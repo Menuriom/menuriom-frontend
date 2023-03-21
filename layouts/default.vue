@@ -4,7 +4,7 @@
     <div class="flex flex-col items-center w-screen min-h-screen bg-white dark:bg-black1 overflow-hidden" id="app">
         <NuxtLoadingIndicator />
         <Header />
-        <main class="">
+        <main class="mt-24 pt-2">
             <slot />
         </main>
         <Footer class="my-8 mt-40" />

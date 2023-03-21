@@ -20,15 +20,17 @@
 *,html {  scroll-behavior: smooth; }
 
 body {
-    font-family: "Inter", "Poppins", "IranyekanRegular";
+    font-family: "Poppins", "Inter", "IranyekanRegular";
     display: flex; flex-direction: column;
     margin: 0; padding: 0;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
-.f-IranyekanRegular { font-family: "IranyekanRegular" !important; }
-.f-IranyekanBold { font-family: "IranyekanBold" !important; }
+.f-inter { font-family: "Inter" !important; }
+.f-poppins { font-family: "Poppins" !important; }
+.f-iranyekan-regular { font-family: "IranyekanRegular" !important; }
+.f-iranyekan-bold { font-family: "IranyekanBold" !important; }
 
 .z-1 { z-index: 1; }
 .z-2 { z-index: 2; }
@@ -53,3 +55,12 @@ body {
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
 /* ===================================================================== */
+
+.down-pop {
+    animation: down-pop 1s ease-out infinite;
+}
+@keyframes down-pop {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(15%); }
+    100% { transform: translateY(0); }
+}

@@ -11,13 +11,13 @@
             <img src="/icons/arrow.svg" alt=">" />
         </div>
         <transition name="slidedown" mode="out-in" appear>
-            <ul class="absolute p-2 bg-white shadow-md rounded-md" v-if="open">
+            <ul class="absolute flex flex-col gap-2 w-max p-2 bg-white shadow-md rounded-md" v-if="open">
                 <li
-                    class="flex items-center gap-1 p-2 w-max rounded-md cursor-pointer"
+                    class="flex items-center gap-1 p-2 w-full hover:bg-zinc-200 rounded-md cursor-pointer"
                     :class="{ selected: i == selectedLanguage }"
                     v-for="(option, i) in languages"
                     :key="i"
-                    @mousedown="selectOption(option)"
+                    @mousedown="selectOption(i)"
                 >
                     <img class="w-6" :src="option.flag" :alt="option.code" />
                     <span class="flex text-sm">{{ option.name }}</span>
@@ -47,10 +47,11 @@ onBeforeUnmount(() => {
 
 const toggleDropdown = () => (open.value = !open.value);
 const closeDropdown = (event) => {
-    if (dropdown.value && !dropdown.value.contains(event.target)) setTimeout(() => (open.value = false), 50);
+    if (dropdown.value && !dropdown.value.contains(event.target)) open.value = false;
 };
 
-const selectOption = async () => {
+const selectOption = (index) => {
+    selectedLanguage.value = index;
     toggleDropdown();
 };
 </script>

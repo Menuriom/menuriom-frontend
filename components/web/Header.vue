@@ -1,7 +1,7 @@
 <style scoped>
 header {
     width: calc(100vw - 2rem);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
 }
 
 .link {
@@ -12,7 +12,7 @@ header {
 <template>
     <header
         ref="header"
-        class="fixed flex items-center justify-between border-2 border-gray-100 rounded-lg mt-4 p-3 max-w-screen-2xl h-14 lg:h-18 bg-white bg-opacity-80 shadow-nr5 z-20"
+        class="fixed flex items-center justify-between border-2 border-gray-100 rounded-lg mt-4 p-3 max-w-screen-2xl h-14 lg:h-18 bg-white bg-opacity-95 shadow-nr5 z-20"
     >
         <nuxt-link class="flex items-center gap-3 h-7 md:h-9 overflow-hidden" to="/">
             <img class="relative h-7 md:h-9" src="/logo.svg" title="Menuriom" alt="Menuriom" />
