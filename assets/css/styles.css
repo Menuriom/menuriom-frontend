@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 :root {
     scrollbar-color: theme("colors.zinc.600") theme("colors.zinc.800") !important;
@@ -12,8 +16,8 @@
 /* *::-webkit-scrollbar-track-piece { background-color: theme("colors.zinc.800"); border-radius: 2px; } */
 *::-webkit-scrollbar-thumb { background: theme("colors.zinc.600"); border-radius: 2px; box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1); }
 
-@font-face { font-family: "Inter"; src: local('Inter'), url("../fonts/Inter.ttf"); font-display: swap; }
-@font-face { font-family: "Poppins"; src: local('Poppins'), url("../fonts/Poppins.ttf"); font-display: swap; }
+/* @font-face { font-family: "Inter"; src: local('Inter'), url("../fonts/Inter.ttf"); font-display: swap; }
+@font-face { font-family: "Poppins"; src: local('Poppins'), url("../fonts/Poppins.ttf"); font-display: swap; } */
 @font-face { font-family: "IranyekanRegular"; src: local('Roboto'), url("../fonts/iranyekanwebregular.woff2"); font-display: swap; }
 @font-face { font-family: "IranyekanBold"; src: local('Roboto'), url("../fonts/iranyekanwebbold.woff2"); font-display: swap; }
 
@@ -37,6 +41,12 @@ body {
 .z-3 { z-index: 3; }
 .z-4 { z-index: 4; }
 .z-5 { z-index: 5; }
+
+.mis-auto { margin-inline-start: auto; }
+.mie-auto { margin-inline-end: auto; }
+
+.gradient { background-image: linear-gradient(90deg, theme("colors.baby-blue") 0%, theme("colors.violet") 100%); }
+.gradient-re { background-image: linear-gradient(90deg, theme("colors.violet") 0%, theme("colors.baby-blue") 100%); }
 
 .page-enter-from { opacity: 0; transform: translateY(-10px); }
 .page-enter-active, .page-leave-active { transition: all 0.2s; }

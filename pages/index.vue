@@ -2,14 +2,14 @@
 
 <template>
     <div class="relative flex flex-col gap-10 w-full">
-        <Blob class="absolute" />
-        <Hero class="relative z-2" />
+        <Hero class="z-2" />
+        <Features class="mt-24" />
     </div>
 </template>
 
 <script setup>
 import Hero from "~/components/web/home/Hero.vue";
-import Blob from "~/components/web/Blob.vue";
+import Features from "~/components/web/home/Features.vue";
 
 useHead({ title: `Menuriom - Create highly versatile online digital menus` });
 definePageMeta({ layout: "default" });

@@ -1,7 +1,7 @@
 <style scoped>
 header {
     width: calc(100vw - 2rem);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px);
 }
 
 .link {
@@ -12,11 +12,11 @@ header {
 <template>
     <header
         ref="header"
-        class="fixed flex items-center justify-between border-2 border-gray-100 rounded-lg mt-4 p-3 max-w-screen-2xl h-14 lg:h-18 bg-white bg-opacity-95 shadow-nr5 z-20"
+        class="fixed flex items-center justify-between border-2 border-gray-100 rounded-lg mt-4 p-3 max-w-screen-2xl h-14 lg:h-16 bg-white bg-opacity-90 shadow-nr5 z-20"
     >
         <nuxt-link class="flex items-center gap-3 h-7 md:h-9 overflow-hidden" to="/">
             <img class="relative h-7 md:h-9" src="/logo.svg" title="Menuriom" alt="Menuriom" />
-            <img class="h-7 md:h-9" src="/logo-text.svg" title="Menuriom" alt="Menuriom" />
+            <img class="h-6 md:h-8" src="/logo-text.svg" title="Menuriom" alt="Menuriom" />
         </nuxt-link>
 
         <nav>
@@ -32,8 +32,12 @@ header {
         <div class="flex items-center gap-4">
             <LangSwitch />
             <span class="text-gray-400">|</span>
-            <nuxt-link class="link p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel">Login</nuxt-link>
-            <nuxt-link class="link p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md" to="/authenticate" title="Try it for free">
+            <nuxt-link class="link text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel">Login</nuxt-link>
+            <nuxt-link
+                class="link text-sm p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
+                to="/authenticate"
+                title="Try it for free"
+            >
                 Try It For Free
             </nuxt-link>
         </div>

@@ -1,0 +1,76 @@
+<style scoped></style>
+
+<template>
+    <section class="relative flex flex-col gap-16 items-center w-screen max-w-screen-2xl rounded-lg p-1.5" title="Features">
+        <Blob class="absolute left-0 -top-44" />
+        <div class="relative flex flex-col gap-6 max-w-3xl z-2">
+            <h2 class="f-inter text-5xl font-bold text-center">Create a highly versetile online menu and enjoy from its benefits</h2>
+            <p class="text-center text-lg">
+                By using an online menu system you can organize your products better
+                <br />
+                and change any item details quickly and easily, have a different menu for different languages, and tailor your menu however you see fit
+            </p>
+        </div>
+
+        <div class="relative flex items-start justify-center gap-40 w-full mt-10 z-2">
+            <SpecialItems />
+            <div class="flex flex-col items-start gap-6 max-w-xl">
+                <img class="h-10" src="~/assets/images/custom-icons/fire.png" alt="fire" />
+                <h3 class="f-inter text-4xl font-bold">Highlight Specific Items In Your Menu</h3>
+                <p class="text-lg">
+                    maybe you have a new item on your menu
+                    <br />
+                    maybe an item is sold out for the day, or you just want to add an item as a special one
+                    <br />
+                    you can highlight items with special tags and even put discounts on some of your products
+                </p>
+                <hr class="w-full h-1 mt-2 bg-zinc-300" />
+            </div>
+        </div>
+
+        <div class="relative flex items-start gap-32 mt-20">
+            <Blob class="absolute left-1/2 -bottom-20 opacity-60" width="400px" height="400px" />
+            <div class="flex flex-col gap-4">
+                <div class="flex flex-col items-start gap-6 max-w-xl">
+                    <hr class="w-full h-1 mb-2 bg-zinc-300" />
+                    <img class="h-10" src="~/assets/images/custom-icons/store-alt.png" alt="store-alt" />
+                    <h3 class="f-inter text-4xl font-bold">Build Different Menu For Your Branches</h3>
+                    <p class="text-lg">
+                        create your menu specific to your branch, whether it's smaller or larger or you don't serve specific items in some of your branches, you
+                        can easily tailor your menus based on your specific needs
+                    </p>
+                </div>
+                <SpecialItems class="mt-10" />
+            </div>
+            <div class="flex flex-col items-end gap-4 -mt-44">
+                <Ordering class="mb-4" />
+                <div class="flex flex-col items-start gap-6 max-w-xl">
+                    <img class="h-10" src="~/assets/images/custom-icons/clipboard-list-check.png" alt="clipboard-list-check" />
+                    <h3 class="f-inter text-4xl font-bold">Get Orders From Your Customers With Your Menu</h3>
+                    <p class="text-lg">
+                        still using pen and paper to take orders? your customers can easily pick their orders from the menu and you get notified what table
+                        ordered what
+                    </p>
+                    <hr class="w-full h-1 mt-2 bg-zinc-300" />
+                </div>
+            </div>
+        </div>
+
+        <div class="relative flex items-start justify-center gap-40 w-full mt-24 z-2">
+            <div class="flex flex-col items-start gap-6 max-w-xl">
+                <hr class="w-full h-1 mb-2 bg-zinc-300" />
+                <img class="h-10" src="~/assets/images/custom-icons/comments-question-check.png" alt="comments-question-check" />
+                <h3 class="f-inter text-4xl font-bold">Get Feedback On Your Service And Products</h3>
+                <p class="text-lg">find out what your customers think about your products and put aside the guessing work</p>
+            </div>
+            <Feedback class="-mt-20" />
+        </div>
+    </section>
+</template>
+
+<script setup>
+import Blob from "~/components/web/Blob.vue";
+import SpecialItems from "~/components/web/features/SpecialItems.vue";
+import Ordering from "~/components/web/features/Ordering.vue";
+import Feedback from "~/components/web/features/Feedback.vue";
+</script>
