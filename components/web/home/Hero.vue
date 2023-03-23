@@ -36,9 +36,9 @@
                     With Menuriom build and manage your restaurant menu with ease.
                 </p>
                 <div class="flex items-center gap-5 mt-4">
-                    <Button class="" type="primary" linkTo=""><span class="text-lg font-bold">Try It For Free</span></Button>
+                    <Button class="" type="primary" linkTo="/authentication"><span class="text-lg font-bold">Try It For Free</span></Button>
                     OR
-                    <Button class="border-2 py-3.5 border-white" type="secondary" linkTo=""><span class="text-lg font-bold">Check The Demo</span></Button>
+                    <Button class="border-2 py-3.5 border-white" type="secondary" linkTo="/demo"><span class="text-lg font-bold">Check The Demo</span></Button>
                 </div>
             </div>
             <div class="absolute -top-6 right-0">

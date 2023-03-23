@@ -7,14 +7,11 @@
         <main class="mt-24">
             <slot />
         </main>
-        <Footer class="my-8 mt-40" />
-        <span class="mb-8 f-josefin text-xs md:text-base text-black1 dark:text-white">Default.Co © {{ year }}. All rights reserved.</span>
+        <Footer class="mt-56" />
     </div>
 </template>
 
 <script setup>
 import Header from "~/components/web/Header.vue";
 import Footer from "~/components/web/Footer.vue";
-
-const year = new Date(Date.now()).getFullYear();
 </script>

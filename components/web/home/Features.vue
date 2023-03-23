@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="relative flex items-start gap-32 mt-20">
+        <div class="relative flex items-start gap-16 mt-20">
             <Blob class="absolute left-1/2 -bottom-20 opacity-60" width="400px" height="400px" />
             <div class="flex flex-col gap-4">
                 <div class="flex flex-col items-start gap-6 max-w-xl">
@@ -40,9 +40,10 @@
                         can easily tailor your menus based on your specific needs
                     </p>
                 </div>
-                <SpecialItems class="mt-10" />
+                <Branches class="mt-10" />
             </div>
-            <div class="flex flex-col items-end gap-4 -mt-44">
+            <span class="flex w-1 h-96 my-auto bg-zinc-300"></span>
+            <div class="flex flex-col items-center gap-4 -mt-44">
                 <Ordering class="mb-4" />
                 <div class="flex flex-col items-start gap-6 max-w-xl">
                     <img class="h-10" src="~/assets/images/custom-icons/clipboard-list-check.png" alt="clipboard-list-check" />
@@ -63,7 +64,7 @@
                 <h3 class="f-inter text-4xl font-bold">Get Feedback On Your Service And Products</h3>
                 <p class="text-lg">find out what your customers think about your products and put aside the guessing work</p>
             </div>
-            <Feedback class="-mt-20" />
+            <Feedback class="-mt-28" />
         </div>
     </section>
 </template>
@@ -73,4 +74,5 @@ import Blob from "~/components/web/Blob.vue";
 import SpecialItems from "~/components/web/features/SpecialItems.vue";
 import Ordering from "~/components/web/features/Ordering.vue";
 import Feedback from "~/components/web/features/Feedback.vue";
+import Branches from "~/components/web/features/Branches.vue";
 </script>

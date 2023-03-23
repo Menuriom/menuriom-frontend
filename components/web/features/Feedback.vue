@@ -51,6 +51,18 @@
                 <b>42</b>
             </div>
         </div>
+
+        <hr class="w-full" />
+        <div class="flex items-center justify-between gap-2 w-full">
+            <div class="flex flex-col gap-2">
+                <span class="w-32 h-6 bg-gray-200 rounded-md shadow-nr5"></span>
+                <span class="w-12 h-3 bg-gray-200 rounded-md shadow-nr5"></span>
+            </div>
+            <button class="flex items-center justify-center gap-2 p-3 px-4 mt-4 text-sm w-max rounded-md text-white bg-neutral-700 shadow-nr25 hover:shadow-nr10">
+                <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
+                <small>Add To Order</small>
+            </button>
+        </div>
     </div>
 </template>
 
