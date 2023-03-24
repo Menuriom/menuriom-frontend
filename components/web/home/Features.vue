@@ -29,7 +29,7 @@
         </div>
 
         <div class="relative flex items-start gap-16 mt-20">
-            <Blob class="absolute left-1/2 -bottom-20 opacity-60" width="400px" height="400px" />
+            <Blob class="absolute left-1/2 -bottom-64 opacity-60" width="450px" height="450px" />
             <div class="flex flex-col gap-4">
                 <div class="flex flex-col items-start gap-6 max-w-xl">
                     <hr class="w-full h-1 mb-2 bg-zinc-300" />
@@ -61,7 +61,7 @@
             <div class="flex flex-col items-start gap-6 max-w-xl">
                 <hr class="w-full h-1 mb-2 bg-zinc-300" />
                 <img class="h-10" src="~/assets/images/custom-icons/comments-question-check.png" alt="comments-question-check" />
-                <h3 class="f-inter text-4xl font-bold">Get Feedback On Your Service And Products</h3>
+                <h3 class="f-inter text-4xl font-bold">Get Feedback On Your Services And Products</h3>
                 <p class="text-lg">find out what your customers think about your products and put aside the guessing work</p>
             </div>
             <Feedback class="-mt-28" />

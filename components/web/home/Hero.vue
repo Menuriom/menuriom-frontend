@@ -2,11 +2,6 @@
 .gradient {
     background-image: linear-gradient(90deg, theme("colors.baby-blue") 0%, theme("colors.violet") 100%);
 }
-.gradient-text {
-    background: linear-gradient(90deg, theme("colors.violet") 0%, theme("colors.baby-blue") 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
 .big-text {
     line-height: 5rem;

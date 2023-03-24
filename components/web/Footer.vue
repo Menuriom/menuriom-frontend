@@ -5,7 +5,7 @@
 
 .box {
     background-image: linear-gradient(90deg, rgba(159, 116, 205, 0.7) 0%, rgba(126, 207, 225, 0.7) 100%);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(25px);
     border: 0.65rem solid theme("colors.neutral.700");
     border-radius: 1.25rem;
 }
@@ -14,7 +14,7 @@
 <template>
     <footer class="relative flex flex-col items-center gap-12 p-2 px-6 md:px-8 w-full bg-neutral-700">
         <!-- TODO: make the box a component so it can be change or undisplayed base on routes -->
-        <div class="box relative flex flex-wrap items-center justify-between gap-4 w-full max-w-4xl p-16 md:py-2 -mt-40 overflow-hidden">
+        <div class="box relative flex flex-wrap items-center justify-between gap-4 w-full max-w-4xl p-16 md:py-2 -mt-56 overflow-hidden">
             <div class="flex flex-col gap-6 items-center md:items-start w-full max-w-md">
                 <h4 class="f-inter font-extrabold text-4xl text-center md:text-start">Start Building Your First Menu For Free</h4>
                 <Button class="border-4 border-black py-3" type="primary" linkTo=""
@@ -23,7 +23,7 @@
             </div>
             <img class="hidden md:flex -mb-2" src="~/assets/images/iPhone.webp" alt="iPhone" />
         </div>
-        <div class="flex flex-wrap items-center justify-between gap-16 md:p-0 w-full max-w-screen-xl">
+        <div class="flex flex-wrap items-center justify-center lg:justify-between gap-16 md:p-0 w-full max-w-screen-xl">
             <div class="flex flex-col items-start gap-6">
                 <div class="flex items-center gap-4">
                     <div class="gradient-re flex items-center justify-center p-1 rounded-md">
@@ -45,7 +45,7 @@
                     </a>
                 </div>
             </div>
-            <nav class="flex items-center gap-10 md:gap-16">
+            <nav class="flex flex-wrap items-center gap-10 md:gap-16">
                 <ul class="flex flex-col items-center md:items-start gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
                         <nuxt-link class="text-white group-hover:text-purple-300" to="/pricing">Pricing</nuxt-link>

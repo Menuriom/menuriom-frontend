@@ -1,13 +1,13 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col items-center w-screen min-h-screen bg-white dark:bg-black1 overflow-hidden" id="app">
+    <div class="flex flex-col items-center w-screen bg-white overflow-hidden" id="app">
         <NuxtLoadingIndicator />
         <Header />
-        <main class="mt-24">
+        <main class="w-full mt-24">
             <slot />
         </main>
-        <Footer class="mt-56" />
+        <Footer class="mt-80" />
     </div>
 </template>
 

@@ -9,7 +9,7 @@
         <div class="flex items-center gap-1" @click="toggleDropdown()">
             <img class="w-6" :src="languages[selectedLanguage].flag" :alt="languages[selectedLanguage].code" />
             <small :class="`text-${textColor}`" v-if="showText">{{ languages[selectedLanguage].name }}</small>
-            <Icon class="w-2.5 h-2.5" :class="`bg-${textColor}`" name="arrow.svg" folder="icons" size="10px" />
+            <Icon class="w-2.5 h-2.5 bg-black" :class="`bg-${textColor}`" name="arrow.svg" folder="icons" size="10px" />
         </div>
         <transition name="slidedown" mode="out-in" appear>
             <ul class="absolute flex flex-col gap-2 w-max p-2 bg-white shadow-md rounded-md" v-if="open">
