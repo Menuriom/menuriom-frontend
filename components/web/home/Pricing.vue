@@ -40,7 +40,7 @@
                     <ul class="flex flex-col gap-4 flex-grow">
                         <li class="flex items-center gap-2" v-if="i > 0">
                             <Icon class="relative w-4 h-4 bg-baby-blue" name="plus.svg" folder="icons" size="16px" />
-                            <small class="opacity-90 text-sky-200">Everything on previus plan</small>
+                            <small class="opacity-90 text-sky-200">Everything on previous plan</small>
                         </li>
                         <li class="flex items-center gap-2" v-for="(feature, j) in item.features" :key="j">
                             <Icon class="relative w-4 h-4 bg-baby-blue" name="check.svg" folder="icons" size="16px" />
