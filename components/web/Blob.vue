@@ -6,7 +6,7 @@
 </style>
 
 <template>
-    <div class="blob" :style="`width: ${width}; height: ${height};`"></div>
+    <div class="blob rounded-full" :style="`width: ${width}; height: ${height};`"></div>
 </template>
 
 <script setup>

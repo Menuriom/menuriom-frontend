@@ -17,9 +17,9 @@
         <div class="box relative flex flex-wrap items-center justify-between gap-4 w-full max-w-4xl p-16 md:py-2 -mt-56 overflow-hidden">
             <div class="flex flex-col gap-6 items-center md:items-start w-full max-w-md">
                 <h4 class="f-inter font-extrabold text-4xl text-center md:text-start">Start Building Your First Menu For Free</h4>
-                <Button class="border-4 border-black py-3" type="primary" linkTo=""
-                    ><span class="text-white text-lg font-bold">Sign Up Now For Free</span></Button
-                >
+                <Button class="border-4 border-black py-3" type="primary" linkTo="">
+                    <span class="text-white text-lg font-bold">Sign Up Now For Free</span>
+                </Button>
             </div>
             <img class="hidden md:flex -mb-2" src="~/assets/images/iPhone.webp" alt="iPhone" />
         </div>

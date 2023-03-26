@@ -12,16 +12,16 @@
             <Icon class="w-2.5 h-2.5 bg-black" :class="`bg-${textColor}`" name="arrow.svg" folder="icons" size="10px" />
         </div>
         <transition name="slidedown" mode="out-in" appear>
-            <ul class="absolute flex flex-col gap-2 w-max p-2 bg-white shadow-md rounded-md" v-if="open">
+            <ul class="absolute flex flex-col gap-1 w-max p-1 bg-white text-pencil-tip shadow-md rounded-md" v-if="open">
                 <li
-                    class="flex items-center gap-1 p-2 w-full hover:bg-zinc-200 rounded-md cursor-pointer"
+                    class="flex items-center gap-1 p-2 py-1 w-full hover:bg-zinc-200 rounded-md cursor-pointer"
                     :class="{ selected: i == selectedLanguage }"
                     v-for="(option, i) in languages"
                     :key="i"
                     @mousedown="selectOption(i)"
                 >
                     <img class="w-6" :src="option.flag" :alt="option.code" />
-                    <span class="flex text-sm">{{ option.name }}</span>
+                    <span class="flex text-xs">{{ option.name }}</span>
                 </li>
             </ul>
         </transition>
