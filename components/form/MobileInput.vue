@@ -25,6 +25,8 @@ span {
             <input
                 ref="input"
                 class="w-full bg-transparent p-1 pb-1.5 px-3 mt-6 rounded-b-md outline-none text-sm"
+                v-maska
+                :data-maska="['+98 09## ### ## ##']"
                 autocomplete="false"
                 :required="required"
                 :name="name"
