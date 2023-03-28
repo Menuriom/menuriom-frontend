@@ -30,7 +30,7 @@ header {
         </nav>
 
         <div class="flex items-center gap-4">
-            <LangSwitch />
+            <LangSwitch textColor="black" />
             <span class="text-gray-400">|</span>
             <nuxt-link class="link text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel">Login</nuxt-link>
             <nuxt-link
