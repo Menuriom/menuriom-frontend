@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
             maxContentLength: Infinity,
         })
         .then((response) => {
-            resStatus = 200;
+            resStatus = response.status;
             resData = response.data;
         })
         .catch((error) => {
