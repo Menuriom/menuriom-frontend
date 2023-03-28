@@ -52,7 +52,8 @@ export default defineEventHandler(async (event) => {
                 return;
             }
 
-            setCookie(event, "AuthToken", token, { sameSite: "strict", path: "/", httpOnly: true, secure: true, maxAge: 3600 });
+            const maxAge = process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS; // 1 week
+            setCookie(event, "AuthToken", token, { sameSite: "strict", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
         })
         .catch((error) => {
             if (typeof error.response === "undefined") console.error({ error });

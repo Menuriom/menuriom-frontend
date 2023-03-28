@@ -7,11 +7,14 @@ export default defineEventHandler(async (event) => {
     let resStatus = 499;
     let resData = {};
 
-    const data = await read(event.node.req);
+    const data = await readBody(event);
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
 
     delete req.headers["content-length"];
     delete req.headers["host"];
+
+    // TODO : remove this when back-end is ok
+    return { expireIn: 120 };
 
     await axios
         .post(
@@ -20,7 +23,7 @@ export default defineEventHandler(async (event) => {
             { timeout: 15 * 1000, headers: { ...req.headers, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() } }
         )
         .then((response) => {
-            resStatus = 200;
+            resStatus = response.status;
             resData = response.data;
         })
         .catch((error) => {

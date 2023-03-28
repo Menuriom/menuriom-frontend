@@ -169,10 +169,14 @@ import MobileInput from "~/components/form/MobileInput.vue";
 import Button from "~/components/web/Button.vue";
 import LangSwitch from "~/components/LangSwitch.vue";
 import Loading from "~/components/Loading.vue";
+import { useUserStore } from "@/stores/user";
 import axios from "axios";
 
 useHead({ title: `Login | Signup` });
-definePageMeta({ layout: "auth" });
+definePageMeta({ layout: "auth", middleware: ["guest-gate"] });
+
+const user = useUserStore();
+const router = useRouter();
 
 const page = ref("1");
 const loading = ref(false);
@@ -232,20 +236,19 @@ const checkVerificationCode = async () => {
     errorField.value = "";
 
     await axios
-        .post(`/auth/verify`, {
+        .post(`/auth/verify-code`, {
             username: useNumbersToEnglish(email.value.toLowerCase()),
             code: useNumbersToEnglish(code.value),
         })
         .then(async (response) => {
             if (response.data.register) {
                 page.value = 3;
-                timeLeft.value = 0;
                 name.value = family.value = mobile.value = size.value = "";
             } else {
-                // TODO : create store for user and create functions needed
-                await this.$store.dispatch("user/refresh");
-                await this.$store.dispatch("user/getUserInfo");
-                // TODO : redirect to user's panel
+                await Promise.all([user.getUserInfo(), user.setRefreshInterval()]);
+
+                // TODO : base on user's role redirect to admin or user panel
+                // await router.push("/user-panel");
             }
         })
         .catch((e) => {
@@ -280,8 +283,8 @@ const completeSignup = async () => {
             size: size.value,
         })
         .then(async (response) => {
-            await this.$store.dispatch("user/refresh");
-            // TODO : redirect to user's panel
+            await Promise.all([user.getUserInfo(), user.setRefreshInterval()]);
+            await router.push("/user-panel");
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
