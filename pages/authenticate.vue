@@ -172,7 +172,7 @@ import Loading from "~/components/Loading.vue";
 import { useUserStore } from "@/stores/user";
 import axios from "axios";
 
-useHead({ title: `Login | Signup` });
+useHead({ title: `Login | Signup - Menuriom` });
 definePageMeta({ layout: "auth", middleware: ["guest-gate"] });
 
 const user = useUserStore();
@@ -246,9 +246,15 @@ const checkVerificationCode = async () => {
                 name.value = family.value = mobile.value = size.value = "";
             } else {
                 await Promise.all([user.getUserInfo(), user.setRefreshInterval()]);
-
-                // TODO : base on user's role redirect to admin or user panel
-                // await router.push("/user-panel");
+                // base on user's role redirect to admin or user panel
+                switch (user.info.role) {
+                    case "admin":
+                        await router.push("/admin-panel");
+                        break;
+                    case "user":
+                        await router.push("/user-panel");
+                        break;
+                }
             }
         })
         .catch((e) => {

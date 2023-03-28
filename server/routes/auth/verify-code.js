@@ -13,9 +13,6 @@ export default defineEventHandler(async (event) => {
     delete req.headers["content-length"];
     delete req.headers["host"];
 
-    // TODO : remove this when back-end is ok
-    // return { register: true };
-
     await axios
         .post(
             `${process.env.API_BASE_URL}/auth/verify`,
