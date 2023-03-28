@@ -14,4 +14,8 @@
 <script setup>
 import Header from "~/components/web/Header.vue";
 import Footer from "~/components/web/Footer.vue";
+import { useUserStore } from "@/stores/user";
+
+const user = useUserStore();
+user.setRefreshInterval();
 </script>

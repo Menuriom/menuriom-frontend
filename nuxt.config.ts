@@ -54,6 +54,6 @@ export default defineNuxtConfig({
         "@nuxtjs/tailwindcss",
 
         // pinia moudle
-        // "@pinia/nuxt",
+        "@pinia/nuxt",
     ],
 });
