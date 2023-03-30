@@ -8,24 +8,25 @@ const oauth2Client = new google.auth.OAuth2(
     `${process.env.BASE_URL}/auth/login/google/callback`
 );
 
-const getAuthToken = async (req, data) => {
+const authenticateWithServer = async (req, data) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
 
     delete req.headers["content-length"];
     delete req.headers["host"];
 
-    const token = await axios
+    const response = await axios
         .post(
             `${process.env.API_BASE_URL}/auth/continue-with-google`,
             { ...data },
             { timeout: 15 * 1000, headers: { ...req.headers, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() } }
         )
-        .then((response) => response.data.token)
+        .then((response) => response.data)
         .catch((error) => {
             if (typeof error.response === "undefined") console.error({ error });
             else console.error({ error: error.response.data });
+            return {};
         });
-    return token;
+    return { ...response };
 };
 
 export default defineEventHandler(async (event) => {
@@ -43,25 +44,30 @@ export default defineEventHandler(async (event) => {
             headers: { "Content-Type": "application/json", "Accept-Encoding": "application/json" },
         })
         .then(async (response) => {
-            // console.log({ data: response.data });
-
             // request the back-end and set a auth-token
-            const token = await getAuthToken(req, { profile: response.data, email: response.data.email });
-            if (!token) {
+            const authResponse = await authenticateWithServer(req, { profile: response.data, email: response.data.email });
+            if (!authResponse.token) {
                 redirectPath = "/authenticate?error=1";
                 return;
             }
 
-            const maxAge = process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS; // 1 week
-            setCookie(event, "AuthToken", token, { sameSite: "strict", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
+            const maxAge = parseInt(process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS); // 1 week
+            setCookie(event, "AuthToken", token, { sameSite: "none", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
+
+            switch (authResponse.role) {
+                case "admin":
+                    redirectPath = "/admin-panel";
+                    break;
+                case "user":
+                    redirectPath = "/user-panel";
+                    break;
+            }
         })
         .catch((error) => {
             if (typeof error.response === "undefined") console.error({ error });
             else console.error({ error: error.response.data });
-            redirectPath = "/authenticate?error=1";
+            redirectPath = "/authenticate?error=2";
         });
 
     await sendRedirect(event, redirectPath);
-
-    // return { platform: event.context.params.platform };
 });

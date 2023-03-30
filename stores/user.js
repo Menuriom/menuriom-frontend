@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from "pinia";
 import axios from "axios";
 
+const refreshInterval = 60 * 15; // 15 minutes
 const initalInfo = {
     image: "",
     name: "",
@@ -14,11 +15,7 @@ export const useUserStore = defineStore("user", () => {
     const info = reactive({ ...initalInfo });
     const isIntervalSet = ref(false);
 
-    // const userInfo = computed(() => info);
-
     const getUserInfo = async () => {
-        // let url = `/api/v1/users/info`;
-        // if (process.server) url = `${process.env.BASE_URL}${url}`;
         await axios
             .get(`/api/v1/users/info`, { timeout: 30 * 1000 })
             .then((response) => {
@@ -39,25 +36,25 @@ export const useUserStore = defineStore("user", () => {
                 clearInterval(interval);
                 isIntervalSet.value = false;
             });
-        }, 60 * 15 * 1000); // 15 minutes
+        }, refreshInterval * 1000);
     };
 
-    const refresh = async () => {
-        await axios
-            .post(`/auth/refresh`, null, { timeout: 30 * 1000 })
-            .then(() => {
-                // await getUserInfo().catch((e) => {});
-                let interval = setInterval(async () => {
-                    await axios.post(`/auth/refresh`, null, { timeout: 30 * 1000 }).catch(async (e) => {
-                        await logout();
-                        clearInterval(interval);
-                    });
-                }, 60 * 15 * 1000); // 15 minutes
-            })
-            .catch((e) => {
-                throw e;
-            });
-    };
+    // const refresh = async () => {
+    //     await axios
+    //         .post(`/auth/refresh`, null, { timeout: 30 * 1000 })
+    //         .then(() => {
+    //             // await getUserInfo().catch((e) => {});
+    //             let interval = setInterval(async () => {
+    //                 await axios.post(`/auth/refresh`, null, { timeout: 30 * 1000 }).catch(async (e) => {
+    //                     await logout();
+    //                     clearInterval(interval);
+    //                 });
+    //             }, refreshInterval * 1000);
+    //         })
+    //         .catch((e) => {
+    //             throw e;
+    //         });
+    // };
 
     const logout = async () => {
         await axios
@@ -75,11 +72,7 @@ export const useUserStore = defineStore("user", () => {
         isIntervalSet,
         getUserInfo,
         setRefreshInterval,
-        refresh,
+        // refresh,
         logout,
     };
 });
-
-// if (import.meta.hot) {
-//     import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot));
-// }

@@ -1,26 +1,6 @@
 import axios from "axios";
 import { setCookie } from "h3";
 
-const getAuthToken = async (req, data = {}) => {
-    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
-
-    delete req.headers["content-length"];
-    delete req.headers["host"];
-
-    const token = await axios
-        .post(
-            `${process.env.API_BASE_URL}/auth/refresh`,
-            { ...data },
-            { timeout: 15 * 1000, headers: { ...req.headers, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() } }
-        )
-        .then((response) => response.data.token)
-        .catch((error) => {
-            if (typeof error.response === "undefined") console.error({ error });
-            else console.error({ error: error.response.data });
-        });
-    return token;
-};
-
 export default defineEventHandler(async (event) => {
     const { req, res } = event.node;
 
@@ -39,8 +19,8 @@ export default defineEventHandler(async (event) => {
             timeout: 15 * 1000,
         })
         .then((response) => {
-            const maxAge = process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS; // 1 week
-            setCookie(event, "AuthToken", response.data.token, { sameSite: "strict", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
+            const maxAge = parseInt(process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS); // 1 week
+            setCookie(event, "AuthToken", response.data.token, { sameSite: "none", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
             resStatus = response.status;
         })
         .catch((error) => {

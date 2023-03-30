@@ -13,9 +13,6 @@ export default defineEventHandler(async (event) => {
     delete req.headers["content-length"];
     delete req.headers["host"];
 
-    // TODO : remove this when back-end is ok
-    // return { register: true };
-
     await axios
         .post(
             `${process.env.API_BASE_URL}/auth/verify`,
@@ -24,8 +21,8 @@ export default defineEventHandler(async (event) => {
         )
         .then((response) => {
             if (!response.data.register) {
-                const maxAge = process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS; // 1 week
-                setCookie(event, "AuthToken", response.data.token, { sameSite: "strict", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
+                const maxAge = parseInt(process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS); // 1 week
+                setCookie(event, "AuthToken", response.data.token, { sameSite: "none", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
             }
             resData = { register: response.data.register };
             resStatus = response.status;
