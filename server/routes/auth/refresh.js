@@ -19,8 +19,8 @@ export default defineEventHandler(async (event) => {
             timeout: 15 * 1000,
         })
         .then((response) => {
-            const maxAge = process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS; // 1 week
-            setCookie(event, "AuthToken", response.data.token, { sameSite: "strict", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
+            const maxAge = parseInt(process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS); // 1 week
+            setCookie(event, "AuthToken", response.data.token, { sameSite: "none", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
             resStatus = response.status;
         })
         .catch((error) => {

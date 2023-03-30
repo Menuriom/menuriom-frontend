@@ -262,6 +262,7 @@ const checkVerificationCode = async () => {
                 if (typeof e.response.data.message === "object") {
                     responseMessage.value = e.response.data.message[0].errors[0];
                     errorField.value = e.response.data.message[0].property;
+                    // if the property is "" then make a global error either on top of the continue button or as a toast message
                 }
             }
         })

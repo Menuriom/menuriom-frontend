@@ -51,8 +51,8 @@ export default defineEventHandler(async (event) => {
                 return;
             }
 
-            const maxAge = process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS; // 1 week
-            setCookie(event, "AuthToken", token, { sameSite: "strict", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
+            const maxAge = parseInt(process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS); // 1 week
+            setCookie(event, "AuthToken", token, { sameSite: "none", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
 
             switch (authResponse.role) {
                 case "admin":
@@ -66,7 +66,7 @@ export default defineEventHandler(async (event) => {
         .catch((error) => {
             if (typeof error.response === "undefined") console.error({ error });
             else console.error({ error: error.response.data });
-            redirectPath = "/authenticate?error=1";
+            redirectPath = "/authenticate?error=2";
         });
 
     await sendRedirect(event, redirectPath);
