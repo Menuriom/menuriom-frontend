@@ -1,9 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full">
-        <NuxtPage page-key="user" />
-    </div>
+    <NuxtPage key="user" page-key="user-panel" />
 </template>
 
 <script setup>

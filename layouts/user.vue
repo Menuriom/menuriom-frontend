@@ -1,7 +1,13 @@
 <style scoped></style>
 
 <template>
-    <div></div>
+    <div class="flex flex-col items-center w-screen bg-white overflow-hidden" id="app">
+        <NuxtLoadingIndicator />
+        <!-- TODO : add header and side menu for user's panel -->
+        <main class="w-full">
+            <slot />
+        </main>
+    </div>
 </template>
 
 <script setup>
