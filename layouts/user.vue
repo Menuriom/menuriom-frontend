@@ -4,4 +4,15 @@
     <div></div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useUserStore } from "@/stores/user";
+import { storeToRefs } from "pinia";
+
+const userState = useUserStore();
+const user = storeToRefs(userState);
+
+onMounted(async () => {
+    if (user.name.value === "" || user.family.value === "") await userState.getUserInfo();
+    userState.setRefreshInterval();
+});
+</script>
