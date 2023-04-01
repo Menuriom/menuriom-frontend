@@ -16,6 +16,11 @@ import Header from "~/components/web/Header.vue";
 import Footer from "~/components/web/Footer.vue";
 import { useUserStore } from "@/stores/user";
 
-const user = useUserStore();
-user.setRefreshInterval();
+const userState = useUserStore();
+
+onMounted(async () => {
+    await userState.getUserInfo().then(() => {
+        userState.setRefreshInterval();
+    });
+});
 </script>

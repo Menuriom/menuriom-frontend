@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     let resStatus = 499;
     let resData = {};
 
-    const data = await read(event.node.req);
+    const data = await readBody(event);
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
 
     delete req.headers["content-length"];
@@ -16,7 +16,14 @@ export default defineEventHandler(async (event) => {
     await axios
         .post(
             `${process.env.API_BASE_URL}/auth/register`,
-            { username: data.username },
+            {
+                username: data.username,
+                code: data.code,
+                name: data.name,
+                family: data.family,
+                mobile: data.mobile,
+                size: data.size,
+            },
             { timeout: 15 * 1000, headers: { ...req.headers, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() } }
         )
         .then((response) => {
@@ -37,6 +44,7 @@ export default defineEventHandler(async (event) => {
         return resData;
     } else {
         res.writeHead(resStatus);
-        res.end(JSON.stringify(resData));
+        if (process.env.NODE_ENV == "production" && resStatus >= 500) res.end("Internal Server Error!!!");
+        else res.end(JSON.stringify(resData));
     }
 });

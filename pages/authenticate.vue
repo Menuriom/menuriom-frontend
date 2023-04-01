@@ -175,7 +175,7 @@ import axios from "axios";
 useHead({ title: `Login | Signup - Menuriom` });
 definePageMeta({ layout: "auth", middleware: ["guest-gate"] });
 
-const user = useUserStore();
+const userStore = useUserStore();
 const router = useRouter();
 
 const page = ref("1");
@@ -240,21 +240,13 @@ const checkVerificationCode = async () => {
             username: useNumbersToEnglish(email.value.toLowerCase()),
             code: useNumbersToEnglish(code.value),
         })
-        .then(async (response) => {
+        .then((response) => {
             if (response.data.register) {
                 page.value = 3;
                 name.value = family.value = mobile.value = size.value = "";
             } else {
-                await Promise.all([user.getUserInfo(), user.setRefreshInterval()]);
-                // base on user's role redirect to admin or user panel
-                switch (user.info.role) {
-                    case "admin":
-                        await router.push("/admin-panel");
-                        break;
-                    case "user":
-                        await router.push("/user-panel");
-                        break;
-                }
+                userStore.setRefreshInterval();
+                router.push("/user-panel");
             }
         })
         .catch((e) => {
@@ -262,6 +254,7 @@ const checkVerificationCode = async () => {
                 if (typeof e.response.data.message === "object") {
                     responseMessage.value = e.response.data.message[0].errors[0];
                     errorField.value = e.response.data.message[0].property;
+                    // TODO
                     // if the property is "" then make a global error either on top of the continue button or as a toast message
                 }
             }
@@ -289,9 +282,9 @@ const completeSignup = async () => {
             mobile: mobile.value,
             size: size.value,
         })
-        .then(async (response) => {
-            await Promise.all([user.getUserInfo(), user.setRefreshInterval()]);
-            await router.push("/user-panel");
+        .then((response) => {
+            userStore.setRefreshInterval();
+            router.push("/user-panel");
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
