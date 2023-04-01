@@ -44,6 +44,7 @@ export default defineEventHandler(async (event) => {
         return resData;
     } else {
         res.writeHead(resStatus);
-        res.end(JSON.stringify(resData));
+        if (process.env.NODE_ENV == "production" && resStatus >= 500) res.end("Internal Server Error!!!");
+        else res.end(JSON.stringify(resData));
     }
 });
