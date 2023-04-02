@@ -2,7 +2,7 @@
 
 <template>
     <section class="relative flex flex-col items-center gap-10 w-full p-8" title="Faqs">
-        <Blob class="absolute right-28 -top-16" />
+        <Blob class="absolute right-28 -top-16" :class="[blobPosition == 'right' ? 'right-28' : 'left-28']" />
         <div class="relative flex flex-col items-center gap-2">
             <img class="w-16 mb-4" src="~/assets/images/icons/q&a.png" alt="Q&A" />
             <h2 class="f-inter text-2xl font-bold">Frequently Asked Questions.</h2>
@@ -31,6 +31,10 @@
 <script setup>
 import Icon from "~/components/Icon.vue";
 import Blob from "~/components/web/Blob.vue";
+
+defineProps({
+    blobPosition: { type: String, default: "right" },
+});
 
 const faqs = reactive({
     list: [

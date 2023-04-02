@@ -22,10 +22,10 @@ header {
         <nav>
             <ul class="flex items-center gap-8">
                 <li class="flex items-center gap-1"><span>Features</span> <img src="/icons/arrow.svg" alt=">" /></li>
-                <li class="flex items-center gap-1"><span>Demo</span></li>
-                <li class="flex items-center gap-1"><span>Pricing</span></li>
-                <li class="flex items-center gap-1"><span>How It Works</span></li>
-                <li class="flex items-center gap-1"><span>Contact Us</span></li>
+                <li class="flex items-center gap-1 hover:underline"><span>Demo</span></li>
+                <li class="flex items-center gap-1 hover:underline"><nuxt-link to="/pricing">Pricing</nuxt-link></li>
+                <li class="flex items-center gap-1 hover:underline"><span>How It Works</span></li>
+                <li class="flex items-center gap-1 hover:underline"><span>Contact Us</span></li>
             </ul>
         </nav>
 

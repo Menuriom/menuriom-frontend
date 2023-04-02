@@ -17,6 +17,8 @@ export default defineNuxtConfig({
                 // { rel: "mask-icon", href: "/pwa/safari-pinned-tab.svg", color: "#FFFFFF" },
             ],
         },
+        pageTransition: { name: "page", mode: "out-in" },
+        layoutTransition: { name: "layout", mode: "out-in" },
     },
 
     css: [
