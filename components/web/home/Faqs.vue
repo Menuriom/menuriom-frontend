@@ -1,14 +1,19 @@
 <style scoped></style>
 
 <template>
-    <section class="relative flex flex-col items-center gap-10 w-full p-8" title="Faqs">
+    <section class="relative flex flex-col items-center gap-10 w-full p-2 sm:p-4 md:p-8" title="Faqs">
         <Blob class="absolute right-28 -top-16" :class="[blobPosition == 'right' ? 'right-28' : 'left-28']" />
         <div class="relative flex flex-col items-center gap-2">
             <img class="w-16 mb-4" src="~/assets/images/icons/q&a.png" alt="Q&A" />
             <h2 class="f-inter text-2xl font-bold">Frequently Asked Questions.</h2>
         </div>
         <ul class="relative flex flex-col items-center gap-6 w-full max-w-screen-lg text-white">
-            <li class="flex flex-col gap-4 p-6 w-full rounded-md bg-pencil-tip shadow-nr25" v-for="(item, i) in faqs.list" :key="i" @click="toggleQuestion(i)">
+            <li
+                class="flex flex-col gap-4 p-6 w-full rounded-md bg-pencil-tip shadow-nr25 select-none"
+                v-for="(item, i) in faqs.list"
+                :key="i"
+                @click="toggleQuestion(i)"
+            >
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <strong class="f-inter text-xl">{{ item.q }}</strong>
                     <Icon

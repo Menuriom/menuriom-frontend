@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <section class="flex flex-col items-center gap-10 w-full p-8">
+    <section class="flex flex-col items-center gap-10 w-full p-2 sm:p-4 md:p-8">
         <div class="flex flex-col items-center gap-2">
             <img class="w-16 mb-4" src="~/assets/images/icons/pricing.png" alt="pricing" />
             <h2 class="f-inter text-2xl font-bold">PRICING.</h2>

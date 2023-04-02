@@ -1,16 +1,18 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col items-center gap-10 w-full p-8">
+    <div class="flex flex-col items-center gap-10 w-full p-2 sm:p-4 md:p-8">
         <div class="relative flex items-center gap-10 p-3 px-5 rounded-md bg-neutral-200">
             <span class="absolute h-8 shadow-md bg-white rounded transition-all" :class="[priceType == 'monthly' ? 'left-2 w-22' : 'left-28 w-36']"></span>
             <span class="relative cursor-pointer" @click="togglePriceType('monthly')">Monthly</span>
             <div class="relative flex items-center gap-1 cursor-pointer" @click="togglePriceType('annual')">
                 <span>Annual</span>
-                <small class="f-inter p-0.5 px-2 rounded-full text-xs bg-pencil-tip text-purple-200">{{ annualOffPercent }}% Off</small>
+                <small class="f-inter p-0.5 px-2 rounded-full whitespace-nowrap text-xs bg-pencil-tip text-purple-200">
+                    {{ annualOffPercent }}% Off
+                </small>
             </div>
         </div>
-        <ul class="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl mt-12">
+        <ul class="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl md:mt-12">
             <li
                 class="flex flex-col gap-2 rounded-2xl shadow-xl"
                 :class="[item.highlight ? 'gradient-re p-3 md:-mt-12' : 'bg-pencil-tip']"

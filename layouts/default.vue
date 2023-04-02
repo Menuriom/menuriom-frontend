@@ -8,7 +8,7 @@
         <main class="w-full mt-24">
             <slot />
         </main>
-        <Footer class="mt-80" />
+        <Footer class="mt-64 lg:mt-80" />
     </div>
 </template>
 
