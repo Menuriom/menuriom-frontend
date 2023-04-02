@@ -37,6 +37,8 @@ export default defineEventHandler(async (event) => {
                 console.error({ error });
                 return;
             }
+
+            if (error.response.status == 401) deleteCookie(event, "AuthToken");
             resStatus = error.response.status;
             resData = error.response.data;
         });

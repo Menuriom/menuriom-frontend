@@ -14,18 +14,18 @@
 <template>
     <footer class="relative flex flex-col items-center gap-12 p-2 px-6 md:px-8 w-full bg-neutral-700">
         <!-- TODO: make the box a component so it can be change or undisplayed base on routes -->
-        <div class="box relative flex flex-wrap items-center justify-between gap-4 w-full max-w-4xl p-16 md:py-2 -mt-56 overflow-hidden">
-            <div class="flex flex-col gap-6 items-center md:items-start w-full max-w-md">
-                <h4 class="f-inter font-extrabold text-4xl text-center md:text-start">Start Building Your First Menu For Free</h4>
-                <Button class="border-4 border-black py-3" type="primary" linkTo="">
-                    <span class="text-white text-lg font-bold">Sign Up Now For Free</span>
+        <div class="box relative flex flex-col lg:flex-row items-center justify-center md:justify-between gap-4 w-full max-w-4xl p-10 sm:p-16 lg:py-2 -mt-40 lg:-mt-56 overflow-hidden">
+            <div class="flex flex-col gap-6 items-center lg:items-start w-full max-w-md">
+                <h4 class="f-inter font-extrabold text-2xl sm:text-3xl lg:text-4xl text-center lg:text-start">Start Building Your First Menu For Free</h4>
+                <Button class="border-4 border-black px-1 py-1 md:py-3" type="primary" linkTo="">
+                    <span class="text-white text-sm sm:text-lg font-bold whitespace-nowrap">Sign Up Now For Free</span>
                 </Button>
             </div>
-            <img class="hidden md:flex -mb-2" src="~/assets/images/iPhone.webp" alt="iPhone" />
+            <img class="hidden lg:flex -mb-2" src="~/assets/images/iPhone.webp" alt="iPhone" />
         </div>
-        <div class="flex flex-wrap items-center justify-center lg:justify-between gap-16 md:p-0 w-full max-w-screen-xl">
+        <div class="flex flex-wrap items-center justify-center lg:justify-between gap-16 w-full max-w-screen-xl">
             <div class="flex flex-col items-start gap-6">
-                <div class="flex items-center gap-4">
+                <div class="flex flex-wrap justify-center items-center gap-4">
                     <div class="gradient-re flex items-center justify-center p-1 rounded-md">
                         <img class="w-20 h-20 -ml-0.5" src="/logo.svg" alt="Menuriom" />
                     </div>
@@ -34,7 +34,7 @@
                         <small class="text-white text-xs -mt-1.5">The Best Way To Create Digital Menus</small>
                     </div>
                 </div>
-                <div class="flex flex-wrap items-center gap-6">
+                <div class="flex flex-wrap justify-center items-center gap-6">
                     <a class="insta-gradient flex items-center gap-2 rounded-xl p-2" href="" title="Follow Us On Instagram">
                         <Icon class="w-8 h-8 bg-white" name="instagram.svg" folder="icons" size="32px" />
                         <small class="text-white">Follow Us On Instagram</small>
@@ -45,7 +45,7 @@
                     </a>
                 </div>
             </div>
-            <nav class="flex flex-wrap items-center gap-10 md:gap-16">
+            <nav class="flex flex-col sm:flex-row flex-wrap items-center gap-10 md:gap-16">
                 <ul class="flex flex-col items-center md:items-start gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
                         <nuxt-link class="text-white group-hover:text-purple-300" to="/pricing">Pricing</nuxt-link>
@@ -81,7 +81,7 @@
         </div>
         <hr class="gradient-re w-full max-w-screen-xl h-0.5 border-0 -my-4" />
         <div class="flex flex-col items-center gap-2">
-            <span class="f-inter text-sm text-white">Default.Co © {{ year }}. All rights reserved.</span>
+            <span class="f-inter text-xs sm:text-sm text-center text-white">Menuriom.com © {{ year }}. All rights reserved.</span>
             <small class="text-white text-xs">Made With <b class="text-rose-400">❤</b> by the 2Idiots</small>
         </div>
     </footer>

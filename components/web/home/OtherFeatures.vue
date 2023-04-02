@@ -6,13 +6,13 @@
 </style>
 
 <template>
-    <section class="wrapper flex flex-col items-center gap-6 w-full p-8 bg-pencil-tip">
+    <section class="wrapper flex flex-col items-center gap-6 w-full p-2 sm:p-4 md:p-8 bg-pencil-tip">
         <img class="-mt-16" src="~/assets/images/icons/gold-card.png" alt="gold-card" />
         <div class="flex flex-col items-center gap-2">
             <h2 class="f-inter text-2xl font-bold text-white">FEATURES.</h2>
-            <h4 class="text-2xl opacity-60 text-white font-extralight text-center">We are constantly growing and adding new features.</h4>
+            <h4 class="text-lg sm:text-2xl opacity-60 text-white font-extralight text-center">We are constantly growing and adding new features.</h4>
         </div>
-        <ul class="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl mb-14">
+        <ul class="flex flex-wrap justify-center gap-4 md:gap-12 w-full max-w-screen-xl mb-14">
             <li
                 class="flex flex-col items-center gap-6 w-full max-w-screen-2xs p-8 mt-16 rounded-xl bg-pencil-tip text-white shadow-2xl group"
                 v-for="(item, i) in features.list"
