@@ -81,7 +81,7 @@
         </div>
         <hr class="gradient-re w-full max-w-screen-xl h-0.5 border-0 -my-4" />
         <div class="flex flex-col items-center gap-2">
-            <span class="f-inter text-sm text-white">Default.Co © {{ year }}. All rights reserved.</span>
+            <span class="f-inter text-sm text-white">Menuriom.com © {{ year }}. All rights reserved.</span>
             <small class="text-white text-xs">Made With <b class="text-rose-400">❤</b> by the 2Idiots</small>
         </div>
     </footer>

@@ -19,6 +19,7 @@ const user = storeToRefs(userState);
 
 onMounted(async () => {
     if (user.name.value === "" || user.family.value === "") await userState.getUserInfo();
+    await userState.refreshToken().catch((e) => {});
     userState.setRefreshInterval();
 });
 </script>

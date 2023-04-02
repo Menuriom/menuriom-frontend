@@ -36,9 +36,6 @@ export default defineEventHandler(async (event) => {
 
     const { tokens } = await oauth2Client.getToken(inputs.code);
 
-    // const v = await oauth2Client.verifyIdToken({ idToken: tokens.id_token }).catch((e) => console.log(e));
-    // console.log({ v });
-
     await axios
         .get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${tokens.access_token}`, {
             headers: { "Content-Type": "application/json", "Accept-Encoding": "application/json" },
@@ -52,13 +49,13 @@ export default defineEventHandler(async (event) => {
             }
 
             const maxAge = parseInt(process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS); // 1 week
-            setCookie(event, "AuthToken", token, { sameSite: "none", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
+            setCookie(event, "AuthToken", authResponse.token, { sameSite: "none", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
 
             switch (authResponse.role) {
                 case "admin":
                     redirectPath = "/admin-panel";
                     break;
-                case "user":
+                default:
                     redirectPath = "/user-panel";
                     break;
             }

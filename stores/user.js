@@ -41,13 +41,19 @@ export const useUserStore = defineStore("user", () => {
             });
     };
 
+    const refreshToken = async () => {
+        await axios.post(`/auth/refresh`, null, { timeout: 30 * 1000 }).catch((e) => {
+            throw e;
+        });
+    };
+
     const setRefreshInterval = () => {
         if (isIntervalSet.value) return;
         isIntervalSet.value = true;
 
         const interval = setInterval(async () => {
-            await axios.post(`/auth/refresh`, null, { timeout: 30 * 1000 }).catch(async (e) => {
-                if (error.response.status == 401) {
+            await axios.post(`/auth/refresh`, null, { timeout: 30 * 1000 }).catch((error) => {
+                if (error.response && error.response.status == 401) {
                     clearInterval(interval);
                     isIntervalSet.value = false;
                 }
@@ -73,6 +79,7 @@ export const useUserStore = defineStore("user", () => {
         isIntervalSet,
         resetUserInfo,
         getUserInfo,
+        refreshToken,
         setRefreshInterval,
         logout,
     };

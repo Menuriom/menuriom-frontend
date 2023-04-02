@@ -24,6 +24,7 @@
                     </div>
                     <button
                         class="flex items-center justify-center gap-2 p-3 w-full border-2 border-white hover:bg-white hover:text-pencil-tip rounded transition-colors"
+                        @click="continueWithGoogle()"
                     >
                         <img src="~/assets/images/G.png" alt="G" />
                         <span>Continue with Google</span>
@@ -43,6 +44,9 @@
                             v-model="email"
                             :error="errorField == 'email' ? responseMessage : ''"
                         />
+                        <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
+                            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        </small>
                         <button
                             class="btn flex items-center justify-center w-full p-3 rounded bg-violet"
                             :class="{ 'opacity-75 cursor-not-allowed': loading }"
@@ -75,6 +79,9 @@
                             v-model="code"
                             :error="errorField == 'code' ? responseMessage : ''"
                         />
+                        <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
+                            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        </small>
                         <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
                             <span v-if="!loading"> Continue </span>
                             <Loading class="" v-else />
@@ -137,6 +144,9 @@
                             v-model="size"
                             :error="errorField == 'size' ? responseMessage : ''"
                         />
+                        <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
+                            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        </small>
                         <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
                             <span v-if="!loading"> Signup </span>
                             <Loading class="" v-else />
@@ -177,6 +187,10 @@ definePageMeta({ layout: "auth", middleware: ["guest-gate"] });
 
 const userStore = useUserStore();
 const router = useRouter();
+const route = useRoute();
+const config = useRuntimeConfig();
+
+const error = route.query.error;
 
 const page = ref("1");
 const loading = ref(false);
@@ -202,7 +216,24 @@ onMounted(() => {
             canResend.value = false;
         } else canResend.value = true;
     }, 1000);
+
+    switch (error) {
+        case "1": responseMessage.value = "Sorry, we can't login/register your right now! please try again later."; break;
+        case "2": responseMessage.value = "Sorry, we have an issue in our servers. please come back later"; break;
+    }
 });
+
+const continueWithGoogle = async () => {
+    const response_type = "code";
+    const redirect_uri = `${config.public.BASE_URL}/auth/login/google/callback`;
+    const scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
+    window.location.href = encodeURI(
+        `https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=${config.public.GOOGLE_LOGIN_CLIENT_ID}` +
+            `&response_type=${response_type}` +
+            `&redirect_uri=${redirect_uri}` +
+            `&scope=${scope}`
+    );
+};
 
 const sendVerificationCode = async () => {
     if (loading.value) return;
