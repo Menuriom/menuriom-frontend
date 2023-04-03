@@ -5,7 +5,7 @@
     <div class="flex flex-col items-center w-screen bg-white overflow-clip" id="app">
         <NuxtLoadingIndicator />
         <Header />
-        <main class="w-full mt-24">
+        <main class="w-full mt-18 md:mt-24">
             <slot />
         </main>
         <Footer class="mt-64 lg:mt-80" />

@@ -12,7 +12,7 @@
             <Icon class="w-2.5 h-2.5 bg-black" :class="`bg-${textColor}`" name="arrow.svg" folder="icons" size="10px" />
         </div>
         <transition name="slidedown" mode="out-in" appear>
-            <ul class="absolute flex flex-col gap-1 w-max p-1 bg-white text-pencil-tip shadow-md rounded-md" v-if="open">
+            <ul class="absolute top-6 flex flex-col gap-1 w-max p-1 bg-white text-pencil-tip shadow-md rounded-md" v-if="open">
                 <li
                     class="flex items-center gap-1 p-2 py-1 w-full hover:bg-zinc-200 rounded-md cursor-pointer"
                     :class="{ selected: i == selectedLanguage }"

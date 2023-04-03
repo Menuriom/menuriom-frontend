@@ -7,13 +7,13 @@
 @media (min-width: 1024px) {
     .list_heads,
     .list_checks {
-        width: 12rem;
+        width: 13rem;
     }
 }
 </style>
 
 <template>
-    <section class="relative flex flex-col items-center gap-10 w-full max-w-screen-lg p-2 sm:p-4 md:p-8" title="Plan Compression">
+    <section class="relative flex flex-col items-center gap-10 w-full max-w-screen-xl p-2 sm:p-4 md:p-8" title="Plan Compression">
         <Blob class="absolute -right-72 -top-16" />
         <div class="flex flex-col items-center gap-2">
             <img class="w-16 mb-1" src="~/assets/images/icons/compare.png" alt="compare" />
@@ -35,7 +35,9 @@
                             <h3 class="f-inter text-sm lg:text-lg font-extrabold">{{ item.title }}</h3>
                         </div>
                         <div class="flex flex-col lg:flex-row justify-start items-center sm:items-baseline md:gap-1" v-if="item.monthlyPrice > 0">
-                            <b class="f-inter text-base md:text-lg">{{ item.monthlyPrice / 1000 }}<span class="text-xs">,000</span></b>
+                            <b class="f-inter text-base md:text-lg">
+                                {{ Intl.NumberFormat().format(item.monthlyPrice / 1000) }}<span class="text-xs">,000</span>
+                            </b>
                             <div class="flex flex-col sm:flex-row items-baseline gap-1">
                                 <b class="f-inter text-xs sm:text-sm text-baby-blue">Toman</b>
                                 <small class="text-[10px]">/month</small>
@@ -54,23 +56,28 @@
                 </div>
             </header>
             <ul class="flex flex-col w-full">
-                <li class="flex flex-col lg:flex-row items-center w-full py-2 lg:py-0 odd:bg-neutral-100 group" v-for="(item, i) in features.list" :key="i">
-                    <h4 class="flex items-center gap-2 flex-grow p-1 lg:p-3 w-full text-center">
-                        <span class="lg:hidden flex-grow h-0.5 bg-neutral-400"></span>
-                        <span class="px-2 lg:px-0"> {{ item.title }} </span>
-                        <span class="lg:hidden flex-grow h-0.5 bg-neutral-400"></span>
-                    </h4>
-                    <span class="lg:hidden text-xs opacity-75 mb-2" v-if="item.desc && item.desc !== ''">{{ item.desc }}</span>
-                    <div class="flex items-center justify-center gap-1 md:gap-4 w-full">
+                <li class="flex flex-col lg:flex-row items-center lg:items-stretch gap-1 lg:gap-0 w-full py-2 lg:py-0 odd:bg-neutral-100 group" v-for="(item, i) in features.list" :key="i">
+                    <div class="flex flex-col items-center lg:items-start gap-1 lg:gap-0 flex-grow p-1 lg:p-3 w-full">
+                        <h4 class="flex items-center gap-2 text-center w-full">
+                            <span class="lg:hidden flex-grow h-0.5 bg-neutral-400"></span>
+                            <span class="px-2 lg:px-0"> {{ item.title }} </span>
+                            <span class="lg:hidden flex-grow h-0.5 bg-neutral-400"></span>
+                        </h4>
+                        <div class="flex items-start gap-1 text-xs opacity-75" v-if="item.desc && item.desc !== ''">
+                            <Icon class="relative w-3 h-3 bg-violet" name="info.svg" folder="icons" size="12px" v-if="item.desc && item.desc !== ''" />
+                            <span class="-mt-0.5">{{ item.desc }}</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center gap-1 md:gap-4 w-full">
                         <div
-                            class="relative list_checks flex flex-col items-center justify-center p-2 lg:p-3 bg-pencil-tip rounded-md lg:rounded-none group-first:rounded-t-lg group-last:rounded-b-lg"
+                            class="relative list_checks flex flex-col items-center justify-center p-2 lg:p-3 bg-pencil-tip rounded-md lg:rounded-none group-first:rounded-t-lg group-last:rounded-b-lg shadow-xl lg:shadow-none"
                             v-for="(mark, j) in item.marks"
                             :key="j"
                         >
                             <span class="lg:hidden text-white text-xs">{{ pricing.list[j].title }}</span>
                             <Icon class="relative w-6 h-6 bg-baby-blue" name="Check.svg" folder="icons/basil" size="24px" v-if="mark == true" />
                             <Icon class="relative w-6 h-6 bg-neutral-500" name="Cross.svg" folder="icons/basil" size="24px" v-else-if="mark == false" />
-                            <span class="text-baby-blue text-sm py-0.5" v-else>{{ mark }}</span>
+                            <span class="text-baby-blue text-xs py-1" v-else>{{ mark }}</span>
                             <span class="absolute bottom-0 w-3/4 h-0.5 bg-neutral-600 group-last:hidden"></span>
                         </div>
                     </div>
@@ -87,8 +94,8 @@ import Blob from "~/components/web/Blob.vue";
 const pricing = reactive({
     list: [
         { highlight: false, icon: "/pricing/basic.webp", title: "Basic", monthlyPrice: 0 },
-        { highlight: true, icon: "/pricing/standard.webp", title: "Standard", monthlyPrice: 50000 },
-        { highlight: false, icon: "/pricing/pro.webp", title: "Pro", monthlyPrice: 100000 },
+        { highlight: true, icon: "/pricing/standard.webp", title: "Standard", monthlyPrice: 150000 },
+        { highlight: false, icon: "/pricing/pro.webp", title: "Pro", monthlyPrice: 3600000 },
     ],
 });
 
