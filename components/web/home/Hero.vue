@@ -36,6 +36,7 @@
                     With Menuriom build and manage your restaurant menu with ease.
                 </p>
                 <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-5 mt-4">
+                    <!-- TODO : chnage the button when user is logged in to "head to dashboard" and "help center or how to start your first menu" -->
                     <Button class="" type="primary" linkTo="/authenticate">
                         <span class="text-sm md:text-lg font-bold">Try It For Free</span>
                     </Button>

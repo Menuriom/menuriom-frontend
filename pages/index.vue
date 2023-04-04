@@ -6,7 +6,7 @@
         <Features class="mt-24" />
         <OtherFeatures class="mt-24" />
         <Pricing class="-mt-10" />
-        <hr class="gradient-re border-0 -my-2 h-1 w-full max-w-screen-lg" />
+        <hr class="gradient-re border-0 -my-2 h-1 w-11/12 lg:w-full max-w-screen-lg" />
         <Faqs />
     </div>
 </template>

@@ -50,6 +50,7 @@ nav {
 </style>
 
 <template>
+    <!-- TODO : remove the login button when user is logged in and change the primary button to "your dashboard" -->
     <header
         ref="header"
         class="fixed flex items-center justify-between gap-4 border-2 border-gray-100 rounded-lg mt-2 md:mt-4 p-3 max-w-screen-2xl h-14 lg:h-16 bg-white bg-opacity-90 shadow-nr5 z-20"

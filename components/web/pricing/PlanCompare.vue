@@ -20,7 +20,7 @@
             <h2 class="f-inter text-2xl font-bold">Compare Plans.</h2>
             <h4 class="text-2xl opacity-60 font-extralight text-center">Overview of what is included in our different plans.</h4>
         </div>
-        <div class="flex flex-col-reverse lg:flex-col items-center gap-4 w-full">
+        <div class="flex flex-col-reverse lg:flex-col items-center gap-8 lg:gap-4 w-full">
             <header class="lg:sticky top-24 flex justify-center lg:items-end gap-1 md:gap-4 w-full z-2">
                 <div class="hidden lg:flex flex-grow-0 lg:flex-grow"></div>
                 <div
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </header>
-            <ul class="flex flex-col w-full">
+            <ul class="flex flex-col gap-6 lg:gap-0 w-full">
                 <li class="flex flex-col lg:flex-row items-center lg:items-stretch gap-1 lg:gap-0 w-full py-2 lg:py-0 odd:bg-neutral-100 group" v-for="(item, i) in features.list" :key="i">
                     <div class="flex flex-col items-center lg:items-start gap-1 lg:gap-0 flex-grow p-1 lg:p-3 w-full">
                         <h4 class="flex items-center gap-2 text-center w-full">

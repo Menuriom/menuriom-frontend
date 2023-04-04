@@ -1,8 +1,8 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-8 p-8 w-96 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
-        <ul class="flex items-center justify-between gap-6">
+    <div class="flex flex-col gap-4 2sm:gap-8 p-4 sm:p-8 w-full sm:w-96 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
+        <ul class="flex items-center justify-between gap-2 2sm:gap-6">
             <li
                 class="flex items-center justify-center p-1.5 rounded-md shadow-nr10 cursor-pointer"
                 :class="[selectedCategory == 1 ? 'gradient-re bg-neutral-700' : 'bg-zinc-200 grayscale']"
@@ -45,10 +45,10 @@
             <img class="w-full h-48 object-cover rounded-lg shadow-nr15" src="~/assets/images/french-toast.webp" alt="french-toast" />
             <span class="absolute left-4 bottom-14 w-16 h-3 bg-neutral-600 bg-opacity-75 backdrop-blur-md rounded-md shadow-nr35"></span>
             <span class="absolute left-4 bottom-4 w-40 h-7 bg-neutral-600 bg-opacity-75 backdrop-blur-md rounded-md shadow-nr35"></span>
-            <div class="absolute -left-8 top-4 gradient-re rounded-lg p-1">
+            <div class="absolute left-0 sm:-left-8 top-4 gradient-re rounded-lg p-1">
                 <div class="flex items-end gap-1 px-4 bg-neutral-600 bg-opacity-90 backdrop-blur-md rounded-md shadow-nr35">
-                    <img class="flex w-14 h-14" style="margin-inline-start: -3rem" src="~/assets/images/icons/fire.png" alt="fire" />
-                    <img class="h-8 mb-2.5" src="~/assets/images/today-special.svg" alt="special" />
+                    <img class="w-10 sm:w-14 -ml-10 sm:-ml-12" src="~/assets/images/icons/fire.png" alt="fire" />
+                    <img class="h-6 sm:h-8 mb-1.5 sm:mb-2.5" src="~/assets/images/today-special.svg" alt="special" />
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
                 <img class="w-18 h-18 object-cover shadow-nr25" src="~/assets/images/coffee1.webp" alt="coffe" />
                 <div class="flex flex-col gap-3">
                     <span class="w-20 h-3 bg-neutral-200 rounded-md shadow-nr5"></span>
-                    <span class="w-40 h-7 bg-neutral-200 rounded-md shadow-nr5"></span>
+                    <span class="w-28 2sm:w-40 h-7 bg-neutral-200 rounded-md shadow-nr5"></span>
                 </div>
             </li>
             <li class="gradient-re relative w-full p-1 rounded-lg shadow-nr10">
@@ -65,7 +65,7 @@
                     <img class="w-18 h-18 object-cover shadow-nr25" src="~/assets/images/coffee-cream1.webp" alt="cream" />
                     <div class="flex flex-col gap-3">
                         <span class="w-20 h-3 bg-neutral-200 rounded-md shadow-nr5"></span>
-                        <span class="w-40 h-7 bg-neutral-200 rounded-md shadow-nr5"></span>
+                        <span class="w-28 2sm:w-40 h-7 bg-neutral-200 rounded-md shadow-nr5"></span>
                     </div>
                 </div>
                 <img class="absolute -top-2 -right-8 w-16 h-16 rotate-45 drop-shadow-lg" src="~/assets/images/icons/new-tag.png" alt="new-tag" />
