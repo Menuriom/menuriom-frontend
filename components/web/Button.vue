@@ -17,13 +17,13 @@
 </style>
 
 <template>
-    <a class="btn p-4 px-8 rounded-md" :class="[type == 'primary' ? 'btn-primary' : 'btn-secondary']" :href="linkTo" v-if="isLink && samepage">
+    <a class="btn p-2 sm:p-4 px-4 sm:px-8 rounded-md" :class="[type == 'primary' ? 'btn-primary' : 'btn-secondary']" :href="linkTo" v-if="isLink && samepage">
         <slot />
     </a>
-    <nuxt-link class="btn p-4 px-8 rounded-md" :class="[type == 'primary' ? 'btn-primary' : 'btn-secondary']" :to="linkTo" v-else-if="isLink && !samepage">
+    <nuxt-link class="btn p-2 sm:p-4 px-4 sm:px-8 rounded-md" :class="[type == 'primary' ? 'btn-primary' : 'btn-secondary']" :to="linkTo" v-else-if="isLink && !samepage">
         <slot />
     </nuxt-link>
-    <button class="btn p-4 px-8 rounded-md" :class="[type == 'primary' ? 'btn-primary' : 'btn-secondary']" v-else>
+    <button class="btn p-2 sm:p-4 px-4 sm:px-8 rounded-md" :class="[type == 'primary' ? 'btn-primary' : 'btn-secondary']" v-else>
         <slot />
     </button>
 </template>
