@@ -3,7 +3,7 @@
 <template>
     <div class="relative flex items-start gap-0 sm:gap-20 md:gap-20 max-w-sm">
         <div class="relative flex flex-col items-start gap-3 p-4 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
-            <img class="w-9 -mt-11" src="~/assets/images/custom-icons/location-dot.png" alt="pin" />
+            <img class="w-9 -mt-11" src="~/assets/images/custom-icons/dark/location-dot.png" alt="pin" />
             <b class="text-lg">Tajrish</b>
             <ul class="flex items-center justify-between gap-2 w-full">
                 <li v-for="n in 4" :key="n" class="w-8 h-8 rounded-md bg-gray-200"></li>
@@ -16,7 +16,7 @@
         </div>
 
         <div class="absolute left-18 top-36 flex flex-col items-start gap-3 p-4 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
-            <img class="w-9 -mt-11" src="~/assets/images/custom-icons/location-dot.png" alt="pin" />
+            <img class="w-9 -mt-11" src="~/assets/images/custom-icons/dark/location-dot.png" alt="pin" />
             <b class="text-lg">Bamland</b>
             <ul class="flex items-center justify-between gap-2 w-full">
                 <li v-for="n in 4" :key="n" class="w-8 h-8 rounded-md bg-gray-200"></li>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="absolute right-10 sm:right-0 top-2 flex flex-col items-start gap-3 p-4 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
-            <img class="w-9 -mt-11" src="~/assets/images/custom-icons/location-dot.png" alt="pin" />
+            <img class="w-9 -mt-11" src="~/assets/images/custom-icons/dark/location-dot.png" alt="pin" />
             <b class="text-lg">Sa'adat Abad</b>
             <ul class="flex items-center justify-between gap-2 w-full">
                 <li v-for="n in 4" :key="n" class="w-8 h-8 rounded-md bg-gray-200"></li>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="relative flex flex-col items-start gap-3 p-4 -ml-12 sm:ml-0 mt-24 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10 z-2">
-            <img class="w-9 -mt-11" src="~/assets/images/custom-icons/location-dot.png" alt="pin" />
+            <img class="w-9 -mt-11" src="~/assets/images/custom-icons/dark/location-dot.png" alt="pin" />
             <b class="text-lg">Ponak</b>
             <ul class="flex items-center justify-between gap-2 w-full">
                 <li v-for="n in 4" :key="n" class="w-8 h-8 rounded-md bg-gray-200"></li>

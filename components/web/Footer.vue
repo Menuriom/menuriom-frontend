@@ -46,7 +46,7 @@
                 </div>
             </div>
             <nav class="flex flex-col sm:flex-row flex-wrap items-center gap-10 md:gap-16">
-                <ul class="flex flex-col items-center md:items-start gap-5">
+                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
                         <nuxt-link class="text-white group-hover:text-purple-300" to="/pricing">Pricing</nuxt-link>
                     </li>
@@ -57,7 +57,7 @@
                         <nuxt-link class="text-white group-hover:text-purple-300" to="/about">About</nuxt-link>
                     </li>
                 </ul>
-                <ul class="flex flex-col items-center md:items-start gap-5">
+                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
                         <nuxt-link class="text-white group-hover:text-purple-300" to="/request-feature">Request Feature</nuxt-link>
                     </li>
@@ -68,7 +68,7 @@
                         <nuxt-link class="text-white group-hover:text-purple-300" to="/help-center">Help Center</nuxt-link>
                     </li>
                 </ul>
-                <ul class="flex flex-col items-center md:items-start gap-5">
+                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
                         <nuxt-link class="text-white group-hover:text-purple-300" to="/privacy-policy">Privacy Policy</nuxt-link>
                     </li>

@@ -292,6 +292,7 @@ const checkVerificationCode = async () => {
         })
         .finally(() => (loading.value = false));
 };
+
 const resendCode = () => {
     if (!canResend.value) return;
     sendVerificationCode();

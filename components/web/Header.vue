@@ -53,9 +53,9 @@ nav {
     <!-- TODO : remove the login button when user is logged in and change the primary button to "your dashboard" -->
     <header
         ref="header"
-        class="fixed flex items-center justify-between gap-4 border-2 border-gray-100 rounded-lg mt-2 md:mt-4 p-3 max-w-screen-2xl h-14 lg:h-16 bg-white bg-opacity-90 shadow-nr5 z-20"
+        class="fixed flex items-center justify-between gap-4 border-2 border-gray-100 rounded-lg mt-2 md:mt-4 p-2 sm:p-3 max-w-screen-2xl h-14 lg:h-16 bg-white bg-opacity-90 shadow-nr5 z-20"
     >
-        <nuxt-link class="flex items-center gap-3 h-7 md:h-9 overflow-hidden flex-shrink-0" to="/">
+        <nuxt-link class="flex items-center gap-1 sm:gap-3 h-7 md:h-9 overflow-hidden flex-shrink-0" to="/">
             <img class="relative h-7 md:h-9" src="/logo.svg" title="Menuriom" alt="Menuriom" />
             <img class="h-6 md:h-8" src="/logo-text.svg" title="Menuriom" alt="Menuriom" />
         </nuxt-link>
@@ -78,7 +78,7 @@ nav {
                         </div>
                         <transition name="slidedown" mode="out-in" appear>
                             <ul
-                                class="drop_down_list lg:absolute top-9 grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-3 w-full lg:w-screen lg:max-w-3xl p-0 lg:p-4 xl:p-6 bg-white rounded-xl lg:shadow-nr15"
+                                class="drop_down_list lg:absolute top-9 grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-3 w-full lg:w-screen lg:max-w-2xl p-0 lg:p-4 xl:p-6 bg-white rounded-xl lg:shadow-nr15"
                                 v-if="featureListOpen"
                             >
                                 <li class="w-full p-3 hover:bg-neutral-100 rounded-lg" v-for="(item, i) in features.list" :key="i">
@@ -127,13 +127,16 @@ nav {
                 <div class="flex items-center gap-4">
                     <LangSwitch class="" textColor="black" />
                     <span class="lg:hidden text-gray-400">|</span>
-                    <nuxt-link class="link md:hidden text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel">Login</nuxt-link>
+                    <nuxt-link class="link md:hidden text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel" v-if="!user.email">
+                        Login
+                    </nuxt-link>
                     <nuxt-link
                         class="link 2sm:hidden text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                        to="/authenticate"
-                        title="Try it for free"
+                        :to="!user.email ? `/authenticate` : `/user-panel`"
+                        :title="!user.email ? `Try it for free` : `Your Menuriom Dashboard`"
                     >
-                        Try It For Free
+                        <span v-if="!user.email">Try It For Free</span>
+                        <span v-else>Your Dashboard</span>
                     </nuxt-link>
                 </div>
             </nav>
@@ -141,18 +144,21 @@ nav {
 
         <div class="flex items-center gap-2 xl:gap-4 flex-shrink-0">
             <span class="hidden md:flex text-gray-400">|</span>
-            <nuxt-link class="link hidden md:flex text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel">Login</nuxt-link>
-            <nuxt-link
-                class="link hidden 2sm:flex text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                to="/authenticate"
-                title="Try it for free"
-            >
-                Try It For Free
+            <nuxt-link class="link hidden md:flex text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel" v-if="!user.email">
+                Login
             </nuxt-link>
-            <button class="toggle flex lg:hidden w-10 h-10 hover:bg-zinc-200 rounded-full" @click="headerToggle()">
-                <span class="line bg-black"></span>
-                <span class="line bg-black"></span>
-                <span class="line bg-black"></span>
+            <nuxt-link
+                class="link hidden 2sm:flex text-xs md:text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
+                :to="!user.email ? `/authenticate` : `/user-panel`"
+                :title="!user.email ? `Try it for free` : `Your Menuriom Dashboard`"
+            >
+                <span v-if="!user.email">Try It For Free</span>
+                <span v-else>Your Dashboard</span>
+            </nuxt-link>
+            <button class="toggle flex lg:hidden w-10 h-10 hover:bg-zinc-100 rounded-full transition-colors" @click="headerToggle()">
+                <span class="line bg-black transition-all" :class="{'rotate-45 -mb-1':menuOpen}"></span>
+                <span class="line bg-black transition-all" v-show="!menuOpen"></span>
+                <span class="line bg-black transition-all" :class="{'-rotate-45 -mt-1':menuOpen}"></span>
             </button>
         </div>
     </header>
@@ -160,20 +166,25 @@ nav {
 
 <script setup>
 import LangSwitch from "~/components/LangSwitch.vue";
+import { useUserStore } from "@/stores/user";
+import { storeToRefs } from "pinia";
+
+const userState = useUserStore();
+const user = storeToRefs(userState);
 
 const featureDropdown = ref(null); //Ref to DOM
 const featureListOpen = ref(false);
 const features = reactive({
     list: [
-        { icon: "/gradient-icons/palette.png", title: "Templates & Customization", desc: "Style your menu base on restaurant theme" },
-        { icon: "/gradient-icons/store.png", title: "Multiple Branches", desc: "Different menu for different branch" },
-        { icon: "/gradient-icons/fire.png", title: "Item Specialazation", desc: "Highlight items in your menu" },
-        { icon: "/gradient-icons/clipboard-list-check.png", title: "Ordering System", desc: "Get orders directly from your menu" },
-        { icon: "/gradient-icons/earth-america.png", title: "Menu Translation", desc: "Multiple languages for same menu" },
-        { icon: "/gradient-icons/bell-on.png", title: "Server Call", desc: "Notify a server when table needs one" },
-        { icon: "/gradient-icons/comments-question-check.png", title: "Feedback System", desc: "Receive review from your customers" },
-        { icon: "/gradient-icons/object-intersect.png", title: "Combo Lists", desc: "Pair items that goes best together " },
-        { icon: "/gradient-icons/qrcode.png", title: "Custom QR Code", desc: "Place your logo onto your QR barcode" },
+        { icon: "/gradient-icons/dark/palette.png", title: "Templates & Customization", desc: "Style your menu base on restaurant theme" },
+        { icon: "/gradient-icons/dark/store.png", title: "Multiple Branches", desc: "Different menu for different branch" },
+        { icon: "/gradient-icons/dark/fire.png", title: "Item Specialazation", desc: "Highlight items in your menu" },
+        { icon: "/gradient-icons/dark/clipboard-list-check.png", title: "Ordering System", desc: "Get orders directly from your menu" },
+        { icon: "/gradient-icons/dark/earth-america.png", title: "Menu Translation", desc: "Multiple languages for same menu" },
+        { icon: "/gradient-icons/dark/bell-on.png", title: "Server Call", desc: "Notify a server when table needs one" },
+        { icon: "/gradient-icons/dark/comments-question-check.png", title: "Feedback System", desc: "Receive review from your customers" },
+        { icon: "/gradient-icons/dark/object-intersect.png", title: "Combo Lists", desc: "Pair items that goes best together " },
+        { icon: "/gradient-icons/dark/qrcode.png", title: "Custom QR Code", desc: "Place your logo onto your QR barcode" },
     ],
 });
 

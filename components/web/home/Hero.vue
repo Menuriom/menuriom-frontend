@@ -16,13 +16,13 @@
             class="flex flex-col 1.5xl:flex-row items-center xl:items-start sm:gap-10 xl:gap-0 w-full p-4 lg:p-10 py-10 lg:py-20 bg-pencil-tip rounded-md"
             title="Hero"
         >
-            <div class="relative flex flex-col items-center xl:items-start gap-8 text-white w-full max-w-3xl z-2">
-                <div class="flex items-end gap-0.5 xl:w-full -mb-6 xl:mb-0">
+            <div class="relative flex flex-col items-center xl:items-start gap-6 md:gap-8 text-white w-full max-w-3xl z-2">
+                <div class="flex items-end gap-0.5 xl:w-full -mb-4 md:-mb-6 xl:mb-0">
                     <span class="text-xs xl:text-base text-center">Creating a digital menu has never been easier.</span>
                     <span class="hidden xl:flex flex-grow bg-white h-0.5 mb-1.5"></span>
                 </div>
                 <div class="flex items-center">
-                    <h1 class="big-text flex flex-col items-center xl:items-start text-3xl sm:text-5xl md:text-6xl font-bold">
+                    <h1 class="big-text flex flex-col items-center xl:items-start text-4xl 2sm:text-5xl md:text-6xl font-bold">
                         <span class="f-inter text-center">The Best Way To Create</span>
                         <div class="flex items-center gap-4">
                             <span class="gradient-text f-inter">QR Menus</span>
@@ -35,14 +35,20 @@
                     <br />
                     With Menuriom build and manage your restaurant menu with ease.
                 </p>
-                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-5 mt-4">
+                <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mt-4">
                     <!-- TODO : chnage the button when user is logged in to "head to dashboard" and "help center or how to start your first menu" -->
-                    <Button class="" type="primary" linkTo="/authenticate">
-                        <span class="text-sm md:text-lg font-bold">Try It For Free</span>
+                    <Button class="" type="primary" linkTo="/authenticate" v-if="!user.email">
+                        <span class="text-lg font-bold">Try It For Free</span>
+                    </Button>
+                    <Button class="" type="primary" linkTo="/user-panel" v-else>
+                        <span class="text-lg font-bold">Head To Dashboard</span>
                     </Button>
                     OR
-                    <Button class="border-2 sm:py-3.5 border-white" type="secondary" linkTo="/demo">
-                        <span class="text-sm md:text-lg font-bold">Check The Demo</span>
+                    <Button class="border-2 sm:py-3.5 border-white" type="secondary" linkTo="/demo" v-if="!user.email">
+                        <span class="text-lg font-bold">Check The Demo</span>
+                    </Button>
+                    <Button class="border-2 sm:py-3.5 border-white" type="secondary" linkTo="/help-center" v-else>
+                        <span class="text-lg font-bold">Learn How To Create</span>
                     </Button>
                 </div>
             </div>
@@ -62,7 +68,7 @@
                     src="~/assets/images/menus/4.png"
                     alt="menu4"
                 />
-                <ul class="absolute top-1/4 right-1/2 sm:right-1/3 w-40 sm:w-96 h-96 flex flex-col z-10">
+                <ul class="absolute top-1/4 right-1/3 w-40 sm:w-96 h-96 flex flex-col z-10">
                     <li
                         class="absolute top-0 right-0 sm:-right-10 flex items-center gap-2 p-2 rounded-md border-2 border-zinc-300 bg-white bg-opacity-90 backdrop-blur-sm shadow-nr25"
                     >
@@ -105,4 +111,9 @@
 
 <script setup>
 import Button from "~/components/web/Button.vue";
+import { useUserStore } from "@/stores/user";
+import { storeToRefs } from "pinia";
+
+const userState = useUserStore();
+const user = storeToRefs(userState);
 </script>

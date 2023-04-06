@@ -18,7 +18,7 @@ export default defineNuxtConfig({
             ],
         },
         pageTransition: { name: "page", mode: "out-in" },
-        layoutTransition: { name: "layout", mode: "out-in" },
+        layoutTransition: { name: "page", mode: "out-in" },
     },
 
     css: [
@@ -27,7 +27,6 @@ export default defineNuxtConfig({
     ],
     postcss: {
         plugins: {
-            // tailwind: {},
             autoprefixer: {},
         },
     },

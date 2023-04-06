@@ -16,7 +16,7 @@
         </section>
         <Plans />
         <PlanCompare />
-        <hr class="gradient-re border-0 -my-4 h-1 w-full max-w-screen-lg">
+        <hr class="gradient-re border-0 -my-4 h-1 w-full max-w-screen-lg" />
         <Faqs blobPosition="left" />
     </div>
 </template>
