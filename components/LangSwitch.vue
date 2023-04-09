@@ -8,7 +8,7 @@
     <div class="relative" ref="dropdown">
         <div class="flex items-center gap-1" @click="toggleDropdown()">
             <img class="w-6" :src="`/flags/${locale}.png`" :alt="locale" />
-            <small :class="`text-${textColor}`" v-if="showText">{{ languages[locale].name }}</small>
+            <small :class="`text-${textColor}`" v-if="showText">{{ locale }}</small>
             <Icon class="w-2.5 h-2.5 bg-black" :class="`bg-${textColor}`" name="arrow.svg" folder="icons" size="10px" />
         </div>
         <transition name="slidedown" mode="out-in" appear>
@@ -20,7 +20,7 @@
                     v-for="lang in availableLocales"
                     :key="lang.code"
                 >
-                    <a class="flex items-center gap-1 p-2 py-1" :href="switchLocalePath(lang.code)">
+                    <a class="flex items-center gap-1 p-2 py-1" href="#" @click.prevent.stop="selectOption(lang.code)">
                         <img class="w-6" :src="`/flags/${lang.code}.png`" :alt="lang.code" />
                         <span class="flex text-xs">{{ lang.name }}</span>
                     </a>
@@ -38,19 +38,10 @@ defineProps({
     showText: { type: Boolean, default: false },
 });
 
-const { locale, locales } = useI18n();
-const switchLocalePath = useSwitchLocalePath();
+const { locale, locales, setLocale } = useI18n();
+// const switchLocalePath = useSwitchLocalePath();
 
-const dropdown = ref(null); //Ref to DOM
-
-const selectedLanguage = ref(locale.value);
-const languages = reactive({
-    en: { flag: "/flags/en.png", name: "English", code: "En" },
-    fa: { flag: "/flags/fa.png", name: "فارسی", code: "Fa" },
-});
 const availableLocales = computed(() => locales.value.filter((i) => i.code !== locale.value));
-
-const open = ref(false);
 
 onMounted(() => {
     document.addEventListener("click", closeDropdown);
@@ -59,16 +50,15 @@ onBeforeUnmount(() => {
     document.removeEventListener("click", closeDropdown);
 });
 
+const open = ref(false);
+const dropdown = ref(null); //Ref to DOM
 const toggleDropdown = () => (open.value = !open.value);
 const closeDropdown = (event) => {
     if (dropdown.value && !dropdown.value.contains(event.target)) open.value = false;
 };
 
-const selectOption = (index) => {
-    selectedLanguage.value = index;
-    locale.value = index;
+const selectOption = (code) => {
+    setLocale(code);
     toggleDropdown();
-
-    // window.location.href = switchLocalePath(locale.value);
 };
 </script>

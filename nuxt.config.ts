@@ -52,8 +52,14 @@ export default defineNuxtConfig({
 
     i18n: {
         baseUrl: process.env.BASE_URL,
-        differentDomains: true,
-        defaultLocale: "en", // TODO : change this to fa for production
+        // differentDomains: true,
+        strategy: "prefix_except_default",
+        detectBrowserLanguage: {
+            useCookie: true,
+            cookieKey: "i18n_redirected",
+            redirectOn: "root",
+        },
+        defaultLocale: "fa",
         lazy: true,
         langDir: "locale",
         locales: [

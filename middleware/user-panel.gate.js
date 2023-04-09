@@ -3,11 +3,12 @@ import { useUserStore } from "@/stores/user";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
     const nuxtApp = useNuxtApp();
+    const localePath = useLocalePath();
 
     if (process.server) {
         // if token does not exist or its invalid then redirect to /authenticate
         const token = useCookie("AuthToken").value;
-        if (!token) return navigateTo("/authenticate");
+        if (!token) return navigateTo(localePath("/authenticate"));
 
         const req = nuxtApp.ssrContext.event.node.req;
         const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
@@ -20,7 +21,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             .get(url, { headers: headers })
             .then((response) => true)
             .catch((e) => false);
-        if (!isTokenValid) return navigateTo("/authenticate");
+        if (!isTokenValid) return navigateTo(localePath("/authenticate"));
     }
 
     if (process.client && nuxtApp.isHydrating && nuxtApp.payload.serverRendered) return;
@@ -31,6 +32,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             .getUserInfo()
             .then(() => true)
             .catch((e) => false);
-        if (!isTokenValid) return navigateTo("/authenticate");
+        if (!isTokenValid) return navigateTo(localePath("/authenticate"));
     }
 });

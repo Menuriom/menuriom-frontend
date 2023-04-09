@@ -22,7 +22,7 @@
             <img src="~/assets/images/icons/light.png" alt="light" />
             <h4 class="f-inter font-extrabold text-2xl sm:text-3xl lg:text-4xl text-center lg:text-start">Looking For A Feature You Can’t Find?</h4>
             <p class="md:text-lg text-center">Tell us what you want, we will get to work on implementing it</p>
-            <Button class="border-4 border-black px-1 py-3 mt-4" type="primary" linkTo="/request-feature">
+            <Button class="border-4 border-black px-1 py-3 mt-4" type="primary" :linkTo="localePath('/request-feature')">
                 <span class="text-white text-sm sm:text-lg font-bold whitespace-nowrap">Submit A Feature Request</span>
             </Button>
         </div>
@@ -63,32 +63,32 @@
             <nav class="flex flex-col sm:flex-row flex-wrap items-center gap-10 md:gap-16">
                 <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" to="/pricing">Pricing</nuxt-link>
+                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/pricing')">Pricing</nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" to="/faqs">Faqs</nuxt-link>
+                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/faqs')">Faqs</nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" to="/about">About</nuxt-link>
-                    </li>
-                </ul>
-                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" to="/request-feature">Request Feature</nuxt-link>
-                    </li>
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" to="/contact">Contact Us</nuxt-link>
-                    </li>
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" to="/help-center">Help Center</nuxt-link>
+                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/about')">About</nuxt-link>
                     </li>
                 </ul>
                 <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" to="/privacy-policy">Privacy Policy</nuxt-link>
+                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/request-feature')">Request Feature</nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" to="/terms">Term Of Service</nuxt-link>
+                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/contact')">Contact Us</nuxt-link>
+                    </li>
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/help-center')">Help Center</nuxt-link>
+                    </li>
+                </ul>
+                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/privacy-policy')">Privacy Policy</nuxt-link>
+                    </li>
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/terms')">Term Of Service</nuxt-link>
                     </li>
                     <LangSwitch :showText="true" textColor="white" />
                 </ul>
@@ -108,6 +108,7 @@ import LangSwitch from "~/components/LangSwitch.vue";
 import Button from "~/components/web/Button.vue";
 
 const route = useRoute();
+const localePath = useLocalePath();
 
 const year = new Date(Date.now()).getFullYear();
 </script>

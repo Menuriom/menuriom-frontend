@@ -55,7 +55,7 @@ nav {
         ref="header"
         class="fixed flex items-center justify-between gap-4 border-2 border-gray-100 rounded-lg mt-2 md:mt-4 p-2 sm:p-3 max-w-screen-2xl h-14 lg:h-16 bg-white bg-opacity-90 shadow-nr5 z-20"
     >
-        <nuxt-link class="flex items-center gap-1 sm:gap-3 h-7 md:h-9 overflow-hidden flex-shrink-0" to="/">
+        <nuxt-link class="flex items-center gap-1 sm:gap-3 h-7 md:h-9 overflow-hidden flex-shrink-0" :to="localePath('/')">
             <img class="relative h-7 md:h-9" src="/logo.svg" title="Menuriom" alt="Menuriom" />
             <img class="h-6 md:h-8" src="/logo-text.svg" title="Menuriom" alt="Menuriom" />
         </nuxt-link>
@@ -82,7 +82,7 @@ nav {
                                 v-if="featureListOpen"
                             >
                                 <li class="w-full p-3 hover:bg-neutral-100 rounded-lg" v-for="(item, i) in features.list" :key="i">
-                                    <nuxt-link class="flex items-center gap-2" :to="`/features#${item.title.toLowerCase().replaceAll(' ', '-')}`">
+                                    <nuxt-link class="flex items-center gap-2" :to="localePath(`/features#${item.title.toLowerCase().replaceAll(' ', '-')}`)">
                                         <img class="w-8" :src="item.icon" :alt="item.title" />
                                         <div class="flex flex-col">
                                             <h4 class="f-inter">{{ item.title }}</h4>
@@ -91,7 +91,7 @@ nav {
                                     </nuxt-link>
                                 </li>
                                 <li class="w-full p-3">
-                                    <nuxt-link class="flex items-center w-max" to="/features">
+                                    <nuxt-link class="flex items-center w-max" :to="localePath('/features')">
                                         <span class="border-b-2 border-violet hover:border-b-4">See all the features &gt;</span>
                                     </nuxt-link>
                                 </li>
@@ -99,25 +99,25 @@ nav {
                         </transition>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="flex items-center gap-4 w-full" to="/demo">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/demo')">
                             <span>Demo</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="flex items-center gap-4 w-full" to="/pricing">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')">
                             <span>Pricing</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="flex items-center gap-4 w-full" to="/how-it-works">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/how-it-works')">
                             <span>How It Works</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="flex items-center gap-4 w-full" to="/contact-us">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')">
                             <span>Contact Us</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
@@ -129,7 +129,7 @@ nav {
                     <span class="lg:hidden text-gray-400">|</span>
                     <nuxt-link
                         class="link md:hidden text-sm p-2 hover:px-3 rounded-md"
-                        to="/authenticate"
+                        :to="localePath('/authenticate')"
                         title="Login into user panel"
                         v-if="!user.email.value"
                     >
@@ -137,7 +137,7 @@ nav {
                     </nuxt-link>
                     <nuxt-link
                         class="link 2sm:hidden text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                        :to="!user.email.value ? `/authenticate` : `/user-panel`"
+                        :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/user-panel`)"
                         :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
                     >
                         <span v-if="!user.email.value">Try It For Free</span>
@@ -149,12 +149,17 @@ nav {
 
         <div class="flex items-center gap-2 xl:gap-4 flex-shrink-0">
             <span class="hidden md:flex text-gray-400">|</span>
-            <nuxt-link class="link hidden md:flex text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel" v-if="!user.email.value">
+            <nuxt-link
+                class="link hidden md:flex text-sm p-2 hover:px-3 rounded-md"
+                :to="localePath(`/authenticate`)"
+                title="Login into user panel"
+                v-if="!user.email.value"
+            >
                 Login
             </nuxt-link>
             <nuxt-link
                 class="link hidden 2sm:flex text-xs md:text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                :to="!user.email.value ? `/authenticate` : `/user-panel`"
+                :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/user-panel`)"
                 :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
             >
                 <span v-if="!user.email.value">Try It For Free</span>
@@ -173,6 +178,8 @@ nav {
 import LangSwitch from "~/components/LangSwitch.vue";
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
+
+const localePath = useLocalePath();
 
 const userState = useUserStore();
 const user = storeToRefs(userState);

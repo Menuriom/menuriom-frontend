@@ -14,7 +14,7 @@
     <div class="flex flex-col items-center justify-center gap-4">
         <div class="flex flex-col items-center gap-6 w-full md:w-max max-w-md p-6 md:p-8 bg-pencil-tip rounded-lg shadow-2xl overflow-hidden">
             <div class="gradient-re flex items-center justify-center w-max p-1 rounded-md">
-                <img class="w-16 h-16 -ml-0.5" src="/logo.svg" alt="Menuriom" />
+                <img class="w-16 h-16 -ms-0.5" src="/logo.svg" alt="Menuriom" />
             </div>
             <transition name="slide-left" mode="out-in">
                 <section class="flex flex-col items-center justify-center gap-6 w-full text-white" page="1" v-if="page == 1">
@@ -157,15 +157,15 @@
         </div>
         <nav>
             <ul class="flex flex-wrap items-center justify-center gap-2 p-2 text-white">
-                <li><nuxt-link class="hover:underline text-xs" to="/">Menuriom.com</nuxt-link></li>
+                <li><nuxt-link class="hover:underline text-xs" :to="localePath('/')">Menuriom.com</nuxt-link></li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li><nuxt-link class="hover:underline text-xs" to="/pricing">Pricing</nuxt-link></li>
+                <li><nuxt-link class="hover:underline text-xs" :to="localePath('/pricing')">Pricing</nuxt-link></li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li><nuxt-link class="hover:underline text-xs" to="/help-center">Help Center</nuxt-link></li>
+                <li><nuxt-link class="hover:underline text-xs" :to="localePath('/help-center')">Help Center</nuxt-link></li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li><nuxt-link class="hover:underline text-xs" to="/faqs">Faqs</nuxt-link></li>
+                <li><nuxt-link class="hover:underline text-xs" :to="localePath('/faqs')">Faqs</nuxt-link></li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li><nuxt-link class="hover:underline text-xs" to="/privacy-policy">Privacy Policy</nuxt-link></li>
+                <li><nuxt-link class="hover:underline text-xs" :to="localePath('/privacy-policy')">Privacy Policy</nuxt-link></li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
                 <li><LangSwitch textColor="white" /></li>
             </ul>
@@ -189,6 +189,7 @@ const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
 const config = useRuntimeConfig();
+const localePath = useLocalePath();
 
 const error = route.query.error;
 
@@ -277,7 +278,7 @@ const checkVerificationCode = async () => {
                 name.value = family.value = mobile.value = size.value = "";
             } else {
                 userStore.setRefreshInterval();
-                router.push("/user-panel");
+                router.push(localePath("/user-panel"));
             }
         })
         .catch((e) => {
@@ -316,7 +317,7 @@ const completeSignup = async () => {
         })
         .then((response) => {
             userStore.setRefreshInterval();
-            router.push("/user-panel");
+            router.push(localePath("/user-panel"));
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
