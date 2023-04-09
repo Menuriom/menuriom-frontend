@@ -50,11 +50,28 @@ export default defineNuxtConfig({
         compressPublicAssets: true,
     },
 
+    i18n: {
+        baseUrl: process.env.BASE_URL,
+        differentDomains: true,
+        defaultLocale: "en", // TODO : change this to fa for production
+        lazy: true,
+        langDir: "locale",
+        locales: [
+            { code: "en", name: "English", iso: "en-US", file: "en.js", dir: "ltr", domain: process.env.BASE_EN_URL },
+            { code: "fa", name: "فارسی", iso: "fa-IR", file: "fa.js", dir: "rtl", domain: process.env.BASE_FA_URL },
+        ],
+        vueI18n: {
+            legacy: false,
+        },
+    },
+
     modules: [
         // tailwind moudle for nuxt 3
         "@nuxtjs/tailwindcss",
 
         // pinia moudle
         "@pinia/nuxt",
+
+        "@nuxtjs/i18n",
     ],
 });

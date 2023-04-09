@@ -14,14 +14,29 @@
 <template>
     <footer class="relative flex flex-col items-center gap-12 p-2 px-6 md:px-8 w-full bg-neutral-700">
         <!-- TODO: make the box a component so it can be change or undisplayed base on routes -->
-        <div class="box relative flex flex-col lg:flex-row items-center justify-center md:justify-between gap-4 w-full max-w-4xl p-10 sm:p-16 lg:py-2 -mt-40 lg:-mt-56 overflow-hidden">
+
+        <div
+            class="box relative flex flex-col items-center justify-center gap-4 w-full max-w-4xl p-10 sm:p-16 sm:py-10 -mt-40 lg:-mt-56 overflow-hidden"
+            v-if="route.path == '/features'"
+        >
+            <img src="~/assets/images/icons/light.png" alt="light" />
+            <h4 class="f-inter font-extrabold text-2xl sm:text-3xl lg:text-4xl text-center lg:text-start">Looking For A Feature You Can’t Find?</h4>
+            <p class="md:text-lg text-center">Tell us what you want, we will get to work on implementing it</p>
+            <Button class="border-4 border-black px-1 py-3 mt-4" type="primary" linkTo="/request-feature">
+                <span class="text-white text-sm sm:text-lg font-bold whitespace-nowrap">Submit A Feature Request</span>
+            </Button>
+        </div>
+        <div
+            class="box relative flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 w-full max-w-4xl p-10 sm:p-16 lg:py-2 -mt-40 lg:-mt-56 overflow-hidden"
+            v-else
+        >
             <div class="flex flex-col gap-6 items-center lg:items-start w-full max-w-md">
                 <h4 class="f-inter font-extrabold text-2xl sm:text-3xl lg:text-4xl text-center lg:text-start">Start Building Your First Menu For Free</h4>
-                <Button class="border-4 border-black px-1 py-1 md:py-3" type="primary" linkTo="">
+                <Button class="border-4 border-black px-1 py-3" type="primary" linkTo="">
                     <span class="text-white text-sm sm:text-lg font-bold whitespace-nowrap">Sign Up Now For Free</span>
                 </Button>
             </div>
-            <img class="hidden lg:flex -mb-2" src="~/assets/images/iPhone.webp" alt="iPhone" />
+            <img class="w-40 lg:w-auto -mb-16 md:-mb-24 lg:-mb-2" src="~/assets/images/iPhone.webp" alt="iPhone" />
         </div>
         <div class="flex flex-wrap items-center justify-center lg:justify-between gap-16 w-full max-w-screen-xl">
             <div class="flex flex-col items-start gap-6">
@@ -91,6 +106,8 @@
 import Icon from "~/components/Icon.vue";
 import LangSwitch from "~/components/LangSwitch.vue";
 import Button from "~/components/web/Button.vue";
+
+const route = useRoute();
 
 const year = new Date(Date.now()).getFullYear();
 </script>

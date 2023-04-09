@@ -14,9 +14,11 @@
                     <div class="flex items-center w-full max-w-lg select-none" draggable="false">
                         <img class="" :src="item.image" :alt="item.title" />
                     </div>
-                    <div class="relative hidden 1.5xl:flex items-center justify-center p-6 md:p-8 rounded-lg bg-pencil-tip flex-shrink-0">
-                        <img class="absolute w-16 h-16 md:w-24 md:h-24 object-contain blur-md opacity-60" :src="item.icon" :alt="item.title" />
-                        <img class="relative w-12 h-12 md:w-20 md:h-20 object-contain" :src="item.icon" :alt="item.title" />
+                    <div class="gradient hidden 1.5xl:flex items-center justify-center group-hover:p-1.5 rounded-lg transition-all">
+                        <div class="relative flex items-center justify-center p-6 md:p-8 rounded-lg bg-pencil-tip flex-shrink-0">
+                            <img class="absolute w-16 h-16 md:w-24 md:h-24 object-contain blur-md opacity-60" :src="item.icon" :alt="item.title" />
+                            <img class="relative w-12 h-12 md:w-20 md:h-20 object-contain" :src="item.icon" :alt="item.title" />
+                        </div>
                     </div>
                     <div class="flex flex-col items-center gap-8 w-full max-w-lg">
                         <div class="relative flex 1.5xl:hidden items-center justify-center p-6 md:p-8 rounded-lg bg-pencil-tip flex-shrink-0">
@@ -32,11 +34,16 @@
                 </li>
             </ul>
         </div>
+        <p class="text-xl font-bold">And Many More</p>
+        <Button class="border-4 border-black" type="primary" linkTo="/authenticate">
+            <span class="text-lg font-bold text-white">Create Your First Menu For Free</span>
+        </Button>
     </div>
 </template>
 
 <script setup>
 import Hero from "~/components/web/features/Hero.vue";
+import Button from "~/components/web/Button.vue";
 
 useHead({ title: `Features - Menuriom` });
 definePageMeta({ layout: "default" });

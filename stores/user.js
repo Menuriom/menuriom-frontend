@@ -13,6 +13,7 @@ export const useUserStore = defineStore("user", () => {
     const permissions = ref([]);
 
     const isIntervalSet = ref(false);
+    const loading = ref(false);
 
     const resetUserInfo = () => {
         avatar.value = "";
@@ -25,6 +26,9 @@ export const useUserStore = defineStore("user", () => {
     };
 
     const getUserInfo = async () => {
+        if (loading.value) return;
+        loading.value = true;
+
         await axios
             .get(`/api/v1/user/info`, { timeout: 30 * 1000 })
             .then((response) => {
@@ -38,19 +42,23 @@ export const useUserStore = defineStore("user", () => {
             })
             .catch((e) => {
                 throw e;
-            });
+            })
+            .finally(() => (loading.value = false));
     };
 
     const refreshToken = async () => {
-        await axios.post(`/auth/refresh`, null, { timeout: 30 * 1000 }).catch((e) => {
-            throw e;
-        });
+        if (loading.value) return;
+        loading.value = true;
+
+        await axios
+            .post(`/auth/refresh`, null, { timeout: 30 * 1000 })
+            .catch((e) => {
+                throw e;
+            })
+            .finally(() => (loading.value = false));
     };
 
     const setRefreshInterval = () => {
-        if (isIntervalSet.value) return;
-        isIntervalSet.value = true;
-
         const interval = setInterval(async () => {
             await axios.post(`/auth/refresh`, null, { timeout: 30 * 1000 }).catch((error) => {
                 if (error.response && error.response.status == 401) {
@@ -62,10 +70,14 @@ export const useUserStore = defineStore("user", () => {
     };
 
     const logout = async () => {
+        if (loading.value) return;
+        loading.value = true;
+
         await axios
             .post(`/auth/logout`, null, { timeout: 30 * 1000 })
             .then(() => resetUserInfo())
-            .catch((e) => {});
+            .catch((e) => {})
+            .finally(() => (loading.value = false));
     };
 
     return {
@@ -77,6 +89,7 @@ export const useUserStore = defineStore("user", () => {
         role,
         permissions,
         isIntervalSet,
+        loading,
         resetUserInfo,
         getUserInfo,
         refreshToken,

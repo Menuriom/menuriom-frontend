@@ -43,11 +43,11 @@
 
         <div class="relative flex flex-col gap-4">
             <img class="w-full h-48 object-cover rounded-lg shadow-nr15" src="~/assets/images/french-toast.webp" alt="french-toast" />
-            <span class="absolute left-4 bottom-14 w-16 h-3 bg-neutral-600 bg-opacity-75 backdrop-blur-md rounded-md shadow-nr35"></span>
-            <span class="absolute left-4 bottom-4 w-40 h-7 bg-neutral-600 bg-opacity-75 backdrop-blur-md rounded-md shadow-nr35"></span>
-            <div class="absolute left-0 sm:-left-8 top-4 gradient-re rounded-lg p-1">
+            <span class="absolute start-4 bottom-14 w-16 h-3 bg-neutral-600 bg-opacity-75 backdrop-blur-md rounded-md shadow-nr35"></span>
+            <span class="absolute start-4 bottom-4 w-40 h-7 bg-neutral-600 bg-opacity-75 backdrop-blur-md rounded-md shadow-nr35"></span>
+            <div class="absolute start-0 sm:-start-8 top-4 gradient-re rounded-lg p-1">
                 <div class="flex items-end gap-1 px-4 bg-neutral-600 bg-opacity-90 backdrop-blur-md rounded-md shadow-nr35">
-                    <img class="w-10 sm:w-14 -ml-10 sm:-ml-12" src="~/assets/images/icons/fire.png" alt="fire" />
+                    <img class="w-10 sm:w-14 -ms-10 sm:-ms-12" src="~/assets/images/icons/fire.png" alt="fire" />
                     <img class="h-6 sm:h-8 mb-1.5 sm:mb-2.5" src="~/assets/images/today-special.svg" alt="special" />
                 </div>
             </div>

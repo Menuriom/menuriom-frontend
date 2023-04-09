@@ -3,7 +3,7 @@
 <template>
     <div class="flex flex-col items-center gap-10 w-full p-2 sm:p-4 md:p-8">
         <div class="relative flex items-center gap-10 p-3 px-5 rounded-md bg-neutral-200">
-            <span class="absolute h-8 shadow-md bg-white rounded transition-all" :class="[priceType == 'monthly' ? 'left-2 w-22' : 'left-28 w-36']"></span>
+            <span class="absolute h-8 shadow-md bg-white rounded transition-all" :class="[priceType == 'monthly' ? 'start-2 w-22' : 'start-28 w-36']"></span>
             <span class="relative cursor-pointer" @click="togglePriceType('monthly')">Monthly</span>
             <div class="relative flex items-center gap-1 cursor-pointer" @click="togglePriceType('annual')">
                 <span>Annual</span>

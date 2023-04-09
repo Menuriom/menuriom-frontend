@@ -16,7 +16,16 @@ import Header from "~/components/web/Header.vue";
 import Footer from "~/components/web/Footer.vue";
 import { useUserStore } from "@/stores/user";
 
+const { t } = useI18n();
+const localHead = useLocaleHead({ addDirAttribute: true, identifierAttribute: "id", addSeoAttributes: true });
 const userState = useUserStore();
+
+useHead({
+    // title: t("layouts.title"),
+    htmlAttrs: { lang: localHead.value.htmlAttrs.lang, dir: localHead.value.htmlAttrs.dir },
+    link: [...localHead.value.link],
+    meta: [...localHead.value.meta],
+});
 
 onMounted(async () => {
     await userState.getUserInfo().then(() => {

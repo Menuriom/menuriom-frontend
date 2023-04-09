@@ -31,7 +31,7 @@
 
         <div class="relative flex flex-col lg:flex-row justify-center items-center lg:items-start gap-24 lg:gap-10 xl:gap-16 mt-14 lg:mt-20 w-full">
             <Blob class="absolute left-1/2 -bottom-64 opacity-60" width="450px" height="450px" />
-            <div class="flex flex-col items-center lg:items-baseline gap-4 w-full lg:w-auto">
+            <div class="flex flex-col items-center lg:items-start gap-4 w-full lg:w-auto">
                 <div class="flex flex-col items-start gap-6 max-w-xl">
                     <hr class="hidden lg:flex w-full h-1 mb-2 bg-zinc-300" />
                     <img class="h-10" src="~/assets/images/custom-icons/dark/store-alt.png" alt="store-alt" />

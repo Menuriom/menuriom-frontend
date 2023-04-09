@@ -127,15 +127,20 @@ nav {
                 <div class="flex items-center gap-4">
                     <LangSwitch class="" textColor="black" />
                     <span class="lg:hidden text-gray-400">|</span>
-                    <nuxt-link class="link md:hidden text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel" v-if="!user.email">
+                    <nuxt-link
+                        class="link md:hidden text-sm p-2 hover:px-3 rounded-md"
+                        to="/authenticate"
+                        title="Login into user panel"
+                        v-if="!user.email.value"
+                    >
                         Login
                     </nuxt-link>
                     <nuxt-link
                         class="link 2sm:hidden text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                        :to="!user.email ? `/authenticate` : `/user-panel`"
-                        :title="!user.email ? `Try it for free` : `Your Menuriom Dashboard`"
+                        :to="!user.email.value ? `/authenticate` : `/user-panel`"
+                        :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
                     >
-                        <span v-if="!user.email">Try It For Free</span>
+                        <span v-if="!user.email.value">Try It For Free</span>
                         <span v-else>Your Dashboard</span>
                     </nuxt-link>
                 </div>
@@ -144,21 +149,21 @@ nav {
 
         <div class="flex items-center gap-2 xl:gap-4 flex-shrink-0">
             <span class="hidden md:flex text-gray-400">|</span>
-            <nuxt-link class="link hidden md:flex text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel" v-if="!user.email">
+            <nuxt-link class="link hidden md:flex text-sm p-2 hover:px-3 rounded-md" to="/authenticate" title="Login into user panel" v-if="!user.email.value">
                 Login
             </nuxt-link>
             <nuxt-link
                 class="link hidden 2sm:flex text-xs md:text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                :to="!user.email ? `/authenticate` : `/user-panel`"
-                :title="!user.email ? `Try it for free` : `Your Menuriom Dashboard`"
+                :to="!user.email.value ? `/authenticate` : `/user-panel`"
+                :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
             >
-                <span v-if="!user.email">Try It For Free</span>
+                <span v-if="!user.email.value">Try It For Free</span>
                 <span v-else>Your Dashboard</span>
             </nuxt-link>
             <button class="toggle flex lg:hidden w-10 h-10 hover:bg-zinc-100 rounded-full transition-colors" @click="headerToggle()">
-                <span class="line bg-black transition-all" :class="{'rotate-45 -mb-1':menuOpen}"></span>
+                <span class="line bg-black transition-all" :class="{ 'rotate-45 -mb-1': menuOpen }"></span>
                 <span class="line bg-black transition-all" v-show="!menuOpen"></span>
-                <span class="line bg-black transition-all" :class="{'-rotate-45 -mt-1':menuOpen}"></span>
+                <span class="line bg-black transition-all" :class="{ '-rotate-45 -mt-1': menuOpen }"></span>
             </button>
         </div>
     </header>

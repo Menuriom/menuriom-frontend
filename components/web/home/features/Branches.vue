@@ -15,7 +15,7 @@
             <img class="w-full h-22 object-cover rounded-md shadow-nr15" src="~/assets/images/burger2.webp" alt="burger" />
         </div>
 
-        <div class="absolute left-18 top-36 flex flex-col items-start gap-3 p-4 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
+        <div class="absolute start-18 top-36 flex flex-col items-start gap-3 p-4 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
             <img class="w-9 -mt-11" src="~/assets/images/custom-icons/dark/location-dot.png" alt="pin" />
             <b class="text-lg">Bamland</b>
             <ul class="flex items-center justify-between gap-2 w-full">
@@ -23,7 +23,7 @@
             </ul>
             <div class="relative flex items-start w-full">
                 <img class="w-full h-22 object-cover rounded-md shadow-nr15" src="~/assets/images/burger2.webp" alt="burger" />
-                <div class="absolute top-2 left-2 flex items-center justify-center p-2 rounded-md bg-zinc-700 bg-opacity-75 backdrop-blur-sm">
+                <div class="absolute top-2 start-2 flex items-center justify-center p-2 rounded-md bg-zinc-700 bg-opacity-75 backdrop-blur-sm">
                     <img class="h-6" src="~/assets/images/20off.svg" alt="off" />
                 </div>
             </div>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="absolute right-10 sm:right-0 top-2 flex flex-col items-start gap-3 p-4 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
+        <div class="absolute end-10 sm:end-0 top-2 flex flex-col items-start gap-3 p-4 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
             <img class="w-9 -mt-11" src="~/assets/images/custom-icons/dark/location-dot.png" alt="pin" />
             <b class="text-lg">Sa'adat Abad</b>
             <ul class="flex items-center justify-between gap-2 w-full">
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="relative flex flex-col items-start gap-3 p-4 -ml-12 sm:ml-0 mt-24 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10 z-2">
+        <div class="relative flex flex-col items-start gap-3 p-4 -ms-12 sm:ms-0 mt-24 w-52 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10 z-2">
             <img class="w-9 -mt-11" src="~/assets/images/custom-icons/dark/location-dot.png" alt="pin" />
             <b class="text-lg">Ponak</b>
             <ul class="flex items-center justify-between gap-2 w-full">

@@ -18,6 +18,6 @@ import OtherFeatures from "~/components/web/home/OtherFeatures.vue";
 import Pricing from "~/components/web/home/Pricing.vue";
 import Faqs from "~/components/web/home/Faqs.vue";
 
-useHead({ title: `Create highly versatile online digital menus - Menuriom` });
+useHead({ title: `Create highly versatile online QR menus - Menuriom` });
 definePageMeta({ layout: "default" });
 </script>
