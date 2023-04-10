@@ -51,20 +51,22 @@ export default defineNuxtConfig({
     },
 
     i18n: {
+        // strategy: "prefix_except_default",
         baseUrl: process.env.BASE_URL,
-        // differentDomains: true,
-        strategy: "prefix_except_default",
-        detectBrowserLanguage: {
-            useCookie: true,
-            cookieKey: "i18n_redirected",
-            redirectOn: "root",
-        },
+        differentDomains: true,
+        // skipSettingLocaleOnNavigate: true,
+        detectBrowserLanguage: false,
+        // detectBrowserLanguage: {
+        //     useCookie: true,
+        //     cookieKey: "i18n_redirected",
+        //     redirectOn: "root",
+        // },
         defaultLocale: "fa",
         lazy: true,
         langDir: "locale",
         locales: [
-            { code: "en", name: "English", iso: "en-US", file: "en.js", dir: "ltr", domain: process.env.BASE_EN_URL },
             { code: "fa", name: "فارسی", iso: "fa-IR", file: "fa.js", dir: "rtl", domain: process.env.BASE_FA_URL },
+            { code: "en", name: "English", iso: "en-US", file: "en.js", dir: "ltr", domain: process.env.BASE_EN_URL },
         ],
         vueI18n: {
             legacy: false,
@@ -80,4 +82,8 @@ export default defineNuxtConfig({
 
         "@nuxtjs/i18n",
     ],
+
+    devServer: {
+        // host: "dev.me",
+    },
 });

@@ -20,10 +20,14 @@
                     v-for="lang in availableLocales"
                     :key="lang.code"
                 >
-                    <a class="flex items-center gap-1 p-2 py-1" href="#" @click.prevent.stop="selectOption(lang.code)">
+                    <a class="flex items-center gap-1 p-2 py-1" :href="switchLocalePath(lang.code)">
                         <img class="w-6" :src="`/flags/${lang.code}.png`" :alt="lang.code" />
                         <span class="flex text-xs">{{ lang.name }}</span>
                     </a>
+                    <!-- <a class="flex items-center gap-1 p-2 py-1" href="#" @click.prevent.stop="selectOption(lang.code)">
+                        <img class="w-6" :src="`/flags/${lang.code}.png`" :alt="lang.code" />
+                        <span class="flex text-xs">{{ lang.name }}</span>
+                    </a> -->
                 </li>
             </ul>
         </transition>
@@ -39,7 +43,7 @@ defineProps({
 });
 
 const { locale, locales, setLocale } = useI18n();
-// const switchLocalePath = useSwitchLocalePath();
+const switchLocalePath = useSwitchLocalePath();
 
 const availableLocales = computed(() => locales.value.filter((i) => i.code !== locale.value));
 
