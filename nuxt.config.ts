@@ -51,16 +51,15 @@ export default defineNuxtConfig({
     },
 
     i18n: {
-        // strategy: "prefix_except_default",
+        strategy: "prefix_except_default",
         baseUrl: process.env.BASE_URL,
-        differentDomains: true,
-        // skipSettingLocaleOnNavigate: true,
-        detectBrowserLanguage: false,
-        // detectBrowserLanguage: {
-        //     useCookie: true,
-        //     cookieKey: "i18n_redirected",
-        //     redirectOn: "root",
-        // },
+        // differentDomains: true,
+        // detectBrowserLanguage: false,
+        detectBrowserLanguage: {
+            useCookie: true,
+            cookieKey: "i18n_redirected",
+            redirectOn: "root",
+        },
         defaultLocale: "fa",
         lazy: true,
         langDir: "locale",

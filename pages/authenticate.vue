@@ -200,6 +200,7 @@ const router = useRouter();
 const route = useRoute();
 const config = useRuntimeConfig();
 const localePath = useLocalePath();
+const { locale, t } = useI18n();
 
 const error = route.query.error;
 
@@ -230,10 +231,10 @@ onMounted(() => {
 
     switch (error) {
         case "1":
-            responseMessage.value = "Sorry, we can't login/register your right now! please try again later.";
+            responseMessage.value = t("auth.error1");
             break;
         case "2":
-            responseMessage.value = "Sorry, we have an issue in our servers. please come back later";
+            responseMessage.value = t("auth.error2");
             break;
     }
 });

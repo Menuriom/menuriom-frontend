@@ -7,9 +7,7 @@
             <span class="relative cursor-pointer" @click="togglePriceType('monthly')">Monthly</span>
             <div class="relative flex items-center gap-1 cursor-pointer" @click="togglePriceType('annual')">
                 <span>Annual</span>
-                <small class="f-inter p-0.5 px-2 rounded-full whitespace-nowrap text-xs bg-pencil-tip text-purple-200">
-                    {{ annualOffPercent }}% Off
-                </small>
+                <small class="f-inter p-0.5 px-2 rounded-full whitespace-nowrap text-xs bg-pencil-tip text-purple-200"> {{ annualOffPercent }}% Off </small>
             </div>
         </div>
         <ul class="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl md:mt-12">
@@ -75,7 +73,6 @@ const pricing = reactive({
                 "Unlimited QR scans",
                 "Fully customizable",
                 "Unlimited Category and menu items",
-                "Menu item like option",
                 "Brand logo and name in the menu",
                 "Multiple language option",
                 "Ticketing and support system",
@@ -92,6 +89,7 @@ const pricing = reactive({
                 "Create up to 3 branches",
                 "Customizable QR code",
                 "Restaurant info at bottom of menu",
+                "Menu item like option",
                 "Analytics for scans and reviews",
                 "Item highlight and sold out options",
             ],

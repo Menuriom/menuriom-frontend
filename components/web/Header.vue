@@ -50,14 +50,14 @@ nav {
 </style>
 
 <template>
-    <!-- TODO : remove the login button when user is logged in and change the primary button to "your dashboard" -->
     <header
         ref="header"
         class="fixed flex items-center justify-between gap-4 border-2 border-gray-100 rounded-lg mt-2 md:mt-4 p-2 sm:p-3 max-w-screen-2xl h-14 lg:h-16 bg-white bg-opacity-90 shadow-nr5 z-20"
     >
         <nuxt-link class="flex items-center gap-1 sm:gap-3 h-7 md:h-9 overflow-hidden flex-shrink-0" :to="localePath('/')">
             <img class="relative h-7 md:h-9" src="/logo.svg" title="Menuriom" alt="Menuriom" />
-            <img class="h-6 md:h-8" src="/logo-text.svg" title="Menuriom" alt="Menuriom" />
+            <img class="h-6 md:h-8" src="/logo-text.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
+            <img class="h-7 md:h-9" src="/logo-text-fa.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
         </nuxt-link>
 
         <transition name="slide-up" appear>
@@ -73,7 +73,7 @@ nav {
                         @mouseleave="toggleFeatures('hover', false)"
                     >
                         <div class="flex items-center gap-1 cursor-pointer select-none" @click="toggleFeatures('click')">
-                            <span>Features</span>
+                            <span>{{ $t("header.Features") }}</span>
                             <img src="/icons/arrow.svg" alt=">" />
                         </div>
                         <transition name="slidedown" mode="out-in" appear>
@@ -100,25 +100,25 @@ nav {
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/demo')">
-                            <span>Demo</span>
+                            <span>{{ $t("header.Demo") }}</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')">
-                            <span>Pricing</span>
+                            <span>{{ $t("header.Pricing") }} </span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/how-it-works')">
-                            <span>How It Works</span>
+                            <span>{{ $t("header.How It Works") }} </span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')">
-                            <span>Contact Us</span>
+                            <span>{{ $t("header.Contact Us") }}</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
@@ -128,20 +128,20 @@ nav {
                     <LangSwitch class="" textColor="black" />
                     <span class="lg:hidden text-gray-400">|</span>
                     <nuxt-link
-                        class="link md:hidden text-sm p-2 hover:px-3 rounded-md"
+                        class="link md:hidden p-2 hover:px-3 rounded-md"
                         :to="localePath('/authenticate')"
                         title="Login into user panel"
                         v-if="!user.email.value"
                     >
-                        Login
+                        {{ $t("header.Login") }}
                     </nuxt-link>
                     <nuxt-link
-                        class="link 2sm:hidden text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
+                        class="link 2sm:hidden p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
                         :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/user-panel`)"
                         :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
                     >
-                        <span v-if="!user.email.value">Try It For Free</span>
-                        <span v-else>Your Dashboard</span>
+                        <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
+                        <span v-else>{{ $t("header.Your Dashboard") }}</span>
                     </nuxt-link>
                 </div>
             </nav>
@@ -150,20 +150,20 @@ nav {
         <div class="flex items-center gap-2 xl:gap-4 flex-shrink-0">
             <span class="hidden md:flex text-gray-400">|</span>
             <nuxt-link
-                class="link hidden md:flex text-sm p-2 hover:px-3 rounded-md"
+                class="link hidden md:flex p-2 hover:px-3 rounded-md"
                 :to="localePath(`/authenticate`)"
                 title="Login into user panel"
                 v-if="!user.email.value"
             >
-                Login
+                {{ $t("header.Login") }}
             </nuxt-link>
             <nuxt-link
-                class="link hidden 2sm:flex text-xs md:text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
+                class="link hidden 2sm:flex text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
                 :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/user-panel`)"
                 :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
             >
-                <span v-if="!user.email.value">Try It For Free</span>
-                <span v-else>Your Dashboard</span>
+                <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
+                <span v-else>{{ $t("header.Your Dashboard") }}</span>
             </nuxt-link>
             <button class="toggle flex lg:hidden w-10 h-10 hover:bg-zinc-100 rounded-full transition-colors" @click="headerToggle()">
                 <span class="line bg-black transition-all" :class="{ 'rotate-45 -mb-1': menuOpen }"></span>
@@ -180,6 +180,7 @@ import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 
 const localePath = useLocalePath();
+const { locale, t } = useI18n();
 
 const userState = useUserStore();
 const user = storeToRefs(userState);
@@ -188,15 +189,15 @@ const featureDropdown = ref(null); //Ref to DOM
 const featureListOpen = ref(false);
 const features = reactive({
     list: [
-        { icon: "/gradient-icons/dark/palette.png", title: "Templates & Customization", desc: "Style your menu base on restaurant theme" },
-        { icon: "/gradient-icons/dark/store.png", title: "Multiple Branches", desc: "Different menu for different branch" },
-        { icon: "/gradient-icons/dark/fire.png", title: "Item Specialazation", desc: "Highlight items in your menu" },
-        { icon: "/gradient-icons/dark/clipboard-list-check.png", title: "Ordering System", desc: "Get orders directly from your menu" },
-        { icon: "/gradient-icons/dark/earth-america.png", title: "Menu Translation", desc: "Multiple languages for same menu" },
-        { icon: "/gradient-icons/dark/bell-on.png", title: "Server Call", desc: "Notify a server when table needs one" },
-        { icon: "/gradient-icons/dark/comments-question-check.png", title: "Feedback System", desc: "Receive review from your customers" },
-        { icon: "/gradient-icons/dark/object-intersect.png", title: "Combo Lists", desc: "Pair items that goes best together " },
-        { icon: "/gradient-icons/dark/qrcode.png", title: "Custom QR Code", desc: "Place your logo onto your QR barcode" },
+        { icon: "/gradient-icons/dark/palette.png", title: t("header.Templates&Customization"), desc: t("header.Templates&CustomizationDesc") },
+        { icon: "/gradient-icons/dark/store.png", title: t("header.MultipleBranches"), desc: t("header.MultipleBranchesDesc") },
+        { icon: "/gradient-icons/dark/fire.png", title: t("header.ItemSpecialazation"), desc: t("header.ItemSpecialazationDesc") },
+        { icon: "/gradient-icons/dark/clipboard-list-check.png", title: t("header.OrderingSystem"), desc: t("header.OrderingSystemDesc") },
+        { icon: "/gradient-icons/dark/earth-america.png", title: t("header.MenuTranslation"), desc: t("header.MenuTranslationDesc") },
+        { icon: "/gradient-icons/dark/bell-on.png", title: t("header.ServerCall"), desc: t("header.ServerCallDesc") },
+        { icon: "/gradient-icons/dark/comments-question-check.png", title: t("header.FeedbackSystem"), desc: t("header.FeedbackSystemDesc") },
+        { icon: "/gradient-icons/dark/object-intersect.png", title: t("header.ComboLists"), desc: t("header.ComboListsDesc") },
+        { icon: "/gradient-icons/dark/qrcode.png", title: t("header.CustomQRCode"), desc: t("header.CustomQRCodeDesc") },
     ],
 });
 
