@@ -85,4 +85,24 @@ export default {
 
         copyright: "All rights reserved.",
     },
+
+    pricing: {
+        Pricing: "Pricing",
+        PricingSlogan: "No matter the size of your business, we got you covered!",
+        PricingSubText: "Start creating instantly. Start free.",
+
+        Monthly: "Monthly",
+        Annual: "Annual",
+        "Most Popular": "Most Popular",
+        "Toman": "Toman",
+        "month": "month",
+        "year": "year",
+        "Free": "Free",
+        "Always": "Always",
+        "Everything on previous plan": "Everything on previous plan",
+        "Get Started": "Get Started",
+
+        "Compare Plans": "Compare Plans",
+        "Overview of what is included in our different plans": "Overview of what is included in our different plans",
+    },
 };

@@ -1,6 +1,6 @@
 <style scoped>
 .bg-card:nth-child(2n) {
-    background-color: theme("colors.neutral.800");
+    background-color: theme("colors.pencil-tip");
     border-radius: 1rem;
     color: white;
 }
@@ -8,7 +8,7 @@
 
 <template>
     <div class="relative flex flex-col items-center gap-10 w-full">
-        <Hero class="1.5xl:mb-20" />
+        <Hero class="1.5xl:mb-32" />
         <div class="relative flex flex-col items-center w-full max-w-screen-2xl p-2">
             <span class="absolute hidden 1.5xl:flex w-1 h-full border-r-8 border-dotted border-zinc-400"></span>
             <ul class="relative flex flex-col items-center gap-32 w-full">

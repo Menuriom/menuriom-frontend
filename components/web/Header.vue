@@ -72,7 +72,7 @@ nav {
                         @mouseover="toggleFeatures('hover', true)"
                         @mouseleave="toggleFeatures('hover', false)"
                     >
-                        <div class="flex items-center gap-1 cursor-pointer select-none" @click="toggleFeatures('click')">
+                        <div class="f-inter flex items-center gap-1 cursor-pointer select-none" @click="toggleFeatures('click')">
                             <span>{{ $t("header.Features") }}</span>
                             <img src="/icons/arrow.svg" alt=">" />
                         </div>
@@ -99,25 +99,25 @@ nav {
                         </transition>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/demo')">
+                        <nuxt-link class="f-inter flex items-center gap-4 w-full" :to="localePath('/demo')">
                             <span>{{ $t("header.Demo") }}</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')">
+                        <nuxt-link class="f-inter flex items-center gap-4 w-full" :to="localePath('/pricing')">
                             <span>{{ $t("header.Pricing") }} </span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/how-it-works')">
+                        <nuxt-link class="f-inter flex items-center gap-4 w-full" :to="localePath('/how-it-works')">
                             <span>{{ $t("header.How It Works") }} </span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')">
+                        <nuxt-link class="f-inter flex items-center gap-4 w-full" :to="localePath('/contact-us')">
                             <span>{{ $t("header.Contact Us") }}</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>

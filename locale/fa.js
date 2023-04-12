@@ -85,4 +85,24 @@ export default {
 
         copyright: "کلیه حقوق مادی و معنوی این وبسایت متعلق به گروه منوریوم است.",
     },
+
+    pricing: {
+        Pricing: "تعرفه ها",
+        PricingSlogan: "هر رستوران با هر اندازه ای که دارید، میتونید رو ما حساب کنید!",
+        PricingSubText: "رایگان شروع کنید. رایگان بسازید.",
+
+        Monthly: "ماهانه",
+        Annual: "سالانه",
+        "Most Popular": "پرفروش",
+        Toman: "تومان",
+        month: "ماه",
+        year: "سال",
+        Free: "رایگان",
+        Always: "همیشه",
+        "Everything on previous plan": "تمام امکانات پلن قبلی",
+        "Get Started": "شروع کنید",
+
+        "Compare Plans": "مقایسه پلن ها",
+        "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
+    },
 };

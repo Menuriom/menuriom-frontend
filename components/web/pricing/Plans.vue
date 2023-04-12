@@ -2,11 +2,20 @@
 
 <template>
     <div class="flex flex-col items-center gap-10 w-full p-2 sm:p-4 md:p-8">
-        <div class="relative flex items-center gap-10 p-3 px-5 rounded-md bg-neutral-200">
-            <span class="absolute h-8 shadow-md bg-white rounded transition-all" :class="[priceType == 'monthly' ? 'start-2 w-22' : 'start-28 w-36']"></span>
-            <span class="relative cursor-pointer" @click="togglePriceType('monthly')">Monthly</span>
+        <div class="relative flex items-center gap-10 p-4 px-5 rounded-md bg-neutral-100">
+            <span
+                class="absolute h-10 shadow-md bg-white border-2 border-violet rounded-md transition-all"
+                :class="[priceType == 'monthly' ? 'start-2 w-22' : 'start-28 w-36']"
+                v-if="locale == 'en'"
+            ></span>
+            <span
+                class="absolute h-10 shadow-md bg-white border-2 border-violet rounded-md transition-all"
+                :class="[priceType == 'monthly' ? 'start-2 w-18' : 'start-22 w-[8.25rem]']"
+                v-else
+            ></span>
+            <span class="relative cursor-pointer" @click="togglePriceType('monthly')">{{ $t("pricing.Monthly") }}</span>
             <div class="relative flex items-center gap-1 cursor-pointer" @click="togglePriceType('annual')">
-                <span>Annual</span>
+                <span>{{ $t("pricing.Annual") }}</span>
                 <small class="f-inter p-0.5 px-2 rounded-full whitespace-nowrap text-xs bg-pencil-tip text-purple-200"> {{ annualOffPercent }}% Off </small>
             </div>
         </div>
@@ -17,7 +26,7 @@
                 v-for="(item, i) in pricing.list"
                 :key="i"
             >
-                <span class="f-inter text-lg mx-auto text-white drop-shadow-md" v-if="item.highlight">Most Popular</span>
+                <span class="f-inter text-lg mx-auto text-white drop-shadow-md" v-if="item.highlight">{{ $t("pricing.Most Popular") }}</span>
                 <div class="flex flex-col gap-4 w-full max-w-xs h-full p-6 rounded-xl bg-pencil-tip text-white">
                     <!-- TODO: calculate prices base on priceType -->
                     <div class="flex items-center gap-2">
@@ -25,17 +34,20 @@
                         <h3 class="f-inter text-lg font-bold">{{ item.title }}</h3>
                     </div>
                     <p class="text-xs text-white opacity-90">{{ item.desc }}</p>
-                    <div class="flex items-baseline gap-1" v-if="item.monthlyPrice > 0">
+                    <div class="flex items-baseline gap-1 bg-zinc-100 text-pencil-tip rounded-lg p-2" v-if="item.monthlyPrice > 0">
                         <b class="f-inter text-4xl">{{ item.monthlyPrice / 1000 }}<span class="text-xs">,000</span></b>
-                        <b class="f-inter text-baby-blue">Toman</b>
-                        <small class="">/ {{ priceType == "monthly" ? "month" : "year" }}</small>
+                        <b class="f-inter text-violet">{{ $t("pricing.Toman") }}</b>
+                        <small class="">/ {{ priceType == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</small>
                     </div>
-                    <b class="f-inter text-3xl text-baby-blue" v-else>Free</b>
+                    <div class="flex items-baseline gap-1 bg-zinc-100 text-pencil-tip rounded-lg p-2" v-else>
+                        <b class="f-inter text-3xl text-violet bg-zinc-100 rounded-lg"> {{ $t("pricing.Free") }} </b>
+                        <small class="">/ {{ $t("pricing.Always") }}</small>
+                    </div>
                     <hr class="border-2 border-gray-400 opacity-25" />
                     <ul class="flex flex-col gap-4 flex-grow">
                         <li class="flex items-center gap-2" v-if="i > 0">
                             <Icon class="relative w-4 h-4 bg-baby-blue" name="plus.svg" folder="icons" size="16px" />
-                            <small class="opacity-90 text-sky-200">Everything on previous plan</small>
+                            <small class="opacity-90 text-sky-200">{{ $t("pricing.Everything on previous plan") }}</small>
                         </li>
                         <li class="flex items-center gap-2" v-for="(feature, j) in item.features" :key="j">
                             <Icon class="relative w-4 h-4 bg-baby-blue" name="check.svg" folder="icons" size="16px" />
@@ -47,7 +59,7 @@
                         :class="[item.highlight ? 'gradient-re' : 'bg-violet']"
                         href="#"
                     >
-                        Get Started
+                        {{ $t("pricing.Get Started") }}
                     </a>
                 </div>
             </li>
@@ -57,6 +69,8 @@
 
 <script setup>
 import Icon from "~/components/Icon.vue";
+
+const { locale } = useI18n();
 
 const priceType = ref("monthly");
 const annualOffPercent = ref(10);
