@@ -60,6 +60,8 @@ export default {
         ComboListsDesc: "Pair items that goes best together",
         CustomQRCode: "Custom QR Code",
         CustomQRCodeDesc: "Place your logo onto your QR barcode",
+
+        "See all the features": "See all the features",
     },
 
     footer: {

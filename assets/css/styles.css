@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
 
 /* @import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap');
@@ -7,7 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;700;800&display=swap');
 
 @tailwind base;
@@ -26,6 +26,7 @@
 
 @font-face { font-family: "IranyekanRegular"; src: local('Roboto'), url("../fonts/iranyekanwebregular.woff2"); font-display: swap; }
 @font-face { font-family: "IranyekanBold"; src: local('Roboto'), url("../fonts/iranyekanwebbold.woff2"); font-display: swap; }
+@font-face { font-family: "Sepahbod"; src: local('Roboto'), url("../fonts/Sepahbod.otf"); font-display: swap; }
 
 *,html {  scroll-behavior: smooth; }
 

@@ -36,36 +36,44 @@
     <footer class="relative flex flex-col items-center gap-12 p-2 px-6 md:px-8 w-full bg-neutral-700">
         <div
             class="box relative flex flex-col items-center justify-center gap-4 w-full max-w-4xl p-10 sm:p-16 sm:py-10 -mt-40 lg:-mt-56 overflow-hidden"
-            v-if="route.path == '/features'"
+            v-if="route.path == localePath('/features')"
         >
-            <img src="~/assets/images/icons/light.png" alt="light" />
-            <h4 class="f-inter font-extrabold text-2xl sm:text-3xl lg:text-4xl text-center lg:text-start">
-                {{ $t("footer.Looking For A Feature You Can’t Find?") }}
-            </h4>
-            <p class="md:text-lg text-center">
-                {{ $t("footer.Tell us what you want, we will get to work on implementing it") }}
-            </p>
-            <Button class="border-4 border-black px-1 py-3 mt-4" type="primary" :linkTo="localePath('/request-feature')">
-                <span class="text-white text-sm sm:text-lg font-bold whitespace-nowrap">
-                    {{ $t("footer.Submit A Feature Request") }}
-                </span>
-            </Button>
+            <div class="gradient absolute -top-20 md:-top-14 end-10 w-24 h-24 rounded-2xl rotate-12"></div>
+            <div class="gradient absolute -top-10 end-4 w-14 h-14 rounded-2xl rotate-6"></div>
+            <div class="gradient absolute -bottom-32 start-2 w-48 h-48 rounded-2xl rotate-6"></div>
+            <div class="relative flex flex-col gap-6 items-center w-full">
+                <img src="~/assets/images/icons/light.png" alt="light" />
+                <h4 class="f-inter font-black text-2xl sm:text-3xl lg:text-4xl text-center lg:text-start">
+                    {{ $t("footer.Looking For A Feature You Can’t Find?") }}
+                </h4>
+                <p class="md:text-lg text-center">
+                    {{ $t("footer.Tell us what you want, we will get to work on implementing it") }}
+                </p>
+                <Button class="border-4 border-black px-1 py-3 mt-4" type="primary" :linkTo="localePath('/request-feature')">
+                    <span class="text-white text-sm sm:text-lg font-bold whitespace-nowrap">
+                        {{ $t("footer.Submit A Feature Request") }}
+                    </span>
+                </Button>
+            </div>
         </div>
         <div
             class="box relative flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 w-full max-w-4xl p-10 sm:p-16 lg:py-2 -mt-40 lg:-mt-56 overflow-hidden"
             v-else
         >
-            <div class="flex flex-col gap-6 items-center lg:items-start w-full max-w-md">
-                <h4 class="f-inter font-extrabold text-2xl sm:text-3xl lg:text-4xl/[3rem] text-center lg:text-start">
+            <div class="gradient absolute -top-20 md:-top-14 start-10 w-24 h-24 rounded-2xl rotate-12"></div>
+            <div class="gradient absolute -top-10 start-4 w-14 h-14 rounded-2xl rotate-6"></div>
+            <div class="gradient absolute -bottom-24 start-24 w-32 h-32 rounded-2xl rotate-6"></div>
+            <div class="relative flex flex-col gap-6 items-center lg:items-start w-full max-w-md">
+                <h4 class="f-inter font-black text-2xl sm:text-3xl lg:text-4xl/[3rem] text-center lg:text-start">
                     {{ $t("footer.Start Building Your First Menu For Free") }}
                 </h4>
-                <Button class="border-4 border-black px-1 py-3" type="primary" linkTo="">
+                <Button class="border-4 border-black px-1 py-3" type="primary" :linkTo="localePath('/authenticate')">
                     <span class="text-white text-sm sm:text-lg font-bold whitespace-nowrap">
                         {{ $t("footer.Sign Up Now For Free") }}
                     </span>
                 </Button>
             </div>
-            <img class="w-40 lg:w-auto -mb-16 md:-mb-24 lg:-mb-2" src="~/assets/images/iPhone.webp" alt="iPhone" />
+            <img class="relative w-40 lg:w-auto -mb-16 md:-mb-24 lg:-mb-2" src="~/assets/images/iPhone.webp" alt="iPhone" />
         </div>
         <div class="flex flex-wrap items-center justify-center lg:justify-between gap-16 w-full max-w-screen-xl">
             <div class="flex flex-col items-start gap-6">

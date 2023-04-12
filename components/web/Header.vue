@@ -85,14 +85,14 @@ nav {
                                     <nuxt-link class="flex items-center gap-2" :to="localePath(`/features#${item.title.toLowerCase().replaceAll(' ', '-')}`)">
                                         <img class="w-8" :src="item.icon" :alt="item.title" />
                                         <div class="flex flex-col">
-                                            <h4 class="f-inter">{{ item.title }}</h4>
+                                            <h4 class="f-inter font-semibold opacity-70">{{ item.title }}</h4>
                                             <small class="text-xs opacity-75">{{ item.desc }}</small>
                                         </div>
                                     </nuxt-link>
                                 </li>
                                 <li class="w-full p-3">
                                     <nuxt-link class="flex items-center w-max" :to="localePath('/features')">
-                                        <span class="border-b-2 border-violet hover:border-b-4">See all the features &gt;</span>
+                                        <span class="border-b-2 border-violet hover:border-b-4 pb-1">{{ $t("header.See all the features") }} &gt;</span>
                                     </nuxt-link>
                                 </li>
                             </ul>
@@ -187,19 +187,22 @@ const user = storeToRefs(userState);
 
 const featureDropdown = ref(null); //Ref to DOM
 const featureListOpen = ref(false);
-const features = reactive({
-    list: [
-        { icon: "/gradient-icons/dark/palette.png", title: t("header.Templates&Customization"), desc: t("header.Templates&CustomizationDesc") },
-        { icon: "/gradient-icons/dark/store.png", title: t("header.MultipleBranches"), desc: t("header.MultipleBranchesDesc") },
-        { icon: "/gradient-icons/dark/fire.png", title: t("header.ItemSpecialazation"), desc: t("header.ItemSpecialazationDesc") },
-        { icon: "/gradient-icons/dark/clipboard-list-check.png", title: t("header.OrderingSystem"), desc: t("header.OrderingSystemDesc") },
-        { icon: "/gradient-icons/dark/earth-america.png", title: t("header.MenuTranslation"), desc: t("header.MenuTranslationDesc") },
-        { icon: "/gradient-icons/dark/bell-on.png", title: t("header.ServerCall"), desc: t("header.ServerCallDesc") },
-        { icon: "/gradient-icons/dark/comments-question-check.png", title: t("header.FeedbackSystem"), desc: t("header.FeedbackSystemDesc") },
-        { icon: "/gradient-icons/dark/object-intersect.png", title: t("header.ComboLists"), desc: t("header.ComboListsDesc") },
-        { icon: "/gradient-icons/dark/qrcode.png", title: t("header.CustomQRCode"), desc: t("header.CustomQRCodeDesc") },
-    ],
+const features = computed(() => {
+    return {
+        list: [
+            { icon: "/gradient-icons/dark/palette.png", title: t("header.Templates&Customization"), desc: t("header.Templates&CustomizationDesc") },
+            { icon: "/gradient-icons/dark/store.png", title: t("header.MultipleBranches"), desc: t("header.MultipleBranchesDesc") },
+            { icon: "/gradient-icons/dark/fire.png", title: t("header.ItemSpecialazation"), desc: t("header.ItemSpecialazationDesc") },
+            { icon: "/gradient-icons/dark/clipboard-list-check.png", title: t("header.OrderingSystem"), desc: t("header.OrderingSystemDesc") },
+            { icon: "/gradient-icons/dark/earth-america.png", title: t("header.MenuTranslation"), desc: t("header.MenuTranslationDesc") },
+            { icon: "/gradient-icons/dark/bell-on.png", title: t("header.ServerCall"), desc: t("header.ServerCallDesc") },
+            { icon: "/gradient-icons/dark/comments-question-check.png", title: t("header.FeedbackSystem"), desc: t("header.FeedbackSystemDesc") },
+            { icon: "/gradient-icons/dark/object-intersect.png", title: t("header.ComboLists"), desc: t("header.ComboListsDesc") },
+            { icon: "/gradient-icons/dark/qrcode.png", title: t("header.CustomQRCode"), desc: t("header.CustomQRCodeDesc") },
+        ],
+    };
 });
+// reactive({});
 
 const menuOpen = ref(false);
 

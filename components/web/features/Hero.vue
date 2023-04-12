@@ -9,7 +9,7 @@
     <section class="wrapper relative flex items-center justify-evenly gap-4 w-screen bg-pencil-tip text-white p-4 md:p-8 lg:p-16">
         <Blob class="absolute start-0 -top-16" width="350px" height="350px" />
         <Blob class="absolute end-20 -bottom-44 opacity-40 md:opacity-100" />
-        <div class="absolute start-20 xl:start-52 grid grid-cols-2 gap-10 w-96">
+        <div class="absolute -start-20 md:start-20 xl:start-52 hidden sm:grid grid-cols-2 gap-10 w-96">
             <span class="absolute -top-16 rotate-12 gradient-re flex items-center justify-center p-1 rounded-xl">
                 <div class="flex items-center justify-center p-4 bg-pencil-tip rounded-lg">
                     <img class="w-10 h-10 object-contain" src="/gradient-icons/light/object-intersect.png" alt="combo" />
@@ -35,10 +35,10 @@
             class="relative flex flex-col items-center gap-4 w-full max-w-xl rounded-lg py-6 my-8 bg-pencil-tip bg-opacity-30 backdrop-blur-sm z-2 flex-shrink-0"
         >
             <img class="w-20 mb-4" src="~/assets/images/icons/gold-card.png" alt="features" />
-            <h1 class="f-inter text-6xl font-extrabold">Core Features</h1>
+            <h1 class="f-inter text-6xl font-extrabold text-center">Core Features</h1>
             <h2 class="text-3xl text-center opacity-60">Get familiar with Menutiom features</h2>
         </div>
-        <div class="absolute end-20 xl:end-40 grid grid-cols-2 gap-10 w-96">
+        <div class="absolute -end-20 md:end-20 xl:end-40 hidden sm:grid grid-cols-2 gap-10 w-96">
             <span class="absolute -top-32 end-64 rotate-12 gradient-re flex items-center justify-center p-1 rounded-xl">
                 <div class="flex items-center justify-center p-4 bg-pencil-tip rounded-lg">
                     <img class="w-10 h-10 object-contain" src="/gradient-icons/light/earth-america.png" alt="Translation" />
@@ -59,7 +59,7 @@
                     <img class="w-10 h-10 object-contain" src="/gradient-icons/light/qrcode.png" alt="qrcode" />
                 </div>
             </span>
-            <span class="absolute top-36 end-56 rotate-3 gradient-re flex items-center justify-center p-1 rounded-xl">
+            <span class="absolute top-44 end-56 rotate-3 gradient-re flex items-center justify-center p-1 rounded-xl">
                 <div class="flex items-center justify-center p-4 bg-pencil-tip rounded-lg">
                     <img class="w-10 h-10 object-contain" src="/gradient-icons/light/bell-on.png" alt="call" />
                 </div>

@@ -60,6 +60,8 @@ export default {
         ComboListsDesc: "لیست ایتم هایی که با هم پیشنهاد میشند",
         CustomQRCode: "کد کیو ار سفارشی شده",
         CustomQRCodeDesc: "امکان شخصی سازی کدهای کیو ار",
+
+        "See all the features": "مشاهده همه ویژگی ها",
     },
 
     footer: {
