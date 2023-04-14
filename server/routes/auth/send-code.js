@@ -1,5 +1,4 @@
 import axios from "axios";
-import { setCookie } from "h3";
 
 export default defineEventHandler(async (event) => {
     const { req, res } = event.node;

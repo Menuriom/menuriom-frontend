@@ -11,6 +11,7 @@
 </style>
 
 <template>
+    <!-- TODO : refactor the stage 3 business size to be a check box rather than a simple user input -->
     <div class="flex flex-col items-center justify-center gap-4">
         <div class="flex flex-col items-center gap-6 w-full md:w-max max-w-md p-6 md:p-8 bg-pencil-tip rounded-lg shadow-2xl overflow-hidden">
             <div class="gradient-re flex items-center justify-center w-max p-1 rounded-md">
@@ -18,20 +19,20 @@
             </div>
             <transition name="slide-left" mode="out-in">
                 <section class="flex flex-col items-center justify-center gap-6 w-full text-white" page="1" v-if="page == 1">
-                    <div class="flex flex-col items-center gap-1 w-full">
-                        <h1 class="f-inter text-3xl font-semibold">Welcome to Menuriom</h1>
-                        <h2 class="text-sm font-thin opacity-60">Login or signup with your email</h2>
+                    <div class="flex flex-col items-center gap-2 w-full">
+                        <h1 class="f-inter text-3xl font-semibold">{{ $t("auth.welcome") }}</h1>
+                        <h2 class="text-sm font-thin opacity-60">{{ $t("auth.Login or signup with your email") }}</h2>
                     </div>
                     <button
                         class="flex items-center justify-center gap-2 p-3 w-full border-2 border-white hover:bg-white hover:text-pencil-tip rounded transition-colors"
                         @click="continueWithGoogle()"
                     >
                         <img src="~/assets/images/G.png" alt="G" />
-                        <span>Continue with Google</span>
+                        <span>{{ $t("auth.Continue with Google") }}</span>
                     </button>
                     <div class="flex items-center gap-2 w-full">
                         <hr class="gradient w-1 h-1 border-0 flex-grow" />
-                        OR
+                        {{ $t("auth.OR") }}
                         <hr class="gradient-re w-1 h-1 border-0 flex-grow" />
                     </div>
                     <form class="flex flex-col gap-4 w-full" @submit.prevent="sendVerificationCode()">
@@ -40,7 +41,7 @@
                             iconName="envelop.svg"
                             :required="true"
                             type="email"
-                            placeholder="Email Address"
+                            :placeholder="$t('auth.Email Address')"
                             v-model="email"
                             :error="errorField == 'email' ? responseMessage : ''"
                         />
@@ -52,22 +53,24 @@
                             :class="{ 'opacity-75 cursor-not-allowed': loading }"
                             :disabled="loading"
                         >
-                            <span v-if="!loading"> Continue </span>
+                            <span v-if="!loading"> {{ $t("auth.Continue") }} </span>
                             <Loading class="" v-else />
                         </button>
                     </form>
-                    <small class="text-xs font-thin opacity-50">
-                        By signing up, you agree to the Menuriom <a class="underline" href="/privacy-policy">Privacy Policy</a> and
-                        <a class="underline" href="/terms">Terms of Service</a>.
-                    </small>
+                    <small
+                        class="text-xs font-thin opacity-50"
+                        v-html="
+                            $t('auth.sign up term agreement message', {
+                                PrivacyPolicy: `<a class='underline' href='/privacy-policy'>${$t('auth.Privacy Policy')}</a>`,
+                                TermsOfService: `<a class='underline' href='/terms'>${$t('auth.Terms of Service')}</a>`,
+                            })
+                        "
+                    />
                 </section>
                 <section class="flex flex-col items-center justify-center gap-6 w-full text-white" page="2" v-else-if="page == 2">
-                    <div class="flex flex-col items-center gap-1 w-full">
-                        <h1 class="f-inter text-3xl font-semibold">Check Your Email</h1>
-                        <h2 class="text-sm font-thin text-center">
-                            <span class="opacity-60">we sent</span> <span class="underline opacity-90">{{ email }}</span>
-                            <span class="opacity-60"> a verfication code. Type or paste it below to continue.</span>
-                        </h2>
+                    <div class="flex flex-col items-center gap-2 w-full">
+                        <h1 class="f-inter text-3xl font-semibold">{{ $t("auth.Check Your Email") }}</h1>
+                        <h2 class="text-sm font-thin text-center" v-html="$t('auth.sent code message', { email: email })" />
                     </div>
                     <form class="flex flex-col gap-4 w-full" @submit.prevent="checkVerificationCode()">
                         <Input
@@ -75,7 +78,7 @@
                             iconName="code.svg"
                             :required="true"
                             type="text"
-                            placeholder="Verfication Code"
+                            :placeholder="$t('auth.Verfication Code')"
                             v-model="code"
                             :error="errorField == 'code' ? responseMessage : ''"
                         />
@@ -83,7 +86,7 @@
                             <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
                         <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
-                            <span v-if="!loading"> Continue </span>
+                            <span v-if="!loading"> {{ $t("auth.Continue") }} </span>
                             <Loading class="" v-else />
                         </button>
                     </form>
@@ -94,18 +97,15 @@
                         :class="{ 'opacity-50 cursor-not-allowed': !canResend }"
                         :disabled="!canResend"
                     >
-                        Resend Code
+                        {{ $t("auth.Resend Code") }}
                         <span v-if="timeLeft">{{ new Date(timeLeft * 1000).toISOString().substring(14, 19) }}</span>
                     </button>
                 </section>
-                <section class="flex flex-col items-center justify-center gap-6 w-full text-white" page="2" v-else-if="page == 3">
-                    <div class="flex flex-col items-center gap-1 w-full">
-                        <h1 class="f-inter text-3xl font-semibold">Almost Done</h1>
+                <section class="flex flex-col items-center justify-center gap-6 w-full text-white" page="3" v-else-if="page == 3">
+                    <div class="flex flex-col items-center gap-2 w-full">
+                        <h1 class="f-inter text-3xl font-semibold">{{ $t("auth.Almost Done") }}</h1>
                         <h2 class="text-sm font-thin text-center">
-                            <span class="opacity-60">
-                                Please complete your profile infor to <br />
-                                finish up the signup
-                            </span>
+                            <span class="opacity-60"> {{ $t("auth.complete signup message") }} </span>
                         </h2>
                     </div>
                     <form class="flex flex-col gap-4 w-full" @submit.prevent="completeSignup()">
@@ -114,7 +114,7 @@
                                 name="name"
                                 :required="true"
                                 type="text"
-                                placeholder="First Name"
+                                :placeholder="$t('auth.First Name')"
                                 v-model="name"
                                 :error="errorField == 'name' ? responseMessage : ''"
                             />
@@ -122,7 +122,7 @@
                                 name="family"
                                 :required="true"
                                 type="text"
-                                placeholder="Last Name"
+                                :placeholder="$t('auth.Last Name')"
                                 v-model="family"
                                 :error="errorField == 'family' ? responseMessage : ''"
                             />
@@ -132,7 +132,7 @@
                             :required="true"
                             type="text"
                             iconName="Mobile-phone.svg"
-                            placeholder="Phone Number"
+                            :placeholder="$t('auth.Phone Number')"
                             v-model="mobile"
                             :error="errorField == 'mobile' ? responseMessage : ''"
                         />
@@ -140,7 +140,7 @@
                             name="size"
                             iconName="Stack.svg"
                             type="number"
-                            placeholder="Business Size"
+                            :placeholder="$t('auth.Business Size')"
                             v-model="size"
                             :error="errorField == 'size' ? responseMessage : ''"
                         />
@@ -148,7 +148,7 @@
                             <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
                         <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
-                            <span v-if="!loading"> Signup </span>
+                            <span v-if="!loading"> {{ $t("auth.Signup") }} </span>
                             <Loading class="" v-else />
                         </button>
                     </form>
@@ -157,15 +157,25 @@
         </div>
         <nav>
             <ul class="flex flex-wrap items-center justify-center gap-2 p-2 text-white">
-                <li><nuxt-link class="hover:underline text-xs" to="/">Menuriom.com</nuxt-link></li>
+                <li>
+                    <nuxt-link class="hover:underline text-xs" :to="localePath('/')">{{ $t("auth.MenuriomDotCom") }}</nuxt-link>
+                </li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li><nuxt-link class="hover:underline text-xs" to="/pricing">Pricing</nuxt-link></li>
+                <li>
+                    <nuxt-link class="hover:underline text-xs" :to="localePath('/pricing')">{{ $t("auth.Pricing") }}</nuxt-link>
+                </li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li><nuxt-link class="hover:underline text-xs" to="/help-center">Help Center</nuxt-link></li>
+                <li>
+                    <nuxt-link class="hover:underline text-xs" :to="localePath('/help-center')">{{ $t("auth.Help Center") }}</nuxt-link>
+                </li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li><nuxt-link class="hover:underline text-xs" to="/faqs">Faqs</nuxt-link></li>
+                <li>
+                    <nuxt-link class="hover:underline text-xs" :to="localePath('/faqs')">{{ $t("auth.Faqs") }}</nuxt-link>
+                </li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li><nuxt-link class="hover:underline text-xs" to="/privacy-policy">Privacy Policy</nuxt-link></li>
+                <li>
+                    <nuxt-link class="hover:underline text-xs" :to="localePath('/privacy-policy')">{{ $t("auth.Privacy Policy") }}</nuxt-link>
+                </li>
                 <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
                 <li><LangSwitch textColor="white" /></li>
             </ul>
@@ -189,6 +199,8 @@ const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
 const config = useRuntimeConfig();
+const localePath = useLocalePath();
+const { locale, t } = useI18n();
 
 const error = route.query.error;
 
@@ -218,8 +230,12 @@ onMounted(() => {
     }, 1000);
 
     switch (error) {
-        case "1": responseMessage.value = "Sorry, we can't login/register your right now! please try again later."; break;
-        case "2": responseMessage.value = "Sorry, we have an issue in our servers. please come back later"; break;
+        case "1":
+            responseMessage.value = t("auth.error1");
+            break;
+        case "2":
+            responseMessage.value = t("auth.error2");
+            break;
     }
 });
 
@@ -277,7 +293,7 @@ const checkVerificationCode = async () => {
                 name.value = family.value = mobile.value = size.value = "";
             } else {
                 userStore.setRefreshInterval();
-                router.push("/user-panel");
+                router.push(localePath("/user-panel"));
             }
         })
         .catch((e) => {
@@ -292,6 +308,7 @@ const checkVerificationCode = async () => {
         })
         .finally(() => (loading.value = false));
 };
+
 const resendCode = () => {
     if (!canResend.value) return;
     sendVerificationCode();
@@ -315,7 +332,7 @@ const completeSignup = async () => {
         })
         .then((response) => {
             userStore.setRefreshInterval();
-            router.push("/user-panel");
+            router.push(localePath("/user-panel"));
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {

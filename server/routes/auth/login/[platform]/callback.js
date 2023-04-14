@@ -32,7 +32,9 @@ const authenticateWithServer = async (req, data) => {
 export default defineEventHandler(async (event) => {
     const { req, res } = event.node;
     const inputs = getQuery(event);
-    let redirectPath = "/authenticate";
+
+    const locale = getCookie(event, "i18n_redirected");
+    let redirectPath = locale == "en" ? "/en" : "";
 
     const { tokens } = await oauth2Client.getToken(inputs.code);
 
@@ -44,7 +46,7 @@ export default defineEventHandler(async (event) => {
             // request the back-end and set a auth-token
             const authResponse = await authenticateWithServer(req, { profile: response.data, email: response.data.email });
             if (!authResponse.token) {
-                redirectPath = "/authenticate?error=1";
+                redirectPath += "/authenticate?error=1";
                 return;
             }
 
@@ -53,17 +55,17 @@ export default defineEventHandler(async (event) => {
 
             switch (authResponse.role) {
                 case "admin":
-                    redirectPath = "/admin-panel";
+                    redirectPath += "/admin-panel";
                     break;
                 default:
-                    redirectPath = "/user-panel";
+                    redirectPath += "/user-panel";
                     break;
             }
         })
         .catch((error) => {
             if (typeof error.response === "undefined") console.error({ error });
             else console.error({ error: error.response.data });
-            redirectPath = "/authenticate?error=2";
+            redirectPath += "/authenticate?error=2";
         });
 
     await sendRedirect(event, redirectPath);

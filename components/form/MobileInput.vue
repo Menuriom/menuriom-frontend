@@ -38,7 +38,7 @@ span {
             />
             <span
                 class="absolute flex items-center gap-2 opacity-90 f-josefin"
-                :class="[isFocused || !!modelValue ? 'left-3 top-1.5 opacity-75' : 'left-4 top-5']"
+                :class="[isFocused || !!modelValue ? 'start-3 top-1.5 opacity-75' : 'start-4 top-5']"
             >
                 <Icon
                     class="icon w-4 h-4 bg-zinc-100"

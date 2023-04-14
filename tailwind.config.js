@@ -17,9 +17,10 @@ module.exports = {
                 nr35: "0 10px 20px -5px rgba(0, 0, 0, 0.35)",
             },
             screens: {
-                "3xs": "160px",
+                "1.5xs": "160px",
                 "2xs": "275px",
                 xs: "320px",
+                "2sm": "375px",
                 "1.5xl": "1440px",
                 "3xl": "1680px",
                 "4xl": "1920px",

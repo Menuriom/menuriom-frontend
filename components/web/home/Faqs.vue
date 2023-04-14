@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <section class="relative flex flex-col items-center gap-10 w-full p-2 sm:p-4 md:p-8" title="Faqs">
+    <section class="relative flex flex-col items-center gap-10 w-full p-4 md:p-8" title="Faqs">
         <Blob class="absolute right-28 -top-16" :class="[blobPosition == 'right' ? 'right-28' : 'left-28']" />
         <div class="relative flex flex-col items-center gap-2">
             <img class="w-16 mb-4" src="~/assets/images/icons/q&a.png" alt="Q&A" />

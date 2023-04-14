@@ -1,15 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
 
-/* @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marhey:wght@400;700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap');
+
+/* @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700;800&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;700;800&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 :root {
     scrollbar-color: theme("colors.zinc.600") theme("colors.zinc.800") !important;
@@ -23,6 +26,7 @@
 
 @font-face { font-family: "IranyekanRegular"; src: local('Roboto'), url("../fonts/iranyekanwebregular.woff2"); font-display: swap; }
 @font-face { font-family: "IranyekanBold"; src: local('Roboto'), url("../fonts/iranyekanwebbold.woff2"); font-display: swap; }
+@font-face { font-family: "Sepahbod"; src: local('Roboto'), url("../fonts/Sepahbod.otf"); font-display: swap; }
 
 *,html {  scroll-behavior: smooth; }
 
@@ -34,8 +38,8 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.f-inter { font-family: "Inter" !important; }
-.f-poppins { font-family: "Poppins" !important; }
+.f-inter { font-family: "Inter", "Noto Kufi Arabic" !important; }
+.f-poppins { font-family: "Poppins", "IranyekanRegular" !important; }
 .f-iranyekan-regular { font-family: "IranyekanRegular" !important; }
 .f-iranyekan-bold { font-family: "IranyekanBold" !important; }
 
@@ -62,7 +66,11 @@ body {
 
 .slide-up-enter-active { transition: all 0.2s ease; }
 .slide-up-leave-active { transition: all 0.2s ease; }
-.slide-up-enter-from, .slide-up-leave-to { transform: translateY(-100%); }
+.slide-up-enter-from, .slide-up-leave-to { opacity: 0; transform: translateY(-10%); }
+
+.slide-down-enter-active { transition: all 0.2s ease; }
+.slide-down-leave-active { transition: all 0.2s ease; }
+.slide-down-enter-from, .slide-down-leave-to { opacity: 0; transform: translateY(100%); }
 
 .slide-left-enter-active { transition: all 0.2s ease; }
 .slide-left-leave-active { transition: all 0.2s ease; }
@@ -81,4 +89,10 @@ body {
     0% { transform: translateY(0); }
     50% { transform: translateY(15%); }
     100% { transform: translateY(0); }
+}
+
+@keyframes gradient-wave {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
 }

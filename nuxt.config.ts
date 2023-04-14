@@ -18,7 +18,7 @@ export default defineNuxtConfig({
             ],
         },
         pageTransition: { name: "page", mode: "out-in" },
-        layoutTransition: { name: "layout", mode: "out-in" },
+        layoutTransition: { name: "page", mode: "out-in" },
     },
 
     css: [
@@ -27,7 +27,6 @@ export default defineNuxtConfig({
     ],
     postcss: {
         plugins: {
-            // tailwind: {},
             autoprefixer: {},
         },
     },
@@ -51,11 +50,39 @@ export default defineNuxtConfig({
         compressPublicAssets: true,
     },
 
+    i18n: {
+        strategy: "prefix_except_default",
+        baseUrl: process.env.BASE_URL,
+        // differentDomains: true,
+        // detectBrowserLanguage: false,
+        detectBrowserLanguage: {
+            useCookie: true,
+            cookieKey: "i18n_redirected",
+            redirectOn: "root",
+        },
+        defaultLocale: "fa",
+        lazy: true,
+        langDir: "locale",
+        locales: [
+            { code: "fa", name: "فارسی", iso: "fa-IR", file: "fa.js", dir: "rtl", domain: process.env.BASE_FA_URL },
+            { code: "en", name: "English", iso: "en-US", file: "en.js", dir: "ltr", domain: process.env.BASE_EN_URL },
+        ],
+        vueI18n: {
+            legacy: false,
+        },
+    },
+
     modules: [
         // tailwind moudle for nuxt 3
         "@nuxtjs/tailwindcss",
 
         // pinia moudle
         "@pinia/nuxt",
+
+        "@nuxtjs/i18n",
     ],
+
+    devServer: {
+        // host: "dev.me",
+    },
 });

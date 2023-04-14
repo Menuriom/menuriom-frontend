@@ -4,6 +4,7 @@ import { storeToRefs } from "pinia";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
     const nuxtApp = useNuxtApp();
+    const localePath = useLocalePath();
 
     if (process.server) {
         // if token exists, check if token is valid or not and if its valid redirect to home page
@@ -21,7 +22,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             .get(url, { headers: headers })
             .then((response) => true)
             .catch((e) => false);
-        if (isTokenValid) return navigateTo("/");
+        if (isTokenValid) return navigateTo(localePath("/"));
     }
 
     if (process.client && nuxtApp.isHydrating && nuxtApp.payload.serverRendered) return;
@@ -29,12 +30,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (process.client) {
         const userState = useUserStore();
         const user = storeToRefs(userState);
-        if (user.name.value !== "" && user.family.value !== "") return navigateTo("/");
+        if (user.name.value !== "" && user.family.value !== "") return navigateTo(localePath("/"));
 
         const isTokenValid = await userState
             .getUserInfo()
             .then((response) => true)
             .catch((e) => false);
-        if (isTokenValid) return navigateTo("/");
+        if (isTokenValid) return navigateTo(localePath("/"));
     }
 });

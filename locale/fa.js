@@ -1,0 +1,108 @@
+export default {
+    auth: {
+        welcome: "به منوریوم خوش اومدی",
+        "Login or signup with your email": "از طریق ایمیل خود ثبت نام کنید یا وارد حساب کاری خود شوید",
+        "Continue with Google": "از طریق حساب گوگل",
+        OR: "یا",
+        "Email Address": "ادرس ایمیل",
+        Continue: "ادامه",
+        "sign up term agreement message": "با عضویت در منوریوم {PrivacyPolicy} و {TermsOfService} را میپذیرم",
+        "Privacy Policy": "سیاست حریم خصوصی",
+        "Terms of Service": "شرایط استفاده",
+
+        "Check Your Email": "ایمیل خودتو رو چک کن",
+        "sent code message": `<span class="opacity-60">ما به ایمیل</span> <span class="underline opacity-90">{email}</span> <span class="opacity-60"> یک کد تایید ارسال کردیم. لطفا کد تایید را در فرم زیر وارد کنید</span>`,
+        "Verfication Code": "کد تایید",
+        "Resend Code": "ارسال دوباره کد",
+
+        "Almost Done": "تکمیل ثبت نام",
+        Signup: "ثبت نام",
+        "complete signup message": "برای اتمام ثبت نام لطفا مشخصات خود را تکمیل کنید",
+        "First Name": "نام",
+        "Last Name": "نام خانوادگی",
+        "Phone Number": "شماره موبایل",
+        "Business Size": "بزرگی کسب و کار",
+
+        MenuriomDotCom: "وبسایت منوریوم",
+        Pricing: "قیمت ها",
+        "Help Center": "مستندات",
+        Faqs: "سوالات متداول",
+
+        error1: "امکان ورود/ثبت نام در حال حاضر وجود ندارد! لطفا کمی بعد ، دوباره تلاش کنید.",
+        error2: "در حال حاضر خطایی در سرور ما رخ داده و در تلاش برای رفع آن هستیم! لطفا کمی بعد تلاش کنید.",
+    },
+
+    header: {
+        Features: "قابلیت ها",
+        Demo: "نمونه منو",
+        Pricing: "تعرفه ها",
+        "How It Works": "نحوه کار",
+        "Contact Us": "تماس با ما",
+        Login: "ورود",
+        "Try It For Free": "رایگان شروع کنید",
+        "Your Dashboard": "داشبورد شما",
+
+        "Templates&Customization": "شخصی سازی و قالب های مختلف",
+        "Templates&CustomizationDesc": "ساخت منو بسته به استایل رستوران",
+        MultipleBranches: "شعبه ها مختلف",
+        MultipleBranchesDesc: "منو های مختلف بسته به نیاز هر شعبه",
+        ItemSpecialazation: "برجسته کردن ایتم ها",
+        ItemSpecialazationDesc: "برجسته کردن بعضی ایتم ها منو",
+        OrderingSystem: "سیستم سفارش گیری",
+        OrderingSystemDesc: "امکان دریافت سفارش از طریق منو",
+        MenuTranslation: "قابلیت چند زبانه",
+        MenuTranslationDesc: "امکان ایجاد و تغییر زبان منو ها",
+        ServerCall: "درخواست گارسون",
+        ServerCallDesc: "امکان درخواست گارسون از طریق منو",
+        FeedbackSystem: "سیستم نظرسنجی",
+        FeedbackSystemDesc: "امکان نظردهی توسط مشتریان",
+        ComboLists: "لیست بهترین ها",
+        ComboListsDesc: "لیست ایتم هایی که با هم پیشنهاد میشند",
+        CustomQRCode: "کد کیو ار سفارشی شده",
+        CustomQRCodeDesc: "امکان شخصی سازی کدهای کیو ار",
+
+        "See all the features": "مشاهده همه ویژگی ها",
+    },
+
+    footer: {
+        "Looking For A Feature You Can’t Find?": "دنبال قابلیتی هستی که نیست؟",
+        "Tell us what you want, we will get to work on implementing it": "به ما بگو چی میخوای، ما میذاریم تو برنامه که اضافه کنیمش",
+        "Submit A Feature Request": "ثبت درخواست قابلیت جدید",
+
+        "Start Building Your First Menu For Free": "اولین منوتو رو همین الان رایگان بساز",
+        "Sign Up Now For Free": "رایگان ثبت نام کنید",
+
+        "The Best Way To Create Online Menus": "بهترین راه برای ساخت منوی آنلاین",
+        "Follow Us On Instagram": "اینستاگرام ما رو دنبال کن",
+        Pricing: "تعرفه ها",
+        Faqs: "سوالات متداول",
+        About: "درباره ما",
+        "Request Feature": "درخواست قابلیت جدید",
+        "Contact Us": "تماس با ما",
+        "Help Center": "مرکز دانش",
+        "Privacy Policy": "حریم خصوصی",
+        "Term Of Service": "شرایط استفاده",
+
+        copyright: "کلیه حقوق مادی و معنوی این وبسایت متعلق به گروه منوریوم است.",
+    },
+
+    pricing: {
+        Pricing: "تعرفه ها",
+        PricingSlogan: "هر رستوران با هر اندازه ای که دارید، میتونید رو ما حساب کنید!",
+        PricingSubText: "رایگان شروع کنید. رایگان بسازید.",
+
+        Monthly: "ماهانه",
+        Annual: "سالانه",
+        "Most Popular": "پرفروش",
+        Toman: "تومان",
+        month: "ماه",
+        year: "سال",
+        Free: "رایگان",
+        Always: "همیشه",
+        "Everything on previous plan": "تمام امکانات پلن قبلی",
+        "Get Started": "شروع کنید",
+
+        "Compare Plans": "مقایسه پلن ها",
+        "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
+    },
+};
