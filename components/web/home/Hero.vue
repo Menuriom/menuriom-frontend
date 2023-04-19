@@ -67,6 +67,6 @@ import Button from "~/components/web/Button.vue";
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 
-const userState = useUserStore();
-const user = storeToRefs(userState);
+const userStore = useUserStore();
+const user = storeToRefs(userStore);
 </script>

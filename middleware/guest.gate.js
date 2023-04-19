@@ -28,11 +28,11 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (process.client && nuxtApp.isHydrating && nuxtApp.payload.serverRendered) return;
 
     if (process.client) {
-        const userState = useUserStore();
-        const user = storeToRefs(userState);
+        const userStore = useUserStore();
+        const user = storeToRefs(userStore);
         if (user.name.value !== "" && user.family.value !== "") return navigateTo(localePath("/"));
 
-        const isTokenValid = await userState
+        const isTokenValid = await userStore
             .getUserInfo()
             .then((response) => true)
             .catch((e) => false);

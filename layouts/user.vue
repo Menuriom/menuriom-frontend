@@ -1,25 +1,46 @@
-<style scoped></style>
+<style scoped>
+main {
+    overflow: hidden;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    main {
+        width: calc(100% - 275px);
+    }
+    main.wide {
+        width: 100%;
+    }
+}
+</style>
 
 <template>
-    <div class="flex flex-col items-center w-screen bg-white overflow-hidden" id="app">
+    <div class="flex flex-col items-center w-screen h-screen bg-neutral-50 overflow-clip" id="app">
         <NuxtLoadingIndicator />
-        <!-- TODO : add header and side menu for user's panel -->
-        <main class="w-full">
-            <slot />
-        </main>
+        <Header />
+        <div class="relative flex w-full h-0 p-2 flex-grow">
+            <SideMenu />
+            <main class="relative p-4 py-2 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
+                <slot />
+            </main>
+        </div>
     </div>
 </template>
 
 <script setup>
+import Header from "~/components/user-panel/Header.vue";
+import SideMenu from "~/components/user-panel/SideMenu.vue";
 import { useUserStore } from "@/stores/user";
+import { usePanelStore } from "@/stores/panel";
 import { storeToRefs } from "pinia";
 
-const userState = useUserStore();
-const user = storeToRefs(userState);
+const panelStore = usePanelStore();
+const userStore = useUserStore();
+const user = storeToRefs(userStore);
 
 onMounted(async () => {
-    if (user.name.value === "" || user.family.value === "") await userState.getUserInfo();
-    await userState.refreshToken().catch((e) => {});
-    userState.setRefreshInterval();
+    if (user.name.value === "" || user.family.value === "") await userStore.getUserInfo();
+    await userStore.refreshToken().catch((e) => {});
+    userStore.setRefreshInterval();
 });
 </script>

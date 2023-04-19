@@ -12,7 +12,7 @@
     background-color: theme("colors.violet");
 }
 .btn-secondary {
-    background-color: transparent;
+    /* background-color: transparent; */
 }
 </style>
 

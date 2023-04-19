@@ -27,8 +27,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (process.client && nuxtApp.isHydrating && nuxtApp.payload.serverRendered) return;
 
     if (process.client) {
-        const userState = useUserStore();
-        const isTokenValid = await userState
+        const userStore = useUserStore();
+        const isTokenValid = await userStore
             .getUserInfo()
             .then(() => true)
             .catch((e) => false);
