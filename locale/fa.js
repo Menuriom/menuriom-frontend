@@ -105,4 +105,38 @@ export default {
         "Compare Plans": "مقایسه پلن ها",
         "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
     },
+
+    "user-panel": {
+        profile: {
+            "Your Profile": "حساب کاربری",
+            "Create New Brand": "ساخت برند جدید",
+            "Upgrade Plan": "ارتقا پلن",
+            "Help Center": "مرکز آموزش",
+            Logout: "خروج از حساب",
+        },
+
+        "side-menu": {
+            Orders: "سفارشات",
+            "Ordering App": "اپ سفارش گیر",
+
+            Dashboard: "داشبورد",
+            Branches: "شعبه ها",
+            Menu: "مدیریت منو",
+            "Menu Editor": "وایرایش منو",
+            "Style Editor": "ویرایش ظاهر منو",
+            "QR Code": "بارکد کیو ار",
+            "Splash Screen": "صفحه کاور",
+            "Manage Staff": "مدیریت خدمه",
+            "Staff Members": "اعضای خدمه",
+            "Sent Invites": "درخواست های ارسالی",
+            "Staff Roles": "تعریف نقش خدمه",
+            "Customers Feedback": "بازخورد مشتریان",
+            "Billing & Plan Upgrade": "صورتحساب و ارتقا پلن",
+            Support: "پشتیبانی",
+
+            "Switch Brand": "انتخاب برند",
+            "Switch between your restaurant brands": "بین برندهای رستوران خود سویچ کنید",
+            "Go To Brand Manager": "مدیریت برندها",
+        },
+    },
 };

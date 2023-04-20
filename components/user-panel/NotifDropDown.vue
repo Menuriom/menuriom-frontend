@@ -2,15 +2,31 @@
 
 <template>
     <div class="relative" ref="dropdown">
-        <div class="flex items-center gap-1 cursor-pointer hover:bg-neutral-600 hover:p-1 transition-all rounded-full" @click="toggleDropdown()">
+        <div class="relative flex items-center gap-1 cursor-pointer hover:bg-neutral-600 hover:p-1 transition-all rounded-full" @click="toggleDropdown()">
             <Icon class="w-7 h-7 bg-zinc-100" name="cowbell.svg" folder="icons" size="20px" />
+            <span class="gradient absolute top-1 start-0 w-2.5 h-2.5 rounded-full border-white"></span>
         </div>
         <transition name="slide-up" mode="out-in" appear>
-            <ul class="absolute top-10 end-0 flex flex-col gap-1 w-max p-1 bg-dolphin text-white shadow-md rounded-xl" v-if="open">
-                <nuxt-link to="">
-                    <li class="flex items-center w-full hover:bg-zinc-200 rounded-md cursor-pointer">
-                        <!-- <Icon src="" alt="" /> -->
-                        <span>d</span>
+            <ul
+                class="absolute top-10 -end-10 md:-end-4 flex flex-col gap-1 w-screen max-w-screen-2xs p-2 bg-dolphin text-white shadow-md rounded-xl"
+                v-if="open"
+            >
+                <nuxt-link :to="localePath('/user-panel/')">
+                    <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
+                            <span class="text-sm">{{ $t("user-panel.profile.Your Profile") }}</span>
+                        </div>
+                        <p class="text-xs opacity-75">some text</p>
+                    </li>
+                </nuxt-link>
+                <nuxt-link :to="localePath('/user-panel/')">
+                    <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
+                            <span class="text-sm">{{ $t("user-panel.profile.Your Profile") }}</span>
+                        </div>
+                        <p class="text-xs opacity-75">some text</p>
                     </li>
                 </nuxt-link>
             </ul>

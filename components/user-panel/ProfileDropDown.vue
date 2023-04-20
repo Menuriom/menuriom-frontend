@@ -30,26 +30,26 @@ li:hover .icon {
                 <nuxt-link :to="localePath('/user-panel/profile')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
-                        <small>Your Profile</small>
+                        <small>{{ $t("user-panel.profile.Your Profile") }}</small>
                     </li>
                 </nuxt-link>
                 <hr class="w-11/12 mx-auto opacity-25" />
                 <nuxt-link :to="localePath('/user-panel/brands')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
-                        <small>Create New Brand</small>
+                        <small>{{ $t("user-panel.profile.Create New Brand") }}</small>
                     </li>
                 </nuxt-link>
                 <nuxt-link :to="localePath('/user-panel/billing/change-plan')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="arrow-up-big-small.svg" folder="icons/light" size="20px" />
-                        <small>Upgrade Plan</small>
+                        <small>{{ $t("user-panel.profile.Upgrade Plan") }}</small>
                     </li>
                 </nuxt-link>
                 <a :href="localePath('/help-center')" target="_blank">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="square-question.svg" folder="icons/light" size="18px" />
-                        <small>Help Center</small>
+                        <small>{{ $t("user-panel.profile.Help Center") }}</small>
                         <Icon class="w-3 h-3 bg-zinc-100 ms-auto" name="arrow-angle.svg" folder="icons" size="10px" />
                     </li>
                 </a>
@@ -57,7 +57,7 @@ li:hover .icon {
                 <button @click="logout()">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-rose-300" name="right-from-bracket.svg" folder="icons/light" size="18px" />
-                        <small class="text-rose-300">Logout</small>
+                        <small class="text-rose-300">{{ $t("user-panel.profile.Logout") }}</small>
                     </li>
                 </button>
             </ul>
