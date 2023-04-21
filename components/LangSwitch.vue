@@ -42,6 +42,7 @@ defineProps({
     showText: { type: Boolean, default: false },
 });
 
+const lang = useCookie("lang");
 const { locale, locales, setLocale } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 
@@ -62,6 +63,7 @@ const closeDropdown = (event) => {
 };
 
 const selectOption = (code) => {
+    lang.value = code;
     setLocale(code);
     toggleDropdown();
 };

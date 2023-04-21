@@ -6,6 +6,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     const nuxtApp = useNuxtApp();
     const localePath = useLocalePath();
 
+    const userStore = useUserStore();
+    const user = storeToRefs(userStore);
+
     if (process.server) {
         // if token exists, check if token is valid or not and if its valid redirect to home page
         const token = useCookie("AuthToken").value;
@@ -20,7 +23,14 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         // cheking the token validity
         const isTokenValid = await axios
             .get(url, { headers: headers })
-            .then((response) => true)
+            .then((response) => {
+                user.avatar.value = response.data.avatar;
+                user.name.value = response.data.name;
+                user.family.value = response.data.family;
+                user.email.value = response.data.email;
+                user.mobile.value = response.data.mobile;
+                return true;
+            })
             .catch((e) => false);
         if (isTokenValid) return navigateTo(localePath("/"));
     }
@@ -28,8 +38,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (process.client && nuxtApp.isHydrating && nuxtApp.payload.serverRendered) return;
 
     if (process.client) {
-        const userStore = useUserStore();
-        const user = storeToRefs(userStore);
         if (user.name.value !== "" && user.family.value !== "") return navigateTo(localePath("/"));
 
         const isTokenValid = await userStore

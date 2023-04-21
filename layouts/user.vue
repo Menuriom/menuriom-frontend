@@ -26,12 +26,19 @@ main {
                 </main>
             </div>
         </Html>
+
+        <Teleport to="body">
+            <PersonalInfo />
+            <SelectAccountType />
+        </Teleport>
     </div>
 </template>
 
 <script setup>
 import Header from "~/components/user-panel/Header.vue";
 import SideMenu from "~/components/user-panel/SideMenu.vue";
+import PersonalInfo from "~/components/user-panel/dialogs/account-setup/PersonalInfo.vue";
+import SelectAccountType from "~/components/user-panel/dialogs/account-setup/SelectAccountType.vue";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
 import { storeToRefs } from "pinia";
@@ -47,8 +54,11 @@ const panelStore = usePanelStore();
 const userStore = useUserStore();
 const user = storeToRefs(userStore);
 
+if (userStore.name === "" || userStore.family === "") panelStore.openPopUp("personal-info");
+else if (Object.keys(user.brands.value).length == 0) panelStore.openPopUp("select-account-type");
+
 onMounted(async () => {
-    if (user.name.value === "" || user.family.value === "") await userStore.getUserInfo();
+    // if (user.name.value === "" || user.family.value === "") await userStore.getUserInfo();
     await userStore.refreshToken().catch((e) => {});
     userStore.setRefreshInterval();
 });

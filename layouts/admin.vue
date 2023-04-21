@@ -17,7 +17,7 @@ const userStore = useUserStore();
 const user = storeToRefs(userStore);
 
 onMounted(async () => {
-    if (user.name.value === "" || user.family.value === "") await userStore.getUserInfo();
+    // if (user.name.value === "" || user.family.value === "") await userStore.getUserInfo();
     await userStore.refreshToken().catch((e) => {});
     userStore.setRefreshInterval();
 });

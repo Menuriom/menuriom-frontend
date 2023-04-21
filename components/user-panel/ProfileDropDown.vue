@@ -23,14 +23,21 @@ li:hover .icon {
         <transition name="slide-up" mode="out-in" appear>
             <ul class="absolute top-10 -end-10 md:-end-4 flex flex-col gap-1 w-max p-2 bg-dolphin text-white shadow-md rounded-xl" v-if="open">
                 <li class="flex flex-col w-full p-2">
-                    <h3 class="text-sm font-bold">Kasra Keshvardoost</h3>
-                    <small class="text-xs opacity-75">kasrakeshvardoost@gmail.com</small>
+                    <!-- TODO : make skeleton fallback for when users data is loading -->
+                    <h3 class="text-sm font-bold capitalize">{{ `${userStore.name} ${userStore.family}` }}</h3>
+                    <small class="text-xs opacity-75">{{userStore.email || userStore.mobile}}</small>
                 </li>
                 <hr class="w-11/12 mx-auto opacity-25" />
                 <nuxt-link :to="localePath('/user-panel/profile')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
                         <small>{{ $t("user-panel.profile.Your Profile") }}</small>
+                    </li>
+                </nuxt-link>
+                <nuxt-link :to="localePath('/user-panel/invites')">
+                    <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
+                        <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
+                        <small>{{ $t("user-panel.profile.Staff Invites") }}</small>
                     </li>
                 </nuxt-link>
                 <hr class="w-11/12 mx-auto opacity-25" />
@@ -66,7 +73,10 @@ li:hover .icon {
 </template>
 
 <script setup>
+import { useUserStore } from "@/stores/user";
+
 // const { locale } = useI18n();
+const userStore = useUserStore();
 
 onMounted(() => {
     document.addEventListener("click", closeDropdown);

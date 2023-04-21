@@ -9,8 +9,9 @@ export const useUserStore = defineStore("user", () => {
     const family = ref("");
     const email = ref("");
     const mobile = ref("");
-    const role = ref("");
-    const permissions = ref([]);
+    const brands = reactive({
+        // id: { name: "", role: "", permissions: "" },
+    });
 
     const isIntervalSet = ref(false);
     const loading = ref(false);
@@ -21,8 +22,7 @@ export const useUserStore = defineStore("user", () => {
         family.value = "";
         email.value = "";
         mobile.value = "";
-        role.value = "";
-        permissions.value = [];
+        brands = {};
     };
 
     const getUserInfo = async () => {
@@ -37,8 +37,6 @@ export const useUserStore = defineStore("user", () => {
                 family.value = response.data.family;
                 email.value = response.data.email;
                 mobile.value = response.data.mobile;
-                role.value = response.data.role;
-                permissions.value = [...response.data.permissions];
             })
             .catch((e) => {
                 throw e;
@@ -86,8 +84,7 @@ export const useUserStore = defineStore("user", () => {
         family,
         email,
         mobile,
-        role,
-        permissions,
+        brands,
         isIntervalSet,
         loading,
         resetUserInfo,

@@ -5,6 +5,9 @@ import { storeToRefs } from "pinia";
 export default defineNuxtRouteMiddleware(async (to, from) => {
     const nuxtApp = useNuxtApp();
 
+    const userStore = useUserStore();
+    const user = storeToRefs(userStore);
+
     if (process.server) {
         // if token does not exist or its invalid or the user role is not admin then abort navigation
         const token = useCookie("AuthToken").value;
@@ -18,7 +21,14 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
         const user = await axios
             .get(url, { headers: headers })
-            .then((response) => response.data)
+            .then((response) => {
+                   user.avatar.value = response.data.avatar;
+                   user.name.value = response.data.name;
+                   user.family.value = response.data.family;
+                   user.email.value = response.data.email;
+                   user.mobile.value = response.data.mobile;
+                   return response.data;
+            })
             .catch((e) => {});
 
         // cheking the token validity
@@ -29,9 +39,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (process.client && nuxtApp.isHydrating && nuxtApp.payload.serverRendered) return;
 
     if (process.client) {
-        const userStore = useUserStore();
-        const user = storeToRefs(userStore);
-
         const isTokenValid = await userStore
             .getUserInfo()
             .then(() => true)

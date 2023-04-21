@@ -109,6 +109,7 @@ export default {
     "user-panel": {
         profile: {
             "Your Profile": "Your Profile",
+            "Staff Invites": "Staff Invites",
             "Create New Brand": "Create New Brand",
             "Upgrade Plan": "Upgrade Plan",
             "Help Center": "Help Center",
@@ -137,6 +138,14 @@ export default {
             "Switch Brand": "Switch Brand",
             "Switch between your restaurant brands": "Switch between your restaurant brands",
             "Go To Brand Manager": "Go To Brand Manager",
+        },
+
+        "account-setup": {
+            "Setting Up Your Account": "Setting Up Your Account",
+            "please answer a few questions so that we can set up your account to fit you best":
+                "please answer a few questions so that we can set up your account to fit you best",
+            "What is your full name and phone number?": "What is your full name and phone number?",
+            "How are you planning to use Menuriom?": "How are you planning to use Menuriom?",
         },
     },
 };

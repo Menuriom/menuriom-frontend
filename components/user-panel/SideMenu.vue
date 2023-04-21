@@ -71,6 +71,7 @@ nav::-webkit-scrollbar {
 <template>
     <aside class="absolute md:relative flex rounded-lg overflow-hidden z-10 flex-shrink-0 shadow-nr35" :class="{ close: !panelStore.sideMenuOpen }">
         <div class="flex flex-col gap-4 h-full p-4 bg-pencil-tip text-white rounded-lg">
+            <!-- TODO : make skeluton fallback for when user data is loading and dont show if no brand available -->
             <div
                 class="flex items-center gap-2 hover:px-2 py-2 rounded-lg hover:bg-neutral-600 cursor-pointer transition-all group"
                 @click="openBrandSwitcher()"
@@ -257,6 +258,6 @@ const toggleSubMenu = (subMenuName) => {
 // --------------------------
 
 const openBrandSwitcher = () => {
-    panelStore.updatePopUp("brand-switcher");
+    panelStore.openPopUp("brand-switcher");
 };
 </script>

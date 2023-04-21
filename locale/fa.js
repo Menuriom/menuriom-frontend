@@ -109,6 +109,7 @@ export default {
     "user-panel": {
         profile: {
             "Your Profile": "حساب کاربری",
+            "Staff Invites": "درخواست های همکاری",
             "Create New Brand": "ساخت برند جدید",
             "Upgrade Plan": "ارتقا پلن",
             "Help Center": "مرکز آموزش",
@@ -137,6 +138,14 @@ export default {
             "Switch Brand": "انتخاب برند",
             "Switch between your restaurant brands": "بین برندهای رستوران خود سویچ کنید",
             "Go To Brand Manager": "مدیریت برندها",
+        },
+
+        "account-setup": {
+            "Setting Up Your Account": "راه اندازی حساب کاربری",
+            "please answer a few questions so that we can set up your account to fit you best":
+                "لطفا به چند سوال ساده پاسخ بدید تا ما حساب شما رو به بهترین شکل تنظیم کنیم",
+            "What is your full name and phone number?": "نام و نام خانوادگی با شماره همراه خود را وارد کنید",
+            "How are you planning to use Menuriom?": "چگونه میخواید ز منوریوم استفاده کنید؟",
         },
     },
 };
