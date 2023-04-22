@@ -145,7 +145,29 @@ export default {
             "please answer a few questions so that we can set up your account to fit you best":
                 "please answer a few questions so that we can set up your account to fit you best",
             "What is your full name and phone number?": "What is your full name and phone number?",
+
             "How are you planning to use Menuriom?": "How are you planning to use Menuriom?",
+            "For my store or restaurant": "For my store or restaurant",
+            "This is for users who want to create and manage their restaurant menus and orders":
+                "This is for users who want to create and manage their restaurant menus and orders",
+            "Im part of a staff or team": "I'm part of a staff or team",
+            "This is for users who are part of a restaurant and want to join as a staff member":
+                "This is for users who are part of a restaurant and want to join as a staff member",
+
+            "Create Your Brand": "Create Your Brand",
+            "Start by setting up your brand info": "Start by setting up your brand info",
+        },
+
+        brands: {
+            "Brand Details": "Brand Details",
+            "Brand Name": "Brand Name",
+            "Brand Slogan": "Brand Slogan",
+            "How many branches does your business have?": "How many branches does your business have?",
+            Branch: "Branch",
+            "Your main branch info": "Your Main Branch Info",
+            "Main Branch Address": "Main Branch Address",
+            "Main Branch Telephone Number": "Main Branch Telephone Number",
+            "Images must be less than 1MB": "Images must be less than 1MB",
         },
     },
 };

@@ -3,16 +3,18 @@
 <template>
     <Dialog name="personal-info" :closeable="false">
         <div class="flex flex-col items-center gap-4 w-screen max-w-md">
-            <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("user-panel.account-setup.Setting Up Your Account") }}</h3>
-            <p class="text-xs opacity-75 text-center max-w-sm">
-                {{ $t("user-panel.account-setup.please answer a few questions so that we can set up your account to fit you best") }}
-            </p>
+            <div class="flex flex-col gap-1">
+                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("user-panel.account-setup.Setting Up Your Account") }}</h3>
+                <p class="text-xs opacity-75 text-center max-w-sm">
+                    {{ $t("user-panel.account-setup.please answer a few questions so that we can set up your account to fit you best") }}
+                </p>
+            </div>
             <ul class="flex items-center gap-2">
-                <li class="w-3 h-3 rounded-full bg-violet"></li>
+                <li class="w-2.5 h-2.5 rounded-full bg-violet"></li>
                 <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>
-                <li class="w-3 h-3 rounded-full bg-neutral-500"></li>
+                <li class="w-2.5 h-2.5 rounded-full bg-neutral-500"></li>
                 <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>
-                <li class="w-3 h-3 rounded-full bg-neutral-500"></li>
+                <li class="w-2.5 h-2.5 rounded-full bg-neutral-500"></li>
             </ul>
             <hr class="w-full border-0 h-0.5 gradient" />
             <h4 class="text-lg">{{ $t("user-panel.account-setup.What is your full name and phone number?") }}</h4>
@@ -75,9 +77,9 @@ const panelStore = usePanelStore();
 const userStore = useUserStore();
 const user = storeToRefs(userStore);
 
-const name = ref("");
-const family = ref("");
-const mobile = ref(null);
+const name = ref(user.name.value || "");
+const family = ref(user.name.family || "");
+const mobile = ref(user.name.mobile || "");
 
 const loading = ref(false);
 const errorField = ref("");
@@ -107,9 +109,9 @@ const completeSignup = async () => {
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
-                if (typeof e.response.data.message === "object") {
-                    responseMessage.value = e.response.data.message[0].errors[0];
-                    errorField.value = e.response.data.message[0].property;
+                if (typeof e.response.data.errors === "object") {
+                    responseMessage.value = e.response.data.errors[0].errors[0];
+                    errorField.value = e.response.data.errors[0].property;
                 }
             }
         })

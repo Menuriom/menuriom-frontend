@@ -145,7 +145,29 @@ export default {
             "please answer a few questions so that we can set up your account to fit you best":
                 "لطفا به چند سوال ساده پاسخ بدید تا ما حساب شما رو به بهترین شکل تنظیم کنیم",
             "What is your full name and phone number?": "نام و نام خانوادگی با شماره همراه خود را وارد کنید",
-            "How are you planning to use Menuriom?": "چگونه میخواید ز منوریوم استفاده کنید؟",
+
+            "How are you planning to use Menuriom?": "چگونه میخواید از منوریوم استفاده کنید؟",
+            "For my store or restaurant": "برای مغزه یا رستوران خودم",
+            "This is for users who want to create and manage their restaurant menus and orders":
+                "برای کاربرانی که میخواهند منو و سفارشات رستوران خود را مدیریت کنند",
+            "Im part of a staff or team": "من عضو تیم خدمه هستم",
+            "This is for users who are part of a restaurant and want to join as a staff member":
+                "برای کاربرانی که میخواهند به عنوان خدمه عضو تیم رستوران ای شوند",
+
+            "Create Your Brand": "برند خود را بسازید",
+            "Start by setting up your brand info": "مشخصات برند خود را وارد کنید",
+        },
+
+        brands: {
+            "Brand Details": "مشخصات برند",
+            "Brand Name": "اسم برند",
+            "Brand Slogan": "شعار برند",
+            "How many branches does your business have?": "کسب کار شما چند شعبه دارد؟",
+            Branch: "شعبه",
+            "Your main branch info": "مشخصات شعبه اصلی",
+            "Main Branch Address": "ادرس شعبه اصلی",
+            "Main Branch Telephone Number": "تلفن تماس شعبه اصلی",
+            "Images must be less than 1MB": "حجم عکس لوگو انتخابی باید کمتر از 1Mb باشد",
         },
     },
 };

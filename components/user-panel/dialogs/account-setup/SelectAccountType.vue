@@ -3,16 +3,18 @@
 <template>
     <Dialog name="select-account-type" :closeable="false">
         <div class="flex flex-col items-center gap-4 w-screen max-w-md">
-            <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("user-panel.account-setup.Setting Up Your Account") }}</h3>
-            <p class="text-xs opacity-75 text-center max-w-sm">
-                {{ $t("user-panel.account-setup.please answer a few questions so that we can set up your account to fit you best") }}
-            </p>
+            <div class="flex flex-col gap-1">
+                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("user-panel.account-setup.Setting Up Your Account") }}</h3>
+                <p class="text-xs opacity-75 text-center max-w-sm">
+                    {{ $t("user-panel.account-setup.please answer a few questions so that we can set up your account to fit you best") }}
+                </p>
+            </div>
             <ul class="flex items-center gap-2">
-                <li class="w-3 h-3 rounded-full bg-violet"></li>
+                <li class="w-2.5 h-2.5 rounded-full bg-neutral-500"></li>
                 <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>
-                <li class="w-3 h-3 rounded-full bg-neutral-500"></li>
+                <li class="w-2.5 h-2.5 rounded-full bg-violet"></li>
                 <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>
-                <li class="w-3 h-3 rounded-full bg-neutral-500"></li>
+                <li class="w-2.5 h-2.5 rounded-full bg-neutral-500"></li>
             </ul>
             <hr class="w-full border-0 h-0.5 gradient" />
             <h4 class="text-lg">{{ $t("user-panel.account-setup.How are you planning to use Menuriom?") }}</h4>
@@ -23,8 +25,10 @@
                             <img class="w-6" src="~/assets/images/panel-icons/store.png" alt="" />
                         </div>
                         <div class="flex flex-col gap-1 flex-grow">
-                            <h4 class="font-bold whitespace-nowrap text-ellipsis">For my store or restaurant</h4>
-                            <p class="text-xs">This is for users who want to create and manage their restaurant menus and orders</p>
+                            <h4 class="font-bold whitespace-nowrap text-ellipsis">{{ $t("user-panel.account-setup.For my store or restaurant") }}</h4>
+                            <p class="text-xs">
+                                {{ $t("user-panel.account-setup.This is for users who want to create and manage their restaurant menus and orders") }}
+                            </p>
                         </div>
                     </li>
                 </div>
@@ -34,13 +38,15 @@
                             <img class="w-6" src="~/assets/images/panel-icons/user-group.png" alt="" />
                         </div>
                         <div class="flex flex-col gap-1 flex-grow">
-                            <h4 class="font-bold whitespace-nowrap text-ellipsis">I'm part of a staff or team</h4>
-                            <p class="text-xs">This is for users who are part of a restaurant and want to join as a staff member</p>
+                            <h4 class="font-bold whitespace-nowrap text-ellipsis">{{ $t("user-panel.account-setup.Im part of a staff or team") }}</h4>
+                            <p class="text-xs">
+                                {{ $t("user-panel.account-setup.This is for users who are part of a restaurant and want to join as a staff member") }}
+                            </p>
                         </div>
                     </li>
                 </div>
             </ul>
-            <hr class="w-full opacity-25" />
+            <hr class="w-3/4 opacity-50" />
         </div>
     </Dialog>
 </template>

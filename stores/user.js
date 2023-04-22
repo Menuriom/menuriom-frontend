@@ -10,6 +10,7 @@ export const useUserStore = defineStore("user", () => {
     const email = ref("");
     const mobile = ref("");
     const brands = reactive({
+        list: {},
         // id: { name: "", role: "", permissions: "" },
     });
 
@@ -22,7 +23,11 @@ export const useUserStore = defineStore("user", () => {
         family.value = "";
         email.value = "";
         mobile.value = "";
-        brands = {};
+        brands.list = {};
+    };
+
+    const injectNewBrand = (brand) => {
+        brands.list = { ...brands.list, ...brand };
     };
 
     const getUserInfo = async () => {
@@ -88,6 +93,7 @@ export const useUserStore = defineStore("user", () => {
         isIntervalSet,
         loading,
         resetUserInfo,
+        injectNewBrand,
         getUserInfo,
         refreshToken,
         setRefreshInterval,

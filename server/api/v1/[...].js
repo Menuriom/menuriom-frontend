@@ -4,7 +4,7 @@ import { checkCsrf } from "../../csrf";
 export default defineEventHandler(async (event) => {
     const { req, res } = event.node;
 
-    const lang = getCookie(event, "lang") || "fa";
+    const lang = getCookie(event, "i18n_redirected") || "fa";
 
     let resStatus = 499;
     let resData = {};

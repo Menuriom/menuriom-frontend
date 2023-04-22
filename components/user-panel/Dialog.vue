@@ -4,6 +4,7 @@
 }
 .dialog > .box {
     min-width: 22rem;
+    max-height: 100%;
     z-index: 2;
 }
 </style>
