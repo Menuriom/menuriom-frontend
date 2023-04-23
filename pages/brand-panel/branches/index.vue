@@ -2,12 +2,11 @@
 
 <template>
     <div class="flex flex-col gap-4 w-full h-96">
-        user's panel
-        <!-- TODO : user must verify phone number (if possible) then create menu and use the system -->
+        branches
     </div>
 </template>
 
 <script setup>
 useHead({ title: `Dashboard - Your Menuriom Panel` });
-// definePageMeta({ layout: "brand-panel" });
+definePageMeta({ layout: "brand-panel" });
 </script>

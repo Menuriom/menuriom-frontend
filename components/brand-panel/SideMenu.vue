@@ -30,7 +30,7 @@ nav::-webkit-scrollbar {
 .link:hover {
     background-color: theme("colors.neutral.700");
 }
-.link.router-link-active {
+.link.router-link-exact-active {
     background-color: theme("colors.neutral.600");
 }
 .link.toggler_active {
@@ -73,15 +73,15 @@ nav::-webkit-scrollbar {
         <div class="flex flex-col gap-4 h-full p-4 bg-pencil-tip text-white rounded-lg">
             <!-- TODO : make skeluton fallback for when user data is loading and dont show if no brand available -->
             <div
-                class="flex items-center gap-2 hover:px-2 py-2 rounded-lg hover:bg-neutral-600 cursor-pointer transition-all group"
+                class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin cursor-pointer transition-all group"
                 @click="openBrandSwitcher()"
                 v-if="panelStore.selectedBrandId !== ''"
             >
-                <img class="w-16 h-16 object-contain flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
-                <img class="w-16 h-16 object-contain flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
-                <div class="flex flex-col gap-1 w-full">
+                <img class="w-16 h-16 object-contain rounded-full bg-zinc-800 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
+                <img class="w-16 h-16 object-contain rounded-full bg-zinc-800 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                <div class="flex flex-col w-full">
                     <h4 class="font-semibold text-lg">{{ brand.name }}</h4>
-                    <span class="flex items-center justify-center w-max p-0.5 px-1 text-xs rounded-md bg-violet">{{ brand.role }}</span>
+                    <span class="text-xs rounded-md text-purple-300">{{ brand.role }}</span>
                 </div>
                 <Icon class="w-3 h-3 bg-white group-hover:-rotate-90 transition-all flex-shrink-0" name="arrow.svg" folder="icons" size="12px" />
             </div>
@@ -100,6 +100,8 @@ nav::-webkit-scrollbar {
                     <span class="text-sm">{{ $t("brand-panel.side-menu.Ordering App") }}</span>
                 </nuxt-link>
             </div>
+
+            <hr class="w-full opacity-40" />
 
             <nav class="flex flex-col items-center gap-2 w-full max-h-full overflow-y-auto overflow-x-hidden flex-grow text-sm" ref="nav">
                 <ul class="flex flex-col gap-2 w-full">
@@ -239,7 +241,9 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const brand = ref(userStore.brands.list[panelStore.selectedBrandId] || "");
+const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || "");
+
+// TODO : set limitation on side menu and header base on brand-panel permission of selected brand
 
 // toggle sub menus open and close state
 const openSubMenus = reactive([]);

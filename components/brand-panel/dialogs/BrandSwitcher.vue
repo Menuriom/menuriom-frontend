@@ -5,25 +5,26 @@
         <div class="flex flex-col gap-3">
             <hr class="w-full border-0 h-0.5 gradient" />
             <ul class="flex flex-col gap-3 w-full">
-                <div class="cursor-pointer rounded-xl" v-for="(brand, i) in brands.list" :key="i" :class="{ 'gradient-re p-1': brand.selected }">
+                <div
+                    class="cursor-pointer rounded-xl"
+                    v-for="(brand, i) in brands.list"
+                    :key="i"
+                    :class="{ 'gradient-re p-1': i == panelStore.selectedBrandId }"
+                >
                     <li
-                        class="flex gap-2 w-full rounded-lg bg-white hover:bg-zinc-100 text-pencil-tip"
-                        :class="[brand.selected ? 'p-2' : 'p-3']"
+                        class="flex items-center gap-2 w-full rounded-lg bg-white hover:bg-zinc-100 text-pencil-tip"
+                        :class="[i == panelStore.selectedBrandId ? 'p-2' : 'p-3']"
                         @click="selectBrand(i)"
                     >
-                        <img class="w-12 flex-shrink-0" src="~/assets/images/fake-logo2.svg" alt="" />
-                        <div class="flex flex-col gap-1 flex-grow">
+                        <img class="w-12 h-12 rounded-full object-contain bg-zinc-200 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
+                        <img class="w-12 h-12 rounded-full object-contain bg-zinc-200 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                        <div class="flex flex-col flex-grow">
                             <h4 class="font-bold whitespace-nowrap text-ellipsis">{{ brand.name }}</h4>
-                            <small
-                                class="w-max text-xs p-0.5 px-2 rounded-md opacity-80"
-                                :class="[brand.role == 'Owner' ? 'gradient text-black' : 'bg-violet text-white']"
-                            >
-                                {{ brand.role }}
-                            </small>
+                            <small class="text-xs text-purple-700"> {{ brand.role }} </small>
                         </div>
                         <span
                             class="flex items-center justify-center w-4 h-4 border-2 border-baby-blue rounded-full flex-shrink-0"
-                            :class="{ 'bg-baby-blue': brand.selected }"
+                            :class="{ 'bg-baby-blue': i == panelStore.selectedBrandId }"
                         >
                             <Icon class="w-4 h-4 bg-white" name="Check.svg" folder="icons/basil" size="16px" />
                         </span>
@@ -46,20 +47,23 @@
 <script setup>
 import Dialog from "~/components/brand-panel/Dialog.vue";
 import { usePanelStore } from "@/stores/panel";
+import { useUserStore } from "@/stores/user";
+import { storeToRefs } from "pinia";
 
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
-
-const brands = reactive({
-    list: [
-        { logo: "", name: "Your Brand Name", role: "Owner", selected: true },
-        { logo: "", name: "Your Brand Name", role: "Waiter", selected: false },
-        { logo: "", name: "Your Brand Name", role: "Manager", selected: false },
-    ],
-});
+const userStore = useUserStore();
+const { brands } = storeToRefs(userStore);
 
 const selectBrand = (index) => {
-    brands.list.forEach((brand) => (brand.selected = false));
-    brands.list[index].selected = true;
+    panelStore.setSelectedBrand(index);
+    panelStore.closePopUp();
+    // brands.value.list[index]
 };
+
+// TODO : only staff members should be able to open the ordering app
+// and staff members are limited:
+// basic -> 1 branch -> 5 staff member per branch
+// standard -> 3 branch -> 10 staff member per branch
+// pro -> 10 branch -> 15 staff member per branch
 </script>

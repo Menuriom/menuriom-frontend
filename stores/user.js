@@ -38,7 +38,7 @@ export const useUserStore = defineStore("user", () => {
         await axios
             .get(`/api/v1/user/info`, { timeout: 30 * 1000 })
             .then((response) => {
-                avatar.value = response.data.avatar;
+                avatar.value = response.data.avatar || "/avatar.svg";
                 name.value = response.data.name;
                 family.value = response.data.family;
                 email.value = response.data.email;
@@ -81,7 +81,9 @@ export const useUserStore = defineStore("user", () => {
         await axios
             .post(`/auth/logout`, null, { timeout: 30 * 1000 })
             .then(() => resetUserInfo())
-            .catch((e) => {})
+            .catch((e) => {
+                throw e;
+            })
             .finally(() => (loading.value = false));
     };
 

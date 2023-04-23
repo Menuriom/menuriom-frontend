@@ -16,8 +16,10 @@ export const usePanelStore = defineStore("panel", () => {
     const openPopUp = (title) => (popUpOpened.value = title);
     const closePopUp = () => (popUpOpened.value = "");
 
-    const setSelectedBrand = (id) => (selectedBrandId.value = id);
-    const saveSelectedBrand = () => localStorage.setItem("selectedBrandId", selectedBrandId.value);
+    const setSelectedBrand = (id) => {
+        selectedBrandId.value = id;
+        localStorage.setItem("selectedBrandId", selectedBrandId.value);
+    };
     const loadSelectedBrand = () => (selectedBrandId.value = localStorage.getItem("selectedBrandId") || "");
 
     return {
@@ -29,7 +31,6 @@ export const usePanelStore = defineStore("panel", () => {
         openPopUp,
         closePopUp,
         setSelectedBrand,
-        saveSelectedBrand,
         loadSelectedBrand,
     };
 });

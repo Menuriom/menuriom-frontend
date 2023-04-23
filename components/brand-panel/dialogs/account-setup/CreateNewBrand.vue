@@ -184,7 +184,6 @@ const createBrand = async () => {
 
             //  select new brand as current brand
             panelStore.setSelectedBrand(Object.keys(response.data.brand)[0]);
-            panelStore.saveSelectedBrand();
 
             stage.value = 2;
             setTimeout(() => (runConfetti.value = true), 100);
@@ -200,4 +199,6 @@ const createBrand = async () => {
         })
         .finally(() => (loading.value = false));
 };
+
+// TODO : max brand count that user can create/own is 3 (hard coded)
 </script>

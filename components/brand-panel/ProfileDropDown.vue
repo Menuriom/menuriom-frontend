@@ -18,14 +18,14 @@ li:hover .icon {
 <template>
     <div class="relative" ref="dropdown">
         <div class="flex items-center gap-1 cursor-pointer" @click="toggleDropdown()">
-            <img class="w-8" :src="`/avatar.svg`" alt="" />
+            <img class="w-9 h-9 rounded-md object-contain bg-zinc-600" :src="userStore.avatar" alt="" />
         </div>
         <transition name="slide-up" mode="out-in" appear>
             <ul class="absolute top-10 -end-10 md:-end-4 flex flex-col gap-1 w-max p-2 bg-dolphin text-white shadow-md rounded-xl" v-if="open">
                 <li class="flex flex-col w-full p-2">
                     <!-- TODO : make skeleton fallback for when users data is loading -->
                     <h3 class="text-sm font-bold capitalize">{{ `${userStore.name} ${userStore.family}` }}</h3>
-                    <small class="text-xs opacity-75">{{userStore.email || userStore.mobile}}</small>
+                    <small class="text-xs opacity-75">{{ userStore.email || userStore.mobile }}</small>
                 </li>
                 <hr class="w-11/12 mx-auto opacity-25" />
                 <nuxt-link :to="localePath('/brand-panel/profile')">
@@ -41,12 +41,12 @@ li:hover .icon {
                     </li>
                 </nuxt-link>
                 <hr class="w-11/12 mx-auto opacity-25" />
-                <nuxt-link :to="localePath('/brand-panel/brands')">
+                <button @click="panelStore.openPopUp('create-new-brand')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
                         <small>{{ $t("brand-panel.profile.Create New Brand") }}</small>
                     </li>
-                </nuxt-link>
+                </button>
                 <nuxt-link :to="localePath('/brand-panel/billing/change-plan')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="arrow-up-big-small.svg" folder="icons/light" size="20px" />
@@ -74,9 +74,13 @@ li:hover .icon {
 
 <script setup>
 import { useUserStore } from "@/stores/user";
+import { usePanelStore } from "@/stores/panel";
 
 // const { locale } = useI18n();
+const localePath = useLocalePath();
+const router = useRouter();
 const userStore = useUserStore();
+const panelStore = usePanelStore();
 
 onMounted(() => {
     document.addEventListener("click", closeDropdown);
@@ -92,7 +96,13 @@ const closeDropdown = (event) => {
     if (dropdown.value && !dropdown.value.contains(event.target)) open.value = false;
 };
 
-const logout = () => {
+const logout = async () => {
+    await userStore
+        .logout()
+        .then(() => {
+            router.push(localePath("/"));
+        })
+        .catch((e) => {});
     // TODO : ...
 };
 </script>

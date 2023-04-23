@@ -1,7 +1,9 @@
 <style scoped></style>
 
 <template>
-    <NuxtPage key="user" page-key="brand-panel" />
+    <div>
+        <NuxtPage key="brand" page-key="brand-panel" ></NuxtPage>
+    </div>
 </template>
 
 <script setup>
