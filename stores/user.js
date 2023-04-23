@@ -10,8 +10,9 @@ export const useUserStore = defineStore("user", () => {
     const email = ref("");
     const mobile = ref("");
     const brands = reactive({
-        list: {},
-        // id: { name: "", role: "", permissions: "" },
+        list: {
+            // id: {logo:"", name: "", role: "", permissions: ""},
+        },
     });
 
     const isIntervalSet = ref(false);
@@ -42,6 +43,7 @@ export const useUserStore = defineStore("user", () => {
                 family.value = response.data.family;
                 email.value = response.data.email;
                 mobile.value = response.data.mobile;
+                brands.list = response.data.brands;
             })
             .catch((e) => {
                 throw e;

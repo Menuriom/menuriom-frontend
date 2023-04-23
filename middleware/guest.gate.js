@@ -29,6 +29,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
                 user.family.value = response.data.family;
                 user.email.value = response.data.email;
                 user.mobile.value = response.data.mobile;
+                user.brands.value.list = response.data.brands;
                 return true;
             })
             .catch((e) => false);

@@ -75,11 +75,13 @@ nav::-webkit-scrollbar {
             <div
                 class="flex items-center gap-2 hover:px-2 py-2 rounded-lg hover:bg-neutral-600 cursor-pointer transition-all group"
                 @click="openBrandSwitcher()"
+                v-if="panelStore.selectedBrandId !== ''"
             >
-                <img class="w-16 h-16 object-contain flex-shrink-0" src="~/assets/images/fake-logo2.svg" alt="" />
+                <img class="w-16 h-16 object-contain flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
+                <img class="w-16 h-16 object-contain flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                 <div class="flex flex-col gap-1 w-full">
-                    <h4 class="font-semibold text-lg">Brand Name</h4>
-                    <span class="flex items-center justify-center w-max p-0.5 px-1 text-xs rounded-md bg-violet">Owner</span>
+                    <h4 class="font-semibold text-lg">{{ brand.name }}</h4>
+                    <span class="flex items-center justify-center w-max p-0.5 px-1 text-xs rounded-md bg-violet">{{ brand.role }}</span>
                 </div>
                 <Icon class="w-3 h-3 bg-white group-hover:-rotate-90 transition-all flex-shrink-0" name="arrow.svg" folder="icons" size="12px" />
             </div>
@@ -230,10 +232,14 @@ nav::-webkit-scrollbar {
 <script setup>
 import BrandSwitcher from "~/components/brand-panel/dialogs/BrandSwitcher.vue";
 import { usePanelStore } from "@/stores/panel";
+import { useUserStore } from "@/stores/user";
 
 // const { locale } = useI18n();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
+const userStore = useUserStore();
+
+const brand = ref(userStore.brands.list[panelStore.selectedBrandId] || "");
 
 // toggle sub menus open and close state
 const openSubMenus = reactive([]);

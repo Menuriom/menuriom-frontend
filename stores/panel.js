@@ -18,7 +18,7 @@ export const usePanelStore = defineStore("panel", () => {
 
     const setSelectedBrand = (id) => (selectedBrandId.value = id);
     const saveSelectedBrand = () => localStorage.setItem("selectedBrandId", selectedBrandId.value);
-    const loadSelectedBrand = () => localStorage.getItem("selectedBrandId");
+    const loadSelectedBrand = () => (selectedBrandId.value = localStorage.getItem("selectedBrandId") || "");
 
     return {
         sideMenuOpen,

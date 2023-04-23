@@ -168,7 +168,7 @@ export default {
             "Brand Details": "مشخصات برند",
             "Brand Name": "اسم برند",
             "Brand Slogan": "شعار برند",
-            "How many branches does your business have?": "کسب کار شما چند شعبه دارد؟",
+            "How many branches does your business have?": "کسب و کار شما چند شعبه دارد؟",
             Branch: "شعبه",
             "Your main branch info": "مشخصات شعبه اصلی",
             "Main Branch Address": "ادرس شعبه اصلی",

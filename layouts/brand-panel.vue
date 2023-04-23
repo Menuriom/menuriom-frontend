@@ -61,6 +61,8 @@ const user = storeToRefs(userStore);
 if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") panelStore.openPopUp("personal-info");
 else if (Object.keys(user.brands.value.list).length == 0) panelStore.openPopUp("select-account-type");
 
+if (process.client) panelStore.loadSelectedBrand();
+
 onMounted(async () => {
     // if (user.name.value === "" || user.family.value === "") await userStore.getUserInfo();
     await userStore.refreshToken().catch((e) => {});
