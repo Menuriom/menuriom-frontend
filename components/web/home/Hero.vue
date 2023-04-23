@@ -40,7 +40,7 @@
                     <Button class="" type="primary" linkTo="/authenticate" v-if="!user.email.value">
                         <span class="text-lg font-bold">Try It For Free</span>
                     </Button>
-                    <Button class="" type="primary" linkTo="/user-panel" v-else>
+                    <Button class="" type="primary" linkTo="/brand-panel" v-else>
                         <span class="text-lg font-bold">Head To Dashboard</span>
                     </Button>
                     OR

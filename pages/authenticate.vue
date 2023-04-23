@@ -284,7 +284,7 @@ const checkVerificationCode = async () => {
                 name.value = family.value = mobile.value = size.value = "";
             } else {
                 userStore.setRefreshInterval();
-                router.push(localePath("/user-panel"));
+                router.push(localePath("/brand-panel"));
             }
         })
         .catch((e) => {
@@ -322,7 +322,7 @@ const completeSignup = async () => {
         })
         .then((response) => {
             userStore.setRefreshInterval();
-            router.push(localePath("/user-panel"));
+            router.push(localePath("/brand-panel"));
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {

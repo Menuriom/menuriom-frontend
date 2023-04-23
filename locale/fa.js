@@ -106,7 +106,10 @@ export default {
         "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
     },
 
-    "user-panel": {
+    "brand-panel": {
+        Congratulations: "تبریک",
+        Ok: "خُب",
+
         profile: {
             "Your Profile": "حساب کاربری",
             "Staff Invites": "درخواست های همکاری",
@@ -154,8 +157,11 @@ export default {
             "This is for users who are part of a restaurant and want to join as a staff member":
                 "برای کاربرانی که میخواهند به عنوان خدمه عضو تیم رستوران ای شوند",
 
-            "Create Your Brand": "برند خود را بسازید",
+            "Create Your Brand": "برند خودتو بساز",
             "Start by setting up your brand info": "مشخصات برند خود را وارد کنید",
+
+            "You have setup your brand and created your first branch": "شما برند و شعبه اصلی خود را ایجاد کردید",
+            newBrandDirection: "حالا میتونی منو رستوران خودتو بسازی یا شعبه های دیگه ای اضافه کنی و کارکنان خودتو به لیست خدمه اضافه کنی",
         },
 
         brands: {

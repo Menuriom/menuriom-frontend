@@ -137,7 +137,7 @@ nav {
                     </nuxt-link>
                     <nuxt-link
                         class="link 2sm:hidden p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                        :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/user-panel`)"
+                        :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/brand-panel`)"
                         :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
                     >
                         <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
@@ -159,7 +159,7 @@ nav {
             </nuxt-link>
             <nuxt-link
                 class="link hidden 2sm:flex text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/user-panel`)"
+                :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/brand-panel`)"
                 :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
             >
                 <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>

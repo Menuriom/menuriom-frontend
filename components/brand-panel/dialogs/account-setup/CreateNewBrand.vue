@@ -2,11 +2,11 @@
 
 <template>
     <Dialog name="create-new-brand" :closeable="false">
-        <div class="flex flex-col items-center gap-4 w-screen max-w-md">
+        <div class="flex flex-col items-center gap-4 w-screen max-w-md" v-if="stage == 1">
             <div class="flex flex-col gap-1">
-                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("user-panel.account-setup.Create Your Brand") }}</h3>
+                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("brand-panel.account-setup.Create Your Brand") }}</h3>
                 <p class="text-xs opacity-75 text-center max-w-sm">
-                    {{ $t("user-panel.account-setup.Start by setting up your brand info") }}
+                    {{ $t("brand-panel.account-setup.Start by setting up your brand info") }}
                 </p>
             </div>
             <ul class="flex items-center gap-2">
@@ -20,7 +20,7 @@
             <form class="flex flex-col gap-4 w-full" @submit.prevent="createBrand()">
                 <h4 class="flex items-center gap-2">
                     <img class="w-5" src="~/assets/images/panel-icons/fork-knife.png" />
-                    {{ $t("user-panel.brands.Brand Details") }}
+                    {{ $t("brand-panel.brands.Brand Details") }}
                 </h4>
                 <div class="flex items-center gap-4">
                     <div
@@ -45,14 +45,14 @@
                             class="w-full flex-grow"
                             :required="true"
                             type="text"
-                            :placeholder="$t('user-panel.brands.Brand Name')"
+                            :placeholder="$t('brand-panel.brands.Brand Name')"
                             v-model="name"
                             :error="errorField == 'name' ? responseMessage : ''"
                         />
                         <Input
                             class="w-full flex-grow"
                             type="text"
-                            :placeholder="$t('user-panel.brands.Brand Slogan')"
+                            :placeholder="$t('brand-panel.brands.Brand Slogan')"
                             v-model="slogan"
                             :error="errorField == 'slogan' ? responseMessage : ''"
                         />
@@ -61,23 +61,23 @@
                 <hr class="w-full opacity-25" />
                 <h4 class="flex items-center gap-2">
                     <img class="w-5" src="~/assets/images/panel-icons/store.png" />
-                    {{ $t("user-panel.brands.How many branches does your business have?") }}
+                    {{ $t("brand-panel.brands.How many branches does your business have?") }}
                 </h4>
-                <RangeSlider v-model="branchSize" :placeholder="$t('user-panel.brands.Branch')" :min="1" :max="20" />
+                <RangeSlider v-model="branchSize" :placeholder="$t('brand-panel.brands.Branch')" :min="1" :max="20" />
                 <hr class="w-full opacity-25" />
                 <h4 class="flex items-center gap-2">
                     <img class="w-5" src="~/assets/images/panel-icons/newspaper.png" />
-                    {{ $t("user-panel.brands.Your main branch info") }}
+                    {{ $t("brand-panel.brands.Your main branch info") }}
                 </h4>
                 <Input
                     type="text"
-                    :placeholder="$t('user-panel.brands.Main Branch Address')"
+                    :placeholder="$t('brand-panel.brands.Main Branch Address')"
                     v-model="address"
                     :error="errorField == 'address' ? responseMessage : ''"
                 />
                 <Input
                     type="text"
-                    :placeholder="$t('user-panel.brands.Main Branch Telephone Number')"
+                    :placeholder="$t('brand-panel.brands.Main Branch Telephone Number')"
                     mask="0##-########"
                     v-model="tel"
                     :error="errorField == 'tel' ? responseMessage : ''"
@@ -103,11 +103,24 @@
                 </div>
             </form>
         </div>
+        <div class="relative flex flex-col items-center gap-4 w-screen max-w-md text-center" v-else-if="stage == 2">
+            <div class="flex flex-col gap-1">
+                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("brand-panel.account-setup.Create Your Brand") }}</h3>
+            </div>
+            <hr class="w-full border-0 h-0.5 gradient" />
+            <Confetti class="w-full h-full" :run="runConfetti" @update:run="runConfetti = $event" />
+            <h4 class="text-2xl text-baby-blue text-center font-bold max-w-sm">{{ $t("brand-panel.Congratulations") }}</h4>
+            <img class="down-pop w-52 object-contain" src="~/assets/images/store-door.webp" />
+            <p class="w-full max-w-xs">{{ $t("brand-panel.account-setup.You have setup your brand and created your first branch") }}!</p>
+            <p class="text-sm opacity-75">{{ $t("brand-panel.account-setup.newBrandDirection") }}</p>
+            <hr class="w-full opacity-25" />
+            <button class="btn w-full p-3 rounded bg-violet" @click="panelStore.closePopUp()">{{ $t("brand-panel.Ok") }}</button>
+        </div>
     </Dialog>
 </template>
 
 <script setup>
-import Dialog from "~/components/user-panel/Dialog.vue";
+import Dialog from "~/components/brand-panel/Dialog.vue";
 import Input from "~/components/form/Input.vue";
 import RangeSlider from "~/components/form/RangeSlider.vue";
 import Loading from "~/components/Loading.vue";
@@ -119,6 +132,8 @@ const { localeProperties, t } = useI18n();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
+const stage = ref(1);
+const runConfetti = ref(false);
 const loading = ref(false);
 const errorField = ref("");
 const responseMessage = ref("");
@@ -149,7 +164,7 @@ const createBrand = async () => {
     const data = new FormData();
     if (logo.value.files[0]) {
         if (logo.value.files[0].size > 1_048_576) {
-            responseMessage.value = t("user-panel.brands.Images must be less than 1MB");
+            responseMessage.value = t("brand-panel.brands.Images must be less than 1MB");
             loading.value = false;
             return;
         }
@@ -171,11 +186,8 @@ const createBrand = async () => {
             panelStore.setSelectedBrand(Object.keys(response.data.brand)[0]);
             panelStore.saveSelectedBrand();
 
-            panelStore.closePopUp();
-            // TODO
-            // show another pop-up to let user know that brand is created
-            // this pop-up must be a general one and must be customizable for diffrent things
-            // try to add the convetie party thingy animation too
+            stage.value = 2;
+            setTimeout(() => (runConfetti.value = true), 100);
         })
         .catch((e) => {
             // TODO : make list of errors and show all errors in the form at once
@@ -185,7 +197,6 @@ const createBrand = async () => {
                     errorField.value = e.response.data.errors[0].property;
                 }
             }
-            console.log({ e });
         })
         .finally(() => (loading.value = false));
 };

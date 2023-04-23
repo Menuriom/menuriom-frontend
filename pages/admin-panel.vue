@@ -6,5 +6,5 @@
 
 <script setup>
 useHead({ title: `Menuriom Admin Panel` });
-definePageMeta({ layout: "admin", middleware: ["admin-panel-gate"] });
+definePageMeta({ layout: "admin-panel", middleware: ["admin-panel-gate"] });
 </script>

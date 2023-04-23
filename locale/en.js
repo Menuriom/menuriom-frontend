@@ -106,7 +106,10 @@ export default {
         "Overview of what is included in our different plans": "Overview of what is included in our different plans",
     },
 
-    "user-panel": {
+    "brand-panel": {
+        Congratulations: "Congratulations",
+        Ok: "Ok",
+
         profile: {
             "Your Profile": "Your Profile",
             "Staff Invites": "Staff Invites",
@@ -156,6 +159,9 @@ export default {
 
             "Create Your Brand": "Create Your Brand",
             "Start by setting up your brand info": "Start by setting up your brand info",
+
+            "You have setup your brand and created your first branch": "You have setup your brand and created your first branch",
+            newBrandDirection: "Now you can start by setting up your menu or add your other branches and invite some staff members to join your team",
         },
 
         brands: {

@@ -94,11 +94,11 @@ body {
 /* ===================================================================== */
 
 .down-pop {
-    animation: down-pop 1s ease-out infinite;
+    animation: down-pop 5s ease-out infinite;
 }
 @keyframes down-pop {
     0% { transform: translateY(0); }
-    50% { transform: translateY(15%); }
+    50% { transform: translateY(5%); }
     100% { transform: translateY(0); }
 }
 

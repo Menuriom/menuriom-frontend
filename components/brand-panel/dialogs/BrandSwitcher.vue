@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <Dialog name="brand-switcher" :title="$t('user-panel.side-menu.Switch Brand')" :desc="$t('user-panel.side-menu.Switch between your restaurant brands')">
+    <Dialog name="brand-switcher" :title="$t('brand-panel.side-menu.Switch Brand')" :desc="$t('brand-panel.side-menu.Switch between your restaurant brands')">
         <div class="flex flex-col gap-3">
             <hr class="w-full border-0 h-0.5 gradient" />
             <ul class="flex flex-col gap-3 w-full">
@@ -33,18 +33,18 @@
             <hr class="w-full opacity-40" />
             <nuxt-link
                 class="btn flex items-center justify-center gap-2 p-2.5 rounded-lg text-sm border-2 border-white"
-                :to="localePath('/user-panel/brands')"
+                :to="localePath('/brand-panel/brands')"
                 @click="panelStore.closePopUp()"
             >
                 <Icon class="w-4 h-4 bg-white" name="cog.svg" folder="icons" size="16px" />
-                {{ $t("user-panel.side-menu.Go To Brand Manager") }}
+                {{ $t("brand-panel.side-menu.Go To Brand Manager") }}
             </nuxt-link>
         </div>
     </Dialog>
 </template>
 
 <script setup>
-import Dialog from "~/components/user-panel/Dialog.vue";
+import Dialog from "~/components/brand-panel/Dialog.vue";
 import { usePanelStore } from "@/stores/panel";
 
 const localePath = useLocalePath();

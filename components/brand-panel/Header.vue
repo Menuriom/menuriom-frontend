@@ -44,8 +44,8 @@ header {
 
 <script setup>
 import LangSwitch from "~/components/LangSwitch.vue";
-import NotifDropDown from "~/components/user-panel/NotifDropDown.vue";
-import ProfileDropDown from "~/components/user-panel/ProfileDropDown.vue";
+import NotifDropDown from "~/components/brand-panel/NotifDropDown.vue";
+import ProfileDropDown from "~/components/brand-panel/ProfileDropDown.vue";
 import { usePanelStore } from "@/stores/panel";
 
 const { locale } = useI18n();

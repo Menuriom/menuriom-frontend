@@ -10,5 +10,5 @@
 
 <script setup>
 useHead({ title: `Dashboard - Your Menuriom Panel` });
-definePageMeta({ layout: "user" });
+definePageMeta({ layout: "brand-panel" });
 </script>

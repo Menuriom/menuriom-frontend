@@ -37,12 +37,12 @@ main {
 </template>
 
 <script setup>
-import Header from "~/components/user-panel/Header.vue";
-import SideMenu from "~/components/user-panel/SideMenu.vue";
-import PersonalInfo from "~/components/user-panel/dialogs/account-setup/PersonalInfo.vue";
-import SelectAccountType from "~/components/user-panel/dialogs/account-setup/SelectAccountType.vue";
-import CreateNewBrand from "~/components/user-panel/dialogs/account-setup/CreateNewBrand.vue";
-import FindYourTeam from "~/components/user-panel/dialogs/account-setup/FindYourTeam.vue";
+import Header from "~/components/brand-panel/Header.vue";
+import SideMenu from "~/components/brand-panel/SideMenu.vue";
+import PersonalInfo from "~/components/brand-panel/dialogs/account-setup/PersonalInfo.vue";
+import SelectAccountType from "~/components/brand-panel/dialogs/account-setup/SelectAccountType.vue";
+import CreateNewBrand from "~/components/brand-panel/dialogs/account-setup/CreateNewBrand.vue";
+import FindYourTeam from "~/components/brand-panel/dialogs/account-setup/FindYourTeam.vue";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
 import { storeToRefs } from "pinia";
