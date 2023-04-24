@@ -77,11 +77,11 @@ nav::-webkit-scrollbar {
                 @click="openBrandSwitcher()"
                 v-if="panelStore.selectedBrandId !== ''"
             >
-                <img class="w-16 h-16 object-contain rounded-full bg-zinc-800 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
-                <img class="w-16 h-16 object-contain rounded-full bg-zinc-800 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
+                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                 <div class="flex flex-col w-full">
-                    <h4 class="font-semibold text-lg">{{ brand.name }}</h4>
-                    <span class="text-xs rounded-md text-purple-300">{{ brand.role }}</span>
+                    <h4 class="font-semibold whitespace-nowrap text-ellipsis overflow-hidden w-36">{{ brand.name }}</h4>
+                    <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-28 text-purple-300">{{ brand.role }}</span>
                 </div>
                 <Icon class="w-3 h-3 bg-white group-hover:-rotate-90 transition-all flex-shrink-0" name="arrow.svg" folder="icons" size="12px" />
             </div>

@@ -200,5 +200,6 @@ const createBrand = async () => {
         .finally(() => (loading.value = false));
 };
 
-// TODO : max brand count that user can create/own is 3 (hard coded)
+// TODO : max brand count that user can create/own is 1 (hard coded) and max that can be staff of is 3
+// TODO : every user should only be able to login with 2 sessions at max
 </script>

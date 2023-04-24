@@ -1,4 +1,6 @@
 export default {
+    Cancel: "Cancel",
+
     auth: {
         welcome: "Welcome to Menuriom",
         "Login or signup with your email": "Login or signup with your email",
@@ -174,6 +176,17 @@ export default {
             "Main Branch Address": "Main Branch Address",
             "Main Branch Telephone Number": "Main Branch Telephone Number",
             "Images must be less than 1MB": "Images must be less than 1MB",
+
+            "Manage Your Brands": "Manage Your Brands",
+            "New Brand": "New Brand",
+            "Create new brands, edit your brand details, or manage brands that you are staff of":
+                "Create new brands, edit your brand details, or manage brands that you are staff of",
+            "Edit Details": "Edit Details",
+            "Delete Brand": "Delete Brand",
+            "Leave This Brand": "Leave This Brand",
+            "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
+            deletingBrandDesc: "all your branches, menus, and staff members in this brand will be deleted and your plan subscription will be canceled",
+            "This action cannot be reversed": "This action cannot be reversed",
         },
     },
 };

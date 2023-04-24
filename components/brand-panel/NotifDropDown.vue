@@ -7,29 +7,36 @@
             <span class="gradient absolute top-1 start-0 w-2.5 h-2.5 rounded-full border-white"></span>
         </div>
         <transition name="slide-up" mode="out-in" appear>
-            <ul
-                class="absolute top-10 -end-10 md:-end-4 flex flex-col gap-1 w-screen max-w-screen-2xs p-2 bg-dolphin text-white shadow-md rounded-xl"
+            <div
+                class="absolute top-10 -end-10 md:-end-4 flex flex-col gap-2 w-screen max-w-screen-2xs p-2 bg-dolphin text-white shadow-md rounded-xl"
                 v-if="open"
             >
-                <nuxt-link :to="localePath('/brand-panel/')">
-                    <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
-                        <div class="flex items-center gap-2">
-                            <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
-                            <span class="text-sm">{{ $t("brand-panel.profile.Your Profile") }}</span>
-                        </div>
-                        <p class="text-xs opacity-75">some text</p>
-                    </li>
-                </nuxt-link>
-                <nuxt-link :to="localePath('/brand-panel/')">
-                    <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
-                        <div class="flex items-center gap-2">
-                            <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
-                            <span class="text-sm">{{ $t("brand-panel.profile.Your Profile") }}</span>
-                        </div>
-                        <p class="text-xs opacity-75">some text</p>
-                    </li>
-                </nuxt-link>
-            </ul>
+                <div class="flex items-center justify-between gap-2 w-full p-1 px-2">
+                    <h4 class="font-semibold">Notifications</h4>
+                    <button class="text-xs text-purple-300 hover:text-violet underline">Clear All</button>
+                </div>
+                <hr class="w-11/12 mx-auto opacity-40" />
+                <ul class="flex flex-col gap-1">
+                    <nuxt-link :to="localePath('/brand-panel/')">
+                        <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
+                            <div class="flex items-center gap-2">
+                                <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
+                                <span class="text-sm">{{ $t("brand-panel.profile.Your Profile") }}</span>
+                            </div>
+                            <p class="text-xs opacity-75">some text</p>
+                        </li>
+                    </nuxt-link>
+                    <nuxt-link :to="localePath('/brand-panel/')">
+                        <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
+                            <div class="flex items-center gap-2">
+                                <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
+                                <span class="text-sm">{{ $t("brand-panel.profile.Your Profile") }}</span>
+                            </div>
+                            <p class="text-xs opacity-75">some text</p>
+                        </li>
+                    </nuxt-link>
+                </ul>
+            </div>
         </transition>
     </div>
 </template>

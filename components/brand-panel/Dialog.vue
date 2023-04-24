@@ -14,7 +14,7 @@
 <template>
     <Transition name="fade" appear>
         <div class="dialog fixed inset-0 flex items-center justify-center p-4" :class="{ open: open }" v-if="open">
-            <div class="backdrop fixed inset-0 bg-neutral-500 bg-opacity-30" @click="close()"></div>
+            <div class="backdrop fixed inset-0 bg-neutral-500 bg-opacity-30 backdrop-grayscale" @click="close()"></div>
             <Transition name="slide-down" appear>
                 <div class="box flex flex-col gap-3 p-3 sm:p-6 rounded-xl shadow-2xl w-max max-w-lg bg-pencil-tip text-white" v-show="open">
                     <div class="flex flex-col w-full" v-if="title || closeable || desc">

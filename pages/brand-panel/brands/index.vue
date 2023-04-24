@@ -1,19 +1,156 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full h-96">
-        <header class="flex flex-col gap-2">
-            <div class="flex items-center gap-2">
-                <img class="w-8" src="~/assets/images/panel-icons/fork-knife.png" alt="" />
-                <h1 class="text-4xl font-bold">Brand Manager</h1>
+    <div class="flex flex-col gap-4 w-full">
+        <header class="flex items-center justify-between gap-2">
+            <div class="flex items-start gap-2">
+                <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
+                <div class="flex flex-col gap-2">
+                    <h1 class="text-4xl/none font-bold">{{ $t("brand-panel.brands.Manage Your Brands") }}</h1>
+                    <small class="text-sm">
+                        {{ $t("brand-panel.brands.Create new brands, edit your brand details, or manage brands that you are staff of") }}
+                    </small>
+                </div>
             </div>
-            <small class="text-sm">Create new brands, edit your brand details, or manage brands that you are staff of</small>
+            <nuxt-link
+                class="flex items-center justify-center gap-2 p-3 text-sm rounded-lg gradient text-white shadow-nr15 hover:scale-105 transition-all"
+                :to="localePath('/brand-panel/brands/new')"
+                v-if="canCreateNewBrand"
+            >
+                <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
+                {{ $t("brand-panel.brands.New Brand") }}
+            </nuxt-link>
         </header>
-        <hr class="w-full border-gray-300">
+        <hr class="w-full border-gray-300" />
+        <section class="flex flex-col w-full">
+            <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))">
+                <li
+                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white border group hover:shadow-nr5 transition-all overflow-hidden"
+                    v-for="(brand, id) in brands.list"
+                    :key="id"
+                >
+                    <SlideMenu class="z-10">
+                        <nuxt-link class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin" :to="localePath(`/brand-panel/brands/${id}`)">
+                            <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                            <small>{{ $t("brand-panel.brands.Edit Details") }}</small>
+                        </nuxt-link>
+                        <hr class="w-full opacity-40" />
+                        <button
+                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer"
+                            @click="openDeleteDialog(id)"
+                            v-if="brand.role == 'owner'"
+                        >
+                            <Icon class="w-4 h-4 bg-red-300" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                            <small>{{ $t("brand-panel.brands.Delete Brand") }}</small>
+                        </button>
+                        <button class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin cursor-pointer" v-else>
+                            <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                            <small>{{ $t("brand-panel.brands.Leave This Brand") }}</small>
+                        </button>
+                    </SlideMenu>
+                    <img class="w-24 h-24 rounded-full object-cover shadow-nr15 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
+                    <img class="w-24 h-24 rounded-full object-cover shadow-nr15 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                    <div class="flex flex-wrap items-center justify-between gap-2 w-full flex-grow">
+                        <h4 class="text-lg/none font-semibold flex-grow">{{ brand.name }}</h4>
+                        <small class="text-xs p-0.5 px-1 text-violet border border-violet rounded">{{ brand.role }}</small>
+                    </div>
+                    <hr class="w-full border-zinc-300" />
+                    <div class="flex items-center justify-between gap-4 w-full">
+                        <ul class="flex items-center">
+                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10">
+                                <img class="w-full h-full object-contain grayscale" src="/avatar.svg" alt="" />
+                            </li>
+                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10 -ms-3">
+                                <img class="w-full h-full object-contain grayscale" src="/avatar.svg" alt="" />
+                            </li>
+                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10 -ms-3">
+                                <img class="w-full h-full object-contain grayscale" src="/avatar.svg" alt="" />
+                            </li>
+                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10 -ms-3 z-2">
+                                <small>3+</small>
+                            </li>
+                        </ul>
+                        <div class="flex items-center gap-1" :title="$t('brand-panel.brands.Branch')">
+                            <Icon class="w-5 h-5 bg-black" name="house.svg" folder="icons/light" size="20px" />
+                            <h5 class="font-semibold">2</h5>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <Teleport to="body">
+            <Dialog name="delete-confirmation" :title="$t('brand-panel.brands.Delete Brand')">
+                <div class="flex flex-col gap-3">
+                    <img class="w-24 mx-auto" src="~/assets/images/delete3.webp" alt="Delete" />
+                    <h2 class="text-xl" v-html="$t('brand-panel.brands.You are about to delete this brand', { name: brands.list[brandIdToDelete].name })" />
+                    <p class="text-sm opacity-75">
+                        {{ $t("brand-panel.brands.deletingBrandDesc") }}
+                    </p>
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                        {{ $t("brand-panel.brands.This action cannot be reversed") }}
+                    </small>
+                    <hr class="w-full opacity-40" />
+                    <div class="flex items-center gap-2 w-full">
+                        <button class="btn w-full p-3 rounded bg-dolphin" :disabled="loading" @click="panelStore.closePopUp()">
+                            {{ $t("Cancel") }}
+                        </button>
+                        <button
+                            class="btn w-full p-3 rounded bg-red-500"
+                            :class="{ 'opacity-75 cursor-not-allowed': loading }"
+                            :disabled="loading"
+                            @click="deleteBrand()"
+                        >
+                            <span v-if="!loading"> {{ $t("brand-panel.brands.Delete Brand") }} </span>
+                            <Loading class="" v-else />
+                        </button>
+                    </div>
+                </div>
+            </Dialog>
+        </Teleport>
     </div>
 </template>
 
 <script setup>
-useHead({ title: `Dashboard - Your Menuriom Panel` });
+import Dialog from "~/components/brand-panel/Dialog.vue";
+import SlideMenu from "~/components/brand-panel/SlideMenu.vue";
+import { usePanelStore } from "@/stores/panel";
+import { useUserStore } from "@/stores/user";
+import { storeToRefs } from "pinia";
+
+useHead({ title: `Brand Managment - Your Menuriom Panel` });
 // definePageMeta({ layout: "brand-panel" });
+
+const localePath = useLocalePath();
+const panelStore = usePanelStore();
+const userStore = useUserStore();
+const { brands } = storeToRefs(userStore);
+
+// TODO : get the brand list from server
+
+const loading = ref(false);
+
+const canCreateNewBrand = computed(() => {
+    for (const key in brands.value.list) {
+        if (brands.value.list[key].role == "owner") return false;
+    }
+    return true;
+});
+
+// deleting ----------------------------------------
+const brandIdToDelete = ref(null);
+const openDeleteDialog = (id) => {
+    brandIdToDelete.value = id;
+    panelStore.openPopUp("delete-confirmation");
+};
+const deleteBrand = () => {
+    // TODO
+};
+// -------------------------------------------------
+
+// loading data -------------------------------------------------
+const loadBrands = () => {
+    // TODO
+};
+// -------------------------------------------------
 </script>

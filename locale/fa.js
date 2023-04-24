@@ -1,4 +1,6 @@
 export default {
+    Cancel: "لغو",
+
     auth: {
         welcome: "به منوریوم خوش اومدی",
         "Login or signup with your email": "از طریق ایمیل خود ثبت نام کنید یا وارد حساب کاری خود شوید",
@@ -174,6 +176,17 @@ export default {
             "Main Branch Address": "ادرس شعبه اصلی",
             "Main Branch Telephone Number": "تلفن تماس شعبه اصلی",
             "Images must be less than 1MB": "حجم عکس لوگو انتخابی باید کمتر از 1Mb باشد",
+
+            "Manage Your Brands": "مدیریت برند ها",
+            "New Brand": "ایجاد برند جدید",
+            "Create new brands, edit your brand details, or manage brands that you are staff of":
+                "برند جدید بسازید، مشخصات برند خودتون رو ویرایش کنید، یا برند هایی که عضوشون هستید رو مدیریت کنید",
+            "Edit Details": "ویرایش جزئیات",
+            "Delete Brand": "حذف برند",
+            "Leave This Brand": "ترک این برند",
+            "You are about to delete this brand": "شما در حال حذف برند <b>{name}</b> هستید",
+            deletingBrandDesc: "با پاک شدن برند؛ تمام شعبه ها، منوها و کارکنان خدمه که در این برند وجود دارند حذف خواهند شد و عضویت پلن شما نیز لغو میشود",
+            "This action cannot be reversed": "این عملیات برگشت ناپذیر است",
         },
     },
 };

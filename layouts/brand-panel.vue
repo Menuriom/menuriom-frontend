@@ -15,7 +15,11 @@ main {
 </style>
 
 <template>
-    <div class="flex flex-col items-center w-screen h-screen bg-neutral-50 overflow-clip" :class="{ 'blur-sm': panelStore.popUpOpened != '' }" id="app">
+    <div
+        class="flex flex-col items-center w-screen max-w-screen-4xl mx-auto h-screen bg-neutral-50 overflow-clip"
+        :class="{ 'blur-sm': panelStore.popUpOpened != '' }"
+        id="app"
+    >
         <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
             <NuxtLoadingIndicator />
             <Header />
@@ -60,7 +64,6 @@ const user = storeToRefs(userStore);
 
 if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") panelStore.openPopUp("personal-info");
 else if (Object.keys(user.brands.value.list).length == 0) panelStore.openPopUp("select-account-type");
-
 
 onMounted(async () => {
     panelStore.loadSelectedBrand();
