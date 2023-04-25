@@ -86,15 +86,16 @@
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
-                <div class="flex items-center gap-2 w-full">
-                    <button class="btn w-max p-4 rounded bg-dolphin" :disabled="loading" type="button" @click="back()">
-                        <Icon
+                <div class="flex gap-2 w-full">
+                    <button class="btn w-max px-6 text-xs rounded bg-dolphin flex-shrink-0" :disabled="loading" type="button" @click="close()">
+                        <!-- <Icon
                             class="w-3 h-3 py-2 bg-white"
                             :class="[localeProperties.dir == 'rtl' ? 'rotate-45' : '-rotate-[135deg]']"
                             name="arrow-angle.svg"
                             folder="icons"
                             size="12px"
-                        />
+                        /> -->
+                        {{ $t("Not Now") }}
                     </button>
                     <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
                         <span v-if="!loading"> {{ $t("auth.Continue") }} </span>
@@ -152,7 +153,7 @@ const selectLogoImage = () => {
     logoBlob.value = URL.createObjectURL(logo.value.files[0]);
 };
 
-const back = () => panelStore.openPopUp("select-account-type");
+const close = () => panelStore.closePopUp();
 
 const createBrand = async () => {
     if (loading.value) return;
@@ -191,10 +192,9 @@ const createBrand = async () => {
         .catch((e) => {
             // TODO : make list of errors and show all errors in the form at once
             if (typeof e.response !== "undefined" && e.response.data) {
-                if (typeof e.response.data.errors === "object") {
-                    responseMessage.value = e.response.data.errors[0].errors[0];
-                    errorField.value = e.response.data.errors[0].property;
-                }
+                const errors = e.response.data.errors || e.response.data.message;
+                responseMessage.value = errors[0].errors[0];
+                errorField.value = errors[0].property;
             }
         })
         .finally(() => (loading.value = false));

@@ -1,5 +1,6 @@
 export default {
     Cancel: "Cancel",
+    "Not Now": "Not Now",
     "Something went wrong!": "Something went wrong!",
 
     auth: {
@@ -182,6 +183,7 @@ export default {
             "New Brand": "New Brand",
             "Create new brands, edit your brand details, or manage brands that you are staff of":
                 "Create new brands, edit your brand details, or manage brands that you are staff of",
+            "Go To Dashboard": "Go To Dashboard",
             "Edit Details": "Edit Details",
             "Delete Brand": "Delete Brand",
             "Leave This Brand": "Leave This Brand",

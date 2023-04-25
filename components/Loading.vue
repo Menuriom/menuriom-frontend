@@ -6,7 +6,7 @@
     display: inline-block;
     position: relative;
     border: 3px solid;
-    border-color: #fff #fff transparent transparent;
+    border-color: #ddd #ddd transparent transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
 }
@@ -55,11 +55,13 @@
 </style>
 
 <template>
-    <div class="loader"></div>
+    <div class="flex items-center justify-center" :class="[size]">
+        <div class="loader"></div>
+    </div>
 </template>
 
 <script setup>
 defineProps({
-    size: { type: String, default: "40px" },
+    size: { type: String, default: "h-6" },
 });
 </script>

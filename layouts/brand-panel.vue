@@ -20,7 +20,7 @@ main {
 
 <template>
     <div
-        class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-50 overflow-clip"
+        class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-50 shadow-nr5 overflow-clip"
         :class="{ 'blur-sm': panelStore.popUpOpened != '' }"
         id="app"
     >
@@ -28,7 +28,7 @@ main {
             <NuxtLoadingIndicator />
             <Header />
             <div class="relative flex w-full h-0 p-2 flex-grow">
-                <SideMenu />
+                <SideMenu v-if="!dontShowMenu" />
                 <main class="relative p-4 py-2 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>
@@ -62,9 +62,16 @@ useHead({
     meta: [...localHead.value.meta],
 });
 
+const route = useRoute();
+const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 const user = storeToRefs(userStore);
+
+const dontShowMenu = computed(() => {
+    for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/brand-panel/:brandID")) return false;
+    return true;
+});
 
 if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") panelStore.openPopUp("personal-info");
 else if (Object.keys(user.brands.value.list).length == 0) panelStore.openPopUp("select-account-type");

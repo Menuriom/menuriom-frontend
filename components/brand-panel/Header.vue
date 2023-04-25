@@ -12,13 +12,20 @@ header {
 <template>
     <header class="flex items-center justify-between gap-3 rounded-lg mt-2 p-2 md:p-3 max-w-screen-4xl h-14 md:h-16 bg-pencil-tip shadow-nr15 z-20">
         <div class="flex items-center gap-3 flex-grow">
-            <button class="toggle flex items-center justify-center hover:bg-neutral-600 rounded-full transition-colors" @click="panelStore.toggleSideMenu()">
+            <button
+                class="toggle flex items-center justify-center hover:bg-neutral-600 rounded-full transition-colors"
+                @click="panelStore.toggleSideMenu()"
+                v-if="!dontShowToggle"
+            >
                 <div class="flex flex-col gap-1.5">
                     <span class="h-0.5 bg-white transition-all" :class="[panelStore.sideMenuOpen ? 'w-3' : 'w-6']"></span>
                     <span class="w-6 h-0.5 bg-white transition-all"></span>
                     <span class="h-0.5 bg-white transition-all" :class="[panelStore.sideMenuOpen ? 'w-4' : 'w-6']"></span>
                 </div>
             </button>
+            <nuxt-link class="flex items-center justify-center p-1 rounded-md gradient" :to="localePath('/')" v-else>
+                <img class="relative h-7 md:h-9" src="/logo.svg" title="Menuriom" alt="Menuriom" />
+            </nuxt-link>
 
             <nuxt-link class="flex items-center justify-center h-7 md:h-9 overflow-hidden group" :to="localePath('/')">
                 <img class="h-6 md:h-8" src="/logo-text-white.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
@@ -48,7 +55,13 @@ import NotifDropDown from "~/components/brand-panel/NotifDropDown.vue";
 import ProfileDropDown from "~/components/brand-panel/ProfileDropDown.vue";
 import { usePanelStore } from "@/stores/panel";
 
+const route = useRoute();
 const { locale } = useI18n();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
+
+const dontShowToggle = computed(() => {
+    for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/brand-panel/:brandID")) return false;
+    return true;
+});
 </script>

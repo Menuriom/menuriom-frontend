@@ -1,5 +1,6 @@
 export default {
     Cancel: "لغو",
+    "Not Now": "حالا نه",
     "Something went wrong!": "مشکلی رخ داده",
 
     auth: {
@@ -182,6 +183,7 @@ export default {
             "New Brand": "ایجاد برند جدید",
             "Create new brands, edit your brand details, or manage brands that you are staff of":
                 "برند جدید بسازید، مشخصات برند خودتون رو ویرایش کنید، یا برند هایی که عضوشون هستید رو مدیریت کنید",
+            "Go To Dashboard": "برو به داشبورد",
             "Edit Details": "ویرایش جزئیات",
             "Delete Brand": "حذف برند",
             "Leave This Brand": "ترک این برند",

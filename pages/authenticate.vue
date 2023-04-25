@@ -257,10 +257,9 @@ const sendVerificationCode = async () => {
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
-                if (typeof e.response.data.errors === "object") {
-                    responseMessage.value = e.response.data.errors[0].errors[0];
-                    errorField.value = e.response.data.errors[0].property;
-                }
+                const errors = e.response.data.errors || e.response.data.message;
+                responseMessage.value = errors[0].errors[0];
+                errorField.value = errors[0].property;
             }
         })
         .finally(() => (loading.value = false));
@@ -289,12 +288,11 @@ const checkVerificationCode = async () => {
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
-                if (typeof e.response.data.errors === "object") {
-                    responseMessage.value = e.response.data.errors[0].errors[0];
-                    errorField.value = e.response.data.errors[0].property;
-                    // TODO
-                    // if the property is "" then make a global error either on top of the continue button or as a toast message
-                }
+                const errors = e.response.data.errors || e.response.data.message;
+                responseMessage.value = errors[0].errors[0];
+                errorField.value = errors[0].property;
+                // TODO
+                // if the property is "" then make a global error either on top of the continue button or as a toast message
             }
         })
         .finally(() => (loading.value = false));
@@ -326,10 +324,9 @@ const completeSignup = async () => {
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
-                if (typeof e.response.data.errors === "object") {
-                    responseMessage.value = e.response.data.errors[0].errors[0];
-                    errorField.value = e.response.data.errors[0].property;
-                }
+                const errors = e.response.data.errors || e.response.data.message;
+                responseMessage.value = errors[0].errors[0];
+                errorField.value = errors[0].property;
             }
         })
         .finally(() => (loading.value = false));

@@ -19,6 +19,9 @@
             <hr class="w-full border-0 h-0.5 gradient" />
             <h4 class="text-lg">{{ $t("brand-panel.account-setup.How are you planning to use Menuriom?") }}</h4>
             <hr class="w-full opacity-25" />
+            <button class="btn w-max px-6 text-xs rounded bg-dolphin flex-shrink-0" :disabled="loading" type="button" @click="close()">
+                {{ $t("Not Now") }}
+            </button>
         </div>
     </Dialog>
 </template>
@@ -28,6 +31,10 @@ import Dialog from "~/components/brand-panel/Dialog.vue";
 import { usePanelStore } from "@/stores/panel";
 
 const panelStore = usePanelStore();
+
+const loading = ref(false);
+
+const close = () => panelStore.closePopUp();
 
 // TODO
 </script>
