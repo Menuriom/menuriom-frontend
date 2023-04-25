@@ -2,7 +2,8 @@
 
 <template>
     <div>
-        <NuxtPage key="brand" page-key="brand-panel" ></NuxtPage>
+        <NuxtPage />
+        <!-- <NuxtPage key="brand" page-key="brand-panel"></NuxtPage> -->
     </div>
 </template>
 

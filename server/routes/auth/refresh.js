@@ -4,6 +4,8 @@ import { setCookie, deleteCookie } from "h3";
 export default defineEventHandler(async (event) => {
     const { req, res } = event.node;
 
+    const lang = getCookie(event, "i18n_redirected") || "fa";
+
     let resStatus = 499;
     let resData = {};
 
@@ -15,7 +17,7 @@ export default defineEventHandler(async (event) => {
     // request the back-end and set new auth-token
     await axios
         .post(`${process.env.API_BASE_URL}/auth/refresh`, null, {
-            headers: { ...req.headers, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() },
+            headers: { ...req.headers, "accept-language": lang, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() },
             timeout: 15 * 1000,
         })
         .then((response) => {

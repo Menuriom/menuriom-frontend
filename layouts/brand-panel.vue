@@ -1,6 +1,10 @@
 <style scoped>
+.wrapper {
+    height: 100vh;
+    height: 100svh;
+}
+
 main {
-    overflow: hidden;
     width: 100%;
 }
 
@@ -16,7 +20,7 @@ main {
 
 <template>
     <div
-        class="flex flex-col items-center w-screen max-w-screen-4xl mx-auto h-screen bg-neutral-50 overflow-clip"
+        class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-50 overflow-clip"
         :class="{ 'blur-sm': panelStore.popUpOpened != '' }"
         id="app"
     >
@@ -68,7 +72,6 @@ else if (Object.keys(user.brands.value.list).length == 0) panelStore.openPopUp("
 onMounted(async () => {
     panelStore.loadSelectedBrand();
 
-    // if (user.name.value === "" || user.family.value === "") await userStore.getUserInfo();
     await userStore.refreshToken().catch((e) => {});
     userStore.setRefreshInterval();
 });

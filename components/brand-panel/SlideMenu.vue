@@ -3,7 +3,7 @@
 <template>
     <div class="flex flex-col" ref="menu">
         <button
-            class="absolute top-3 end-3 flex items-center justify-center w-8 h-8 rounded-full bg-black scale-0 group-hover:scale-100 hover:border transition-all"
+            class="absolute top-3 end-3 flex items-center justify-center w-8 h-8 rounded-full bg-black scale-100 lg:scale-0 lg:group-hover:scale-100 hover:border transition-all"
             @click="toggleMenu()"
         >
             <Icon class="w-5 h-5 bg-purple-100" name="dots.svg" folder="icons" size="4px" />

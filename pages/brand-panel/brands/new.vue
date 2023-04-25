@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full"></div>
+    <div class="flex flex-col gap-4 w-full">dd</div>
 </template>
 
 <script setup>

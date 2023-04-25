@@ -22,7 +22,7 @@
                     <img class="w-5" src="~/assets/images/panel-icons/fork-knife.png" />
                     {{ $t("brand-panel.brands.Brand Details") }}
                 </h4>
-                <div class="flex items-center gap-4">
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4">
                     <div
                         class="relative flex flex-col items-start justify-center gap-2 w-32 h-32 rounded-full hover:border-2 border-violet bg-white flex-shrink-0"
                     >

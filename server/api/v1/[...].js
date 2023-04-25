@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
             url: `${process.env.API_BASE_URL}${req.url}`.replace("/api/v1/", "/"),
             data: data,
             timeout: 15 * 1000,
-            headers: { ...req.headers, "Accept-Language": lang, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() },
+            headers: { ...req.headers, "accept-language": lang, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() },
             maxBodyLength: Infinity,
             maxContentLength: Infinity,
         })

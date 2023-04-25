@@ -1,5 +1,6 @@
 export default {
     Cancel: "لغو",
+    "Something went wrong!": "مشکلی رخ داده",
 
     auth: {
         welcome: "به منوریوم خوش اومدی",

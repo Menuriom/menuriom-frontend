@@ -1,5 +1,6 @@
 export default {
     Cancel: "Cancel",
+    "Something went wrong!": "Something went wrong!",
 
     auth: {
         welcome: "Welcome to Menuriom",

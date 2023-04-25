@@ -39,10 +39,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (process.client && nuxtApp.isHydrating && nuxtApp.payload.serverRendered) return;
 
     if (process.client) {
-        const isTokenValid = await userStore
-            .getUserInfo()
-            .then(() => true)
-            .catch((e) => false);
-        if (!isTokenValid) return navigateTo(localePath("/authenticate"));
+        if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") {
+            const isTokenValid = await userStore
+                .getUserInfo()
+                .then(() => true)
+                .catch((e) => false);
+            if (!isTokenValid) return navigateTo(localePath("/authenticate"));
+        }
     }
 });
