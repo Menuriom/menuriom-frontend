@@ -22,7 +22,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         const user = await axios
             .get(url, { headers: headers })
             .then((response) => {
-                   user.avatar.value = response.data.avatar || "/avatar.svg";
+                   user.avatar.value = response.data.avatar || "/avatar.webp";
                    user.name.value = response.data.name;
                    user.family.value = response.data.family;
                    user.email.value = response.data.email;

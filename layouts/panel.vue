@@ -29,7 +29,7 @@ main {
             <Header />
             <div class="relative flex w-full h-0 p-2 flex-grow">
                 <SideMenu v-if="!dontShowMenu" />
-                <main class="relative p-4 py-2 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
+                <main class="relative p-4 py-4 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>
             </div>
@@ -45,12 +45,12 @@ main {
 </template>
 
 <script setup>
-import Header from "~/components/brand-panel/Header.vue";
-import SideMenu from "~/components/brand-panel/SideMenu.vue";
-import PersonalInfo from "~/components/brand-panel/dialogs/account-setup/PersonalInfo.vue";
-import SelectAccountType from "~/components/brand-panel/dialogs/account-setup/SelectAccountType.vue";
-import CreateNewBrand from "~/components/brand-panel/dialogs/account-setup/CreateNewBrand.vue";
-import FindYourTeam from "~/components/brand-panel/dialogs/account-setup/FindYourTeam.vue";
+import Header from "~/components/panel/Header.vue";
+import SideMenu from "~/components/panel/SideMenu.vue";
+import PersonalInfo from "~/components/panel/dialogs/account-setup/PersonalInfo.vue";
+import SelectAccountType from "~/components/panel/dialogs/account-setup/SelectAccountType.vue";
+import CreateNewBrand from "~/components/panel/dialogs/account-setup/CreateNewBrand.vue";
+import FindYourTeam from "~/components/panel/dialogs/account-setup/FindYourTeam.vue";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
 import { storeToRefs } from "pinia";
@@ -69,7 +69,7 @@ const userStore = useUserStore();
 const user = storeToRefs(userStore);
 
 const dontShowMenu = computed(() => {
-    for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/brand-panel/:brandID")) return false;
+    for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/panel/:brandID")) return false;
     return true;
 });
 

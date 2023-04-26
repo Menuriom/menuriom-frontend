@@ -17,20 +17,20 @@
                 </div>
                 <hr class="w-11/12 mx-auto opacity-40" />
                 <ul class="flex flex-col gap-1">
-                    <nuxt-link :to="localePath('/brand-panel/')">
+                    <nuxt-link :to="localePath('/panel/')">
                         <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                             <div class="flex items-center gap-2">
                                 <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
-                                <span class="text-sm">{{ $t("brand-panel.profile.Your Profile") }}</span>
+                                <span class="text-sm">{{ $t("panel.profile.Your Profile") }}</span>
                             </div>
                             <p class="text-xs opacity-75">some text</p>
                         </li>
                     </nuxt-link>
-                    <nuxt-link :to="localePath('/brand-panel/')">
+                    <nuxt-link :to="localePath('/panel/')">
                         <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                             <div class="flex items-center gap-2">
                                 <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
-                                <span class="text-sm">{{ $t("brand-panel.profile.Your Profile") }}</span>
+                                <span class="text-sm">{{ $t("panel.profile.Your Profile") }}</span>
                             </div>
                             <p class="text-xs opacity-75">some text</p>
                         </li>

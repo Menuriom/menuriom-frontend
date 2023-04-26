@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
                     redirectPath += "/admin-panel";
                     break;
                 default:
-                    redirectPath += "/brand-panel";
+                    redirectPath += "/panel";
                     break;
             }
         })

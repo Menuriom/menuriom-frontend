@@ -74,11 +74,11 @@ nav::-webkit-scrollbar {
             <!-- TODO : make skeluton fallback for when user data is loading and dont show if no brand available -->
             <nuxt-link
                 class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin cursor-pointer transition-all group"
-                :to="localePath(`/brand-panel/`)"
+                :to="localePath(`/panel/`)"
             >
                 <img class="w-14 h-14 object-cover rounded-full shadow-nr35 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
                 <img class="w-14 h-14 object-cover rounded-full shadow-nr35 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
-                <div class="flex flex-col w-full">
+                <div class="flex flex-col gap-1 w-full">
                     <h4 class="font-semibold whitespace-nowrap text-ellipsis overflow-hidden w-36">{{ brand.name }}</h4>
                     <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-28 text-purple-300">{{ brand.role }}</span>
                 </div>
@@ -91,7 +91,7 @@ nav::-webkit-scrollbar {
                     :to="localePath(`/orders-panel/${panelStore.selectedBrandId}`)"
                 >
                     <img class="w-5" src="~/assets/images/panel-icons/cash-register.png" alt="" />
-                    <span class="text-sm">{{ $t("brand-panel.side-menu.Orders") }}</span>
+                    <span class="text-sm">{{ $t("panel.side-menu.Orders") }}</span>
                     <span class="absolute -top-1.5 end-1 gradient w-3 h-3 rounded-full"></span>
                 </nuxt-link>
                 <nuxt-link
@@ -99,7 +99,7 @@ nav::-webkit-scrollbar {
                     :to="localePath(`/ordering-app/${panelStore.selectedBrandId}`)"
                 >
                     <img class="w-5" src="~/assets/images/panel-icons/mobile-button.png" alt="" />
-                    <span class="text-sm">{{ $t("brand-panel.side-menu.Ordering App") }}</span>
+                    <span class="text-sm">{{ $t("panel.side-menu.Ordering App") }}</span>
                 </nuxt-link>
             </div>
 
@@ -111,22 +111,22 @@ nav::-webkit-scrollbar {
                 v-if="panelStore.selectedBrandId !== ''"
             >
                 <ul class="flex flex-col gap-2 w-full">
-                    <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}`)">
+                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}`)">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/rectangles-mixed.png" alt="" />
-                            <span>{{ $t("brand-panel.side-menu.Dashboard") }}</span>
+                            <span>{{ $t("panel.side-menu.Dashboard") }}</span>
                         </li>
                     </nuxt-link>
-                    <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}/branches`)">
+                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/branches`)">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/store.png" alt="" />
-                            <span>{{ $t("brand-panel.side-menu.Branches") }}</span>
+                            <span>{{ $t("panel.side-menu.Branches") }}</span>
                         </li>
                     </nuxt-link>
                     <button class="link" :class="{ toggler_active: openSubMenus.includes('menu') }" @click="toggleSubMenu('menu')">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/cards-blank.png" alt="" />
-                            <span>{{ $t("brand-panel.side-menu.Menu") }}</span>
+                            <span>{{ $t("panel.side-menu.Menu") }}</span>
                             <Icon
                                 class="sub_menu_toggler bg-white"
                                 :class="{ open: openSubMenus.includes('menu') }"
@@ -138,24 +138,24 @@ nav::-webkit-scrollbar {
                     </button>
                     <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('menu') }" name="menu">
                         <ul class="sub_menu flex flex-col">
-                            <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}/menu/items`)">
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/items`)">
                                 <li class="flex items-center gap-3">
-                                    <span>{{ $t("brand-panel.side-menu.Menu Editor") }}</span>
+                                    <span>{{ $t("panel.side-menu.Menu Editor") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}/menu-style`)">
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/menu-style`)">
                                 <li class="flex items-center gap-3">
-                                    <span>{{ $t("brand-panel.side-menu.Style Editor") }}</span>
+                                    <span>{{ $t("panel.side-menu.Style Editor") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}/menu/qr-code`)">
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/qr-code`)">
                                 <li class="flex items-center gap-3">
-                                    <span>{{ $t("brand-panel.side-menu.QR Code") }}</span>
+                                    <span>{{ $t("panel.side-menu.QR Code") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}/menu/splash-screen`)">
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/splash-screen`)">
                                 <li class="flex items-center gap-3">
-                                    <span>{{ $t("brand-panel.side-menu.Splash Screen") }}</span>
+                                    <span>{{ $t("panel.side-menu.Splash Screen") }}</span>
                                 </li>
                             </nuxt-link>
                         </ul>
@@ -163,7 +163,7 @@ nav::-webkit-scrollbar {
                     <button class="link" :class="{ toggler_active: openSubMenus.includes('staff') }" @click="toggleSubMenu('staff')">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/user-group.png" alt="" />
-                            <span>{{ $t("brand-panel.side-menu.Manage Staff") }}</span>
+                            <span>{{ $t("panel.side-menu.Manage Staff") }}</span>
                             <Icon
                                 class="sub_menu_toggler bg-white"
                                 :class="{ open: openSubMenus.includes('staff') }"
@@ -175,42 +175,42 @@ nav::-webkit-scrollbar {
                     </button>
                     <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('staff') }" name="staff">
                         <ul class="sub_menu flex flex-col">
-                            <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}/staff-list`)">
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/staff-list`)">
                                 <li class="flex items-center gap-3">
-                                    <span>{{ $t("brand-panel.side-menu.Staff Members") }}</span>
+                                    <span>{{ $t("panel.side-menu.Staff Members") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}/sent-invites`)">
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/sent-invites`)">
                                 <li class="flex items-center gap-3">
-                                    <span>{{ $t("brand-panel.side-menu.Sent Invites") }}</span>
+                                    <span>{{ $t("panel.side-menu.Sent Invites") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}/staff-roles`)">
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/staff-roles`)">
                                 <li class="flex items-center gap-3">
-                                    <span>{{ $t("brand-panel.side-menu.Staff Roles") }}</span>
+                                    <span>{{ $t("panel.side-menu.Staff Roles") }}</span>
                                 </li>
                             </nuxt-link>
                         </ul>
                     </div>
-                    <nuxt-link class="link" :to="localePath(`/brand-panel/${panelStore.selectedBrandId}/feedback`)">
+                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/feedback`)">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/comments.png" alt="" />
-                            <span>{{ $t("brand-panel.side-menu.Customers Feedback") }}</span>
+                            <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
                         </li>
                     </nuxt-link>
                 </ul>
                 <hr class="w-full opacity-40 mx-4" />
                 <ul class="flex flex-col gap-2 w-full">
-                    <nuxt-link class="link" :to="localePath(`/brand-panel/billing`)">
+                    <nuxt-link class="link" :to="localePath(`/panel/billing`)">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/money-bills.png" alt="" />
-                            <span>{{ $t("brand-panel.side-menu.Billing & Plan Upgrade") }}</span>
+                            <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
                         </li>
                     </nuxt-link>
-                    <nuxt-link class="link" :to="localePath('/brand-panel/support')">
+                    <nuxt-link class="link" :to="localePath('/panel/support')">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/message-question.png" alt="" />
-                            <span>{{ $t("brand-panel.side-menu.Support") }}</span>
+                            <span>{{ $t("panel.side-menu.Support") }}</span>
                         </li>
                     </nuxt-link>
                 </ul>
@@ -223,7 +223,7 @@ nav::-webkit-scrollbar {
                 <div class="relative flex flex-col items-center justify-between gap-4">
                     <small class="hidden 2sm:flex text-sm opacity-75">Remove The Limitations</small>
                     <h5 class="hidden 2sm:flex gradient-text text-2xl font-black -mt-2 md:mb-2">Upgrade To Pro</h5>
-                    <nuxt-link class="flex items-center gap-2 p-1 px-4 bg-pencil-tip rounded-xl shadow-xl" :to="localePath('/brand-panel/billing/upgrade')">
+                    <nuxt-link class="flex items-center gap-2 p-1 px-4 bg-pencil-tip rounded-xl shadow-xl" :to="localePath('/panel/billing/upgrade')">
                         <img class="w-9 md:w-12" src="~/assets/images/icons/sparkles.png" alt="" />
                         <b class="text-xl">Go Pro</b>
                     </nuxt-link>
@@ -238,7 +238,7 @@ nav::-webkit-scrollbar {
 </template>
 
 <script setup>
-// import BrandSwitcher from "~/components/brand-panel/dialogs/BrandSwitcher.vue";
+// import BrandSwitcher from "~/components/panel/dialogs/BrandSwitcher.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
@@ -249,7 +249,7 @@ const userStore = useUserStore();
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || "");
 
-// TODO : set limitation on side menu and header base on brand-panel permission of selected brand
+// TODO : set limitation on side menu and header base on panel permission of selected brand
 
 // toggle sub menus open and close state
 const openSubMenus = reactive([]);

@@ -51,8 +51,8 @@ header {
 
 <script setup>
 import LangSwitch from "~/components/LangSwitch.vue";
-import NotifDropDown from "~/components/brand-panel/NotifDropDown.vue";
-import ProfileDropDown from "~/components/brand-panel/ProfileDropDown.vue";
+import NotifDropDown from "~/components/panel/NotifDropDown.vue";
+import ProfileDropDown from "~/components/panel/ProfileDropDown.vue";
 import { usePanelStore } from "@/stores/panel";
 
 const route = useRoute();
@@ -61,7 +61,7 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 
 const dontShowToggle = computed(() => {
-    for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/brand-panel/:brandID")) return false;
+    for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/panel/:brandID")) return false;
     return true;
 });
 </script>

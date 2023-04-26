@@ -6,5 +6,5 @@
 
 <script setup>
 useHead({ title: `Brand Managment - Your Menuriom Panel` });
-// definePageMeta({ layout: "brand-panel" });
+// definePageMeta({ layout: "panel" });
 </script>

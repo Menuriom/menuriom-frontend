@@ -3,14 +3,14 @@
 <template>
     <div class="flex flex-col" ref="menu">
         <button
-            class="absolute top-3 end-3 flex items-center justify-center w-8 h-8 rounded-full bg-black scale-100 lg:scale-0 lg:group-hover:scale-100 hover:border transition-all"
+            class="absolute top-3 end-3 flex items-center justify-center w-8 h-8 rounded-full bg-white scale-100 lg:scale-0 lg:group-hover:scale-100 hover:border transition-all"
             @click="toggleMenu()"
         >
-            <Icon class="w-5 h-5 bg-purple-100" name="dots.svg" folder="icons" size="4px" />
+            <Icon class="w-5 h-5 bg-black" name="dots.svg" folder="icons" size="4px" />
         </button>
         <Transition name="slide-down" appear>
             <menu
-                class="absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 w-full p-2 bg-pencil-tip text-white rounded-lg transition-all"
+                class="absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 w-full p-2 bg-pencil-tip bg-opacity-95 text-white rounded-lg transition-all"
                 v-if="!!open"
             >
                 <hr class="w-1/2 border-b-2 my-1 mx-auto" />

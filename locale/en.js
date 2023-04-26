@@ -110,7 +110,7 @@ export default {
         "Overview of what is included in our different plans": "Overview of what is included in our different plans",
     },
 
-    "brand-panel": {
+    "panel": {
         Congratulations: "Congratulations",
         Ok: "Ok",
 
@@ -179,17 +179,39 @@ export default {
             "Main Branch Telephone Number": "Main Branch Telephone Number",
             "Images must be less than 1MB": "Images must be less than 1MB",
 
-            "Manage Your Brands": "Manage Your Brands",
+            "Your Brands": "Your Brands",
+            "Create New Brand": "Create New Brand",
+            "No Brands Here Yet": "No Brands Here Yet",
             "New Brand": "New Brand",
             "Create new brands, edit your brand details, or manage brands that you are staff of":
                 "Create new brands, edit your brand details, or manage brands that you are staff of",
             "Go To Dashboard": "Go To Dashboard",
             "Edit Details": "Edit Details",
             "Delete Brand": "Delete Brand",
+            "Leave Brand": "Leave Brand",
             "Leave This Brand": "Leave This Brand",
+
             "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
             deletingBrandDesc: "all your branches, menus, and staff members in this brand will be deleted and your plan subscription will be canceled",
             "This action cannot be reversed": "This action cannot be reversed",
+
+            "You are about to leave this brand": "You are about to leave brand <b>{name}</b>",
+            leavingBrandDesc: "By leaving the brand you won't be able to access this brand",
+            "You need new invitation to join this brand again": "You need new invitation to join this brand again",
+
+            "Check Invite List": "Check Invite List",
+            "Start by creating a brand, or check your invation list to join a existing brand":
+                "Start by creating a brand, or check your invation list to join a existing brand",
+        },
+
+        branches: {
+            Branches: "Branches",
+            "Here you can manage your branches and customize their menu": "Here you can manage your branches and customize their menu",
+            "New Branch": "New Branch",
+            "Create New Branch": "Create New Branch",
+            "Customize This Branch Menu": "Customize This Branch Menu",
+            "Edit Details": "Edit Details",
+            "Delete Branch": "Delete Branch",
         },
     },
 };

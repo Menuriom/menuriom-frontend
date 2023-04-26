@@ -3,11 +3,11 @@
 <template>
     <div>
         <NuxtPage />
-        <!-- <NuxtPage key="brand" page-key="brand-panel"></NuxtPage> -->
+        <!-- <NuxtPage key="brand" page-key="panel"></NuxtPage> -->
     </div>
 </template>
 
 <script setup>
 useHead({ title: `Your Menuriom Panel` });
-definePageMeta({ layout: "brand-panel", middleware: ["brand-panel-gate"] });
+definePageMeta({ layout: "panel", middleware: ["panel-gate"] });
 </script>

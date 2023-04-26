@@ -283,7 +283,7 @@ const checkVerificationCode = async () => {
                 name.value = family.value = mobile.value = size.value = "";
             } else {
                 userStore.setRefreshInterval();
-                router.push(localePath("/brand-panel"));
+                router.push(localePath("/panel"));
             }
         })
         .catch((e) => {
@@ -320,7 +320,7 @@ const completeSignup = async () => {
         })
         .then((response) => {
             userStore.setRefreshInterval();
-            router.push(localePath("/brand-panel"));
+            router.push(localePath("/panel"));
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {

@@ -38,7 +38,7 @@ export const useUserStore = defineStore("user", () => {
         await axios
             .get(`/api/v1/user/info`, { timeout: 30 * 1000 })
             .then((response) => {
-                avatar.value = response.data.avatar || "/avatar.svg";
+                avatar.value = response.data.avatar || "/avatar.webp";
                 name.value = response.data.name;
                 family.value = response.data.family;
                 email.value = response.data.email;

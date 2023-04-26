@@ -110,7 +110,7 @@ export default {
         "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
     },
 
-    "brand-panel": {
+    panel: {
         Congratulations: "تبریک",
         Ok: "خُب",
 
@@ -179,17 +179,39 @@ export default {
             "Main Branch Telephone Number": "تلفن تماس شعبه اصلی",
             "Images must be less than 1MB": "حجم عکس لوگو انتخابی باید کمتر از 1Mb باشد",
 
-            "Manage Your Brands": "مدیریت برند ها",
+            "Your Brands": "برندهای شما",
+            "Create New Brand": "ساخت برند جدید",
+            "No Brands Here Yet": "هیچ برندی اینجا نیست",
             "New Brand": "ایجاد برند جدید",
             "Create new brands, edit your brand details, or manage brands that you are staff of":
                 "برند جدید بسازید، مشخصات برند خودتون رو ویرایش کنید، یا برند هایی که عضوشون هستید رو مدیریت کنید",
             "Go To Dashboard": "برو به داشبورد",
             "Edit Details": "ویرایش جزئیات",
             "Delete Brand": "حذف برند",
+            "Leave Brand": "ترک از برند",
             "Leave This Brand": "ترک این برند",
+
             "You are about to delete this brand": "شما در حال حذف برند <b>{name}</b> هستید",
             deletingBrandDesc: "با پاک شدن برند؛ تمام شعبه ها، منوها و کارکنان خدمه که در این برند وجود دارند حذف خواهند شد و عضویت پلن شما نیز لغو میشود",
             "This action cannot be reversed": "این عملیات برگشت ناپذیر است",
+
+            "You are about to leave this brand": "شما در حال ترک کردن برند <b>{name}</b> هستید",
+            leavingBrandDesc: "با ترک این برند شما دیگر دسترسی به این برند را نخواهید داشت",
+            "You need new invitation to join this brand again": "برای دسترسی دوباره به این برند، ابتدا باید درخواست دعوت جدیدی به شما ارسال شود",
+
+            "Check Invite List": "لیست دعوتنامه ها",
+            "Start by creating a brand, or check your invation list to join a existing brand":
+                "برند جدیدی بساز، یا برای عضویت در برند خاص لیست دعوت های خودتو چک کن",
+        },
+
+        branches: {
+            Branches: "شعبه ها",
+            "Here you can manage your branches and customize their menu": "اینجا میتونی شعبه های رستورانتو مدیریت کنی و منوهاشون رو سفارشی کنی",
+            "New Branch": "شعبه جدید",
+            "Create New Branch": "ساخت شعبه جدید",
+            "Customize This Branch Menu": "سفارشی سازی منوی این شعبه",
+            "Edit Details": "وایرایش جزئیات",
+            "Delete Branch": "حذف شعبه",
         },
     },
 };
