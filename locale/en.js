@@ -110,9 +110,11 @@ export default {
         "Overview of what is included in our different plans": "Overview of what is included in our different plans",
     },
 
-    "panel": {
+    panel: {
+        "Your Menuriom Panel": "Your Menuriom Panel",
         Congratulations: "Congratulations",
         Ok: "Ok",
+        Save: "Save",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -128,6 +130,7 @@ export default {
             "Ordering App": "Ordering App",
 
             Dashboard: "Dashboard",
+            "Language Settings": "Language Settings",
             Branches: "Branches",
             Menu: "Menu",
             "Menu Editor": "Menu Editor",
@@ -141,6 +144,7 @@ export default {
             "Customers Feedback": "Customers Feedback",
             "Billing & Plan Upgrade": "Billing & Plan Upgrade",
             Support: "Support",
+            Settings: "Settings",
 
             "Switch Brand": "Switch Brand",
             "Switch between your restaurant brands": "Switch between your restaurant brands",
@@ -212,6 +216,18 @@ export default {
             "Customize This Branch Menu": "Customize This Branch Menu",
             "Edit Details": "Edit Details",
             "Delete Branch": "Delete Branch",
+        },
+
+        languages: {
+            "Select your menu languages and setup your currency unit": "Select your menu languages and setup your currency unit",
+            "Your Menu Languages": "Your Menu Languages",
+            "Your Currency": "Your Currency",
+            "Choose which languages you want your menu to have": "Choose which languages you want your menu to have",
+            "You can translate your menu items and your restaurant info base on languages you choose":
+                "You can translate your menu items and your restaurant info base on languages you choose",
+            "You can choose up to n languages": "You can choose up to {n} languages",
+            "Upgrade your plan to support more languages": "Upgrade your plan to support more languages",
+            "Select what currency you want to show for your prices": "Select what currency you want to show for your prices",
         },
     },
 };

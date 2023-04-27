@@ -117,6 +117,15 @@ nav::-webkit-scrollbar {
                             <span>{{ $t("panel.side-menu.Dashboard") }}</span>
                         </li>
                     </nuxt-link>
+                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/feedback`)">
+                        <li class="flex items-center gap-3">
+                            <img class="w-5" src="~/assets/images/panel-icons/comments.png" alt="" />
+                            <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
+                        </li>
+                    </nuxt-link>
+                </ul>
+                <hr class="w-full opacity-40 mx-4" />
+                <ul class="flex flex-col gap-2 w-full">
                     <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/branches`)">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/store.png" alt="" />
@@ -192,22 +201,39 @@ nav::-webkit-scrollbar {
                             </nuxt-link>
                         </ul>
                     </div>
-                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/feedback`)">
+                    <button class="link" :class="{ toggler_active: openSubMenus.includes('settings') }" @click="toggleSubMenu('settings')">
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/comments.png" alt="" />
-                            <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
+                            <img class="w-5" src="~/assets/images/panel-icons/gear.png" alt="" />
+                            <span>{{ $t("panel.side-menu.Settings") }}</span>
+                            <Icon
+                                class="sub_menu_toggler bg-white"
+                                :class="{ open: openSubMenus.includes('settings') }"
+                                name="arrow.svg"
+                                folder="icons"
+                                size="12px"
+                            />
                         </li>
-                    </nuxt-link>
+                    </button>
+                    <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('settings') }" name="settings">
+                        <ul class="sub_menu flex flex-col">
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/languages`)">
+                                <li class="flex items-center gap-3">
+                                    <Icon class="w-5 h-5 bg-white" name="language.svg" folder="icons/light" size="20px" />
+                                    <span>{{ $t("panel.side-menu.Language Settings") }}</span>
+                                </li>
+                            </nuxt-link>
+                        </ul>
+                    </div>
                 </ul>
                 <hr class="w-full opacity-40 mx-4" />
                 <ul class="flex flex-col gap-2 w-full">
-                    <nuxt-link class="link" :to="localePath(`/panel/billing`)">
+                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/money-bills.png" alt="" />
                             <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
                         </li>
                     </nuxt-link>
-                    <nuxt-link class="link" :to="localePath('/panel/support')">
+                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/message-question.png" alt="" />
                             <span>{{ $t("panel.side-menu.Support") }}</span>

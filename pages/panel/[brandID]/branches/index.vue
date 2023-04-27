@@ -136,13 +136,14 @@ import axios from "axios";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-useHead({ title: `Brand Managment - Your Menuriom Panel` });
-
 const { t } = useI18n();
 const route = useRoute();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
+
+const title = computed(() => `${t("panel.branches.Branches")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: title });
 
 // TODO : limit branch creation base on the user's plan on brand
 // TODO : add permission check for actions
@@ -229,7 +230,7 @@ await useAsyncData(() => getRecords()).then(({ data, error }) => {
     if (error.value) {
         errorField.value = "data";
         if (typeof error.value.response !== "undefined" && error.value.response.data) {
-            const errors = e.response.data.errors || e.response.data.message;
+            const errors = error.value.response.data.errors || error.value.response.data.message;
             responseMessage.value = errors[0].errors[0];
         } else responseMessage.value = t("Something went wrong!");
         // TODO : log errors in sentry type thing

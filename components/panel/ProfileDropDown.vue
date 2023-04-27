@@ -47,7 +47,7 @@ li:hover .icon {
                         <small>{{ $t("panel.brands.Your Brands") }}</small>
                     </li>
                 </nuxt-link>
-                <nuxt-link :to="localePath('/panel/billing/change-plan')" v-if="panelStore.selectedBrandId != ''">
+                <nuxt-link :to="localePath(`/panel/${panelStore.selectedBrandId}/billing/change-plan`)" v-if="panelStore.selectedBrandId != ''">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="arrow-up-big-small.svg" folder="icons/light" size="20px" />
                         <small>{{ $t("panel.profile.Upgrade Plan") }}</small>

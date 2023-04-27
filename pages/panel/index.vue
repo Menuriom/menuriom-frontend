@@ -196,17 +196,18 @@
 import Dialog from "~/components/panel/Dialog.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
 import Loading from "~/components/Loading.vue";
-import { getRequestConfig } from "~/composables/useServerUtil";
+import { getBrandList } from "~/composables/useApiCalls";
 import axios from "axios";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
-
-useHead({ title: `Brand Managment - Your Menuriom Panel` });
 
 const { t } = useI18n();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
+
+const title = computed(() => `${t("panel.brands.Your Brands")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: title });
 
 // TODO : if user has only one brand and he is the owner of that brand, redirect user to the brand-edit page
 
@@ -298,50 +299,30 @@ const leaveBrand = async () => {
 // -------------------------------------------------
 
 // loading data -------------------------------------------------
-const loading = ref(false);
+const loading = ref(true);
 const noMoreRecords = ref(false);
 const records = reactive({ list: [] });
-const getRecords = async (loadMore = false) => {
-    if (noMoreRecords.value || loading.value) return;
-    loading.value = true;
+const { data, error } = await useLazyAsyncData(() => getBrandList());
 
-    let { url, headers } = getRequestConfig(`/api/v1/panel/brands`, {});
-    let params = [`pp=25`];
-    if (loadMore && records.list.length != 0) params.push(`lastRecordID=${records.values[records.list.length - 1]._id}`);
-    url = encodeURI(`${url}?${params.join("&")}`);
-
-    let _records = [];
-    let _canCreateNewBrand = false;
-    let _noMoreRecords = false;
-
-    await axios
-        .get(url, { headers: headers })
-        .then((response) => {
-            _records = [..._records, ...response.data.records];
-            if (response.data.records.length == 0) _noMoreRecords = true;
-            _canCreateNewBrand = response.data.canCreateNewBrand;
-        })
-        .catch((e) => {
-            throw e;
-        })
-        .finally(() => (loading.value = false));
-
-    return { _records, _noMoreRecords, _canCreateNewBrand };
+const handleData = (data) => {
+    records.list = data._records;
+    noMoreRecords.value = data._noMoreRecords;
+    canCreateNewBrand.value = data._canCreateNewBrand;
+    loading.value = false;
 };
-await useAsyncData(() => getRecords()).then(({ data, error }) => {
-    if (error.value) {
-        errorField.value = "data";
-        if (typeof error.value.response !== "undefined" && error.value.response.data) {
-            const errors = e.response.data.errors || e.response.data.message;
-            responseMessage.value = errors[0].errors[0];
-        } else responseMessage.value = t("Something went wrong!");
-        // TODO : log errors in sentry type thing
-    }
-    if (data.value) {
-        records.list = data.value._records;
-        noMoreRecords.value = data.value._noMoreRecords;
-        canCreateNewBrand.value = data.value._canCreateNewBrand;
-    }
-});
+const handleErrors = (err) => {
+    errorField.value = "data";
+    if (typeof err.response !== "undefined" && err.response.data) {
+        const errors = err.response.data.errors || err.response.data.message;
+        responseMessage.value = errors[0].errors[0];
+    } else responseMessage.value = t("Something went wrong!");
+    // TODO : log errors in sentry type thing
+};
+
+if (data.value) handleData(data.value);
+watch(data, (val) => handleData(val));
+
+if (error.value) handleErrors(error.value);
+watch(error, (err) => handleData(err));
 // -------------------------------------------------
 </script>

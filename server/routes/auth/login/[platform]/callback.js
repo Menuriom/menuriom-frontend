@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
             }
 
             const maxAge = parseInt(process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS); // 1 week
-            setCookie(event, "AuthToken", authResponse.token, { sameSite: "none", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
+            setCookie(event, "AuthToken", authResponse.token, { sameSite: "lax", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
 
             switch (authResponse.role) {
                 case "admin":

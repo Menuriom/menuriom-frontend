@@ -111,8 +111,10 @@ export default {
     },
 
     panel: {
+        "Your Menuriom Panel": "پنل منوریوم شما",
         Congratulations: "تبریک",
         Ok: "خُب",
+        Save: "ذخیره",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -128,6 +130,7 @@ export default {
             "Ordering App": "اپ سفارش گیر",
 
             Dashboard: "داشبورد",
+            "Language Settings": "تنظیمات زبان",
             Branches: "شعبه ها",
             Menu: "مدیریت منو",
             "Menu Editor": "وایرایش منو",
@@ -141,6 +144,7 @@ export default {
             "Customers Feedback": "بازخورد مشتریان",
             "Billing & Plan Upgrade": "صورتحساب و ارتقا پلن",
             Support: "پشتیبانی",
+            Settings: "تنظیمات",
 
             "Switch Brand": "انتخاب برند",
             "Switch between your restaurant brands": "بین برندهای رستوران خود سویچ کنید",
@@ -212,6 +216,18 @@ export default {
             "Customize This Branch Menu": "سفارشی سازی منوی این شعبه",
             "Edit Details": "وایرایش جزئیات",
             "Delete Branch": "حذف شعبه",
+        },
+
+        languages: {
+            "Select your menu languages and setup your currency unit": "زبان های منو و واحد پولی که تو منو نمایش داده میشه انتخاب کن",
+            "Your Menu Languages": "زبان های منو",
+            "Your Currency": "واحد پولی",
+            "Choose which languages you want your menu to have": "زبان هایی که میخواهید تو منو باشه رو انتخاب کنید",
+            "You can translate your menu items and your restaurant info base on languages you choose":
+                "بسته به زبان هایی که انخاب میکنید، میتونید منو رو ترجمه کنید",
+            "You can choose up to n languages": "شما میتونید تا {n} زبان انتخاب کنید",
+            "Upgrade your plan to support more languages": "برای انتخاب زبان های بیشتر پلن خود را ارتقا بدید",
+            "Select what currency you want to show for your prices": "واحد پولی که در منو نمایش داده میود رو انتخاب کنید",
         },
     },
 };

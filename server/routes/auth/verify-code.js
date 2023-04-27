@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
         .then((response) => {
             if (!response.data.register) {
                 const maxAge = parseInt(process.env.AUTH_TOKEN_EXPIRE_TIME_IN_SECONDS); // 1 week
-                setCookie(event, "AuthToken", response.data.token, { sameSite: "none", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
+                setCookie(event, "AuthToken", response.data.token, { sameSite: "lax", path: "/", httpOnly: true, secure: true, maxAge: maxAge });
             }
             resData = { register: response.data.register };
             resStatus = response.status;
