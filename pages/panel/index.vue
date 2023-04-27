@@ -1,0 +1,328 @@
+<style scoped></style>
+
+<template>
+    <div class="flex flex-col gap-4 sm:gap-6 w-full">
+        <header class="flex flex-wrap items-center justify-between gap-4">
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-2">
+                    <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
+                    <h1 class="text-4xl/none font-bold">{{ $t("panel.brands.Your Brands") }}</h1>
+                </div>
+                <small class="hidden sm:flex text-sm">
+                    {{ $t("panel.brands.Create new brands, edit your brand details, or manage brands that you are staff of") }}
+                </small>
+            </div>
+            <nuxt-link
+                class="flex items-center justify-center gap-2 p-3 text-sm rounded-lg gradient text-white shadow-nr15 hover:scale-105 transition-all flex-shrink-0"
+                :to="localePath('/panel/brand/creation')"
+                v-if="canCreateNewBrand"
+            >
+                <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
+                {{ $t("panel.brands.New Brand") }}
+            </nuxt-link>
+        </header>
+        <hr class="w-full border-gray-300 opacity-50" />
+        <section class="flex flex-col w-full">
+            <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-show="!loading">
+                <li
+                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white border group hover:shadow-nr5 transition-all overflow-hidden"
+                    v-for="(brand, i) in records.list"
+                    :key="i"
+                >
+                    <nuxt-link
+                        class="btn absolute top-4 start-4 flex items-center gap-1 p-1 rounded-md bg-pencil-tip text-white"
+                        :to="localePath(`/panel/${brand._id}`)"
+                        :title="$t(`panel.brands.Go To Dashboard`)"
+                    >
+                        <Icon class="w-5 h-5 bg-white" name="column-light.svg" folder="icons/light" size="20px" />
+                    </nuxt-link>
+                    <SlideMenu class="z-10">
+                        <nuxt-link class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin" :to="localePath(`/panel/${brand._id}`)">
+                            <Icon class="w-4 h-4 bg-white" name="column-light.svg" folder="icons/light" size="16px" />
+                            <small>{{ $t("panel.brands.Go To Dashboard") }}</small>
+                        </nuxt-link>
+                        <nuxt-link class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin" :to="localePath(`/panel/brand/${brand._id}`)">
+                            <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                            <small>{{ $t("panel.brands.Edit Details") }}</small>
+                        </nuxt-link>
+                        <hr class="w-full opacity-40" />
+                        <button
+                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer"
+                            @click="openDeleteDialog(i)"
+                            v-if="brand.roles.includes('owner')"
+                        >
+                            <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
+                            <small>{{ $t("panel.brands.Delete Brand") }}</small>
+                        </button>
+                        <button class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer" @click="openLeaveDialog(i)" v-else>
+                            <Icon class="w-4 h-4 bg-red-300" name="right-from-bracket.svg" folder="icons/light" size="16px" />
+                            <small>{{ $t("panel.brands.Leave This Brand") }}</small>
+                        </button>
+                    </SlideMenu>
+                    <nuxt-link class="btn rounded-full" :to="localePath(`/panel/${brand._id}`)" :title="$t(`panel.brands.Go To Dashboard`)">
+                        <img class="w-24 h-24 rounded-full object-cover shadow-nr15 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
+                        <img class="w-24 h-24 rounded-full object-cover shadow-nr15 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                    </nuxt-link>
+                    <div class="flex flex-wrap items-center justify-between gap-2 w-full flex-grow">
+                        <h4 class="text-lg/none font-semibold flex-grow">{{ brand.name }}</h4>
+                        <small class="text-xs p-0.5 px-1 text-violet border border-violet rounded" v-for="role in brand.roles" :key="role">{{ role }}</small>
+                    </div>
+                    <hr class="w-full border-zinc-300" />
+                    <div class="flex items-center justify-between gap-4 w-full">
+                        <ul class="flex items-center">
+                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10">
+                                <img class="w-full h-full object-contain grayscale" src="/avatar.svg" alt="" />
+                            </li>
+                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10 -ms-3">
+                                <img class="w-full h-full object-contain grayscale" src="/avatar.svg" alt="" />
+                            </li>
+                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10 -ms-3">
+                                <img class="w-full h-full object-contain grayscale" src="/avatar.svg" alt="" />
+                            </li>
+                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10 -ms-3 z-2">
+                                <small>3+</small>
+                            </li>
+                        </ul>
+                        <div class="flex items-center gap-1" :title="$t('panel.brands.Branch')">
+                            <Icon class="w-5 h-5 bg-black" name="house.svg" folder="icons/light" size="20px" />
+                            <h5 class="font-semibold">2</h5>
+                        </div>
+                    </div>
+                </li>
+                <li class="w-full rounded-lg bg-white border hover:shadow-nr5 transition-all overflow-hidden" v-if="canCreateNewBrand">
+                    <nuxt-link class="flex flex-col items-center justify-center gap-4 w-full h-full p-3" :to="localePath(`/panel/brand/creation`)">
+                        <img class="down-pop w-32 object-contain" src="~/assets/images/store-door.webp" />
+                        <div class="flex items-center gap-2">
+                            <Icon class="w-3 h-3 bg-violet" name="plus.svg" folder="icons" size="12px" />
+                            <small class="text-sm text-violet">{{ $t("panel.brands.Create New Brand") }}</small>
+                        </div>
+                    </nuxt-link>
+                </li>
+            </ul>
+            <div class="flex flex-col items-center gap-8 w-full" v-if="!loading && records.list.length == 0 && errorField == ''">
+                <img class="down-pop w-52 object-contain" src="~/assets/images/store-door.webp" />
+                <div class="flex flex-col items-center gap-2">
+                    <h4 class="text-xl font-bold">{{ $t("panel.brands.No Brands Here Yet") }}</h4>
+                    <small class="text-sm">
+                        {{ $t("panel.brands.Start by creating a brand, or check your invation list to join a existing brand") }}
+                    </small>
+                </div>
+                <div class="flex items-center gap-4">
+                    <nuxt-link
+                        class="btn flex items-center gap-2 border-2 border-black bg-violet text-white p-3 rounded-md"
+                        :to="localePath(`/panel/brand/creation`)"
+                    >
+                        <Icon class="w-5 h-5 bg-white" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.brands.Create New Brand") }}
+                    </nuxt-link>
+                    <nuxt-link class="btn flex items-center gap-2 border-2 border-black p-3 rounded-md" :to="localePath(`/panel/invite-list`)">
+                        <Icon class="w-5 h-5 bg-black" name="envelope-open-text.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.brands.Check Invite List") }}
+                    </nuxt-link>
+                </div>
+            </div>
+            <Loading v-if="loading" />
+            <small class="flex items-start text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
+                <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+            </small>
+        </section>
+
+        <Teleport to="body">
+            <Dialog name="delete-confirmation" :title="$t('panel.brands.Delete Brand')">
+                <div class="flex flex-col gap-3">
+                    <img class="w-44 mx-auto" src="~/assets/images/empty.webp" />
+                    <h2 class="text-xl" v-html="$t('panel.brands.You are about to delete this brand', { name: records.list[indexToDelete].name })" />
+                    <p class="text-sm opacity-75">
+                        {{ $t("panel.brands.deletingBrandDesc") }}
+                    </p>
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                        {{ $t("panel.brands.This action cannot be reversed") }}
+                    </small>
+                    <hr class="w-full opacity-40" />
+                    <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
+                        <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    </small>
+                    <div class="flex items-center gap-2 w-full">
+                        <button class="btn w-full p-3 rounded bg-dolphin" :disabled="deleting" @click="panelStore.closePopUp()">
+                            {{ $t("Cancel") }}
+                        </button>
+                        <button
+                            class="btn w-full p-3 rounded bg-red-500"
+                            :class="{ 'opacity-75 cursor-not-allowed': deleting }"
+                            :disabled="deleting"
+                            @click="deleteRecord()"
+                        >
+                            <span v-if="!deleting"> {{ $t("panel.brands.Delete Brand") }} </span>
+                            <Loading class="h-6" v-else />
+                        </button>
+                    </div>
+                </div>
+            </Dialog>
+            <Dialog name="leave-confirmation" :title="$t('panel.brands.Leave Brand')">
+                <div class="flex flex-col gap-3">
+                    <img class="w-44 mx-auto" src="~/assets/images/cup-on-ground.webp" />
+                    <h2 class="text-xl" v-html="$t('panel.brands.You are about to leave this brand', { name: records.list[indexToLeave].name })" />
+                    <p class="text-sm opacity-75">
+                        {{ $t("panel.brands.leavingBrandDesc") }}
+                    </p>
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                        {{ $t("panel.brands.You need new invitation to join this brand again") }}
+                    </small>
+                    <hr class="w-full opacity-40" />
+                    <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
+                        <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    </small>
+                    <div class="flex items-center gap-2 w-full">
+                        <button class="btn w-full p-3 rounded bg-dolphin" :disabled="leaving" @click="panelStore.closePopUp()">
+                            {{ $t("Cancel") }}
+                        </button>
+                        <button
+                            class="btn w-full p-3 rounded bg-red-500"
+                            :class="{ 'opacity-75 cursor-not-allowed': leaving }"
+                            :disabled="leaving"
+                            @click="leaveBrand()"
+                        >
+                            <span v-if="!leaving"> {{ $t("panel.brands.Leave Brand") }} </span>
+                            <Loading class="h-6" v-else />
+                        </button>
+                    </div>
+                </div>
+            </Dialog>
+        </Teleport>
+    </div>
+</template>
+
+<script setup>
+import Dialog from "~/components/panel/Dialog.vue";
+import SlideMenu from "~/components/panel/SlideMenu.vue";
+import Loading from "~/components/Loading.vue";
+import { getBrandList } from "~/composables/useApiCalls";
+import axios from "axios";
+import { usePanelStore } from "@/stores/panel";
+import { useUserStore } from "@/stores/user";
+
+const { t } = useI18n();
+const localePath = useLocalePath();
+const panelStore = usePanelStore();
+const userStore = useUserStore();
+
+const title = computed(() => `${t("panel.brands.Your Brands")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: title });
+
+// TODO : if user has only one brand and he is the owner of that brand, redirect user to the brand-edit page
+
+// TODO : add branch count and staff list to brands
+
+const errorField = ref("");
+const responseMessage = ref("");
+
+const canCreateNewBrand = ref(false);
+
+// deleting ----------------------------------------
+const deleting = ref(false);
+const indexToDelete = ref(null);
+const openDeleteDialog = (index) => {
+    indexToDelete.value = index;
+    panelStore.openPopUp("delete-confirmation");
+};
+// TODO : add some sort of confirmation for this action
+const deleteRecord = async () => {
+    if (deleting.value) return;
+    deleting.value = true;
+
+    responseMessage.value = "";
+    errorField.value = "";
+
+    const id = records.list[indexToDelete.value]._id;
+
+    await axios
+        .delete(`/api/v1/panel/brands/${id}`)
+        .then((response) => {
+            // remove the brand from list of brands in the page
+            records.list.splice(indexToDelete.value, 1);
+            // remove the brand from list of brands in store
+            delete userStore.brands.list[id];
+            // allow user to create new brand
+            canCreateNewBrand.value = true;
+            panelStore.closePopUp();
+            panelStore.setSelectedBrand("");
+        })
+        .catch((e) => {
+            console.log({ e: e.response.data });
+            if (typeof e.response !== "undefined" && e.response.data) {
+                const errors = e.response.data.errors || e.response.data.message;
+                responseMessage.value = errors[0].errors[0];
+                errorField.value = errors[0].property;
+            }
+        })
+        .finally(() => (deleting.value = false));
+};
+// -------------------------------------------------
+
+// loading data -------------------------------------------------
+const leaving = ref(false);
+const indexToLeave = ref(null);
+const openLeaveDialog = (index) => {
+    indexToLeave.value = index;
+    panelStore.openPopUp("leave-confirmation");
+};
+const leaveBrand = async () => {
+    if (leaving.value) return;
+    leaving.value = true;
+
+    responseMessage.value = "";
+    errorField.value = "";
+
+    const id = records.list[indexToLeave.value]._id;
+
+    await axios
+        .delete(`/api/v1/panel/brands/leave/${id}`)
+        .then((response) => {
+            // remove the brand from list of brands in the page
+            records.list.splice(indexToLeave.value, 1);
+            // remove the brand from list of brands in store
+            delete userStore.brands.list[id];
+
+            panelStore.closePopUp();
+            panelStore.setSelectedBrand("");
+        })
+        .catch((e) => {
+            console.log({ e: e.response.data });
+            if (typeof e.response !== "undefined" && e.response.data) {
+                const errors = e.response.data.errors || e.response.data.message;
+                responseMessage.value = errors[0].errors[0];
+                errorField.value = errors[0].property;
+            }
+        })
+        .finally(() => (leaving.value = false));
+};
+// -------------------------------------------------
+
+// loading data -------------------------------------------------
+const loading = ref(true);
+const noMoreRecords = ref(false);
+const records = reactive({ list: [] });
+const { data, error } = await useLazyAsyncData(() => getBrandList());
+
+const handleData = (data) => {
+    records.list = data._records;
+    noMoreRecords.value = data._noMoreRecords;
+    canCreateNewBrand.value = data._canCreateNewBrand;
+    loading.value = false;
+};
+const handleErrors = (err) => {
+    errorField.value = "data";
+    if (typeof err.response !== "undefined" && err.response.data) {
+        const errors = err.response.data.errors || err.response.data.message;
+        responseMessage.value = errors[0].errors[0];
+    } else responseMessage.value = t("Something went wrong!");
+    // TODO : log errors in sentry type thing
+};
+
+if (data.value) handleData(data.value);
+watch(data, (val) => handleData(val));
+
+if (error.value) handleErrors(error.value);
+watch(error, (err) => handleData(err));
+// -------------------------------------------------
+</script>

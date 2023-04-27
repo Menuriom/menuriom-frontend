@@ -18,9 +18,8 @@ import Header from "~/components/web/Header.vue";
 import Footer from "~/components/web/Footer.vue";
 import { useUserStore } from "@/stores/user";
 
-// const { t } = useI18n();
 const localHead = useLocaleHead({ addDirAttribute: true, identifierAttribute: "id", addSeoAttributes: true });
-const userState = useUserStore();
+const userStore = useUserStore();
 
 useHead({
     // title: t("layouts.title"),
@@ -29,8 +28,8 @@ useHead({
 });
 
 onMounted(async () => {
-    await userState.getUserInfo().then(() => {
-        userState.setRefreshInterval();
+    await userStore.getUserInfo().then(() => {
+        userStore.setRefreshInterval();
     });
 });
 </script>

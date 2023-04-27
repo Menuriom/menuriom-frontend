@@ -8,6 +8,7 @@ module.exports = {
                 violet: "#9f74cd",
                 "baby-blue": "#7ecfe1",
                 "pencil-tip": "#373737",
+                "dolphin": "#464646",
             },
             boxShadow: {
                 nr5: "0 10px 20px -5px rgba(0, 0, 0, 0.05)",

@@ -25,6 +25,8 @@ span {
             <input
                 ref="input"
                 class="w-full bg-transparent p-1 pb-1.5 px-3 mt-6 rounded-b-md outline-none text-sm"
+                v-maska
+                :data-maska="mask"
                 autocomplete="false"
                 :required="required"
                 :name="name"
@@ -65,6 +67,7 @@ const props = defineProps({
     required: { type: Boolean, default: false },
     modelValue: String,
     type: String,
+    mask: String,
     error: { type: String, default: "" },
     shadow: { type: Boolean, default: true },
     iconName: { type: String },
@@ -72,7 +75,7 @@ const props = defineProps({
 // const { modelValue } = toRefs(props);
 defineEmits(["update:modelValue"]);
 
-const input = ref("");
+const input = ref(""); // Dom Ref
 
 let isFocused = ref(false);
 const focus = () => input.value.focus();

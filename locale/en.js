@@ -1,4 +1,8 @@
 export default {
+    Cancel: "Cancel",
+    "Not Now": "Not Now",
+    "Something went wrong!": "Something went wrong!",
+
     auth: {
         welcome: "Welcome to Menuriom",
         "Login or signup with your email": "Login or signup with your email",
@@ -94,15 +98,136 @@ export default {
         Monthly: "Monthly",
         Annual: "Annual",
         "Most Popular": "Most Popular",
-        "Toman": "Toman",
-        "month": "month",
-        "year": "year",
-        "Free": "Free",
-        "Always": "Always",
+        Toman: "Toman",
+        month: "month",
+        year: "year",
+        Free: "Free",
+        Always: "Always",
         "Everything on previous plan": "Everything on previous plan",
         "Get Started": "Get Started",
 
         "Compare Plans": "Compare Plans",
         "Overview of what is included in our different plans": "Overview of what is included in our different plans",
+    },
+
+    panel: {
+        "Your Menuriom Panel": "Your Menuriom Panel",
+        Congratulations: "Congratulations",
+        Ok: "Ok",
+        Save: "Save",
+
+        profile: {
+            "Your Profile": "Your Profile",
+            "Staff Invites": "Staff Invites",
+            "Create New Brand": "Create New Brand",
+            "Upgrade Plan": "Upgrade Plan",
+            "Help Center": "Help Center",
+            Logout: "Logout",
+        },
+
+        "side-menu": {
+            Orders: "Orders",
+            "Ordering App": "Ordering App",
+
+            Dashboard: "Dashboard",
+            "Language Settings": "Language Settings",
+            Branches: "Branches",
+            Menu: "Menu",
+            "Menu Editor": "Menu Editor",
+            "Style Editor": "Style Editor",
+            "QR Code": "QR Code",
+            "Splash Screen": "Splash Screen",
+            "Manage Staff": "Manage Staff",
+            "Staff Members": "Staff Members",
+            "Sent Invites": "Sent Invites",
+            "Staff Roles": "Staff Roles",
+            "Customers Feedback": "Customers Feedback",
+            "Billing & Plan Upgrade": "Billing & Plan Upgrade",
+            Support: "Support",
+            Settings: "Settings",
+
+            "Switch Brand": "Switch Brand",
+            "Switch between your restaurant brands": "Switch between your restaurant brands",
+            "Go To Brand Manager": "Go To Brand Manager",
+        },
+
+        "account-setup": {
+            "Setting Up Your Account": "Setting Up Your Account",
+            "please answer a few questions so that we can set up your account to fit you best":
+                "please answer a few questions so that we can set up your account to fit you best",
+            "What is your full name and phone number?": "What is your full name and phone number?",
+
+            "How are you planning to use Menuriom?": "How are you planning to use Menuriom?",
+            "For my store or restaurant": "For my store or restaurant",
+            "This is for users who want to create and manage their restaurant menus and orders":
+                "This is for users who want to create and manage their restaurant menus and orders",
+            "Im part of a staff or team": "I'm part of a staff or team",
+            "This is for users who are part of a restaurant and want to join as a staff member":
+                "This is for users who are part of a restaurant and want to join as a staff member",
+
+            "Create Your Brand": "Create Your Brand",
+            "Start by setting up your brand info": "Start by setting up your brand info",
+
+            "You have setup your brand and created your first branch": "You have setup your brand and created your first branch",
+            newBrandDirection: "Now you can start by setting up your menu or add your other branches and invite some staff members to join your team",
+        },
+
+        brands: {
+            "Brand Details": "Brand Details",
+            "Brand Name": "Brand Name",
+            "Brand Slogan": "Brand Slogan",
+            "How many branches does your business have?": "How many branches does your business have?",
+            Branch: "Branch",
+            "Your main branch info": "Your Main Branch Info",
+            "Main Branch Address": "Main Branch Address",
+            "Main Branch Telephone Number": "Main Branch Telephone Number",
+            "Images must be less than 1MB": "Images must be less than 1MB",
+
+            "Your Brands": "Your Brands",
+            "Create New Brand": "Create New Brand",
+            "No Brands Here Yet": "No Brands Here Yet",
+            "New Brand": "New Brand",
+            "Create new brands, edit your brand details, or manage brands that you are staff of":
+                "Create new brands, edit your brand details, or manage brands that you are staff of",
+            "Go To Dashboard": "Go To Dashboard",
+            "Edit Details": "Edit Details",
+            "Delete Brand": "Delete Brand",
+            "Leave Brand": "Leave Brand",
+            "Leave This Brand": "Leave This Brand",
+
+            "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
+            deletingBrandDesc: "all your branches, menus, and staff members in this brand will be deleted and your plan subscription will be canceled",
+            "This action cannot be reversed": "This action cannot be reversed",
+
+            "You are about to leave this brand": "You are about to leave brand <b>{name}</b>",
+            leavingBrandDesc: "By leaving the brand you won't be able to access this brand",
+            "You need new invitation to join this brand again": "You need new invitation to join this brand again",
+
+            "Check Invite List": "Check Invite List",
+            "Start by creating a brand, or check your invation list to join a existing brand":
+                "Start by creating a brand, or check your invation list to join a existing brand",
+        },
+
+        branches: {
+            Branches: "Branches",
+            "Here you can manage your branches and customize their menu": "Here you can manage your branches and customize their menu",
+            "New Branch": "New Branch",
+            "Create New Branch": "Create New Branch",
+            "Customize This Branch Menu": "Customize This Branch Menu",
+            "Edit Details": "Edit Details",
+            "Delete Branch": "Delete Branch",
+        },
+
+        languages: {
+            "Select your menu languages and setup your currency unit": "Select your menu languages and setup your currency unit",
+            "Your Menu Languages": "Your Menu Languages",
+            "Your Currency": "Your Currency",
+            "Choose which languages you want your menu to have": "Choose which languages you want your menu to have",
+            "You can translate your menu items and your restaurant info base on languages you choose":
+                "You can translate your menu items and your restaurant info base on languages you choose",
+            "You can choose up to n languages": "You can choose up to {n} languages",
+            "Upgrade your plan to support more languages": "Upgrade your plan to support more languages",
+            "Select what currency you want to show for your prices": "Select what currency you want to show for your prices",
+        },
     },
 };

@@ -136,14 +136,6 @@
                             v-model="mobile"
                             :error="errorField == 'mobile' ? responseMessage : ''"
                         />
-                        <Input
-                            name="size"
-                            iconName="Stack.svg"
-                            type="number"
-                            :placeholder="$t('auth.Business Size')"
-                            v-model="size"
-                            :error="errorField == 'size' ? responseMessage : ''"
-                        />
                         <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                             <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
@@ -189,8 +181,8 @@ import MobileInput from "~/components/form/MobileInput.vue";
 import Button from "~/components/web/Button.vue";
 import LangSwitch from "~/components/LangSwitch.vue";
 import Loading from "~/components/Loading.vue";
-import { useUserStore } from "@/stores/user";
 import axios from "axios";
+import { useUserStore } from "@/stores/user";
 
 useHead({ title: `Login | Signup - Menuriom` });
 definePageMeta({ layout: "auth", middleware: ["guest-gate"] });
@@ -216,7 +208,6 @@ const timeLeft = ref(300);
 const name = ref("");
 const family = ref("");
 const mobile = ref(null);
-const size = ref(null);
 
 const errorField = ref("");
 const responseMessage = ref("");
@@ -266,10 +257,9 @@ const sendVerificationCode = async () => {
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
-                if (typeof e.response.data.message === "object") {
-                    responseMessage.value = e.response.data.message[0].errors[0];
-                    errorField.value = e.response.data.message[0].property;
-                }
+                const errors = e.response.data.errors || e.response.data.message;
+                responseMessage.value = errors[0].errors[0];
+                errorField.value = errors[0].property;
             }
         })
         .finally(() => (loading.value = false));
@@ -293,17 +283,16 @@ const checkVerificationCode = async () => {
                 name.value = family.value = mobile.value = size.value = "";
             } else {
                 userStore.setRefreshInterval();
-                router.push(localePath("/user-panel"));
+                router.push(localePath("/panel"));
             }
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
-                if (typeof e.response.data.message === "object") {
-                    responseMessage.value = e.response.data.message[0].errors[0];
-                    errorField.value = e.response.data.message[0].property;
-                    // TODO
-                    // if the property is "" then make a global error either on top of the continue button or as a toast message
-                }
+                const errors = e.response.data.errors || e.response.data.message;
+                responseMessage.value = errors[0].errors[0];
+                errorField.value = errors[0].property;
+                // TODO
+                // if the property is "" then make a global error either on top of the continue button or as a toast message
             }
         })
         .finally(() => (loading.value = false));
@@ -328,18 +317,16 @@ const completeSignup = async () => {
             name: name.value,
             family: family.value,
             mobile: mobile.value,
-            size: size.value,
         })
         .then((response) => {
             userStore.setRefreshInterval();
-            router.push(localePath("/user-panel"));
+            router.push(localePath("/panel"));
         })
         .catch((e) => {
             if (typeof e.response !== "undefined" && e.response.data) {
-                if (typeof e.response.data.message === "object") {
-                    responseMessage.value = e.response.data.message[0].errors[0];
-                    errorField.value = e.response.data.message[0].property;
-                }
+                const errors = e.response.data.errors || e.response.data.message;
+                responseMessage.value = errors[0].errors[0];
+                errorField.value = errors[0].property;
             }
         })
         .finally(() => (loading.value = false));

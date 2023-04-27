@@ -40,7 +40,7 @@
                     <Button class="" type="primary" linkTo="/authenticate" v-if="!user.email.value">
                         <span class="text-lg font-bold">Try It For Free</span>
                     </Button>
-                    <Button class="" type="primary" linkTo="/user-panel" v-else>
+                    <Button class="" type="primary" linkTo="/panel" v-else>
                         <span class="text-lg font-bold">Head To Dashboard</span>
                     </Button>
                     OR
@@ -67,6 +67,6 @@ import Button from "~/components/web/Button.vue";
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 
-const userState = useUserStore();
-const user = storeToRefs(userState);
+const userStore = useUserStore();
+const user = storeToRefs(userStore);
 </script>

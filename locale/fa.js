@@ -1,4 +1,8 @@
 export default {
+    Cancel: "لغو",
+    "Not Now": "حالا نه",
+    "Something went wrong!": "مشکلی رخ داده",
+
     auth: {
         welcome: "به منوریوم خوش اومدی",
         "Login or signup with your email": "از طریق ایمیل خود ثبت نام کنید یا وارد حساب کاری خود شوید",
@@ -104,5 +108,126 @@ export default {
 
         "Compare Plans": "مقایسه پلن ها",
         "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
+    },
+
+    panel: {
+        "Your Menuriom Panel": "پنل منوریوم شما",
+        Congratulations: "تبریک",
+        Ok: "خُب",
+        Save: "ذخیره",
+
+        profile: {
+            "Your Profile": "حساب کاربری",
+            "Staff Invites": "درخواست های همکاری",
+            "Create New Brand": "ساخت برند جدید",
+            "Upgrade Plan": "ارتقا پلن",
+            "Help Center": "مرکز آموزش",
+            Logout: "خروج از حساب",
+        },
+
+        "side-menu": {
+            Orders: "سفارشات",
+            "Ordering App": "اپ سفارش گیر",
+
+            Dashboard: "داشبورد",
+            "Language Settings": "تنظیمات زبان",
+            Branches: "شعبه ها",
+            Menu: "مدیریت منو",
+            "Menu Editor": "وایرایش منو",
+            "Style Editor": "ویرایش ظاهر منو",
+            "QR Code": "بارکد کیو ار",
+            "Splash Screen": "صفحه کاور",
+            "Manage Staff": "مدیریت خدمه",
+            "Staff Members": "اعضای خدمه",
+            "Sent Invites": "درخواست های ارسالی",
+            "Staff Roles": "تعریف نقش خدمه",
+            "Customers Feedback": "بازخورد مشتریان",
+            "Billing & Plan Upgrade": "صورتحساب و ارتقا پلن",
+            Support: "پشتیبانی",
+            Settings: "تنظیمات",
+
+            "Switch Brand": "انتخاب برند",
+            "Switch between your restaurant brands": "بین برندهای رستوران خود سویچ کنید",
+            "Go To Brand Manager": "مدیریت برندها",
+        },
+
+        "account-setup": {
+            "Setting Up Your Account": "راه اندازی حساب کاربری",
+            "please answer a few questions so that we can set up your account to fit you best":
+                "لطفا به چند سوال ساده پاسخ بدید تا ما حساب شما رو به بهترین شکل تنظیم کنیم",
+            "What is your full name and phone number?": "نام و نام خانوادگی با شماره همراه خود را وارد کنید",
+
+            "How are you planning to use Menuriom?": "چگونه میخواید از منوریوم استفاده کنید؟",
+            "For my store or restaurant": "برای مغزه یا رستوران خودم",
+            "This is for users who want to create and manage their restaurant menus and orders":
+                "برای کاربرانی که میخواهند منو و سفارشات رستوران خود را مدیریت کنند",
+            "Im part of a staff or team": "من عضو تیم خدمه هستم",
+            "This is for users who are part of a restaurant and want to join as a staff member":
+                "برای کاربرانی که میخواهند به عنوان خدمه عضو تیم رستوران ای شوند",
+
+            "Create Your Brand": "برند خودتو بساز",
+            "Start by setting up your brand info": "مشخصات برند خود را وارد کنید",
+
+            "You have setup your brand and created your first branch": "شما برند و شعبه اصلی خود را ایجاد کردید",
+            newBrandDirection: "حالا میتونی منو رستوران خودتو بسازی یا شعبه های دیگه ای اضافه کنی و کارکنان خودتو به لیست خدمه اضافه کنی",
+        },
+
+        brands: {
+            "Brand Details": "مشخصات برند",
+            "Brand Name": "اسم برند",
+            "Brand Slogan": "شعار برند",
+            "How many branches does your business have?": "کسب و کار شما چند شعبه دارد؟",
+            Branch: "شعبه",
+            "Your main branch info": "مشخصات شعبه اصلی",
+            "Main Branch Address": "ادرس شعبه اصلی",
+            "Main Branch Telephone Number": "تلفن تماس شعبه اصلی",
+            "Images must be less than 1MB": "حجم عکس لوگو انتخابی باید کمتر از 1Mb باشد",
+
+            "Your Brands": "برندهای شما",
+            "Create New Brand": "ساخت برند جدید",
+            "No Brands Here Yet": "هیچ برندی اینجا نیست",
+            "New Brand": "ایجاد برند جدید",
+            "Create new brands, edit your brand details, or manage brands that you are staff of":
+                "برند جدید بسازید، مشخصات برند خودتون رو ویرایش کنید، یا برند هایی که عضوشون هستید رو مدیریت کنید",
+            "Go To Dashboard": "برو به داشبورد",
+            "Edit Details": "ویرایش جزئیات",
+            "Delete Brand": "حذف برند",
+            "Leave Brand": "ترک از برند",
+            "Leave This Brand": "ترک این برند",
+
+            "You are about to delete this brand": "شما در حال حذف برند <b>{name}</b> هستید",
+            deletingBrandDesc: "با پاک شدن برند؛ تمام شعبه ها، منوها و کارکنان خدمه که در این برند وجود دارند حذف خواهند شد و عضویت پلن شما نیز لغو میشود",
+            "This action cannot be reversed": "این عملیات برگشت ناپذیر است",
+
+            "You are about to leave this brand": "شما در حال ترک کردن برند <b>{name}</b> هستید",
+            leavingBrandDesc: "با ترک این برند شما دیگر دسترسی به این برند را نخواهید داشت",
+            "You need new invitation to join this brand again": "برای دسترسی دوباره به این برند، ابتدا باید درخواست دعوت جدیدی به شما ارسال شود",
+
+            "Check Invite List": "لیست دعوتنامه ها",
+            "Start by creating a brand, or check your invation list to join a existing brand":
+                "برند جدیدی بساز، یا برای عضویت در برند خاص لیست دعوت های خودتو چک کن",
+        },
+
+        branches: {
+            Branches: "شعبه ها",
+            "Here you can manage your branches and customize their menu": "اینجا میتونی شعبه های رستورانتو مدیریت کنی و منوهاشون رو سفارشی کنی",
+            "New Branch": "شعبه جدید",
+            "Create New Branch": "ساخت شعبه جدید",
+            "Customize This Branch Menu": "سفارشی سازی منوی این شعبه",
+            "Edit Details": "وایرایش جزئیات",
+            "Delete Branch": "حذف شعبه",
+        },
+
+        languages: {
+            "Select your menu languages and setup your currency unit": "زبان های منو و واحد پولی که تو منو نمایش داده میشه انتخاب کن",
+            "Your Menu Languages": "زبان های منو",
+            "Your Currency": "واحد پولی",
+            "Choose which languages you want your menu to have": "زبان هایی که میخواهید تو منو باشه رو انتخاب کنید",
+            "You can translate your menu items and your restaurant info base on languages you choose":
+                "بسته به زبان هایی که انخاب میکنید، میتونید منو رو ترجمه کنید",
+            "You can choose up to n languages": "شما میتونید تا {n} زبان انتخاب کنید",
+            "Upgrade your plan to support more languages": "برای انتخاب زبان های بیشتر پلن خود را ارتقا بدید",
+            "Select what currency you want to show for your prices": "واحد پولی که در منو نمایش داده میود رو انتخاب کنید",
+        },
     },
 };

@@ -1,0 +1,85 @@
+<style scoped>
+.wrapper {
+    height: 100vh;
+    height: 100svh;
+}
+
+main {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    main {
+        width: calc(100% - 275px);
+    }
+    main.wide {
+        width: 100%;
+    }
+}
+</style>
+
+<template>
+    <div
+        class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-50 shadow-nr5 overflow-clip"
+        :class="{ 'blur-sm': panelStore.popUpOpened != '' }"
+        id="app"
+    >
+        <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
+            <NuxtLoadingIndicator />
+            <Header />
+            <div class="relative flex w-full h-0 p-2 flex-grow">
+                <SideMenu v-if="!dontShowMenu" />
+                <main class="relative p-4 py-4 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
+                    <slot />
+                </main>
+            </div>
+        </Html>
+
+        <Teleport to="body">
+            <PersonalInfo />
+            <SelectAccountType />
+            <CreateNewBrand />
+            <FindYourTeam />
+        </Teleport>
+    </div>
+</template>
+
+<script setup>
+import Header from "~/components/panel/Header.vue";
+import SideMenu from "~/components/panel/SideMenu.vue";
+import PersonalInfo from "~/components/panel/dialogs/account-setup/PersonalInfo.vue";
+import SelectAccountType from "~/components/panel/dialogs/account-setup/SelectAccountType.vue";
+import CreateNewBrand from "~/components/panel/dialogs/account-setup/CreateNewBrand.vue";
+import FindYourTeam from "~/components/panel/dialogs/account-setup/FindYourTeam.vue";
+import { useUserStore } from "@/stores/user";
+import { usePanelStore } from "@/stores/panel";
+import { storeToRefs } from "pinia";
+
+const localHead = useLocaleHead({ addDirAttribute: true, identifierAttribute: "id", addSeoAttributes: true });
+useHead({
+    // title: t("layouts.title"),
+    link: [...localHead.value.link],
+    meta: [...localHead.value.meta],
+});
+
+const route = useRoute();
+const localePath = useLocalePath();
+const panelStore = usePanelStore();
+const userStore = useUserStore();
+const user = storeToRefs(userStore);
+
+const dontShowMenu = computed(() => {
+    for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/panel/:brandID")) return false;
+    return true;
+});
+
+if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") panelStore.openPopUp("personal-info");
+else if (Object.keys(user.brands.value.list).length == 0) panelStore.openPopUp("select-account-type");
+
+onMounted(async () => {
+    panelStore.loadSelectedBrand();
+
+    await userStore.refreshToken().catch((e) => {});
+    userStore.setRefreshInterval();
+});
+</script>

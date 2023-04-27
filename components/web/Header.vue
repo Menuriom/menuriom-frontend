@@ -72,7 +72,7 @@ nav {
                         @mouseover="toggleFeatures('hover', true)"
                         @mouseleave="toggleFeatures('hover', false)"
                     >
-                        <div class="f-inter flex items-center gap-1 cursor-pointer select-none" @click="toggleFeatures('click')">
+                        <div class="flex items-center gap-1 cursor-pointer select-none" @click="toggleFeatures('click')">
                             <span>{{ $t("header.Features") }}</span>
                             <img src="/icons/arrow.svg" alt=">" />
                         </div>
@@ -99,25 +99,25 @@ nav {
                         </transition>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="f-inter flex items-center gap-4 w-full" :to="localePath('/demo')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/demo')">
                             <span>{{ $t("header.Demo") }}</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="f-inter flex items-center gap-4 w-full" :to="localePath('/pricing')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')">
                             <span>{{ $t("header.Pricing") }} </span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="f-inter flex items-center gap-4 w-full" :to="localePath('/how-it-works')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/how-it-works')">
                             <span>{{ $t("header.How It Works") }} </span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 hover:underline">
-                        <nuxt-link class="f-inter flex items-center gap-4 w-full" :to="localePath('/contact-us')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')">
                             <span>{{ $t("header.Contact Us") }}</span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
@@ -137,7 +137,7 @@ nav {
                     </nuxt-link>
                     <nuxt-link
                         class="link 2sm:hidden p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                        :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/user-panel`)"
+                        :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
                         :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
                     >
                         <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
@@ -159,7 +159,7 @@ nav {
             </nuxt-link>
             <nuxt-link
                 class="link hidden 2sm:flex text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/user-panel`)"
+                :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
                 :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
             >
                 <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
@@ -182,8 +182,8 @@ import { storeToRefs } from "pinia";
 const localePath = useLocalePath();
 const { locale, t } = useI18n();
 
-const userState = useUserStore();
-const user = storeToRefs(userState);
+const userStore = useUserStore();
+const user = storeToRefs(userStore);
 
 const featureDropdown = ref(null); //Ref to DOM
 const featureListOpen = ref(false);

@@ -13,12 +13,12 @@
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 
-const userState = useUserStore();
-const user = storeToRefs(userState);
+const userStore = useUserStore();
+const user = storeToRefs(userStore);
 
 onMounted(async () => {
-    if (user.name.value === "" || user.family.value === "") await userState.getUserInfo();
-    await userState.refreshToken().catch((e) => {});
-    userState.setRefreshInterval();
+    // if (user.name.value === "" || user.family.value === "") await userStore.getUserInfo();
+    await userStore.refreshToken().catch((e) => {});
+    userStore.setRefreshInterval();
 });
 </script>

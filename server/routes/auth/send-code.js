@@ -3,6 +3,8 @@ import axios from "axios";
 export default defineEventHandler(async (event) => {
     const { req, res } = event.node;
 
+    const lang = getCookie(event, "i18n_redirected") || "fa";
+
     let resStatus = 499;
     let resData = {};
 
@@ -16,7 +18,10 @@ export default defineEventHandler(async (event) => {
         .post(
             `${process.env.API_BASE_URL}/auth/send-code`,
             { username: data.username },
-            { timeout: 15 * 1000, headers: { ...req.headers, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() } }
+            {
+                timeout: 15 * 1000,
+                headers: { ...req.headers, "accept-language": lang, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() },
+            }
         )
         .then((response) => {
             resStatus = response.status;

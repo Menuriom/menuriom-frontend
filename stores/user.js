@@ -9,8 +9,11 @@ export const useUserStore = defineStore("user", () => {
     const family = ref("");
     const email = ref("");
     const mobile = ref("");
-    const role = ref("");
-    const permissions = ref([]);
+    const brands = reactive({
+        list: {
+            // id: {logo:"", name: "", role: "", permissions: ""},
+        },
+    });
 
     const isIntervalSet = ref(false);
     const loading = ref(false);
@@ -21,8 +24,11 @@ export const useUserStore = defineStore("user", () => {
         family.value = "";
         email.value = "";
         mobile.value = "";
-        role.value = "";
-        permissions.value = [];
+        brands.list = {};
+    };
+
+    const injectNewBrand = (brand) => {
+        brands.list = { ...brands.list, ...brand };
     };
 
     const getUserInfo = async () => {
@@ -32,13 +38,12 @@ export const useUserStore = defineStore("user", () => {
         await axios
             .get(`/api/v1/user/info`, { timeout: 30 * 1000 })
             .then((response) => {
-                avatar.value = response.data.avatar;
+                avatar.value = response.data.avatar || "/avatar.webp";
                 name.value = response.data.name;
                 family.value = response.data.family;
                 email.value = response.data.email;
                 mobile.value = response.data.mobile;
-                role.value = response.data.role;
-                permissions.value = [...response.data.permissions];
+                brands.list = response.data.brands;
             })
             .catch((e) => {
                 throw e;
@@ -76,7 +81,9 @@ export const useUserStore = defineStore("user", () => {
         await axios
             .post(`/auth/logout`, null, { timeout: 30 * 1000 })
             .then(() => resetUserInfo())
-            .catch((e) => {})
+            .catch((e) => {
+                throw e;
+            })
             .finally(() => (loading.value = false));
     };
 
@@ -86,11 +93,11 @@ export const useUserStore = defineStore("user", () => {
         family,
         email,
         mobile,
-        role,
-        permissions,
+        brands,
         isIntervalSet,
         loading,
         resetUserInfo,
+        injectNewBrand,
         getUserInfo,
         refreshToken,
         setRefreshInterval,
