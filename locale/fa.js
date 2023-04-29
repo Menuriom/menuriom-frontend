@@ -115,6 +115,8 @@ export default {
         Congratulations: "تبریک",
         Ok: "خُب",
         Save: "ذخیره",
+        Delete: "حذف",
+        Select: "انتخاب",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -216,18 +218,21 @@ export default {
             "Customize This Branch Menu": "سفارشی سازی منوی این شعبه",
             "Edit Details": "وایرایش جزئیات",
             "Delete Branch": "حذف شعبه",
+
+            "You are about to delete this branch": "شما در حال حذف شعبه <b>{name}</b> هستید",
+            deletingBranchDesc: "با حذف این شعبه، تمام منو های سفارشی شده برای این شعبه نیز حذف میشوند",
         },
 
         languages: {
             "Select your menu languages and setup your currency unit": "زبان های منو و واحد پولی که تو منو نمایش داده میشه انتخاب کن",
-            "Your Menu Languages": "زبان های منو",
-            "Your Currency": "واحد پولی",
-            "Choose which languages you want your menu to have": "زبان هایی که میخواهید تو منو باشه رو انتخاب کنید",
+            "Menu Languages": "زبان های منو",
+            Currency: "واحد پولی",
+            "Choose which languages you want your menu to have": "زبان هایی که میخواهید داخل منو نمایش داده بشه رو انتخاب کنید",
             "You can translate your menu items and your restaurant info base on languages you choose":
-                "بسته به زبان هایی که انخاب میکنید، میتونید منو رو ترجمه کنید",
+                "بسته به زبان هایی که انتخاب میکنید، میتونید منو رو ترجمه کنید",
             "You can choose up to n languages": "شما میتونید تا {n} زبان انتخاب کنید",
             "Upgrade your plan to support more languages": "برای انتخاب زبان های بیشتر پلن خود را ارتقا بدید",
-            "Select what currency you want to show for your prices": "واحد پولی که در منو نمایش داده میود رو انتخاب کنید",
+            "Select what currency you want to show for your prices": "واحد پولی که در منو نمایش داده میشود رو انتخاب کنید",
         },
     },
 };

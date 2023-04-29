@@ -1,6 +1,7 @@
 import axios from "axios";
 import { delay, getRequestConfig } from "~/composables/useServerUtil";
 
+// brands ---------------------------------------------------------
 export const getBrandList = async () => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/brands`, {});
     const params = [`pp=25`];
@@ -23,7 +24,6 @@ export const getBrandList = async () => {
 
     return { _records, _noMoreRecords, _canCreateNewBrand };
 };
-
 export const getBrandSettings = async (brandID) => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/brands/${brandID}/settings`, {});
     const params = [];
@@ -31,20 +31,47 @@ export const getBrandSettings = async (brandID) => {
 
     let _languages = [];
     let _currency = "";
+    let _languageLimit = 2;
 
     await axios
         .get(url, { headers: headers })
         .then((response) => {
             _languages = response.data.languages;
             _currency = response.data.currency;
+            _languageLimit = response.data.languageLimit;
         })
         .catch((e) => {
             throw e;
         });
 
-    return { _languages, _currency };
+    return { _languages, _currency, _languageLimit };
 };
+// ---------------------------------------------------------
 
+// branches ---------------------------------------------------------
+export const getBranchList = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/branches/${brandID}/`, {});
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _records = [];
+    let _canCreateNewBranch = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _records = [..._records, ...response.data.records];
+            _canCreateNewBranch = response.data.canCreateNewBranch;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _records, _canCreateNewBranch };
+};
+// ---------------------------------------------------------
+
+// general APIs ---------------------------------------------------------
 export const getLanguages = async () => {
     let { url, headers } = getRequestConfig(`/api/v1/general/language-list`, {});
     const params = [];
@@ -61,7 +88,6 @@ export const getLanguages = async () => {
 
     return { _languages };
 };
-
 export const getCurrencies = async () => {
     let { url, headers } = getRequestConfig(`/api/v1/general/currency-list`, {});
     const params = [];
@@ -78,3 +104,4 @@ export const getCurrencies = async () => {
 
     return { _currencies };
 };
+// ---------------------------------------------------------

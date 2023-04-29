@@ -17,8 +17,8 @@ export default defineNuxtConfig({
                 // { rel: "mask-icon", href: "/pwa/safari-pinned-tab.svg", color: "#FFFFFF" },
             ],
         },
-        pageTransition: { name: "page", mode: "out-in" },
-        layoutTransition: { name: "page", mode: "out-in" },
+        pageTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
+        layoutTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
     },
 
     css: [
@@ -44,7 +44,11 @@ export default defineNuxtConfig({
     },
 
     // vite options
-    vite: {},
+    vite: {
+        resolve: {
+            dedupe: ["vue"],
+        },
+    },
 
     nitro: {
         compressPublicAssets: true,

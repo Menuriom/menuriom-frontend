@@ -115,6 +115,8 @@ export default {
         Congratulations: "Congratulations",
         Ok: "Ok",
         Save: "Save",
+        Delete: "Delete",
+        Select: "Select",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -216,12 +218,15 @@ export default {
             "Customize This Branch Menu": "Customize This Branch Menu",
             "Edit Details": "Edit Details",
             "Delete Branch": "Delete Branch",
+
+            "You are about to delete this branch": "You are about to delete branch <b>{name}</b>",
+            deletingBranchDesc: "By deleting this branch, all custom menus of this branch will also be deleted",
         },
 
         languages: {
             "Select your menu languages and setup your currency unit": "Select your menu languages and setup your currency unit",
-            "Your Menu Languages": "Your Menu Languages",
-            "Your Currency": "Your Currency",
+            "Menu Languages": "Menu Languages",
+            Currency: "Currency",
             "Choose which languages you want your menu to have": "Choose which languages you want your menu to have",
             "You can translate your menu items and your restaurant info base on languages you choose":
                 "You can translate your menu items and your restaurant info base on languages you choose",

@@ -25,7 +25,7 @@
         <section class="flex flex-col w-full">
             <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-show="!loading">
                 <li
-                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white border group hover:shadow-nr5 transition-all overflow-hidden"
+                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
                     v-for="(brand, i) in records.list"
                     :key="i"
                 >
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="w-full rounded-lg bg-white border hover:shadow-nr5 transition-all overflow-hidden" v-if="canCreateNewBrand">
+                <li class="w-full rounded-lg bg-white shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden" v-if="canCreateNewBrand">
                     <nuxt-link class="flex flex-col items-center justify-center gap-4 w-full h-full p-3" :to="localePath(`/panel/brand/creation`)">
                         <img class="down-pop w-32 object-contain" src="~/assets/images/store-door.webp" />
                         <div class="flex items-center gap-2">
@@ -139,7 +139,7 @@
                         {{ $t("panel.brands.This action cannot be reversed") }}
                     </small>
                     <hr class="w-full opacity-40" />
-                    <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
+                    <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
@@ -169,7 +169,7 @@
                         {{ $t("panel.brands.You need new invitation to join this brand again") }}
                     </small>
                     <hr class="w-full opacity-40" />
-                    <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
+                    <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
@@ -317,6 +317,7 @@ const handleErrors = (err) => {
         responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     // TODO : log errors in sentry type thing
+    if (process.server) console.log({ err });
 };
 
 if (data.value) handleData(data.value);
