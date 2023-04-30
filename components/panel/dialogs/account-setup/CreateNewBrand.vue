@@ -45,14 +45,14 @@
                             class="w-full flex-grow"
                             :required="true"
                             type="text"
-                            :placeholder="$t('panel.brands.Brand Name')"
+                            :label="$t('panel.brands.Brand Name')"
                             v-model="name"
                             :error="errorField == 'name' ? responseMessage : ''"
                         />
                         <Input
                             class="w-full flex-grow"
                             type="text"
-                            :placeholder="$t('panel.brands.Brand Slogan')"
+                            :label="$t('panel.brands.Brand Slogan')"
                             v-model="slogan"
                             :error="errorField == 'slogan' ? responseMessage : ''"
                         />
@@ -63,21 +63,16 @@
                     <img class="w-5" src="~/assets/images/panel-icons/store.png" />
                     {{ $t("panel.brands.How many branches does your business have?") }}
                 </h4>
-                <RangeSlider v-model="branchSize" :placeholder="$t('panel.brands.Branch')" :min="1" :max="20" />
+                <RangeSlider v-model="branchSize" :labeel="$t('panel.brands.Branch')" :min="1" :max="20" />
                 <hr class="w-full opacity-25" />
                 <h4 class="flex items-center gap-2">
                     <img class="w-5" src="~/assets/images/panel-icons/newspaper.png" />
                     {{ $t("panel.brands.Your main branch info") }}
                 </h4>
+                <Input type="text" :labeel="$t('panel.brands.Main Branch Address')" v-model="address" :error="errorField == 'address' ? responseMessage : ''" />
                 <Input
                     type="text"
-                    :placeholder="$t('panel.brands.Main Branch Address')"
-                    v-model="address"
-                    :error="errorField == 'address' ? responseMessage : ''"
-                />
-                <Input
-                    type="text"
-                    :placeholder="$t('panel.brands.Main Branch Telephone Number')"
+                    :labeel="$t('panel.brands.Main Branch Telephone Number')"
                     mask="0##-########"
                     v-model="tel"
                     :error="errorField == 'tel' ? responseMessage : ''"
@@ -98,7 +93,7 @@
                     </button>
                     <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
                         <span v-if="!loading"> {{ $t("panel.brands.Create New Brand") }} </span>
-                        <Loading class="" v-else />
+                        <Loading v-else />
                     </button>
                 </div>
             </form>
@@ -166,7 +161,7 @@ const createBrand = async () => {
     const data = new FormData();
     if (logo.value.files[0]) {
         if (logo.value.files[0].size > 1_048_576) {
-            responseMessage.value = t("panel.brands.Images must be less than 1MB");
+            responseMessage.value = t("panel.Images must be less than nMB", { size: 1 });
             loading.value = false;
             return;
         }

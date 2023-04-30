@@ -13,7 +13,7 @@
                 </small> -->
             </div>
             <button
-                class="btn gradient flex items-center justify-center gap-2 text-sm p-3 px-6 rounded-lg text-white"
+                class="btn flex items-center justify-center gap-2 text-sm p-3 px-6 rounded-lg bg-violet text-white"
                 :class="{ 'opacity-50 cursor-not-allowed': saving }"
                 :disabled="saving"
                 @click="saveSetting()"
@@ -24,7 +24,7 @@
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
         <section class="flex flex-wrap items-start gap-4 w-full" ref="sec">
-            <div class="flex flex-col gap-2 p-4 bg-white rounded-md w-full max-w-3xl shadow-nr5 flex-grow">
+            <div class="flex flex-col gap-2 p-4 bg-white rounded-lg w-full max-w-3xl shadow-nr5 flex-grow">
                 <h2 class="text-2xl/none font-bold">{{ $t("panel.languages.Menu Languages") }}</h2>
                 <div class="flex flex-col">
                     <small>{{ $t("panel.languages.Choose which languages you want your menu to have") }}</small>
@@ -61,11 +61,11 @@
                     </nuxt-link>
                 </div>
             </div>
-            <div class="flex flex-col gap-2 p-4 bg-white rounded-md w-full md:w-max shadow-nr5 flex-shrink-0">
+            <div class="flex flex-col gap-2 p-4 bg-white rounded-lg w-full md:w-max shadow-nr5 flex-shrink-0">
                 <h2 class="text-2xl/none font-bold">{{ $t("panel.languages.Currency") }}</h2>
                 <small>{{ $t("panel.languages.Select what currency you want to show for your prices") }}</small>
                 <hr class="w-full border-gray-300 opacity-50" />
-                <ul class="flex flex-col gap-2 w-full max-w-screen-2xs" v-if="!loadingCurrencies">
+                <ul class="flex flex-col gap-2 w-full max-w-screen-sm" v-if="!loadingCurrencies">
                     <li
                         class="flex items-center justify-between gap-2 p-2 rounded-md cursor-pointer"
                         :class="[i == settings.currency ? 'bg-dolphin text-white' : 'bg-neutral-50']"
@@ -82,7 +82,7 @@
                 <Loading v-else />
             </div>
         </section>
-        <!-- <small class="flex items-start text-xs text-rose-500" v-if="errorField === 'data' && responseMessage !== ''">
+        <!-- <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="errorField === 'data' && responseMessage !== ''">
             <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
         </small> -->
     </div>

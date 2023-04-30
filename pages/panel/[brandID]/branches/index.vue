@@ -13,7 +13,7 @@
                 </small>
             </div>
             <nuxt-link
-                class="flex items-center justify-center gap-2 p-3 text-sm rounded-lg gradient text-white shadow-nr15 hover:scale-105 transition-all flex-shrink-0"
+                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
                 :to="localePath(`/panel/${route.params.brandID}/branches/creation`)"
             >
                 <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
@@ -51,14 +51,14 @@
                     </SlideMenu>
                     <h4 class="text-xl font-semibold me-auto w-52">{{ branch.translation?.[locale]?.name || branch.name }}</h4>
                     <div class="relative flex flex-col rounded-full mb-8">
-                        <div class="relative w-56 h-36 rounded-md bg-pencil-tip shadow-nr15 z-2">
+                        <div class="relative w-56 h-36 rounded-md overflow-hidden bg-pencil-tip shadow-nr15 z-2">
                             <img class="w-full h-full object-cover" :src="branch.gallery[0]" v-if="branch.gallery[0]" />
                         </div>
-                        <div class="absolute -start-6 top-8 w-56 h-36 bg-dolphin rounded-md shadow-nr15">
-                            <img class="w-full h-full object-cover" :src="branch.gallery[1]" v-if="branch.gallery[1]" />
-                        </div>
-                        <div class="absolute -end-6 top-4 w-56 h-36 bg-neutral-600 rounded-md shadow-nr15">
+                        <div class="absolute -end-6 top-4 w-56 h-36 bg-dolphin rounded-md overflow-hidden shadow-nr15">
                             <img class="w-full h-full object-cover" :src="branch.gallery[2]" v-if="branch.gallery[2]" />
+                        </div>
+                        <div class="absolute -start-6 top-8 w-56 h-36 bg-neutral-600 rounded-md overflow-hidden shadow-nr15">
+                            <img class="w-full h-full object-cover" :src="branch.gallery[1]" v-if="branch.gallery[1]" />
                         </div>
                     </div>
                     <hr class="w-full border-dolphin opacity-10" />
@@ -89,7 +89,7 @@
                 </li>
             </ul>
             <Loading v-if="loading" />
-            <small class="flex items-start text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
+            <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
                 <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
         </section>
@@ -172,14 +172,13 @@ const deleteRecord = async () => {
     const id = records.list[indexToDelete.value]._id;
 
     await axios
-        .delete(`/api/v1/panel/branches/${id}?brandID=${route.params.brandID}`)
+        .delete(`/api/v1/panel/branches/${id}`)
         .then((response) => {
             records.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();
             // TODO : allow user to create new branch if the limit is under the plan's limit
         })
         .catch((e) => {
-            console.log({ e: e.response.data });
             if (typeof e.response !== "undefined" && e.response.data) {
                 const errors = e.response.data.errors || e.response.data.message;
                 responseMessage.value = errors[0].errors[0];

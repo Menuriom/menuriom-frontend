@@ -25,7 +25,7 @@
                         name="name"
                         :required="true"
                         type="text"
-                        :placeholder="$t('auth.First Name')"
+                        :label="$t('auth.First Name')"
                         v-model="name"
                         :error="errorField == 'name' ? responseMessage : ''"
                     />
@@ -34,7 +34,7 @@
                         name="family"
                         :required="true"
                         type="text"
-                        :placeholder="$t('auth.Last Name')"
+                        :label="$t('auth.Last Name')"
                         v-model="family"
                         :error="errorField == 'family' ? responseMessage : ''"
                     />
@@ -44,7 +44,7 @@
                     :required="true"
                     type="text"
                     iconName="Mobile-phone.svg"
-                    :placeholder="$t('auth.Phone Number')"
+                    :label="$t('auth.Phone Number')"
                     v-model="mobile"
                     :error="errorField == 'mobile' ? responseMessage : ''"
                 />

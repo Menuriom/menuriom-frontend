@@ -117,6 +117,9 @@ export default {
         Save: "Save",
         Delete: "Delete",
         Select: "Select",
+        "Go Back": "Go Back",
+        "Images must be less than nMB": "Images must be less than {size} MB",
+        Uploading: "Uploading",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -183,7 +186,6 @@ export default {
             "Your main branch info": "Your Main Branch Info",
             "Main Branch Address": "Main Branch Address",
             "Main Branch Telephone Number": "Main Branch Telephone Number",
-            "Images must be less than 1MB": "Images must be less than 1MB",
 
             "Your Brands": "Your Brands",
             "Create New Brand": "Create New Brand",
@@ -221,6 +223,19 @@ export default {
 
             "You are about to delete this branch": "You are about to delete branch <b>{name}</b>",
             deletingBranchDesc: "By deleting this branch, all custom menus of this branch will also be deleted",
+
+            "Branch Creation": "Branch Creation",
+            "Create Branch": "Create Branch",
+            "Branch Images": "Branch Images",
+            "Add Image": "Add Image",
+            "General Info": "General Info",
+            "Branch Address": "Branch Address",
+            "Branch Name": "Branch Name",
+            "Branch Postal Code": "Branch Postal Code",
+            "Phone Numbers": "Phone Numbers",
+            "Phone Number": "Phone Number",
+            "Add Phone Number": "Add Phone Number",
+            "10 digit number": "10 digit number",
         },
 
         languages: {

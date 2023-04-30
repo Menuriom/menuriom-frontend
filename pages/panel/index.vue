@@ -13,7 +13,7 @@
                 </small>
             </div>
             <nuxt-link
-                class="flex items-center justify-center gap-2 p-3 text-sm rounded-lg gradient text-white shadow-nr15 hover:scale-105 transition-all flex-shrink-0"
+                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
                 :to="localePath('/panel/brand/creation')"
                 v-if="canCreateNewBrand"
             >
@@ -122,7 +122,7 @@
                 </div>
             </div>
             <Loading v-if="loading" />
-            <small class="flex items-start text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
+            <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
                 <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
         </section>
@@ -248,7 +248,6 @@ const deleteRecord = async () => {
             panelStore.setSelectedBrand("");
         })
         .catch((e) => {
-            console.log({ e: e.response.data });
             if (typeof e.response !== "undefined" && e.response.data) {
                 const errors = e.response.data.errors || e.response.data.message;
                 responseMessage.value = errors[0].errors[0];
@@ -287,7 +286,6 @@ const leaveBrand = async () => {
             panelStore.setSelectedBrand("");
         })
         .catch((e) => {
-            console.log({ e: e.response.data });
             if (typeof e.response !== "undefined" && e.response.data) {
                 const errors = e.response.data.errors || e.response.data.message;
                 responseMessage.value = errors[0].errors[0];

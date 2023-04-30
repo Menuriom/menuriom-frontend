@@ -117,6 +117,9 @@ export default {
         Save: "ذخیره",
         Delete: "حذف",
         Select: "انتخاب",
+        "Go Back": "بازگشت",
+        "Images must be less than nMB": "حجم عکس انتخابی باید کمتر از {size} Mb باشد",
+        Uploading: "درحال ارسال",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -183,7 +186,6 @@ export default {
             "Your main branch info": "مشخصات شعبه اصلی",
             "Main Branch Address": "ادرس شعبه اصلی",
             "Main Branch Telephone Number": "تلفن تماس شعبه اصلی",
-            "Images must be less than 1MB": "حجم عکس لوگو انتخابی باید کمتر از 1Mb باشد",
 
             "Your Brands": "برندهای شما",
             "Create New Brand": "ساخت برند جدید",
@@ -221,6 +223,19 @@ export default {
 
             "You are about to delete this branch": "شما در حال حذف شعبه <b>{name}</b> هستید",
             deletingBranchDesc: "با حذف این شعبه، تمام منو های سفارشی شده برای این شعبه نیز حذف میشوند",
+
+            "Branch Creation": "ساخت شعبه جدید",
+            "Create Branch": "ساخت شعبه",
+            "Branch Images": "عکس های شعبه",
+            "Add Image": "افزودن عکس",
+            "General Info": "اطلاعات کلی",
+            "Branch Address": "آدرس شعبه",
+            "Branch Name": "نام شعبه",
+            "Branch Postal Code": "کد پستی شعبه",
+            "Phone Numbers": "تلفن های تماس",
+            "Phone Number": "تلفن تماس",
+            "Add Phone Number": "افزودن شماره تماس",
+            "10 digit number": "کد 10 رقمی",
         },
 
         languages: {

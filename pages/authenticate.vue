@@ -11,8 +11,8 @@
 </style>
 
 <template>
-    <!-- TODO : refactor the stage 3 business size to be a check box rather than a simple user input -->
     <div class="flex flex-col items-center justify-center gap-4">
+        <!-- TODO : refactor the stage 3 business size to be a check box rather than a simple user input -->
         <div class="flex flex-col items-center gap-6 w-full md:w-max max-w-md p-6 md:p-8 bg-pencil-tip rounded-lg shadow-2xl overflow-hidden">
             <div class="gradient-re flex items-center justify-center w-max p-1 rounded-md">
                 <img class="w-16 h-16 -ml-0.5" src="/logo.svg" alt="Menuriom" />
@@ -41,7 +41,7 @@
                             iconName="envelop.svg"
                             :required="true"
                             type="email"
-                            :placeholder="$t('auth.Email Address')"
+                            :label="$t('auth.Email Address')"
                             v-model="email"
                             :error="errorField == 'email' ? responseMessage : ''"
                         />
@@ -78,7 +78,7 @@
                             iconName="code.svg"
                             :required="true"
                             type="text"
-                            :placeholder="$t('auth.Verfication Code')"
+                            :label="$t('auth.Verfication Code')"
                             v-model="code"
                             :error="errorField == 'code' ? responseMessage : ''"
                         />
@@ -114,7 +114,7 @@
                                 name="name"
                                 :required="true"
                                 type="text"
-                                :placeholder="$t('auth.First Name')"
+                                :label="$t('auth.First Name')"
                                 v-model="name"
                                 :error="errorField == 'name' ? responseMessage : ''"
                             />
@@ -122,7 +122,7 @@
                                 name="family"
                                 :required="true"
                                 type="text"
-                                :placeholder="$t('auth.Last Name')"
+                                :label="$t('auth.Last Name')"
                                 v-model="family"
                                 :error="errorField == 'family' ? responseMessage : ''"
                             />
@@ -132,7 +132,7 @@
                             :required="true"
                             type="text"
                             iconName="Mobile-phone.svg"
-                            :placeholder="$t('auth.Phone Number')"
+                            :label="$t('auth.Phone Number')"
                             v-model="mobile"
                             :error="errorField == 'mobile' ? responseMessage : ''"
                         />
