@@ -96,7 +96,7 @@ export const getCurrencies = async () => {
     let _currencies = {};
 
     await axios
-        .get(url, { headers: headers, timeout: 10 * 1000 })
+        .get(url, { headers: headers })
         .then((response) => (_currencies = { ...response.data }))
         .catch((e) => {
             throw e;
