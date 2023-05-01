@@ -120,6 +120,9 @@ export default {
         "Go Back": "Go Back",
         "Images must be less than nMB": "Images must be less than {size} MB",
         Uploading: "Uploading",
+        Languages: "Languages",
+        Default: "Default",
+        needMoreLang: "To support multiple languages for your menu please go to language settings and choose the languages you want.",
 
         profile: {
             "Your Profile": "Your Profile",

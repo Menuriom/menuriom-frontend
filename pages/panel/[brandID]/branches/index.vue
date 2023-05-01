@@ -189,18 +189,6 @@ const deleteRecord = async () => {
 };
 // -------------------------------------------------
 
-// loading data -------------------------------------------------
-const loading = ref(true);
-const noMoreRecords = ref(false);
-const records = reactive({ list: [] });
-const { data, error } = await useLazyAsyncData(() => getBranchList(route.params.brandID));
-
-const handleData = (data) => {
-    records.list = data._records;
-    noMoreRecords.value = data._noMoreRecords;
-    canCreateNewBranch.value = data._canCreateNewBranch;
-    loading.value = false;
-};
 const handleErrors = (err) => {
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
@@ -211,10 +199,22 @@ const handleErrors = (err) => {
     if (process.server) console.log({ err });
 };
 
-if (data.value) handleData(data.value);
-watch(data, (val) => handleData(val));
+// getBranchList -------------------------------------------------
+const loading = ref(true);
+const noMoreRecords = ref(false);
+const records = reactive({ list: [] });
+const getBranchList_results = await useLazyAsyncData(() => getBranchList(route.params.brandID));
 
-if (error.value) handleErrors(error.value);
-watch(error, (err) => handleData(err));
+if (getBranchList_results.error.value) handleErrors(getBranchList_results.error.value);
+watch(getBranchList_results.error, (err) => handleErrors(err));
+
+const handleBranchList_results = (data) => {
+    records.list = data._records;
+    noMoreRecords.value = data._noMoreRecords;
+    canCreateNewBranch.value = data._canCreateNewBranch;
+    loading.value = false;
+};
+if (getBranchList_results.data.value) handleBranchList_results(getBranchList_results.data.value);
+watch(getBranchList_results.data, (val) => handleBranchList_results(val));
 // -------------------------------------------------
 </script>

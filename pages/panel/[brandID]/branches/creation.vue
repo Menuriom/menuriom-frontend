@@ -22,7 +22,7 @@
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
-        <section class="flex flex-col items-center justify-center w-full">
+        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <div class="flex flex-col gap-1">
                     <div class="flex items-center gap-2">
@@ -53,15 +53,20 @@
                     <Icon class="w-5 h-5 bg-white" name="newspaper.svg" folder="icons/light" size="20px" />
                     <h3 class="text-lg">{{ $t("panel.branches.General Info") }}</h3>
                 </div>
-                <Input :label="$t('panel.branches.Branch Name')" required v-model="name" :error="errorField == 'name' ? responseMessage : ''" />
+                <Input
+                    :label="$t('panel.branches.Branch Name')"
+                    :required="formLang == 'default'"
+                    v-model="name.values[formLang]"
+                    :error="errorField == `name.${formLang}` ? responseMessage : ''"
+                />
                 <div class="flex flex-wrap md:flex-nowrap items-start gap-4 w-full">
                     <Input
                         name="address"
                         class="w-full flex-grow"
                         :label="$t('panel.branches.Branch Address')"
-                        required
-                        v-model="address"
-                        :error="errorField == 'address' ? responseMessage : ''"
+                        :required="formLang == 'default'"
+                        v-model="address.values[formLang]"
+                        :error="errorField == `address.${formLang}` ? responseMessage : ''"
                     />
                     <Input
                         name="postalCode"
@@ -141,12 +146,14 @@
                     </button>
                 </div>
             </div>
+            <FormLangList :formLang="formLang" @update:formLang="formLang = $event" @updateLanguages="setLangVariables($event)" />
         </section>
     </div>
 </template>
 
 <script setup>
 import Input from "~/components/form/Input.vue";
+import FormLangList from "~/components/panel/FormLangList.vue";
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
 import { usePanelStore } from "@/stores/panel";
@@ -167,18 +174,13 @@ useHead({ title: title });
 const fileInput = ref(""); // DOM ref
 const fileInputForm = ref(""); // DOM ref
 
+const formLang = ref("default");
 const errorField = ref("");
 const responseMessage = ref("");
 
 const gallery = ref([]);
-const name = reactive({
-    default: "", // TODO
-    translation: { en: "", fa: "" },
-});
-const address = reactive({
-    default: "",
-    translation: { en: "", fa: "" },
-});
+const name = reactive({ values: { default: "" } });
+const address = reactive({ values: { default: "" } });
 const postalCode = ref("");
 const telephoneNumbers = ref(["", ""]);
 
@@ -203,15 +205,15 @@ const save = async () => {
     if (saving.value) return;
     saving.value = true;
 
+    formLang.value = "default";
     responseMessage.value = "";
     errorField.value = "";
 
     const data = new FormData();
     gallery.value.forEach((image) => data.append("gallery", image.file));
-    data.append("name", name.value);
-    data.append("address", address.value);
+    for (const val in name.values) data.append(`name.${val}`, name.values[val]);
+    for (const val in address.values) data.append(`address.${val}`, address.values[val]);
     if (postalCode.value) data.append("postalCode", postalCode.value);
-    // if (telephoneNumbers.value.length) data.append("telephoneNumbers", [...telephoneNumbers.value]);
     telephoneNumbers.value.forEach((number) => {
         if (number) data.append("telephoneNumbers", number);
     });
@@ -234,4 +236,9 @@ const save = async () => {
         .finally(() => (saving.value = false));
 };
 // -------------------------------------------------
+
+const setLangVariables = (translations) => {
+    name.values = { default: "", ...translations };
+    address.values = { default: "", ...translations };
+};
 </script>

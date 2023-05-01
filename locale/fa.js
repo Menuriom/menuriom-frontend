@@ -120,6 +120,9 @@ export default {
         "Go Back": "بازگشت",
         "Images must be less than nMB": "حجم عکس انتخابی باید کمتر از {size} Mb باشد",
         Uploading: "درحال ارسال",
+        Languages: "زبان ها",
+        Default: "پیشفرض",
+        needMoreLang: "برای پشتیبانی از چند زبان ابتدا از بخش تنظیمات زبان، زبان های مورد نظر خور را انتخاب کنید",
 
         profile: {
             "Your Profile": "حساب کاربری",

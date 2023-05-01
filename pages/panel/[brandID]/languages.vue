@@ -144,24 +144,40 @@ const saveSetting = async () => {
 // -------------------------------------------------
 
 // loading data -------------------------------------------------
-const loadingSettings = ref(true);
-const settings = reactive({ languages: [], currency: "", languageLimit: 2 });
-const loadingLanguages = ref(true);
-const languages = reactive({ list: {} });
-const loadingCurrencies = ref(true);
-const currencies = reactive({ list: {} });
-const { data, error } = await useLazyAsyncData(async () => {
-    return { ...(await getBrandSettings(route.params.brandID)), ...(await Promise.all([getLanguages(), getCurrencies()])) };
-});
 
-const handleData = (data) => {
-    settings.languages = data._languages;
-    settings.currency = data._currency;
-    settings.languageLimit = data._languageLimit;
-    languages.list = data[0]._languages;
-    currencies.list = data[1]._currencies;
-    loadingSettings.value = loadingLanguages.value = loadingCurrencies.value = false;
+// const { data, error } = await useLazyAsyncData(async () => {
+//     return { ...(await getBrandSettings(route.params.brandID)), ...(await Promise.all([getLanguages(), getCurrencies()])) };
+// });
+const callGroup = async () => {
+    // const results = [
+    //     await useLazyAsyncData(() => getBrandSettings(route.params.brandID)),
+    //     ...(await Promise.all([useLazyAsyncData(() => getLanguages()), useLazyAsyncData(() => getCurrencies())])),
+    // ];
+    // const results = [
+    //     await useLazyAsyncData(() => getBrandSettings(route.params.brandID)),
+    //     await useLazyAsyncData(() => getLanguages()),
+    //     await useLazyAsyncData(() => getCurrencies()),
+    // ];
+
+    const error = results[0].error || results[1].error || results[2].error;
+    const data = [results[0].data, results[1].data, results[2].data];
+
+    // if (error.value) handleErrors(error.value);
+    // watch(error, (err) => handleData(err));
+
+    // if (data[0].value) handleData0(data[0].value);
+    // watch(data[0], (val) => handleData0(val));
+
+    // if (data[1].value) handleData1(data[1].value);
+    // watch(data[1], (val) => handleData0(val));
+
+    // if (data[2].value) handleData2(data[2].value);
+    // watch(data[2], (val) => handleData0(val));
+
+    return { data, error };
 };
+// const { data, error } = await callGroup();
+
 const handleErrors = (err) => {
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
@@ -172,10 +188,53 @@ const handleErrors = (err) => {
     if (process.server) console.log({ err });
 };
 
-if (data.value) handleData(data.value);
-watch(data, (val) => handleData(val));
+// getBrandSettings -------------------------------------------------
+const loadingSettings = ref(true);
+const settings = reactive({ languages: [], currency: "", languageLimit: 2 });
+const getBrandSettings_results = await useLazyAsyncData(() => getBrandSettings(route.params.brandID));
 
-if (error.value) handleErrors(error.value);
-watch(error, (err) => handleData(err));
+if (getBrandSettings_results.error.value) handleErrors(getBrandSettings_results.error.value);
+watch(getBrandSettings_results.error, (err) => handleErrors(err));
+
+const handleBrandSettings_results = (data) => {
+    settings.languages = data._languages;
+    settings.currency = data._currency;
+    settings.languageLimit = data._languageLimit;
+    loadingSettings.value = false;
+};
+if (getBrandSettings_results.data.value) handleBrandSettings_results(getBrandSettings_results.data.value);
+watch(getBrandSettings_results.data, (val) => handleBrandSettings_results(val));
+// -------------------------------------------------
+
+// getLanguages -------------------------------------------------
+const loadingLanguages = ref(true);
+const languages = reactive({ list: {} });
+const getLanguages_results = await useLazyAsyncData(() => getLanguages());
+
+if (getLanguages_results.error.value) handleErrors(getLanguages_results.error.value);
+watch(getLanguages_results.error, (err) => handleErrors(err));
+
+const handleLanguages_results = (data) => {
+    languages.list = data._languages;
+    loadingLanguages.value = false;
+};
+if (getLanguages_results.data.value) handleLanguages_results(getLanguages_results.data.value);
+watch(getLanguages_results.data, (val) => handleLanguages_results(val));
+// -------------------------------------------------
+
+// getCurrencies -------------------------------------------------
+const loadingCurrencies = ref(true);
+const currencies = reactive({ list: {} });
+const getCurrencies_results = await useLazyAsyncData(() => getCurrencies());
+
+if (getCurrencies_results.error.value) handleErrors(getCurrencies_results.error.value);
+watch(getCurrencies_results.error, (err) => handleErrors(err));
+
+const handleCurrencies_results = (data) => {
+    currencies.list = data._currencies;
+    loadingCurrencies.value = false;
+};
+if (getCurrencies_results.data.value) handleCurrencies_results(getCurrencies_results.data.value);
+watch(getCurrencies_results.data, (val) => handleCurrencies_results(val));
 // -------------------------------------------------
 </script>

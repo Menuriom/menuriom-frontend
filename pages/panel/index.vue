@@ -296,18 +296,6 @@ const leaveBrand = async () => {
 };
 // -------------------------------------------------
 
-// loading data -------------------------------------------------
-const loading = ref(true);
-const noMoreRecords = ref(false);
-const records = reactive({ list: [] });
-const { data, error } = await useLazyAsyncData(() => getBrandList());
-
-const handleData = (data) => {
-    records.list = data._records;
-    noMoreRecords.value = data._noMoreRecords;
-    canCreateNewBrand.value = data._canCreateNewBrand;
-    loading.value = false;
-};
 const handleErrors = (err) => {
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
@@ -318,10 +306,22 @@ const handleErrors = (err) => {
     if (process.server) console.log({ err });
 };
 
-if (data.value) handleData(data.value);
-watch(data, (val) => handleData(val));
+// getBrandList -------------------------------------------------
+const loading = ref(true);
+const noMoreRecords = ref(false);
+const records = reactive({ list: [] });
+const getBrandList_results = await useLazyAsyncData(() => getBrandList());
 
-if (error.value) handleErrors(error.value);
-watch(error, (err) => handleData(err));
+if (getBrandList_results.error.value) handleErrors(getBrandList_results.error.value);
+watch(getBrandList_results.error, (err) => handleErrors(err));
+
+const handleBrandList_results = (data) => {
+    records.list = data._records;
+    noMoreRecords.value = data._noMoreRecords;
+    canCreateNewBrand.value = data._canCreateNewBrand;
+    loading.value = false;
+};
+if (getBrandList_results.data.value) handleBrandList_results(getBrandList_results.data.value);
+watch(getBrandList_results.data, (val) => handleBrandList_results(val));
 // -------------------------------------------------
 </script>
