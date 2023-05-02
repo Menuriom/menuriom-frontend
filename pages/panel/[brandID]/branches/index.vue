@@ -15,6 +15,7 @@
             <nuxt-link
                 class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
                 :to="localePath(`/panel/${route.params.brandID}/branches/creation`)"
+                v-if="checkPermissions(['main-panel.branches.add'], brand)"
             >
                 <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
                 {{ $t("panel.branches.New Branch") }}
@@ -39,12 +40,17 @@
                         <nuxt-link
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
                             :to="localePath(`/panel/${route.params.brandID}/branch/${branch._id}`)"
+                            v-if="checkPermissions(['main-panel.branches.edit'], brand)"
                         >
                             <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.branches.Edit Details") }}</small>
                         </nuxt-link>
                         <hr class="w-full opacity-40" />
-                        <button class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer" @click="openDeleteDialog(i)">
+                        <button
+                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer"
+                            @click="openDeleteDialog(i)"
+                            v-if="checkPermissions(['main-panel.branches.delete'], brand)"
+                        >
                             <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.branches.Delete Branch") }}</small>
                         </button>
@@ -79,6 +85,7 @@
                     <nuxt-link
                         class="flex flex-col items-center justify-center gap-4 w-full h-full p-3 py-10"
                         :to="localePath(`/panel/${route.params.brandID}/branches/creation`)"
+                        v-if="checkPermissions(['main-panel.branches.add'], brand)"
                     >
                         <img class="down-pop w-32 object-contain" src="~/assets/images/store.webp" />
                         <div class="flex items-center gap-2">
@@ -147,8 +154,9 @@ const userStore = useUserStore();
 const title = computed(() => `${t("panel.branches.Branches")} - ${t("panel.Your Menuriom Panel")}`);
 useHead({ title: title });
 
+const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
+
 // TODO : limit branch creation base on the user's plan on brand
-// TODO : add permission check for actions
 
 const errorField = ref("");
 const responseMessage = ref("");

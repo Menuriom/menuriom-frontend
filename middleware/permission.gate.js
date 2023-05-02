@@ -18,30 +18,30 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     // owner has access to all routes
     if (userStore.brands.list[to.params.brandID].role == "owner") return;
 
+    // if the use is not owner then check permissions base on route
     const permissionsToCheck = getRoutePermissionList(to.matched, localePath);
     const userPermissions = userStore.brands.list[to.params.brandID].permissions;
     for (let i = 0; i < permissionsToCheck.length; i++) {
-        if (!userPermissions.includes(permissionsToCheck[i])) return navigateTo(from.fullPath);
+        if (!userPermissions.includes(permissionsToCheck[i])) return navigateTo(localePath("/panel"));
     }
 });
 
 const getRoutePermissionList = (routes, localePath) => {
-    routesPermissions = {
+    const routesPermissions = {
         // route : 'permission'
-        [localePath("/panel/")]: "",
-        [localePath("/panel/:brandID")]: "",
-        [localePath("/panel/:brandID/branches")]: "",
-        [localePath("/panel/:brandID/branches/:id")]: "",
-        [localePath("/panel/:brandID/branches/creation")]: "",
-        [localePath("/panel/:brandID/languages")]: "",
+        [localePath("/panel/:brandID")]: ["main-panel"],
+        [localePath("/panel/:brandID/branches")]: ["main-panel.branches.view"],
+        [localePath("/panel/:brandID/branches/:id")]: ["main-panel.branches.view", "main-panel.branches.edit"],
+        [localePath("/panel/:brandID/branches/creation")]: ["main-panel.branches.add"],
+        [localePath("/panel/:brandID/languages")]: ["main-panel.settings"],
         // ...
         // TODO : add to this list to keep route permission checking up to date
     };
 
-    neededPermission = [];
+    const neededPermissions = new Set();
     for (let i = 0; i < routes.length; i++) {
         const route = routes[i];
-        neededPermission.push(routesPermissions[route]);
+        neededPermissions.add(...routesPermissions[route]);
     }
-    return neededPermission;
+    return neededPermissions;
 };

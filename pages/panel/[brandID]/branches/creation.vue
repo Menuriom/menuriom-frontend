@@ -137,6 +137,7 @@
                         :class="{ 'opacity-50': saving }"
                         @click="save()"
                         :disabled="saving"
+                        v-if="checkPermissions(['main-panel.branches.add'], brand)"
                     >
                         <span class="flex items-center gap-2" v-if="!saving">
                             <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
@@ -169,7 +170,7 @@ const userStore = useUserStore();
 const title = computed(() => `${t("panel.branches.Branch Creation")} - ${t("panel.Your Menuriom Panel")}`);
 useHead({ title: title });
 
-// TODO : add permission check for actions
+const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
 const fileInput = ref(""); // DOM ref
 const fileInputForm = ref(""); // DOM ref

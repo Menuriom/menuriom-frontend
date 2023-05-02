@@ -17,6 +17,7 @@
                 :class="{ 'opacity-50 cursor-not-allowed': saving }"
                 :disabled="saving"
                 @click="saveSetting()"
+                v-if="checkPermissions(['main-panel.settings'], brand)"
             >
                 <Icon class="w-4 h-4 bg-white" name="floppy-disk.svg" folder="icons" size="16px" />
                 {{ $t("panel.Save") }}
@@ -92,15 +93,19 @@
 import Loading from "~/components/Loading.vue";
 import { getBrandSettings, getLanguages, getCurrencies } from "~/composables/useApiCalls";
 import axios from "axios";
+import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
 
 const { t } = useI18n();
 const route = useRoute();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
+const userStore = useUserStore();
 
 const title = computed(() => `${t("panel.side-menu.Language Settings")} - ${t("panel.Your Menuriom Panel")}`);
 useHead({ title: title });
+
+const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
 const errorField = ref("");
 const responseMessage = ref("");
@@ -142,41 +147,6 @@ const saveSetting = async () => {
         .finally(() => (saving.value = false));
 };
 // -------------------------------------------------
-
-// loading data -------------------------------------------------
-
-// const { data, error } = await useLazyAsyncData(async () => {
-//     return { ...(await getBrandSettings(route.params.brandID)), ...(await Promise.all([getLanguages(), getCurrencies()])) };
-// });
-const callGroup = async () => {
-    // const results = [
-    //     await useLazyAsyncData(() => getBrandSettings(route.params.brandID)),
-    //     ...(await Promise.all([useLazyAsyncData(() => getLanguages()), useLazyAsyncData(() => getCurrencies())])),
-    // ];
-    // const results = [
-    //     await useLazyAsyncData(() => getBrandSettings(route.params.brandID)),
-    //     await useLazyAsyncData(() => getLanguages()),
-    //     await useLazyAsyncData(() => getCurrencies()),
-    // ];
-
-    const error = results[0].error || results[1].error || results[2].error;
-    const data = [results[0].data, results[1].data, results[2].data];
-
-    // if (error.value) handleErrors(error.value);
-    // watch(error, (err) => handleData(err));
-
-    // if (data[0].value) handleData0(data[0].value);
-    // watch(data[0], (val) => handleData0(val));
-
-    // if (data[1].value) handleData1(data[1].value);
-    // watch(data[1], (val) => handleData0(val));
-
-    // if (data[2].value) handleData2(data[2].value);
-    // watch(data[2], (val) => handleData0(val));
-
-    return { data, error };
-};
-// const { data, error } = await callGroup();
 
 const handleErrors = (err) => {
     errorField.value = "data";

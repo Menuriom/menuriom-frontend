@@ -29,19 +29,47 @@
                     v-for="(brand, i) in records.list"
                     :key="i"
                 >
-                    <nuxt-link
-                        class="btn absolute top-4 start-4 flex items-center gap-1 p-1 rounded-md bg-pencil-tip text-white"
-                        :to="localePath(`/panel/${brand._id}`)"
-                        :title="$t(`panel.brands.Go To Dashboard`)"
-                    >
-                        <Icon class="w-5 h-5 bg-white" name="column-light.svg" folder="icons/light" size="20px" />
-                    </nuxt-link>
+                    <div class="absolute top-4 start-4 flex flex-col gap-2">
+                        <nuxt-link
+                            class="btn flex items-center gap-1 p-2 rounded-md bg-pencil-tip"
+                            :to="localePath(`/panel/${brand._id}`)"
+                            :title="$t(`panel.brands.Go To Dashboard`)"
+                            v-if="checkPermissions(['panel'], brand)"
+                        >
+                            <!-- <Icon class="w-5 h-5 bg-white" name="column-light.svg" folder="icons/light" size="20px" /> -->
+                            <img class="w-4" src="~/assets/images/panel-icons/rectangles-mixed.png" alt="" />
+                        </nuxt-link>
+                        <nuxt-link
+                            class="btn flex items-center gap-1 p-2 rounded-md bg-pencil-tip"
+                            :to="localePath(`/orders-panel/${panelStore.selectedBrandId}`)"
+                            :title="$t('panel.side-menu.Orders')"
+                            v-if="checkPermissions(['orders-panel'], brand)"
+                        >
+                            <img class="w-4" src="~/assets/images/panel-icons/cash-register-light.png" alt="" />
+                        </nuxt-link>
+                        <nuxt-link
+                            class="btn flex items-center gap-1 p-2 rounded-md bg-pencil-tip"
+                            :to="localePath(`/ordering-app/${panelStore.selectedBrandId}`)"
+                            :title="$t('panel.side-menu.Ordering App')"
+                            v-if="checkPermissions(['ordering-app'], brand)"
+                        >
+                            <img class="w-4" src="~/assets/images/panel-icons/mobile-button-light.png" alt="" />
+                        </nuxt-link>
+                    </div>
                     <SlideMenu class="z-10">
-                        <nuxt-link class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin" :to="localePath(`/panel/${brand._id}`)">
+                        <nuxt-link
+                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
+                            :to="localePath(`/panel/${brand._id}`)"
+                            v-if="checkPermissions(['panel'], brand)"
+                        >
                             <Icon class="w-4 h-4 bg-white" name="column-light.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Go To Dashboard") }}</small>
                         </nuxt-link>
-                        <nuxt-link class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin" :to="localePath(`/panel/brand/${brand._id}`)">
+                        <nuxt-link
+                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
+                            :to="localePath(`/panel/brand/${brand._id}`)"
+                            v-if="brand.role == 'owner'"
+                        >
                             <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Edit Details") }}</small>
                         </nuxt-link>
@@ -49,7 +77,7 @@
                         <button
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer"
                             @click="openDeleteDialog(i)"
-                            v-if="brand.roles.includes('owner')"
+                            v-if="brand.role == 'owner'"
                         >
                             <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Delete Brand") }}</small>
@@ -59,13 +87,13 @@
                             <small>{{ $t("panel.brands.Leave This Brand") }}</small>
                         </button>
                     </SlideMenu>
-                    <nuxt-link class="btn rounded-full" :to="localePath(`/panel/${brand._id}`)" :title="$t(`panel.brands.Go To Dashboard`)">
+                    <nuxt-link class="btn rounded-full -mt-2 mb-4" :to="localePath(`/panel/${brand._id}`)" :title="$t(`panel.brands.Go To Dashboard`)">
                         <img class="w-24 h-24 rounded-full object-cover shadow-nr15 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
                         <img class="w-24 h-24 rounded-full object-cover shadow-nr15 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                     </nuxt-link>
                     <div class="flex flex-wrap items-center justify-between gap-2 w-full flex-grow">
                         <h4 class="text-lg/none font-semibold flex-grow">{{ brand.name }}</h4>
-                        <small class="text-xs p-0.5 px-1 text-violet border border-violet rounded" v-for="role in brand.roles" :key="role">{{ role }}</small>
+                        <small class="text-xs p-0.5 px-1 text-violet border border-violet rounded">{{ brand.role }}</small>
                     </div>
                     <hr class="w-full border-zinc-300" />
                     <div class="flex items-center justify-between gap-4 w-full">
@@ -89,7 +117,10 @@
                         </div>
                     </div>
                 </li>
-                <li class="w-full rounded-lg bg-white shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden" v-if="canCreateNewBrand">
+                <li
+                    class="w-full rounded-lg bg-white shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
+                    v-if="canCreateNewBrand && records.list.length > 0"
+                >
                     <nuxt-link class="flex flex-col items-center justify-center gap-4 w-full h-full p-3" :to="localePath(`/panel/brand/creation`)">
                         <img class="down-pop w-32 object-contain" src="~/assets/images/store-door.webp" />
                         <div class="flex items-center gap-2">
