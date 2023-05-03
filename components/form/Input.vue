@@ -48,17 +48,17 @@ input::placeholder {
             />
             <span
                 class="absolute flex items-center gap-2 opacity-90 f-josefin"
-                :class="[isFocused || !!modelValue ? 'start-3 top-1.5 opacity-75' : 'start-4 top-5']"
+                :class="[isFocused || !!modelValue ? 'start-3 top-1.5 opacity-75' : 'start-4 top-4.5']"
             >
                 <Icon
                     class="icon w-4 h-4 bg-zinc-100"
-                    :class="{ 'w-3 h-3 bg-purple-300': isFocused || !!modelValue }"
+                    :class="{ 'bg-purple-300': isFocused || !!modelValue }"
                     :name="iconName"
-                    folder="icons"
-                    :size="isFocused || !!modelValue ? '12px' : '16px'"
+                    :folder="iconFolder"
+                    :size="isFocused || !!modelValue ? '14px' : '16px'"
                     v-if="iconName"
                 />
-                <span class="flex -mb-0.5 text-xs opacity-90" :class="{ 'text-purple-200': isFocused || !!modelValue }"> {{ label }} </span>
+                <span class="flex text-xs opacity-90" :class="{ 'text-purple-200': isFocused || !!modelValue }"> {{ label }} </span>
                 <span class="absolute end-0 -me-3 text-rose-400 text-lg" v-show="required">*</span>
             </span>
         </div>
@@ -82,6 +82,7 @@ const props = defineProps({
     error: { type: String, default: "" },
     shadow: { type: Boolean, default: true },
     iconName: { type: String },
+    iconFolder: { type: String, default: "icons" },
 });
 // const { modelValue } = toRefs(props);
 const emit = defineEmits(["update:modelValue"]);

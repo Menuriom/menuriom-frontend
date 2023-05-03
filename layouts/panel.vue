@@ -20,7 +20,7 @@ main {
 
 <template>
     <div
-        class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-50 shadow-nr5 overflow-clip"
+        class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-50 overflow-clip"
         :class="{ 'blur-sm': panelStore.popUpOpened != '' }"
         id="app"
     >
@@ -29,7 +29,7 @@ main {
             <Header />
             <div class="relative flex w-full h-0 p-2 flex-grow">
                 <SideMenu v-if="!dontShowMenu" />
-                <main class="relative p-1 md:p-4 md:pe-2 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
+                <main class="relative py-3 px-1 md:p-4 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>
             </div>
@@ -39,6 +39,7 @@ main {
             <PersonalInfo />
             <SelectAccountType />
             <CreateNewBrand />
+            <BrandCreatedSuccess />
             <FindYourTeam />
         </Teleport>
     </div>
@@ -50,6 +51,7 @@ import SideMenu from "~/components/panel/SideMenu.vue";
 import PersonalInfo from "~/components/panel/dialogs/account-setup/PersonalInfo.vue";
 import SelectAccountType from "~/components/panel/dialogs/account-setup/SelectAccountType.vue";
 import CreateNewBrand from "~/components/panel/dialogs/account-setup/CreateNewBrand.vue";
+import BrandCreatedSuccess from "~/components/panel/dialogs/account-setup/BrandCreatedSuccess.vue";
 import FindYourTeam from "~/components/panel/dialogs/account-setup/FindYourTeam.vue";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
@@ -74,7 +76,7 @@ const dontShowMenu = computed(() => {
 });
 
 if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") panelStore.openPopUp("personal-info");
-else if (Object.keys(user.brands.value.list).length == 0) panelStore.openPopUp("select-account-type");
+else if (Object.keys(user.brands.value.list).length == 0 && route.path != localePath("/panel/brand/creation")) panelStore.openPopUp("select-account-type");
 
 onMounted(async () => {
     panelStore.loadSelectedBrand();

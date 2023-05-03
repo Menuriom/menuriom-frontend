@@ -2,7 +2,7 @@
 
 <template>
     <Dialog name="create-new-brand" :closeable="false">
-        <div class="flex flex-col items-center gap-4 w-screen max-w-md" v-if="stage == 1">
+        <div class="flex flex-col items-center gap-4 w-screen max-w-md">
             <div class="flex flex-col gap-1">
                 <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.account-setup.Create Your Brand") }}</h3>
                 <p class="text-xs opacity-75 text-center max-w-sm">
@@ -29,7 +29,7 @@
                         <img class="w-full h-full rounded-full object-contain" :src="logoBlob" v-if="logoBlob" />
                         <div class="flex flex-col items-center justify-center gap-2 w-full" v-else>
                             <img class="w-10" src="~/assets/images/panel-icons/knife-fork.svg" alt="" />
-                            <span class="text-sm text-pencil-tip opacity-90">Select Logo</span>
+                            <span class="text-sm text-pencil-tip opacity-90">{{ $t("panel.brands.Select Logo") }}</span>
                         </div>
                         <input
                             class="absolute inset-0 opacity-0 cursor-pointer"
@@ -40,7 +40,7 @@
                             :disabled="loading"
                         />
                     </div>
-                    <div class="flex flex-col gap-2 w-full">
+                    <div class="flex flex-col gap-4 w-full">
                         <Input
                             class="w-full flex-grow"
                             :required="true"
@@ -58,21 +58,29 @@
                         />
                     </div>
                 </div>
+                <small class="flex items-start text-xs text-rose-300" v-if="errorField === 'logo' && responseMessage !== ''">
+                    <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                </small>
                 <hr class="w-full opacity-25" />
                 <h4 class="flex items-center gap-2">
                     <img class="w-5" src="~/assets/images/panel-icons/store.png" />
                     {{ $t("panel.brands.How many branches does your business have?") }}
                 </h4>
-                <RangeSlider v-model="branchSize" :labeel="$t('panel.brands.Branch')" :min="1" :max="20" />
+                <RangeSlider v-model="branchSize" :label="$t('panel.brands.Branch')" :min="1" :max="20" />
                 <hr class="w-full opacity-25" />
                 <h4 class="flex items-center gap-2">
                     <img class="w-5" src="~/assets/images/panel-icons/newspaper.png" />
                     {{ $t("panel.brands.Your main branch info") }}
                 </h4>
-                <Input type="text" :labeel="$t('panel.brands.Main Branch Address')" v-model="address" :error="errorField == 'address' ? responseMessage : ''" />
                 <Input
-                    type="text"
-                    :labeel="$t('panel.brands.Main Branch Telephone Number')"
+                    :required="true"
+                    :label="$t('panel.brands.Main Branch Address')"
+                    v-model="address"
+                    :error="errorField == 'address' ? responseMessage : ''"
+                />
+                <Input
+                    :required="true"
+                    :label="$t('panel.brands.Main Branch Telephone Number')"
                     mask="0##-########"
                     v-model="tel"
                     :error="errorField == 'tel' ? responseMessage : ''"
@@ -98,19 +106,6 @@
                 </div>
             </form>
         </div>
-        <div class="relative flex flex-col items-center gap-4 w-screen max-w-md text-center" v-else-if="stage == 2">
-            <div class="flex flex-col gap-1">
-                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.account-setup.Create Your Brand") }}</h3>
-            </div>
-            <hr class="w-full border-0 h-0.5 gradient" />
-            <Confetti class="w-full h-full" :run="runConfetti" @update:run="runConfetti = $event" />
-            <h4 class="text-2xl text-baby-blue text-center font-bold max-w-sm">{{ $t("panel.Congratulations") }}</h4>
-            <img class="down-pop w-52 object-contain" src="~/assets/images/store-door.webp" />
-            <p class="w-full max-w-xs">{{ $t("panel.account-setup.You have setup your brand and created your first branch") }}!</p>
-            <p class="text-sm opacity-75">{{ $t("panel.account-setup.newBrandDirection") }}</p>
-            <hr class="w-full opacity-25" />
-            <button class="btn w-full p-3 rounded bg-violet" @click="panelStore.closePopUp()">{{ $t("panel.Ok") }}</button>
-        </div>
     </Dialog>
 </template>
 
@@ -129,8 +124,6 @@ const router = useRouter();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const stage = ref(1);
-const runConfetti = ref(false);
 const loading = ref(false);
 const errorField = ref("");
 const responseMessage = ref("");
@@ -183,8 +176,7 @@ const createBrand = async () => {
             panelStore.setSelectedBrand(Object.keys(response.data.brand)[0]);
             router.push(localePath(`/panel/${response.data.newId}`));
 
-            stage.value = 2;
-            setTimeout(() => (runConfetti.value = true), 100);
+            panelStore.openPopUp("brand-creation-success");
         })
         .catch((e) => {
             // TODO : make list of errors and show all errors in the form at once

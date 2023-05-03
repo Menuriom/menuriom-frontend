@@ -46,6 +46,24 @@ export const getBrandSettings = async (brandID) => {
 
     return { _languages, _currency, _languageLimit };
 };
+export const getBrandInfo = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/brands/${brandID}`, {});
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _info = {};
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _info = response.data;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _info };
+};
 // ---------------------------------------------------------
 
 // branches ---------------------------------------------------------

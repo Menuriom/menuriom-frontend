@@ -122,6 +122,7 @@ export default {
         Uploading: "Uploading",
         Languages: "Languages",
         Default: "Default",
+        Socials: "Socials",
         needMoreLang: "To support multiple languages for your menu please go to language settings and choose the languages you want.",
 
         profile: {
@@ -189,9 +190,11 @@ export default {
             "Your main branch info": "Your Main Branch Info",
             "Main Branch Address": "Main Branch Address",
             "Main Branch Telephone Number": "Main Branch Telephone Number",
+            "Select Logo": "Select Logo",
 
             "Your Brands": "Your Brands",
             "Create New Brand": "Create New Brand",
+            "Edit Brand": "Edit Brand",
             "No Brands Here Yet": "No Brands Here Yet",
             "New Brand": "New Brand",
             "Create new brands, edit your brand details, or manage brands that you are staff of":
@@ -201,6 +204,7 @@ export default {
             "Delete Brand": "Delete Brand",
             "Leave Brand": "Leave Brand",
             "Leave This Brand": "Leave This Brand",
+            "Update Brand Info": "Update Brand Info",
 
             "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
             deletingBrandDesc: "all your branches, menus, and staff members in this brand will be deleted and your plan subscription will be canceled",

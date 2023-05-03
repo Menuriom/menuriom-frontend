@@ -122,6 +122,7 @@ export default {
         Uploading: "درحال ارسال",
         Languages: "زبان ها",
         Default: "پیشفرض",
+        Socials: "شبکه های اجتماعی",
         needMoreLang: "برای پشتیبانی از چند زبان ابتدا از بخش تنظیمات زبان، زبان های مورد نظر خور را انتخاب کنید",
 
         profile: {
@@ -189,9 +190,11 @@ export default {
             "Your main branch info": "مشخصات شعبه اصلی",
             "Main Branch Address": "ادرس شعبه اصلی",
             "Main Branch Telephone Number": "تلفن تماس شعبه اصلی",
+            "Select Logo": "انتخاب لوگو",
 
             "Your Brands": "برندهای شما",
             "Create New Brand": "ساخت برند جدید",
+            "Edit Brand": "ویرایش مشخصات برند",
             "No Brands Here Yet": "هیچ برندی اینجا نیست",
             "New Brand": "ایجاد برند جدید",
             "Create new brands, edit your brand details, or manage brands that you are staff of":
@@ -201,6 +204,7 @@ export default {
             "Delete Brand": "حذف برند",
             "Leave Brand": "ترک از برند",
             "Leave This Brand": "ترک این برند",
+            "Update Brand Info": "ذخیره اطلاعات برند",
 
             "You are about to delete this brand": "شما در حال حذف برند <b>{name}</b> هستید",
             deletingBrandDesc: "با پاک شدن برند؛ تمام شعبه ها، منوها و کارکنان خدمه که در این برند وجود دارند حذف خواهند شد و عضویت پلن شما نیز لغو میشود",

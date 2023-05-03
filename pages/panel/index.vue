@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 sm:gap-6 w-full">
+    <div class="flex flex-col gap-4 md:gap-6 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
@@ -134,7 +134,7 @@
                 <img class="down-pop w-52 object-contain" src="~/assets/images/store-door.webp" />
                 <div class="flex flex-col items-center gap-2">
                     <h4 class="text-xl font-bold">{{ $t("panel.brands.No Brands Here Yet") }}</h4>
-                    <small class="text-sm">
+                    <small class="text-sm text-center">
                         {{ $t("panel.brands.Start by creating a brand, or check your invation list to join a existing brand") }}
                     </small>
                 </div>

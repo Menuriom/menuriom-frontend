@@ -27,20 +27,20 @@ li:hover .icon {
                     <h3 class="text-sm font-bold capitalize">{{ `${userStore.name} ${userStore.family}` }}</h3>
                     <small class="text-xs opacity-75">{{ userStore.email || userStore.mobile }}</small>
                 </li>
-                <hr class="w-11/12 mx-auto opacity-25" />
+
                 <nuxt-link :to="localePath('/panel/profile')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
                         <small>{{ $t("panel.profile.Your Profile") }}</small>
                     </li>
                 </nuxt-link>
+                <hr class="w-11/12 mx-auto opacity-25" />
                 <nuxt-link :to="localePath('/panel/invites')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="envelope-open-text.svg" folder="icons/light" size="18px" />
                         <small>{{ $t("panel.profile.Staff Invites") }}</small>
                     </li>
                 </nuxt-link>
-                <hr class="w-11/12 mx-auto opacity-25" />
                 <nuxt-link :to="localePath('/panel/')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />

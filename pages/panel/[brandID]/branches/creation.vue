@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 sm:gap-6 w-full">
+    <div class="flex flex-col gap-4 md:gap-6 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
@@ -23,12 +23,12 @@
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
-            <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
+            <form class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35" @submit.prevent="save()">
                 <div class="flex flex-col gap-1">
-                    <div class="flex items-center gap-2">
+                    <h3 class="flex items-center gap-2 text-lg">
                         <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
-                        <h3 class="text-lg">{{ $t("panel.branches.Branch Images") }}</h3>
-                    </div>
+                        {{ $t("panel.branches.Branch Images") }}
+                    </h3>
                     <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 2 }) }}</small>
                 </div>
                 <ul class="flex flex-wrap items-center gap-4">
@@ -49,10 +49,10 @@
                     </li>
                 </ul>
                 <hr class="w-full opacity-20" />
-                <div class="flex items-center gap-2">
+                <h3 class="flex items-center gap-2 text-lg">
                     <Icon class="w-5 h-5 bg-white" name="newspaper.svg" folder="icons/light" size="20px" />
-                    <h3 class="text-lg">{{ $t("panel.branches.General Info") }}</h3>
-                </div>
+                    {{ $t("panel.branches.General Info") }}
+                </h3>
                 <Input
                     :label="$t('panel.branches.Branch Name')"
                     :required="formLang == 'default'"
@@ -80,13 +80,14 @@
                 </div>
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex items-center gap-2">
+                    <h3 class="flex items-center gap-2 text-lg">
                         <Icon class="w-5 h-5 bg-white" name="phone-rotary.svg" folder="icons/light" size="20px" />
-                        <h3 class="text-lg">{{ $t("panel.branches.Phone Numbers") }}</h3>
-                    </div>
+                        {{ $t("panel.branches.Phone Numbers") }}
+                    </h3>
                     <button
                         class="btn flex items-center justify-center gap-2 p-2.5 text-xs rounded-md border-2 text-purple-300 border-neutral-300"
                         @click="telephoneNumbers.push('')"
+                        type="button"
                     >
                         <Icon class="w-3 h-3 bg-purple-300" name="plus.svg" folder="icons" size="12px" />
                         <!-- {{ $t("panel.branches.Add Phone Number") }} -->
@@ -100,6 +101,7 @@
                         <Input placeholder="021 22334455" name="tel" mask="###########" class="w-full md:w-52 flex-grow" v-model="telephoneNumbers[i]" />
                         <button
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer flex-shrink-0"
+                            type="button"
                             @click="telephoneNumbers.splice(i, 1)"
                         >
                             <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
@@ -121,7 +123,6 @@
                     <nuxt-link
                         class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-lg border-2 border-neutral-300 flex-shrink-0"
                         :to="localePath(`/panel/${route.params.brandID}/branches`)"
-                        :disabled="saving"
                     >
                         <Icon
                             class="w-3 h-3 py-2 bg-white"
@@ -135,7 +136,6 @@
                     <button
                         class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
                         :class="{ 'opacity-50': saving }"
-                        @click="save()"
                         :disabled="saving"
                         v-if="checkPermissions(['main-panel.branches.add'], brand)"
                     >
@@ -146,7 +146,7 @@
                         <Loading v-else />
                     </button>
                 </div>
-            </div>
+            </form>
             <FormLangList :formLang="formLang" @update:formLang="formLang = $event" @updateLanguages="setLangVariables($event)" />
         </section>
     </div>
