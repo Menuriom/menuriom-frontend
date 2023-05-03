@@ -17,7 +17,7 @@
                 <li class="w-2.5 h-2.5 rounded-full bg-violet"></li>
             </ul>
             <hr class="w-full border-0 h-0.5 gradient" />
-            <form class="flex flex-col gap-4 w-full" @submit.prevent="createBrand()">
+            <div class="flex flex-col gap-4 w-full">
                 <h4 class="flex items-center gap-2">
                     <img class="w-5" src="~/assets/images/panel-icons/fork-knife.png" />
                     {{ $t("panel.brands.Brand Details") }}
@@ -90,7 +90,7 @@
                     <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <div class="flex gap-2 w-full">
-                    <button class="btn w-max px-6 text-xs rounded bg-dolphin flex-shrink-0" :disabled="loading" type="button" @click="back()">
+                    <button class="btn w-max px-6 text-xs rounded bg-dolphin flex-shrink-0" :disabled="loading" @click="back()">
                         <Icon
                             class="w-3 h-3 py-2 bg-white"
                             :class="[localeProperties.dir == 'rtl' ? 'rotate-45' : '-rotate-[135deg]']"
@@ -99,12 +99,12 @@
                             size="12px"
                         />
                     </button>
-                    <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
+                    <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75': loading }" :disabled="loading" @click="createBrand()">
                         <span v-if="!loading"> {{ $t("panel.brands.Create New Brand") }} </span>
                         <Loading v-else />
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
     </Dialog>
 </template>

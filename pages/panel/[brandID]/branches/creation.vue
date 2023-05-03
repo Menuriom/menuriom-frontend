@@ -23,7 +23,7 @@
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
-            <form class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35" @submit.prevent="save()">
+            <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <div class="flex flex-col gap-1">
                     <h3 class="flex items-center gap-2 text-lg">
                         <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
@@ -101,7 +101,6 @@
                         <Input placeholder="021 22334455" name="tel" mask="###########" class="w-full md:w-52 flex-grow" v-model="telephoneNumbers[i]" />
                         <button
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer flex-shrink-0"
-                            type="button"
                             @click="telephoneNumbers.splice(i, 1)"
                         >
                             <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
@@ -137,6 +136,7 @@
                         class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
                         :class="{ 'opacity-50': saving }"
                         :disabled="saving"
+                        @click="save()"
                         v-if="checkPermissions(['main-panel.branches.add'], brand)"
                     >
                         <span class="flex items-center gap-2" v-if="!saving">
@@ -146,7 +146,7 @@
                         <Loading v-else />
                     </button>
                 </div>
-            </form>
+            </div>
             <FormLangList :formLang="formLang" @update:formLang="formLang = $event" @updateLanguages="setLangVariables($event)" />
         </section>
     </div>

@@ -205,6 +205,8 @@ export default {
             "Leave Brand": "Leave Brand",
             "Leave This Brand": "Leave This Brand",
             "Update Brand Info": "Update Brand Info",
+            "Brand Settings & Info": "Brand Settings & Info",
+            "General Info": "General Info",
 
             "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
             deletingBrandDesc: "all your branches, menus, and staff members in this brand will be deleted and your plan subscription will be canceled",

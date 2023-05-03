@@ -67,11 +67,11 @@
                         </nuxt-link>
                         <nuxt-link
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
-                            :to="localePath(`/panel/brand/${brand._id}`)"
+                            :to="localePath(`/panel/brand/${brand._id}/general-info`)"
                             v-if="brand.role == 'owner'"
                         >
                             <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
-                            <small>{{ $t("panel.brands.Edit Details") }}</small>
+                            <small>{{ $t("panel.brands.Brand Settings & Info") }}</small>
                         </nuxt-link>
                         <hr class="w-full opacity-40" />
                         <button

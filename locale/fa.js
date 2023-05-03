@@ -205,6 +205,8 @@ export default {
             "Leave Brand": "ترک از برند",
             "Leave This Brand": "ترک این برند",
             "Update Brand Info": "ذخیره اطلاعات برند",
+            "Brand Settings & Info": "تنظیمات و جزئیات برند",
+            "General Info": "مشخصات کلی",
 
             "You are about to delete this brand": "شما در حال حذف برند <b>{name}</b> هستید",
             deletingBrandDesc: "با پاک شدن برند؛ تمام شعبه ها، منوها و کارکنان خدمه که در این برند وجود دارند حذف خواهند شد و عضویت پلن شما نیز لغو میشود",
