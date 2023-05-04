@@ -47,7 +47,7 @@
                 </div>
             </ul>
             <hr class="w-3/4 opacity-50" />
-            <button class="w-max text-xs" :disabled="loading" type="button" @click="panelStore.closePopUp()">{{ $t("Not Now") }}</button>
+            <button class="w-max text-xs" type="button" @click="panelStore.closePopUp()">{{ $t("Not Now") }}</button>
         </div>
     </Dialog>
 </template>

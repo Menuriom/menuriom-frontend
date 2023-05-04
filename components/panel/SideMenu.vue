@@ -13,13 +13,6 @@ aside > div {
     max-width: 275px;
 }
 
-nav {
-    scrollbar-width: thin;
-}
-nav::-webkit-scrollbar {
-    width: 4px;
-}
-
 .link {
     transition: all 0.2s;
     padding: 0.65rem 0.5rem;
@@ -71,7 +64,6 @@ nav::-webkit-scrollbar {
 <template>
     <aside class="absolute md:relative flex rounded-lg overflow-hidden z-10 flex-shrink-0 shadow-nr35" :class="{ close: !panelStore.sideMenuOpen }">
         <div class="flex flex-col gap-4 h-full p-4 bg-pencil-tip text-white rounded-lg">
-            <!-- TODO : make skeluton fallback for when user data is loading and dont show if no brand available -->
             <nuxt-link
                 class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin cursor-pointer transition-all group"
                 :to="localePath(`/panel/`)"
@@ -89,6 +81,7 @@ nav::-webkit-scrollbar {
                 <nuxt-link
                     class="btn relative flex items-center justify-center gap-2 p-2 rounded bg-white text-pencil-tip flex-grow"
                     :to="localePath(`/orders-panel/${panelStore.selectedBrandId}`)"
+                    v-if="checkPermissions(['orders-panel'], brand)"
                 >
                     <img class="w-5" src="~/assets/images/panel-icons/cash-register.png" alt="" />
                     <span class="text-sm">{{ $t("panel.side-menu.Orders") }}</span>
@@ -97,6 +90,7 @@ nav::-webkit-scrollbar {
                 <nuxt-link
                     class="btn flex items-center justify-center gap-2 p-2 rounded bg-white text-pencil-tip flex-grow"
                     :to="localePath(`/ordering-app/${panelStore.selectedBrandId}`)"
+                    v-if="checkPermissions(['ordering-app'], brand)"
                 >
                     <img class="w-5" src="~/assets/images/panel-icons/mobile-button.png" alt="" />
                     <span class="text-sm">{{ $t("panel.side-menu.Ordering App") }}</span>
@@ -111,13 +105,21 @@ nav::-webkit-scrollbar {
                 v-if="panelStore.selectedBrandId !== ''"
             >
                 <ul class="flex flex-col gap-2 w-full">
-                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}`)">
+                    <nuxt-link
+                        class="link"
+                        :to="localePath(`/panel/${panelStore.selectedBrandId}`)"
+                        v-if="checkPermissions(['main-panel.dashboard.view'], brand)"
+                    >
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/rectangles-mixed.png" alt="" />
                             <span>{{ $t("panel.side-menu.Dashboard") }}</span>
                         </li>
                     </nuxt-link>
-                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/feedback`)">
+                    <nuxt-link
+                        class="link"
+                        :to="localePath(`/panel/${panelStore.selectedBrandId}/feedback`)"
+                        v-if="checkPermissions(['main-panel.customer-feedback.view'], brand)"
+                    >
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/comments.png" alt="" />
                             <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
@@ -126,7 +128,11 @@ nav::-webkit-scrollbar {
                 </ul>
                 <hr class="w-full opacity-40 mx-4" />
                 <ul class="flex flex-col gap-2 w-full">
-                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/branches`)">
+                    <nuxt-link
+                        class="link"
+                        :to="localePath(`/panel/${panelStore.selectedBrandId}/branches`)"
+                        v-if="checkPermissions(['main-panel.branches.view'], brand)"
+                    >
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/store.png" alt="" />
                             <span>{{ $t("panel.side-menu.Branches") }}</span>
@@ -201,7 +207,12 @@ nav::-webkit-scrollbar {
                             </nuxt-link>
                         </ul>
                     </div>
-                    <button class="link" :class="{ toggler_active: openSubMenus.includes('settings') }" @click="toggleSubMenu('settings')">
+                    <button
+                        class="link"
+                        :class="{ toggler_active: openSubMenus.includes('settings') }"
+                        @click="toggleSubMenu('settings')"
+                        v-if="checkPermissions(['main-panel.settings'], brand)"
+                    >
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/gear.png" alt="" />
                             <span>{{ $t("panel.side-menu.Settings") }}</span>
@@ -227,7 +238,11 @@ nav::-webkit-scrollbar {
                 </ul>
                 <hr class="w-full opacity-40 mx-4" />
                 <ul class="flex flex-col gap-2 w-full">
-                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)">
+                    <nuxt-link
+                        class="link"
+                        :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)"
+                        v-if="checkPermissions(['main-panel.billing'], brand)"
+                    >
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/money-bills.png" alt="" />
                             <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
@@ -273,9 +288,7 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || "");
-
-// TODO : set limitation on side menu and header base on panel permission of selected brand
+const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
 // toggle sub menus open and close state
 const openSubMenus = reactive([]);

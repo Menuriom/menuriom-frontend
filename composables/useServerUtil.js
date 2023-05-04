@@ -15,7 +15,7 @@ export const getRequestConfig = (url, headers) => {
         delete req.headers["host"];
 
         url = `${process.env.API_BASE_URL}${url}`.replace("/api/v1/", "/");
-        headers = { ...req.headers, "accept-language": lang, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() };
+        headers = { ...headers, ...req.headers, "accept-language": lang, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() };
     }
 
     return { url, headers };

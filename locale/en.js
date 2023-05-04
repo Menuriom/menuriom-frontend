@@ -115,6 +115,15 @@ export default {
         Congratulations: "Congratulations",
         Ok: "Ok",
         Save: "Save",
+        Delete: "Delete",
+        Select: "Select",
+        "Go Back": "Go Back",
+        "Images must be less than nMB": "Images must be less than {size} MB",
+        Uploading: "Uploading",
+        Languages: "Languages",
+        Default: "Default",
+        Socials: "Socials",
+        needMoreLang: "To support multiple languages for your menu please go to language settings and choose the languages you want.",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -181,10 +190,11 @@ export default {
             "Your main branch info": "Your Main Branch Info",
             "Main Branch Address": "Main Branch Address",
             "Main Branch Telephone Number": "Main Branch Telephone Number",
-            "Images must be less than 1MB": "Images must be less than 1MB",
+            "Select Logo": "Select Logo",
 
             "Your Brands": "Your Brands",
             "Create New Brand": "Create New Brand",
+            "Edit Brand": "Edit Brand",
             "No Brands Here Yet": "No Brands Here Yet",
             "New Brand": "New Brand",
             "Create new brands, edit your brand details, or manage brands that you are staff of":
@@ -194,6 +204,10 @@ export default {
             "Delete Brand": "Delete Brand",
             "Leave Brand": "Leave Brand",
             "Leave This Brand": "Leave This Brand",
+            "Update Brand Info": "Update Brand Info",
+            "Brand Settings & Info": "Brand Settings & Info",
+            "General Info": "General Info",
+            "Brand info has been updated": "Brand info has been updated",
 
             "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
             deletingBrandDesc: "all your branches, menus, and staff members in this brand will be deleted and your plan subscription will be canceled",
@@ -216,12 +230,28 @@ export default {
             "Customize This Branch Menu": "Customize This Branch Menu",
             "Edit Details": "Edit Details",
             "Delete Branch": "Delete Branch",
+
+            "You are about to delete this branch": "You are about to delete branch <b>{name}</b>",
+            deletingBranchDesc: "By deleting this branch, all custom menus of this branch will also be deleted",
+
+            "Branch Creation": "Branch Creation",
+            "Create Branch": "Create Branch",
+            "Branch Images": "Branch Images",
+            "Add Image": "Add Image",
+            "General Info": "General Info",
+            "Branch Address": "Branch Address",
+            "Branch Name": "Branch Name",
+            "Branch Postal Code": "Branch Postal Code",
+            "Phone Numbers": "Phone Numbers",
+            "Phone Number": "Phone Number",
+            "Add Phone Number": "Add Phone Number",
+            "10 digit number": "10 digit number",
         },
 
         languages: {
             "Select your menu languages and setup your currency unit": "Select your menu languages and setup your currency unit",
-            "Your Menu Languages": "Your Menu Languages",
-            "Your Currency": "Your Currency",
+            "Menu Languages": "Menu Languages",
+            Currency: "Currency",
             "Choose which languages you want your menu to have": "Choose which languages you want your menu to have",
             "You can translate your menu items and your restaurant info base on languages you choose":
                 "You can translate your menu items and your restaurant info base on languages you choose",

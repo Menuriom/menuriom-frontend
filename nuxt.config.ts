@@ -17,8 +17,8 @@ export default defineNuxtConfig({
                 // { rel: "mask-icon", href: "/pwa/safari-pinned-tab.svg", color: "#FFFFFF" },
             ],
         },
-        pageTransition: { name: "page", mode: "out-in" },
-        layoutTransition: { name: "page", mode: "out-in" },
+        // pageTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
+        layoutTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
     },
 
     css: [
@@ -31,9 +31,7 @@ export default defineNuxtConfig({
         },
     },
     build: {
-        transpile: [
-            // "vue-toastification",
-        ],
+        transpile: ["vue-toastification"],
     },
 
     runtimeConfig: {
@@ -81,8 +79,4 @@ export default defineNuxtConfig({
 
         "@nuxtjs/i18n",
     ],
-
-    devServer: {
-        // host: "dev.me",
-    },
 });

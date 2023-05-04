@@ -27,6 +27,7 @@ module.exports = {
                 "4xl": "1920px",
             },
             spacing: {
+                "4.5": "1.125rem/* 18px */",
                 18: "4.5rem/* 72px */",
                 22: "5.5rem/* 88px */",
             },

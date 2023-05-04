@@ -25,7 +25,7 @@
                         name="name"
                         :required="true"
                         type="text"
-                        :placeholder="$t('auth.First Name')"
+                        :label="$t('auth.First Name')"
                         v-model="name"
                         :error="errorField == 'name' ? responseMessage : ''"
                     />
@@ -34,7 +34,7 @@
                         name="family"
                         :required="true"
                         type="text"
-                        :placeholder="$t('auth.Last Name')"
+                        :label="$t('auth.Last Name')"
                         v-model="family"
                         :error="errorField == 'family' ? responseMessage : ''"
                     />
@@ -44,7 +44,7 @@
                     :required="true"
                     type="text"
                     iconName="Mobile-phone.svg"
-                    :placeholder="$t('auth.Phone Number')"
+                    :label="$t('auth.Phone Number')"
                     v-model="mobile"
                     :error="errorField == 'mobile' ? responseMessage : ''"
                 />
@@ -107,12 +107,16 @@ const completeSignup = async () => {
                 panelStore.openPopUp("select-account-type");
             }
         })
-        .catch((e) => {
-            if (typeof e.response !== "undefined" && e.response.data) {
-                const errors = e.response.data.errors || e.response.data.message;
-                responseMessage.value = errors[0].errors[0];
-                errorField.value = errors[0].property;
-            }
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
         })
         .finally(() => (loading.value = false));
 };
