@@ -31,9 +31,7 @@ export default defineNuxtConfig({
         },
     },
     build: {
-        transpile: [
-            // "vue-toastification",
-        ],
+        transpile: ["vue-toastification"],
     },
 
     runtimeConfig: {
@@ -44,11 +42,7 @@ export default defineNuxtConfig({
     },
 
     // vite options
-    vite: {
-        resolve: {
-            dedupe: ["vue"],
-        },
-    },
+    vite: {},
 
     nitro: {
         compressPublicAssets: true,
@@ -85,8 +79,4 @@ export default defineNuxtConfig({
 
         "@nuxtjs/i18n",
     ],
-
-    devServer: {
-        // host: "dev.me",
-    },
 });

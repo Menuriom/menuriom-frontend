@@ -278,12 +278,16 @@ const deleteRecord = async () => {
             panelStore.closePopUp();
             panelStore.setSelectedBrand("");
         })
-        .catch((e) => {
-            if (typeof e.response !== "undefined" && e.response.data) {
-                const errors = e.response.data.errors || e.response.data.message;
-                responseMessage.value = errors[0].errors[0];
-                errorField.value = errors[0].property;
-            }
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
         })
         .finally(() => (deleting.value = false));
 };
@@ -316,12 +320,16 @@ const leaveBrand = async () => {
             panelStore.closePopUp();
             panelStore.setSelectedBrand("");
         })
-        .catch((e) => {
-            if (typeof e.response !== "undefined" && e.response.data) {
-                const errors = e.response.data.errors || e.response.data.message;
-                responseMessage.value = errors[0].errors[0];
-                errorField.value = errors[0].property;
-            }
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
         })
         .finally(() => (leaving.value = false));
 };
@@ -331,10 +339,10 @@ const handleErrors = (err) => {
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;
-        responseMessage.value = errors[0].errors[0];
+        if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
-    // TODO : log errors in sentry type thing
     if (process.server) console.log({ err });
+    // TODO : log errors in sentry type thing
 };
 
 // getBrandList -------------------------------------------------

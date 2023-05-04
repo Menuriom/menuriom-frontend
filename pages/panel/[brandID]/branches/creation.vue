@@ -147,7 +147,12 @@
                     </button>
                 </div>
             </div>
-            <FormLangList :formLang="formLang" @update:formLang="formLang = $event" @updateLanguages="setLangVariables($event)" />
+            <FormLangList
+                :brandID="route.params.brandID"
+                :formLang="formLang"
+                @update:formLang="formLang = $event"
+                @updateLanguages="setLangVariables($event)"
+            />
         </section>
     </div>
 </template>
@@ -160,7 +165,7 @@ import axios from "axios";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-const { locale, localeProperties, t } = useI18n();
+const { localeProperties, t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const localePath = useLocalePath();
@@ -227,19 +232,25 @@ const save = async () => {
             // TODO : toast that record is created
             router.push(localePath(`/panel/${route.params.brandID}/branches`));
         })
-        .catch((e) => {
-            if (typeof e.response !== "undefined" && e.response.data) {
-                const errors = e.response.data.errors || e.response.data.message;
-                responseMessage.value = errors[0].errors[0];
-                errorField.value = errors[0].property;
-            }
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
         })
         .finally(() => (saving.value = false));
 };
 // -------------------------------------------------
 
 const setLangVariables = (translations) => {
-    name.values = { default: "", ...translations };
-    address.values = { default: "", ...translations };
+    for (const lang in translations) {
+        if (!name.values[lang]) name.values[lang] = "";
+        if (!address.values[lang]) address.values[lang] = "";
+    }
 };
 </script>

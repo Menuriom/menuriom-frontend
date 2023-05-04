@@ -13,13 +13,6 @@ aside > div {
     max-width: 275px;
 }
 
-nav {
-    scrollbar-width: thin;
-}
-nav::-webkit-scrollbar {
-    width: 4px;
-}
-
 .link {
     transition: all 0.2s;
     padding: 0.65rem 0.5rem;

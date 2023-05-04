@@ -255,12 +255,16 @@ const sendVerificationCode = async () => {
             page.value = 2;
             timeLeft.value = response.data.expireIn;
         })
-        .catch((e) => {
-            if (typeof e.response !== "undefined" && e.response.data) {
-                const errors = e.response.data.errors || e.response.data.message;
-                responseMessage.value = errors[0].errors[0];
-                errorField.value = errors[0].property;
-            }
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
         })
         .finally(() => (loading.value = false));
 };
@@ -286,14 +290,17 @@ const checkVerificationCode = async () => {
                 router.push(localePath("/panel"));
             }
         })
-        .catch((e) => {
-            if (typeof e.response !== "undefined" && e.response.data) {
-                const errors = e.response.data.errors || e.response.data.message;
-                responseMessage.value = errors[0].errors[0];
-                errorField.value = errors[0].property;
-                // TODO
-                // if the property is "" then make a global error either on top of the continue button or as a toast message
-            }
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
+            // TODO : if the property is "" then make a global error either on top of the continue button or as a toast message
         })
         .finally(() => (loading.value = false));
 };
@@ -322,12 +329,16 @@ const completeSignup = async () => {
             userStore.setRefreshInterval();
             router.push(localePath("/panel"));
         })
-        .catch((e) => {
-            if (typeof e.response !== "undefined" && e.response.data) {
-                const errors = e.response.data.errors || e.response.data.message;
-                responseMessage.value = errors[0].errors[0];
-                errorField.value = errors[0].property;
-            }
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
         })
         .finally(() => (loading.value = false));
 };
