@@ -191,6 +191,7 @@ const postalCode = ref("");
 const telephoneNumbers = ref(["", ""]);
 
 const addImages = () => {
+    // TODO : limit user to upload at max 5 images
     const files = [...fileInput.value.files];
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -226,6 +227,7 @@ const save = async () => {
 
     await axios
         .post(`/api/v1/panel/branches/${route.params.brandID}`, data, {
+            headers: { brand: route.params.brandID },
             onUploadProgress: (event) => (percentage.value = parseInt(Math.round((event.loaded / event.total) * 100))),
         })
         .then((response) => {

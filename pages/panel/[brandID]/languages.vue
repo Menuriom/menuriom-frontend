@@ -132,7 +132,11 @@ const saveSetting = async () => {
     errorField.value = "";
 
     await axios
-        .post(`/api/v1/panel/brands/${route.params.brandID}/settings`, { languages: settings.languages, currency: settings.currency })
+        .post(
+            `/api/v1/panel/brands/${route.params.brandID}/settings`,
+            { languages: settings.languages, currency: settings.currency },
+            { headers: { brand: route.params.brandID } }
+        )
         .then((response) => {
             // TODO : make toast and inform user that data is saved
         })

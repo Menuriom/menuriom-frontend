@@ -175,13 +175,13 @@ const save = async () => {
     if (socials.whatsapp) data.append("socials_whatsapp", socials.whatsapp);
 
     await axios
-        .put(`/api/v1/panel/brands/${route.params.id}`, data)
+        .put(`/api/v1/panel/brands/${route.params.id}`, data, { headers: { brand: route.params.id } })
         .then((response) => {
             // update brand details in store
             brands.value.list[route.params.id].logo = response.data.logo;
             brands.value.list[route.params.id].name = response.data.name;
             brands.value.list[route.params.id].slogan = response.data.slogan;
-            logoBlob.value = ogLogo.value = response.data.logo
+            logoBlob.value = ogLogo.value = response.data.logo;
 
             // make toast to inform user that brand details is updated
             toast.info(t(`panel.brands.Brand info has been updated`), { timeout: 2000, rtl: localeProperties.dir == "rtl" });

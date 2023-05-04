@@ -25,7 +25,7 @@ export const getBrandList = async () => {
     return { _records, _noMoreRecords, _canCreateNewBrand };
 };
 export const getBrandSettings = async (brandID) => {
-    let { url, headers } = getRequestConfig(`/api/v1/panel/brands/${brandID}/settings`, {});
+    let { url, headers } = getRequestConfig(`/api/v1/panel/brands/${brandID}/settings`, { brand: brandID });
     const params = [];
     url = encodeURI(`${url}?${params.join("&")}`);
 
@@ -47,7 +47,7 @@ export const getBrandSettings = async (brandID) => {
     return { _languages, _currency, _languageLimit };
 };
 export const getBrandInfo = async (brandID) => {
-    let { url, headers } = getRequestConfig(`/api/v1/panel/brands/${brandID}`, {});
+    let { url, headers } = getRequestConfig(`/api/v1/panel/brands/${brandID}`, { brand: brandID });
     const params = [];
     url = encodeURI(`${url}?${params.join("&")}`);
 
@@ -67,8 +67,26 @@ export const getBrandInfo = async (brandID) => {
 // ---------------------------------------------------------
 
 // branches ---------------------------------------------------------
+export const getBranchInfo = async (branchID, brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/branches/${branchID}`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _info = {};
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _info = response.data;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _info };
+};
 export const getBranchList = async (brandID) => {
-    let { url, headers } = getRequestConfig(`/api/v1/panel/branches/${brandID}/`, {});
+    let { url, headers } = getRequestConfig(`/api/v1/panel/branches/`, { brand: brandID });
     const params = [];
     url = encodeURI(`${url}?${params.join("&")}`);
 

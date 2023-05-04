@@ -32,14 +32,14 @@
                     <SlideMenu class="-my-2 z-10">
                         <nuxt-link
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
-                            :to="localePath(`/panel/${route.params.brandID}/branch/${branch._id}/customize-menu`)"
+                            :to="localePath(`/panel/${route.params.brandID}/branches/${branch._id}/customize-menu`)"
                         >
                             <Icon class="w-4 h-4 bg-white" name="cards-blank.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.branches.Customize This Branch Menu") }}</small>
                         </nuxt-link>
                         <nuxt-link
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
-                            :to="localePath(`/panel/${route.params.brandID}/branch/${branch._id}`)"
+                            :to="localePath(`/panel/${route.params.brandID}/branches/${branch._id}`)"
                             v-if="checkPermissions(['main-panel.branches.edit'], brand)"
                         >
                             <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
@@ -180,7 +180,7 @@ const deleteRecord = async () => {
     const id = records.list[indexToDelete.value]._id;
 
     await axios
-        .delete(`/api/v1/panel/branches/${id}`)
+        .delete(`/api/v1/panel/branches/${id}`, { headers: { brand: route.params.brandID } })
         .then((response) => {
             records.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();

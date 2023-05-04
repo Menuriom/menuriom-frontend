@@ -267,7 +267,7 @@ const deleteRecord = async () => {
     const id = records.list[indexToDelete.value]._id;
 
     await axios
-        .delete(`/api/v1/panel/brands/${id}`)
+        .delete(`/api/v1/panel/brands/${id}`, { headers: { brand: id } })
         .then((response) => {
             // remove the brand from list of brands in the page
             records.list.splice(indexToDelete.value, 1);
@@ -310,7 +310,7 @@ const leaveBrand = async () => {
     const id = records.list[indexToLeave.value]._id;
 
     await axios
-        .delete(`/api/v1/panel/brands/leave/${id}`)
+        .delete(`/api/v1/panel/brands/leave/${id}`, { headers: { brand: id } })
         .then((response) => {
             // remove the brand from list of brands in the page
             records.list.splice(indexToLeave.value, 1);
