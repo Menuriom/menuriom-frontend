@@ -3,7 +3,6 @@
 <template>
     <div class="flex flex-col h-full">
         <NuxtPage />
-        <!-- <NuxtPage key="brand" page-key="panel"></NuxtPage> -->
     </div>
 </template>
 

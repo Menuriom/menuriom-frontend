@@ -30,9 +30,16 @@ const getRoutePermissionList = (routes, localePath) => {
     const routesPermissions = {
         // route : 'permission'
         [localePath("/panel/:brandID")]: ["main-panel"],
+        // branches
         [localePath("/panel/:brandID/branches")]: ["main-panel.branches.view"],
         [localePath("/panel/:brandID/branches/:id")]: ["main-panel.branches.view", "main-panel.branches.edit"],
         [localePath("/panel/:brandID/branches/creation")]: ["main-panel.branches.add"],
+        // staff
+        [localePath("/panel/:brandID/staff/members")]: ["main-panel.staff.view"],
+        [localePath("/panel/:brandID/staff/invite")]: ["main-panel.staff.view", "main-panel.staff.invite"],
+        [localePath("/panel/:brandID/staff/:id")]: ["main-panel.staff.view", "main-panel.staff.alter"],
+        [localePath("/panel/:brandID/staff/roles")]: ["main-panel.staff.roles"],
+        // settings
         [localePath("/panel/:brandID/languages")]: ["main-panel.settings"],
         // ...
         // TODO : add to this list to keep route permission checking up to date

@@ -124,6 +124,11 @@ export default {
         Default: "Default",
         Socials: "Socials",
         needMoreLang: "To support multiple languages for your menu please go to language settings and choose the languages you want.",
+        "Some of the files that you selected, were over the nMB size limit": "Some of the files that you selected, were over the {size} MB size limit",
+        "up to n": "up to {number}",
+        "max file count is n": "max file count is {count}",
+        "record out of": "record out of",
+        "Record per page": "Record per page",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -230,6 +235,9 @@ export default {
             "Customize This Branch Menu": "Customize This Branch Menu",
             "Edit Details": "Edit Details",
             "Delete Branch": "Delete Branch",
+            "Edit Branch Details": "Edit Branch Details",
+            "Branch info has been updated": "Branch info has been updated",
+            "New branch created": "New branch created",
 
             "You are about to delete this branch": "You are about to delete branch <b>{name}</b>",
             deletingBranchDesc: "By deleting this branch, all custom menus of this branch will also be deleted",
@@ -246,6 +254,15 @@ export default {
             "Phone Number": "Phone Number",
             "Add Phone Number": "Add Phone Number",
             "10 digit number": "10 digit number",
+        },
+
+        staff: {
+            "Staff Members": "Staff Members",
+            "Invite new staff to your team and manage their access": "Invite new staff to your team and manage their access",
+            "Invite Members": "Invite Members",
+            "Invite New Member": "Invite New Member",
+            "Edit Role": "Edit Role",
+            "Remove staff": "Remove staff",
         },
 
         languages: {

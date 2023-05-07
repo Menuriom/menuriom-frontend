@@ -62,7 +62,7 @@
                             :to="localePath(`/panel/${brand._id}`)"
                             v-if="checkPermissions(['panel'], brand)"
                         >
-                            <Icon class="w-4 h-4 bg-white" name="column-light.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-white shrink-0" name="column-light.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Go To Dashboard") }}</small>
                         </nuxt-link>
                         <nuxt-link
@@ -70,7 +70,7 @@
                             :to="localePath(`/panel/brand/${brand._id}/general-info`)"
                             v-if="brand.role == 'owner'"
                         >
-                            <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Brand Settings & Info") }}</small>
                         </nuxt-link>
                         <hr class="w-full opacity-40" />
@@ -79,11 +79,11 @@
                             @click="openDeleteDialog(i)"
                             v-if="brand.role == 'owner'"
                         >
-                            <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Delete Brand") }}</small>
                         </button>
                         <button class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer" @click="openLeaveDialog(i)" v-else>
-                            <Icon class="w-4 h-4 bg-red-300" name="right-from-bracket.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-red-300 shrink-0" name="right-from-bracket.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Leave This Brand") }}</small>
                         </button>
                     </SlideMenu>
@@ -118,7 +118,7 @@
                     </div>
                 </li>
                 <li
-                    class="w-full rounded-lg bg-white shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
+                    class="w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
                     v-if="canCreateNewBrand && records.list.length > 0"
                 >
                     <nuxt-link class="flex flex-col items-center justify-center gap-4 w-full h-full p-3" :to="localePath(`/panel/brand/creation`)">

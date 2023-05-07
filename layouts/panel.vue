@@ -36,23 +36,23 @@ main {
         </Html>
 
         <Teleport to="body">
-            <PersonalInfo />
-            <SelectAccountType />
-            <CreateNewBrand />
+            <PersonalInfo v-if="panelStore.popUpOpened == 'personal-info'" />
+            <SelectAccountType v-if="panelStore.popUpOpened == 'select-account-type'" />
+            <CreateNewBrand v-if="panelStore.popUpOpened == 'create-new-brand'" />
+            <FindYourTeam v-if="panelStore.popUpOpened == 'find-your-team'" />
             <BrandCreatedSuccess />
-            <FindYourTeam />
         </Teleport>
     </div>
 </template>
 
 <script setup>
 import Header from "~/components/panel/Header.vue";
-import SideMenu from "~/components/panel/SideMenu.vue";
-import PersonalInfo from "~/components/panel/dialogs/account-setup/PersonalInfo.vue";
-import SelectAccountType from "~/components/panel/dialogs/account-setup/SelectAccountType.vue";
-import CreateNewBrand from "~/components/panel/dialogs/account-setup/CreateNewBrand.vue";
+const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
+const PersonalInfo = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/PersonalInfo.vue"));
+const SelectAccountType = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/SelectAccountType.vue"));
+const CreateNewBrand = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/CreateNewBrand.vue"));
+const FindYourTeam = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/FindYourTeam.vue"));
 import BrandCreatedSuccess from "~/components/panel/dialogs/account-setup/BrandCreatedSuccess.vue";
-import FindYourTeam from "~/components/panel/dialogs/account-setup/FindYourTeam.vue";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
 import { storeToRefs } from "pinia";

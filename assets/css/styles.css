@@ -40,8 +40,8 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-nav, nav ul { scrollbar-width: thin; }
-nav::-webkit-scrollbar, nav ul::-webkit-scrollbar { width: 4px; }
+nav, nav ul, .scroll-thin { scrollbar-width: thin; }
+nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollbar { width: 4px; height: 4px; }
 
 *:is(h1, h2, h3, h4, h5, h6) { font-family: "Inter", "Kalameh"; }
 
@@ -114,10 +114,10 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar { width: 4px; }
 
 /* .Vue-Toastification =================================== */
 .Vue-Toastification__toast--default { background-color: theme("colors.dolphin") !important; }
-.Vue-Toastification__toast--info { background-color: theme("colors.cyan.800") !important; }
-.Vue-Toastification__toast--success { background-color: theme("colors.emerald.800") !important; }
-.Vue-Toastification__toast--error { background-color: theme("colors.red.800") !important; }
-.Vue-Toastification__toast--warning { background-color: theme("colors.yellow.800") !important; }
+.Vue-Toastification__toast--info { background-color: theme("colors.cyan.900") !important; }
+.Vue-Toastification__toast--success { background-color: theme("colors.emerald.900") !important; }
+.Vue-Toastification__toast--error { background-color: theme("colors.red.900") !important; }
+.Vue-Toastification__toast--warning { background-color: theme("colors.yellow.900") !important; }
 .Vue-Toastification__icon {
     margin: 0 !important;
     padding: 1rem !important;
@@ -125,5 +125,11 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar { width: 4px; }
     background-color: rgba(45, 45, 45, .4) !important;
     border-radius: .5rem;
 }
-.Vue-Toastification__toast { align-items: center; padding: 1rem !important; gap: 1rem; box-shadow: 0px 5px 15px -5px rgba(0,0,0,.4) !important; }
+.Vue-Toastification__toast {
+    align-items: center; padding: .5rem !important;
+    padding-bottom: 1rem !important;
+    gap: 1rem; font-size: .75rem !important;
+    box-shadow: 0px 5px 15px -5px rgba(0,0,0,.4) !important;
+    font-family: "Poppins", "Inter", "IranyekanRegular" !important;
+}
 /* .Vue-Toastification =================================== */

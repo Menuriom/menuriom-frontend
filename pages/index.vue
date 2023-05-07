@@ -12,6 +12,9 @@
 </template>
 
 <script setup>
+// TODO : vue bundles every component and loads them when any page loads... 
+// use asyncComponents to make sure components load on pages they are needed and lower bundle size
+// asyncComponents components need to have v-if on them and imported using defineAsynComponent function
 import Hero from "~/components/web/home/Hero.vue";
 import Features from "~/components/web/home/Features.vue";
 import OtherFeatures from "~/components/web/home/OtherFeatures.vue";

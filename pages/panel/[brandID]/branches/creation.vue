@@ -28,6 +28,7 @@
                     <h3 class="flex items-center gap-2 text-lg">
                         <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.branches.Branch Images") }}
+                        <small class="px-2 rounded-md bg-zinc-800 opacity-75">{{ $t("panel.up to n", { number: 5 }) }}</small>
                     </h3>
                     <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 2 }) }}</small>
                 </div>
@@ -162,12 +163,14 @@ import Input from "~/components/form/Input.vue";
 import FormLangList from "~/components/panel/FormLangList.vue";
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
+import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
 const { localeProperties, t } = useI18n();
 const route = useRoute();
 const router = useRouter();
+const toast = useToast();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
@@ -191,17 +194,26 @@ const postalCode = ref("");
 const telephoneNumbers = ref(["", ""]);
 
 const addImages = () => {
-    // TODO : limit user to upload at max 5 images
     const files = [...fileInput.value.files];
+    fileInputForm.value.reset();
+
+    // limit user to upload at max 5 images
+    if (files.length + gallery.value.length > 5) {
+        toast.error(t(`panel.max file count is n`, { count: 5 }), { timeout: 2000, rtl: localeProperties.value.dir == "rtl" });
+        return;
+    }
+
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         if (file.size > 2 * 1_048_576) {
-            // TODO : make toast and let user know some files didnt included
+            toast.success(t(`panel.Some of files that you select was over the nMB size limit`, { size: 2 }), {
+                timeout: 2000,
+                rtl: localeProperties.value.dir == "rtl",
+            });
             continue;
         }
         gallery.value.push({ blob: URL.createObjectURL(file), file: file });
     }
-    fileInputForm.value.reset();
 };
 const removeImage = (index) => gallery.value.splice(index, 1);
 
@@ -222,7 +234,7 @@ const save = async () => {
     for (const val in address.values) data.append(`address.${val}`, address.values[val]);
     if (postalCode.value) data.append("postalCode", postalCode.value);
     telephoneNumbers.value.forEach((number) => {
-        if (number) data.append("telephoneNumbers", number);
+        if (number) data.append("telephoneNumbers[]", number);
     });
 
     await axios
@@ -231,7 +243,7 @@ const save = async () => {
             onUploadProgress: (event) => (percentage.value = parseInt(Math.round((event.loaded / event.total) * 100))),
         })
         .then((response) => {
-            // TODO : toast that record is created
+            toast.success(t(`panel.branches.New branch created`), { timeout: 2000, rtl: localeProperties.value.dir == "rtl" });
             router.push(localePath(`/panel/${route.params.brandID}/branches`));
         })
         .catch((err) => {

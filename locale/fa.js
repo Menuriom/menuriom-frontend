@@ -123,7 +123,12 @@ export default {
         Languages: "زبان ها",
         Default: "پیشفرض",
         Socials: "شبکه های اجتماعی",
-        needMoreLang: "برای پشتیبانی از چند زبان ابتدا از بخش تنظیمات زبان، زبان های مورد نظر خور را انتخاب کنید",
+        needMoreLang: "برای پشتیبانی از چند زبان ابتدا از بخش تنظیمات زبان، زبان های مورد نظر خود را انتخاب کنید",
+        "Some of the files that you selected, were over the nMB size limit": "برخی از فایل های انتخابی حجم بیش از {size} MB دارند",
+        "up to n": "حداکثر {number}",
+        "max file count is n": "حداکثر امکان انتخاب {count} فایل وجود دارد",
+        "record out of": "رکورد از",
+        "Record per page": "رکورد در صفحه",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -230,6 +235,9 @@ export default {
             "Customize This Branch Menu": "سفارشی سازی منوی این شعبه",
             "Edit Details": "وایرایش جزئیات",
             "Delete Branch": "حذف شعبه",
+            "Edit Branch Details": "ویرایش جزئیات شعبه",
+            "Branch info has been updated": "اطلاعات شعبه بروز شد",
+            "New branch created": "شعبه جدید ایجاد شد",
 
             "You are about to delete this branch": "شما در حال حذف شعبه <b>{name}</b> هستید",
             deletingBranchDesc: "با حذف این شعبه، تمام منو های سفارشی شده برای این شعبه نیز حذف میشوند",
@@ -246,6 +254,15 @@ export default {
             "Phone Number": "تلفن تماس",
             "Add Phone Number": "افزودن شماره تماس",
             "10 digit number": "کد 10 رقمی",
+        },
+
+        staff: {
+            "Staff Members": "اعضای خدمه",
+            "Invite new staff to your team and manage their access": "دعوت اعضای خدمه به تیم و مدیریت دسترسی های اعضا",
+            "Invite Members": "دعوت اعضا",
+            "Invite New Member": "دعوت اعضا",
+            "Edit Role": "ویرایش نقش",
+            "Remove staff": "حذف از تیم",
         },
 
         languages: {

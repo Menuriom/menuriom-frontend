@@ -17,7 +17,7 @@ export default defineNuxtConfig({
                 // { rel: "mask-icon", href: "/pwa/safari-pinned-tab.svg", color: "#FFFFFF" },
             ],
         },
-        // pageTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
+        pageTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
         layoutTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
     },
 
@@ -59,6 +59,7 @@ export default defineNuxtConfig({
             redirectOn: "root",
         },
         defaultLocale: "fa",
+        defaultDirection:"rtl",
         lazy: true,
         langDir: "locale",
         locales: [
@@ -71,12 +72,9 @@ export default defineNuxtConfig({
     },
 
     modules: [
-        // tailwind moudle for nuxt 3
+        // ...
         "@nuxtjs/tailwindcss",
-
-        // pinia moudle
         "@pinia/nuxt",
-
         "@nuxtjs/i18n",
     ],
 });

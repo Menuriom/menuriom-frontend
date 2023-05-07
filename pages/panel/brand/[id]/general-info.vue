@@ -7,7 +7,7 @@
             {{ $t("panel.brands.General Info") }}
         </h2>
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full">
-            <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white">
+            <div class="flex flex-col gap-4 w-full lg:max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white">
                 <h3 class="flex items-center gap-2 text-lg">
                     <Icon class="w-5 h-5 bg-white" name="fork-knife.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.brands.Brand Details") }}
@@ -184,7 +184,7 @@ const save = async () => {
             logoBlob.value = ogLogo.value = response.data.logo;
 
             // make toast to inform user that brand details is updated
-            toast.info(t(`panel.brands.Brand info has been updated`), { timeout: 2000, rtl: localeProperties.dir == "rtl" });
+            toast.info(t(`panel.brands.Brand info has been updated`), { timeout: 2000, rtl: localeProperties.value.dir == "rtl" });
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
