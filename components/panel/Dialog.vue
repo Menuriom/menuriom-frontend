@@ -21,7 +21,8 @@
                     <div class="flex flex-col w-full" v-if="title || closeable || desc">
                         <div class="flex justify-between items-center gap-3">
                             <h3 class="text-2xl font-bold" v-if="title">{{ title }}</h3>
-                            <button class="bg-white rounded-full p-2 hover:rotate-180 transition-all" @click="close()" v-if="closeable">
+                            <slot name="title" />
+                            <button class="bg-white rounded-full p-2 hover:rotate-180 transition-all shrink-0" @click="close()" v-if="closeable">
                                 <img class="rotate-45" src="/icons/plus.svg" width="16" height="16" alt="Close" />
                             </button>
                         </div>

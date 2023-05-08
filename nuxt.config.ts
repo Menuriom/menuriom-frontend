@@ -59,12 +59,12 @@ export default defineNuxtConfig({
             redirectOn: "root",
         },
         defaultLocale: "fa",
-        defaultDirection:"rtl",
+        defaultDirection: "rtl",
         lazy: true,
         langDir: "locale",
         locales: [
-            { code: "fa", name: "فارسی", iso: "fa-IR", file: "fa.js", dir: "rtl", domain: process.env.BASE_FA_URL },
-            { code: "en", name: "English", iso: "en-US", file: "en.js", dir: "ltr", domain: process.env.BASE_EN_URL },
+            { code: "fa", name: "فارسی", iso: "fa-IR", files: ["fa.js", "fa.json"], dir: "rtl", domain: process.env.BASE_FA_URL },
+            { code: "en", name: "English", iso: "en-US", files: ["en.js", "en.json"], dir: "ltr", domain: process.env.BASE_EN_URL },
         ],
         vueI18n: {
             legacy: false,

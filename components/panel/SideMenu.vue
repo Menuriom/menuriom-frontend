@@ -207,7 +207,7 @@ aside > div {
                             <nuxt-link
                                 class="link"
                                 :to="localePath(`/panel/${panelStore.selectedBrandId}/sent/invite`)"
-                                v-if="checkPermissions(['main-panel.staff.invite'], brand)"
+                                v-if="checkPermissions(['main-panel.staff.view', 'main-panel.staff.invite'], brand, 'AND')"
                             >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Sent Invites") }}</span>

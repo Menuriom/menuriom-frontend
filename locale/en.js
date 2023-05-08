@@ -10,12 +10,10 @@ export default {
         OR: "OR",
         "Email Address": "Email Address",
         Continue: "Continue",
-        "sign up term agreement message": "By signing up, you agree to the Menuriom {PrivacyPolicy} and {TermsOfService}.",
         "Privacy Policy": "Privacy Policy",
         "Terms of Service": "Terms of Service",
 
         "Check Your Email": "Check Your Email",
-        "sent code message": `<span class="opacity-60">we sent</span> <span class="underline opacity-90">{email}</span> <span class="opacity-60"> a verfication code. Type or paste it below to continue.</span>`,
         "Verfication Code": "Verfication Code",
         "Resend Code": "Resend Code",
 
@@ -118,15 +116,11 @@ export default {
         Delete: "Delete",
         Select: "Select",
         "Go Back": "Go Back",
-        "Images must be less than nMB": "Images must be less than {size} MB",
         Uploading: "Uploading",
         Languages: "Languages",
         Default: "Default",
         Socials: "Socials",
         needMoreLang: "To support multiple languages for your menu please go to language settings and choose the languages you want.",
-        "Some of the files that you selected, were over the nMB size limit": "Some of the files that you selected, were over the {size} MB size limit",
-        "up to n": "up to {number}",
-        "max file count is n": "max file count is {count}",
         "record out of": "record out of",
         "Record per page": "Record per page",
 
@@ -214,11 +208,9 @@ export default {
             "General Info": "General Info",
             "Brand info has been updated": "Brand info has been updated",
 
-            "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
             deletingBrandDesc: "all your branches, menus, and staff members in this brand will be deleted and your plan subscription will be canceled",
             "This action cannot be reversed": "This action cannot be reversed",
 
-            "You are about to leave this brand": "You are about to leave brand <b>{name}</b>",
             leavingBrandDesc: "By leaving the brand you won't be able to access this brand",
             "You need new invitation to join this brand again": "You need new invitation to join this brand again",
 
@@ -239,7 +231,6 @@ export default {
             "Branch info has been updated": "Branch info has been updated",
             "New branch created": "New branch created",
 
-            "You are about to delete this branch": "You are about to delete branch <b>{name}</b>",
             deletingBranchDesc: "By deleting this branch, all custom menus of this branch will also be deleted",
 
             "Branch Creation": "Branch Creation",
@@ -263,6 +254,17 @@ export default {
             "Invite New Member": "Invite New Member",
             "Edit Role": "Edit Role",
             "Remove staff": "Remove staff",
+            "All Branches": "All Branches",
+            "Send Invite": "Send Invite",
+            "Go to staff roles": "Go to staff roles",
+
+            "Enter email of user you want to invite, and then select what role you want to apply to them":
+                "Enter email of user you want to invite, and then select what role you want to apply to them",
+
+            "Remove Staff": "Remove Staff",
+            deletingStaffDesc: "By removing this user from your team, they can no longer access anything in your brand",
+            "For this user to join your team again, you need to send them a new invite":
+                "For this user to join your team again, you need to send them a new invite",
         },
 
         languages: {
@@ -272,7 +274,7 @@ export default {
             "Choose which languages you want your menu to have": "Choose which languages you want your menu to have",
             "You can translate your menu items and your restaurant info base on languages you choose":
                 "You can translate your menu items and your restaurant info base on languages you choose",
-            "You can choose up to n languages": "You can choose up to {n} languages",
+
             "Upgrade your plan to support more languages": "Upgrade your plan to support more languages",
             "Select what currency you want to show for your prices": "Select what currency you want to show for your prices",
         },

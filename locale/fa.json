@@ -1,0 +1,25 @@
+{
+    "auth": {
+        "sign up term agreement message": "با عضویت در منوریوم {PrivacyPolicy} و {TermsOfService} را میپذیرم",
+        "sent code message": "<span class='opacity-60'>ما به ایمیل</span> <span class='underline opacity-90'>{email}</span> <span class='opacity-60'> یک کد تایید ارسال کردیم. لطفا کد تایید را در فرم زیر وارد کنید</span>"
+    },
+    "panel": {
+        "up to n": "حداکثر {number}",
+        "Some of the files that you selected, were over the nMB size limit": "برخی از فایل های انتخابی حجم بیش از {size} MB دارند",
+        "max file count is n": "حداکثر امکان انتخاب {count} فایل وجود دارد",
+        "Images must be less than nMB": "حجم عکس انتخابی باید کمتر از {size} Mb باشد"
+    },
+    "brand": {
+        "You are about to delete this brand": "شما درحال حذف برند <b>{name}</b> هستید",
+        "You are about to leave this brand": "شما درحال ترک کردن برند <b>{name}</b> هستید"
+    },
+    "branches": {
+        "You are about to delete this branch": "شما درحال حذف شعبه <b>{name}</b> هستید"
+    },
+    "staff": {
+        "You are about to remove this member": "شما درحال حذف کردن {member} از تیم خود هستید"
+    },
+    "languages": {
+        "You can choose up to n languages": "شما میتونید تا {n} زبان انتخاب کنید"
+    }
+}

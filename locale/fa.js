@@ -10,12 +10,10 @@ export default {
         OR: "یا",
         "Email Address": "ادرس ایمیل",
         Continue: "ادامه",
-        "sign up term agreement message": "با عضویت در منوریوم {PrivacyPolicy} و {TermsOfService} را میپذیرم",
         "Privacy Policy": "سیاست حریم خصوصی",
         "Terms of Service": "شرایط استفاده",
 
         "Check Your Email": "ایمیل خودتو رو چک کن",
-        "sent code message": `<span class="opacity-60">ما به ایمیل</span> <span class="underline opacity-90">{email}</span> <span class="opacity-60"> یک کد تایید ارسال کردیم. لطفا کد تایید را در فرم زیر وارد کنید</span>`,
         "Verfication Code": "کد تایید",
         "Resend Code": "ارسال دوباره کد",
 
@@ -118,15 +116,11 @@ export default {
         Delete: "حذف",
         Select: "انتخاب",
         "Go Back": "بازگشت",
-        "Images must be less than nMB": "حجم عکس انتخابی باید کمتر از {size} Mb باشد",
         Uploading: "درحال ارسال",
         Languages: "زبان ها",
         Default: "پیشفرض",
         Socials: "شبکه های اجتماعی",
         needMoreLang: "برای پشتیبانی از چند زبان ابتدا از بخش تنظیمات زبان، زبان های مورد نظر خود را انتخاب کنید",
-        "Some of the files that you selected, were over the nMB size limit": "برخی از فایل های انتخابی حجم بیش از {size} MB دارند",
-        "up to n": "حداکثر {number}",
-        "max file count is n": "حداکثر امکان انتخاب {count} فایل وجود دارد",
         "record out of": "رکورد از",
         "Record per page": "رکورد در صفحه",
 
@@ -214,11 +208,9 @@ export default {
             "General Info": "مشخصات کلی",
             "Brand info has been updated": "اطلاعات برند بروز شد",
 
-            "You are about to delete this brand": "شما در حال حذف برند <b>{name}</b> هستید",
             deletingBrandDesc: "با پاک شدن برند؛ تمام شعبه ها، منوها و کارکنان خدمه که در این برند وجود دارند حذف خواهند شد و عضویت پلن شما نیز لغو میشود",
             "This action cannot be reversed": "این عملیات برگشت ناپذیر است",
 
-            "You are about to leave this brand": "شما در حال ترک کردن برند <b>{name}</b> هستید",
             leavingBrandDesc: "با ترک این برند شما دیگر دسترسی به این برند را نخواهید داشت",
             "You need new invitation to join this brand again": "برای دسترسی دوباره به این برند، ابتدا باید درخواست دعوت جدیدی به شما ارسال شود",
 
@@ -239,7 +231,6 @@ export default {
             "Branch info has been updated": "اطلاعات شعبه بروز شد",
             "New branch created": "شعبه جدید ایجاد شد",
 
-            "You are about to delete this branch": "شما در حال حذف شعبه <b>{name}</b> هستید",
             deletingBranchDesc: "با حذف این شعبه، تمام منو های سفارشی شده برای این شعبه نیز حذف میشوند",
 
             "Branch Creation": "ساخت شعبه جدید",
@@ -263,6 +254,16 @@ export default {
             "Invite New Member": "دعوت اعضا",
             "Edit Role": "ویرایش نقش",
             "Remove staff": "حذف از تیم",
+            "All Branches": "همه شعبه ها",
+            "Send Invite": "ارسال دعوت",
+            "Go to staff roles": "مدیریت نقش ها",
+
+            "Enter email of user you want to invite, and then select what role you want to apply to them":
+                "ایمیل کاربر مورد نظر را وارد کنید، سپس سطح دسترسی کاربر را معلوم کنید",
+
+            "Remove Staff": "حذف خدمه",
+            deletingStaffDesc: "با خذف این کاربر از تیم، دسترسی این کاربر به طور کل از برند شما گرفته میشود ",
+            "For this user to join your team again, you need to send them a new invite": "برای عضو شدن دوباره این کاربر نیاز به ارسال دعوتنامه جدید دارید",
         },
 
         languages: {
@@ -272,7 +273,6 @@ export default {
             "Choose which languages you want your menu to have": "زبان هایی که میخواهید داخل منو نمایش داده بشه رو انتخاب کنید",
             "You can translate your menu items and your restaurant info base on languages you choose":
                 "بسته به زبان هایی که انتخاب میکنید، میتونید منو رو ترجمه کنید",
-            "You can choose up to n languages": "شما میتونید تا {n} زبان انتخاب کنید",
             "Upgrade your plan to support more languages": "برای انتخاب زبان های بیشتر پلن خود را ارتقا بدید",
             "Select what currency you want to show for your prices": "واحد پولی که در منو نمایش داده میشود رو انتخاب کنید",
         },

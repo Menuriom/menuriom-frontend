@@ -140,7 +140,6 @@
 import Dialog from "~/components/panel/Dialog.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
 import Loading from "~/components/Loading.vue";
-import { getBranchList } from "~/composables/useApiCalls";
 import axios from "axios";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";

@@ -107,6 +107,34 @@ export const getBranchList = async (brandID) => {
 };
 // ---------------------------------------------------------
 
+// staff ---------------------------------------------------------
+export const getStaffList = async (brandID, branchID, pp, lastRecordID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/staff`, { brand: brandID });
+    const params = [];
+    params.push(`pp=${pp ? pp : "25"}`);
+    if (lastRecordID) params.push(`lastRecordID=${lastRecordID}`);
+    if (branchID) params.push(`branchID=${branchID}`);
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _records = [];
+    let _total = 0;
+    let _canInviteNewMembers = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _records = [..._records, ...response.data.records];
+            _total = Number(response.data.total);
+            _canInviteNewMembers = response.data.canInviteNewMembers;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _records, _canInviteNewMembers, _total };
+};
+// ---------------------------------------------------------
+
 // general APIs ---------------------------------------------------------
 export const getLanguages = async () => {
     let { url, headers } = getRequestConfig(`/api/v1/general/language-list`, {});

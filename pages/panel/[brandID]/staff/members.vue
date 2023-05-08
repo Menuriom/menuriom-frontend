@@ -12,14 +12,14 @@
                     {{ $t("panel.staff.Invite new staff to your team and manage their access") }}
                 </small>
             </div>
-            <nuxt-link
+            <button
                 class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
-                :to="localePath(`/panel/${route.params.brandID}/staff/invite`)"
-                v-if="checkPermissions(['main-panel.staff.invite'], brand)"
+                @click="panelStore.openPopUp('invite-new-member')"
+                v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
             >
                 <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
                 {{ $t("panel.staff.Invite Members") }}
-            </nuxt-link>
+            </button>
         </header>
         <div class="flex items-center justify-between gap-4">
             <input class="shadow-nr10 p-2 h-10 rounded w-full max-w-xs" placeholder="Search..." type="text" name="" id="" />
@@ -37,14 +37,14 @@
         <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto">
             <li class="flex items-center gap-1 text-sm p-1 px-2 border-2 border-dolphin rounded-lg shrink-0">
                 <Icon class="w-4 h-4 bg-black shrink-0" name="Stack.svg" folder="icons/basil" size="16px" />
-                All Branches
+                {{ $t("panel.staff.All Branches") }}
             </li>
-            <li class="text-sm p-1 px-2 border-2 rounded-lg shrink-0">Main Branch</li>
-            <li class="text-sm p-1 px-2 border-2 rounded-lg shrink-0">Saadat Branch</li>
-            <li class="text-sm p-1 px-2 border-2 rounded-lg shrink-0">Saadat Branch</li>
+            <li class="text-sm p-1 px-2 border-2 rounded-lg shrink-0" v-for="(branch, i) in branches.list" :key="i">{{ branch.name }}</li>
         </ul>
         <hr class="w-full border-gray-300 opacity-50" />
-        <small class="flex items-center gap-1 -my-2"><b>25 </b> {{ $t("panel.record out of") }} 125</small>
+        <small class="flex items-center gap-1 -my-2" v-if="totalRecords > 0">
+            <b>25</b> {{ $t("panel.record out of") }} <span>{{ totalRecords }}</span>
+        </small>
         <section class="flex flex-col w-full">
             <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(230px, 1fr))" v-show="!loading">
                 <li
@@ -72,27 +72,27 @@
                         </button>
                     </SlideMenu>
                     <div class="relative w-24 h-24 rounded-full overflow-hidden bg-pencil-tip shadow-nr15 z-2">
-                        <img class="w-full h-full object-cover" :src="staff.gallery[0]" v-if="staff.gallery[0]" />
+                        <img class="w-full h-full object-cover" :src="staff.user.avatar" v-if="staff.user.avatar" />
                     </div>
                     <div class="flex flex-col items-center">
-                        <h4 class="font-semibold">Kasra Keshvardoost</h4>
-                        <p class="text-xs opacity-75">kasrakeshvardoost@gmail.com</p>
+                        <h4 class="font-semibold">{{ `${staff.user.name} ${staff.user.family}` }}</h4>
+                        <p class="text-xs opacity-75">{{ staff.user.email ? staff.user.email : staff.user.mobile }}</p>
                     </div>
-                    <small class="border border-violet text-violet p-0.5 px-2 rounded">Waiter</small>
+                    <small class="border border-violet text-violet p-0.5 px-2 rounded">{{ staff.role }}</small>
                     <hr class="w-3/4 border-b-2 border-dolphin opacity-10 rounded-full" />
                 </li>
                 <li class="w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden">
-                    <nuxt-link
+                    <button
                         class="flex flex-col items-center justify-center gap-4 w-full h-full p-3 py-10"
-                        :to="localePath(`/panel/${route.params.brandID}/staff/invite`)"
-                        v-if="checkPermissions(['main-panel.staff.invite'], brand)"
+                        @click="panelStore.openPopUp('invite-new-member')"
+                        v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                     >
                         <img class="down-pop w-20 object-contain" src="~/assets/images/team.webp" />
                         <div class="flex items-center gap-2">
                             <Icon class="w-3 h-3 bg-violet" name="plus.svg" folder="icons" size="12px" />
                             <small class="text-sm text-violet">{{ $t("panel.staff.Invite New Member") }}</small>
                         </div>
-                    </nuxt-link>
+                    </button>
                 </li>
             </ul>
             <Loading v-if="loading" />
@@ -102,15 +102,22 @@
         </section>
 
         <Teleport to="body">
-            <Dialog name="delete-confirmation" :title="$t('panel.staff.Delete Branch')" v-if="panelStore.popUpOpened == 'delete-confirmation'">
+            <Dialog name="delete-confirmation" :title="$t('panel.staff.Remove Staff')" v-if="panelStore.popUpOpened == 'delete-confirmation'">
                 <div class="flex flex-col gap-3">
                     <img class="w-44 mx-auto" src="~/assets/images/empty.webp" />
-                    <h2 class="text-xl" v-html="$t('panel.staff.You are about to delete this branch', { name: records.list[indexToDelete].name })" />
+                    <h2
+                        class="text-xl"
+                        v-html="
+                            $t('panel.staff.You are about to remove this member', {
+                                member: `${records.list[indexToDelete].user.name} ${records.list[indexToDelete].user.family}`,
+                            })
+                        "
+                    />
                     <p class="text-sm opacity-75">
-                        {{ $t("panel.staff.deletingBranchDesc") }}
+                        {{ $t("panel.staff.deletingStaffDesc") }}
                     </p>
                     <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
-                        {{ $t("panel.brands.This action cannot be reversed") }}
+                        {{ $t("panel.staff.For this user to join your team again, you need to send them a new invite") }}
                     </small>
                     <hr class="w-full opacity-40" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
@@ -126,12 +133,14 @@
                             :disabled="deleting"
                             @click="deleteRecord()"
                         >
-                            <span v-if="!deleting"> {{ $t("panel.staff.Delete Branch") }} </span>
+                            <span v-if="!deleting"> {{ $t("panel.staff.Remove Staff") }} </span>
                             <Loading class="h-6" v-else />
                         </button>
                     </div>
                 </div>
             </Dialog>
+            <InviteNewMember v-if="panelStore.popUpOpened == 'invite-new-member'" />
+            <InviteSuccess v-if="panelStore.popUpOpened == 'invite-success'" />
         </Teleport>
     </div>
 </template>
@@ -139,8 +148,9 @@
 <script setup>
 import Dialog from "~/components/panel/Dialog.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
+const InviteNewMember = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/InviteNewMember.vue"));
+const InviteSuccess = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/InviteSuccess.vue"));
 import Loading from "~/components/Loading.vue";
-import { getBranchList } from "~/composables/useApiCalls";
 import axios from "axios";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
@@ -151,17 +161,17 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.staff.Branches")} - ${t("panel.Your Menuriom Panel")}`);
+const title = computed(() => `${t("panel.staff.Staff Members")} - ${t("panel.Your Menuriom Panel")}`);
 useHead({ title: title });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
-// TODO : limit branch creation base on the user's plan on brand
+// TODO : limit staff invitation base on the user's plan on brand
 
 const errorField = ref("");
 const responseMessage = ref("");
 
-const canCreateNewBranch = ref(true);
+const canInviteNewMembers = ref(true);
 
 // deleting ----------------------------------------
 const deleting = ref(false);
@@ -180,7 +190,7 @@ const deleteRecord = async () => {
     const id = records.list[indexToDelete.value]._id;
 
     await axios
-        .delete(`/api/v1/panel/branches/${id}`, { headers: { brand: route.params.brandID } })
+        .delete(`/api/v1/panel/staff/${id}`, { headers: { brand: route.params.brandID } })
         .then((response) => {
             records.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();
@@ -211,20 +221,36 @@ const handleErrors = (err) => {
     // TODO : log errors in sentry type thing
 };
 
-// getBranchList -------------------------------------------------
+// getStaffList -------------------------------------------------
 const loading = ref(true);
-const noMoreRecords = ref(false);
 const records = reactive({ list: [] });
+const totalRecords = ref(0);
+const getStaffList_results = await useLazyAsyncData(() => getStaffList(route.params.brandID));
+
+if (getStaffList_results.error.value) handleErrors(getStaffList_results.error.value);
+watch(getStaffList_results.error, (err) => handleErrors(err));
+
+const handleStaffList_results = (data) => {
+    records.list = data._records;
+    totalRecords.value = data._total;
+    canInviteNewMembers.value = data._canInviteNewMembers;
+    loading.value = false;
+};
+if (getStaffList_results.data.value) handleStaffList_results(getStaffList_results.data.value);
+watch(getStaffList_results.data, (val) => handleStaffList_results(val));
+// -------------------------------------------------
+
+// getBranchList -------------------------------------------------
+const loadingBranches = ref(true);
+const branches = reactive({ list: [] });
 const getBranchList_results = await useLazyAsyncData(() => getBranchList(route.params.brandID));
 
 if (getBranchList_results.error.value) handleErrors(getBranchList_results.error.value);
 watch(getBranchList_results.error, (err) => handleErrors(err));
 
 const handleBranchList_results = (data) => {
-    records.list = data._records;
-    noMoreRecords.value = data._noMoreRecords;
-    canCreateNewBranch.value = data._canCreateNewBranch;
-    loading.value = false;
+    branches.list = data._records;
+    loadingBranches.value = false;
 };
 if (getBranchList_results.data.value) handleBranchList_results(getBranchList_results.data.value);
 watch(getBranchList_results.data, (val) => handleBranchList_results(val));
