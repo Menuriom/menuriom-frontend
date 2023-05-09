@@ -24,7 +24,7 @@ aside li a.router-link-exact-active {
                         />
                     </nuxt-link>
                     <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
-                    <h1 class="text-2xl md:text-4xl/none font-bold">{{ $t("panel.brands.Brand Settings & Info") }}</h1>
+                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.brands.Brand Settings & Info") }}</h1>
                 </div>
             </div>
         </header>

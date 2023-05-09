@@ -265,6 +265,14 @@ export default {
             deletingStaffDesc: "By removing this user from your team, they can no longer access anything in your brand",
             "For this user to join your team again, you need to send them a new invite":
                 "For this user to join your team again, you need to send them a new invite",
+
+            "Staff Roles": "Staff Roles",
+            "Create New Role": "Create New Role",
+            "Here you can create roles and manage the access level of each role": "Here you can create roles and manage the access level of each role",
+            
+            "Delete Role": "Delete Role",
+            "By deleting this role, you need to assign a new role to all staff members that previously had this role":
+                "By deleting this role, you need to assign a new role to all staff members that previously had this role",
         },
 
         languages: {

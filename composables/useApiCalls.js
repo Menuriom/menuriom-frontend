@@ -133,6 +133,26 @@ export const getStaffList = async (brandID, branchID, pp, lastRecordID) => {
 
     return { _records, _canInviteNewMembers, _total };
 };
+export const getStaffRolesList = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/staff-roles`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _records = [];
+    let _canCreateNewRoles = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _records = [..._records, ...response.data.records];
+            _canCreateNewRoles = response.data.canCreateNewRoles;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _records, _canCreateNewRoles };
+};
 // ---------------------------------------------------------
 
 // general APIs ---------------------------------------------------------

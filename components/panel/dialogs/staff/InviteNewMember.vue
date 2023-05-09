@@ -8,7 +8,7 @@
                 <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.staff.Invite New Member") }}</h3>
             </div>
         </template>
-        <div class="flex flex-col items-center gap-4 w-screen max-w-md mt-4">
+        <div class="flex flex-col items-center gap-4 md:w-screen max-w-md mt-4">
             <div class="flex flex-col gap-4 w-full">
                 <p class="text-xs opacity-75 max-w-sm">
                     {{ $t("panel.staff.Enter email of user you want to invite, and then select what role you want to apply to them") }}

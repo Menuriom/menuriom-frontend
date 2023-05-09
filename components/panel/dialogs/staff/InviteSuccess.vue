@@ -2,7 +2,7 @@
 
 <template>
     <Dialog name="invite-success" @update:open="startConfetti($event)">
-        <div class="relative flex flex-col items-center gap-4 w-screen max-w-md text-center">
+        <div class="relative flex flex-col items-center gap-4 md:w-screen max-w-md text-center">
             <div class="flex flex-col gap-1">
                 <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.account-setup.Create Your Brand") }}</h3>
             </div>

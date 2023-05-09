@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/store-dark.png" alt="" />
-                    <h1 class="text-4xl/none font-bold">{{ $t("panel.branches.Branch Creation") }}</h1>
+                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.branches.Branch Creation") }}</h1>
                 </div>
                 <div class="flex items-center gap-1 text-sm ms-2">
                     <nuxt-link :to="localePath(`/panel/${route.params.brandID}`)">

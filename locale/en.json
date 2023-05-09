@@ -7,19 +7,20 @@
         "up to n": "up to {number}",
         "Some of the files that you selected, were over the nMB size limit": "Some of the files that you selected, were over the {size} MB size limit",
         "max file count is n": "max file count is {count}",
-        "Images must be less than nMB": "Images must be less than {size} MB"
-    },
-    "brand": {
-        "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
-        "You are about to leave this brand": "You are about to leave brand <b>{name}</b>"
-    },
-    "branches": {
-        "You are about to delete this branch": "You are about to delete branch <b>{name}</b>"
-    },
-    "staff": {
-        "You are about to remove this member": "You are about to remove {member}"
-    },
-    "languages": {
-        "You can choose up to n languages": "You can choose up to {n} languages"
+        "Images must be less than nMB": "Images must be less than {size} MB",
+        "brand": {
+            "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
+            "You are about to leave this brand": "You are about to leave brand <b>{name}</b>"
+        },
+        "branches": {
+            "You are about to delete this branch": "You are about to delete branch <b>{name}</b>"
+        },
+        "staff": {
+            "You are about to remove this member": "You are about to remove {member}",
+            "You are about to delete this role": "You are about to delete role {role}"
+        },
+        "languages": {
+            "You can choose up to n languages": "You can choose up to {n} languages"
+        }
     }
 }

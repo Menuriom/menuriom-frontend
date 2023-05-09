@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
-                    <h1 class="text-4xl/none font-bold">{{ $t("panel.brands.Create New Brand") }}</h1>
+                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.brands.Create New Brand") }}</h1>
                 </div>
                 <p class="text-sm opacity-75">
                     {{ $t("panel.account-setup.Start by setting up your brand info") }}

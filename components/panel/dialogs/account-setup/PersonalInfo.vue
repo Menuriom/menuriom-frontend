@@ -2,7 +2,7 @@
 
 <template>
     <Dialog name="personal-info" :closeable="false">
-        <div class="flex flex-col items-center gap-4 w-screen max-w-md">
+        <div class="flex flex-col items-center gap-4 md:w-screen max-w-md">
             <div class="flex flex-col gap-1">
                 <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.account-setup.Setting Up Your Account") }}</h3>
                 <p class="text-xs opacity-75 text-center max-w-sm">

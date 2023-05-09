@@ -148,7 +148,7 @@ export default {
             "Manage Staff": "مدیریت خدمه",
             "Staff Members": "اعضای خدمه",
             "Sent Invites": "درخواست های ارسالی",
-            "Staff Roles": "تعریف نقش خدمه",
+            "Staff Roles": "دسترسی های اعضا",
             "Customers Feedback": "بازخورد مشتریان",
             "Billing & Plan Upgrade": "صورتحساب و ارتقا پلن",
             Support: "پشتیبانی",
@@ -264,6 +264,15 @@ export default {
             "Remove Staff": "حذف خدمه",
             deletingStaffDesc: "با خذف این کاربر از تیم، دسترسی این کاربر به طور کل از برند شما گرفته میشود ",
             "For this user to join your team again, you need to send them a new invite": "برای عضو شدن دوباره این کاربر نیاز به ارسال دعوتنامه جدید دارید",
+
+            "Staff Roles": "مدیریت دسترسی اعضا",
+            "Create New Role": "ساخت نقش جدید",
+            "Here you can create roles and manage the access level of each role":
+                "در اینجا شما میتوانید نقش های مختلف تعریف کنید و سطح دسترسی هر نقش را مدیریت کنید",
+
+            "Delete Role": "حذف نقش",
+            "By deleting this role, you need to assign a new role to all staff members that previously had this role":
+                "با حذف این نقش، باید به تمام اعضای خدمه که قبلا این نقش را داشته اند نقش جدیدی اختصاص دهید",
         },
 
         languages: {
