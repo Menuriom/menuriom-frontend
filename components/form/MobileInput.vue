@@ -1,7 +1,4 @@
 <style scoped>
-.dark.input-box-shadow {
-    box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 40%);
-}
 .input-box-shadow {
     box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 10%);
 }

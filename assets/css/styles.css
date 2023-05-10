@@ -85,7 +85,7 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
 
 .slide-down-enter-active { transition: all 0.2s ease; }
 .slide-down-leave-active { transition: all 0.2s ease; }
-.slide-down-enter-from, .slide-down-leave-to { opacity: 0; transform: translateY(100%); }
+.slide-down-enter-from, .slide-down-leave-to { opacity: 0; transform: translateY(10%); }
 
 .slide-left-enter-active { transition: all 0.2s ease; }
 .slide-left-leave-active { transition: all 0.2s ease; }

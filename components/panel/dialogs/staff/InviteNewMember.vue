@@ -8,7 +8,7 @@
                 <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.staff.Invite New Member") }}</h3>
             </div>
         </template>
-        <div class="flex flex-col items-center gap-4 md:w-screen max-w-md mt-4">
+        <div class="flex flex-col items-center gap-4 md:w-screen max-w-md mt-4" ref="form">
             <div class="flex flex-col gap-4 w-full">
                 <p class="text-xs opacity-75 max-w-sm">
                     {{ $t("panel.staff.Enter email of user you want to invite, and then select what role you want to apply to them") }}
@@ -17,34 +17,45 @@
                     class="w-full flex-grow"
                     :required="true"
                     :label="$t('auth.Email Address')"
+                    :placeholder="$t('panel.staff.Email address of user that they signup with')"
                     v-model="name"
                     :error="errorField == 'name' ? responseMessage : ''"
                 />
-                <Input
+                <SelectDropDown
                     class="w-full flex-grow"
-                    :label="$t('panel.brands.Brand Slogan')"
-                    v-model="slogan"
+                    :required="true"
+                    :formHtmlObject="form"
+                    :label="$t('panel.staff.Role')"
+                    :options="roles.list"
+                    v-slot="{ option }"
+                    v-model:selected-option="selectedRole.option"
                     :error="errorField == 'slogan' ? responseMessage : ''"
-                />
+                >
+                    <span :value="option.value">{{ option.name }}</span>
+                </SelectDropDown>
                 <nuxt-link
                     class="flex items-center gap-1 w-max text-xs text-purple-300 hover:underline underline-offset-2"
                     :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/roles`)"
+                    @click="panelStore.closePopUp()"
                     v-if="checkPermissions(['main-panel.staff.roles'], brand)"
                 >
                     <Icon class="w-3 h-3 bg-purple-300" name="arrow-angle.svg" folder="icons" size="10px" />
                     {{ $t("panel.staff.Go to staff roles") }}
                 </nuxt-link>
                 <hr class="w-full opacity-25" />
-                <h4 class="flex items-center gap-2">
-                    <img class="w-5" src="~/assets/images/panel-icons/newspaper.png" />
-                    {{ $t("panel.brands.Your main branch info") }}
-                </h4>
-                <Input
-                    :required="true"
-                    :label="$t('panel.brands.Main Branch Address')"
-                    v-model="address"
-                    :error="errorField == 'address' ? responseMessage : ''"
-                />
+                <small> {{ $t("panel.staff.You can select specific branches for this member") }} </small>
+                <small class="text-xs opacity-75"> {{ $t("panel.staff.If you dont select any branches this user will be able from all branches") }} </small>
+                <MultiSelectDropDown
+                    class="w-full flex-grow"
+                    :formHtmlObject="form"
+                    :label="$t('panel.branches.Branches')"
+                    :options="branches.list"
+                    v-slot="{ option }"
+                    v-model:selected-options="selectedBranches.list"
+                    :error="errorField == 'slogan' ? responseMessage : ''"
+                >
+                    <span :value="option.value">{{ option.name }}</span>
+                </MultiSelectDropDown>
                 <hr class="w-full opacity-25" />
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
@@ -61,7 +72,8 @@
 <script setup>
 import Dialog from "~/components/panel/Dialog.vue";
 import Input from "~/components/form/Input.vue";
-import RangeSlider from "~/components/form/RangeSlider.vue";
+import SelectDropDown from "~/components/form/SelectDropDown.vue";
+import MultiSelectDropDown from "~/components/form/MultiSelectDropDown.vue";
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
 import { usePanelStore } from "@/stores/panel";
@@ -75,19 +87,18 @@ const userStore = useUserStore();
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
+const form = ref(); // Dom Ref
+// const formClientHeight = computed(() => form.value.clientHeight);
+
 const loading = ref(false);
 const errorField = ref("");
 const responseMessage = ref("");
 
-const logo = ref(""); // Dom Ref
-const logoBlob = ref(null);
-
 const name = ref("");
-const slogan = ref("");
-const branchSize = ref(1);
-const address = ref("");
-const tel = ref("");
+const selectedRole = reactive({ option: { name: "", value: "" } });
+const selectedBranches = reactive({ list: [] });
 
+// sending invite  ----------------------------------------
 const sendInvite = async () => {
     if (loading.value) return;
     loading.value = true;
@@ -113,4 +124,49 @@ const sendInvite = async () => {
         })
         .finally(() => (loading.value = false));
 };
+// ----------------------------------------
+
+const handleErrors = (err) => {
+    errorField.value = "data";
+    if (typeof err.response !== "undefined" && err.response.data) {
+        const errors = err.response.data.errors || err.response.data.message;
+        if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
+    } else responseMessage.value = t("Something went wrong!");
+    if (process.server) console.log({ err });
+    // TODO : log errors in sentry type thing
+};
+
+// getBranchList -------------------------------------------------
+const loadingBranches = ref(true);
+const branches = reactive({ list: [] });
+const getBranchList_results = await useLazyAsyncData(() => getBranchList(route.params.brandID));
+
+if (getBranchList_results.error.value) handleErrors(getBranchList_results.error.value);
+watch(getBranchList_results.error, (err) => handleErrors(err));
+
+const handleBranchList_results = (data) => {
+    branches.list = data._records;
+    loadingBranches.value = false;
+};
+if (getBranchList_results.data.value) handleBranchList_results(getBranchList_results.data.value);
+watch(getBranchList_results.data, (val) => handleBranchList_results(val));
+// -------------------------------------------------
+
+// getRoleList -------------------------------------------------
+const loadingRoles = ref(true);
+const roles = reactive({ list: [] });
+const getRoleList_results = await useLazyAsyncData(() => getStaffRolesList(route.params.brandID, ["name"]));
+
+if (getRoleList_results.error.value) handleErrors(getRoleList_results.error.value);
+watch(getRoleList_results.error, (err) => handleErrors(err));
+
+const handleRoleList_results = (data) => {
+    roles.list = data._records.map((record) => {
+        return { name: record.name, value: record._id };
+    });
+    loadingRoles.value = false;
+};
+if (getRoleList_results.data.value) handleRoleList_results(getRoleList_results.data.value);
+watch(getRoleList_results.data, (val) => handleRoleList_results(val));
+// -------------------------------------------------
 </script>

@@ -257,6 +257,8 @@ export default {
             "All Branches": "All Branches",
             "Send Invite": "Send Invite",
             "Go to staff roles": "Go to staff roles",
+            Role: "Role",
+            "Email address of user that they signup with": "Email address of user that they signup with",
 
             "Enter email of user you want to invite, and then select what role you want to apply to them":
                 "Enter email of user you want to invite, and then select what role you want to apply to them",
@@ -269,10 +271,14 @@ export default {
             "Staff Roles": "Staff Roles",
             "Create New Role": "Create New Role",
             "Here you can create roles and manage the access level of each role": "Here you can create roles and manage the access level of each role",
-            
+
             "Delete Role": "Delete Role",
             "By deleting this role, you need to assign a new role to all staff members that previously had this role":
                 "By deleting this role, you need to assign a new role to all staff members that previously had this role",
+
+            "You can select specific branches for this member": "You can select specific branches for this member",
+            "If you dont select any branches this user will be able from all branches":
+                "If you don't select any branches, this user will be able from all branches",
         },
 
         languages: {

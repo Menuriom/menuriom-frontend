@@ -23,6 +23,7 @@
             </button>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
+        <small class="opacity-75 text-xs">You can create at max 15 roles</small>
         <section class="flex flex-col w-full">
             <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(230px, 1fr))" v-show="!loading">
                 <li

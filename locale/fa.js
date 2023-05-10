@@ -257,6 +257,8 @@ export default {
             "All Branches": "همه شعبه ها",
             "Send Invite": "ارسال دعوت",
             "Go to staff roles": "مدیریت نقش ها",
+            Role: "نقش",
+            "Email address of user that they signup with": "آدرس ایمیل که کاربر با ان ثبت نام کرده",
 
             "Enter email of user you want to invite, and then select what role you want to apply to them":
                 "ایمیل کاربر مورد نظر را وارد کنید، سپس سطح دسترسی کاربر را معلوم کنید",
@@ -273,6 +275,10 @@ export default {
             "Delete Role": "حذف نقش",
             "By deleting this role, you need to assign a new role to all staff members that previously had this role":
                 "با حذف این نقش، باید به تمام اعضای خدمه که قبلا این نقش را داشته اند نقش جدیدی اختصاص دهید",
+
+            "You can select specific branches for this member": "شما میتوانید فقط یکسری شعبه های خاص را برای این کاربر انتخاب کنید",
+            "If you dont select any branches this user will be able from all branches":
+                "اگر شعبه ای را برای این کاربر درنظر نگیرید، امکان دسترسی از طریق تمام شعبه ها برای این کاربر فراهم می شود",
         },
 
         languages: {

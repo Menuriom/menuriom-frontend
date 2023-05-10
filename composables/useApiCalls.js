@@ -133,9 +133,10 @@ export const getStaffList = async (brandID, branchID, pp, lastRecordID) => {
 
     return { _records, _canInviteNewMembers, _total };
 };
-export const getStaffRolesList = async (brandID) => {
+export const getStaffRolesList = async (brandID, fields) => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/staff-roles`, { brand: brandID });
     const params = [];
+    if (fields) params["fields"] = fields.join(",");
     url = encodeURI(`${url}?${params.join("&")}`);
 
     let _records = [];
