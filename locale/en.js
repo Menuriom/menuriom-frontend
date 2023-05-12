@@ -279,6 +279,11 @@ export default {
             "You can select specific branches for this member": "You can select specific branches for this member",
             "If you dont select any branches this user will be able from all branches":
                 "If you don't select any branches, this user will be able from all branches",
+
+            "Invite has been sent": "Invite Has Been Sent",
+            "Send Another Invite": "Send Another Invite",
+            "You can always revoke your sent invitations from sent invite list": "You can always revoke your sent invitations from sent invite list",
+            noUserNotice: "There is no user with the corresponding email, but we stored your invite and we'll show the invite to the user when they join",
         },
 
         languages: {

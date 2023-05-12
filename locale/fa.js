@@ -276,9 +276,14 @@ export default {
             "By deleting this role, you need to assign a new role to all staff members that previously had this role":
                 "با حذف این نقش، باید به تمام اعضای خدمه که قبلا این نقش را داشته اند نقش جدیدی اختصاص دهید",
 
-            "You can select specific branches for this member": "شما میتوانید فقط یکسری شعبه های خاص را برای این کاربر انتخاب کنید",
+            "You can select specific branches for this member": "شما میتوانید فقط دسترسی یکسری شعبه های خاص را برای این کاربر درنظر بگیرید",
             "If you dont select any branches this user will be able from all branches":
                 "اگر شعبه ای را برای این کاربر درنظر نگیرید، امکان دسترسی از طریق تمام شعبه ها برای این کاربر فراهم می شود",
+
+            "Invite has been sent": "درخواست ارسال شد",
+            "Send Another Invite": "ارسال درخواست دیگر",
+            "You can always revoke your sent invitations from sent invite list": "شما در هر زمان میتوانید دعوت نامه های ارسالی را از طریق لیست ارسال باطل کنید",
+            noUserNotice: "کاربری با این ایمیل در سیستم پیدا نشد. درخواست دعوت برای نمایش به کاربر درهنگام ثبت نام ذخیره شد",
         },
 
         languages: {

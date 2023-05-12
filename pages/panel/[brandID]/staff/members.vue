@@ -141,7 +141,6 @@
                 </div>
             </Dialog>
             <InviteNewMember v-if="panelStore.popUpOpened == 'invite-new-member'" />
-            <InviteSuccess v-if="panelStore.popUpOpened == 'invite-success'" />
         </Teleport>
     </div>
 </template>
@@ -150,7 +149,6 @@
 import Dialog from "~/components/panel/Dialog.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
 const InviteNewMember = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/InviteNewMember.vue"));
-const InviteSuccess = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/InviteSuccess.vue"));
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
 import { usePanelStore } from "@/stores/panel";

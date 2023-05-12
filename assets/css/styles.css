@@ -97,6 +97,14 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
 
 /* ===================================================================== */
 
+.rotate-pop {
+    animation: rotate-pop .5s ease;
+}
+@keyframes rotate-pop {
+    0% { transform: rotateZ(0) scale(0); }
+    100% { transform: rotateZ(720deg) scale(1); }
+}
+
 .down-pop {
     animation: down-pop 5s ease-out infinite;
 }
