@@ -154,6 +154,24 @@ export const getStaffRolesList = async (brandID, fields) => {
 
     return { _records, _canCreateNewRoles };
 };
+export const getInviteList = async () => {
+    let { url, headers } = getRequestConfig(`/api/v1/account/invitation-list`, {});
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _invites = [];
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _invites = [..._invites, ...response.data.invites];
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _invites };
+};
 // ---------------------------------------------------------
 
 // general APIs ---------------------------------------------------------

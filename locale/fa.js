@@ -178,6 +178,13 @@ export default {
 
             "You have setup your brand and created your first branch": "شما برند و شعبه اصلی خود را ایجاد کردید",
             newBrandDirection: "حالا میتونی منو رستوران خودتو بسازی یا شعبه های دیگه ای اضافه کنی و کارکنان خودتو به لیست خدمه اضافه کنی",
+
+            "Finding Your Team": "پیدا کردن تیم",
+            "An invitation from a restaurant brand must be sent for you to be able to join a team":
+                "برای اینکه بتوانید به یک تیم بپیوندید باید دعوتنامه ای از یک برند رستوران برای شما ارسال شود",
+            "Select from your list of staff invites": "از لیست دعوت های خود انتخاب کنید",
+            "You Have No Invitations Yet": "شما هنوز هیچ دعوتنامه ای ندارید",
+            "Accept Selected Invites": "پذیرفتن دعوت نامه های انتخابی",
         },
 
         brands: {

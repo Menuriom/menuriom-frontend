@@ -178,6 +178,13 @@ export default {
 
             "You have setup your brand and created your first branch": "You have setup your brand and created your first branch",
             newBrandDirection: "Now you can start by setting up your menu or add your other branches and invite some staff members to join your team",
+
+            "Finding Your Team": "Finding Your Team",
+            "An invitation from a restaurant brand must be sent for you to be able to join a team":
+                "An invitation from a restaurant brand must be sent for you to be able to join a team",
+            "Select from your list of staff invites": "Select from your list of staff invites",
+            "You Have No Invitations Yet": "You Have No Invitations Yet",
+            "Accept Selected Invites": "Accept Selected Invites",
         },
 
         brands: {

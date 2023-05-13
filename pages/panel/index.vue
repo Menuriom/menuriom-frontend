@@ -241,7 +241,6 @@ const title = computed(() => `${t("panel.brands.Your Brands")} - ${t("panel.Your
 useHead({ title: title });
 
 // TODO : if user has only one brand and he is the owner of that brand, redirect user to the brand-edit page
-
 // TODO : add branch count and staff list to brands
 
 const errorField = ref("");

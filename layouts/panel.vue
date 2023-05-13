@@ -49,9 +49,9 @@ main {
 import Header from "~/components/panel/Header.vue";
 const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
 const PersonalInfo = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/PersonalInfo.vue"));
-const SelectAccountType = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/SelectAccountType.vue"));
 const CreateNewBrand = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/CreateNewBrand.vue"));
 const FindYourTeam = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/FindYourTeam.vue"));
+import SelectAccountType from "~/components/panel/dialogs/account-setup/SelectAccountType.vue";
 import BrandCreatedSuccess from "~/components/panel/dialogs/account-setup/BrandCreatedSuccess.vue";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
@@ -76,16 +76,16 @@ const dontShowMenu = computed(() => {
 });
 
 if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") panelStore.openPopUp("personal-info");
-else if (Object.keys(user.brands.value.list).length == 0 && route.path != localePath("/panel/brand/creation")) panelStore.openPopUp("select-account-type");
+else if (Object.keys(user.brands.value.list).length == 0) {
+    if (route.path != localePath("/panel/brand/creation") && route.path != localePath("/panel/invite-list")) {
+        panelStore.openPopUp("select-account-type");
+    }
+}
 
 onMounted(async () => {
     panelStore.loadSelectedBrand();
 
     await userStore.refreshToken().catch((e) => {});
     userStore.setRefreshInterval();
-
-    document.addEventListener("keyup", (event) => {
-        if (event.key === "Escape") panelStore.closePopUp();
-    });
 });
 </script>

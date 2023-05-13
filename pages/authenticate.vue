@@ -113,7 +113,6 @@
                             <Input
                                 name="name"
                                 :required="true"
-                                type="text"
                                 :label="$t('auth.First Name')"
                                 v-model="name"
                                 :error="errorField == 'name' ? responseMessage : ''"
@@ -121,17 +120,15 @@
                             <Input
                                 name="family"
                                 :required="true"
-                                type="text"
                                 :label="$t('auth.Last Name')"
                                 v-model="family"
                                 :error="errorField == 'family' ? responseMessage : ''"
                             />
                         </div>
-                        <MobileInput
+                        <Input
                             name="mobile"
                             :required="true"
-                            type="text"
-                            iconName="Mobile-phone.svg"
+                            mask="+98 ### ### ####"
                             :label="$t('auth.Phone Number')"
                             v-model="mobile"
                             :error="errorField == 'mobile' ? responseMessage : ''"
@@ -231,6 +228,7 @@ onMounted(() => {
 });
 
 const continueWithGoogle = async () => {
+    loading.value = true;
     const response_type = "code";
     const redirect_uri = `${config.public.BASE_URL}/auth/login/google/callback`;
     const scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
@@ -284,7 +282,8 @@ const checkVerificationCode = async () => {
         .then((response) => {
             if (response.data.register) {
                 page.value = 3;
-                name.value = family.value = mobile.value = size.value = "";
+                name.value = family.value = mobile.value = "";
+                loading.value = false;
             } else {
                 userStore.setRefreshInterval();
                 router.push(localePath("/panel"));
@@ -301,8 +300,8 @@ const checkVerificationCode = async () => {
             if (process.server) console.log({ err });
             // TODO : log errors in sentry type thing
             // TODO : if the property is "" then make a global error either on top of the continue button or as a toast message
-        })
-        .finally(() => (loading.value = false));
+            loading.value = false;
+        });
 };
 
 const resendCode = () => {
@@ -323,7 +322,7 @@ const completeSignup = async () => {
             code: useNumbersToEnglish(code.value),
             name: name.value,
             family: family.value,
-            mobile: mobile.value,
+            mobile: mobile.value.replaceAll(" ", ""),
         })
         .then((response) => {
             userStore.setRefreshInterval();
@@ -339,7 +338,7 @@ const completeSignup = async () => {
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
             // TODO : log errors in sentry type thing
-        })
-        .finally(() => (loading.value = false));
+            loading.value = false;
+        });
 };
 </script>

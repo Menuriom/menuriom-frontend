@@ -8,6 +8,10 @@
         "Some of the files that you selected, were over the nMB size limit": "برخی از فایل های انتخابی حجم بیش از {size} MB دارند",
         "max file count is n": "حداکثر امکان انتخاب {count} فایل وجود دارد",
         "Images must be less than nMB": "حجم عکس انتخابی باید کمتر از {size} Mb باشد",
+        "account-setup": {
+            "roleInviteDesc": "ما از شما دعوت می کنیم که در نقش <b class='text-purple-300'>{role}</b> به ما بپیوندید.",
+            "You can select n invites at max": "امکان انتخاب حداکثر {n} دعوت وجود دارد"
+        },
         "brand": {
             "You are about to delete this brand": "شما درحال حذف برند <b>{name}</b> هستید",
             "You are about to leave this brand": "شما درحال ترک کردن برند <b>{name}</b> هستید"

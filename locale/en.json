@@ -8,6 +8,10 @@
         "Some of the files that you selected, were over the nMB size limit": "Some of the files that you selected, were over the {size} MB size limit",
         "max file count is n": "max file count is {count}",
         "Images must be less than nMB": "Images must be less than {size} MB",
+        "account-setup": {
+            "roleInviteDesc": "We are inviting you to join us in the <b class='text-purple-300'>{role}</b> role.",
+            "You can select n invites at max": "You can select {n} invites at max"
+        },
         "brand": {
             "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
             "You are about to leave this brand": "You are about to leave brand <b>{name}</b>"

@@ -99,11 +99,11 @@ const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] |
 const stage = ref(1);
 const form = ref(); // Dom Ref
 
+const noUser = ref(false);
 const loading = ref(false);
 const errorField = ref("");
 const responseMessage = ref("");
 
-const noUser = ref(false);
 const email = ref("");
 const selectedRole = reactive({ option: { name: "", value: "" } });
 const selectedBranches = reactive({ list: [] });
@@ -113,6 +113,7 @@ const sendInvite = async () => {
     if (loading.value) return;
     loading.value = true;
 
+    noUser.value = false;
     responseMessage.value = "";
     errorField.value = "";
 
@@ -127,6 +128,7 @@ const sendInvite = async () => {
     await axios
         .post(`/api/v1/panel/staff/invite`, data, { headers: { brand: route.params.brandID } })
         .then((response) => {
+            noUser.value = !response.data.userExists;
             stage.value = 2;
         })
         .catch((err) => {
