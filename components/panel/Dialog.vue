@@ -5,7 +5,8 @@
 }
 .dialog > .box {
     min-width: 19rem;
-    max-height: 100%;
+    max-height: calc(100vh - 2rem);
+    max-height: calc(100svh - 2rem);
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 2;

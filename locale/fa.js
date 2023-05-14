@@ -123,6 +123,8 @@ export default {
         needMoreLang: "برای پشتیبانی از چند زبان ابتدا از بخش تنظیمات زبان، زبان های مورد نظر خود را انتخاب کنید",
         "record out of": "رکورد از",
         "Record per page": "رکورد در صفحه",
+        Accept: "تایید",
+        Reject: "رد کردن",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -185,6 +187,14 @@ export default {
             "Select from your list of staff invites": "از لیست دعوت های خود انتخاب کنید",
             "You Have No Invitations Yet": "شما هنوز هیچ دعوتنامه ای ندارید",
             "Accept Selected Invites": "پذیرفتن دعوت نامه های انتخابی",
+        },
+
+        account: {
+            Profile: "حساب کاربری",
+            "Invitations List": "درخواست های همکاری",
+            "Notification Settings": "تنظیمات اعلانیه",
+            Transactions: "تراکنش ها",
+            Sessions: "دستگاه های متصل",
         },
 
         brands: {

@@ -123,6 +123,8 @@ export default {
         needMoreLang: "To support multiple languages for your menu please go to language settings and choose the languages you want.",
         "record out of": "record out of",
         "Record per page": "Record per page",
+        "Accept": "Accept",
+        "Reject": "Reject",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -185,6 +187,14 @@ export default {
             "Select from your list of staff invites": "Select from your list of staff invites",
             "You Have No Invitations Yet": "You Have No Invitations Yet",
             "Accept Selected Invites": "Accept Selected Invites",
+        },
+
+        account: {
+            Profile: "Profile",
+            "Invitations List": "Invitations List",
+            "Notification Settings": "Notification Settings",
+            Transactions: "Transactions",
+            Sessions: "Sessions",
         },
 
         brands: {

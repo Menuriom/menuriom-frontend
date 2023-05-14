@@ -95,7 +95,6 @@ const selectInvite = (index) => {
 };
 
 // accepting invites ----------------------------------------
-const percentage = ref(0);
 const accepting = ref(false);
 const acceptInvites = async () => {
     if (accepting.value) return;

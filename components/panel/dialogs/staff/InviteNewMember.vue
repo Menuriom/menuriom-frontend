@@ -4,7 +4,7 @@
     <Dialog name="invite-new-member">
         <template #title>
             <div class="flex items-center gap-2 w-full">
-                <img class="w-8" src="~/assets/images/panel-icons/envelope-open-text-dark.png" alt="" />
+                <img class="w-8" src="~/assets/images/panel-icons/envelope-open-text-light.png" alt="" />
                 <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.staff.Invite New Member") }}</h3>
             </div>
         </template>

@@ -5,7 +5,7 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar { width: 4px !important; }
 
 aside li a.router-link-exact-active {
     background-color: theme("colors.neutral.600");
-    box-shadow: inset 0px 5px 15px -5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.4);
 }
 </style>
 

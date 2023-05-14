@@ -74,12 +74,15 @@ const dontShowMenu = computed(() => {
     for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/panel/:brandID")) return false;
     return true;
 });
+const showPopUp = computed(() => {
+    const paths = route.matched.map((x) => x.path);
+    if (paths.includes(localePath("/panel/brand/creation")) || paths.includes(localePath("/panel/account"))) return false;
+    return true;
+});
 
 if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") panelStore.openPopUp("personal-info");
 else if (Object.keys(user.brands.value.list).length == 0) {
-    if (route.path != localePath("/panel/brand/creation") && route.path != localePath("/panel/invite-list")) {
-        panelStore.openPopUp("select-account-type");
-    }
+    if (showPopUp.value) panelStore.openPopUp("select-account-type");
 }
 
 onMounted(async () => {

@@ -138,7 +138,7 @@
                         {{ $t("panel.brands.Start by creating a brand, or check your invation list to join a existing brand") }}
                     </small>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex flex-wrap items-center justify-center gap-4">
                     <nuxt-link
                         class="btn flex items-center gap-2 border-2 border-black bg-violet text-white p-3 rounded-md"
                         :to="localePath(`/panel/brand/creation`)"
@@ -146,7 +146,7 @@
                         <Icon class="w-5 h-5 bg-white" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.brands.Create New Brand") }}
                     </nuxt-link>
-                    <nuxt-link class="btn flex items-center gap-2 border-2 border-black p-3 rounded-md" :to="localePath(`/panel/invite-list`)">
+                    <nuxt-link class="btn flex items-center gap-2 border-2 border-black p-3 rounded-md" :to="localePath(`/panel/account/invite-list`)">
                         <Icon class="w-5 h-5 bg-black" name="envelope-open-text.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.brands.Check Invite List") }}
                     </nuxt-link>
