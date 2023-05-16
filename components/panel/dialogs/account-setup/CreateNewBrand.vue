@@ -2,13 +2,11 @@
 
 <template>
     <Dialog name="create-new-brand" :closeable="false">
-        <div class="flex flex-col items-center gap-4 w-screen max-w-md">
-            <div class="flex flex-col gap-1">
-                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.account-setup.Create Your Brand") }}</h3>
-                <p class="text-xs opacity-75 text-center max-w-sm">
-                    {{ $t("panel.account-setup.Start by setting up your brand info") }}
-                </p>
-            </div>
+        <div class="flex flex-col items-center gap-4 md:w-screen max-w-md">
+            <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.account-setup.Create Your Brand") }}</h3>
+            <p class="text-xs opacity-75 text-center max-w-sm">
+                {{ $t("panel.account-setup.Start by setting up your brand info") }}
+            </p>
             <ul class="flex items-center gap-2">
                 <li class="w-2.5 h-2.5 rounded-full bg-neutral-500"></li>
                 <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>

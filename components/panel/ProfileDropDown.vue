@@ -1,4 +1,8 @@
 <style scoped>
+.list {
+    width: 100vw;
+    max-width: 14rem;
+}
 .icon {
     position: relative;
     top: 0px;
@@ -21,7 +25,7 @@ li:hover .icon {
             <img class="w-9 h-9 rounded-md object-contain bg-zinc-600" :src="userStore.avatar" alt="" />
         </div>
         <transition name="slide-up" mode="out-in" appear>
-            <ul class="absolute top-10 -end-10 md:-end-4 flex flex-col gap-1 w-max p-2 bg-dolphin text-white shadow-md rounded-xl" v-if="open">
+            <ul class="list absolute top-10 -end-10 md:-end-4 flex flex-col gap-1 p-2 bg-dolphin text-white shadow-md rounded-xl" v-if="open">
                 <li class="flex flex-col w-full p-2">
                     <!-- TODO : make skeleton fallback for when users data is loading -->
                     <h3 class="text-sm font-bold capitalize">{{ `${userStore.name} ${userStore.family}` }}</h3>
@@ -35,7 +39,7 @@ li:hover .icon {
                     </li>
                 </nuxt-link>
                 <hr class="w-11/12 mx-auto opacity-25" />
-                <nuxt-link :to="localePath('/panel/invites')">
+                <nuxt-link :to="localePath('/panel/account/invite-list')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-neutral-600 rounded-md cursor-pointer">
                         <Icon class="icon w-5 h-5 bg-zinc-100" name="envelope-open-text.svg" folder="icons/light" size="18px" />
                         <small>{{ $t("panel.profile.Staff Invites") }}</small>

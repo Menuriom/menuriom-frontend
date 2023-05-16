@@ -10,12 +10,10 @@ export default {
         OR: "OR",
         "Email Address": "Email Address",
         Continue: "Continue",
-        "sign up term agreement message": "By signing up, you agree to the Menuriom {PrivacyPolicy} and {TermsOfService}.",
         "Privacy Policy": "Privacy Policy",
         "Terms of Service": "Terms of Service",
 
         "Check Your Email": "Check Your Email",
-        "sent code message": `<span class="opacity-60">we sent</span> <span class="underline opacity-90">{email}</span> <span class="opacity-60"> a verfication code. Type or paste it below to continue.</span>`,
         "Verfication Code": "Verfication Code",
         "Resend Code": "Resend Code",
 
@@ -118,12 +116,17 @@ export default {
         Delete: "Delete",
         Select: "Select",
         "Go Back": "Go Back",
-        "Images must be less than nMB": "Images must be less than {size} MB",
         Uploading: "Uploading",
         Languages: "Languages",
         Default: "Default",
         Socials: "Socials",
         needMoreLang: "To support multiple languages for your menu please go to language settings and choose the languages you want.",
+        "record out of": "record out of",
+        "Record per page": "Record per page",
+        Accept: "Accept",
+        Reject: "Reject",
+        "Load More": "Load More",
+        "End of the list": "End of the list",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -179,6 +182,23 @@ export default {
 
             "You have setup your brand and created your first branch": "You have setup your brand and created your first branch",
             newBrandDirection: "Now you can start by setting up your menu or add your other branches and invite some staff members to join your team",
+
+            "Finding Your Team": "Finding Your Team",
+            "An invitation from a restaurant brand must be sent for you to be able to join a team":
+                "An invitation from a restaurant brand must be sent for you to be able to join a team",
+            "Select from your list of staff invites": "Select from your list of staff invites",
+            "You Have No Invitations Yet": "You Have No Invitations Yet",
+            "Accept Selected Invites": "Accept Selected Invites",
+        },
+
+        account: {
+            Profile: "Profile",
+            "Invitations List": "Invitations List",
+            "Notification Settings": "Notification Settings",
+            Transactions: "Transactions",
+            Sessions: "Sessions",
+
+            "You can join three brands at a max": "You can join three brands at a max",
         },
 
         brands: {
@@ -209,11 +229,9 @@ export default {
             "General Info": "General Info",
             "Brand info has been updated": "Brand info has been updated",
 
-            "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
             deletingBrandDesc: "all your branches, menus, and staff members in this brand will be deleted and your plan subscription will be canceled",
             "This action cannot be reversed": "This action cannot be reversed",
 
-            "You are about to leave this brand": "You are about to leave brand <b>{name}</b>",
             leavingBrandDesc: "By leaving the brand you won't be able to access this brand",
             "You need new invitation to join this brand again": "You need new invitation to join this brand again",
 
@@ -230,8 +248,10 @@ export default {
             "Customize This Branch Menu": "Customize This Branch Menu",
             "Edit Details": "Edit Details",
             "Delete Branch": "Delete Branch",
+            "Edit Branch Details": "Edit Branch Details",
+            "Branch info has been updated": "Branch info has been updated",
+            "New branch created": "New branch created",
 
-            "You are about to delete this branch": "You are about to delete branch <b>{name}</b>",
             deletingBranchDesc: "By deleting this branch, all custom menus of this branch will also be deleted",
 
             "Branch Creation": "Branch Creation",
@@ -248,6 +268,45 @@ export default {
             "10 digit number": "10 digit number",
         },
 
+        staff: {
+            "Staff Members": "Staff Members",
+            "Invite new staff to your team and manage their access": "Invite new staff to your team and manage their access",
+            "Invite Members": "Invite Members",
+            "Invite New Member": "Invite New Member",
+            "Edit Role": "Edit Role",
+            "Remove staff": "Remove staff",
+            "All Branches": "All Branches",
+            "Send Invite": "Send Invite",
+            "Go to staff roles": "Go to staff roles",
+            Role: "Role",
+            "Email address of user that they signup with": "Email address of user that they signup with",
+
+            "Enter email of user you want to invite, and then select what role you want to apply to them":
+                "Enter email of user you want to invite, and then select what role you want to apply to them",
+
+            "Remove Staff": "Remove Staff",
+            deletingStaffDesc: "By removing this user from your team, they can no longer access anything in your brand",
+            "For this user to join your team again, you need to send them a new invite":
+                "For this user to join your team again, you need to send them a new invite",
+
+            "Staff Roles": "Staff Roles",
+            "Create New Role": "Create New Role",
+            "Here you can create roles and manage the access level of each role": "Here you can create roles and manage the access level of each role",
+
+            "Delete Role": "Delete Role",
+            "By deleting this role, you need to assign a new role to all staff members that previously had this role":
+                "By deleting this role, you need to assign a new role to all staff members that previously had this role",
+
+            "You can select specific branches for this member": "You can select specific branches for this member",
+            "If you dont select any branches this user will be able from all branches":
+                "If you don't select any branches, this user will be able from all branches",
+
+            "Invite has been sent": "Invite Has Been Sent",
+            "Send Another Invite": "Send Another Invite",
+            "You can always revoke your sent invitations from sent invite list": "You can always revoke your sent invitations from sent invite list",
+            noUserNotice: "There is no user with the corresponding email, but we stored your invite and we'll show the invite to the user when they join",
+        },
+
         languages: {
             "Select your menu languages and setup your currency unit": "Select your menu languages and setup your currency unit",
             "Menu Languages": "Menu Languages",
@@ -255,7 +314,7 @@ export default {
             "Choose which languages you want your menu to have": "Choose which languages you want your menu to have",
             "You can translate your menu items and your restaurant info base on languages you choose":
                 "You can translate your menu items and your restaurant info base on languages you choose",
-            "You can choose up to n languages": "You can choose up to {n} languages",
+
             "Upgrade your plan to support more languages": "Upgrade your plan to support more languages",
             "Select what currency you want to show for your prices": "Select what currency you want to show for your prices",
         },

@@ -17,7 +17,7 @@ export default defineNuxtConfig({
                 // { rel: "mask-icon", href: "/pwa/safari-pinned-tab.svg", color: "#FFFFFF" },
             ],
         },
-        // pageTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
+        pageTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
         layoutTransition: { name: "page", mode: "out-in", type: "transition", appear: true },
     },
 
@@ -57,13 +57,15 @@ export default defineNuxtConfig({
             useCookie: true,
             cookieKey: "i18n_redirected",
             redirectOn: "root",
+            fallbackLocale: "fa",
         },
         defaultLocale: "fa",
+        defaultDirection: "rtl",
         lazy: true,
         langDir: "locale",
         locales: [
-            { code: "fa", name: "فارسی", iso: "fa-IR", file: "fa.js", dir: "rtl", domain: process.env.BASE_FA_URL },
-            { code: "en", name: "English", iso: "en-US", file: "en.js", dir: "ltr", domain: process.env.BASE_EN_URL },
+            { code: "fa", name: "فارسی", iso: "fa-IR", files: ["fa.js", "fa.json"], dir: "rtl", domain: process.env.BASE_FA_URL },
+            { code: "en", name: "English", iso: "en-US", files: ["en.js", "en.json"], dir: "ltr", domain: process.env.BASE_EN_URL },
         ],
         vueI18n: {
             legacy: false,
@@ -71,12 +73,9 @@ export default defineNuxtConfig({
     },
 
     modules: [
-        // tailwind moudle for nuxt 3
+        // ...
         "@nuxtjs/tailwindcss",
-
-        // pinia moudle
         "@pinia/nuxt",
-
         "@nuxtjs/i18n",
     ],
 });

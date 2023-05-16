@@ -1,7 +1,4 @@
 <style scoped>
-.dark.input-box-shadow {
-    box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 40%);
-}
 .input-box-shadow {
     box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 10%);
 }
@@ -41,7 +38,7 @@ input::placeholder {
                 :type="type"
                 :value="modelValue"
                 :placeholder="isFocused || !label ? placeholder : ''"
-                dir="auto"
+                :dir="modelValue ? 'auto' : ''"
                 @input="updateData($event.target.value)"
                 @focus="isFocused = true"
                 @blur="isFocused = false"

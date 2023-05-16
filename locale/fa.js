@@ -10,12 +10,10 @@ export default {
         OR: "یا",
         "Email Address": "ادرس ایمیل",
         Continue: "ادامه",
-        "sign up term agreement message": "با عضویت در منوریوم {PrivacyPolicy} و {TermsOfService} را میپذیرم",
         "Privacy Policy": "سیاست حریم خصوصی",
         "Terms of Service": "شرایط استفاده",
 
         "Check Your Email": "ایمیل خودتو رو چک کن",
-        "sent code message": `<span class="opacity-60">ما به ایمیل</span> <span class="underline opacity-90">{email}</span> <span class="opacity-60"> یک کد تایید ارسال کردیم. لطفا کد تایید را در فرم زیر وارد کنید</span>`,
         "Verfication Code": "کد تایید",
         "Resend Code": "ارسال دوباره کد",
 
@@ -118,12 +116,17 @@ export default {
         Delete: "حذف",
         Select: "انتخاب",
         "Go Back": "بازگشت",
-        "Images must be less than nMB": "حجم عکس انتخابی باید کمتر از {size} Mb باشد",
         Uploading: "درحال ارسال",
         Languages: "زبان ها",
         Default: "پیشفرض",
         Socials: "شبکه های اجتماعی",
-        needMoreLang: "برای پشتیبانی از چند زبان ابتدا از بخش تنظیمات زبان، زبان های مورد نظر خور را انتخاب کنید",
+        needMoreLang: "برای پشتیبانی از چند زبان ابتدا از بخش تنظیمات زبان، زبان های مورد نظر خود را انتخاب کنید",
+        "record out of": "رکورد از",
+        "Record per page": "رکورد در صفحه",
+        Accept: "تایید",
+        Reject: "رد کردن",
+        "Load More": "بارگذاری بیشتر",
+        "End of the list": "انتهای لیست",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -149,7 +152,7 @@ export default {
             "Manage Staff": "مدیریت خدمه",
             "Staff Members": "اعضای خدمه",
             "Sent Invites": "درخواست های ارسالی",
-            "Staff Roles": "تعریف نقش خدمه",
+            "Staff Roles": "دسترسی های اعضا",
             "Customers Feedback": "بازخورد مشتریان",
             "Billing & Plan Upgrade": "صورتحساب و ارتقا پلن",
             Support: "پشتیبانی",
@@ -179,6 +182,23 @@ export default {
 
             "You have setup your brand and created your first branch": "شما برند و شعبه اصلی خود را ایجاد کردید",
             newBrandDirection: "حالا میتونی منو رستوران خودتو بسازی یا شعبه های دیگه ای اضافه کنی و کارکنان خودتو به لیست خدمه اضافه کنی",
+
+            "Finding Your Team": "پیدا کردن تیم",
+            "An invitation from a restaurant brand must be sent for you to be able to join a team":
+                "برای اینکه بتوانید به یک تیم بپیوندید باید دعوتنامه ای از یک برند رستوران برای شما ارسال شود",
+            "Select from your list of staff invites": "از لیست دعوت های خود انتخاب کنید",
+            "You Have No Invitations Yet": "شما هنوز هیچ دعوتنامه ای ندارید",
+            "Accept Selected Invites": "پذیرفتن دعوت نامه های انتخابی",
+        },
+
+        account: {
+            Profile: "حساب کاربری",
+            "Invitations List": "درخواست های همکاری",
+            "Notification Settings": "تنظیمات اعلانیه",
+            Transactions: "تراکنش ها",
+            Sessions: "دستگاه های متصل",
+
+            "You can join three brands at a max": "حداکثر می توانید به سه برند بپیوندید",
         },
 
         brands: {
@@ -209,11 +229,9 @@ export default {
             "General Info": "مشخصات کلی",
             "Brand info has been updated": "اطلاعات برند بروز شد",
 
-            "You are about to delete this brand": "شما در حال حذف برند <b>{name}</b> هستید",
             deletingBrandDesc: "با پاک شدن برند؛ تمام شعبه ها، منوها و کارکنان خدمه که در این برند وجود دارند حذف خواهند شد و عضویت پلن شما نیز لغو میشود",
             "This action cannot be reversed": "این عملیات برگشت ناپذیر است",
 
-            "You are about to leave this brand": "شما در حال ترک کردن برند <b>{name}</b> هستید",
             leavingBrandDesc: "با ترک این برند شما دیگر دسترسی به این برند را نخواهید داشت",
             "You need new invitation to join this brand again": "برای دسترسی دوباره به این برند، ابتدا باید درخواست دعوت جدیدی به شما ارسال شود",
 
@@ -230,8 +248,10 @@ export default {
             "Customize This Branch Menu": "سفارشی سازی منوی این شعبه",
             "Edit Details": "وایرایش جزئیات",
             "Delete Branch": "حذف شعبه",
+            "Edit Branch Details": "ویرایش جزئیات شعبه",
+            "Branch info has been updated": "اطلاعات شعبه بروز شد",
+            "New branch created": "شعبه جدید ایجاد شد",
 
-            "You are about to delete this branch": "شما در حال حذف شعبه <b>{name}</b> هستید",
             deletingBranchDesc: "با حذف این شعبه، تمام منو های سفارشی شده برای این شعبه نیز حذف میشوند",
 
             "Branch Creation": "ساخت شعبه جدید",
@@ -248,6 +268,45 @@ export default {
             "10 digit number": "کد 10 رقمی",
         },
 
+        staff: {
+            "Staff Members": "اعضای خدمه",
+            "Invite new staff to your team and manage their access": "دعوت اعضای خدمه به تیم و مدیریت دسترسی های اعضا",
+            "Invite Members": "دعوت اعضا",
+            "Invite New Member": "دعوت اعضا",
+            "Edit Role": "ویرایش نقش",
+            "Remove staff": "حذف از تیم",
+            "All Branches": "همه شعبه ها",
+            "Send Invite": "ارسال دعوت",
+            "Go to staff roles": "مدیریت نقش ها",
+            Role: "نقش",
+            "Email address of user that they signup with": "آدرس ایمیل که کاربر با ان ثبت نام کرده",
+
+            "Enter email of user you want to invite, and then select what role you want to apply to them":
+                "ایمیل کاربر مورد نظر را وارد کنید، سپس سطح دسترسی کاربر را معلوم کنید",
+
+            "Remove Staff": "حذف خدمه",
+            deletingStaffDesc: "با خذف این کاربر از تیم، دسترسی این کاربر به طور کل از برند شما گرفته میشود ",
+            "For this user to join your team again, you need to send them a new invite": "برای عضو شدن دوباره این کاربر نیاز به ارسال دعوتنامه جدید دارید",
+
+            "Staff Roles": "مدیریت دسترسی اعضا",
+            "Create New Role": "ساخت نقش جدید",
+            "Here you can create roles and manage the access level of each role":
+                "در اینجا شما میتوانید نقش های مختلف تعریف کنید و سطح دسترسی هر نقش را مدیریت کنید",
+
+            "Delete Role": "حذف نقش",
+            "By deleting this role, you need to assign a new role to all staff members that previously had this role":
+                "با حذف این نقش، باید به تمام اعضای خدمه که قبلا این نقش را داشته اند نقش جدیدی اختصاص دهید",
+
+            "You can select specific branches for this member": "شما میتوانید فقط دسترسی یکسری شعبه های خاص را برای این کاربر درنظر بگیرید",
+            "If you dont select any branches this user will be able from all branches":
+                "اگر شعبه ای را برای این کاربر درنظر نگیرید، امکان دسترسی از طریق تمام شعبه ها برای این کاربر فراهم می شود",
+
+            "Invite has been sent": "درخواست ارسال شد",
+            "Send Another Invite": "ارسال درخواست دیگر",
+            "You can always revoke your sent invitations from sent invite list": "شما در هر زمان میتوانید دعوت نامه های ارسالی را از طریق لیست ارسال باطل کنید",
+            noUserNotice: "کاربری با این ایمیل در سیستم پیدا نشد. درخواست دعوت برای نمایش به کاربر درهنگام ثبت نام ذخیره شد",
+        },
+
         languages: {
             "Select your menu languages and setup your currency unit": "زبان های منو و واحد پولی که تو منو نمایش داده میشه انتخاب کن",
             "Menu Languages": "زبان های منو",
@@ -255,7 +314,6 @@ export default {
             "Choose which languages you want your menu to have": "زبان هایی که میخواهید داخل منو نمایش داده بشه رو انتخاب کنید",
             "You can translate your menu items and your restaurant info base on languages you choose":
                 "بسته به زبان هایی که انتخاب میکنید، میتونید منو رو ترجمه کنید",
-            "You can choose up to n languages": "شما میتونید تا {n} زبان انتخاب کنید",
             "Upgrade your plan to support more languages": "برای انتخاب زبان های بیشتر پلن خود را ارتقا بدید",
             "Select what currency you want to show for your prices": "واحد پولی که در منو نمایش داده میشود رو انتخاب کنید",
         },

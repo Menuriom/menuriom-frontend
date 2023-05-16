@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
-                    <h1 class="text-4xl/none font-bold">{{ $t("panel.brands.Your Brands") }}</h1>
+                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.brands.Your Brands") }}</h1>
                 </div>
                 <small class="hidden sm:flex text-sm">
                     {{ $t("panel.brands.Create new brands, edit your brand details, or manage brands that you are staff of") }}
@@ -62,7 +62,7 @@
                             :to="localePath(`/panel/${brand._id}`)"
                             v-if="checkPermissions(['panel'], brand)"
                         >
-                            <Icon class="w-4 h-4 bg-white" name="column-light.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-white shrink-0" name="column-light.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Go To Dashboard") }}</small>
                         </nuxt-link>
                         <nuxt-link
@@ -70,7 +70,7 @@
                             :to="localePath(`/panel/brand/${brand._id}/general-info`)"
                             v-if="brand.role == 'owner'"
                         >
-                            <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Brand Settings & Info") }}</small>
                         </nuxt-link>
                         <hr class="w-full opacity-40" />
@@ -79,11 +79,11 @@
                             @click="openDeleteDialog(i)"
                             v-if="brand.role == 'owner'"
                         >
-                            <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Delete Brand") }}</small>
                         </button>
                         <button class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer" @click="openLeaveDialog(i)" v-else>
-                            <Icon class="w-4 h-4 bg-red-300" name="right-from-bracket.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-red-300 shrink-0" name="right-from-bracket.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.brands.Leave This Brand") }}</small>
                         </button>
                     </SlideMenu>
@@ -118,7 +118,7 @@
                     </div>
                 </li>
                 <li
-                    class="w-full rounded-lg bg-white shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
+                    class="w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
                     v-if="canCreateNewBrand && records.list.length > 0"
                 >
                     <nuxt-link class="flex flex-col items-center justify-center gap-4 w-full h-full p-3" :to="localePath(`/panel/brand/creation`)">
@@ -138,7 +138,7 @@
                         {{ $t("panel.brands.Start by creating a brand, or check your invation list to join a existing brand") }}
                     </small>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex flex-wrap items-center justify-center gap-4">
                     <nuxt-link
                         class="btn flex items-center gap-2 border-2 border-black bg-violet text-white p-3 rounded-md"
                         :to="localePath(`/panel/brand/creation`)"
@@ -146,7 +146,7 @@
                         <Icon class="w-5 h-5 bg-white" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.brands.Create New Brand") }}
                     </nuxt-link>
-                    <nuxt-link class="btn flex items-center gap-2 border-2 border-black p-3 rounded-md" :to="localePath(`/panel/invite-list`)">
+                    <nuxt-link class="btn flex items-center gap-2 border-2 border-black p-3 rounded-md" :to="localePath(`/panel/account/invite-list`)">
                         <Icon class="w-5 h-5 bg-black" name="envelope-open-text.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.brands.Check Invite List") }}
                     </nuxt-link>
@@ -241,7 +241,6 @@ const title = computed(() => `${t("panel.brands.Your Brands")} - ${t("panel.Your
 useHead({ title: title });
 
 // TODO : if user has only one brand and he is the owner of that brand, redirect user to the brand-edit page
-
 // TODO : add branch count and staff list to brands
 
 const errorField = ref("");

@@ -100,7 +100,7 @@ aside > div {
             <hr class="w-full opacity-40" />
 
             <nav
-                class="flex flex-col items-center gap-2 w-full max-h-full overflow-y-auto overflow-x-hidden flex-grow text-sm"
+                class="flex flex-col items-center gap-2 pe-1 w-full max-h-full overflow-y-auto overflow-x-hidden flex-grow text-sm"
                 ref="nav"
                 v-if="panelStore.selectedBrandId !== ''"
             >
@@ -175,7 +175,12 @@ aside > div {
                             </nuxt-link>
                         </ul>
                     </div>
-                    <button class="link" :class="{ toggler_active: openSubMenus.includes('staff') }" @click="toggleSubMenu('staff')">
+                    <button
+                        class="link"
+                        :class="{ toggler_active: openSubMenus.includes('staff') }"
+                        @click="toggleSubMenu('staff')"
+                        v-if="checkPermissions(['main-panel.staff.view', 'main-panel.staff.invite', 'main-panel.staff.roles'], brand)"
+                    >
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/user-group.png" alt="" />
                             <span>{{ $t("panel.side-menu.Manage Staff") }}</span>
@@ -190,17 +195,29 @@ aside > div {
                     </button>
                     <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('staff') }" name="staff">
                         <ul class="sub_menu flex flex-col">
-                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/staff-list`)">
+                            <nuxt-link
+                                class="link"
+                                :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/members`)"
+                                v-if="checkPermissions(['main-panel.staff.view'], brand)"
+                            >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Staff Members") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/sent-invites`)">
+                            <nuxt-link
+                                class="link"
+                                :to="localePath(`/panel/${panelStore.selectedBrandId}/sent/invite`)"
+                                v-if="checkPermissions(['main-panel.staff.view', 'main-panel.staff.invite'], brand, 'AND')"
+                            >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Sent Invites") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/staff-roles`)">
+                            <nuxt-link
+                                class="link"
+                                :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/roles`)"
+                                v-if="checkPermissions(['main-panel.staff.roles'], brand)"
+                            >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Staff Roles") }}</span>
                                 </li>
@@ -271,15 +288,10 @@ aside > div {
                 </div>
             </div>
         </div>
-
-        <Teleport to="body">
-            <!-- <BrandSwitcher /> -->
-        </Teleport>
     </aside>
 </template>
 
 <script setup>
-// import BrandSwitcher from "~/components/panel/dialogs/BrandSwitcher.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
@@ -311,8 +323,4 @@ const toggleSubMenu = (subMenuName) => {
     }
 };
 // --------------------------
-
-const openBrandSwitcher = () => {
-    panelStore.openPopUp("brand-switcher");
-};
 </script>

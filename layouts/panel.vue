@@ -28,7 +28,7 @@ main {
             <NuxtLoadingIndicator />
             <Header />
             <div class="relative flex w-full h-0 p-2 flex-grow">
-                <SideMenu v-if="!dontShowMenu" />
+                <SideMenu v-if="!dontShowMenu" @click="ddDialogshow()" />
                 <main class="relative py-3 px-1 md:p-4 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>
@@ -36,23 +36,23 @@ main {
         </Html>
 
         <Teleport to="body">
-            <PersonalInfo />
-            <SelectAccountType />
-            <CreateNewBrand />
+            <PersonalInfo v-if="panelStore.popUpOpened == 'personal-info'" />
+            <SelectAccountType v-if="panelStore.popUpOpened == 'select-account-type'" />
+            <CreateNewBrand v-if="panelStore.popUpOpened == 'create-new-brand'" />
+            <FindYourTeam v-if="panelStore.popUpOpened == 'find-your-team'" />
             <BrandCreatedSuccess />
-            <FindYourTeam />
         </Teleport>
     </div>
 </template>
 
 <script setup>
 import Header from "~/components/panel/Header.vue";
-import SideMenu from "~/components/panel/SideMenu.vue";
-import PersonalInfo from "~/components/panel/dialogs/account-setup/PersonalInfo.vue";
+const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
+const PersonalInfo = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/PersonalInfo.vue"));
+const CreateNewBrand = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/CreateNewBrand.vue"));
+const FindYourTeam = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/FindYourTeam.vue"));
 import SelectAccountType from "~/components/panel/dialogs/account-setup/SelectAccountType.vue";
-import CreateNewBrand from "~/components/panel/dialogs/account-setup/CreateNewBrand.vue";
 import BrandCreatedSuccess from "~/components/panel/dialogs/account-setup/BrandCreatedSuccess.vue";
-import FindYourTeam from "~/components/panel/dialogs/account-setup/FindYourTeam.vue";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
 import { storeToRefs } from "pinia";
@@ -74,9 +74,16 @@ const dontShowMenu = computed(() => {
     for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/panel/:brandID")) return false;
     return true;
 });
+const showPopUp = computed(() => {
+    const paths = route.matched.map((x) => x.path);
+    if (paths.includes(localePath("/panel/brand/creation")) || paths.includes(localePath("/panel/account"))) return false;
+    return true;
+});
 
 if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") panelStore.openPopUp("personal-info");
-else if (Object.keys(user.brands.value.list).length == 0 && route.path != localePath("/panel/brand/creation")) panelStore.openPopUp("select-account-type");
+else if (Object.keys(user.brands.value.list).length == 0) {
+    if (showPopUp.value) panelStore.openPopUp("select-account-type");
+}
 
 onMounted(async () => {
     panelStore.loadSelectedBrand();

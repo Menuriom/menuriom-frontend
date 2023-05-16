@@ -2,13 +2,11 @@
 
 <template>
     <Dialog name="personal-info" :closeable="false">
-        <div class="flex flex-col items-center gap-4 w-screen max-w-md">
-            <div class="flex flex-col gap-1">
-                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.account-setup.Setting Up Your Account") }}</h3>
-                <p class="text-xs opacity-75 text-center max-w-sm">
-                    {{ $t("panel.account-setup.please answer a few questions so that we can set up your account to fit you best") }}
-                </p>
-            </div>
+        <div class="flex flex-col items-center gap-4 md:w-screen max-w-md">
+            <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.account-setup.Setting Up Your Account") }}</h3>
+            <p class="text-xs opacity-75 text-center max-w-sm">
+                {{ $t("panel.account-setup.please answer a few questions so that we can set up your account to fit you best") }}
+            </p>
             <ul class="flex items-center gap-2">
                 <li class="w-2.5 h-2.5 rounded-full bg-violet"></li>
                 <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>
@@ -24,7 +22,6 @@
                         class="w-full flex-grow"
                         name="name"
                         :required="true"
-                        type="text"
                         :label="$t('auth.First Name')"
                         v-model="name"
                         :error="errorField == 'name' ? responseMessage : ''"
@@ -33,17 +30,15 @@
                         class="w-full flex-grow"
                         name="family"
                         :required="true"
-                        type="text"
                         :label="$t('auth.Last Name')"
                         v-model="family"
                         :error="errorField == 'family' ? responseMessage : ''"
                     />
                 </div>
-                <MobileInput
+                <Input
                     name="mobile"
                     :required="true"
-                    type="text"
-                    iconName="Mobile-phone.svg"
+                    mask="+98 ### ### ####"
                     :label="$t('auth.Phone Number')"
                     v-model="mobile"
                     :error="errorField == 'mobile' ? responseMessage : ''"
@@ -101,7 +96,7 @@ const completeSignup = async () => {
         .then((response) => {
             user.name.value = response.data.name;
             user.family.value = response.data.family;
-            user.mobile.value = response.data.mobile;
+            user.mobile.value = response.data.mobile.replaceAll(" ", "");
 
             if (Object.keys(user.brands.value).length == 0) {
                 panelStore.openPopUp("select-account-type");

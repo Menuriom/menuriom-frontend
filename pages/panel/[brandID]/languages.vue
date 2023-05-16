@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/language-dark.png" alt="" />
-                    <h1 class="text-4xl/none font-bold">{{ $t("panel.side-menu.Language Settings") }}</h1>
+                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.side-menu.Language Settings") }}</h1>
                 </div>
                 <!-- <small class="hidden sm:flex text-sm">
                     {{ $t("panel.languages.Select your menu languages and setup your currency unit") }}

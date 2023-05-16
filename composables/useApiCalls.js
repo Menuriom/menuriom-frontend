@@ -107,6 +107,83 @@ export const getBranchList = async (brandID) => {
 };
 // ---------------------------------------------------------
 
+// staff ---------------------------------------------------------
+export const getStaffList = async (brandID, branchID, pp, lastRecordID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/staff`, { brand: brandID });
+    const params = [];
+    params.push(`pp=${pp ? pp : "25"}`);
+    if (lastRecordID) params.push(`lastRecordID=${lastRecordID}`);
+    if (branchID) params.push(`branchID=${branchID}`);
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _records = [];
+    let _total = 0;
+    let _canInviteNewMembers = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _records = [..._records, ...response.data.records];
+            _total = Number(response.data.total);
+            _canInviteNewMembers = response.data.canInviteNewMembers;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _records, _canInviteNewMembers, _total };
+};
+export const getStaffRolesList = async (brandID, fields) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/staff-roles`, { brand: brandID });
+    const params = [];
+    if (fields) params["fields"] = fields.join(",");
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _records = [];
+    let _canCreateNewRoles = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _records = [..._records, ...response.data.records];
+            _canCreateNewRoles = response.data.canCreateNewRoles;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _records, _canCreateNewRoles };
+};
+export const getInviteList = async (records = [], pp = 25, lastRecordID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/account/invitation-list`, {});
+    const params = [];
+    params.push(`pp=${pp}`);
+    if (lastRecordID) params.push(`lastRecordID=${lastRecordID}`);
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _totalBrands = 0;
+    let _invites = records;
+    let _noMoreRecords = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _totalBrands = response.data.totalBrands;
+            const newInvites = response.data.invites.map((record) => {
+                return { ...record, loading: false };
+            });
+            _invites = [..._invites, ...newInvites];
+
+            if (newInvites.length === 0) _noMoreRecords = true;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _invites, _noMoreRecords, _totalBrands };
+};
+// ---------------------------------------------------------
+
 // general APIs ---------------------------------------------------------
 export const getLanguages = async () => {
     let { url, headers } = getRequestConfig(`/api/v1/general/language-list`, {});
