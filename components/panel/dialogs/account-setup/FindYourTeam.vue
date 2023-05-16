@@ -16,7 +16,7 @@
             </ul>
             <hr class="w-full border-0 h-0.5 gradient" />
             <h4 class="text-lg">{{ $t("panel.account-setup.Select from your list of staff invites") }}</h4>
-            <ul class="flex flex-col w-full" v-if="!loading && records.list.length > 0">
+            <ul class="flex flex-col gap-2 w-full" v-if="!loading && records.list.length > 0">
                 <li
                     class="flex items-center gap-4 p-4 rounded-md bg-dolphin hover:bg-neutral-700 cursor-pointer"
                     v-for="(invite, i) in records.list"
@@ -87,7 +87,7 @@ const selectInvite = (index) => {
     if (selectedInvites.value.includes(index)) selectedInvites.value.splice(index, 1);
     else {
         if (selectedInvites.value.length >= 3) {
-            toast.warning(t(`panel.account-setup.You can select n invites at max`), { timeout: 2000, rtl: localeProperties.value.dir == "rtl" });
+            toast.warning(t(`panel.account-setup.You can select n invites at max`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
             return;
         }
         selectedInvites.value.push(index);

@@ -198,7 +198,7 @@ const addImages = () => {
 
     // limit user to upload at max 5 images
     if (files.length + gallery.value.length > 5) {
-        toast.error(t(`panel.max file count is n`, { count: 5 }), { timeout: 2000, rtl: localeProperties.value.dir == "rtl" });
+        toast.error(t(`panel.max file count is n`, { count: 5 }), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
         return;
     }
 
@@ -206,7 +206,7 @@ const addImages = () => {
         const file = files[i];
         if (file.size > 2 * 1_048_576) {
             toast.success(t(`panel.Some of files that you select was over the nMB size limit`, { size: 2 }), {
-                timeout: 2000,
+                timeout: 3000,
                 rtl: localeProperties.value.dir == "rtl",
             });
             continue;
@@ -249,7 +249,7 @@ const save = async () => {
             gallery.value = [];
             response.data.gallery.forEach((image) => gallery.value.push({ blob: image, file: null }));
 
-            toast.info(t(`panel.branches.Branch info has been updated`), { timeout: 2000, rtl: localeProperties.value.dir == "rtl" });
+            toast.info(t(`panel.branches.Branch info has been updated`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {

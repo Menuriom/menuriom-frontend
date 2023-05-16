@@ -12,20 +12,18 @@ aside li a.router-link-exact-active {
 <template>
     <div class="flex flex-col gap-4 md:gap-6 w-full h-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
-                <div class="flex items-center gap-2">
-                    <nuxt-link class="flex justify-center p-2 rounded-md border-2 border-pencil-tip w-10 hover:w-16 transition-all" :to="localePath(`/panel`)">
-                        <Icon
-                            class="w-5 h-5 bg-dolphin"
-                            :class="[localeProperties.dir == 'rtl' ? 'rotate-45' : '-rotate-[135deg]']"
-                            name="arrow-angle.svg"
-                            folder="icons"
-                            size="20px"
-                        />
-                    </nuxt-link>
-                    <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
-                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.brands.Brand Settings & Info") }}</h1>
-                </div>
+            <div class="flex items-center gap-2">
+                <nuxt-link class="flex justify-center p-2 rounded-md border-2 border-pencil-tip w-10 hover:w-16 transition-all" :to="localePath(`/panel`)">
+                    <Icon
+                        class="w-5 h-5 bg-dolphin"
+                        :class="[localeProperties.dir == 'rtl' ? 'rotate-45' : '-rotate-[135deg]']"
+                        name="arrow-angle.svg"
+                        folder="icons"
+                        size="20px"
+                    />
+                </nuxt-link>
+                <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
+                <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.brands.Brand Settings & Info") }}</h1>
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />

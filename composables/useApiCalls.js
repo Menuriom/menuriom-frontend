@@ -154,23 +154,33 @@ export const getStaffRolesList = async (brandID, fields) => {
 
     return { _records, _canCreateNewRoles };
 };
-export const getInviteList = async () => {
+export const getInviteList = async (records = [], pp = 25, lastRecordID) => {
     let { url, headers } = getRequestConfig(`/api/v1/account/invitation-list`, {});
     const params = [];
+    params.push(`pp=${pp}`);
+    if (lastRecordID) params.push(`lastRecordID=${lastRecordID}`);
     url = encodeURI(`${url}?${params.join("&")}`);
 
-    let _invites = [];
+    let _totalBrands = 0;
+    let _invites = records;
+    let _noMoreRecords = false;
 
     await axios
         .get(url, { headers: headers })
         .then((response) => {
-            _invites = [..._invites, ...response.data.invites];
+            _totalBrands = response.data.totalBrands;
+            const newInvites = response.data.invites.map((record) => {
+                return { ...record, loading: false };
+            });
+            _invites = [..._invites, ...newInvites];
+
+            if (newInvites.length === 0) _noMoreRecords = true;
         })
         .catch((e) => {
             throw e;
         });
 
-    return { _invites };
+    return { _invites, _noMoreRecords, _totalBrands };
 };
 // ---------------------------------------------------------
 

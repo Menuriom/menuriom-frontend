@@ -199,7 +199,7 @@ const addImages = () => {
 
     // limit user to upload at max 5 images
     if (files.length + gallery.value.length > 5) {
-        toast.error(t(`panel.max file count is n`, { count: 5 }), { timeout: 2000, rtl: localeProperties.value.dir == "rtl" });
+        toast.error(t(`panel.max file count is n`, { count: 5 }), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
         return;
     }
 
@@ -207,7 +207,7 @@ const addImages = () => {
         const file = files[i];
         if (file.size > 2 * 1_048_576) {
             toast.success(t(`panel.Some of files that you select was over the nMB size limit`, { size: 2 }), {
-                timeout: 2000,
+                timeout: 3000,
                 rtl: localeProperties.value.dir == "rtl",
             });
             continue;
@@ -243,7 +243,7 @@ const save = async () => {
             onUploadProgress: (event) => (percentage.value = parseInt(Math.round((event.loaded / event.total) * 100))),
         })
         .then((response) => {
-            toast.success(t(`panel.branches.New branch created`), { timeout: 2000, rtl: localeProperties.value.dir == "rtl" });
+            toast.success(t(`panel.branches.New branch created`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
             router.push(localePath(`/panel/${route.params.brandID}/branches`));
         })
         .catch((err) => {

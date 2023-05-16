@@ -123,8 +123,10 @@ export default {
         needMoreLang: "To support multiple languages for your menu please go to language settings and choose the languages you want.",
         "record out of": "record out of",
         "Record per page": "Record per page",
-        "Accept": "Accept",
-        "Reject": "Reject",
+        Accept: "Accept",
+        Reject: "Reject",
+        "Load More": "Load More",
+        "End of the list": "End of the list",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -195,6 +197,8 @@ export default {
             "Notification Settings": "Notification Settings",
             Transactions: "Transactions",
             Sessions: "Sessions",
+
+            "You can join three brands at a max": "You can join three brands at a max",
         },
 
         brands: {

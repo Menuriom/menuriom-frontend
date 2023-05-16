@@ -125,6 +125,8 @@ export default {
         "Record per page": "رکورد در صفحه",
         Accept: "تایید",
         Reject: "رد کردن",
+        "Load More": "بارگذاری بیشتر",
+        "End of the list": "انتهای لیست",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -195,6 +197,8 @@ export default {
             "Notification Settings": "تنظیمات اعلانیه",
             Transactions: "تراکنش ها",
             Sessions: "دستگاه های متصل",
+
+            "You can join three brands at a max": "حداکثر می توانید به سه برند بپیوندید",
         },
 
         brands: {

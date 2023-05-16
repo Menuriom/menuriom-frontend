@@ -15,11 +15,21 @@ aside li a.router-link-exact-active {
 
 <template>
     <div class="flex flex-col gap-4 md:gap-6 w-full h-full">
-        <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
-                <div class="flex items-center gap-2">
-                    <img class="w-9" :src="route.meta.icon" alt="" />
-                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t(route.meta.title) }}</h1>
+        <header class="flex flex-wrap items-center gap-4">
+            <nuxt-link class="flex justify-center p-2 rounded-md border-2 border-pencil-tip w-10 hover:w-16 transition-all" :to="localePath(`/panel`)">
+                <Icon
+                    class="w-5 h-5 bg-dolphin"
+                    :class="[localeProperties.dir == 'rtl' ? 'rotate-45' : '-rotate-[135deg]']"
+                    name="arrow-angle.svg"
+                    folder="icons"
+                    size="20px"
+                />
+            </nuxt-link>
+            <div class="flex items-center gap-2">
+                <img class="w-16 h-16 rounded-full object-cover bg-zinc-600 shadow-nr25" :src="userStore.avatar" alt="" />
+                <div class="flex flex-col gap-1">
+                    <h4 class="text-lg md:text-2xl/none font-bold">{{ `${userStore.name} ${userStore.family}` }}</h4>
+                    <span class="text-sm md:text-base">{{ userStore.email }}</span>
                 </div>
             </div>
         </header>
@@ -43,6 +53,7 @@ aside li a.router-link-exact-active {
                                 {{ $t("panel.account.Invitations List") }}
                             </nuxt-link>
                         </li>
+                        <hr class="my-2 opacity-30" />
                         <li class="flex items-center text-sm flex-shrink-0">
                             <nuxt-link
                                 class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800"
@@ -80,6 +91,7 @@ aside li a.router-link-exact-active {
 <script setup>
 import { useUserStore } from "@/stores/user";
 
+const { localeProperties } = useI18n();
 const route = useRoute();
 const localePath = useLocalePath();
 const userStore = useUserStore();

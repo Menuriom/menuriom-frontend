@@ -10,7 +10,8 @@
         "Images must be less than nMB": "حجم عکس انتخابی باید کمتر از {size} Mb باشد",
         "account-setup": {
             "roleInviteDesc": "ما از شما دعوت می کنیم که در نقش <b class='text-purple-300'>{role}</b> به ما بپیوندید.",
-            "You can select n invites at max": "امکان انتخاب حداکثر {n} دعوت وجود دارد"
+            "You can select n invites at max": "امکان انتخاب حداکثر {n} دعوت وجود دارد",
+            "You are now part of this brand staff members": "شما اکنون بخشی از کارکنان {brand} هستید"
         },
         "brand": {
             "You are about to delete this brand": "شما درحال حذف برند <b>{name}</b> هستید",
