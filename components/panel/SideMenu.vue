@@ -274,13 +274,13 @@ aside > div {
                 </ul>
             </nav>
 
-            <div class="relative flex flex-col items-center p-2 md:p-6 bg-black rounded-xl shadow-lg overflow-hidden shrink-0">
+            <div class="relative flex flex-col items-center p-2 md:p-6 md:py-4 bg-black rounded-xl shadow-lg overflow-hidden shrink-0">
                 <span class="absolute end-1/2 -top-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
                 <span class="absolute end-10 -bottom-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
                 <span class="absolute -end-4 -bottom-14 -rotate-45 gradient-re w-24 h-24 rounded-2xl"></span>
-                <div class="relative flex flex-col items-center justify-between gap-4">
+                <div class="relative flex flex-col items-center justify-between gap-2">
                     <small class="hidden 2sm:flex text-sm opacity-75">Remove The Limitations</small>
-                    <h5 class="hidden 2sm:flex gradient-text text-2xl font-black -mt-2 md:mb-2">Upgrade To Pro</h5>
+                    <h5 class="hidden 2sm:flex gradient-text text-2xl font-black -mt-2">Upgrade To Pro</h5>
                     <nuxt-link class="flex items-center gap-2 p-1 px-4 bg-pencil-tip rounded-xl shadow-xl" :to="localePath('/panel/billing/upgrade')">
                         <img class="w-9 md:w-12" src="~/assets/images/icons/sparkles.png" alt="" />
                         <b class="text-xl">Go Pro</b>

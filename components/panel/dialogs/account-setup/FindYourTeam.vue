@@ -110,7 +110,7 @@ const acceptInvites = async () => {
     }
 
     await axios
-        .post(`/api/v1/account/invites`, { invites })
+        .post(`/api/v1/account/accept-invites`, { invites })
         .then((response) => {
             // load brands into userStore
             userStore.injectNewBrand(response.data.brands);

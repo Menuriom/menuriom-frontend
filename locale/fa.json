@@ -13,7 +13,7 @@
             "You can select n invites at max": "امکان انتخاب حداکثر {n} دعوت وجود دارد",
             "You are now part of this brand staff members": "شما اکنون بخشی از کارکنان {brand} هستید"
         },
-        "brand": {
+        "brands": {
             "You are about to delete this brand": "شما درحال حذف برند <b>{name}</b> هستید",
             "You are about to leave this brand": "شما درحال ترک کردن برند <b>{name}</b> هستید"
         },

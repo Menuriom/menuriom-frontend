@@ -117,8 +117,6 @@ const sendInvite = async () => {
     responseMessage.value = "";
     errorField.value = "";
 
-    console.log({ selectedBranches: selectedBranches.list });
-
     const data = {
         email: email.value,
         selectedRole: selectedRole.option.value,

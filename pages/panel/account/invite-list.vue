@@ -29,7 +29,7 @@
         <button class="btn w-max p-2.5 border-2 border-black rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
             {{ $t("panel.Load More") }}
         </button>
-        <small class="text-xs opacity-75" v-else>{{ $t("panel.End of the list") }}</small>
+        <small class="text-xs opacity-75" v-if="noMoreRecords && records.list.length > 0">{{ $t("panel.End of the list") }}</small>
         <div class="flex flex-col items-center gap-2 w-full my-4" v-if="records.list.length === 0">
             <img class="" src="~/assets/images/envelop.png" alt="" />
             <p class="opacity-75">{{ $t("panel.account-setup.You Have No Invitations Yet") }}</p>
@@ -74,7 +74,7 @@ const acceptInvite = async (invite, index) => {
     const invites = [records.list[index]._id];
 
     await axios
-        .post(`/api/v1/account/invites`, { invites })
+        .post(`/api/v1/account/accept-invites`, { invites })
         .then((response) => {
             // load brands into userStore
             userStore.injectNewBrand(response.data.brands);
@@ -105,9 +105,34 @@ const acceptInvite = async (invite, index) => {
 // ----------------------------------------
 
 // rejecting invites ----------------------------------------
-const rejectInvite = async (index) => {
+const rejectInvite = async (invite, index) => {
     if (loading.value || index.loading) return;
-    // TODO
+    records.list[index].loading = true;
+
+    responseMessage.value = "";
+    errorField.value = "";
+
+    const invites = [records.list[index]._id];
+
+    await axios
+        .post(`/api/v1/account/reject-invites`, { invites })
+        .then((response) => {
+            records.list.splice(index, 1);
+        })
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
+
+            if (responseMessage.value) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            records.list[index].loading = false;
+        });
 };
 // ----------------------------------------
 

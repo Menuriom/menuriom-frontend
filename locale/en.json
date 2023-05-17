@@ -13,7 +13,7 @@
             "You can select n invites at max": "You can select {n} invites at max",
             "You are now part of this brand staff members": "You are now part of {brand} staff members"
         },
-        "brand": {
+        "brands": {
             "You are about to delete this brand": "You are about to delete brand <b>{name}</b>",
             "You are about to leave this brand": "You are about to leave brand <b>{name}</b>"
         },

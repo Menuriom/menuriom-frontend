@@ -28,7 +28,7 @@ main {
             <NuxtLoadingIndicator />
             <Header />
             <div class="relative flex w-full h-0 p-2 flex-grow">
-                <SideMenu v-if="!dontShowMenu" @click="ddDialogshow()" />
+                <SideMenu v-if="!dontShowMenu" />
                 <main class="relative py-3 px-1 md:p-4 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>
@@ -85,10 +85,10 @@ else if (Object.keys(user.brands.value.list).length == 0) {
     if (showPopUp.value) panelStore.openPopUp("select-account-type");
 }
 
-onMounted(async () => {
-    panelStore.loadSelectedBrand();
+if (process.client) await userStore.refreshToken().catch((e) => {});
 
-    await userStore.refreshToken().catch((e) => {});
+onMounted(() => {
+    panelStore.loadSelectedBrand();
     userStore.setRefreshInterval();
 });
 </script>

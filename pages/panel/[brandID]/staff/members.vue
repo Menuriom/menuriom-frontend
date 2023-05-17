@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full">
+    <div class="flex flex-col gap-4 w-full" ref="form">
         <header class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
@@ -13,43 +13,61 @@
                     <!-- TODO : add i icon next to description of any page so that by clicking on it a pop-up opens and shows the general guide for the page -->
                 </small>
             </div>
-            <button
-                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
-                @click="panelStore.openPopUp('invite-new-member')"
-                v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
-            >
-                <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
-                {{ $t("panel.staff.Invite Members") }}
-            </button>
+            <div class="flex flex-wrap items-center gap-2">
+                <button
+                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-lg border-2 border-black flex-shrink-0"
+                    @click="panelStore.openPopUp('sent-invite')"
+                    v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
+                >
+                    <Icon class="w-4 h-4 bg-black" name="envelope-open-text.svg" folder="icons/light" size="16px" />
+                    {{ $t("panel.side-menu.Sent Invites") }}
+                </button>
+                <button
+                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                    @click="panelStore.openPopUp('invite-new-member')"
+                    v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
+                >
+                    <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
+                    {{ $t("panel.staff.Invite Members") }}
+                </button>
+            </div>
         </header>
         <div class="flex items-center justify-between gap-4">
             <input class="shadow-nr10 p-2 h-10 rounded w-full max-w-xs" placeholder="Search..." type="text" name="" id="" />
             <label class="flex items-center gap-2">
-                <select class="text-sm shadow-nr15 rounded-md bg-dolphin text-white p-1">
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="200">200</option>
-                </select>
                 <small class="text-sm">{{ $t("panel.Record per page") }}</small>
+                <SelectDropDown
+                    class="w-20"
+                    customPadding="px-2 py-1"
+                    :formHtmlObject="form"
+                    :options="[
+                        { name: '25', value: '25' },
+                        { name: '50', value: '50' },
+                        { name: '100', value: '100' },
+                    ]"
+                    v-slot="{ option }"
+                    v-model:selected-option="pp"
+                >
+                    <span :value="option.value">{{ option.name }}</span>
+                </SelectDropDown>
             </label>
         </div>
         <hr class="w-full border-gray-300 opacity-50" />
-        <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto">
-            <li class="flex items-center gap-1 text-sm p-1 px-2 border-2 border-dolphin rounded-lg shrink-0">
-                <Icon class="w-4 h-4 bg-black shrink-0" name="Stack.svg" folder="icons/basil" size="16px" />
+        <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
+            <li class="flex items-center gap-2 text-sm p-1 px-2 border-2 border-dolphin bg-pencil-tip text-white rounded-lg shrink-0 cursor-pointer">
+                <Icon class="w-4 h-4 bg-white shrink-0" name="Stack.svg" folder="icons/basil" size="20px" />
                 {{ $t("panel.staff.All Branches") }}
             </li>
-            <li class="text-sm p-1 px-2 border-2 rounded-lg shrink-0" v-for="(branch, i) in branches.list" :key="i">{{ branch.name }}</li>
+            <li class="text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer" v-for="(branch, i) in branches.list" :key="i">{{ branch.name }}</li>
         </ul>
         <hr class="w-full border-gray-300 opacity-50" />
         <small class="flex items-center gap-1 -my-2" v-if="totalRecords > 0">
-            <b>25</b> {{ $t("panel.record out of") }} <span>{{ totalRecords }}</span>
+            <b>{{ records.list.length }}</b> {{ $t("panel.record out of") }} <span>{{ totalRecords }}</span>
         </small>
-        <section class="flex flex-col w-full">
+        <section class="flex flex-col w-full grow">
             <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(230px, 1fr))" v-show="!loading">
                 <li
-                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
+                    class="relative flex flex-col items-center gap-4 p-4 aspect-square w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
                     v-for="(staff, i) in records.list"
                     :key="i"
                 >
@@ -73,16 +91,18 @@
                         </button>
                     </SlideMenu>
                     <div class="relative w-24 h-24 rounded-full overflow-hidden bg-pencil-tip shadow-nr15 z-2">
-                        <img class="w-full h-full object-cover" :src="staff.user.avatar" v-if="staff.user.avatar" />
+                        <img class="w-full h-full object-cover" :src="staff.user.avatar ?? '/avatar.webp'" />
                     </div>
                     <div class="flex flex-col items-center">
                         <h4 class="font-semibold">{{ `${staff.user.name} ${staff.user.family}` }}</h4>
                         <p class="text-xs opacity-75">{{ staff.user.email ? staff.user.email : staff.user.mobile }}</p>
                     </div>
-                    <small class="border border-violet text-violet p-0.5 px-2 rounded">{{ staff.role }}</small>
+                    <small class="border border-violet text-violet p-0.5 px-2 rounded">{{ staff.role.name }}</small>
                     <hr class="w-3/4 border-b-2 border-dolphin opacity-10 rounded-full" />
                 </li>
-                <li class="w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden">
+                <li
+                    class="w-full aspect-square rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
+                >
                     <button
                         class="flex flex-col items-center justify-center gap-4 w-full h-full p-3 py-10"
                         @click="panelStore.openPopUp('invite-new-member')"
@@ -148,6 +168,7 @@
 <script setup>
 import Dialog from "~/components/panel/Dialog.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
+import SelectDropDown from "~/components/form/SelectDropDown.vue";
 const InviteNewMember = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/InviteNewMember.vue"));
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
@@ -167,6 +188,7 @@ const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] |
 
 // TODO : limit staff invitation base on the user's plan on brand
 
+const form = ref(); // Dom Ref
 const errorField = ref("");
 const responseMessage = ref("");
 
@@ -221,22 +243,31 @@ const handleErrors = (err) => {
 };
 
 // getStaffList -------------------------------------------------
-const loading = ref(true);
+const noMoreRecords = ref(false);
+const lastRecordID = ref("");
+const pp = ref({ value: 25, name: "25" });
 const records = reactive({ list: [] });
 const totalRecords = ref(0);
-const getStaffList_results = await useLazyAsyncData(() => getStaffList(route.params.brandID));
+const getStaffList_results = await useLazyAsyncData(() => getStaffList(route.params.brandID), { watch: [lastRecordID, pp] });
+const loading = computed(() => getStaffList_results.pending.value);
 
 if (getStaffList_results.error.value) handleErrors(getStaffList_results.error.value);
 watch(getStaffList_results.error, (err) => handleErrors(err));
 
 const handleStaffList_results = (data) => {
+    if (!data) return;
     records.list = data._records;
     totalRecords.value = data._total;
     canInviteNewMembers.value = data._canInviteNewMembers;
-    loading.value = false;
 };
-if (getStaffList_results.data.value) handleStaffList_results(getStaffList_results.data.value);
-watch(getStaffList_results.data, (val) => handleStaffList_results(val));
+watch(getStaffList_results.data, (val) => handleStaffList_results(val), { immediate: process.server || useNuxtApp().isHydrating });
+
+const loadMore = () => {
+    if (noMoreRecords.value) return;
+    const lastRecord = records.list[records.list.length - 1];
+    if (lastRecordID.value === lastRecord._id) noMoreRecords.value = true;
+    lastRecordID.value = lastRecord._id;
+};
 // -------------------------------------------------
 
 // getBranchList -------------------------------------------------
@@ -251,7 +282,6 @@ const handleBranchList_results = (data) => {
     branches.list = data._records;
     loadingBranches.value = false;
 };
-if (getBranchList_results.data.value) handleBranchList_results(getBranchList_results.data.value);
-watch(getBranchList_results.data, (val) => handleBranchList_results(val));
+watch(getBranchList_results.data, (val) => handleBranchList_results(val), { immediate: process.server || useNuxtApp().isHydrating });
 // -------------------------------------------------
 </script>

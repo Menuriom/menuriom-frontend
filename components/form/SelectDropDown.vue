@@ -34,7 +34,7 @@ span {
             <div class="relative flex items-center w-full" tabindex="0" @click="toggleDropdown()">
                 <input
                     class="w-full bg-transparent rounded-b-md outline-none text-sm select-none"
-                    :class="[!!label ? 'p-1 px-3 pb-1.5 mt-6' : 'p-4']"
+                    :class="[!!label ? 'p-1 px-3 pb-1.5 mt-6' : customPadding]"
                     :required="required"
                     :name="name"
                     :value="selectedOption.name"
@@ -99,6 +99,7 @@ const props = defineProps({
     shadow: { type: Boolean, default: true },
     iconName: { type: String },
     iconFolder: { type: String, default: "icons" },
+    customPadding: { type: String, default: "p-4" },
     formHtmlObject: Object,
 });
 const emit = defineEmits(["update:selectedOption"]);
