@@ -115,6 +115,7 @@ export default {
         Save: "Save",
         Delete: "Delete",
         Select: "Select",
+        Search: "Search",
         "Go Back": "Go Back",
         Uploading: "Uploading",
         Languages: "Languages",

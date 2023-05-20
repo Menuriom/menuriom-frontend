@@ -32,16 +32,8 @@
                 </button>
             </div>
         </header>
-        <div class="flex items-center justify-between gap-4">
-            <!-- TODO : make search input a component -->
-            <input
-                class="shadow-nr10 p-2 h-10 rounded w-full max-w-xs"
-                placeholder="Search..."
-                type="text"
-                name="search"
-                v-model="searchQuery"
-                @keyup="search($event)"
-            />
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <Search class="w-full max-w-xs" v-model="searchQuery" @keyup="searchKeyUp($event)" @search="search()" @clear:search="clearSearch()" />
             <label class="flex items-center gap-2">
                 <small class="text-sm">{{ $t("panel.Record per page") }}</small>
                 <SelectDropDown
@@ -205,6 +197,7 @@
 
 <script setup>
 import Dialog from "~/components/panel/Dialog.vue";
+import Search from "~/components/form/Search.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
 import SelectDropDown from "~/components/form/SelectDropDown.vue";
 const InviteNewMember = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/InviteNewMember.vue"));
@@ -360,16 +353,18 @@ watch(records, () => filterRecords(selectedBranch.value), { immediate: process.s
 // -------------------------------------------------
 
 // search records -------------------------------------------------
-const search = (event) => {
-    if (event.key !== "Enter" || loading.value || !searchQuery.value) return;
+const search = () => {
     records.list = [];
     getStaffList_results.refresh();
+};
+const searchKeyUp = (event) => {
+    if (event.key !== "Enter" || loading.value || !searchQuery.value) return;
+    search();
 };
 const clearSearch = () => {
     if (loading.value || !searchQuery.value) return;
     searchQuery.value = "";
-    records.list = [];
-    getStaffList_results.refresh();
+    search();
 };
 // -------------------------------------------------
 </script>

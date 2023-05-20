@@ -115,6 +115,7 @@ export default {
         Save: "ذخیره",
         Delete: "حذف",
         Select: "انتخاب",
+        Search: "جستجو",
         "Go Back": "بازگشت",
         Uploading: "درحال ارسال",
         Languages: "زبان ها",
