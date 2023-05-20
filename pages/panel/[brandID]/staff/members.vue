@@ -16,7 +16,7 @@
             <div class="flex flex-wrap items-center gap-2">
                 <button
                     class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-lg border-2 border-black flex-shrink-0"
-                    @click="panelStore.openPopUp('sent-invite')"
+                    @click="panelStore.openPopUp('sent-invites')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
                     <Icon class="w-4 h-4 bg-black" name="envelope-open-text.svg" folder="icons/light" size="16px" />
@@ -33,7 +33,15 @@
             </div>
         </header>
         <div class="flex items-center justify-between gap-4">
-            <input class="shadow-nr10 p-2 h-10 rounded w-full max-w-xs" placeholder="Search..." type="text" name="" id="" />
+            <!-- TODO : make search input a component -->
+            <input
+                class="shadow-nr10 p-2 h-10 rounded w-full max-w-xs"
+                placeholder="Search..."
+                type="text"
+                name="search"
+                v-model="searchQuery"
+                @keyup="search($event)"
+            />
             <label class="flex items-center gap-2">
                 <small class="text-sm">{{ $t("panel.Record per page") }}</small>
                 <SelectDropDown
@@ -54,32 +62,44 @@
         </div>
         <hr class="w-full border-gray-300 opacity-50" />
         <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
-            <li class="flex items-center gap-2 text-sm p-1 px-2 border-2 border-dolphin bg-pencil-tip text-white rounded-lg shrink-0 cursor-pointer">
-                <Icon class="w-4 h-4 bg-white shrink-0" name="Stack.svg" folder="icons/basil" size="20px" />
+            <li
+                class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
+                :class="{ 'border-dolphin bg-pencil-tip text-white': selectedBranch === '' }"
+                @click="selectedBranch = ''"
+            >
+                <Icon class="w-4 h-4 shrink-0" :class="[selectedBranch === '' ? 'bg-white' : 'bg-black']" name="Stack.svg" folder="icons/basil" size="20px" />
                 {{ $t("panel.staff.All Branches") }}
             </li>
-            <li class="text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer" v-for="(branch, i) in branches.list" :key="i">{{ branch.name }}</li>
+            <li
+                class="text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
+                :class="{ 'border-dolphin bg-pencil-tip text-white': selectedBranch === branch._id }"
+                v-for="(branch, i) in branches.list"
+                :key="i"
+                @click="selectedBranch = branch._id"
+            >
+                {{ branch.name }}
+            </li>
         </ul>
         <hr class="w-full border-gray-300 opacity-50" />
         <small class="flex items-center gap-1 -my-2" v-if="totalRecords > 0">
-            <b>{{ records.list.length }}</b> {{ $t("panel.record out of") }} <span>{{ totalRecords }}</span>
+            <b>{{ filteredRecords.list.length }}</b> {{ $t("panel.record out of") }} <span>{{ totalRecords }}</span>
         </small>
-        <section class="flex flex-col w-full grow">
-            <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(230px, 1fr))" v-show="!loading">
+        <section class="flex flex-col gap-4 w-full grow">
+            <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(230px, 1fr))">
                 <li
-                    class="relative flex flex-col items-center gap-4 p-4 aspect-square w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
-                    v-for="(staff, i) in records.list"
+                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
+                    v-for="(staff, i) in filteredRecords.list"
                     :key="i"
                 >
                     <SlideMenu class="-my-2 z-10">
-                        <nuxt-link
+                        <button
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
-                            :to="localePath(`/panel/${route.params.brandID}/staff/${staff._id}`)"
-                            v-if="checkPermissions(['main-panel.staff.edit'], brand)"
+                            @click="openEditDialog(i)"
+                            v-if="checkPermissions(['main-panel.staff.alter'], brand)"
                         >
-                            <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
-                            <small>{{ $t("panel.staff.Edit Role") }}</small>
-                        </nuxt-link>
+                            <Icon class="w-4 h-4 bg-white shrink-0" name="shield.svg" folder="icons/light" size="16px" />
+                            <small>{{ $t("panel.staff.Change Access Of Staff") }}</small>
+                        </button>
                         <hr class="w-full opacity-40" />
                         <button
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer"
@@ -99,9 +119,14 @@
                     </div>
                     <small class="border border-violet text-violet p-0.5 px-2 rounded">{{ staff.role.name }}</small>
                     <hr class="w-3/4 border-b-2 border-dolphin opacity-10 rounded-full" />
+                    <div class="flex flex-wrap items-center justify-between gap-2 p-2 rounded-md w-full bg-neutral-100">
+                        <small>{{ $t("panel.staff.Joined At") }}:</small>
+                        <b class="text-xs">{{ new Date(staff.createdAt).toLocaleDateString(locale) }}</b>
+                    </div>
                 </li>
                 <li
-                    class="w-full aspect-square rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
+                    class="w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
+                    v-if="!loading"
                 >
                     <button
                         class="flex flex-col items-center justify-center gap-4 w-full h-full p-3 py-10"
@@ -117,6 +142,10 @@
                 </li>
             </ul>
             <Loading v-if="loading" />
+            <button class="btn w-max p-2.5 border-2 border-black rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
+                {{ $t("panel.Load More") }}
+            </button>
+            <small class="text-xs opacity-75" v-if="noMoreRecords && records.list.length > 0">{{ $t("panel.End of the list") }}</small>
             <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
                 <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
@@ -125,7 +154,8 @@
         <Teleport to="body">
             <Dialog name="delete-confirmation" :title="$t('panel.staff.Remove Staff')" v-if="panelStore.popUpOpened == 'delete-confirmation'">
                 <div class="flex flex-col gap-3">
-                    <img class="w-44 mx-auto" src="~/assets/images/empty.webp" />
+                    <!-- <img class="w-44 mx-auto" src="~/assets/images/empty.webp" /> -->
+                    <hr class="w-full opacity-30 my-2" />
                     <h2
                         class="text-xl"
                         v-html="
@@ -137,7 +167,7 @@
                     <p class="text-sm opacity-75">
                         {{ $t("panel.staff.deletingStaffDesc") }}
                     </p>
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
                         {{ $t("panel.staff.For this user to join your team again, you need to send them a new invite") }}
                     </small>
                     <hr class="w-full opacity-40" />
@@ -161,6 +191,14 @@
                 </div>
             </Dialog>
             <InviteNewMember v-if="panelStore.popUpOpened == 'invite-new-member'" />
+            <EditMemberAccess
+                :_id="staffToEdit._id"
+                :user="staffToEdit.user"
+                :role="staffToEdit.role"
+                :branches="staffToEdit.branches"
+                @update:record="editRecord($event)"
+                v-if="panelStore.popUpOpened == 'edit-member-access'"
+            />
         </Teleport>
     </div>
 </template>
@@ -170,6 +208,7 @@ import Dialog from "~/components/panel/Dialog.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
 import SelectDropDown from "~/components/form/SelectDropDown.vue";
 const InviteNewMember = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/InviteNewMember.vue"));
+const EditMemberAccess = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/EditMemberAccess.vue"));
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
 import { usePanelStore } from "@/stores/panel";
@@ -177,6 +216,7 @@ import { useUserStore } from "@/stores/user";
 
 const { locale, t } = useI18n();
 const route = useRoute();
+const nuxtApp = useNuxtApp();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
@@ -187,6 +227,8 @@ useHead({ title: title });
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
 // TODO : limit staff invitation base on the user's plan on brand
+// for every branch a brand can add up to 15 staff memebers
+// so for example : if brand CAN create 5 branches then they can invite 5*15 (75) staff members
 
 const form = ref(); // Dom Ref
 const errorField = ref("");
@@ -215,7 +257,7 @@ const deleteRecord = async () => {
         .then((response) => {
             records.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();
-            // TODO : allow user to create new branch if the limit is under the plan's limit
+            // TODO : allow user to invite new staff if the limit is under the plan's limit
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -232,6 +274,17 @@ const deleteRecord = async () => {
 };
 // -------------------------------------------------
 
+// editing -------------------------------------------------
+const indexToEdit = ref(null);
+const staffToEdit = ref(null);
+const openEditDialog = (index) => {
+    indexToEdit.value = index;
+    staffToEdit.value = records.list[index];
+    panelStore.openPopUp("edit-member-access");
+};
+const editRecord = (newRecord) => (records.list[indexToEdit.value] = newRecord);
+// -------------------------------------------------
+
 const handleErrors = (err) => {
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
@@ -243,12 +296,17 @@ const handleErrors = (err) => {
 };
 
 // getStaffList -------------------------------------------------
+const searchQuery = ref("");
 const noMoreRecords = ref(false);
 const lastRecordID = ref("");
 const pp = ref({ value: 25, name: "25" });
 const records = reactive({ list: [] });
+const filteredRecords = reactive({ list: [] });
 const totalRecords = ref(0);
-const getStaffList_results = await useLazyAsyncData(() => getStaffList(route.params.brandID), { watch: [lastRecordID, pp] });
+const getStaffList_results = await useLazyAsyncData(
+    () => getStaffList(route.params.brandID, null, records.list, pp.value.value, lastRecordID.value, searchQuery.value),
+    { watch: [lastRecordID] }
+);
 const loading = computed(() => getStaffList_results.pending.value);
 
 if (getStaffList_results.error.value) handleErrors(getStaffList_results.error.value);
@@ -259,8 +317,9 @@ const handleStaffList_results = (data) => {
     records.list = data._records;
     totalRecords.value = data._total;
     canInviteNewMembers.value = data._canInviteNewMembers;
+    noMoreRecords.value = data._noMoreRecords;
 };
-watch(getStaffList_results.data, (val) => handleStaffList_results(val), { immediate: process.server || useNuxtApp().isHydrating });
+watch(getStaffList_results.data, (val) => handleStaffList_results(val), { immediate: process.server || nuxtApp.isHydrating });
 
 const loadMore = () => {
     if (noMoreRecords.value) return;
@@ -271,17 +330,46 @@ const loadMore = () => {
 // -------------------------------------------------
 
 // getBranchList -------------------------------------------------
-const loadingBranches = ref(true);
 const branches = reactive({ list: [] });
 const getBranchList_results = await useLazyAsyncData(() => getBranchList(route.params.brandID));
+const loadingBranches = computed(() => getBranchList_results.pending.value);
 
 if (getBranchList_results.error.value) handleErrors(getBranchList_results.error.value);
 watch(getBranchList_results.error, (err) => handleErrors(err));
 
 const handleBranchList_results = (data) => {
     branches.list = data._records;
-    loadingBranches.value = false;
 };
-watch(getBranchList_results.data, (val) => handleBranchList_results(val), { immediate: process.server || useNuxtApp().isHydrating });
+watch(getBranchList_results.data, (val) => handleBranchList_results(val), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
+
+// records filtering -------------------------------------------------
+const selectedBranch = ref("");
+const filterRecords = (branchId) => {
+    if (!branchId) return (filteredRecords.list = records.list);
+    filteredRecords.list = records.list.filter((record) => {
+        if (record.branches.length === 0) return true;
+        for (let i = 0; i < record.branches.length; i++) {
+            if (record.branches[i]._id === branchId) return true;
+        }
+        return false;
+    });
+};
+watch(selectedBranch, (branchId) => filterRecords(branchId));
+watch(records, () => filterRecords(selectedBranch.value), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
+
+// search records -------------------------------------------------
+const search = (event) => {
+    if (event.key !== "Enter" || loading.value || !searchQuery.value) return;
+    records.list = [];
+    getStaffList_results.refresh();
+};
+const clearSearch = () => {
+    if (loading.value || !searchQuery.value) return;
+    searchQuery.value = "";
+    records.list = [];
+    getStaffList_results.refresh();
+};
 // -------------------------------------------------
 </script>

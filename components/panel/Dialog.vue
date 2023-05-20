@@ -1,6 +1,7 @@
 <style scoped>
 .dialog {
     z-index: 100;
+    padding: 0;
     background: transparent;
 }
 .dialog > .box {

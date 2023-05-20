@@ -166,7 +166,7 @@
                     <p class="text-sm opacity-75">
                         {{ $t("panel.brands.deletingBrandDesc") }}
                     </p>
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
                         {{ $t("panel.brands.This action cannot be reversed") }}
                     </small>
                     <hr class="w-full opacity-40" />
@@ -196,7 +196,7 @@
                     <p class="text-sm opacity-75">
                         {{ $t("panel.brands.leavingBrandDesc") }}
                     </p>
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
                         {{ $t("panel.brands.You need new invitation to join this brand again") }}
                     </small>
                     <hr class="w-full opacity-40" />

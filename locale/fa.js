@@ -273,13 +273,15 @@ export default {
             "Invite new staff to your team and manage their access": "دعوت اعضای خدمه به تیم و مدیریت دسترسی های اعضا",
             "Invite Members": "دعوت اعضا",
             "Invite New Member": "دعوت اعضا",
-            "Edit Role": "ویرایش نقش",
+            "Change Access Of Staff": "تغییر دسترسی کاربر",
             "Remove staff": "حذف از تیم",
             "All Branches": "همه شعبه ها",
             "Send Invite": "ارسال دعوت",
             "Go to staff roles": "مدیریت نقش ها",
             Role: "نقش",
+            "Joined At": "تاریخ عضویت",
             "Email address of user that they signup with": "آدرس ایمیل که کاربر با ان ثبت نام کرده",
+            "Member access has been updated": "دسترسی کاربر بروز شد",
 
             "Enter email of user you want to invite, and then select what role you want to apply to them":
                 "ایمیل کاربر مورد نظر را وارد کنید، سپس سطح دسترسی کاربر را معلوم کنید",
@@ -298,7 +300,7 @@ export default {
                 "با حذف این نقش، باید به تمام اعضای خدمه که قبلا این نقش را داشته اند نقش جدیدی اختصاص دهید",
 
             "You can select specific branches for this member": "شما میتوانید فقط دسترسی یکسری شعبه های خاص را برای این کاربر درنظر بگیرید",
-            "If you dont select any branches this user will be able from all branches":
+            "If you dont select any branches this user will have access to all branches":
                 "اگر شعبه ای را برای این کاربر درنظر نگیرید، امکان دسترسی از طریق تمام شعبه ها برای این کاربر فراهم می شود",
 
             "Invite has been sent": "درخواست ارسال شد",

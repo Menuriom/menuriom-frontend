@@ -36,6 +36,7 @@ main {
         </Html>
 
         <Teleport to="body">
+            <SentInvites v-if="panelStore.popUpOpened == 'sent-invites'" />
             <PersonalInfo v-if="panelStore.popUpOpened == 'personal-info'" />
             <SelectAccountType v-if="panelStore.popUpOpened == 'select-account-type'" />
             <CreateNewBrand v-if="panelStore.popUpOpened == 'create-new-brand'" />
@@ -48,6 +49,7 @@ main {
 <script setup>
 import Header from "~/components/panel/Header.vue";
 const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
+const SentInvites = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/SentInvites.vue"));
 const PersonalInfo = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/PersonalInfo.vue"));
 const CreateNewBrand = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/CreateNewBrand.vue"));
 const FindYourTeam = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/FindYourTeam.vue"));

@@ -108,17 +108,19 @@ export const getBranchList = async (brandID) => {
 // ---------------------------------------------------------
 
 // staff ---------------------------------------------------------
-export const getStaffList = async (brandID, branchID, pp, lastRecordID) => {
+export const getStaffList = async (brandID, branchID, records = [], pp = 25, lastRecordID, searchQuery = "") => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/staff`, { brand: brandID });
     const params = [];
-    params.push(`pp=${pp ? pp : "25"}`);
+    params.push(`pp=${pp}`);
+    if (searchQuery) params.push(`searchQuery=${searchQuery}`);
     if (lastRecordID) params.push(`lastRecordID=${lastRecordID}`);
     if (branchID) params.push(`branchID=${branchID}`);
     url = encodeURI(`${url}?${params.join("&")}`);
 
-    let _records = [];
+    let _records = records;
     let _total = 0;
     let _canInviteNewMembers = false;
+    let _noMoreRecords = false;
 
     await axios
         .get(url, { headers: headers })
@@ -126,12 +128,13 @@ export const getStaffList = async (brandID, branchID, pp, lastRecordID) => {
             _records = [..._records, ...response.data.records];
             _total = Number(response.data.total);
             _canInviteNewMembers = response.data.canInviteNewMembers;
+            if (response.data.records.length === 0) _noMoreRecords = true;
         })
         .catch((e) => {
             throw e;
         });
 
-    return { _records, _canInviteNewMembers, _total };
+    return { _records, _canInviteNewMembers, _total, _noMoreRecords };
 };
 export const getStaffRolesList = async (brandID, fields) => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/staff-roles`, { brand: brandID });
@@ -181,6 +184,30 @@ export const getInviteList = async (records = [], pp = 25, lastRecordID) => {
         });
 
     return { _invites, _noMoreRecords, _totalBrands };
+};
+export const getSentInviteList = async (brandID, records = [], pp = 25, lastRecordID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/staff/sent-invites`, { brand: brandID });
+    const params = [];
+    params.push(`pp=${pp}`);
+    if (lastRecordID) params.push(`lastRecordID=${lastRecordID}`);
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _invites = records;
+    let _noMoreRecords = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            const newInvites = response.data.records;
+            _invites = [..._invites, ...newInvites];
+
+            if (newInvites.length === 0) _noMoreRecords = true;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _invites, _noMoreRecords };
 };
 // ---------------------------------------------------------
 

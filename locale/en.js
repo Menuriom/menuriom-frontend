@@ -273,13 +273,15 @@ export default {
             "Invite new staff to your team and manage their access": "Invite new staff to your team and manage their access",
             "Invite Members": "Invite Members",
             "Invite New Member": "Invite New Member",
-            "Edit Role": "Edit Role",
+            "Change Access Of Staff": "Change Access Of Staff",
             "Remove staff": "Remove staff",
             "All Branches": "All Branches",
             "Send Invite": "Send Invite",
             "Go to staff roles": "Go to staff roles",
             Role: "Role",
+            "Joined At": "Joined At",
             "Email address of user that they signup with": "Email address of user that they signup with",
+            "Member access has been updated": "Member access has been updated",
 
             "Enter email of user you want to invite, and then select what role you want to apply to them":
                 "Enter email of user you want to invite, and then select what role you want to apply to them",
@@ -298,8 +300,8 @@ export default {
                 "By deleting this role, you need to assign a new role to all staff members that previously had this role",
 
             "You can select specific branches for this member": "You can select specific branches for this member",
-            "If you dont select any branches this user will be able from all branches":
-                "If you don't select any branches, this user will be able from all branches",
+            "If you dont select any branches this user will have access to all branches":
+                "If you don't select any branches, this user will have access to all branches",
 
             "Invite has been sent": "Invite Has Been Sent",
             "Send Another Invite": "Send Another Invite",

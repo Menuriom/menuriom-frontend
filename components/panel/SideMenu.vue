@@ -62,7 +62,7 @@ aside > div {
 </style>
 
 <template>
-    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-10 flex-shrink-0 shadow-nr35" :class="{ close: !panelStore.sideMenuOpen }">
+    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 flex-shrink-0 shadow-nr35" :class="{ close: !panelStore.sideMenuOpen }">
         <div class="flex flex-col gap-4 h-full p-4 bg-pencil-tip text-white rounded-lg">
             <nuxt-link
                 class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin cursor-pointer transition-all group"
@@ -204,15 +204,15 @@ aside > div {
                                     <span>{{ $t("panel.side-menu.Staff Members") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link
+                            <button
                                 class="link"
-                                :to="localePath(`/panel/${panelStore.selectedBrandId}/sent/invite`)"
+                                @click="panelStore.openPopUp('sent-invites')"
                                 v-if="checkPermissions(['main-panel.staff.view', 'main-panel.staff.invite'], brand, 'AND')"
                             >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Sent Invites") }}</span>
                                 </li>
-                            </nuxt-link>
+                            </button>
                             <nuxt-link
                                 class="link"
                                 :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/roles`)"

@@ -1,24 +1,25 @@
 <style scoped></style>
 
 <template>
-    <Dialog name="invite-new-member">
+    <Dialog name="edit-member-access">
         <template #title>
             <div class="flex items-center gap-2 w-full">
-                <img class="w-8" src="~/assets/images/panel-icons/envelope-open-text-light.png" alt="" />
-                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.staff.Invite New Member") }}</h3>
+                <img class="w-8" src="~/assets/images/panel-icons/shield.png" alt="" />
+                <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.staff.Change Access Of Staff") }}</h3>
             </div>
         </template>
         <transition name="slide-up" mode="out-in">
-            <div class="flex flex-col items-center gap-4 md:w-screen max-w-md mt-4" ref="form" v-if="stage === 1">
+            <div class="flex flex-col items-center gap-4 md:w-screen max-w-md mt-4" ref="form">
                 <div class="flex flex-col gap-4 w-full">
-                    <small> {{ $t("panel.staff.Enter email of user you want to invite, and then select what role you want to apply to them") }} </small>
-                    <Input
-                        :required="true"
-                        :label="$t('auth.Email Address')"
-                        :placeholder="$t('panel.staff.Email address of user that they signup with')"
-                        v-model="email"
-                        :error="errorField == 'email' ? responseMessage : ''"
-                    />
+                    <div class="flex items-center gap-2 bg-white text-pencil-tip p-4 rounded-md">
+                        <div class="relative w-14 h-14 rounded-full overflow-hidden bg-pencil-tip shadow-nr25">
+                            <img class="w-full h-full object-cover" :src="user.avatar ?? '/avatar.webp'" />
+                        </div>
+                        <div class="flex flex-col">
+                            <h4 class="font-bold text-xl">{{ `${user.name} ${user.family}` }}</h4>
+                            <p class="text-xs opacity-75">{{ user.email ? user.email : user.mobile }}</p>
+                        </div>
+                    </div>
                     <SelectDropDown
                         :required="true"
                         :formHtmlObject="form"
@@ -59,22 +60,11 @@
                     <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
-                    <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75': loading }" :disabled="loading" @click="sendInvite()">
-                        <span v-if="!loading"> {{ $t("panel.staff.Send Invite") }} </span>
+                    <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75': loading }" :disabled="loading" @click="editingAccess()">
+                        <span v-if="!loading"> {{ $t("panel.Save") }} </span>
                         <Loading v-else />
                     </button>
                 </div>
-            </div>
-            <div class="relative flex flex-col items-center gap-4 md:w-screen max-w-md text-center" v-else-if="stage === 2">
-                <div class="flex flex-col items-center gap-4 my-8">
-                    <img class="rotate-pop object-contain" src="~/assets/images/check.png" v-if="stage === 2" />
-                    <p class="text-xl gradient-text font-extrabold">{{ $t("panel.staff.Invite has been sent") }}</p>
-                    <small class="text-blue-200 bg-blue-900 bg-opacity-20 p-2 border border-blue-900 rounded-md" v-if="noUser">
-                        {{ $t("panel.staff.noUserNotice") }}
-                    </small>
-                    <small class="opacity-75"> {{ $t("panel.staff.You can always revoke your sent invitations from sent invite list") }} </small>
-                </div>
-                <button class="text-sm text-violet underline underline-offset-2" @click="stage = 1">{{ $t("panel.staff.Send Another Invite") }}</button>
             </div>
         </transition>
     </Dialog>
@@ -82,56 +72,64 @@
 
 <script setup>
 import Dialog from "~/components/panel/Dialog.vue";
-import Input from "~/components/form/Input.vue";
 import SelectDropDown from "~/components/form/SelectDropDown.vue";
 import MultiSelectDropDown from "~/components/form/MultiSelectDropDown.vue";
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
+import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-const { t } = useI18n();
+const { localeProperties, t } = useI18n();
 const localePath = useLocalePath();
 const route = useRoute();
+const nuxtApp = useNuxtApp();
+const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
+const props = defineProps({
+    _id: String,
+    user: Object,
+    role: Object,
+    branches: Array,
+});
+const emit = defineEmits(["update:record"]);
+
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
-const stage = ref(1);
 const form = ref(); // Dom Ref
 
-const noUser = ref(false);
 const loading = ref(false);
 const errorField = ref("");
 const responseMessage = ref("");
 
-const email = ref("");
-const selectedRole = reactive({ option: { name: "", value: "" } });
-const selectedBranches = reactive({ list: [] });
+const user = reactive({ ...props.user });
+const selectedRole = reactive({ option: { name: props.role.name, value: props.role._id } });
+const selectedBranches = reactive({ list: [...props.branches.map((branch) => ({ name: branch.name, value: branch._id }))] });
 
-// sending invite  ----------------------------------------
-const sendInvite = async () => {
+// editing access  ----------------------------------------
+const editingAccess = async () => {
     if (loading.value) return;
     loading.value = true;
 
-    noUser.value = false;
     responseMessage.value = "";
     errorField.value = "";
 
     const data = {
-        email: email.value,
         selectedRole: selectedRole.option.value,
         selectedBranches: selectedBranches.list.map((x) => x.value),
     };
 
     await axios
-        .post(`/api/v1/panel/staff/invite`, data, { headers: { brand: route.params.brandID } })
+        .put(`/api/v1/panel/staff/${props._id}`, data, { headers: { brand: route.params.brandID } })
         .then((response) => {
-            noUser.value = !response.data.userExists;
-            stage.value = 2;
+            toast.info(t("panel.staff.Member access has been updated"), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            emit("update:record", response.data.updatedRecord);
+            panelStore.closePopUp();
         })
         .catch((err) => {
+            console.log({ err });
             if (typeof err.response !== "undefined" && err.response.data) {
                 const errors = err.response.data.errors || err.response.data.message;
                 if (typeof errors === "object") {
@@ -157,9 +155,9 @@ const handleErrors = (err) => {
 };
 
 // getBranchList -------------------------------------------------
-const loadingBranches = ref(true);
 const branches = reactive({ list: [] });
 const getBranchList_results = await useLazyAsyncData(() => getBranchList(route.params.brandID));
+const loadingBranches = computed(() => getBranchList_results.pending.value);
 
 if (getBranchList_results.error.value) handleErrors(getBranchList_results.error.value);
 watch(getBranchList_results.error, (err) => handleErrors(err));
@@ -168,16 +166,14 @@ const handleBranchList_results = (data) => {
     branches.list = data._records.map((record) => {
         return { name: record.name, value: record._id };
     });
-    loadingBranches.value = false;
 };
-if (getBranchList_results.data.value) handleBranchList_results(getBranchList_results.data.value);
-watch(getBranchList_results.data, (val) => handleBranchList_results(val));
+watch(getBranchList_results.data, (val) => handleBranchList_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 
 // getRoleList -------------------------------------------------
-const loadingRoles = ref(true);
 const roles = reactive({ list: [] });
 const getRoleList_results = await useLazyAsyncData(() => getStaffRolesList(route.params.brandID, ["name"]));
+const loadingRoles = computed(() => getRoleList_results.pending.value);
 
 if (getRoleList_results.error.value) handleErrors(getRoleList_results.error.value);
 watch(getRoleList_results.error, (err) => handleErrors(err));
@@ -186,9 +182,7 @@ const handleRoleList_results = (data) => {
     roles.list = data._records.map((record) => {
         return { name: record.name, value: record._id };
     });
-    loadingRoles.value = false;
 };
-if (getRoleList_results.data.value) handleRoleList_results(getRoleList_results.data.value);
-watch(getRoleList_results.data, (val) => handleRoleList_results(val));
+watch(getRoleList_results.data, (val) => handleRoleList_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 </script>
