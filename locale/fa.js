@@ -308,6 +308,17 @@ export default {
             "Send Another Invite": "ارسال درخواست دیگر",
             "You can always revoke your sent invitations from sent invite list": "شما در هر زمان میتوانید دعوت نامه های ارسالی را از طریق لیست ارسال باطل کنید",
             noUserNotice: "کاربری با این ایمیل در سیستم پیدا نشد. درخواست دعوت برای نمایش به کاربر درهنگام ثبت نام ذخیره شد",
+
+            roles: {
+                "You can create at max 15 roles": "شما میتوانید حداکثر 15 نقش ایجاد کنید",
+                "No Members": "بدون عضو",
+                "Edit Role": "ویرایش نقش",
+                "Role Creation": "ساخت نقش جدید",
+                "Role Name": "نام نقش",
+                "Create Role": "ساخت نقش",
+                Permissions: "دسترسی ها",
+                "You can manage the access of this role to different parts of the panel": "شما می توانید دسترسی این نقش را به قسمت های مختلف پنل مدیریت کنید",
+            },
         },
 
         languages: {

@@ -355,7 +355,8 @@ watch(records, () => filterRecords(selectedBranch.value), { immediate: process.s
 // search records -------------------------------------------------
 const search = () => {
     records.list = [];
-    getStaffList_results.refresh();
+    if (lastRecordID.value) lastRecordID.value = "";
+    else getStaffList_results.refresh();
 };
 const searchKeyUp = (event) => {
     if (event.key !== "Enter" || loading.value || !searchQuery.value) return;

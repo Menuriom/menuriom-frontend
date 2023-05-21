@@ -22,11 +22,7 @@ input::placeholder {
 
 <template>
     <div class="flex flex-col gap-1">
-        <div
-            class="wrapper relative flex items-center p-2 gap-2 bg-white text-black rounded-md"
-            :class="{ error: !!error, 'input-box-shadow': !!shadow }"
-            @click="focus()"
-        >
+        <div class="wrapper relative flex items-center p-2 gap-2 bg-white text-black rounded-md" :class="{ 'input-box-shadow': !!shadow }" @click="focus()">
             <button class="flex items-center justify-center p-1 rounded-md shrink-0 cursor-pointer" @click="$emit(`search`)">
                 <Icon class="icon w-5 h-5 bg-dolphin shrink-0" name="search.svg" folder="icons/light" size="18px" />
             </button>

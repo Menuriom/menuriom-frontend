@@ -25,7 +25,7 @@ main {
         id="app"
     >
         <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
-            <NuxtLoadingIndicator />
+            <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
             <Header />
             <div class="relative flex w-full h-0 p-2 flex-grow">
                 <SideMenu v-if="!dontShowMenu" />

@@ -98,6 +98,7 @@ import { usePanelStore } from "@/stores/panel";
 
 const { t } = useI18n();
 const route = useRoute();
+const nuxtApp = useNuxtApp();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
@@ -180,8 +181,7 @@ const handleBrandSettings_results = (data) => {
     settings.languageLimit = data._languageLimit;
     loadingSettings.value = false;
 };
-if (getBrandSettings_results.data.value) handleBrandSettings_results(getBrandSettings_results.data.value);
-watch(getBrandSettings_results.data, (val) => handleBrandSettings_results(val));
+watch(getBrandSettings_results.data, (val) => handleBrandSettings_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 
 // getLanguages -------------------------------------------------
@@ -196,8 +196,7 @@ const handleLanguages_results = (data) => {
     languages.list = data._languages;
     loadingLanguages.value = false;
 };
-if (getLanguages_results.data.value) handleLanguages_results(getLanguages_results.data.value);
-watch(getLanguages_results.data, (val) => handleLanguages_results(val));
+watch(getLanguages_results.data, (val) => handleLanguages_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 
 // getCurrencies -------------------------------------------------
@@ -212,7 +211,6 @@ const handleCurrencies_results = (data) => {
     currencies.list = data._currencies;
     loadingCurrencies.value = false;
 };
-if (getCurrencies_results.data.value) handleCurrencies_results(getCurrencies_results.data.value);
-watch(getCurrencies_results.data, (val) => handleCurrencies_results(val));
+watch(getCurrencies_results.data, (val) => handleCurrencies_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 </script>

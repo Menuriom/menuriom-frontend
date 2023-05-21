@@ -308,6 +308,18 @@ export default {
             "Send Another Invite": "Send Another Invite",
             "You can always revoke your sent invitations from sent invite list": "You can always revoke your sent invitations from sent invite list",
             noUserNotice: "There is no user with the corresponding email, but we stored your invite and we'll show the invite to the user when they join",
+
+            roles: {
+                "You can create at max 15 roles": "You can create at max 15 roles",
+                "No Members": "No Members",
+                "Edit Role": "Edit Role",
+                "Role Creation": "Role Creation",
+                "Role Name": "Role Name",
+                "Create Role": "Create Role",
+                Permissions: "Permissions",
+                "You can manage the access of this role to different parts of the panel":
+                    "You can manage the access of this role to different parts of the panel",
+            },
         },
 
         languages: {

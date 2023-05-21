@@ -125,7 +125,7 @@ export const getStaffList = async (brandID, branchID, records = [], pp = 25, las
     await axios
         .get(url, { headers: headers })
         .then((response) => {
-            _records = [..._records, ...response.data.records];
+            _records.push(...response.data.records);
             _total = Number(response.data.total);
             _canInviteNewMembers = response.data.canInviteNewMembers;
             if (response.data.records.length === 0) _noMoreRecords = true;
@@ -208,6 +208,27 @@ export const getSentInviteList = async (brandID, records = [], pp = 25, lastReco
         });
 
     return { _invites, _noMoreRecords };
+};
+// ---------------------------------------------------------
+
+// roles ---------------------------------------------------------
+export const getPermissionsList = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/staff-roles/permissions-list`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _permissions = [];
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _permissions = [...response.data.permissions];
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _permissions };
 };
 // ---------------------------------------------------------
 
