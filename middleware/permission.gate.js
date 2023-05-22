@@ -37,7 +37,10 @@ const getRoutePermissionList = (routes, localePath) => {
         // staff
         [localePath("/panel/:brandID/staff/members")]: ["main-panel.staff.view"],
         [localePath("/panel/:brandID/staff/invite")]: ["main-panel.staff.view", "main-panel.staff.invite"],
+        // staff roles
         [localePath("/panel/:brandID/staff/roles")]: ["main-panel.staff.roles"],
+        [localePath("/panel/:brandID/staff/roles/creation")]: ["main-panel.staff.roles"],
+        [localePath("/panel/:brandID/staff/roles/:id")]: ["main-panel.staff.roles"],
         // settings
         [localePath("/panel/:brandID/languages")]: ["main-panel.settings"],
         // ...

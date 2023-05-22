@@ -317,6 +317,7 @@ export default {
                 "Role Name": "نام نقش",
                 "Create Role": "ساخت نقش",
                 Permissions: "دسترسی ها",
+                "New role created": "نقش جدید ایجاد شد",
                 "You can manage the access of this role to different parts of the panel": "شما می توانید دسترسی این نقش را به قسمت های مختلف پنل مدیریت کنید",
             },
         },

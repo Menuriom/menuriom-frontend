@@ -16,7 +16,7 @@
             <nuxt-link
                 class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
                 :to="localePath(`/panel/${route.params.brandID}/staff/roles/creation`)"
-                v-if="canCreateNewRoles && checkPermissions(['main-panel.staff.roles'], brand)"
+                v-if="records.list.length < 15 && checkPermissions(['main-panel.staff.roles'], brand)"
             >
                 <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
                 {{ $t("panel.staff.Create New Role") }}
@@ -51,13 +51,6 @@
                         </button>
                     </SlideMenu>
                     <h4 class="text-lg font-bold uppercase">{{ role.name }}</h4>
-                    <!-- TODO : show users that got this role (3+ more) -->
-                    <!-- <div class="relative w-24 h-24 rounded-full overflow-hidden bg-pencil-tip shadow-nr15 z-2">
-                        <img class="w-full h-full object-cover" :src="staff.user.avatar" v-if="staff.user.avatar" />
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <p class="text-xs opacity-75">{{ staff.user.email ? staff.user.email : staff.user.mobile }}</p>
-                    </div> -->
                     <hr class="w-3/4 border-b-2 border-dolphin opacity-10 rounded-full" />
                     <div class="flex flex-wrap items-center justify-between gap-1 w-full p-2 rounded-md bg-neutral-100">
                         <small>{{ $t("panel.staff.Staff Members") }}:</small>
@@ -108,8 +101,6 @@
                     </div>
                 </div>
             </Dialog>
-            <!-- TODO : For adding new roles make two version that can switch between (one with less complexcity and one more detailed) -->
-            <!-- for example complex one shows all the permissions that user can toggle but simple one only shows permission labels and by toggling gives all permissions of that group -->
         </Teleport>
     </div>
 </template>
@@ -136,8 +127,6 @@ const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] |
 const errorField = ref("");
 const responseMessage = ref("");
 
-const canCreateNewRoles = ref(true);
-
 // deleting ----------------------------------------
 const deleting = ref(false);
 const indexToDelete = ref(null);
@@ -155,11 +144,10 @@ const deleteRecord = async () => {
     const id = records.list[indexToDelete.value]._id;
 
     await axios
-        .delete(`/api/v1/panel/staff/${id}`, { headers: { brand: route.params.brandID } })
+        .delete(`/api/v1/panel/staff-roles/${id}`, { headers: { brand: route.params.brandID } })
         .then((response) => {
             records.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();
-            // TODO : allow user to create new branch if the limit is under the plan's limit
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -187,19 +175,16 @@ const handleErrors = (err) => {
 };
 
 // getRolesList -------------------------------------------------
-const loading = ref(true);
 const records = reactive({ list: [] });
 const getRolesList_results = await useLazyAsyncData(() => getStaffRolesList(route.params.brandID));
+const loading = computed(()=>getRolesList_results.pending.value);
 
 if (getRolesList_results.error.value) handleErrors(getRolesList_results.error.value);
 watch(getRolesList_results.error, (err) => handleErrors(err));
 
 const handleStaffRolesList_results = (data) => {
     records.list = data._records;
-    canCreateNewRoles.value = data._canCreateNewRoles;
-    loading.value = false;
 };
-if (getRolesList_results.data.value) handleStaffRolesList_results(getRolesList_results.data.value);
-watch(getRolesList_results.data, (val) => handleStaffRolesList_results(val));
+watch(getRolesList_results.data, (val) => handleStaffRolesList_results(val),{ immediate: process.server || useNuxtApp().isHydrating });
 // -------------------------------------------------
 </script>

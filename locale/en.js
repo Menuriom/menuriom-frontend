@@ -317,6 +317,7 @@ export default {
                 "Role Name": "Role Name",
                 "Create Role": "Create Role",
                 Permissions: "Permissions",
+                "New role created": "New role created",
                 "You can manage the access of this role to different parts of the panel":
                     "You can manage the access of this role to different parts of the panel",
             },

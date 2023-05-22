@@ -39,7 +39,7 @@
                     {{ $t("panel.staff.roles.You can manage the access of this role to different parts of the panel") }}
                 </small>
 
-                <div class="flex flex-wrap gap-4">
+                <div class="flex flex-wrap gap-4 select-none">
                     <div
                         class="flex items-center justify-between gap-2 p-4 rounded-md bg-dolphin shadow-nr15 hover:shadow-nr35 cursor-pointer grow"
                         v-for="(permission, i) in permission.groups[0]"
@@ -53,37 +53,69 @@
                             <small class="text-sm">{{ permission.translation?.[locale]?.label || permission.label }}</small>
                         </div>
                         <span
-                            class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shadow-xl shrink-0"
-                            :class="[selectedPermissions.list.has(permission._id) ? 'border-baby-blue bg-baby-blue shadow-baby-blue' : 'border-zinc-500']"
+                            class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shrink-0"
+                            :class="[
+                                selectedPermissions.list.has(permission._id) ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue' : 'border-zinc-200',
+                            ]"
                         >
                             <Icon class="w-5 h-5 bg-dolphin" name="Check.svg" folder="icons/basil" size="24px" />
                         </span>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full select-none">
                     <div
-                        class="flex flex-col gap-4 p-4 w-full rounded-md bg-neutral-700 shadow-nr15 hover:shadow-nr35"
+                        class="flex flex-col gap-4 p-4 w-full rounded-md bg-pencil-tip text-neutral-200 shadow-nr15 hover:shadow-nr35"
                         v-for="(permissions, i) in permission.groups.slice(1, permission.groups.length)"
                         :key="i"
                     >
-                        <h3 class="">{{ permissions[0].translation?.[locale]?.groupLabel || permissions[0].groupLabel }}</h3>
+                        <div class="flex items-center gap-3 w-max max-w-full cursor-pointer" @click="toggleAllPermissionGroup(i + 1)">
+                            <span
+                                class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shrink-0"
+                                :class="[
+                                    permissions[0].selectLevel == 'all' || permissions[0].selectLevel == 'some'
+                                        ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue'
+                                        : 'border-zinc-500',
+                                ]"
+                            >
+                                <Icon
+                                    class="w-5 h-5 bg-pencil-tip"
+                                    :name="permissions[0].selectLevel == 'all' ? 'Check.svg' : 'Minus.svg'"
+                                    folder="icons/basil"
+                                    size="24px"
+                                />
+                            </span>
+                            <h3 class="font-bold text-violet">{{ permissions[0].translation?.[locale]?.groupLabel || permissions[0].groupLabel }}</h3>
+                        </div>
                         <hr class="w-full opacity-20" />
-                        <ul class="flex flex-col gap-4">
-                            <li class="flex items-center gap-3" v-for="(permission, j) in permissions" :key="j" @click="togglePermissions(permission._id)">
+                        <ul class="flex flex-col gap-5 w-full">
+                            <li
+                                class="flex items-center gap-3 w-max max-w-full cursor-pointer"
+                                v-for="(permission, j) in permissions"
+                                :key="j"
+                                @click="togglePermissions(permission._id, i + 1)"
+                            >
                                 <span
-                                    class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shadow-nr5 shrink-0"
+                                    class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shrink-0"
                                     :class="[
-                                        selectedPermissions.list.has(permission._id) ? 'border-baby-blue bg-baby-blue shadow-baby-blue' : 'border-zinc-500',
+                                        selectedPermissions.list.has(permission._id)
+                                            ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue'
+                                            : 'border-zinc-500',
                                     ]"
                                 >
-                                    <Icon class="w-5 h-5 bg-dolphin" name="Check.svg" folder="icons/basil" size="24px" />
+                                    <Icon class="w-5 h-5 bg-pencil-tip" name="Check.svg" folder="icons/basil" size="24px" />
                                 </span>
-                                {{ permission.translation?.[locale]?.label || permission.label }}
+                                <div class="flex flex-wrap items-center gap-1 select-none">
+                                    <small class="text-sm">{{ permission.translation?.[locale]?.label || permission.label }}</small>
+                                    <small class="text-[11px] opacity-80" v-if="permission.desc">
+                                        ({{ permission.translation?.[locale]?.desc || permission.desc }})
+                                    </small>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </div>
+                <Loading v-if="loadingPermissionsList" />
 
                 <hr class="w-full opacity-20" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
@@ -124,7 +156,6 @@
 
 <script setup>
 import Input from "~/components/form/Input.vue";
-import FormLangList from "~/components/panel/FormLangList.vue";
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
@@ -150,39 +181,53 @@ const responseMessage = ref("");
 const selectedPermissions = reactive({ list: new Set() });
 const roleName = ref("");
 
-const togglePermissions = (permission_id) => {
+const containAllPermissionsInGroup = (permissions = []) => {
+    let count = 0;
+    for (let i = 0; i < permissions.length; i++) {
+        if (selectedPermissions.list.has(permissions[i])) count++;
+    }
+    if (count === 0) return "none";
+    else if (count === permissions.length) return "all";
+    else return "some";
+};
+
+const togglePermissions = (permission_id, index) => {
     if (!selectedPermissions.list.has(permission_id)) selectedPermissions.list.add(permission_id);
     else selectedPermissions.list.delete(permission_id);
+
+    if (!index) return;
+    permission.groups[index][0].selectLevel = containAllPermissionsInGroup(permission.groups[index].map((p) => p._id));
+};
+
+const toggleAllPermissionGroup = (index) => {
+    const selectLevel = permission.groups[index][0].selectLevel;
+    const permissions = permission.groups[index].map((p) => p._id);
+    if (selectLevel == "all" || selectLevel == "some") {
+        for (let i = 0; i < permissions.length; i++) selectedPermissions.list.delete(permissions[i]);
+    } else {
+        for (let i = 0; i < permissions.length; i++) selectedPermissions.list.add(permissions[i]);
+    }
+    permission.groups[index][0].selectLevel = containAllPermissionsInGroup(permissions);
 };
 
 // saving ----------------------------------------
-const percentage = ref(0);
 const saving = ref(false);
 const save = async () => {
     if (saving.value) return;
     saving.value = true;
 
-    formLang.value = "default";
     responseMessage.value = "";
     errorField.value = "";
 
-    const data = new FormData();
-    gallery.value.forEach((image) => data.append("gallery", image.file));
-    for (const val in name.values) data.append(`name.${val}`, name.values[val]);
-    for (const val in address.values) data.append(`address.${val}`, address.values[val]);
-    if (postalCode.value) data.append("postalCode", postalCode.value);
-    telephoneNumbers.value.forEach((number) => {
-        if (number) data.append("telephoneNumbers[]", number);
-    });
-
     await axios
-        .post(`/api/v1/panel/branches/${route.params.brandID}`, data, {
-            headers: { brand: route.params.brandID },
-            onUploadProgress: (event) => (percentage.value = parseInt(Math.round((event.loaded / event.total) * 100))),
-        })
+        .post(
+            `/api/v1/panel/staff-roles/`,
+            { roleName: roleName.value, permissions: [...selectedPermissions.list] },
+            { headers: { brand: route.params.brandID } }
+        )
         .then((response) => {
-            toast.success(t(`panel.staff.roles.New branch created`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
-            router.push(localePath(`/panel/${route.params.brandID}/branches`));
+            toast.success(t(`panel.staff.roles.New role created`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            router.push(localePath(`/panel/${route.params.brandID}/staff/roles`));
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -212,7 +257,7 @@ const handleErrors = (err) => {
 // getPermissionsList -------------------------------------------------
 const permission = reactive({ groups: [] });
 const getPermissionsList_results = await useLazyAsyncData(() => getPermissionsList(route.params.brandID));
-const loadingSettings = computed(() => getPermissionsList_results.pending.value);
+const loadingPermissionsList = computed(() => getPermissionsList_results.pending.value);
 
 if (getPermissionsList_results.error.value) handleErrors(getPermissionsList_results.error.value);
 watch(getPermissionsList_results.error, (err) => handleErrors(err));
