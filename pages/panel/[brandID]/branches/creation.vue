@@ -61,6 +61,7 @@
                     :error="errorField == `name.${formLang}` ? responseMessage : ''"
                 />
                 <div class="flex flex-wrap md:flex-nowrap items-start gap-4 w-full">
+                    <!-- TODO : add little flag icon on the corner of any dual language field showing the current lang -->
                     <Input
                         name="address"
                         class="w-full flex-grow"

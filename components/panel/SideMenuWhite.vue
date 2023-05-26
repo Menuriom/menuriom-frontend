@@ -21,19 +21,20 @@ aside > div {
     border-color: transparent;
 }
 .link:hover {
-    background-color: theme("colors.neutral.700");
+    background-color: theme("colors.neutral.100");
 }
 .link.router-link-exact-active {
     background-color: theme("colors.neutral.600");
+    color: white;
 }
 .link.toggler_active {
-    border: 1px solid theme("colors.neutral.600");
+    background-color: theme("colors.neutral.100");
 }
 
 .sub_menu {
     margin-inline-start: 1rem;
     padding-inline-start: 0.5rem;
-    border-inline-start: 1px solid theme("colors.zinc.400");
+    border-inline-start: 1px solid theme("colors.zinc.300");
 }
 .sub_menu:hover {
     border-inline-start: 1px solid theme("colors.violet");
@@ -62,10 +63,10 @@ aside > div {
 </style>
 
 <template>
-    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 flex-shrink-0 shadow-nr35" :class="{ close: !panelStore.sideMenuOpen }">
-        <div class="flex flex-col gap-4 h-full p-4 bg-pencil-tip text-white rounded-lg">
+    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 flex-shrink-0 shadow-nr10" :class="{ close: !panelStore.sideMenuOpen }">
+        <div class="flex flex-col gap-4 h-full p-4 bg-white text-pencil-tip rounded-lg">
             <nuxt-link
-                class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin cursor-pointer transition-all group"
+                class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin text-white cursor-pointer transition-all group"
                 :to="localePath(`/panel/`)"
             >
                 <img class="w-14 h-14 object-cover rounded-full shadow-nr35 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
@@ -79,39 +80,46 @@ aside > div {
 
             <div class="flex items-center gap-2 w-full" v-if="panelStore.selectedBrandId !== ''">
                 <nuxt-link
-                    class="btn relative flex items-center justify-center gap-2 p-2 rounded bg-white text-pencil-tip flex-grow"
+                    class="btn relative flex items-center justify-center gap-2 p-2 rounded-md bg-neutral-50 text-pencil-tip flex-grow"
                     :to="localePath(`/orders-panel/${panelStore.selectedBrandId}`)"
                     v-if="checkPermissions(['orders-panel'], brand)"
                 >
                     <img class="w-5" src="~/assets/images/panel-icons/cash-register.png" alt="" />
+                    <!-- <Icon class="w-5 h-5 bg-black" name="cash-register.svg" folder="icons/light" size="20px" /> -->
                     <span class="text-sm">{{ $t("panel.side-menu.Orders") }}</span>
                     <span class="absolute -top-1.5 end-1 gradient w-3 h-3 rounded-full"></span>
                 </nuxt-link>
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-2 rounded bg-white text-pencil-tip flex-grow"
+                    class="btn flex items-center justify-center gap-2 p-2 rounded-md bg-neutral-50 text-pencil-tip flex-grow"
                     :to="localePath(`/ordering-app/${panelStore.selectedBrandId}`)"
                     v-if="checkPermissions(['ordering-app'], brand)"
                 >
                     <img class="w-5" src="~/assets/images/panel-icons/mobile-button.png" alt="" />
+                    <!-- <Icon class="w-5 h-5 bg-black" name="mobile-notch.svg" folder="icons/light" size="20px" /> -->
                     <span class="text-sm">{{ $t("panel.side-menu.Ordering App") }}</span>
                 </nuxt-link>
             </div>
 
-            <hr class="w-full opacity-30" />
+            <hr class="w-full border-zinc-300" />
 
             <nav
-                class="flex flex-col items-center gap-2 pe-1 w-full max-h-full overflow-y-auto overflow-x-hidden flex-grow text-sm"
+                class="flex flex-col items-center gap-1 pe-1 w-full max-h-full overflow-y-auto overflow-x-hidden flex-grow text-sm"
                 ref="nav"
                 v-if="panelStore.selectedBrandId !== ''"
             >
-                <ul class="flex flex-col gap-2 w-full">
+                <ul class="flex flex-col gap-1 w-full">
                     <nuxt-link
                         class="link"
                         :to="localePath(`/panel/${panelStore.selectedBrandId}`)"
                         v-if="checkPermissions(['main-panel.dashboard.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/rectangles-mixed-light.png" alt="" />
+                            <img
+                                class="w-5"
+                                src="~/assets/images/panel-icons/rectangles-mixed-light.png"
+                                v-if="$route.path === localePath(`/panel/${panelStore.selectedBrandId}`)"
+                            />
+                            <img class="w-5" src="~/assets/images/panel-icons/rectangles-mixed-dark.png" v-else />
                             <span>{{ $t("panel.side-menu.Dashboard") }}</span>
                         </li>
                     </nuxt-link>
@@ -121,29 +129,39 @@ aside > div {
                         v-if="checkPermissions(['main-panel.customer-feedback.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/comments-light.png" alt="" />
+                            <img
+                                class="w-5"
+                                src="~/assets/images/panel-icons/comments-light.png"
+                                v-if="$route.path === localePath(`/panel/${panelStore.selectedBrandId}/feedback`)"
+                            />
+                            <img class="w-5" src="~/assets/images/panel-icons/comments-dark.png" v-else />
                             <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
                         </li>
                     </nuxt-link>
                 </ul>
-                <hr class="w-full opacity-20 mx-4" />
-                <ul class="flex flex-col gap-2 w-full">
+                <hr class="w-full border-zinc-300 mx-4" />
+                <ul class="flex flex-col gap-1 w-full">
                     <nuxt-link
                         class="link"
                         :to="localePath(`/panel/${panelStore.selectedBrandId}/branches`)"
                         v-if="checkPermissions(['main-panel.branches.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/store-light.png" alt="" />
+                            <img
+                                class="w-5"
+                                src="~/assets/images/panel-icons/store-light.png"
+                                v-if="$route.path === localePath(`/panel/${panelStore.selectedBrandId}/branches`)"
+                            />
+                            <img class="w-5" src="~/assets/images/panel-icons/store-dark.png" v-else />
                             <span>{{ $t("panel.side-menu.Branches") }}</span>
                         </li>
                     </nuxt-link>
                     <button class="link" :class="{ toggler_active: openSubMenus.includes('menu') }" @click="toggleSubMenu('menu')">
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/cards-blank-light.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/cards-blank-dark.png" alt="" />
                             <span>{{ $t("panel.side-menu.Menu") }}</span>
                             <Icon
-                                class="sub_menu_toggler bg-white"
+                                class="sub_menu_toggler bg-black"
                                 :class="{ open: openSubMenus.includes('menu') }"
                                 name="arrow.svg"
                                 folder="icons"
@@ -151,8 +169,8 @@ aside > div {
                             />
                         </li>
                     </button>
-                    <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('menu') }" name="menu">
-                        <ul class="sub_menu flex flex-col">
+                    <div class="sub_menu_wrapper" :class="{ '-my-0.5': !openSubMenus.includes('menu') }" name="menu">
+                        <ul class="sub_menu flex flex-col gap-1">
                             <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/items`)">
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Menu Editor") }}</span>
@@ -182,10 +200,10 @@ aside > div {
                         v-if="checkPermissions(['main-panel.staff.view', 'main-panel.staff.invite', 'main-panel.staff.roles'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/user-group-light.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/user-group-dark.png" alt="" />
                             <span>{{ $t("panel.side-menu.Manage Staff") }}</span>
                             <Icon
-                                class="sub_menu_toggler bg-white"
+                                class="sub_menu_toggler bg-black"
                                 :class="{ open: openSubMenus.includes('staff') }"
                                 name="arrow.svg"
                                 folder="icons"
@@ -193,8 +211,8 @@ aside > div {
                             />
                         </li>
                     </button>
-                    <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('staff') }" name="staff">
-                        <ul class="sub_menu flex flex-col">
+                    <div class="sub_menu_wrapper" :class="{ '-my-0.5': !openSubMenus.includes('staff') }" name="staff">
+                        <ul class="sub_menu flex flex-col gap-1">
                             <nuxt-link
                                 class="link"
                                 :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/members`)"
@@ -231,10 +249,10 @@ aside > div {
                         v-if="checkPermissions(['main-panel.settings'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/gear-light.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/gear-dark.png" alt="" />
                             <span>{{ $t("panel.side-menu.Settings") }}</span>
                             <Icon
-                                class="sub_menu_toggler bg-white"
+                                class="sub_menu_toggler bg-black"
                                 :class="{ open: openSubMenus.includes('settings') }"
                                 name="arrow.svg"
                                 folder="icons"
@@ -242,32 +260,42 @@ aside > div {
                             />
                         </li>
                     </button>
-                    <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('settings') }" name="settings">
-                        <ul class="sub_menu flex flex-col">
+                    <div class="sub_menu_wrapper" :class="{ '-my-0.5': !openSubMenus.includes('settings') }" name="settings">
+                        <ul class="sub_menu flex flex-col gap-1">
                             <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/languages`)">
                                 <li class="flex items-center gap-3">
-                                    <!-- <Icon class="w-5 h-5 bg-white" name="language.svg" folder="icons/light" size="20px" /> -->
+                                    <!-- <Icon class="w-5 h-5 bg-neutral-300" name="language.svg" folder="icons/light" size="20px" /> -->
                                     <span>{{ $t("panel.side-menu.Language Settings") }}</span>
                                 </li>
                             </nuxt-link>
                         </ul>
                     </div>
                 </ul>
-                <hr class="w-full opacity-20 mx-4" />
-                <ul class="flex flex-col gap-2 w-full">
+                <hr class="w-full border-zinc-300 mx-4" />
+                <ul class="flex flex-col gap-1 w-full">
                     <nuxt-link
                         class="link"
                         :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)"
                         v-if="checkPermissions(['main-panel.billing'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/money-bills-light.png" alt="" />
+                            <img
+                                class="w-5"
+                                src="~/assets/images/panel-icons/money-bills-light.png"
+                                v-if="$route.path === localePath(`/panel/${panelStore.selectedBrandId}/billing`)"
+                            />
+                            <img class="w-5" src="~/assets/images/panel-icons/money-bills-dark.png" v-else />
                             <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
                         </li>
                     </nuxt-link>
                     <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/message-question-light.png" alt="" />
+                            <img
+                                class="w-5"
+                                src="~/assets/images/panel-icons/message-question-light.png"
+                                v-if="$route.path === localePath(`/panel/${panelStore.selectedBrandId}/support`)"
+                            />
+                            <img class="w-5" src="~/assets/images/panel-icons/message-question-dark.png" v-else />
                             <span>{{ $t("panel.side-menu.Support") }}</span>
                         </li>
                     </nuxt-link>
@@ -279,9 +307,9 @@ aside > div {
                 <span class="absolute end-10 -bottom-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
                 <span class="absolute -end-4 -bottom-14 -rotate-45 gradient-re w-24 h-24 rounded-2xl"></span>
                 <div class="relative flex flex-col items-center justify-between gap-2">
-                    <small class="hidden 2sm:flex text-sm opacity-75">Remove The Limitations</small>
+                    <small class="hidden 2sm:flex text-white text-sm opacity-75">Remove The Limitations</small>
                     <h5 class="hidden 2sm:flex gradient-text text-2xl font-black -mt-2">Upgrade To Pro</h5>
-                    <nuxt-link class="flex items-center gap-2 p-1 px-4 bg-pencil-tip rounded-xl shadow-xl" :to="localePath('/panel/billing/upgrade')">
+                    <nuxt-link class="flex items-center gap-2 p-1 px-4 bg-neutral-50 rounded-xl shadow-xl" :to="localePath('/panel/billing/upgrade')">
                         <img class="w-9 md:w-12" src="~/assets/images/icons/sparkles.png" alt="" />
                         <b class="text-xl">Go Pro</b>
                     </nuxt-link>

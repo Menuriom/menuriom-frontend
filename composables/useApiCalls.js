@@ -230,6 +230,26 @@ export const getPermissionsList = async (brandID) => {
 
     return { _permissions };
 };
+export const getRoleInfo = async (brandID, roleID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/staff-roles/${roleID}`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _permissions = [];
+    let _name = [];
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _permissions = response.data.permissions;
+            _name = response.data.name;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _permissions, _name };
+};
 // ---------------------------------------------------------
 
 // general APIs ---------------------------------------------------------

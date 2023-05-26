@@ -318,6 +318,7 @@ export default {
                 "Create Role": "Create Role",
                 Permissions: "Permissions",
                 "New role created": "New role created",
+                "Role has been updated": "Role has been updated",
                 "You can manage the access of this role to different parts of the panel":
                     "You can manage the access of this role to different parts of the panel",
             },
@@ -333,6 +334,12 @@ export default {
 
             "Upgrade your plan to support more languages": "Upgrade your plan to support more languages",
             "Select what currency you want to show for your prices": "Select what currency you want to show for your prices",
+        },
+
+        billing: {
+            Billing: "Billing",
+            "Billing Info": "Billing Info",
+            "Billing History": "Billing History",
         },
     },
 };

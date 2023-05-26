@@ -43,6 +43,8 @@ const getRoutePermissionList = (routes, localePath) => {
         [localePath("/panel/:brandID/staff/roles/:id")]: ["main-panel.staff.roles"],
         // settings
         [localePath("/panel/:brandID/languages")]: ["main-panel.settings"],
+        // billing
+        [localePath("/panel/:brandID/billing")]: ["main-panel.billing.access"],
         // ...
         // TODO : add to this list to keep route permission checking up to date
     };

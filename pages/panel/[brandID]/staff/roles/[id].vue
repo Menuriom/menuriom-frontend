@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/shield.png" alt="" />
-                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.staff.roles.Role Creation") }}</h1>
+                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.staff.roles.Edit Role") }}</h1>
                 </div>
                 <div class="flex items-center gap-1 text-sm ms-2">
                     <nuxt-link :to="localePath(`/panel/${route.params.brandID}`)">
@@ -17,7 +17,7 @@
                         {{ $t("panel.staff.Staff Roles") }}
                     </nuxt-link>
                     <span>&gt;</span>
-                    <span>{{ $t("panel.staff.roles.Role Creation") }}</span>
+                    <span>{{ $t("panel.staff.roles.Edit Role") }}</span>
                 </div>
             </div>
         </header>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full select-none">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full h-96 overflow-auto select-none">
                     <div
                         class="flex flex-col gap-4 p-4 w-full rounded-md bg-pencil-tip text-neutral-200 shadow-nr15 hover:shadow-nr35"
                         v-for="(permissions, i) in permission.groups.slice(1, permission.groups.length)"
@@ -71,7 +71,7 @@
                     >
                         <div class="flex items-center gap-3 w-max max-w-full cursor-pointer" @click="toggleAllPermissionGroup(i + 1)">
                             <span
-                                class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shrink-0"
+                                class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
                                 :class="[
                                     permissions[0].selectLevel == 'all' || permissions[0].selectLevel == 'some'
                                         ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue'
@@ -79,10 +79,10 @@
                                 ]"
                             >
                                 <Icon
-                                    class="w-5 h-5 bg-pencil-tip"
+                                    class="w-4 h-4 bg-pencil-tip"
                                     :name="permissions[0].selectLevel == 'all' ? 'Check.svg' : 'Minus.svg'"
                                     folder="icons/basil"
-                                    size="24px"
+                                    size="22px"
                                 />
                             </span>
                             <h3 class="font-bold text-violet">{{ permissions[0].translation?.[locale]?.groupLabel || permissions[0].groupLabel }}</h3>
@@ -96,17 +96,19 @@
                                 @click="togglePermissions(permission._id, i + 1)"
                             >
                                 <span
-                                    class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shrink-0"
+                                    class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
                                     :class="[
                                         selectedPermissions.list.has(permission._id)
                                             ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue'
                                             : 'border-zinc-500',
                                     ]"
                                 >
-                                    <Icon class="w-5 h-5 bg-pencil-tip" name="Check.svg" folder="icons/basil" size="24px" />
+                                    <Icon class="w-4 h-4 bg-pencil-tip" name="Check.svg" folder="icons/basil" size="22px" />
                                 </span>
                                 <div class="flex flex-wrap items-center gap-1 select-none">
-                                    <small class="text-sm">{{ permission.translation?.[locale]?.label || permission.label }}</small>
+                                    <small class="text-sm" :class="[selectedPermissions.list.has(permission._id) ? 'text-cyan-200' : 'text-white']">
+                                        {{ permission.translation?.[locale]?.label || permission.label }}
+                                    </small>
                                     <small class="text-[11px] opacity-80" v-if="permission.desc">
                                         ({{ permission.translation?.[locale]?.desc || permission.desc }})
                                     </small>
@@ -143,8 +145,8 @@
                         v-if="checkPermissions(['main-panel.staff.roles'], brand)"
                     >
                         <span class="flex items-center gap-2" v-if="!saving">
-                            <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
-                            {{ $t("panel.staff.roles.Create Role") }}
+                            <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                            {{ $t("panel.staff.roles.Edit Role") }}
                         </span>
                         <Loading v-else />
                     </button>
@@ -165,12 +167,13 @@ import { useUserStore } from "@/stores/user";
 const { locale, localeProperties, t } = useI18n();
 const route = useRoute();
 const router = useRouter();
+const nuxtApp = useNuxtApp();
 const toast = useToast();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.staff.roles.Role Creation")} - ${t("panel.Your Menuriom Panel")}`);
+const title = computed(() => `${t("panel.staff.roles.Edit Role")} - ${t("panel.Your Menuriom Panel")}`);
 useHead({ title: title });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
@@ -204,10 +207,11 @@ const toggleAllPermissionGroup = (index) => {
     const permissions = permission.groups[index].map((p) => p._id);
     if (selectLevel == "all" || selectLevel == "some") {
         for (let i = 0; i < permissions.length; i++) selectedPermissions.list.delete(permissions[i]);
+        permission.groups[index][0].selectLevel = "none";
     } else {
         for (let i = 0; i < permissions.length; i++) selectedPermissions.list.add(permissions[i]);
+        permission.groups[index][0].selectLevel = "all";
     }
-    permission.groups[index][0].selectLevel = containAllPermissionsInGroup(permissions);
 };
 
 // saving ----------------------------------------
@@ -220,13 +224,13 @@ const save = async () => {
     errorField.value = "";
 
     await axios
-        .post(
-            `/api/v1/panel/staff-roles/`,
+        .put(
+            `/api/v1/panel/staff-roles/${route.params.id}`,
             { roleName: roleName.value, permissions: [...selectedPermissions.list] },
             { headers: { brand: route.params.brandID } }
         )
         .then((response) => {
-            toast.success(t(`panel.staff.roles.New role created`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            toast.info(t(`panel.staff.roles.Role has been updated`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
             router.push(localePath(`/panel/${route.params.brandID}/staff/roles`));
         })
         .catch((err) => {
@@ -254,6 +258,20 @@ const handleErrors = (err) => {
     // TODO : log errors in sentry type thing
 };
 
+// getRoleInfo -------------------------------------------------
+const getRoleInfo_results = await useLazyAsyncData(() => getRoleInfo(route.params.brandID, route.params.id));
+const loadingRoleInfo = computed(() => getRoleInfo_results.pending.value);
+
+if (getRoleInfo_results.error.value) handleErrors(getRoleInfo_results.error.value);
+watch(getRoleInfo_results.error, (err) => handleErrors(err));
+
+const handleRoleInfo_results = (data) => {
+    roleName.value = data._name;
+    selectedPermissions.list = new Set([...data._permissions]);
+};
+watch(getRoleInfo_results.data, (val) => handleRoleInfo_results(val), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
+
 // getPermissionsList -------------------------------------------------
 const permission = reactive({ groups: [] });
 const getPermissionsList_results = await useLazyAsyncData(() => getPermissionsList(route.params.brandID));
@@ -264,7 +282,11 @@ watch(getPermissionsList_results.error, (err) => handleErrors(err));
 
 const handlePermissionsList_results = (data) => {
     permission.groups = data._permissions;
+
+    for (let i = 1; i < permission.groups.length; i++) {
+        permission.groups[i][0].selectLevel = containAllPermissionsInGroup(permission.groups[i].map((p) => p._id));
+    }
 };
-watch(getPermissionsList_results.data, (val) => handlePermissionsList_results(val), { immediate: process.server || useNuxtApp().isHydrating });
+watch(getPermissionsList_results.data, (val) => handlePermissionsList_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 </script>

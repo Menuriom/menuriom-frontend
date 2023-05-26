@@ -55,7 +55,7 @@
                         <span
                             class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shrink-0"
                             :class="[
-                                selectedPermissions.list.has(permission._id) ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue' : 'border-zinc-200',
+                                selectedPermissions.list.has(permission._id) ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue' : 'border-zinc-500',
                             ]"
                         >
                             <Icon class="w-5 h-5 bg-dolphin" name="Check.svg" folder="icons/basil" size="24px" />
@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full select-none">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full h-96 overflow-auto select-none">
                     <div
                         class="flex flex-col gap-4 p-4 w-full rounded-md bg-pencil-tip text-neutral-200 shadow-nr15 hover:shadow-nr35"
                         v-for="(permissions, i) in permission.groups.slice(1, permission.groups.length)"
@@ -71,7 +71,7 @@
                     >
                         <div class="flex items-center gap-3 w-max max-w-full cursor-pointer" @click="toggleAllPermissionGroup(i + 1)">
                             <span
-                                class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shrink-0"
+                                class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
                                 :class="[
                                     permissions[0].selectLevel == 'all' || permissions[0].selectLevel == 'some'
                                         ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue'
@@ -79,10 +79,10 @@
                                 ]"
                             >
                                 <Icon
-                                    class="w-5 h-5 bg-pencil-tip"
+                                    class="w-4 h-4 bg-pencil-tip"
                                     :name="permissions[0].selectLevel == 'all' ? 'Check.svg' : 'Minus.svg'"
                                     folder="icons/basil"
-                                    size="24px"
+                                    size="22px"
                                 />
                             </span>
                             <h3 class="font-bold text-violet">{{ permissions[0].translation?.[locale]?.groupLabel || permissions[0].groupLabel }}</h3>
@@ -96,17 +96,19 @@
                                 @click="togglePermissions(permission._id, i + 1)"
                             >
                                 <span
-                                    class="flex items-center justify-center w-5 h-5 border-2 rounded transition-all shrink-0"
+                                    class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
                                     :class="[
                                         selectedPermissions.list.has(permission._id)
                                             ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue'
                                             : 'border-zinc-500',
                                     ]"
                                 >
-                                    <Icon class="w-5 h-5 bg-pencil-tip" name="Check.svg" folder="icons/basil" size="24px" />
+                                    <Icon class="w-4 h-4 bg-pencil-tip" name="Check.svg" folder="icons/basil" size="22px" />
                                 </span>
                                 <div class="flex flex-wrap items-center gap-1 select-none">
-                                    <small class="text-sm">{{ permission.translation?.[locale]?.label || permission.label }}</small>
+                                    <small class="text-sm" :class="[selectedPermissions.list.has(permission._id) ? 'text-cyan-200' : 'text-white']">
+                                        {{ permission.translation?.[locale]?.label || permission.label }}
+                                    </small>
                                     <small class="text-[11px] opacity-80" v-if="permission.desc">
                                         ({{ permission.translation?.[locale]?.desc || permission.desc }})
                                     </small>
@@ -204,10 +206,11 @@ const toggleAllPermissionGroup = (index) => {
     const permissions = permission.groups[index].map((p) => p._id);
     if (selectLevel == "all" || selectLevel == "some") {
         for (let i = 0; i < permissions.length; i++) selectedPermissions.list.delete(permissions[i]);
+        permission.groups[index][0].selectLevel = "none";
     } else {
         for (let i = 0; i < permissions.length; i++) selectedPermissions.list.add(permissions[i]);
+        permission.groups[index][0].selectLevel = "all";
     }
-    permission.groups[index][0].selectLevel = containAllPermissionsInGroup(permissions);
 };
 
 // saving ----------------------------------------

@@ -140,7 +140,7 @@ export default {
 
         "side-menu": {
             Orders: "سفارشات",
-            "Ordering App": "اپ سفارش گیر",
+            "Ordering App": "اپ سفارش",
 
             Dashboard: "داشبورد",
             "Language Settings": "تنظیمات زبان",
@@ -318,6 +318,7 @@ export default {
                 "Create Role": "ساخت نقش",
                 Permissions: "دسترسی ها",
                 "New role created": "نقش جدید ایجاد شد",
+                "Role has been updated": "نقش بروز شد",
                 "You can manage the access of this role to different parts of the panel": "شما می توانید دسترسی این نقش را به قسمت های مختلف پنل مدیریت کنید",
             },
         },
@@ -331,6 +332,12 @@ export default {
                 "بسته به زبان هایی که انتخاب میکنید، میتونید منو رو ترجمه کنید",
             "Upgrade your plan to support more languages": "برای انتخاب زبان های بیشتر پلن خود را ارتقا بدید",
             "Select what currency you want to show for your prices": "واحد پولی که در منو نمایش داده میشود رو انتخاب کنید",
+        },
+
+        billing: {
+            Billing: "صورتحساب",
+            "Billing Info": "جزئیات صورتحساب",
+            "Billing History": "تاریخچه پرداختی ها",
         },
     },
 };

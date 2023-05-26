@@ -49,6 +49,7 @@ main {
 <script setup>
 import Header from "~/components/panel/Header.vue";
 const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
+const SideMenuWhite = defineAsyncComponent(() => import("~/components/panel/SideMenuWhite.vue"));
 const SentInvites = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/SentInvites.vue"));
 const PersonalInfo = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/PersonalInfo.vue"));
 const CreateNewBrand = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/CreateNewBrand.vue"));
