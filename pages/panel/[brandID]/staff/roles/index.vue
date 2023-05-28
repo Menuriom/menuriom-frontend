@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/shield.png" alt="" />
-                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.staff.Staff Roles") }}</h1>
+                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.staff.Staff Roles") }}</h1>
                 </div>
                 <small class="hidden sm:flex text-sm">
                     {{ $t("panel.staff.Here you can create roles and manage the access level of each role") }}

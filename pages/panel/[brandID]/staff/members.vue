@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/user-group-dark.png" alt="" />
-                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.staff.Staff Members") }}</h1>
+                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.staff.Staff Members") }}</h1>
                 </div>
                 <small class="hidden sm:flex text-sm">
                     {{ $t("panel.staff.Invite new staff to your team and manage their access") }}

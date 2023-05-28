@@ -1,4 +1,8 @@
-<style scoped></style>
+<style scoped>
+.money-box {
+    max-width: 200px;
+}
+</style>
 
 <template>
     <div class="flex flex-col gap-4 md:gap-6 w-full">
@@ -15,11 +19,10 @@
         <section class="flex flex-col gap-4 w-full" name="Billing Info">
             <header class="flex items-center gap-2">
                 <img class="w-9" src="~/assets/images/panel-icons/money-bills-dark.png" alt="" />
-                <h1 class="text-4xl/tight font-bold">{{ $t("panel.billing.Billing Info") }}</h1>
+                <h1 class="text-2xl/tight md:text-3xl/tight font-bold">{{ $t("panel.billing.Billing Info") }}</h1>
             </header>
-            <!-- <hr class="w-full border-gray-300 opacity-50" /> -->
-            <div class="flex flex-wrap lg:flex-nowrap gap-4 w-full 2sm:p-4 2sm:bg-white rounded-lg 2sm:shadow-nr10">
-                <div class="flex flex-col gap-4 w-full lg:max-w-lg xl:max-w-xl shrink-0">
+            <div class="flex flex-wrap xl:flex-nowrap gap-4 w-full 2sm:p-4 2sm:bg-white rounded-lg 2sm:shadow-nr10">
+                <div class="flex flex-col gap-4 w-full xl:max-w-xl shrink-0">
                     <div class="flex flex-col gap-4 p-4 w-full rounded-lg bg-pencil-tip text-white shadow-nr15">
                         <h3 class="flex items-center gap-4">
                             <b class="text-sm shrink-0">Current Plan Details</b>
@@ -69,7 +72,7 @@
                     </div>
                     <small>Bill Number <b class="text-sm">#4282521</b></small>
                     <p class="text-sm">For renewal of monthly standard plan from 01/02/1401 till 01/03/1401</p>
-                    <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-md bg-neutral-100">
+                    <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-md bg-neutral-100 grow">
                         <div class="flex flex-col items-start">
                             <h4 class="text-sm">Plan</h4>
                             <b class="">Standard Plan</b>
@@ -86,7 +89,7 @@
                     <div class="flex flex-wrap items-center justify-between gap-4 w-full">
                         <span class="p-2 text-sm rounded-md bg-red-800 bg-opacity-25 text-rose-800">Not Paid</span>
                         <div>
-                            <button class="btn w-max p-3 px-6 bg-violet text-white rounded-lg">Renew Plan</button>
+                            <button class="btn w-max p-3 px-6 text-sm bg-violet text-white rounded-lg">Renew Subscription</button>
                         </div>
                     </div>
                 </div>
@@ -96,9 +99,48 @@
         <section class="flex flex-col gap-4 w-full" name="Billing History">
             <header class="flex items-center gap-2">
                 <img class="w-9" src="~/assets/images/panel-icons/money-bill-transfer-dark.png" alt="" />
-                <h1 class="text-4xl/tight font-bold">{{ $t("panel.billing.Billing History") }}</h1>
+                <h1 class="text-2xl/tight md:text-3xl/tight font-bold">{{ $t("panel.billing.Billing History") }}</h1>
             </header>
+            <!-- TODO : add date range for billing history -->
             <hr class="w-full border-gray-300 opacity-50" />
+            <ul class="flex flex-col gap-4">
+                <li class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 p-4 bg-white rounded-lg shadow-nr10" v-for="i in 10">
+                    <div class="flex flex-col gap-2">
+                        <small>Bill Number <b class="text-sm">#4282521</b></small>
+                        <div class="flex flex-col gap-1">
+                            <p class="text-sm w-full max-w-sm">For renewal of the monthly standard plan</p>
+                            <p class="text-sm w-full max-w-sm">
+                                From <span class="p-1.5 py-0.5 bg-neutral-100 rounded-md shadow-inner">01/02/1401</span> Till
+                                <span class="p-1.5 py-0.5 bg-neutral-100 rounded-md shadow-inner">01/03/1401</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center gap-1 text-sm">
+                            <span class="w-20">Issue Date:</span>
+                            <b class="w-16">31/02/1401</b>
+                        </div>
+                        <div class="flex items-center gap-1 text-sm">
+                            <span class="w-20">Due Date:</span>
+                            <b class="w-16">31/12/1401</b>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center w-40">
+                        <div class="flex items-center gap-2 p-2 rounded-lg border bg-neutral-800 shrink-0">
+                            <img class="w-6" src="/pricing/standard-g.png" alt="basic" />
+                            <span class="gradient-text text-sm font-bold">Standard Plan</span>
+                        </div>
+                    </div>
+                    <div class="money-box flex items-baseline gap-1 w-full">
+                        <span class="text-xl text-lime-700">324,000,000</span>
+                        <small class="text-sm">Toman</small>
+                    </div>
+                    <span class="w-20 text-center p-2 py-1 text-sm rounded-md bg-red-800 bg-opacity-25 text-rose-800 shrink-0">Not Paid</span>
+                    <button class="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-50 border shrink-0" @click="toggleMenu()">
+                        <Icon class="w-5 h-5 bg-black rotate-90" name="dots.svg" folder="icons" size="4px" />
+                    </button>
+                </li>
+            </ul>
         </section>
 
         <!-- <Teleport to="body"> </Teleport> -->
@@ -136,4 +178,24 @@ const handleErrors = (err) => {
     if (process.server) console.log({ err });
     // TODO : log errors in sentry type thing
 };
+
+// getCurrentPlan -------------------------------------------------
+const currentPlan = reactive({ plan: { icon: "", name: "" }, branchLimit: "", staffLimit: "", daysRemaining: "", price: "", period: "" });
+const getCurrentPlan_results = await useLazyAsyncData(() => getCurrentPlan(route.params.brandID));
+const loadingCurrentPlan = computed(() => getCurrentPlan_results.pending.value);
+
+if (getCurrentPlan_results.error.value) handleErrors(getCurrentPlan_results.error.value);
+watch(getCurrentPlan_results.error, (err) => handleErrors(err));
+
+const handleCurrentPlan_results = (data) => {
+    if (!data) return;
+    currentPlan.plan = data._currentPlan.plan;
+    currentPlan.branchLimit = data._currentPlan.branchLimit;
+    currentPlan.staffLimit = data._currentPlan.staffLimit;
+    currentPlan.daysRemaining = data._currentPlan.daysRemaining;
+    currentPlan.price = data._currentPlan.price;
+    currentPlan.period = data._currentPlan.period;
+};
+watch(getCurrentPlan_results.data, (val) => handleCurrentPlan_results(val), { immediate: process.server || useNuxtApp().isHydrating });
+// -------------------------------------------------
 </script>

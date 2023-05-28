@@ -28,7 +28,7 @@ main {
             <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
             <Header />
             <div class="relative flex w-full h-0 p-2 flex-grow">
-                <SideMenu v-if="!dontShowMenu" />
+                <SideMenuWhite v-if="!dontShowMenu" />
                 <main class="relative py-3 px-1 md:p-4 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>

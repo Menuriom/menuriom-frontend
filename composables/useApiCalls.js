@@ -252,6 +252,27 @@ export const getRoleInfo = async (brandID, roleID) => {
 };
 // ---------------------------------------------------------
 
+// billing ---------------------------------------------------------
+export const getCurrentPlan = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/billing/current-plan`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _currentPlan = [];
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _currentPlan = response.data.currentPlan;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _currentPlan };
+};
+// ---------------------------------------------------------
+
 // general APIs ---------------------------------------------------------
 export const getLanguages = async () => {
     let { url, headers } = getRequestConfig(`/api/v1/general/language-list`, {});
