@@ -28,7 +28,8 @@ main {
             <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
             <Header />
             <div class="relative flex w-full h-0 p-2 flex-grow">
-                <SideMenuWhite v-if="!dontShowMenu" />
+                <SideMenu v-if="!dontShowMenu" />
+                <!-- <SideMenuWhite v-if="!dontShowMenu" /> -->
                 <main class="relative py-3 px-1 md:p-4 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>
@@ -48,6 +49,7 @@ main {
 
 <script setup>
 import Header from "~/components/panel/Header.vue";
+import Blob from "~/components/web/Blob.vue";
 const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
 const SideMenuWhite = defineAsyncComponent(() => import("~/components/panel/SideMenuWhite.vue"));
 const SentInvites = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/SentInvites.vue"));

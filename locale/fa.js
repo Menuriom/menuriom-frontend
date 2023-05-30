@@ -338,6 +338,10 @@ export default {
             Billing: "صورتحساب",
             "Billing Info": "جزئیات صورتحساب",
             "Billing History": "تاریخچه پرداختی ها",
+            "Current Plan Details": "مشخصات اشتراک کنونی",
+            remaining: "باقی مانده",
+            "Upgrade-Downgrade Plan": "ارتقا / تنزل اشتراک",
+            "Change Payment Period": "تغییر بازه پرداخت",
         },
     },
 };

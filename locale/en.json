@@ -26,6 +26,9 @@
         },
         "languages": {
             "You can choose up to n languages": "You can choose up to {n} languages"
+        },
+        "billing": {
+            "planLimitDesc": "up to {branchLimit} branches, and {staffLimit} staff members per branch"
         }
     }
 }

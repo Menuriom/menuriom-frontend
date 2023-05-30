@@ -25,39 +25,52 @@
                 <div class="flex flex-col gap-4 w-full xl:max-w-xl shrink-0">
                     <div class="flex flex-col gap-4 p-4 w-full rounded-lg bg-pencil-tip text-white shadow-nr15">
                         <h3 class="flex items-center gap-4">
-                            <b class="text-sm shrink-0">Current Plan Details</b>
+                            <b class="text-sm shrink-0">{{ $t("panel.billing.Current Plan Details") }}</b>
                             <span class="w-full h-0.5 bg-neutral-400 opacity-50"></span>
                         </h3>
                         <div class="flex flex-wrap items-center justify-between gap-4">
                             <div class="flex items-center gap-2">
-                                <img class="bg-dolphin p-2 rounded-md w-16" src="/pricing/basic-g.png" alt="basic" />
-                                <h2 class="gradient-text text-4xl/none font-extrabold">Basic Plan</h2>
+                                <img class="bg-dolphin p-2 rounded-md w-16" :src="currentPlan.plan.icon" />
+                                <h2 class="gradient-text text-4xl/relaxed font-extrabold">
+                                    {{ currentPlan.plan.translation?.[locale]?.name || currentPlan.plan.name }}
+                                </h2>
                             </div>
-                            <div class="flex items-center gap-1">
-                                <b>21</b>
-                                <small>days remaining</small>
+                            <div class="flex items-center gap-1" v-if="currentPlan.daysRemaining">
+                                <b>{{ currentPlan.daysRemaining }}</b>
+                                <small>{{ $t("panel.billing.remaining") }}</small>
                             </div>
                         </div>
-                        <p class="text-xs text-neutral-200">
-                            up to <b class="text-white">20</b> branches, and <b class="text-white">15</b> staff members per branch
-                        </p>
-                        <div class="flex items-baseline gap-2">
+                        <p
+                            class="text-xs text-neutral-200"
+                            v-html="
+                                $t('panel.billing.planLimitDesc', {
+                                    branchLimit: `<b class='text-white'>${currentPlan.branchLimit}</b>`,
+                                    staffLimit: `<b class='text-white'>${currentPlan.staffLimit}</b>`,
+                                })
+                            "
+                        />
+                        <div class="flex items-baseline gap-2" v-if="currentPlan.price > 0">
                             <div class="flex flex-wrap items-end gap-1">
-                                <b class="text-2xl/none text-emerald-200">30<span class="text-sm font-normal">,000</span></b>
-                                <small class="text-sm font-thin">Toman</small>
+                                <b class="text-2xl/none text-emerald-200">{{ currentPlan.price / 1000 }}<span class="text-sm font-normal">,000</span></b>
+                                <b class="f-inter text-sm font-extralight">{{ $t("pricing.Toman") }}</b>
                             </div>
                             <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
-                            <b class="">Monthly</b>
+                            <b>{{ currentPlan.period == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</b>
+                        </div>
+                        <div class="flex items-baseline gap-2" v-else>
+                            <b class="text-2xl/none text-emerald-200"> {{ $t("pricing.Free") }} </b>
+                            <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
+                            <b>{{ $t("pricing.Always") }}</b>
                         </div>
                     </div>
                     <div class="flex flex-wrap items-center gap-4 w-full">
                         <button class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow">
                             <Icon class="w-5 h-5 bg-pencil-tip shrink-0" name="arrow-up-big-small.svg" folder="icons/light" size="20px" />
-                            Upgrade/Downgrade Plan
+                            {{ $t("panel.billing.Upgrade-Downgrade Plan") }}
                         </button>
                         <button class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow">
                             <Icon class="w-5 h-5 bg-pencil-tip shrink-0" name="calendar-clock.svg" folder="icons/light" size="20px" />
-                            Change Payment Period
+                            {{ $t("panel.billing.Change Payment Period") }}
                         </button>
                     </div>
                 </div>
@@ -157,6 +170,7 @@ import { useUserStore } from "@/stores/user";
 
 const { locale, t } = useI18n();
 const route = useRoute();
+const nuxtApp = useNuxtApp();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
@@ -180,7 +194,7 @@ const handleErrors = (err) => {
 };
 
 // getCurrentPlan -------------------------------------------------
-const currentPlan = reactive({ plan: { icon: "", name: "" }, branchLimit: "", staffLimit: "", daysRemaining: "", price: "", period: "" });
+const currentPlan = reactive({ plan: { icon: "", name: "", translation: {} }, branchLimit: "", staffLimit: "", daysRemaining: "", price: "", period: "" });
 const getCurrentPlan_results = await useLazyAsyncData(() => getCurrentPlan(route.params.brandID));
 const loadingCurrentPlan = computed(() => getCurrentPlan_results.pending.value);
 
@@ -196,6 +210,6 @@ const handleCurrentPlan_results = (data) => {
     currentPlan.price = data._currentPlan.price;
     currentPlan.period = data._currentPlan.period;
 };
-watch(getCurrentPlan_results.data, (val) => handleCurrentPlan_results(val), { immediate: process.server || useNuxtApp().isHydrating });
+watch(getCurrentPlan_results.data, (val) => handleCurrentPlan_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 </script>

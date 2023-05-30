@@ -26,6 +26,9 @@
         },
         "languages": {
             "You can choose up to n languages": "شما میتونید تا {n} زبان انتخاب کنید"
+        },
+        "billing": {
+            "planLimitDesc": "تا {branchLimit} شعبه و امکان دعوت {staffLimit} عضو خدمه برای هر شعبه"
         }
     }
 }

@@ -340,6 +340,10 @@ export default {
             Billing: "Billing",
             "Billing Info": "Billing Info",
             "Billing History": "Billing History",
+            "Current Plan Details": "Current Plan Details",
+            "remaining": "remaining",
+            "Upgrade-Downgrade Plan": "Upgrade/Downgrade Plan",
+            "Change Payment Period": "Change Payment Period",
         },
     },
 };
