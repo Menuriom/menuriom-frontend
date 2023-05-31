@@ -271,6 +271,24 @@ export const getCurrentPlan = async (brandID) => {
 
     return { _currentPlan };
 };
+export const getPurchasablePlans = async () => {
+    let { url, headers } = getRequestConfig(`/api/v1/pricing/purchasable-plans`, {});
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _plans = [];
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _plans = response.data.plans;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _plans };
+};
 // ---------------------------------------------------------
 
 // general APIs ---------------------------------------------------------

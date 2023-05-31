@@ -2,6 +2,21 @@
 .money-box {
     max-width: 200px;
 }
+
+.plan-card-list {
+    margin-top: -1rem;
+    padding: 0 1rem;
+    grid-template-rows: 0fr;
+    transition: all 0.2s ease-out;
+}
+.plan-card:hover .plan-card-list {
+    margin-top: -0.5rem;
+    padding: 1rem;
+    grid-template-rows: 1fr;
+}
+.plan-card:hover {
+    z-index: 2;
+}
 </style>
 
 <template>
@@ -23,7 +38,7 @@
             </header>
             <div class="flex flex-wrap xl:flex-nowrap gap-4 w-full 2sm:p-4 2sm:bg-white rounded-lg 2sm:shadow-nr10">
                 <div class="flex flex-col gap-4 w-full xl:max-w-xl shrink-0">
-                    <div class="flex flex-col gap-4 p-4 w-full rounded-lg bg-pencil-tip text-white shadow-nr15">
+                    <div class="flex flex-col gap-4 p-4 w-full rounded-lg bg-pencil-tip text-white shadow-nr15" v-if="!loadingCurrentPlan">
                         <h3 class="flex items-center gap-4">
                             <b class="text-sm shrink-0">{{ $t("panel.billing.Current Plan Details") }}</b>
                             <span class="w-full h-0.5 bg-neutral-400 opacity-50"></span>
@@ -31,7 +46,7 @@
                         <div class="flex flex-wrap items-center justify-between gap-4">
                             <div class="flex items-center gap-2">
                                 <img class="bg-dolphin p-2 rounded-md w-16" :src="currentPlan.plan.icon" />
-                                <h2 class="gradient-text text-4xl/relaxed font-extrabold">
+                                <h2 class="gradient-text text-3xl sm:text-4xl/relaxed font-extrabold">
                                     {{ currentPlan.plan.translation?.[locale]?.name || currentPlan.plan.name }}
                                 </h2>
                             </div>
@@ -63,18 +78,43 @@
                             <b>{{ $t("pricing.Always") }}</b>
                         </div>
                     </div>
+                    <div class="flex flex-col gap-4 p-4 w-full rounded-lg bg-pencil-tip text-white shadow-nr15" v-else>
+                        <h3 class="flex items-center gap-4">
+                            <b class="text-sm shrink-0">{{ $t("panel.billing.Current Plan Details") }}</b>
+                            <span class="w-full h-0.5 bg-neutral-400 opacity-50"></span>
+                        </h3>
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+                            <div class="flex items-center gap-2">
+                                <span class="skeleton rounded-md w-16 h-16"></span>
+                                <h2 class="skeleton rounded-md w-40 h-8"></h2>
+                            </div>
+                            <span class="skeleton rounded-md w-24 h-4"></span>
+                        </div>
+                        <p class="skeleton rounded-md w-96 h-4" />
+                        <div class="flex items-baseline gap-2">
+                            <b class="skeleton w-20 h-6 rounded text-2xl/none text-emerald-200"></b>
+                            <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
+                            <b class="skeleton w-20 h-6 rounded"></b>
+                        </div>
+                    </div>
                     <div class="flex flex-wrap items-center gap-4 w-full">
-                        <button class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow">
+                        <button
+                            class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow"
+                            v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
+                        >
                             <Icon class="w-5 h-5 bg-pencil-tip shrink-0" name="arrow-up-big-small.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.billing.Upgrade-Downgrade Plan") }}
                         </button>
-                        <button class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow">
+                        <button
+                            class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow"
+                            v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
+                        >
                             <Icon class="w-5 h-5 bg-pencil-tip shrink-0" name="calendar-clock.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.billing.Change Payment Period") }}
                         </button>
                     </div>
                 </div>
-                <div class="flex flex-col gap-2 p-4 w-full border-2 bg-white rounded-lg shadow-nr5 grow">
+                <div class="flex flex-col gap-2 p-4 w-full border-2 bg-white rounded-lg shadow-nr5 grow" v-if="bills.list.length">
                     <div class="flex flex-wrap items-center gap-4 w-full">
                         <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">Your Last Bill</h3>
                         <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
@@ -106,6 +146,66 @@
                         </div>
                     </div>
                 </div>
+                <div class="flex flex-col gap-4 p-1 sm:p-4 w-full border-2 bg-white rounded-lg shadow-nr5 grow" v-else>
+                    <div class="flex flex-wrap items-start justify-center gap-4 w-full">
+                        <div class="flex flex-wrap items-center gap-4 p-2 md:p-0 grow">
+                            <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Upgrade Your Plan Now") }}</h3>
+                            <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
+                        </div>
+                        <div class="relative flex items-center gap-2 p-1 py-2 rounded-md bg-neutral-100">
+                            <span
+                                class="absolute w-32 h-7 shadow-md bg-white rounded-md transition-all"
+                                :class="[priceType == 'monthly' ? 'start-1' : 'start-32 ms-3']"
+                            ></span>
+                            <span class="relative flex items-center justify-center w-32 text-sm cursor-pointer" @click="priceType = 'monthly'">
+                                {{ $t("pricing.Monthly") }}
+                            </span>
+                            <div class="relative flex items-center justify-center gap-1 w-32 text-sm cursor-pointer" @click="priceType = 'annual'">
+                                <span>{{ $t("pricing.Annual") }}</span>
+                                <small class="f-inter px-2 rounded-full whitespace-nowrap text-[11px] bg-pencil-tip text-purple-200"> 10% Off </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-start gap-4 grow">
+                        <div
+                            class="plan-card relative flex flex-col gap-4 w-full md:w-80 p-4 rounded-xl bg-dolphin shadow-nr15 grow"
+                            v-for="(plan, i) in purchasablePlans.plans"
+                            :key="i"
+                        >
+                            <div class="flex items-center gap-2">
+                                <img class="w-10" :src="plan.icon" :alt="plan.name" />
+                                <h3 class="text-2xl text-white font-bold">{{ plan.translation?.[locale]?.name || plan.name }}</h3>
+                            </div>
+                            <p class="text-sm text-white opacity-90 h-10">{{ plan.translation?.[locale]?.desc || plan.desc }}</p>
+                            <div
+                                class="flex flex-wrap items-center justify-between gap-4 p-3 bg-neutral-800 text-white rounded-lg"
+                                v-if="plan.monthlyPrice > 0"
+                            >
+                                <div class="flex flex-wrap items-baseline gap-1">
+                                    <b class="f-inter text-emerald-100 text-4xl">
+                                        {{ Intl.NumberFormat(locale).format((priceType === "monthly" ? plan.monthlyPrice : plan.yearlyPrice) / 1000)
+                                        }}<span class="text-xs">,000</span>
+                                    </b>
+                                    <b class="f-inter text-violet">{{ $t("pricing.Toman") }}</b>
+                                    <small class="">/ {{ priceType == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</small>
+                                </div>
+                                <button class="btn gradient w-full md:w-max p-4 py-2 text-white rounded-md shrink-0">{{ $t("panel.billing.Purchase") }}</button>
+                            </div>
+                            <div class="plan-card-list grid md:absolute start-0 top-full w-full bg-dolphin rounded-b-lg shadow-xl">
+                                <ul class="flex flex-col gap-4 w-full overflow-hidden">
+                                    <li class="flex items-center gap-2">
+                                        <Icon class="relative w-4 h-4 bg-baby-blue" name="plus.svg" folder="icons" size="16px" />
+                                        <small class="opacity-90 text-sky-200">{{ $t("pricing.Everything on previous plan") }}</small>
+                                    </li>
+                                    <li class="flex items-center gap-2" v-for="(feature, j) in plan.listings" :key="j">
+                                        <Icon class="relative w-4 h-4 bg-baby-blue" name="check.svg" folder="icons" size="16px" />
+                                        <small class="opacity-90 text-white">{{ plan.translation?.[locale]?.listings[j] || feature }}</small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -116,8 +216,12 @@
             </header>
             <!-- TODO : add date range for billing history -->
             <hr class="w-full border-gray-300 opacity-50" />
-            <ul class="flex flex-col gap-4">
-                <li class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 p-4 bg-white rounded-lg shadow-nr10" v-for="i in 10">
+            <ul class="flex flex-col gap-4" v-if="bills.list.length">
+                <li
+                    class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 p-4 bg-white rounded-lg shadow-nr10"
+                    v-for="(bill, i) in bills.list"
+                    :key="i"
+                >
                     <div class="flex flex-col gap-2">
                         <small>Bill Number <b class="text-sm">#4282521</b></small>
                         <div class="flex flex-col gap-1">
@@ -154,6 +258,10 @@
                     </button>
                 </li>
             </ul>
+            <div class="flex flex-col items-center gap-4 w-full my-10" v-if="!bills.list.length">
+                <img class="w-40" src="~/assets/images/invoice.webp" alt="invoice" />
+                <p class="text-sm opacity-50">{{ $t("panel.billing.You have no bills yet") }}</p>
+            </div>
         </section>
 
         <!-- <Teleport to="body"> </Teleport> -->
@@ -164,7 +272,6 @@
 import Dialog from "~/components/panel/Dialog.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
 import Loading from "~/components/Loading.vue";
-import axios from "axios";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
@@ -211,5 +318,25 @@ const handleCurrentPlan_results = (data) => {
     currentPlan.period = data._currentPlan.period;
 };
 watch(getCurrentPlan_results.data, (val) => handleCurrentPlan_results(val), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
+
+// getPurchasablePlans -------------------------------------------------
+const priceType = ref("monthly");
+const purchasablePlans = reactive({ plans: [] });
+const getPurchasablePlans_results = await useLazyAsyncData(() => getPurchasablePlans(route.params.brandID));
+const loadingPurchasablePlans = computed(() => getPurchasablePlans_results.pending.value);
+
+if (getPurchasablePlans_results.error.value) handleErrors(getPurchasablePlans_results.error.value);
+watch(getPurchasablePlans_results.error, (err) => handleErrors(err));
+
+const handlePurchasablePlans_results = (data) => {
+    if (!data) return;
+    purchasablePlans.plans = data._plans.filter((plan) => plan.monthlyPrice != 0 && plan.yearlyPrice != 0);
+};
+watch(getPurchasablePlans_results.data, (val) => handlePurchasablePlans_results(val), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
+
+// getBills -------------------------------------------------
+const bills = reactive({ list: [] });
 // -------------------------------------------------
 </script>

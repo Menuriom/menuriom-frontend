@@ -342,6 +342,9 @@ export default {
             remaining: "باقی مانده",
             "Upgrade-Downgrade Plan": "ارتقا / تنزل اشتراک",
             "Change Payment Period": "تغییر بازه پرداخت",
+            "You have no bills yet": "شما فعلا هیچ صورت حسابی ندارید",
+            "Upgrade Your Plan Now": "همین الان اشتراکتو ارتقا بده",
+            Purchase: "خرید",
         },
     },
 };

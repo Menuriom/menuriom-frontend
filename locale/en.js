@@ -344,6 +344,9 @@ export default {
             "remaining": "remaining",
             "Upgrade-Downgrade Plan": "Upgrade/Downgrade Plan",
             "Change Payment Period": "Change Payment Period",
+            "You have no bills yet": "You have no bills yet",
+            "Upgrade Your Plan Now": "Upgrade Your Plan Now",
+            "Purchase": "Purchase",
         },
     },
 };
