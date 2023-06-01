@@ -100,6 +100,7 @@
                     <div class="flex flex-wrap items-center gap-4 w-full">
                         <button
                             class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow"
+                            @click="panelStore.openPopUp('change-plan-dialog')"
                             v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
                         >
                             <Icon class="w-5 h-5 bg-pencil-tip shrink-0" name="arrow-up-big-small.svg" folder="icons/light" size="20px" />
@@ -107,6 +108,7 @@
                         </button>
                         <button
                             class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow"
+                            @click="panelStore.openPopUp('change-plan-dialog')"
                             v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
                         >
                             <Icon class="w-5 h-5 bg-pencil-tip shrink-0" name="calendar-clock.svg" folder="icons/light" size="20px" />
@@ -152,7 +154,7 @@
                             <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Upgrade Your Plan Now") }}</h3>
                             <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
                         </div>
-                        <div class="relative flex items-center gap-2 p-1 py-2 rounded-md bg-neutral-100">
+                        <div class="relative flex items-center gap-2 p-1 py-2 rounded-md bg-neutral-100 shadow-inner">
                             <span
                                 class="absolute w-32 h-7 shadow-md bg-white rounded-md transition-all"
                                 :class="[priceType == 'monthly' ? 'start-1' : 'start-32 ms-3']"
@@ -168,8 +170,8 @@
                     </div>
                     <div class="flex flex-wrap items-start gap-4 grow">
                         <div
-                            class="plan-card relative flex flex-col gap-4 w-full md:w-80 p-4 rounded-xl bg-dolphin shadow-nr15 grow"
-                            v-for="(plan, i) in purchasablePlans.plans"
+                            class="plan-card relative flex flex-col gap-4 w-full md:w-80 p-4 rounded-xl bg-pencil-tip shadow-nr15 grow"
+                            v-for="(plan, i) in purchasablePlans.plans.filter((plan) => plan.monthlyPrice != 0 && plan.yearlyPrice != 0)"
                             :key="i"
                         >
                             <div class="flex items-center gap-2">
@@ -189,17 +191,23 @@
                                     <b class="f-inter text-violet">{{ $t("pricing.Toman") }}</b>
                                     <small class="">/ {{ priceType == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</small>
                                 </div>
-                                <button class="btn gradient w-full md:w-max p-4 py-2 text-white rounded-md shrink-0">{{ $t("panel.billing.Purchase") }}</button>
+                                <button
+                                    class="btn gradient w-full md:w-max p-4 py-2 text-white rounded-md shrink-0"
+                                    @click="panelStore.openPopUp('change-plan-dialog')"
+                                    v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
+                                >
+                                    {{ $t("panel.billing.Purchase") }}
+                                </button>
                             </div>
-                            <div class="plan-card-list grid md:absolute start-0 top-full w-full bg-dolphin rounded-b-lg shadow-xl">
+                            <div class="plan-card-list grid md:absolute start-0 top-full w-full bg-dolphin rounded-b-xl shadow-nr35">
                                 <ul class="flex flex-col gap-4 w-full overflow-hidden">
                                     <li class="flex items-center gap-2">
                                         <Icon class="relative w-4 h-4 bg-baby-blue" name="plus.svg" folder="icons" size="16px" />
-                                        <small class="opacity-90 text-sky-200">{{ $t("pricing.Everything on previous plan") }}</small>
+                                        <small class="opacity-90 text-sky-200 text-sm">{{ $t("pricing.Everything on previous plan") }}</small>
                                     </li>
                                     <li class="flex items-center gap-2" v-for="(feature, j) in plan.listings" :key="j">
                                         <Icon class="relative w-4 h-4 bg-baby-blue" name="check.svg" folder="icons" size="16px" />
-                                        <small class="opacity-90 text-white">{{ plan.translation?.[locale]?.listings[j] || feature }}</small>
+                                        <small class="opacity-90 text-white text-sm">{{ plan.translation?.[locale]?.listings[j] || feature }}</small>
                                     </li>
                                 </ul>
                             </div>
@@ -264,13 +272,14 @@
             </div>
         </section>
 
-        <!-- <Teleport to="body"> </Teleport> -->
+        <Teleport to="body">
+            <ChangePlanDialog :purchasablePlans="purchasablePlans.plans" :currentPlan="currentPlan" v-if="panelStore.popUpOpened === 'change-plan-dialog'" />
+        </Teleport>
     </div>
 </template>
 
 <script setup>
-import Dialog from "~/components/panel/Dialog.vue";
-import SlideMenu from "~/components/panel/SlideMenu.vue";
+const ChangePlanDialog = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/ChangePlanDialog.vue"));
 import Loading from "~/components/Loading.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
@@ -331,7 +340,8 @@ watch(getPurchasablePlans_results.error, (err) => handleErrors(err));
 
 const handlePurchasablePlans_results = (data) => {
     if (!data) return;
-    purchasablePlans.plans = data._plans.filter((plan) => plan.monthlyPrice != 0 && plan.yearlyPrice != 0);
+    purchasablePlans.plans = data._plans;
+    // purchasablePlans.plans = data._plans.filter((plan) => plan.monthlyPrice != 0 && plan.yearlyPrice != 0);
 };
 watch(getPurchasablePlans_results.data, (val) => handlePurchasablePlans_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------

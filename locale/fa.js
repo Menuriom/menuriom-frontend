@@ -345,6 +345,13 @@ export default {
             "You have no bills yet": "شما فعلا هیچ صورت حسابی ندارید",
             "Upgrade Your Plan Now": "همین الان اشتراکتو ارتقا بده",
             Purchase: "خرید",
+            "Upgrade Or Downgrade Plan": "ارتقا یا تنزل اشتراک",
+            "You can change your plan type or payment period": "تغییر اشتراک کنونی یا بازه پرداختی",
+            Plans: "پلن ها",
+            "Payment Details": "جزئیات پرداخت",
+            "Current Active Plan": "اشتراک فعال کنونی",
+            "Selected Plan": "پلن انتخابی",
+            "Payable Price": "مبلغ قابل پرداخت",
         },
     },
 };

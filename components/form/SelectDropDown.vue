@@ -32,6 +32,7 @@ span {
             ref="dropdown"
         >
             <div class="relative flex items-center w-full" tabindex="0" @click="toggleDropdown()">
+                <img class="w-6 ms-3 object-contain" :src="selectedOption.icon" v-if="selectedOption.icon">
                 <input
                     class="w-full bg-transparent rounded-b-md outline-none text-sm select-none"
                     :class="[!!label ? 'p-1 px-3 pb-1.5 mt-6' : customPadding]"
