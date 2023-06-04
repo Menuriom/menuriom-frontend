@@ -352,6 +352,10 @@ export default {
             "Current Active Plan": "اشتراک فعال کنونی",
             "Selected Plan": "پلن انتخابی",
             "Payable Price": "مبلغ قابل پرداخت",
+            "No Action Needed": "اقدامی لازم نیست",
+            "You have selected your current active plan and payment period": "شما اشتراک کنونی و بازه پرداخت فعلی خود را انتخاب کرده اید",
+            "Head To Payment Gateway": "انتقال به درگاه پرداخت",
+            "Change Plan": "ثبت تغییرات",
         },
     },
 };

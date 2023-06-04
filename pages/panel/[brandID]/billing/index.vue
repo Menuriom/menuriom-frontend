@@ -188,7 +188,7 @@
                                         {{ Intl.NumberFormat(locale).format((priceType === "monthly" ? plan.monthlyPrice : plan.yearlyPrice) / 1000)
                                         }}<span class="text-xs">,000</span>
                                     </b>
-                                    <b class="f-inter text-violet">{{ $t("pricing.Toman") }}</b>
+                                    <b class="f-inter text-baby-blue">{{ $t("pricing.Toman") }}</b>
                                     <small class="">/ {{ priceType == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</small>
                                 </div>
                                 <button
@@ -310,7 +310,15 @@ const handleErrors = (err) => {
 };
 
 // getCurrentPlan -------------------------------------------------
-const currentPlan = reactive({ plan: { icon: "", name: "", translation: {} }, branchLimit: "", staffLimit: "", daysRemaining: "", price: "", period: "" });
+const currentPlan = reactive({
+    plan: { icon: "", name: "", translation: {} },
+    branchLimit: "",
+    staffLimit: "",
+    daysRemaining: "",
+    secondsPassed: "",
+    price: "",
+    period: "",
+});
 const getCurrentPlan_results = await useLazyAsyncData(() => getCurrentPlan(route.params.brandID));
 const loadingCurrentPlan = computed(() => getCurrentPlan_results.pending.value);
 
@@ -323,6 +331,7 @@ const handleCurrentPlan_results = (data) => {
     currentPlan.branchLimit = data._currentPlan.branchLimit;
     currentPlan.staffLimit = data._currentPlan.staffLimit;
     currentPlan.daysRemaining = data._currentPlan.daysRemaining;
+    currentPlan.secondsPassed = data._currentPlan.secondsPassed;
     currentPlan.price = data._currentPlan.price;
     currentPlan.period = data._currentPlan.period;
 };

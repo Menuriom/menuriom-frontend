@@ -354,6 +354,10 @@ export default {
             "Current Active Plan": "Current Active Plan",
             "Selected Plan": "Selected Plan",
             "Payable Price": "Payable Price",
+            "No Action Needed": "No Action Needed",
+            "You have selected your current active plan and payment period": "You have selected your current active plan and payment period",
+            "Head To Payment Gateway": "Head To Payment Gateway",
+            "Change Plan": "Change Plan",
         },
     },
 };

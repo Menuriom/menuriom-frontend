@@ -18,7 +18,7 @@
                 <span class="relative flex items-center justify-center w-32 text-sm cursor-pointer" @click="paymentPeriod = 'monthly'">
                     {{ $t("pricing.Monthly") }}
                 </span>
-                <div class="relative flex items-center justify-center gap-1 w-32 text-sm cursor-pointer" @click="paymentPeriod = 'annual'">
+                <div class="relative flex items-center justify-center gap-1 w-32 text-sm cursor-pointer" @click="paymentPeriod = 'yearly'">
                     <span>{{ $t("pricing.Annual") }}</span>
                     <small class="f-inter px-2 rounded-full whitespace-nowrap text-[11px] bg-pencil-tip text-purple-200"> 10% Off </small>
                 </div>
@@ -69,7 +69,7 @@
                 <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Payment Details") }}</h3>
                 <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
             </div>
-            <div class="flex flex-col gap-4 p-4 w-full bg-neutral-800 rounded-xl">
+            <div class="flex flex-col gap-4 p-4 w-full bg-neutral-800 rounded-xl" v-if="!nothingChanged">
                 <div class="flex flex-wrap items-center justify-between gap-2 w-full">
                     <h3>{{ $t("panel.billing.Selected Plan") }}:</h3>
                     <div class="flex flex-wrap items-center gap-2">
@@ -79,10 +79,10 @@
                         </span>
                     </div>
                 </div>
-                <div class="flex flex-wrap items-center justify-between gap-2 w-full">
+                <div class="flex flex-wrap items-center justify-between gap-2 w-full" v-if="calculatedPrice > 0">
                     <h3>{{ $t("panel.billing.Payable Price") }}:</h3>
                     <div class="flex flex-wrap items-center gap-2">
-                        <b class="text-emerald-100 text-2xl">{{ Intl.NumberFormat(locale).format(3_250_000) }}</b>
+                        <b class="text-emerald-100 text-2xl">{{ Intl.NumberFormat(locale).format(calculatedPrice) }}</b>
                         <span class="text-sm"> {{ $t("pricing.Toman") }} </span>
                     </div>
                 </div>
@@ -98,6 +98,7 @@
                         :options="gateway.list"
                         v-slot="{ option }"
                         v-model:selected-option="selectedGateway.option"
+                        v-if="calculatedPrice > 0"
                     >
                         <div class="flex items-center gap-2 w-full">
                             <img class="w-6 object-contain" :src="option.icon" />
@@ -105,10 +106,15 @@
                         </div>
                     </SelectDropDown>
                     <button class="btn p-3 rounded bg-violet grow" :class="{ 'opacity-75': loading }" :disabled="loading" @click="editingAccess()">
-                        <span v-if="!loading"> {{ $t("panel.Save") }} </span>
+                        <span v-if="!loading && calculatedPrice > 0"> {{ $t("panel.billing.Head To Payment Gateway") }} </span>
+                        <span v-else-if="!loading && calculatedPrice === 0"> {{ $t("panel.billing.Change Plan") }} </span>
                         <Loading v-else />
                     </button>
                 </div>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-2 p-4 w-full h-48 bg-neutral-800 rounded-xl" v-else>
+                <span class="text-violet">{{ $t("panel.billing.No Action Needed") }}</span>
+                <small class="opacity-75">{{ $t("panel.billing.You have selected your current active plan and payment period") }}</small>
             </div>
         </div>
     </Dialog>
@@ -131,7 +137,7 @@ const loading = ref(false);
 const errorField = ref("");
 const responseMessage = ref("");
 
-const paymentPeriod = ref("monthly");
+const paymentPeriod = ref(props.currentPlan.period);
 const selectedPlan = ref(props.currentPlan.plan);
 
 const gateway = reactive({ list: [{ icon: "/icons/zarinpal.svg", name: "Zarinpal", value: "zarinpal" }] });
@@ -143,7 +149,117 @@ const changeSelectedPlan = (newId) => {
     }
 };
 
+const nothingChanged = ref(true);
+const calculatedPrice = ref(0);
 const calculatePrice = () => {
+    nothingChanged.value = false;
+
     // TODO
+    // NOTIC 1 : plan/period change can only be done for any user every 3 days
+    // NOTIC 2 : any bill other than auto generated renewal bill will be deleted if they stay more than 20 minutes in pending stage
+    // NOTIC 3 : show user the remaining time left to pay a bill inother word show how long can factor stay in pending stage
+
+    // if current plan is same as selected plan with same period we hide price and gray out the action buttons
+    if (props.currentPlan.plan._id === selectedPlan.value._id && props.currentPlan.period === paymentPeriod.value) {
+        nothingChanged.value = true;
+        return;
+    }
+
+    // BASIC to others
+    // if current plan is basic plan then we calc the price base on selected plan and period
+    const selectedPlanPrice = paymentPeriod.value === "monthly" ? selectedPlan.value.monthlyPrice : selectedPlan.value.yearlyPrice;
+    if (props.currentPlan.price == 0) {
+        calculatedPrice.value = selectedPlanPrice;
+        return;
+    }
+
+    // let pricePerDay = Math.floor(props.currentPlan.period === "monthly" ? props.currentPlan.price / 30 : props.currentPlan.price / 365);
+    let pricePerDay = paymentPeriod.value === "monthly" ? selectedPlanPrice / 30 : selectedPlanPrice / 365;
+
+    let currentPlanIndex = 0;
+    let selectedPlanIndex = 0;
+    for (let i = 0; i < props.purchasablePlans.length; i++) {
+        if (props.purchasablePlans[i]._id === props.currentPlan.plan._id) currentPlanIndex = i;
+        if (props.purchasablePlans[i]._id === selectedPlan.value._id) selectedPlanIndex = i;
+    }
+    if (currentPlanIndex > selectedPlanIndex) {
+        // downgrade
+        // if its a downgrade then user must be worry about losing their stuff and if there is any renewal bill generated that bill must regenerate with lower plan
+        pricePerDay = 0;
+    } else if (currentPlanIndex < selectedPlanIndex) {
+        // upgrade
+        // if its an upgrade then user must pay the diffrence of the remaining-days price upgrade
+        if (paymentPeriod.value === "monthly") {
+            pricePerDay = Math.floor((selectedPlan.value.monthlyPrice - props.purchasablePlans[currentPlanIndex].monthlyPrice) / 30);
+        }
+        if (paymentPeriod.value === "yearly") {
+            pricePerDay = Math.floor((selectedPlan.value.yearlyPrice - props.purchasablePlans[currentPlanIndex].yearlyPrice) / 365);
+        }
+    } else {
+        // no change to plan
+    }
+
+    const remainingDaysFromCurrentPlan = Math.floor(Number(props.currentPlan.secondsPassed) / (3600 * 24));
+    let payingForHowManyDays = remainingDaysFromCurrentPlan;
+
+    // monthly to annual
+    if (props.currentPlan.period === "monthly" && paymentPeriod.value === "yearly") {
+        // monthly to annual : user must pay the full year price to make it happen
+        payingForHowManyDays = 365;
+    }
+    // annual to monthly
+    if (props.currentPlan.period === "yearly" && paymentPeriod.value === "monthly") {
+        // annual to monthly : if less than month remains then user must pay full month (on successful payment if there is a renewal bill then that bill is obsolete)
+        if (payingForHowManyDays < 30) payingForHowManyDays = 30;
+    }
+
+    const totalPrice = pricePerDay * payingForHowManyDays;
+    console.log({
+        secondsPassed: props.currentPlan.secondsPassed,
+        pricePerDay,
+        payingForHowManyDays,
+        calculatedPrice: calculatedPrice.value,
+    });
+    calculatedPrice.value = Math.floor(totalPrice);
 };
+
+watch([paymentPeriod, selectedPlan], ([newPaymentPeriod, newSelectedPlan]) => calculatePrice());
+
+// basic monthly -> basic yearly = dont allow
+// basic monthly -> standard monthly = pays full price of one month
+// basic monthly -> standard yearly = pays full price of one year
+// basic monthly -> pro monthly = pays full price of one month
+// basic monthly -> pro yearly = pays full price of one year
+
+// basic yearly -> basic monthly = dont allow
+// basic yearly -> standard monthly = dont allow
+// basic yearly -> standard yearly = dont allow
+// basic yearly -> pro monthly = dont allow
+// basic yearly -> pro yearly = dont allow
+
+// standard monthly -> basic monthly = user worries about their stuff
+// standard monthly -> basic yearly = user worries about their stuff && period will be monthly
+// standard monthly -> standard yearly = user pays (365 - remaining days) * price per day calulated by yearly price (1)
+// standard monthly -> pro monthly = user pays (proMonthlyPrice - standardMonthlyPrice) * remainingDays (2)
+// standard monthly -> pro yearly = user pays (1) + (2)
+
+// standard yearly -> basic monthly = user worries about their stuff
+// standard yearly -> basic yearly = user worries about their stuff && period will be monthly
+// standard yearly -> standard monthly = user must pay full price of one month
+// standard yearly -> pro monthly = if remainingDays is more than 30 days, no payment needed else user must pay full month
+// standard yearly -> pro yearly = user pays (proYearlyPrice - standardYearlyPrice) * remainingDays
+
+// pro monthly -> basic monthly
+// pro monthly -> basic yearly
+// pro monthly -> standard monthly
+// pro monthly -> standard yearly
+// pro monthly -> pro yearly
+
+// pro yearly -> basic monthly
+// pro yearly -> basic yearly
+// pro yearly -> standard monthly
+// pro yearly -> standard yearly
+// pro yearly -> pro monthly
 </script>
+
+
