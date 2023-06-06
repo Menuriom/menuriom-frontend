@@ -358,6 +358,7 @@ export default {
             "You have selected your current active plan and payment period": "You have selected your current active plan and payment period",
             "Head To Payment Gateway": "Head To Payment Gateway",
             "Change Plan": "Change Plan",
+            "No Payment Required": "No Payment Required",
         },
     },
 };

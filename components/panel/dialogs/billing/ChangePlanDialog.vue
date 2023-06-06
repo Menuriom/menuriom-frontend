@@ -86,6 +86,9 @@
                         <span class="text-sm"> {{ $t("pricing.Toman") }} </span>
                     </div>
                 </div>
+                <div class="text-center" v-else>
+                    <span class="text-sm text-emerald-100"> {{ $t("panel.billing.No Payment Required") }} </span>
+                </div>
                 <hr class="w-full opacity-30" />
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
@@ -105,7 +108,7 @@
                             <span :value="option.value">{{ option.name }}</span>
                         </div>
                     </SelectDropDown>
-                    <button class="btn p-3 rounded bg-violet grow" :class="{ 'opacity-75': loading }" :disabled="loading" @click="editingAccess()">
+                    <button class="btn p-3 rounded bg-violet grow" :class="{ 'opacity-75': loading }" :disabled="loading" @click="changePlan()">
                         <span v-if="!loading && calculatedPrice > 0"> {{ $t("panel.billing.Head To Payment Gateway") }} </span>
                         <span v-else-if="!loading && calculatedPrice === 0"> {{ $t("panel.billing.Change Plan") }} </span>
                         <Loading v-else />
@@ -130,7 +133,7 @@ const props = defineProps({
     currentPlan: Object,
 });
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
 const form = ref(); // Dom Ref
 const loading = ref(false);
@@ -139,6 +142,7 @@ const responseMessage = ref("");
 
 const paymentPeriod = ref(props.currentPlan.period);
 const selectedPlan = ref(props.currentPlan.plan);
+const paymentDescription = ref("");
 
 const gateway = reactive({ list: [{ icon: "/icons/zarinpal.svg", name: "Zarinpal", value: "zarinpal" }] });
 const selectedGateway = reactive({ option: { icon: "/icons/zarinpal.svg", name: "Zarinpal", value: "zarinpal" } });
@@ -150,14 +154,16 @@ const changeSelectedPlan = (newId) => {
 };
 
 const nothingChanged = ref(true);
+const actionNotAllowed = ref(false);
 const calculatedPrice = ref(0);
+
 const calculatePrice = () => {
     nothingChanged.value = false;
+    actionNotAllowed.value = false;
+    calculatedPrice.value = 0;
 
-    // TODO
-    // NOTIC 1 : plan/period change can only be done for any user every 3 days
-    // NOTIC 2 : any bill other than auto generated renewal bill will be deleted if they stay more than 20 minutes in pending stage
-    // NOTIC 3 : show user the remaining time left to pay a bill inother word show how long can factor stay in pending stage
+    const remainingDays = Math.floor(Number(props.currentPlan.secondsPassed) / (3600 * 24));
+    const devider = paymentPeriod.value === "monthly" ? 30 : 365;
 
     // if current plan is same as selected plan with same period we hide price and gray out the action buttons
     if (props.currentPlan.plan._id === selectedPlan.value._id && props.currentPlan.period === paymentPeriod.value) {
@@ -165,101 +171,75 @@ const calculatePrice = () => {
         return;
     }
 
-    // BASIC to others
-    // if current plan is basic plan then we calc the price base on selected plan and period
-    const selectedPlanPrice = paymentPeriod.value === "monthly" ? selectedPlan.value.monthlyPrice : selectedPlan.value.yearlyPrice;
-    if (props.currentPlan.price == 0) {
-        calculatedPrice.value = selectedPlanPrice;
-        return;
+    // basic plan can only be monthly
+    if (selectedPlan.value.name === props.purchasablePlans[0].name) paymentPeriod.value = "monthly";
+
+    // on any downgrade of plan user must first met the selected plan limitations, else they can't to the action
+    if (actionType() === "downgrade") {
+        paymentDescription.value = `You are downgrading your plan from Standard to basic`;
+        paymentDescription.value += `\n you currently have x number of branches and y number of staff and basic plan only hold 1 branch and 5 staff memebers`;
+        paymentDescription.value += `\n please remove the excess branch and staff members and then you can downgrade your plan`;
+        // TODO : check current branch number and staff members and if user passing them for downgrade inform them and prevent the downgrade until the limit is ok
     }
 
-    // let pricePerDay = Math.floor(props.currentPlan.period === "monthly" ? props.currentPlan.price / 30 : props.currentPlan.price / 365);
-    let pricePerDay = paymentPeriod.value === "monthly" ? selectedPlanPrice / 30 : selectedPlanPrice / 365;
+    if (props.currentPlan.plan.name === props.purchasablePlans[0].name) {
+        calculatedPrice.value = selectedPlan.value[`${paymentPeriod.value}Price`];
+    }
 
+    if (props.currentPlan.plan.name === props.purchasablePlans[1].name) {
+        if (remainingDays <= 5) {
+            calculatedPrice.value = selectedPlan.value[`${paymentPeriod.value}Price`];
+            // TODO : inform user that becuse less than 5 days remaining of their current plan they must pay selected plan full price
+        } else {
+            if (selectedPlan.value.name === props.purchasablePlans[2].name) {
+                const diff = props.purchasablePlans[2][`${paymentPeriod.value}Price`] - props.purchasablePlans[1][`${paymentPeriod.value}Price`];
+                calculatedPrice.value = Math.floor((diff * remainingDays) / devider);
+                // TODO : inform user that X amount days still remains of their current plan but they must pay the plan diffrence for remaining days to make the upgrade
+            }
+        }
+    }
+
+    if (props.currentPlan.plan.name === props.purchasablePlans[2].name) {
+        if (remainingDays <= 5) {
+            calculatedPrice.value = selectedPlan.value[`${paymentPeriod.value}Price`];
+            // TODO : inform user that becuse less than 5 days remaining of their current plan they must pay selected plan full price
+        } else {
+            // TODO : inform user that X amount days still remains of their "current plan"
+            // and if they downgrade their plan these remaining of you plan will be converted to "plan that they downgrading"
+        }
+    }
+};
+
+const actionType = () => {
+    let type = "same";
     let currentPlanIndex = 0;
     let selectedPlanIndex = 0;
+
     for (let i = 0; i < props.purchasablePlans.length; i++) {
         if (props.purchasablePlans[i]._id === props.currentPlan.plan._id) currentPlanIndex = i;
         if (props.purchasablePlans[i]._id === selectedPlan.value._id) selectedPlanIndex = i;
     }
-    if (currentPlanIndex > selectedPlanIndex) {
-        // downgrade
-        // if its a downgrade then user must be worry about losing their stuff and if there is any renewal bill generated that bill must regenerate with lower plan
-        pricePerDay = 0;
-    } else if (currentPlanIndex < selectedPlanIndex) {
-        // upgrade
-        // if its an upgrade then user must pay the diffrence of the remaining-days price upgrade
-        if (paymentPeriod.value === "monthly") {
-            pricePerDay = Math.floor((selectedPlan.value.monthlyPrice - props.purchasablePlans[currentPlanIndex].monthlyPrice) / 30);
-        }
-        if (paymentPeriod.value === "yearly") {
-            pricePerDay = Math.floor((selectedPlan.value.yearlyPrice - props.purchasablePlans[currentPlanIndex].yearlyPrice) / 365);
-        }
-    } else {
-        // no change to plan
-    }
 
-    const remainingDaysFromCurrentPlan = Math.floor(Number(props.currentPlan.secondsPassed) / (3600 * 24));
-    let payingForHowManyDays = remainingDaysFromCurrentPlan;
+    if (currentPlanIndex > selectedPlanIndex) type = "downgrade";
+    else if (currentPlanIndex < selectedPlanIndex) type = "upgrade";
 
-    // monthly to annual
-    if (props.currentPlan.period === "monthly" && paymentPeriod.value === "yearly") {
-        // monthly to annual : user must pay the full year price to make it happen
-        payingForHowManyDays = 365;
-    }
-    // annual to monthly
-    if (props.currentPlan.period === "yearly" && paymentPeriod.value === "monthly") {
-        // annual to monthly : if less than month remains then user must pay full month (on successful payment if there is a renewal bill then that bill is obsolete)
-        if (payingForHowManyDays < 30) payingForHowManyDays = 30;
-    }
-
-    const totalPrice = pricePerDay * payingForHowManyDays;
-    console.log({
-        secondsPassed: props.currentPlan.secondsPassed,
-        pricePerDay,
-        payingForHowManyDays,
-        calculatedPrice: calculatedPrice.value,
-    });
-    calculatedPrice.value = Math.floor(totalPrice);
+    return type;
 };
 
 watch([paymentPeriod, selectedPlan], ([newPaymentPeriod, newSelectedPlan]) => calculatePrice());
 
-// basic monthly -> basic yearly = dont allow
-// basic monthly -> standard monthly = pays full price of one month
-// basic monthly -> standard yearly = pays full price of one year
-// basic monthly -> pro monthly = pays full price of one month
-// basic monthly -> pro yearly = pays full price of one year
-
-// basic yearly -> basic monthly = dont allow
-// basic yearly -> standard monthly = dont allow
-// basic yearly -> standard yearly = dont allow
-// basic yearly -> pro monthly = dont allow
-// basic yearly -> pro yearly = dont allow
-
-// standard monthly -> basic monthly = user worries about their stuff
-// standard monthly -> basic yearly = user worries about their stuff && period will be monthly
-// standard monthly -> standard yearly = user pays (365 - remaining days) * price per day calulated by yearly price (1)
-// standard monthly -> pro monthly = user pays (proMonthlyPrice - standardMonthlyPrice) * remainingDays (2)
-// standard monthly -> pro yearly = user pays (1) + (2)
-
-// standard yearly -> basic monthly = user worries about their stuff
-// standard yearly -> basic yearly = user worries about their stuff && period will be monthly
-// standard yearly -> standard monthly = user must pay full price of one month
-// standard yearly -> pro monthly = if remainingDays is more than 30 days, no payment needed else user must pay full month
-// standard yearly -> pro yearly = user pays (proYearlyPrice - standardYearlyPrice) * remainingDays
-
-// pro monthly -> basic monthly
-// pro monthly -> basic yearly
-// pro monthly -> standard monthly
-// pro monthly -> standard yearly
-// pro monthly -> pro yearly
-
-// pro yearly -> basic monthly
-// pro yearly -> basic yearly
-// pro yearly -> standard monthly
-// pro yearly -> standard yearly
-// pro yearly -> pro monthly
+const changePlan = () => {
+    // TODO
+    // request to server
+    // server should recalculate the price
+    // if no payment needed then server make the change and inform us with changed current plan
+    // if payment needed then server creates a factor and inform us and we should redirect user to payment gateway
+    // after successful payable downgrade/upgrade any renewal bill will be canceled
+    // ...
+    // TODO
+    // NOTIC 1 : plan/period change can only be done for any user every 3 days
+    // NOTIC 2 : any bill other than auto generated renewal bill will be deleted if they stay more than 20 minutes in pending stage
+    // NOTIC 3 : show user the remaining time left to pay a bill inother word show how long can factor stay in pending stage
+    // NOTIC 4 : on any successful plan upgrade/downgrade any renewal bill will be canceled due to plan change
+};
 </script>
-
-

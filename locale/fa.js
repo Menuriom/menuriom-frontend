@@ -356,6 +356,7 @@ export default {
             "You have selected your current active plan and payment period": "شما اشتراک کنونی و بازه پرداخت فعلی خود را انتخاب کرده اید",
             "Head To Payment Gateway": "انتقال به درگاه پرداخت",
             "Change Plan": "ثبت تغییرات",
+            "No Payment Required": "بدون نیاز به پرداخت",
         },
     },
 };
