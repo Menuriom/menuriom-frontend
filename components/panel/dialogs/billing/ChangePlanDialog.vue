@@ -89,11 +89,29 @@
                 <div class="text-center" v-else>
                     <span class="text-sm text-emerald-100"> {{ $t("panel.billing.No Payment Required") }} </span>
                 </div>
+                <ul class="flex flex-col gap-2 w-full" v-if="alerts.list.length > 0">
+                    <li class="flex w-full" v-for="(alert, i) in alerts.list" :key="i">
+                        <small
+                            class="text-sm bg-opacity-20 p-2 border rounded-md w-full"
+                            :class="{
+                                'text-blue-200 bg-blue-900 border-blue-900': alert.type === 'info',
+                                'text-emerald-200 bg-emerald-900 border-emerald-900': alert.type === 'success',
+                                'text-red-200 bg-red-900 border-red-900': alert.type === 'error',
+                                'text-orange-200 bg-orange-900 border-orange-900': alert.type === 'warning',
+                            }"
+                        >
+                            {{ alert.text }}
+                        </small>
+                    </li>
+                </ul>
+                <small class="text-xs opacity-75" v-if="remainingDays <= 5">
+                    {{ $t("panel.billing.Any unpaid renewal bill for your current plan will be canceled upon successful plan change") }}
+                </small>
                 <hr class="w-full opacity-30" />
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
-                <div class="flex flex-wrap items-center gap-2">
+                <div class="flex flex-wrap items-center gap-2" v-if="!actionNotAllowed">
                     <SelectDropDown
                         class="w-40 shrink-0"
                         customPadding="px-3 py-4"
@@ -127,11 +145,15 @@
 import Dialog from "~/components/panel/Dialog.vue";
 import SelectDropDown from "~/components/form/SelectDropDown.vue";
 import Loading from "~/components/Loading.vue";
+import axios from "axios";
 
 const props = defineProps({
     purchasablePlans: Array,
     currentPlan: Object,
 });
+
+// "invoiceStartAt" : ISODate("2023-05-26T10:51:49.519Z"),
+// "nextInvoice" : ISODate("2023-06-28T10:51:49.519Z"),
 
 const { locale, t } = useI18n();
 
@@ -142,7 +164,6 @@ const responseMessage = ref("");
 
 const paymentPeriod = ref(props.currentPlan.period);
 const selectedPlan = ref(props.currentPlan.plan);
-const paymentDescription = ref("");
 
 const gateway = reactive({ list: [{ icon: "/icons/zarinpal.svg", name: "Zarinpal", value: "zarinpal" }] });
 const selectedGateway = reactive({ option: { icon: "/icons/zarinpal.svg", name: "Zarinpal", value: "zarinpal" } });
@@ -153,64 +174,9 @@ const changeSelectedPlan = (newId) => {
     }
 };
 
-const nothingChanged = ref(true);
-const actionNotAllowed = ref(false);
-const calculatedPrice = ref(0);
+// calculating price ------------------------------------------------
 
-const calculatePrice = () => {
-    nothingChanged.value = false;
-    actionNotAllowed.value = false;
-    calculatedPrice.value = 0;
-
-    const remainingDays = Math.floor(Number(props.currentPlan.secondsPassed) / (3600 * 24));
-    const devider = paymentPeriod.value === "monthly" ? 30 : 365;
-
-    // if current plan is same as selected plan with same period we hide price and gray out the action buttons
-    if (props.currentPlan.plan._id === selectedPlan.value._id && props.currentPlan.period === paymentPeriod.value) {
-        nothingChanged.value = true;
-        return;
-    }
-
-    // basic plan can only be monthly
-    if (selectedPlan.value.name === props.purchasablePlans[0].name) paymentPeriod.value = "monthly";
-
-    // on any downgrade of plan user must first met the selected plan limitations, else they can't to the action
-    if (actionType() === "downgrade") {
-        paymentDescription.value = `You are downgrading your plan from Standard to basic`;
-        paymentDescription.value += `\n you currently have x number of branches and y number of staff and basic plan only hold 1 branch and 5 staff memebers`;
-        paymentDescription.value += `\n please remove the excess branch and staff members and then you can downgrade your plan`;
-        // TODO : check current branch number and staff members and if user passing them for downgrade inform them and prevent the downgrade until the limit is ok
-    }
-
-    if (props.currentPlan.plan.name === props.purchasablePlans[0].name) {
-        calculatedPrice.value = selectedPlan.value[`${paymentPeriod.value}Price`];
-    }
-
-    if (props.currentPlan.plan.name === props.purchasablePlans[1].name) {
-        if (remainingDays <= 5) {
-            calculatedPrice.value = selectedPlan.value[`${paymentPeriod.value}Price`];
-            // TODO : inform user that becuse less than 5 days remaining of their current plan they must pay selected plan full price
-        } else {
-            if (selectedPlan.value.name === props.purchasablePlans[2].name) {
-                const diff = props.purchasablePlans[2][`${paymentPeriod.value}Price`] - props.purchasablePlans[1][`${paymentPeriod.value}Price`];
-                calculatedPrice.value = Math.floor((diff * remainingDays) / devider);
-                // TODO : inform user that X amount days still remains of their current plan but they must pay the plan diffrence for remaining days to make the upgrade
-            }
-        }
-    }
-
-    if (props.currentPlan.plan.name === props.purchasablePlans[2].name) {
-        if (remainingDays <= 5) {
-            calculatedPrice.value = selectedPlan.value[`${paymentPeriod.value}Price`];
-            // TODO : inform user that becuse less than 5 days remaining of their current plan they must pay selected plan full price
-        } else {
-            // TODO : inform user that X amount days still remains of their "current plan"
-            // and if they downgrade their plan these remaining of you plan will be converted to "plan that they downgrading"
-        }
-    }
-};
-
-const actionType = () => {
+const actionMetadata = () => {
     let type = "same";
     let currentPlanIndex = 0;
     let selectedPlanIndex = 0;
@@ -223,12 +189,126 @@ const actionType = () => {
     if (currentPlanIndex > selectedPlanIndex) type = "downgrade";
     else if (currentPlanIndex < selectedPlanIndex) type = "upgrade";
 
-    return type;
+    return { type, currentPlanIndex, selectedPlanIndex };
+};
+
+const planLimitationValues = (planIndex) => {
+    let branchLimitCount = 1;
+    let staffLimitCount = 5;
+    for (let i = 0; i < props.purchasablePlans[planIndex].limitations.length; i++) {
+        if (props.purchasablePlans[planIndex].limitations[i].limit == "branch-limit-count") {
+            branchLimitCount = props.purchasablePlans[planIndex].limitations[i].value;
+        }
+        if (props.purchasablePlans[planIndex].limitations[i].limit == "staff-limit-count") {
+            staffLimitCount = props.purchasablePlans[planIndex].limitations[i].value;
+        }
+    }
+    return { branchLimitCount, staffLimitCount };
+};
+
+const nothingChanged = ref(true);
+const actionNotAllowed = ref(false);
+const calculatedPrice = ref(0);
+const alerts = reactive({ list: [] });
+const remainingDays = ref(props.currentPlan.secondsPassed ? Math.floor(Number(props.currentPlan.secondsPassed) / (3600 * 24)) : Infinity);
+
+const calculatePrice = () => {
+    nothingChanged.value = false;
+    actionNotAllowed.value = false;
+    calculatedPrice.value = 0;
+    alerts.list = [];
+
+    const devider = paymentPeriod.value === "monthly" ? 30 : 365;
+
+    // if current plan is same as selected plan with same period we hide price and gray out the action buttons
+    if (props.currentPlan.plan._id === selectedPlan.value._id && props.currentPlan.period === paymentPeriod.value) {
+        nothingChanged.value = true;
+        return;
+    }
+
+    // basic plan can only be monthly
+    if (selectedPlan.value.name === props.purchasablePlans[0].name) paymentPeriod.value = "monthly";
+
+    const actionMeta = actionMetadata();
+    const selectedPlanLimitation = planLimitationValues(actionMeta.selectedPlanIndex);
+
+    // on any downgrade of plan user must first met the selected plan limitations, else they can't to the action
+    if (actionMeta.type === "downgrade") {
+        alerts.list.push({
+            type: "info",
+            text: t("panel.billing.You are downgrading your plan from X to Y", {
+                fromPlan: props.currentPlan.plan.translation?.[locale.value]?.name || props.currentPlan.plan.name,
+                toPlan: selectedPlan.value.translation?.[locale.value]?.name || selectedPlan.value.name,
+            }),
+        });
+
+        const exceededBranchLimit = props.currentPlan.branchCount > selectedPlanLimitation.branchLimitCount;
+        const exceededStaffLimit = props.currentPlan.branchCount > selectedPlanLimitation.branchLimitCount * selectedPlanLimitation.staffLimitCount;
+        if (exceededBranchLimit || exceededStaffLimit) {
+            alerts.list.push({
+                type: "error",
+                text: t("panel.billing.planChangeLimitExceed", {
+                    currentBranchCount: props.currentPlan.branchCount,
+                    currentStaffCount: props.currentPlan.staffCount,
+                    planBranchLimit: selectedPlanLimitation.branchLimitCount,
+                    planStaffLimit: selectedPlanLimitation.branchLimitCount * selectedPlanLimitation.staffLimitCount,
+                }),
+            });
+            actionNotAllowed.value = true;
+        }
+
+        if (actionMeta.currentPlanIndex > 0) {
+            alerts.list.push({
+                type: "warning",
+                text: t("panel.billing.planChangeDaysWillBeLossed", {
+                    remainingDays: remainingDays.value,
+                    toPlan: selectedPlan.value.translation?.[locale.value]?.name || selectedPlan.value.name,
+                }),
+            });
+        }
+    }
+
+    if (props.currentPlan.plan.name === props.purchasablePlans[0].name) {
+        calculatedPrice.value = selectedPlan.value[`${paymentPeriod.value}Price`];
+    }
+
+    if (props.currentPlan.plan.name === props.purchasablePlans[1].name) {
+        if (remainingDays.value <= 5) {
+            calculatedPrice.value = selectedPlan.value[`${paymentPeriod.value}Price`];
+        } else {
+            if (selectedPlan.value.name === props.purchasablePlans[2].name) {
+                const diff = props.purchasablePlans[2][`${paymentPeriod.value}Price`] - props.purchasablePlans[1][`${paymentPeriod.value}Price`];
+                calculatedPrice.value = Math.floor((diff * remainingDays.value) / devider);
+                alerts.list.push({
+                    type: "warning",
+                    text: t(
+                        "panel.billing.because X days left from your current plan you need to pay the plan price difference for these X days to upgrade your plan",
+                        { days: remainingDays.value }
+                    ),
+                });
+            }
+        }
+    }
+
+    if (props.currentPlan.plan.name === props.purchasablePlans[2].name) {
+        if (remainingDays.value <= 5) {
+            calculatedPrice.value = selectedPlan.value[`${paymentPeriod.value}Price`];
+        }
+    }
+
+    if (remainingDays.value <= 5) {
+        alerts.list.push({
+            type: "info",
+            text: t("panel.billing.because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade"),
+        });
+    }
 };
 
 watch([paymentPeriod, selectedPlan], ([newPaymentPeriod, newSelectedPlan]) => calculatePrice());
+// ------------------------------------------------
 
-const changePlan = () => {
+// changing the plan -------------------------------------------------
+const changePlan = async () => {
     // TODO
     // request to server
     // server should recalculate the price
@@ -241,5 +321,43 @@ const changePlan = () => {
     // NOTIC 2 : any bill other than auto generated renewal bill will be deleted if they stay more than 20 minutes in pending stage
     // NOTIC 3 : show user the remaining time left to pay a bill inother word show how long can factor stay in pending stage
     // NOTIC 4 : on any successful plan upgrade/downgrade any renewal bill will be canceled due to plan change
+
+    if (loading.value) return;
+    loading.value = true;
+
+    responseMessage.value = "";
+    errorField.value = "";
+
+    await axios
+        .post(
+            `/api/v1/panel/billing/plan-change`,
+            {
+                selectedGateway: selectedGateway.option.value,
+                selectedPaymentPeriod: paymentPeriod.value,
+                selectedPlan: selectedPlan.value._id,
+            },
+            { headers: { brand: route.params.brandID } }
+        )
+        .then((response) => {
+            if (response.data.type === "withPayment") {
+                window.location.href = response.data.url;
+            } else {
+                loading.value = false;
+            }
+        })
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
+
+            loading.value = false;
+        });
 };
+// -------------------------------------------------
 </script>

@@ -349,7 +349,7 @@ export default {
             Purchase: "Purchase",
             "Upgrade Or Downgrade Plan": "Upgrade Or Downgrade Plan",
             "You can change your plan type or payment period": "You can change your plan type or payment period",
-            "Plans": "Plans",
+            Plans: "Plans",
             "Payment Details": "Payment Details",
             "Current Active Plan": "Current Active Plan",
             "Selected Plan": "Selected Plan",
@@ -359,6 +359,11 @@ export default {
             "Head To Payment Gateway": "Head To Payment Gateway",
             "Change Plan": "Change Plan",
             "No Payment Required": "No Payment Required",
+            
+            "Any unpaid renewal bill for your current plan will be canceled upon successful plan change":
+                "Any unpaid renewal bill for your current plan will be canceled upon successful plan change",
+            "because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade":
+                "because less than 5 days of your current plan remaining, you need to pay the whole price of the plan to upgrade",
         },
     },
 };

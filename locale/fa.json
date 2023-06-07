@@ -28,7 +28,11 @@
             "You can choose up to n languages": "شما میتونید تا {n} زبان انتخاب کنید"
         },
         "billing": {
-            "planLimitDesc": "تا {branchLimit} شعبه و امکان دعوت {staffLimit} عضو خدمه برای هر شعبه"
+            "planLimitDesc": "تا {branchLimit} شعبه و امکان دعوت {staffLimit} عضو خدمه برای هر شعبه",
+            "planChangeLimitExceed": "شما در حال حاضر {currentBranchCount} شعبه و {currentStaffCount} پرسنل دارید و طرح انتخابی فقط دارای {planBranchLimit} شعبه و {planStaffLimit} کارمند است. لطفاً شعبه و کارکنان اضافی خود را حذف کنید و سپس می توانید طرح خود را کاهش دهید",
+            "You are downgrading your plan from X to Y": "شما درحال تنزل اشتراک خود از {fromPlan} به {toPlan} هستید",
+            "because X days left from your current plan you need to pay the plan price difference for these X days to upgrade your plan": "به این دلیل که {days} روز از طرح فعلی شما باقی مانده است، باید تفاوت قیمت طرح را برای این {days} روز بپردازید تا طرح خود را ارتقا دهید.",
+            "planChangeDaysWillBeLossed": "از اشتراک کنونی شما {remainingDays} روز باقی مانده، اگر اشتراک خود را به طرح پایین تری کاهش دهید، این {remainingDays} روز باقی مانده نیز به طرح {toPlan} تبدیل میشود"
         }
     }
 }

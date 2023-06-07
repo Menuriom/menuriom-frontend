@@ -28,7 +28,11 @@
             "You can choose up to n languages": "You can choose up to {n} languages"
         },
         "billing": {
-            "planLimitDesc": "up to {branchLimit} branches, and {staffLimit} staff members per branch"
+            "planLimitDesc": "up to {branchLimit} branches, and {staffLimit} staff members per branch",
+            "planChangeLimitExceed": "you currently have {currentBranchCount} number of branches and {currentStaffCount} number of staff and the basic plan only holds {planBranchLimit} branch and {planStaffLimit} staff members. please remove the excess branch and staff members and then you can downgrade your plan",
+            "You are downgrading your plan from X to Y": "You are downgrading your plan from {fromPlan} to {toPlan}",
+            "because X days left from your current plan you need to pay the plan price difference for these X days to upgrade your plan": "because {days} days left from your current plan, you need to pay the plan price difference for these {days} days to upgrade your plan",
+            "planChangeDaysWillBeLossed": "Still {remainingDays} days remaining from your current plan, if you downgrade your plan these {remainingDays} days will also be converted to {toPlan}"
         }
     }
 }

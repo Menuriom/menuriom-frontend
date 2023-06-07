@@ -66,7 +66,9 @@
                         />
                         <div class="flex items-baseline gap-2" v-if="currentPlan.price > 0">
                             <div class="flex flex-wrap items-end gap-1">
-                                <b class="text-2xl/none text-emerald-200">{{ currentPlan.price / 1000 }}<span class="text-sm font-normal">,000</span></b>
+                                <b class="text-2xl/none text-emerald-200">
+                                    {{ Intl.NumberFormat(locale).format(currentPlan.price / 1000) }}<span class="text-sm font-normal">,000</span>
+                                </b>
                                 <b class="f-inter text-sm font-extralight">{{ $t("pricing.Toman") }}</b>
                             </div>
                             <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
@@ -318,6 +320,8 @@ const currentPlan = reactive({
     secondsPassed: "",
     price: "",
     period: "",
+    branchCount: 0,
+    staffCount: 0,
 });
 const getCurrentPlan_results = await useLazyAsyncData(() => getCurrentPlan(route.params.brandID));
 const loadingCurrentPlan = computed(() => getCurrentPlan_results.pending.value);
