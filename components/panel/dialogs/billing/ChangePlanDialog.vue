@@ -310,13 +310,6 @@ watch([paymentPeriod, selectedPlan], ([newPaymentPeriod, newSelectedPlan]) => ca
 // changing the plan -------------------------------------------------
 const changePlan = async () => {
     // TODO
-    // request to server
-    // server should recalculate the price
-    // if no payment needed then server make the change and inform us with changed current plan
-    // if payment needed then server creates a factor and inform us and we should redirect user to payment gateway
-    // after successful payable downgrade/upgrade any renewal bill will be canceled
-    // ...
-    // TODO
     // NOTIC 1 : plan/period change can only be done for any user every 3 days
     // NOTIC 2 : any bill other than auto generated renewal bill will be deleted if they stay more than 20 minutes in pending stage
     // NOTIC 3 : show user the remaining time left to pay a bill inother word show how long can factor stay in pending stage
@@ -343,6 +336,8 @@ const changePlan = async () => {
                 window.location.href = response.data.url;
             } else {
                 loading.value = false;
+                // TODO
+                // inform back up to index page to change the plan and bill details if necceary
             }
         })
         .catch((err) => {
