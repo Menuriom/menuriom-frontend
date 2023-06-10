@@ -152,7 +152,6 @@ const props = defineProps({
     currentPlan: Object,
 });
 
-// "invoiceStartAt" : ISODate("2023-05-26T10:51:49.519Z"),
 // "nextInvoice" : ISODate("2023-06-28T10:51:49.519Z"),
 
 const { locale, t } = useI18n();
