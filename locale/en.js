@@ -128,6 +128,7 @@ export default {
         Reject: "Reject",
         "Load More": "Load More",
         "End of the list": "End of the list",
+        "Payment Results": "Payment Results",
 
         profile: {
             "Your Profile": "Your Profile",

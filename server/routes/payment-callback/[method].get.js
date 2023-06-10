@@ -1,6 +1,5 @@
-// import { sendStream } from "h3";
-import http from "http";
-import https from "https";
+import axios from "axios";
+import { checkCsrf } from "../../csrf";
 
 const getQueryString = (event) => {
     const queries = getQuery(event);
@@ -18,11 +17,6 @@ const getQueryString = (event) => {
 export default defineEventHandler(async (event) => {
     const { req, res } = event.node;
 
-    const lang = getCookie(event, "i18n_redirected") || "fa";
-
-    let resStatus = 499;
-    let resData = {};
-
     if (!checkCsrf(event, getCookie(event, "XSRF-TOKEN"))) {
         res.writeHead(419);
         return res.end("Expired");
@@ -30,13 +24,14 @@ export default defineEventHandler(async (event) => {
 
     const params = event.context.params;
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
+    const lang = getCookie(event, "i18n_redirected") || "fa";
 
     delete req.headers["content-length"];
     delete req.headers["host"];
 
-    let errorCode = 499;
-    let errorMessage = "UnknowResults";
-    let redirectTo = locale == "en" ? "/en" : "";
+    let statusCode = 499;
+    let message = "UnknowResults";
+    let redirectTo = lang == "en" ? "/en" : "";
     redirectTo += "/panel/billing/payment-results?";
 
     await axios
@@ -47,20 +42,20 @@ export default defineEventHandler(async (event) => {
             headers: { ...req.headers, "accept-language": lang, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() },
         })
         .then((response) => {
-            errorCode = response.data.errorCode;
-            errorMessage = response.data.errorMessage;
+            statusCode = 200;
+            message = 'SuccessfulPayment';
         })
         .catch((error) => {
             if (typeof error.response === "undefined") {
                 console.error({ error });
-                errorCode = 500;
-                errorMessage = "InternalServerError";
+                statusCode = 500;
+                message = "InternalServerError";
             } else {
-                errorCode = error.response.status;
-                errorMessage = "UpstreamError";
+                statusCode = error.response.status;
+                message = "UpstreamError";
             }
         });
 
-    redirectTo += `errorCode=${errorCode}&errorMessage=${errorMessage}`;
+    redirectTo += `statusCode=${statusCode}&message=${message}`;
     await sendRedirect(event, redirectTo);
 });

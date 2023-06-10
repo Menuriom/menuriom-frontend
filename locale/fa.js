@@ -128,6 +128,7 @@ export default {
         Reject: "رد کردن",
         "Load More": "بارگذاری بیشتر",
         "End of the list": "انتهای لیست",
+        "Payment Results": "نتیجه پرداخت",
 
         profile: {
             "Your Profile": "حساب کاربری",
