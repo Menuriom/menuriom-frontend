@@ -120,6 +120,17 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
 	100% { background-position: 0% 50%; }
 }
 
+.skeleton {
+    background: linear-gradient(90deg, #ffffff22 0%, #99999988 50%, #ffffff22 100%);
+    background-size: 200% 200%;
+    animation: shimmer_skeleton 2s infinite;
+}
+@keyframes shimmer_skeleton {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 150% -150%; }
+    100% { background-position: 0% 50%; }
+}
+
 /* .Vue-Toastification =================================== */
 .Vue-Toastification__toast--default { background-color: theme("colors.dolphin") !important; }
 .Vue-Toastification__toast--info { background-color: theme("colors.cyan.900") !important; }

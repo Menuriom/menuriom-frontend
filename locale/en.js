@@ -115,6 +115,7 @@ export default {
         Save: "Save",
         Delete: "Delete",
         Select: "Select",
+        Search: "Search",
         "Go Back": "Go Back",
         Uploading: "Uploading",
         Languages: "Languages",
@@ -127,6 +128,7 @@ export default {
         Reject: "Reject",
         "Load More": "Load More",
         "End of the list": "End of the list",
+        "Payment Results": "Payment Results",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -273,13 +275,15 @@ export default {
             "Invite new staff to your team and manage their access": "Invite new staff to your team and manage their access",
             "Invite Members": "Invite Members",
             "Invite New Member": "Invite New Member",
-            "Edit Role": "Edit Role",
+            "Change Access Of Staff": "Change Access Of Staff",
             "Remove staff": "Remove staff",
             "All Branches": "All Branches",
             "Send Invite": "Send Invite",
             "Go to staff roles": "Go to staff roles",
             Role: "Role",
+            "Joined At": "Joined At",
             "Email address of user that they signup with": "Email address of user that they signup with",
+            "Member access has been updated": "Member access has been updated",
 
             "Enter email of user you want to invite, and then select what role you want to apply to them":
                 "Enter email of user you want to invite, and then select what role you want to apply to them",
@@ -298,13 +302,27 @@ export default {
                 "By deleting this role, you need to assign a new role to all staff members that previously had this role",
 
             "You can select specific branches for this member": "You can select specific branches for this member",
-            "If you dont select any branches this user will be able from all branches":
-                "If you don't select any branches, this user will be able from all branches",
+            "If you dont select any branches this user will have access to all branches":
+                "If you don't select any branches, this user will have access to all branches",
 
             "Invite has been sent": "Invite Has Been Sent",
             "Send Another Invite": "Send Another Invite",
             "You can always revoke your sent invitations from sent invite list": "You can always revoke your sent invitations from sent invite list",
             noUserNotice: "There is no user with the corresponding email, but we stored your invite and we'll show the invite to the user when they join",
+
+            roles: {
+                "You can create at max 15 roles": "You can create at max 15 roles",
+                "No Members": "No Members",
+                "Edit Role": "Edit Role",
+                "Role Creation": "Role Creation",
+                "Role Name": "Role Name",
+                "Create Role": "Create Role",
+                Permissions: "Permissions",
+                "New role created": "New role created",
+                "Role has been updated": "Role has been updated",
+                "You can manage the access of this role to different parts of the panel":
+                    "You can manage the access of this role to different parts of the panel",
+            },
         },
 
         languages: {
@@ -317,6 +335,36 @@ export default {
 
             "Upgrade your plan to support more languages": "Upgrade your plan to support more languages",
             "Select what currency you want to show for your prices": "Select what currency you want to show for your prices",
+        },
+
+        billing: {
+            Billing: "Billing",
+            "Billing Info": "Billing Info",
+            "Billing History": "Billing History",
+            "Current Plan Details": "Current Plan Details",
+            remaining: "remaining",
+            "Upgrade-Downgrade Plan": "Upgrade/Downgrade Plan",
+            "Change Payment Period": "Change Payment Period",
+            "You have no bills yet": "You have no bills yet",
+            "Upgrade Your Plan Now": "Upgrade Your Plan Now",
+            Purchase: "Purchase",
+            "Upgrade Or Downgrade Plan": "Upgrade Or Downgrade Plan",
+            "You can change your plan type or payment period": "You can change your plan type or payment period",
+            Plans: "Plans",
+            "Payment Details": "Payment Details",
+            "Current Active Plan": "Current Active Plan",
+            "Selected Plan": "Selected Plan",
+            "Payable Price": "Payable Price",
+            "No Action Needed": "No Action Needed",
+            "You have selected your current active plan and payment period": "You have selected your current active plan and payment period",
+            "Head To Payment Gateway": "Head To Payment Gateway",
+            "Change Plan": "Change Plan",
+            "No Payment Required": "No Payment Required",
+            
+            "Any unpaid renewal bill for your current plan will be canceled upon successful plan change":
+                "Any unpaid renewal bill for your current plan will be canceled upon successful plan change",
+            "because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade":
+                "because less than 5 days of your current plan remaining, you need to pay the whole price of the plan to upgrade",
         },
     },
 };

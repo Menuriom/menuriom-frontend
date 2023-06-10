@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/store-dark.png" alt="" />
-                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.branches.Branch Creation") }}</h1>
+                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.branches.Branch Creation") }}</h1>
                 </div>
                 <div class="flex items-center gap-1 text-sm ms-2">
                     <nuxt-link :to="localePath(`/panel/${route.params.brandID}`)">
@@ -61,6 +61,7 @@
                     :error="errorField == `name.${formLang}` ? responseMessage : ''"
                 />
                 <div class="flex flex-wrap md:flex-nowrap items-start gap-4 w-full">
+                    <!-- TODO : add little flag icon on the corner of any dual language field showing the current lang -->
                     <Input
                         name="address"
                         class="w-full flex-grow"
@@ -166,6 +167,8 @@ import axios from "axios";
 import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
+
+// TODO : add map to record the location of branch to show in menu 
 
 const { localeProperties, t } = useI18n();
 const route = useRoute();

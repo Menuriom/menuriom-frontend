@@ -62,7 +62,7 @@ aside > div {
 </style>
 
 <template>
-    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-10 flex-shrink-0 shadow-nr35" :class="{ close: !panelStore.sideMenuOpen }">
+    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 flex-shrink-0 shadow-nr35" :class="{ close: !panelStore.sideMenuOpen }">
         <div class="flex flex-col gap-4 h-full p-4 bg-pencil-tip text-white rounded-lg">
             <nuxt-link
                 class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin cursor-pointer transition-all group"
@@ -97,7 +97,7 @@ aside > div {
                 </nuxt-link>
             </div>
 
-            <hr class="w-full opacity-40" />
+            <hr class="w-full opacity-30" />
 
             <nav
                 class="flex flex-col items-center gap-2 pe-1 w-full max-h-full overflow-y-auto overflow-x-hidden flex-grow text-sm"
@@ -111,7 +111,7 @@ aside > div {
                         v-if="checkPermissions(['main-panel.dashboard.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/rectangles-mixed.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/rectangles-mixed-light.png" alt="" />
                             <span>{{ $t("panel.side-menu.Dashboard") }}</span>
                         </li>
                     </nuxt-link>
@@ -121,12 +121,12 @@ aside > div {
                         v-if="checkPermissions(['main-panel.customer-feedback.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/comments.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/comments-light.png" alt="" />
                             <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
                         </li>
                     </nuxt-link>
                 </ul>
-                <hr class="w-full opacity-40 mx-4" />
+                <hr class="w-full opacity-20 mx-4" />
                 <ul class="flex flex-col gap-2 w-full">
                     <nuxt-link
                         class="link"
@@ -134,13 +134,13 @@ aside > div {
                         v-if="checkPermissions(['main-panel.branches.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/store.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/store-light.png" alt="" />
                             <span>{{ $t("panel.side-menu.Branches") }}</span>
                         </li>
                     </nuxt-link>
                     <button class="link" :class="{ toggler_active: openSubMenus.includes('menu') }" @click="toggleSubMenu('menu')">
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/cards-blank.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/cards-blank-light.png" alt="" />
                             <span>{{ $t("panel.side-menu.Menu") }}</span>
                             <Icon
                                 class="sub_menu_toggler bg-white"
@@ -182,7 +182,7 @@ aside > div {
                         v-if="checkPermissions(['main-panel.staff.view', 'main-panel.staff.invite', 'main-panel.staff.roles'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/user-group.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/user-group-light.png" alt="" />
                             <span>{{ $t("panel.side-menu.Manage Staff") }}</span>
                             <Icon
                                 class="sub_menu_toggler bg-white"
@@ -204,15 +204,15 @@ aside > div {
                                     <span>{{ $t("panel.side-menu.Staff Members") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link
+                            <button
                                 class="link"
-                                :to="localePath(`/panel/${panelStore.selectedBrandId}/sent/invite`)"
+                                @click="panelStore.openPopUp('sent-invites')"
                                 v-if="checkPermissions(['main-panel.staff.view', 'main-panel.staff.invite'], brand, 'AND')"
                             >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Sent Invites") }}</span>
                                 </li>
-                            </nuxt-link>
+                            </button>
                             <nuxt-link
                                 class="link"
                                 :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/roles`)"
@@ -231,7 +231,7 @@ aside > div {
                         v-if="checkPermissions(['main-panel.settings'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/gear.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/gear-light.png" alt="" />
                             <span>{{ $t("panel.side-menu.Settings") }}</span>
                             <Icon
                                 class="sub_menu_toggler bg-white"
@@ -246,14 +246,14 @@ aside > div {
                         <ul class="sub_menu flex flex-col">
                             <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/languages`)">
                                 <li class="flex items-center gap-3">
-                                    <Icon class="w-5 h-5 bg-white" name="language.svg" folder="icons/light" size="20px" />
+                                    <!-- <Icon class="w-5 h-5 bg-white" name="language.svg" folder="icons/light" size="20px" /> -->
                                     <span>{{ $t("panel.side-menu.Language Settings") }}</span>
                                 </li>
                             </nuxt-link>
                         </ul>
                     </div>
                 </ul>
-                <hr class="w-full opacity-40 mx-4" />
+                <hr class="w-full opacity-20 mx-4" />
                 <ul class="flex flex-col gap-2 w-full">
                     <nuxt-link
                         class="link"
@@ -261,26 +261,26 @@ aside > div {
                         v-if="checkPermissions(['main-panel.billing'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/money-bills.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/money-bills-light.png" alt="" />
                             <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
                         </li>
                     </nuxt-link>
                     <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/message-question.png" alt="" />
+                            <img class="w-5" src="~/assets/images/panel-icons/message-question-light.png" alt="" />
                             <span>{{ $t("panel.side-menu.Support") }}</span>
                         </li>
                     </nuxt-link>
                 </ul>
             </nav>
 
-            <div class="relative flex flex-col items-center p-2 md:p-6 bg-black rounded-xl shadow-lg overflow-hidden shrink-0">
+            <div class="relative flex flex-col items-center p-2 md:p-6 md:py-4 bg-black rounded-xl shadow-lg overflow-hidden shrink-0">
                 <span class="absolute end-1/2 -top-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
                 <span class="absolute end-10 -bottom-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
                 <span class="absolute -end-4 -bottom-14 -rotate-45 gradient-re w-24 h-24 rounded-2xl"></span>
-                <div class="relative flex flex-col items-center justify-between gap-4">
+                <div class="relative flex flex-col items-center justify-between gap-2">
                     <small class="hidden 2sm:flex text-sm opacity-75">Remove The Limitations</small>
-                    <h5 class="hidden 2sm:flex gradient-text text-2xl font-black -mt-2 md:mb-2">Upgrade To Pro</h5>
+                    <h5 class="hidden 2sm:flex gradient-text text-2xl font-black -mt-2">Upgrade To Pro</h5>
                     <nuxt-link class="flex items-center gap-2 p-1 px-4 bg-pencil-tip rounded-xl shadow-xl" :to="localePath('/panel/billing/upgrade')">
                         <img class="w-9 md:w-12" src="~/assets/images/icons/sparkles.png" alt="" />
                         <b class="text-xl">Go Pro</b>

@@ -3,7 +3,7 @@
 <template>
     <div class="flex flex-col items-center w-screen bg-white overflow-clip" id="app">
         <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
-            <NuxtLoadingIndicator />
+            <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
             <Header />
             <main class="w-full mt-18 md:mt-24">
                 <slot />

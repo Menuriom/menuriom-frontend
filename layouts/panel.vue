@@ -25,10 +25,11 @@ main {
         id="app"
     >
         <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
-            <NuxtLoadingIndicator />
+            <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
             <Header />
             <div class="relative flex w-full h-0 p-2 flex-grow">
-                <SideMenu v-if="!dontShowMenu" @click="ddDialogshow()" />
+                <SideMenu v-if="!dontShowMenu" />
+                <!-- <SideMenuWhite v-if="!dontShowMenu" /> -->
                 <main class="relative py-3 px-1 md:p-4 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>
@@ -36,6 +37,7 @@ main {
         </Html>
 
         <Teleport to="body">
+            <SentInvites v-if="panelStore.popUpOpened == 'sent-invites'" />
             <PersonalInfo v-if="panelStore.popUpOpened == 'personal-info'" />
             <SelectAccountType v-if="panelStore.popUpOpened == 'select-account-type'" />
             <CreateNewBrand v-if="panelStore.popUpOpened == 'create-new-brand'" />
@@ -47,7 +49,10 @@ main {
 
 <script setup>
 import Header from "~/components/panel/Header.vue";
+import Blob from "~/components/web/Blob.vue";
 const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
+const SideMenuWhite = defineAsyncComponent(() => import("~/components/panel/SideMenuWhite.vue"));
+const SentInvites = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/SentInvites.vue"));
 const PersonalInfo = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/PersonalInfo.vue"));
 const CreateNewBrand = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/CreateNewBrand.vue"));
 const FindYourTeam = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/FindYourTeam.vue"));
@@ -85,10 +90,10 @@ else if (Object.keys(user.brands.value.list).length == 0) {
     if (showPopUp.value) panelStore.openPopUp("select-account-type");
 }
 
-onMounted(async () => {
-    panelStore.loadSelectedBrand();
+if (process.client) await userStore.refreshToken().catch((e) => {});
 
-    await userStore.refreshToken().catch((e) => {});
+onMounted(() => {
+    panelStore.loadSelectedBrand();
     userStore.setRefreshInterval();
 });
 </script>

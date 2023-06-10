@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/store-dark.png" alt="" />
-                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.branches.Branches") }}</h1>
+                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.branches.Branches") }}</h1>
                 </div>
                 <small class="hidden sm:flex text-sm">
                     {{ $t("panel.branches.Here you can manage your branches and customize their menu") }}
@@ -104,12 +104,13 @@
         <Teleport to="body">
             <Dialog name="delete-confirmation" :title="$t('panel.branches.Delete Branch')">
                 <div class="flex flex-col gap-3">
-                    <img class="w-44 mx-auto" src="~/assets/images/empty.webp" />
+                    <!-- <img class="w-44 mx-auto" src="~/assets/images/empty.webp" /> -->
+                    <hr class="w-full opacity-30 my-2" />
                     <h2 class="text-xl" v-html="$t('panel.branches.You are about to delete this branch', { name: records.list[indexToDelete].name })" />
                     <p class="text-sm opacity-75">
                         {{ $t("panel.branches.deletingBranchDesc") }}
                     </p>
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
                         {{ $t("panel.brands.This action cannot be reversed") }}
                     </small>
                     <hr class="w-full opacity-40" />

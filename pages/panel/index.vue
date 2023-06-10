@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
-                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.brands.Your Brands") }}</h1>
+                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.brands.Your Brands") }}</h1>
                 </div>
                 <small class="hidden sm:flex text-sm">
                     {{ $t("panel.brands.Create new brands, edit your brand details, or manage brands that you are staff of") }}
@@ -166,7 +166,7 @@
                     <p class="text-sm opacity-75">
                         {{ $t("panel.brands.deletingBrandDesc") }}
                     </p>
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
                         {{ $t("panel.brands.This action cannot be reversed") }}
                     </small>
                     <hr class="w-full opacity-40" />
@@ -196,7 +196,7 @@
                     <p class="text-sm opacity-75">
                         {{ $t("panel.brands.leavingBrandDesc") }}
                     </p>
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
                         {{ $t("panel.brands.You need new invitation to join this brand again") }}
                     </small>
                     <hr class="w-full opacity-40" />

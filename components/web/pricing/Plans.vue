@@ -22,7 +22,7 @@
         <ul class="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl md:mt-12">
             <li
                 class="flex flex-col gap-2 rounded-2xl shadow-xl"
-                :class="[item.highlight ? 'gradient-re p-3 md:-mt-12' : 'bg-pencil-tip']"
+                :class="[item.highlight ? 'gradient-re p-2 md:-mt-12' : 'bg-pencil-tip']"
                 v-for="(item, i) in pricing.list"
                 :key="i"
             >
@@ -79,7 +79,7 @@ const pricing = reactive({
     list: [
         {
             highlight: false,
-            icon: "/pricing/basic.webp",
+            icon: "/pricing/basic-g.png",
             title: "Basic",
             desc: "For individuals or small restaurants and small coffee shops",
             monthlyPrice: 0,
@@ -94,7 +94,7 @@ const pricing = reactive({
         },
         {
             highlight: true,
-            icon: "/pricing/standard.webp",
+            icon: "/pricing/standard-g.png",
             title: "Standard",
             desc: "For businesses and restaurants with more than one branch",
             monthlyPrice: 50000,
@@ -110,7 +110,7 @@ const pricing = reactive({
         },
         {
             highlight: false,
-            icon: "/pricing/pro.webp",
+            icon: "/pricing/pro-g.png",
             title: "Pro",
             desc: "For businesses that need more than a digital menu",
             monthlyPrice: 100000,

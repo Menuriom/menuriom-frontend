@@ -52,7 +52,9 @@
                     >
                         <span :value="option.value">{{ option.name }}</span>
                     </MultiSelectDropDown>
-                    <small class="text-xs opacity-75"> {{ $t("panel.staff.If you dont select any branches this user will be able from all branches") }} </small>
+                    <small class="text-xs opacity-75">
+                        {{ $t("panel.staff.If you dont select any branches this user will have access to all branches") }}
+                    </small>
                     <hr class="w-full opacity-25" />
                     <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
@@ -116,8 +118,6 @@ const sendInvite = async () => {
     noUser.value = false;
     responseMessage.value = "";
     errorField.value = "";
-
-    console.log({ selectedBranches: selectedBranches.list });
 
     const data = {
         email: email.value,

@@ -115,6 +115,7 @@ export default {
         Save: "ذخیره",
         Delete: "حذف",
         Select: "انتخاب",
+        Search: "جستجو",
         "Go Back": "بازگشت",
         Uploading: "درحال ارسال",
         Languages: "زبان ها",
@@ -127,6 +128,7 @@ export default {
         Reject: "رد کردن",
         "Load More": "بارگذاری بیشتر",
         "End of the list": "انتهای لیست",
+        "Payment Results": "نتیجه پرداخت",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -139,7 +141,7 @@ export default {
 
         "side-menu": {
             Orders: "سفارشات",
-            "Ordering App": "اپ سفارش گیر",
+            "Ordering App": "اپ سفارش",
 
             Dashboard: "داشبورد",
             "Language Settings": "تنظیمات زبان",
@@ -273,13 +275,15 @@ export default {
             "Invite new staff to your team and manage their access": "دعوت اعضای خدمه به تیم و مدیریت دسترسی های اعضا",
             "Invite Members": "دعوت اعضا",
             "Invite New Member": "دعوت اعضا",
-            "Edit Role": "ویرایش نقش",
+            "Change Access Of Staff": "تغییر دسترسی کاربر",
             "Remove staff": "حذف از تیم",
             "All Branches": "همه شعبه ها",
             "Send Invite": "ارسال دعوت",
             "Go to staff roles": "مدیریت نقش ها",
             Role: "نقش",
+            "Joined At": "تاریخ عضویت",
             "Email address of user that they signup with": "آدرس ایمیل که کاربر با ان ثبت نام کرده",
+            "Member access has been updated": "دسترسی کاربر بروز شد",
 
             "Enter email of user you want to invite, and then select what role you want to apply to them":
                 "ایمیل کاربر مورد نظر را وارد کنید، سپس سطح دسترسی کاربر را معلوم کنید",
@@ -298,13 +302,26 @@ export default {
                 "با حذف این نقش، باید به تمام اعضای خدمه که قبلا این نقش را داشته اند نقش جدیدی اختصاص دهید",
 
             "You can select specific branches for this member": "شما میتوانید فقط دسترسی یکسری شعبه های خاص را برای این کاربر درنظر بگیرید",
-            "If you dont select any branches this user will be able from all branches":
+            "If you dont select any branches this user will have access to all branches":
                 "اگر شعبه ای را برای این کاربر درنظر نگیرید، امکان دسترسی از طریق تمام شعبه ها برای این کاربر فراهم می شود",
 
             "Invite has been sent": "درخواست ارسال شد",
             "Send Another Invite": "ارسال درخواست دیگر",
             "You can always revoke your sent invitations from sent invite list": "شما در هر زمان میتوانید دعوت نامه های ارسالی را از طریق لیست ارسال باطل کنید",
             noUserNotice: "کاربری با این ایمیل در سیستم پیدا نشد. درخواست دعوت برای نمایش به کاربر درهنگام ثبت نام ذخیره شد",
+
+            roles: {
+                "You can create at max 15 roles": "شما میتوانید حداکثر 15 نقش ایجاد کنید",
+                "No Members": "بدون عضو",
+                "Edit Role": "ویرایش نقش",
+                "Role Creation": "ساخت نقش جدید",
+                "Role Name": "نام نقش",
+                "Create Role": "ساخت نقش",
+                Permissions: "دسترسی ها",
+                "New role created": "نقش جدید ایجاد شد",
+                "Role has been updated": "نقش بروز شد",
+                "You can manage the access of this role to different parts of the panel": "شما می توانید دسترسی این نقش را به قسمت های مختلف پنل مدیریت کنید",
+            },
         },
 
         languages: {
@@ -316,6 +333,36 @@ export default {
                 "بسته به زبان هایی که انتخاب میکنید، میتونید منو رو ترجمه کنید",
             "Upgrade your plan to support more languages": "برای انتخاب زبان های بیشتر پلن خود را ارتقا بدید",
             "Select what currency you want to show for your prices": "واحد پولی که در منو نمایش داده میشود رو انتخاب کنید",
+        },
+
+        billing: {
+            Billing: "صورتحساب",
+            "Billing Info": "جزئیات صورتحساب",
+            "Billing History": "تاریخچه پرداختی ها",
+            "Current Plan Details": "مشخصات اشتراک کنونی",
+            remaining: "باقی مانده",
+            "Upgrade-Downgrade Plan": "ارتقا / تنزل اشتراک",
+            "Change Payment Period": "تغییر بازه پرداخت",
+            "You have no bills yet": "شما فعلا هیچ صورت حسابی ندارید",
+            "Upgrade Your Plan Now": "همین الان اشتراکتو ارتقا بده",
+            Purchase: "خرید",
+            "Upgrade Or Downgrade Plan": "ارتقا یا تنزل اشتراک",
+            "You can change your plan type or payment period": "تغییر اشتراک کنونی یا بازه پرداختی",
+            Plans: "پلن ها",
+            "Payment Details": "جزئیات پرداخت",
+            "Current Active Plan": "اشتراک فعال کنونی",
+            "Selected Plan": "پلن انتخابی",
+            "Payable Price": "مبلغ قابل پرداخت",
+            "No Action Needed": "اقدامی لازم نیست",
+            "You have selected your current active plan and payment period": "شما اشتراک کنونی و بازه پرداخت فعلی خود را انتخاب کرده اید",
+            "Head To Payment Gateway": "انتقال به درگاه پرداخت",
+            "Change Plan": "ثبت تغییرات",
+            "No Payment Required": "بدون نیاز به پرداخت",
+
+            "Any unpaid renewal bill for your current plan will be canceled upon successful plan change":
+                "درصورت تفییر موفق اشتراک، هرگونه صورتحساب تمدید پلن کنونی شما لغو خواهد شد",
+            "because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade":
+                "به این علت که کمتر از 5 روز از اشتراک کنونی شما مانده، برای ارتقا باید کل قیمت اشتراک جدید را پرداخت کنید",
         },
     },
 };

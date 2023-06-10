@@ -23,7 +23,7 @@ input::placeholder {
 <template>
     <div class="flex flex-col gap-1">
         <div
-            class="wrapper relative flex items-center bg-neutral-700 dark:bg-black2 text-white rounded-md"
+            class="wrapper relative flex items-center bg-neutral-700 text-white rounded-md"
             :class="{ error: !!error, 'input-box-shadow': !!shadow }"
             @click="focus()"
         >

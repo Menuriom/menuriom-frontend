@@ -5,29 +5,29 @@
         <header class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
-                    <img class="w-9" src="~/assets/images/panel-icons/user-group-dark.png" alt="" />
-                    <h1 class="text-4xl/tight font-bold">{{ $t("panel.staff.Staff Roles") }}</h1>
+                    <img class="w-9" src="~/assets/images/panel-icons/shield.png" alt="" />
+                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.staff.Staff Roles") }}</h1>
                 </div>
                 <small class="hidden sm:flex text-sm">
                     {{ $t("panel.staff.Here you can create roles and manage the access level of each role") }}
                     <!-- TODO : add i icon next to description of any page so that by clicking on it a pop-up opens and shows the general guide for the page -->
                 </small>
             </div>
-            <button
+            <nuxt-link
                 class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
-                @click="panelStore.openPopUp('invite-new-member')"
-                v-if="canCreateNewRoles && checkPermissions(['main-panel.staff.roles'], brand)"
+                :to="localePath(`/panel/${route.params.brandID}/staff/roles/creation`)"
+                v-if="records.list.length < 15 && checkPermissions(['main-panel.staff.roles'], brand)"
             >
                 <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
                 {{ $t("panel.staff.Create New Role") }}
-            </button>
+            </nuxt-link>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
-        <small class="opacity-75 text-xs">You can create at max 15 roles</small>
+        <small class="opacity-75 text-xs">{{ $t("panel.staff.roles.You can create at max 15 roles") }}</small>
         <section class="flex flex-col w-full">
             <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(230px, 1fr))" v-show="!loading">
                 <li
-                    class="relative flex flex-col items-center gap-4 p-4 w-full h-32 rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
+                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
                     v-for="(role, i) in records.list"
                     :key="i"
                 >
@@ -38,7 +38,7 @@
                             v-if="checkPermissions(['main-panel.staff.roles'], brand)"
                         >
                             <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
-                            <small>{{ $t("panel.staff.Edit Role") }}</small>
+                            <small>{{ $t("panel.staff.roles.Edit Role") }}</small>
                         </nuxt-link>
                         <hr class="w-full opacity-40" />
                         <button
@@ -51,14 +51,19 @@
                         </button>
                     </SlideMenu>
                     <h4 class="text-lg font-bold uppercase">{{ role.name }}</h4>
-                    <!-- TODO : show users that got this role (3+ more) -->
-                    <!-- <div class="relative w-24 h-24 rounded-full overflow-hidden bg-pencil-tip shadow-nr15 z-2">
-                        <img class="w-full h-full object-cover" :src="staff.user.avatar" v-if="staff.user.avatar" />
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <p class="text-xs opacity-75">{{ staff.user.email ? staff.user.email : staff.user.mobile }}</p>
-                    </div> -->
                     <hr class="w-3/4 border-b-2 border-dolphin opacity-10 rounded-full" />
+                    <div class="flex flex-wrap items-center justify-between gap-1 w-full p-2 rounded-md bg-neutral-100">
+                        <small>{{ $t("panel.staff.Staff Members") }}:</small>
+                        <ul class="flex items-center" v-if="role.staff.length > 0">
+                            <li class="-ms-3 rounded-full shadow-nr10" v-for="(user, j) in role.staff.slice(0, 3)" :key="j">
+                                <img class="w-8 h-8 object-cover" :src="user.avatar ? user.avatar : '/avatar.webp'" :title="`${user.name} ${user.family}`" />
+                            </li>
+                            <li class="flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-nr10 -ms-3 z-2" v-if="role.staff.length > 3">
+                                <small class="opacity-50">•••</small>
+                            </li>
+                        </ul>
+                        <small class="text-xs opacity-75 py-2" v-else>{{ $t("panel.staff.roles.No Members") }}</small>
+                    </div>
                 </li>
             </ul>
             <Loading v-if="loading" />
@@ -70,9 +75,10 @@
         <Teleport to="body">
             <Dialog name="delete-confirmation" :title="$t('panel.staff.Delete Role')" v-if="panelStore.popUpOpened == 'delete-confirmation'">
                 <div class="flex flex-col gap-3">
-                    <img class="w-28 mx-auto" src="~/assets/images/delete.webp" />
+                    <!-- <img class="w-28 mx-auto" src="~/assets/images/delete.webp" /> -->
+                    <hr class="w-full opacity-30 my-2" />
                     <h2 class="text-xl" v-html="$t('panel.staff.You are about to delete this role', { role: records.list[indexToDelete].name })" />
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
                         {{ $t("panel.staff.By deleting this role, you need to assign a new role to all staff members that previously had this role") }}
                     </small>
                     <hr class="w-full opacity-40" />
@@ -95,11 +101,7 @@
                     </div>
                 </div>
             </Dialog>
-            <!-- TODO : For adding new roles make two version that can switch between (one with less complexcity and one more detailed) -->
-            <!-- for example complex one shows all the permissions that user can toggle but simple one only shows permission labels and by toggling gives all permissions of that group -->
         </Teleport>
-
-        <!-- TODO : role creation and edit -> page base form -->
     </div>
 </template>
 
@@ -125,8 +127,6 @@ const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] |
 const errorField = ref("");
 const responseMessage = ref("");
 
-const canCreateNewRoles = ref(true);
-
 // deleting ----------------------------------------
 const deleting = ref(false);
 const indexToDelete = ref(null);
@@ -144,11 +144,10 @@ const deleteRecord = async () => {
     const id = records.list[indexToDelete.value]._id;
 
     await axios
-        .delete(`/api/v1/panel/staff/${id}`, { headers: { brand: route.params.brandID } })
+        .delete(`/api/v1/panel/staff-roles/${id}`, { headers: { brand: route.params.brandID } })
         .then((response) => {
             records.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();
-            // TODO : allow user to create new branch if the limit is under the plan's limit
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -176,19 +175,16 @@ const handleErrors = (err) => {
 };
 
 // getRolesList -------------------------------------------------
-const loading = ref(true);
 const records = reactive({ list: [] });
 const getRolesList_results = await useLazyAsyncData(() => getStaffRolesList(route.params.brandID));
+const loading = computed(()=>getRolesList_results.pending.value);
 
 if (getRolesList_results.error.value) handleErrors(getRolesList_results.error.value);
 watch(getRolesList_results.error, (err) => handleErrors(err));
 
 const handleStaffRolesList_results = (data) => {
     records.list = data._records;
-    canCreateNewRoles.value = data._canCreateNewRoles;
-    loading.value = false;
 };
-if (getRolesList_results.data.value) handleStaffRolesList_results(getRolesList_results.data.value);
-watch(getRolesList_results.data, (val) => handleStaffRolesList_results(val));
+watch(getRolesList_results.data, (val) => handleStaffRolesList_results(val),{ immediate: process.server || useNuxtApp().isHydrating });
 // -------------------------------------------------
 </script>
