@@ -33,6 +33,9 @@
             "You are downgrading your plan from X to Y": "You are downgrading your plan from {fromPlan} to {toPlan}",
             "because X days left from your current plan you need to pay the plan price difference for these X days to upgrade your plan": "because {days} days left from your current plan, you need to pay the plan price difference for these {days} days to upgrade your plan",
             "planChangeDaysWillBeLossed": "Still {remainingDays} days remaining from your current plan, if you downgrade your plan these {remainingDays} days will also be converted to {toPlan}"
+        },
+        "payment": {
+            "errorWithCode": "Payment failed with error code of {code}"
         }
     }
 }

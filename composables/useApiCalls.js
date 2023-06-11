@@ -289,6 +289,28 @@ export const getPurchasablePlans = async () => {
 
     return { _plans };
 };
+export const getTransactionDetails = async (transactionID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/transactions/${transactionID}`, {});
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _brandID = "";
+    let _bill = {};
+    let _transaction = {};
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _brandID = response.data.brandID;
+            _bill = response.data.bill;
+            _transaction = response.data.transaction;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _brandID, _bill, _transaction };
+};
 // ---------------------------------------------------------
 
 // general APIs ---------------------------------------------------------

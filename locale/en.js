@@ -360,11 +360,35 @@ export default {
             "Head To Payment Gateway": "Head To Payment Gateway",
             "Change Plan": "Change Plan",
             "No Payment Required": "No Payment Required",
-            
+
             "Any unpaid renewal bill for your current plan will be canceled upon successful plan change":
                 "Any unpaid renewal bill for your current plan will be canceled upon successful plan change",
             "because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade":
                 "because less than 5 days of your current plan remaining, you need to pay the whole price of the plan to upgrade",
+        },
+
+        payment: {
+            "Payment Successful": "Payment Successful",
+            "Payment Failed": "Payment Failed",
+            "Please contact our support for more info": "Please contact our support for more info",
+            "Go back to billing page": "Go back to billing page",
+            "Transaction Details": "Transaction Details",
+            "Transaction Code": "Transaction Code",
+            "Payment Status": "Payment Status",
+            "Payment Method": "Payment Method",
+            "Transaction Time": "Transaction Time",
+            "Paid Amount": "Paid Amount",
+
+            "Bill Info": "Bill Info",
+            "Bill Number": "Bill Number",
+            "Payable Price": "Payable Price",
+            notPaid: "Not Paid",
+            pendingPayment: "Pending Payment",
+            paid: "Paid",
+            canceled: "Canceled",
+
+            "Trouble With Your Payment?": "Trouble With Your Payment?",
+            "Let us know by contacting through support": "Let us know by contacting through support",
         },
     },
 };

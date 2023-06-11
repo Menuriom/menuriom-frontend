@@ -31,6 +31,8 @@ export default defineEventHandler(async (event) => {
 
     let statusCode = 499;
     let message = "UnknowResults";
+    let transactionID = "";
+
     let redirectTo = lang == "en" ? "/en" : "";
     redirectTo += "/panel/billing/payment-results?";
 
@@ -42,8 +44,9 @@ export default defineEventHandler(async (event) => {
             headers: { ...req.headers, "accept-language": lang, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() },
         })
         .then((response) => {
-            statusCode = 200;
-            message = 'SuccessfulPayment';
+            statusCode = response.data.statusCode || 200;
+            message = response.data.message || "SuccessfulPayment";
+            transactionID = response.data.transactionID;
         })
         .catch((error) => {
             if (typeof error.response === "undefined") {
@@ -57,5 +60,7 @@ export default defineEventHandler(async (event) => {
         });
 
     redirectTo += `statusCode=${statusCode}&message=${message}`;
+    if (transactionID) redirectTo += `&transactionID=${transactionID}`;
+
     await sendRedirect(event, redirectTo);
 });

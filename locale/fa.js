@@ -364,5 +364,29 @@ export default {
             "because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade":
                 "به این علت که کمتر از 5 روز از اشتراک کنونی شما مانده، برای ارتقا باید کل قیمت اشتراک جدید را پرداخت کنید",
         },
+
+        payment: {
+            "Payment Successful": "پرداخت موفق",
+            "Payment Failed": "پرداخت ناموفق",
+            "Please contact our support for more info": "برای اطلاعات بیشتر لطفا با پشتیبانی تماس بگیرید",
+            "Go back to billing page": "بازگشت به صفحه صورتحساب ها",
+            "Transaction Details": "جزئیات تراکنش",
+            "Transaction Code": "کد تراکنش",
+            "Payment Status": "وضعیت پرداخت",
+            "Payment Method": "روش پرداخت",
+            "Transaction Time": "تاریخ تراکنش",
+            "Paid Amount": "مبلغ پرداختی",
+
+            "Bill Info": "مشخصات فاکتور",
+            "Bill Number": "شماره فاکتور",
+            "Payable Price": "مبلغ قابل پرداخت",
+            notPaid: "پرداخت نشده",
+            pendingPayment: "منتظر پرداخت",
+            paid: "پرداخت شده",
+            canceled: "لغو شده",
+
+            "Trouble With Your Payment?": "در پرداخت خود مشکلی دارید؟",
+            "Let us know by contacting through support": "از طریق پشتیبانی به ما اطلاع دهید",
+        },
     },
 };

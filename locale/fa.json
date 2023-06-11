@@ -33,6 +33,9 @@
             "You are downgrading your plan from X to Y": "شما درحال تنزل اشتراک خود از {fromPlan} به {toPlan} هستید",
             "because X days left from your current plan you need to pay the plan price difference for these X days to upgrade your plan": "به این دلیل که {days} روز از طرح فعلی شما باقی مانده است، باید تفاوت قیمت طرح را برای این {days} روز بپردازید تا طرح خود را ارتقا دهید.",
             "planChangeDaysWillBeLossed": "از اشتراک کنونی شما {remainingDays} روز باقی مانده، اگر اشتراک خود را به طرح پایین تری کاهش دهید، این {remainingDays} روز باقی مانده نیز به طرح {toPlan} تبدیل میشود"
+        },
+        "payment": {
+            "errorWithCode": "پرداخت با کد {code} با خطا مواجه شد"
         }
     }
 }
