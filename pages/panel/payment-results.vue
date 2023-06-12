@@ -52,26 +52,35 @@
                 <span class="w-full h-0.5 bg-neutral-200 grow"></span>
             </h2>
             <ul class="flex flex-col gap-4 w-full">
-                <li class="flex flex-col sm:flex-row items-center justify-between gap-1 w-full">
+                <li class="flex flex-col sm:flex-row items-center justify-between gap-1 w-full" v-if="paymentInfo.transaction.code">
                     <span class="text-sm">{{ $t("panel.payment.Transaction Code") }}</span>
                     <b>{{ paymentInfo.transaction.code }}</b>
                 </li>
                 <li class="flex flex-col sm:flex-row items-center justify-between gap-1 w-full">
                     <span class="text-sm">{{ $t("panel.payment.Payment Status") }}</span>
-                    <b class="flex items-center gap-1">
-                        <div class="bg-blue-500 w-5 h-5 rounded-full" v-if="paymentInfo.transaction.status == 'pending'">
+                    <b class="flex items-center gap-1" v-if="paymentInfo.transaction.status == 'pending'">
+                        <div class="bg-blue-500 w-5 h-5 rounded-full">
                             <Icon class="w-5 h-5 bg-blue-50" name="Sand-watch.svg" folder="icons/basil" size="20px" />
                         </div>
-                        <div class="bg-emerald-500 w-5 h-5 rounded-full" v-if="paymentInfo.transaction.status == 'ok'">
+                        {{ $t("panel.payment.pendingPayment") }}
+                    </b>
+                    <b class="flex items-center gap-1" v-if="paymentInfo.transaction.status == 'ok'">
+                        <div class="bg-emerald-500 w-5 h-5 rounded-full">
                             <Icon class="w-5 h-5 bg-emerald-50" name="Check.svg" folder="icons/basil" size="24px" />
                         </div>
-                        <div class="bg-rose-500 w-5 h-5 rounded-full" v-if="paymentInfo.transaction.status == 'canceled'">
+                        {{ $t("panel.payment.done") }}
+                    </b>
+                    <b class="flex items-center gap-1" v-if="paymentInfo.transaction.status == 'canceled'">
+                        <div class="bg-rose-500 w-5 h-5 rounded-full">
                             <Icon class="w-5 h-5 bg-rose-50" name="Cross.svg" folder="icons/basil" size="24px" />
                         </div>
-                        <div class="bg-red-500 w-5 h-5 rounded-full" v-if="paymentInfo.transaction.status == 'error'">
+                        {{ $t("panel.payment.canceled") }}
+                    </b>
+                    <b class="flex items-center gap-1" v-if="paymentInfo.transaction.status == 'error'">
+                        <div class="bg-red-500 w-5 h-5 rounded-full">
                             <Icon class="w-5 h-5 bg-red-50" name="Info-circle.svg" folder="icons/basil" size="22px" />
                         </div>
-                        {{ paymentInfo.transaction.status }}
+                        {{ $t("panel.payment.error") }}
                     </b>
                 </li>
                 <li class="flex flex-col sm:flex-row items-center justify-between gap-1 w-full">

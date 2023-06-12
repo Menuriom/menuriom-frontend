@@ -349,6 +349,7 @@ export default {
             "Upgrade Or Downgrade Plan": "ارتقا یا تنزل اشتراک",
             "You can change your plan type or payment period": "تغییر اشتراک کنونی یا بازه پرداختی",
             Plans: "پلن ها",
+            Plan: "اشتراک",
             "Payment Details": "جزئیات پرداخت",
             "Current Active Plan": "اشتراک فعال کنونی",
             "Selected Plan": "پلن انتخابی",
@@ -358,6 +359,14 @@ export default {
             "Head To Payment Gateway": "انتقال به درگاه پرداخت",
             "Change Plan": "ثبت تغییرات",
             "No Payment Required": "بدون نیاز به پرداخت",
+
+            "Bill Number": "شماره فاکتور",
+            For: "به مدت",
+            "Issue Date": "تاریخ صدور",
+            "Due Date": "مهلت پرداخت",
+            "Your Last Bill": "اخرین صورتحساب",
+            "Payment Details": "جزئیات پرداخت",
+            "Pay This Bill": "پرداخت صورتحساب",
 
             "Any unpaid renewal bill for your current plan will be canceled upon successful plan change":
                 "درصورت تفییر موفق اشتراک، هرگونه صورتحساب تمدید پلن کنونی شما لغو خواهد شد",
@@ -384,6 +393,8 @@ export default {
             pendingPayment: "منتظر پرداخت",
             paid: "پرداخت شده",
             canceled: "لغو شده",
+            done: "انجام شده",
+            error: "خطا",
 
             "Trouble With Your Payment?": "در پرداخت خود مشکلی دارید؟",
             "Let us know by contacting through support": "از طریق پشتیبانی به ما اطلاع دهید",

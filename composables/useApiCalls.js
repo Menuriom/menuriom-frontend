@@ -311,6 +311,31 @@ export const getTransactionDetails = async (transactionID) => {
 
     return { _brandID, _bill, _transaction };
 };
+export const getBillHistoryList = async (brandID, records = [], pp = 25, lastRecordID, searchQuery = "") => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/billing/list`, { brand: brandID });
+    const params = [];
+    params.push(`pp=${pp}`);
+    if (searchQuery) params.push(`searchQuery=${searchQuery}`);
+    if (lastRecordID) params.push(`lastRecordID=${lastRecordID}`);
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _records = records;
+    let _total = 0;
+    let _noMoreRecords = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _records.push(...response.data.records);
+            _total = Number(response.data.total);
+            if (response.data.records.length === 0) _noMoreRecords = true;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _records, _total, _noMoreRecords };
+};
 // ---------------------------------------------------------
 
 // general APIs ---------------------------------------------------------

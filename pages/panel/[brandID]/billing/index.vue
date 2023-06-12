@@ -27,6 +27,7 @@
             <span class="absolute start-1/4 -bottom-14 -rotate-45 -ms-10 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute start-1/4 -bottom-20 -rotate-12 gradient-re w-24 h-24 rounded-2xl"></span>
             <div class="relative flex flex-col items-center justify-between gap-2">
+                <!-- TODO -->
                 <h5 class="hidden 2sm:flex gradient-text text-3xl font-black">Upgrade To Pro</h5>
             </div>
         </nuxt-link>
@@ -51,7 +52,7 @@
                                 </h2>
                             </div>
                             <div class="flex items-center gap-1" v-if="currentPlan.daysRemaining">
-                                <b>{{ currentPlan.daysRemaining }}</b>
+                                <b class="text-purple-400">{{ currentPlan.daysRemaining }}</b>
                                 <small>{{ $t("panel.billing.remaining") }}</small>
                             </div>
                         </div>
@@ -67,7 +68,8 @@
                         <div class="flex items-baseline gap-2" v-if="currentPlan.price > 0">
                             <div class="flex flex-wrap items-end gap-1">
                                 <b class="text-2xl/none text-emerald-200">
-                                    {{ Intl.NumberFormat(locale).format(currentPlan.price / 1000) }}<span class="text-sm font-normal">,000</span>
+                                    {{ Intl.NumberFormat(locale).format(currentPlan.price) }}
+                                    <!-- <span class="text-sm font-normal">,000</span> -->
                                 </b>
                                 <b class="f-inter text-sm font-extralight">{{ $t("pricing.Toman") }}</b>
                             </div>
@@ -118,35 +120,48 @@
                         </button>
                     </div>
                 </div>
-                <div class="flex flex-col gap-2 p-4 w-full border-2 bg-white rounded-lg shadow-nr5 grow" v-if="bills.list.length">
+                <div class="flex flex-col gap-2 p-4 w-full border-2 bg-white rounded-lg shadow-nr5 grow" v-if="bills.list.length > 0">
                     <div class="flex flex-wrap items-center gap-4 w-full">
-                        <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">Your Last Bill</h3>
+                        <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Your Last Bill") }}</h3>
                         <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
-                        <div class="flex items-center gap-1 text-sm">
-                            <span>Due Date:</span>
-                            <b>31/02/1401</b>
+                        <div class="flex items-center gap-1 text-sm" v-if="bills.list[0].dueDate">
+                            <span>{{ $t("panel.billing.Due Date") }}:</span>
+                            <b>{{ new Date(bills.list[0].dueDate).toLocaleString(locale) }}</b>
                         </div>
                     </div>
-                    <small>Bill Number <b class="text-sm">#4282521</b></small>
-                    <p class="text-sm">For renewal of monthly standard plan from 01/02/1401 till 01/03/1401</p>
+                    <small>
+                        {{ $t("panel.billing.Bill Number") }} <b class="text-sm" dir="ltr">#{{ bills.list[0].billNumber }}</b>
+                    </small>
+                    <p class="text-sm w-full max-w-sm">{{ bills.list[0].translation?.[locale]?.description || bills.list[0].description }}</p>
+                    <p class="text-sm w-full max-w-sm" v-if="bills.list[0].forHowLong">{{ $t("panel.billing.For") }} {{ bills.list[0].forHowLong }}</p>
                     <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-md bg-neutral-100 grow">
                         <div class="flex flex-col items-start">
-                            <h4 class="text-sm">Plan</h4>
-                            <b class="">Standard Plan</b>
+                            <h4 class="text-sm">{{ $t("panel.billing.Plan") }}</h4>
+                            <b>{{ bills.list[0].plan.translation?.[locale]?.name || bills.list[0].plan.name }}</b>
                         </div>
                         <div class="flex items-baseline gap-1">
-                            <span class="text-3xl/none text-lime-700">324,000,000</span>
-                            <small class="text-sm">Toman</small>
+                            <span class="text-3xl/none text-lime-700"> {{ Intl.NumberFormat(locale).format(bills.list[0].payablePrice) }}</span>
+                            <small class="text-sm">{{ $t("pricing.Toman") }}</small>
                         </div>
                     </div>
                     <h3 class="flex items-center gap-4">
-                        <b class="text-sm shrink-0">Payment Details</b>
+                        <b class="text-sm shrink-0">{{ $t("panel.billing.Payment Details") }}</b>
                         <span class="w-full h-0.5 bg-zinc-400 opacity-30"></span>
                     </h3>
                     <div class="flex flex-wrap items-center justify-between gap-4 w-full">
-                        <span class="p-2 text-sm rounded-md bg-red-800 bg-opacity-25 text-rose-800">Not Paid</span>
+                        <span
+                            class="p-2 text-sm rounded-md bg-opacity-25"
+                            :class="{
+                                'bg-red-800 text-rose-800': bills.list[0].status == 'notPaid',
+                                'bg-blue-800 text-blue-800': bills.list[0].status == 'pendingPayment',
+                                'bg-emerald-800 text-emerald-800': bills.list[0].status == 'paid',
+                                'bg-red-800 text-red-800': bills.list[0].status == 'canceled',
+                            }"
+                        >
+                            {{ $t(`panel.payment.${bills.list[0].status}`) }}
+                        </span>
                         <div>
-                            <button class="btn w-max p-3 px-6 text-sm bg-violet text-white rounded-lg">Renew Subscription</button>
+                            <button class="btn w-max p-3 px-6 text-sm bg-violet text-white rounded-lg">{{$t("panel.billing.Pay This Bill")}}</button>
                         </div>
                     </div>
                 </div>
@@ -219,7 +234,7 @@
             </div>
         </section>
 
-        <section class="flex flex-col gap-4 w-full" name="Billing History">
+        <section class="flex flex-col gap-4 w-full pb-6" name="Billing History">
             <header class="flex items-center gap-2">
                 <img class="w-9" src="~/assets/images/panel-icons/money-bill-transfer-dark.png" alt="" />
                 <h1 class="text-2xl/tight md:text-3xl/tight font-bold">{{ $t("panel.billing.Billing History") }}</h1>
@@ -232,42 +247,65 @@
                     v-for="(bill, i) in bills.list"
                     :key="i"
                 >
-                    <div class="flex flex-col gap-2">
-                        <small>Bill Number <b class="text-sm">#4282521</b></small>
+                    <div class="flex flex-col gap-2 w-72">
+                        <small>
+                            {{ $t("panel.billing.Bill Number") }} <b class="text-sm" dir="ltr">#{{ bill.billNumber }}</b>
+                        </small>
                         <div class="flex flex-col gap-1">
-                            <p class="text-sm w-full max-w-sm">For renewal of the monthly standard plan</p>
-                            <p class="text-sm w-full max-w-sm">
-                                From <span class="p-1.5 py-0.5 bg-neutral-100 rounded-md shadow-inner">01/02/1401</span> Till
-                                <span class="p-1.5 py-0.5 bg-neutral-100 rounded-md shadow-inner">01/03/1401</span>
+                            <p class="text-sm w-full max-w-sm">{{ bill.translation?.[locale]?.description || bill.description }}</p>
+                            <p class="text-sm w-full max-w-sm" v-if="bill.forHowLong">
+                                {{ $t("panel.billing.For") }} <span class="p-1.5 py-0.5 bg-neutral-100 rounded-md shadow-inner">{{ bill.forHowLong }}</span>
                             </p>
                         </div>
                     </div>
                     <div class="flex flex-col gap-1">
                         <div class="flex items-center gap-1 text-sm">
-                            <span class="w-20">Issue Date:</span>
-                            <b class="w-16">31/02/1401</b>
+                            <span class="w-20">{{ $t("panel.billing.Issue Date") }}:</span>
+                            <b class="w-44">{{ new Date(bill.createdAt).toLocaleString(locale) }}</b>
                         </div>
-                        <div class="flex items-center gap-1 text-sm">
-                            <span class="w-20">Due Date:</span>
-                            <b class="w-16">31/12/1401</b>
+                        <div class="flex items-center gap-1 text-sm" v-if="bill.dueDate">
+                            <span class="w-20">{{ $t("panel.billing.Due Date") }}:</span>
+                            <b class="w-44">{{ new Date(bill.dueDate).toLocaleString(locale) }}</b>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center w-40">
-                        <div class="flex items-center gap-2 p-2 rounded-lg border bg-neutral-800 shrink-0">
-                            <img class="w-6" src="/pricing/standard-g.png" alt="basic" />
-                            <span class="gradient-text text-sm font-bold">Standard Plan</span>
+                    <div class="flex items-center justify-center w-44 shrink-0">
+                        <div class="flex items-center gap-2 p-2 rounded-lg border bg-neutral-800">
+                            <img class="w-6" :src="bill.plan.icon" :alt="bill.plan.name" />
+                            <span class="gradient-text font-bold">
+                                {{ bill.plan.translation?.[locale]?.name || bill.plan.name }}
+                            </span>
                         </div>
                     </div>
                     <div class="money-box flex items-baseline gap-1 w-full">
-                        <span class="text-xl text-lime-700">324,000,000</span>
-                        <small class="text-sm">Toman</small>
+                        <span class="text-xl text-lime-700"> {{ Intl.NumberFormat(locale).format(bill.payablePrice) }}</span>
+                        <small class="text-sm">{{ $t("pricing.Toman") }}</small>
                     </div>
-                    <span class="w-20 text-center p-2 py-1 text-sm rounded-md bg-red-800 bg-opacity-25 text-rose-800 shrink-0">Not Paid</span>
+                    <div class="flex items-center md:justify-center w-40 shrink-0">
+                        <span
+                            class="text-center p-2 py-1 text-sm rounded-md bg-opacity-25"
+                            :class="{
+                                'bg-red-800 text-rose-800': bill.status == 'notPaid',
+                                'bg-blue-800 text-blue-800': bill.status == 'pendingPayment',
+                                'bg-emerald-800 text-emerald-800': bill.status == 'paid',
+                                'bg-red-800 text-red-800': bill.status == 'canceled',
+                            }"
+                        >
+                            {{ $t(`panel.payment.${bill.status}`) }}
+                        </span>
+                    </div>
                     <button class="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-50 border shrink-0" @click="toggleMenu()">
                         <Icon class="w-5 h-5 bg-black rotate-90" name="dots.svg" folder="icons" size="4px" />
                     </button>
                 </li>
             </ul>
+            <Loading v-if="loadingBills" />
+            <button class="btn w-max p-2.5 border-2 border-black rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreBills">
+                {{ $t("panel.Load More") }}
+            </button>
+            <small class="text-xs opacity-75" v-if="noMoreBills && bills.list.length > 0">{{ $t("panel.End of the list") }}</small>
+            <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loadingBills && errorField === 'data' && responseMessage !== ''">
+                <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+            </small>
             <div class="flex flex-col items-center gap-4 w-full my-10" v-if="!bills.list.length">
                 <img class="w-40" src="~/assets/images/invoice.webp" alt="invoice" />
                 <p class="text-sm opacity-50">{{ $t("panel.billing.You have no bills yet") }}</p>
@@ -289,7 +327,6 @@ import { useUserStore } from "@/stores/user";
 const { locale, t } = useI18n();
 const route = useRoute();
 const nuxtApp = useNuxtApp();
-const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
@@ -360,6 +397,32 @@ watch(getPurchasablePlans_results.data, (val) => handlePurchasablePlans_results(
 // -------------------------------------------------
 
 // getBills -------------------------------------------------
+const noMoreBills = ref(false);
+const lastBillID = ref("");
+const pp = ref({ value: 25, name: "25" });
 const bills = reactive({ list: [] });
+const totalRecords = ref(0);
+const getBillsList_results = await useLazyAsyncData(() => getBillHistoryList(route.params.brandID, bills.list, pp.value.value, lastBillID.value), {
+    watch: [lastBillID],
+});
+const loadingBills = computed(() => getBillsList_results.pending.value);
+
+if (getBillsList_results.error.value) handleErrors(getBillsList_results.error.value);
+watch(getBillsList_results.error, (err) => handleErrors(err));
+
+const handleBillsList_results = (data) => {
+    if (!data) return;
+    bills.list = data._records;
+    totalRecords.value = data._total;
+    noMoreBills.value = data._noMoreBills;
+};
+watch(getBillsList_results.data, (val) => handleBillsList_results(val), { immediate: process.server || nuxtApp.isHydrating });
+
+const loadMore = () => {
+    if (noMoreBills.value) return;
+    const lastRecord = bills.list.at(-1);
+    if (lastBillID.value === lastRecord._id) noMoreBills.value = true;
+    lastBillID.value = lastRecord._id;
+};
 // -------------------------------------------------
 </script>

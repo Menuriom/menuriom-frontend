@@ -351,6 +351,7 @@ export default {
             "Upgrade Or Downgrade Plan": "Upgrade Or Downgrade Plan",
             "You can change your plan type or payment period": "You can change your plan type or payment period",
             Plans: "Plans",
+            Plan: "Plan",
             "Payment Details": "Payment Details",
             "Current Active Plan": "Current Active Plan",
             "Selected Plan": "Selected Plan",
@@ -360,6 +361,14 @@ export default {
             "Head To Payment Gateway": "Head To Payment Gateway",
             "Change Plan": "Change Plan",
             "No Payment Required": "No Payment Required",
+
+            "Bill Number": "Bill Number",
+            For: "For",
+            "Issue Date": "Issue Date",
+            "Due Date": "Due Date",
+            "Your Last Bill": "Your Last Bill",
+            "Payment Details": "Payment Details",
+            "Pay This Bill": "Pay This Bill",
 
             "Any unpaid renewal bill for your current plan will be canceled upon successful plan change":
                 "Any unpaid renewal bill for your current plan will be canceled upon successful plan change",
@@ -386,6 +395,8 @@ export default {
             pendingPayment: "Pending Payment",
             paid: "Paid",
             canceled: "Canceled",
+            done: "Done",
+            error: "Error",
 
             "Trouble With Your Payment?": "Trouble With Your Payment?",
             "Let us know by contacting through support": "Let us know by contacting through support",

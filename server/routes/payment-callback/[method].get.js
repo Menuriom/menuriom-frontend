@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
     let transactionID = "";
 
     let redirectTo = lang == "en" ? "/en" : "";
-    redirectTo += "/panel/billing/payment-results?";
+    redirectTo += "/panel/payment-results?";
 
     await axios
         .request({

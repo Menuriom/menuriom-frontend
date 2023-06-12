@@ -35,7 +35,7 @@
             "planChangeDaysWillBeLossed": "از اشتراک کنونی شما {remainingDays} روز باقی مانده، اگر اشتراک خود را به طرح پایین تری کاهش دهید، این {remainingDays} روز باقی مانده نیز به طرح {toPlan} تبدیل میشود"
         },
         "payment": {
-            "errorWithCode": "پرداخت با کد {code} با خطا مواجه شد"
+            "errorWithCode": "پرداخت با خطا مواجه شد! کد خطا {code}"
         }
     }
 }
