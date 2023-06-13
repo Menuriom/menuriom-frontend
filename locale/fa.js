@@ -360,6 +360,8 @@ export default {
             "Change Plan": "ثبت تغییرات",
             "No Payment Required": "بدون نیاز به پرداخت",
 
+            Transactions: "تراکنش ها",
+            "Bill Details": "جزئیات صورتحساب",
             "Bill Number": "شماره فاکتور",
             For: "به مدت",
             "Issue Date": "تاریخ صدور",
@@ -367,6 +369,8 @@ export default {
             "Your Last Bill": "اخرین صورتحساب",
             "Payment Details": "جزئیات پرداخت",
             "Pay This Bill": "پرداخت صورتحساب",
+            "Your plan and payment period successfully updated": "طرح و دوره پرداخت شما با موفقیت به روز شد",
+            "There is no transactions for this bill": "تراکنشی برای این صورتحساب وجود ندارد",
 
             "Any unpaid renewal bill for your current plan will be canceled upon successful plan change":
                 "درصورت تفییر موفق اشتراک، هرگونه صورتحساب تمدید پلن کنونی شما لغو خواهد شد",

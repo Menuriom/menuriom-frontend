@@ -362,6 +362,8 @@ export default {
             "Change Plan": "Change Plan",
             "No Payment Required": "No Payment Required",
 
+            Transactions: "Transactions",
+            "Bill Details": "Bill Details",
             "Bill Number": "Bill Number",
             For: "For",
             "Issue Date": "Issue Date",
@@ -369,6 +371,8 @@ export default {
             "Your Last Bill": "Your Last Bill",
             "Payment Details": "Payment Details",
             "Pay This Bill": "Pay This Bill",
+            "Your plan and payment period successfully updated": "Your plan and payment period were successfully updated",
+            "There is no transactions for this bill": "There is no transactions for this bill",
 
             "Any unpaid renewal bill for your current plan will be canceled upon successful plan change":
                 "Any unpaid renewal bill for your current plan will be canceled upon successful plan change",

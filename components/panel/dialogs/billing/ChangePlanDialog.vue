@@ -146,16 +146,19 @@ import Dialog from "~/components/panel/Dialog.vue";
 import SelectDropDown from "~/components/form/SelectDropDown.vue";
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
+import { useToast } from "vue-toastification";
+import { usePanelStore } from "@/stores/panel";
 
 const props = defineProps({
     purchasablePlans: Array,
     currentPlan: Object,
 });
+const emit = defineEmits(["update:currentPlan"]);
 
-// "nextInvoice" : ISODate("2023-06-28T10:51:49.519Z"),
-
-const { locale, t } = useI18n();
+const { localeProperties, locale, t } = useI18n();
 const route = useRoute();
+const toast = useToast();
+const panelStore = usePanelStore();
 
 const form = ref(); // Dom Ref
 const loading = ref(false);
@@ -336,8 +339,12 @@ const changePlan = async () => {
                 window.location.href = response.data.url;
             } else {
                 loading.value = false;
-                // TODO
-                // inform back up to index page to change the plan and bill details if necceary
+                emit("update:currentPlan");
+                toast.success(t("panel.billing.Your plan and payment period successfully updated"), {
+                    timeout: 3000,
+                    rtl: localeProperties.value.dir == "rtl",
+                });
+                panelStore.closePopUp();
             }
         })
         .catch((err) => {

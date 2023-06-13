@@ -259,17 +259,19 @@ export const getCurrentPlan = async (brandID) => {
     url = encodeURI(`${url}?${params.join("&")}`);
 
     let _currentPlan = [];
+    let _lastBill = [];
 
     await axios
         .get(url, { headers: headers })
         .then((response) => {
             _currentPlan = response.data.currentPlan;
+            _lastBill = response.data.lastBill;
         })
         .catch((e) => {
             throw e;
         });
 
-    return { _currentPlan };
+    return { _currentPlan, _lastBill };
 };
 export const getPurchasablePlans = async () => {
     let { url, headers } = getRequestConfig(`/api/v1/pricing/purchasable-plans`, {});
@@ -335,6 +337,30 @@ export const getBillHistoryList = async (brandID, records = [], pp = 25, lastRec
         });
 
     return { _records, _total, _noMoreRecords };
+};
+export const getBillTransactionsList = async (brandID, billID, records = [], pp = 25, lastRecordID, searchQuery = "") => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/transactions`, { brand: brandID });
+    const params = [];
+    params.push(`pp=${pp}`);
+    if (searchQuery) params.push(`searchQuery=${searchQuery}`);
+    if (lastRecordID) params.push(`lastRecordID=${lastRecordID}`);
+    if (billID) params.push(`billID=${billID}`);
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _records = records;
+    let _noMoreRecords = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _records.push(...response.data.records);
+            if (response.data.records.length === 0) _noMoreRecords = true;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _records, _noMoreRecords };
 };
 // ---------------------------------------------------------
 

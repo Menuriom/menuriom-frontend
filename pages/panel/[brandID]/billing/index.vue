@@ -120,27 +120,27 @@
                         </button>
                     </div>
                 </div>
-                <div class="flex flex-col gap-2 p-4 w-full border-2 bg-white rounded-lg shadow-nr5 grow" v-if="bills.list.length > 0">
+                <div class="flex flex-col gap-2 p-4 w-full border-2 bg-white rounded-lg shadow-nr5 grow" v-if="bills.list.length > 0 && lastBill.billNumber">
                     <div class="flex flex-wrap items-center gap-4 w-full">
                         <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Your Last Bill") }}</h3>
                         <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
-                        <div class="flex items-center gap-1 text-sm" v-if="bills.list[0].dueDate">
+                        <div class="flex items-center gap-1 text-sm" v-if="lastBill.dueDate">
                             <span>{{ $t("panel.billing.Due Date") }}:</span>
-                            <b>{{ new Date(bills.list[0].dueDate).toLocaleString(locale) }}</b>
+                            <b>{{ new Date(lastBill.dueDate).toLocaleString(locale) }}</b>
                         </div>
                     </div>
                     <small>
-                        {{ $t("panel.billing.Bill Number") }} <b class="text-sm" dir="ltr">#{{ bills.list[0].billNumber }}</b>
+                        {{ $t("panel.billing.Bill Number") }} <b class="text-sm" dir="ltr">#{{ lastBill.billNumber }}</b>
                     </small>
-                    <p class="text-sm w-full max-w-sm">{{ bills.list[0].translation?.[locale]?.description || bills.list[0].description }}</p>
-                    <p class="text-sm w-full max-w-sm" v-if="bills.list[0].forHowLong">{{ $t("panel.billing.For") }} {{ bills.list[0].forHowLong }}</p>
+                    <p class="text-sm w-full max-w-sm">{{ lastBill.translation?.[locale]?.description || lastBill.description }}</p>
+                    <p class="text-sm w-full max-w-sm -mt-2" v-if="lastBill.forHowLong">{{ $t("panel.billing.For") }} {{ lastBill.forHowLong }}</p>
                     <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-md bg-neutral-100 grow">
                         <div class="flex flex-col items-start">
                             <h4 class="text-sm">{{ $t("panel.billing.Plan") }}</h4>
-                            <b>{{ bills.list[0].plan.translation?.[locale]?.name || bills.list[0].plan.name }}</b>
+                            <b>{{ lastBill.plan.translation?.[locale]?.name || lastBill.plan.name }}</b>
                         </div>
                         <div class="flex items-baseline gap-1">
-                            <span class="text-3xl/none text-lime-700"> {{ Intl.NumberFormat(locale).format(bills.list[0].payablePrice) }}</span>
+                            <span class="text-3xl/none text-lime-700"> {{ Intl.NumberFormat(locale).format(lastBill.payablePrice) }}</span>
                             <small class="text-sm">{{ $t("pricing.Toman") }}</small>
                         </div>
                     </div>
@@ -152,16 +152,16 @@
                         <span
                             class="p-2 text-sm rounded-md bg-opacity-25"
                             :class="{
-                                'bg-red-800 text-rose-800': bills.list[0].status == 'notPaid',
-                                'bg-blue-800 text-blue-800': bills.list[0].status == 'pendingPayment',
-                                'bg-emerald-800 text-emerald-800': bills.list[0].status == 'paid',
-                                'bg-red-800 text-red-800': bills.list[0].status == 'canceled',
+                                'bg-red-800 text-rose-800': lastBill.status == 'notPaid',
+                                'bg-blue-800 text-blue-800': lastBill.status == 'pendingPayment',
+                                'bg-emerald-800 text-emerald-800': lastBill.status == 'paid',
+                                'bg-red-800 text-red-800': lastBill.status == 'canceled',
                             }"
                         >
-                            {{ $t(`panel.payment.${bills.list[0].status}`) }}
+                            {{ $t(`panel.payment.${lastBill.status}`) }}
                         </span>
-                        <div>
-                            <button class="btn w-max p-3 px-6 text-sm bg-violet text-white rounded-lg">{{$t("panel.billing.Pay This Bill")}}</button>
+                        <div v-if="lastBill.status == 'notPaid' && checkPermissions(['main-panel.billing.pay'], brand)">
+                            <button class="btn w-max p-3 px-6 text-sm bg-violet text-white rounded-lg">{{ $t("panel.billing.Pay This Bill") }}</button>
                         </div>
                     </div>
                 </div>
@@ -293,7 +293,7 @@
                             {{ $t(`panel.payment.${bill.status}`) }}
                         </span>
                     </div>
-                    <button class="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-50 border shrink-0" @click="toggleMenu()">
+                    <button class="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-50 border shrink-0" @click="openBillDetail(bill)">
                         <Icon class="w-5 h-5 bg-black rotate-90" name="dots.svg" folder="icons" size="4px" />
                     </button>
                 </li>
@@ -313,13 +313,20 @@
         </section>
 
         <Teleport to="body">
-            <ChangePlanDialog :purchasablePlans="purchasablePlans.plans" :currentPlan="currentPlan" v-if="panelStore.popUpOpened === 'change-plan-dialog'" />
+            <ChangePlanDialog
+                :purchasablePlans="purchasablePlans.plans"
+                :currentPlan="currentPlan"
+                @update:currentPlan="getCurrentPlan_results.refresh()"
+                v-if="panelStore.popUpOpened === 'change-plan-dialog'"
+            />
+            <BillDetails :bill="selectedBill" v-if="panelStore.popUpOpened === 'bill-details'" />
         </Teleport>
     </div>
 </template>
 
 <script setup>
 const ChangePlanDialog = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/ChangePlanDialog.vue"));
+const BillDetails = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/BillDetails.vue"));
 import Loading from "~/components/Loading.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
@@ -337,6 +344,12 @@ const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] |
 
 const errorField = ref("");
 const responseMessage = ref("");
+
+const selectedBill = ref({});
+const openBillDetail = (bill) => {
+    selectedBill.value = bill;
+    panelStore.openPopUp("bill-details");
+};
 
 const handleErrors = (err) => {
     errorField.value = "data";
@@ -360,6 +373,7 @@ const currentPlan = reactive({
     branchCount: 0,
     staffCount: 0,
 });
+const lastBill = ref({});
 const getCurrentPlan_results = await useLazyAsyncData(() => getCurrentPlan(route.params.brandID));
 const loadingCurrentPlan = computed(() => getCurrentPlan_results.pending.value);
 
@@ -375,6 +389,7 @@ const handleCurrentPlan_results = (data) => {
     currentPlan.secondsPassed = data._currentPlan.secondsPassed;
     currentPlan.price = data._currentPlan.price;
     currentPlan.period = data._currentPlan.period;
+    lastBill.value = data._lastBill;
 };
 watch(getCurrentPlan_results.data, (val) => handleCurrentPlan_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
