@@ -3,7 +3,7 @@
 <template>
     <div class="flex flex-col gap-4 w-full" ref="form">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/user-group-dark.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.staff.Staff Members") }}</h1>

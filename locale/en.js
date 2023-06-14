@@ -270,6 +270,11 @@ export default {
             "10 digit number": "10 digit number",
         },
 
+        menu: {
+            "Menu Editor": "Menu Editor",
+            "For Branch": "For Branch",
+        },
+
         staff: {
             "Staff Members": "Staff Members",
             "Invite new staff to your team and manage their access": "Invite new staff to your team and manage their access",

@@ -270,6 +270,11 @@ export default {
             "10 digit number": "کد 10 رقمی",
         },
 
+        menu: {
+            "Menu Editor": "ویرایشگر منو",
+            "For Branch": "برای شعبه",
+        },
+
         staff: {
             "Staff Members": "اعضای خدمه",
             "Invite new staff to your team and manage their access": "دعوت اعضای خدمه به تیم و مدیریت دسترسی های اعضا",
