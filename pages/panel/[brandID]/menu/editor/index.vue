@@ -8,8 +8,9 @@
                     <img class="w-9" src="~/assets/images/panel-icons/cards-blank-dark.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.side-menu.Menu Editor") }}</h1>
                 </div>
-                <small class="hidden sm:flex text-sm">
-                    {{ $t("panel.menu.You are editing your general menu") }}
+                <small class="hidden sm:flex gap-1 text-sm">
+                    {{ $t("panel.menu.You are editing the general menu") }}.
+                    <span v-html="$t('panel.menu.For', { branch: `<b>all branches</b>` })" />
                 </small>
             </div>
             <div class="flex flex-wrap items-center gap-2">
@@ -17,15 +18,15 @@
                     class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-lg border-2 border-black flex-shrink-0"
                     @click="panelStore.openPopUp('sent-invites')"
                 >
-                    <Icon class="w-4 h-4 bg-black" name="envelope-open-text.svg" folder="icons/light" size="16px" />
-                    {{ $t("panel.side-menu.Sent Invites") }}
+                    <Icon class="w-5 h-5 bg-black" name="brush.svg" folder="icons/light" size="20px" />
+                    {{ $t("panel.menu.Edit Menu Style") }}
                 </button>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-lg border-2 border-black flex-shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
                 >
-                    <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
-                    {{ $t("panel.menu.Invite Members") }}
+                    <Icon class="w-5 h-5 bg-black" name="book-open.svg" folder="icons/light" size="20px" />
+                    {{ $t("panel.menu.View Live Menu") }}
                 </button>
             </div>
         </header>
@@ -40,7 +41,7 @@
                     class="w-64"
                     customPadding="px-2.5 py-2.5"
                     :formHtmlObject="form"
-                    :options="[{ name: 'General Menu (no branch)', value: null }]"
+                    :options="[{ name: 'General Menu (all branch)', value: null }]"
                     v-slot="{ option }"
                     v-model:selected-option="forBranch"
                 >
@@ -48,7 +49,38 @@
                 </SelectDropDown>
             </label>
         </div>
+
         <hr class="w-full border-gray-300 opacity-50" />
+
+        <section class="flex flex-col gap-4" name="Categories">
+            <header class="flex flex-wrap items-center justify-between gap-4">
+                <h2 class="text-xl md:text-2xl/tight font-bold">Categories</h2>
+                <nuxt-link
+                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                    :to="localePath(`/panel/${route.params.brandID}/menu/category/creation`)"
+                >
+                    <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
+                    {{ $t("panel.menu.New Category") }}
+                </nuxt-link>
+            </header>
+            <CategoryList />
+        </section>
+
+        <hr class="w-full border-gray-300 opacity-50" />
+
+        <section class="flex flex-col gap-4" name="Menu Items">
+            <header class="flex flex-wrap items-center justify-between gap-4">
+                <h2 class="text-xl md:text-2xl/tight font-bold">Items</h2>
+                <nuxt-link
+                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                    :to="localePath(`/panel/${route.params.brandID}/menu/item/creation`)"
+                >
+                    <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
+                    {{ $t("panel.menu.New Item") }}
+                </nuxt-link>
+            </header>
+            <ItemList />
+        </section>
 
         <!-- <Teleport to="body"> </Teleport> -->
     </div>
@@ -56,15 +88,17 @@
 
 <script setup>
 import Search from "~/components/form/Search.vue";
-import SlideMenu from "~/components/panel/SlideMenu.vue";
 import SelectDropDown from "~/components/form/SelectDropDown.vue";
 import Loading from "~/components/Loading.vue";
+const CategoryList = defineAsyncComponent(() => import("~/components/panel/menu/CategoryList.vue"));
+const ItemList = defineAsyncComponent(() => import("~/components/panel/menu/ItemList.vue"));
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
 const { locale, t } = useI18n();
 const route = useRoute();
 const nuxtApp = useNuxtApp();
+const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
@@ -77,7 +111,7 @@ const form = ref(); // Dom Ref
 const errorField = ref("");
 const responseMessage = ref("");
 
-const forBranch = ref({ value: null, name: "General Menu (no branch)" });
+const forBranch = ref({ value: null, name: "General Menu (all branch)" });
 const searchQuery = ref("");
 
 const handleErrors = (err) => {

@@ -273,6 +273,16 @@ export default {
         menu: {
             "Menu Editor": "ویرایشگر منو",
             "For Branch": "برای شعبه",
+            "Edit Menu Style": "ویرایش ظاهر منو",
+            "View Live Menu": "مشاهده منو",
+            "You are editing the general menu": "شما درحال ویرایش منو کلی هستید",
+            "You are editing a specific menu": "شما درحال ویرایش یک منو خاص هستید",
+            "New Category": "دسته‌بندی جدید",
+            "New Item": "ایتم جدید",
+
+            "Hide This Category": "مخفی کردن دسته‌بندی",
+            "Edit This Category": "ویرایش این دسته‌بندی",
+            "Delete Category": "حذف دسته‌بندی",
         },
 
         staff: {

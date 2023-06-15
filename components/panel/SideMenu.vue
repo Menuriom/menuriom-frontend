@@ -138,7 +138,12 @@ aside > div {
                             <span>{{ $t("panel.side-menu.Branches") }}</span>
                         </li>
                     </nuxt-link>
-                    <button class="link" :class="{ toggler_active: openSubMenus.includes('menu') }" @click="toggleSubMenu('menu')">
+                    <button
+                        class="link"
+                        :class="{ toggler_active: openSubMenus.includes('menu') }"
+                        @click="toggleSubMenu('menu')"
+                        v-if="checkPermissions(['main-panel.menu.items', 'main-panel.menu.style', 'main-panel.menu.qr-code'], brand)"
+                    >
                         <li class="flex items-center gap-3">
                             <img class="w-5" src="~/assets/images/panel-icons/cards-blank-light.png" alt="" />
                             <span>{{ $t("panel.side-menu.Menu") }}</span>
@@ -153,22 +158,38 @@ aside > div {
                     </button>
                     <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('menu') }" name="menu">
                         <ul class="sub_menu flex flex-col">
-                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/items`)">
+                            <nuxt-link
+                                class="link"
+                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/editor`)"
+                                v-if="checkPermissions(['main-panel.menu.items'], brand)"
+                            >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Menu Editor") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/menu-style`)">
+                            <nuxt-link
+                                class="link"
+                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu-style`)"
+                                v-if="checkPermissions(['main-panel.menu.style'], brand)"
+                            >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Style Editor") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/qr-code`)">
+                            <nuxt-link
+                                class="link"
+                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/qr-code`)"
+                                v-if="checkPermissions(['main-panel.menu.qr-code'], brand)"
+                            >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.QR Code") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/splash-screen`)">
+                            <nuxt-link
+                                class="link"
+                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/splash-screen`)"
+                                v-if="checkPermissions(['main-panel.menu.style'], brand)"
+                            >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Splash Screen") }}</span>
                                 </li>

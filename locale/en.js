@@ -273,6 +273,16 @@ export default {
         menu: {
             "Menu Editor": "Menu Editor",
             "For Branch": "For Branch",
+            "Edit Menu Style": "Edit Menu Style",
+            "View Live Menu": "View Live Menu",
+            "You are editing the general menu": "You are editing the general menu",
+            "You are editing a specific menu": "You are editing a specific menu",
+            "New Category": "New Category",
+            "New Item": "New Item",
+
+            "Hide This Category": "Hide This Category",
+            "Edit This Category": "Edit This Category",
+            "Delete Category": "Delete Category",
         },
 
         staff: {

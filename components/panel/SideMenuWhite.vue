@@ -178,7 +178,7 @@ aside > div {
                         <ul class="sub_menu flex flex-col gap-1">
                             <nuxt-link
                                 class="link"
-                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/items`)"
+                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/editor`)"
                                 v-if="checkPermissions(['main-panel.menu.items'], brand)"
                             >
                                 <li class="flex items-center gap-3">
