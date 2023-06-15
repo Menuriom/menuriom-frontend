@@ -283,6 +283,8 @@ export default {
             "Hide This Category": "Hide This Category",
             "Edit This Category": "Edit This Category",
             "Delete Category": "Delete Category",
+            "Category Icon": "Category Icon",
+            "Category Name": "Category Name",
         },
 
         staff: {

@@ -5,7 +5,7 @@
         <header class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
-                    <img class="w-9" src="~/assets/images/panel-icons/store-dark.png" alt="" />
+                    <img class="w-9" src="~/assets/images/panel-icons/layer-group-dark.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.menu.New Category") }}</h1>
                 </div>
                 <div class="flex items-center gap-1 text-sm ms-2">
@@ -13,7 +13,7 @@
                         <Icon class="w-4 h-4 bg-pencil-tip hover:bg-violet" name="house.svg" folder="icons/light" size="16px" />
                     </nuxt-link>
                     <span>&gt;</span>
-                    <nuxt-link class="hover:text-violet" :to="localePath(`/panel/${route.params.brandID}/branches`)">
+                    <nuxt-link class="hover:text-violet" :to="localePath(`/panel/${route.params.brandID}/menu/editor`)">
                         {{ $t("panel.menu.Menu Editor") }}
                     </nuxt-link>
                     <span>&gt;</span>
@@ -24,43 +24,55 @@
         <hr class="w-full border-gray-300 opacity-50" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-                <div class="flex flex-col gap-1">
+                <div class="flex flex-wrap items-center justify-between gap-2">
                     <h3 class="flex items-center gap-2 text-lg">
                         <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.menu.Branch Images") }}
-                        <small class="px-2 rounded-md bg-zinc-800 opacity-75">{{ $t("panel.up to n", { number: 5 }) }}</small>
+                        {{ $t("panel.menu.Category Icon") }}
                     </h3>
-                    <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 2 }) }}</small>
+                    <ul class="flex items-center gap-2">
+                        <li
+                            class="p-1 px-2 text-xs rounded-md border border-violet cursor-pointer"
+                            :class="[iconMode == 'upload' ? 'bg-white text-black' : 'text-white']"
+                            @click="iconMode = 'upload'"
+                        >
+                            Upload File
+                        </li>
+                        <li
+                            class="p-1 px-2 text-xs rounded-md border border-violet cursor-pointer"
+                            :class="[iconMode == 'select' ? 'bg-white text-black' : 'text-white']"
+                            @click="iconMode = 'select'"
+                        >
+                            Select From List
+                        </li>
+                    </ul>
                 </div>
-                <ul class="flex flex-wrap items-center gap-4">
-                    <li class="relative w-40 h-28 border-2 border-zinc-400 bg-neutral-100 rounded-md" v-for="(image, i) in gallery" :key="i">
-                        <img class="w-full h-full object-contain" :src="image.blob" alt="" />
-                        <button class="absolute top-1 start-1 p-1.5 hover:border border-red-500 rounded-md bg-dolphin cursor-pointer" @click="removeImage(i)">
-                            <Icon class="w-5 h-5 bg-rose-300" name="trash-can.svg" folder="icons/light" size="20px" />
-                        </button>
-                    </li>
-                    <li class="relative flex items-center justify-center w-40 h-28 rounded-lg border-2 border-dashed border-neutral-400 hover:border-violet">
-                        <div class="flex flex-col items-center gap-2">
-                            <Icon class="w-4 h-4 bg-purple-300" name="plus.svg" folder="icons" size="16px" />
-                            <small class="text-purple-300">{{ $t("panel.menu.Add Image") }}</small>
+                <div class="flex flex-col justify-center gap-4 w-full" v-show="iconMode === 'upload'">
+                    <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 1 }) }}</small>
+                    <div class="relative flex flex-col items-start justify-center gap-2 w-32 h-32 rounded-full hover:border-2 border-violet bg-white shrink-0">
+                        <img class="w-full h-full rounded-full object-contain" :src="logoBlob" v-if="logoBlob" />
+                        <div class="flex flex-col items-center justify-center gap-2 w-full" v-else>
+                            <img class="w-10" src="~/assets/images/panel-icons/knife-fork.svg" alt="" />
+                            <span class="text-sm text-pencil-tip opacity-90">{{ $t("panel.brands.Select Logo") }}</span>
                         </div>
-                        <form class="absolute inset-0 opacity-0 cursor-pointer" @submit.prevent="" ref="fileInputForm">
-                            <input class="absolute inset-0" ref="fileInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple @input="addImages()" />
-                        </form>
-                    </li>
-                </ul>
+                        <input
+                            class="absolute inset-0 opacity-0 cursor-pointer"
+                            ref="logo"
+                            type="file"
+                            accept=".jpg,.jpeg,.png,.webp"
+                            @change="selectLogoImage()"
+                            :disabled="saving"
+                        />
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center gap-4 w-full" v-show="iconMode === 'select'"></div>
+
                 <hr class="w-full opacity-20" />
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="newspaper.svg" folder="icons/light" size="20px" />
-                    {{ $t("panel.menu.General Info") }}
-                </h3>
                 <Input
-                    :label="$t('panel.menu.Branch Name')"
+                    :label="$t('panel.menu.Category Name')"
                     :required="formLang == 'default'"
                     v-model="name.values[formLang]"
                     :error="errorField == `name.${formLang}` ? responseMessage : ''"
                 />
-
                 <hr class="w-full opacity-20" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
@@ -119,7 +131,7 @@ import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-// TODO : add map to record the location of branch to show in menu
+// TODO : add ability to remove category icon in style section
 
 const { localeProperties, t } = useI18n();
 const route = useRoute();
@@ -134,9 +146,6 @@ useHead({ title: title });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
-const fileInput = ref(""); // DOM ref
-const fileInputForm = ref(""); // DOM ref
-
 const formLang = ref("default");
 const errorField = ref("");
 const responseMessage = ref("");
@@ -147,29 +156,13 @@ const address = reactive({ values: { default: "" } });
 const postalCode = ref("");
 const telephoneNumbers = ref(["", ""]);
 
-const addImages = () => {
-    const files = [...fileInput.value.files];
-    fileInputForm.value.reset();
-
-    // limit user to upload at max 5 images
-    if (files.length + gallery.value.length > 5) {
-        toast.error(t(`panel.max file count is n`, { count: 5 }), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
-        return;
-    }
-
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        if (file.size > 2 * 1_048_576) {
-            toast.success(t(`panel.Some of files that you select was over the nMB size limit`, { size: 2 }), {
-                timeout: 3000,
-                rtl: localeProperties.value.dir == "rtl",
-            });
-            continue;
-        }
-        gallery.value.push({ blob: URL.createObjectURL(file), file: file });
-    }
+const iconMode = ref("select");
+const logo = ref(""); // Dom Ref
+const logoBlob = ref(null);
+const selectLogoImage = () => {
+    if (!logo.value.files[0]) return;
+    logoBlob.value = URL.createObjectURL(logo.value.files[0]);
 };
-const removeImage = (index) => gallery.value.splice(index, 1);
 
 // saving ----------------------------------------
 const percentage = ref(0);

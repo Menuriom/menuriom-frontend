@@ -11,7 +11,7 @@ export const useUserStore = defineStore("user", () => {
     const mobile = ref("");
     const brands = reactive({
         list: {
-            // id: {logo:"", name: "", roles: "", permissions: []},
+            // id: {logo:"", name: "", roles: "", permissions: [], limitations:[]},
         },
     });
 

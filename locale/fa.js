@@ -283,6 +283,8 @@ export default {
             "Hide This Category": "مخفی کردن دسته‌بندی",
             "Edit This Category": "ویرایش این دسته‌بندی",
             "Delete Category": "حذف دسته‌بندی",
+            "Category Icon": "ایکون دسته‌بندی",
+            "Category Name": "نام دسته‌بندی",
         },
 
         staff: {
