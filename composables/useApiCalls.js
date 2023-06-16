@@ -107,6 +107,27 @@ export const getBranchList = async (brandID) => {
 };
 // ---------------------------------------------------------
 
+// menu ---------------------------------------------------------
+export const getCategoryIconList = async (brandID, records = []) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/icons`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _icons = records;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _icons = response.data.icons;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _icons };
+};
+// ---------------------------------------------------------
+
 // staff ---------------------------------------------------------
 export const getStaffList = async (brandID, branchID, records = [], pp = 25, lastRecordID, searchQuery = "") => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/staff`, { brand: brandID });

@@ -129,6 +129,7 @@ export default {
         "Load More": "بارگذاری بیشتر",
         "End of the list": "انتهای لیست",
         "Payment Results": "نتیجه پرداخت",
+        "Drag & drop your logo or click to select": "عکس را در باکس بیاندازید، یا برای انتخاب کلیک کنید",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -285,6 +286,12 @@ export default {
             "Delete Category": "حذف دسته‌بندی",
             "Category Icon": "ایکون دسته‌بندی",
             "Category Name": "نام دسته‌بندی",
+            "This feature is for the pro plan only": "این قابلیت فقط برای طرح حرفه ای موجود است",
+            "Upgrade your plan to get this feature": "برای استفاده از این ویژگی طرح خود را ارتقا دهید",
+            "File Upload": "آپلود فایل",
+            "Select From List": "انتخاب از لیست",
+            "Create Category": "ساخت دسته‌بندی",
+            "New category has been created": "دسته‌بندی جدید ایجاد شد",
         },
 
         staff: {

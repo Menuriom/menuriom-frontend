@@ -129,6 +129,7 @@ export default {
         "Load More": "Load More",
         "End of the list": "End of the list",
         "Payment Results": "Payment Results",
+        "Drag & drop your logo or click to select": "Drag & drop your logo, or click to select",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -285,6 +286,12 @@ export default {
             "Delete Category": "Delete Category",
             "Category Icon": "Category Icon",
             "Category Name": "Category Name",
+            "This feature is for the pro plan only": "This feature is for the pro plan only",
+            "Upgrade your plan to get this feature": "Upgrade your plan to get this feature",
+            "File Upload": "File Upload",
+            "Select From List": "Select From List",
+            "Create Category": "Create Category",
+            "New category has been created": "New category has been created",
         },
 
         staff: {
