@@ -21,7 +21,8 @@
             "You are about to delete this branch": "You are about to delete branch <b>{name}</b>"
         },
         "menu": {
-            "For": "For {branch}"
+            "For": "For {branch}",
+            "You are about to delete this category": "You are about to delete category <b>{name}</b>"
         },
         "staff": {
             "You are about to remove this member": "You are about to remove {member}",

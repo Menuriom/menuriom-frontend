@@ -296,6 +296,8 @@ export default {
             "You can select specific branches for this category": "شما میتوانید این دسته‌بندی را فقط برای یکسری شعبه در نظر بگیرید",
             "If you dont select any branches this category will be available for all of your branches":
                 "اگر شعبه ای را برای این دسته‌بندی درنظر نگیرید، این دسته‌بندی برای تمام شعبه های شما نمایش داده میشود",
+
+            deletingCategoryDesc: "با حذف این دسته‌بندی، تمام ایتم های اختصاص یافته به این دسته‌بندی نیز حذف میشوند",
         },
 
         staff: {

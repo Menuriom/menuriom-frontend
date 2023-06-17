@@ -21,7 +21,8 @@
             "You are about to delete this branch": "شما درحال حذف شعبه <b>{name}</b> هستید"
         },
         "menu": {
-            "For": "برای {branch}"
+            "For": "برای {branch}",
+            "You are about to delete this category": "شما درحال حذف دسته بندی <b>{name}</b> هستید"
         },
         "staff": {
             "You are about to remove this member": "شما درحال حذف کردن {member} از تیم خود هستید",

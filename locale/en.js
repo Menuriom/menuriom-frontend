@@ -296,6 +296,8 @@ export default {
             "You can select specific branches for this category": "You can select specific branches for this category",
             "If you dont select any branches this category will be available for all of your branches":
                 "If you dont select any branches, this category will be available for all of your branches",
+
+            deletingCategoryDesc: "By deleting this category, all items assigned to this category will also be deleted",
         },
 
         staff: {
