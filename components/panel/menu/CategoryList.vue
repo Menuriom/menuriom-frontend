@@ -49,8 +49,10 @@
                     </button>
                 </SlideMenu>
                 <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip rounded-xl">
-                    <img class="w-16 h-16 mt-2" src="~/assets/images/icons/burger.png" alt="" />
-                    <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">Burgers</b>
+                    <img class="w-16 h-16 mt-2" :src="category.icon" alt="" />
+                    <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
+                        {{ category.translation?.[locale]?.name || category.name }}
+                    </b>
                 </div>
                 <span class="absolute bottom-0 flex items-center justify-center gap-1.5 w-full h-6 hover:cursor-grab active:cursor-grabbing">
                     <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
@@ -82,6 +84,8 @@ const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] |
 // only pro tier can upload category logos : others can only pick (we need icon picker [jesus])
 // icon picker : list of icons with urls and groups like drinks and salads etc
 
+const searchQuery = ref("");
+
 const errorField = ref("");
 const responseMessage = ref("");
 
@@ -96,25 +100,20 @@ const handleErrors = (err) => {
 };
 
 // getStaffList -------------------------------------------------
-const searchQuery = ref("");
-const noMoreRecords = ref(false);
-const lastRecordID = ref("");
 const categories = reactive({ list: [] });
-const getStaffList_results = await useLazyAsyncData(
-    () => getStaffList(route.params.brandID, null, categories.list, 50, lastRecordID.value, searchQuery.value),
-    { watch: [lastRecordID] }
-);
-const loading = computed(() => getStaffList_results.pending.value);
+const canCreateNewCategory = ref(true);
+const getCategoryList_results = await useLazyAsyncData(() => getCategoryList(route.params.brandID));
+const loadingCategories = computed(() => getCategoryList_results.pending.value);
 
-if (getStaffList_results.error.value) handleErrors(getStaffList_results.error.value);
-watch(getStaffList_results.error, (err) => handleErrors(err));
+if (getCategoryList_results.error.value) handleErrors(getCategoryList_results.error.value);
+watch(getCategoryList_results.error, (err) => handleErrors(err));
 
-const handleStaffList_results = (data) => {
+const handleCategoryList_results = (data) => {
     if (!data) return;
-    categories.list = data._records;
-    noMoreRecords.value = data._noMoreRecords;
+    categories.list = data._categories;
+    canCreateNewCategory.value = data._canCreateNewCategory;
 };
-watch(getStaffList_results.data, (val) => handleStaffList_results(val), { immediate: process.server || nuxtApp.isHydrating });
+watch(getCategoryList_results.data, (val) => handleCategoryList_results(val), { immediate: process.server || nuxtApp.isHydrating });
 
 // -------------------------------------------------
 </script>

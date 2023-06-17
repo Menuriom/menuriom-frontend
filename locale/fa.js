@@ -282,6 +282,7 @@ export default {
             "New Item": "ایتم جدید",
 
             "Hide This Category": "مخفی کردن دسته‌بندی",
+            "Show as new category": "نمایش به عنوان دسته‌بندی جدید",
             "Edit This Category": "ویرایش این دسته‌بندی",
             "Delete Category": "حذف دسته‌بندی",
             "Category Icon": "ایکون دسته‌بندی",
@@ -292,6 +293,9 @@ export default {
             "Select From List": "انتخاب از لیست",
             "Create Category": "ساخت دسته‌بندی",
             "New category has been created": "دسته‌بندی جدید ایجاد شد",
+            "You can select specific branches for this category": "شما میتوانید این دسته‌بندی را فقط برای یکسری شعبه در نظر بگیرید",
+            "If you dont select any branches this category will be available for all of your branches":
+                "اگر شعبه ای را برای این دسته‌بندی درنظر نگیرید، این دسته‌بندی برای تمام شعبه های شما نمایش داده میشود",
         },
 
         staff: {

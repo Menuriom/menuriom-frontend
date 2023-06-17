@@ -282,6 +282,7 @@ export default {
             "New Item": "New Item",
 
             "Hide This Category": "Hide This Category",
+            "Show as new category": "Show as new category",
             "Edit This Category": "Edit This Category",
             "Delete Category": "Delete Category",
             "Category Icon": "Category Icon",
@@ -292,6 +293,9 @@ export default {
             "Select From List": "Select From List",
             "Create Category": "Create Category",
             "New category has been created": "New category has been created",
+            "You can select specific branches for this category": "You can select specific branches for this category",
+            "If you dont select any branches this category will be available for all of your branches":
+                "If you dont select any branches, this category will be available for all of your branches",
         },
 
         staff: {
