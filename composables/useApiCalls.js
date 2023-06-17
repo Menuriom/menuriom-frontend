@@ -126,6 +126,26 @@ export const getCategoryIconList = async (brandID, records = []) => {
 
     return { _icons };
 };
+export const getCategoryList = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/menu-categories`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _categories = [];
+    let _canCreateNewCategory = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _categories = response.data.records;
+            _canCreateNewCategory = response.data.canCreateNewCategory;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _categories, _canCreateNewCategory };
+};
 // ---------------------------------------------------------
 
 // staff ---------------------------------------------------------

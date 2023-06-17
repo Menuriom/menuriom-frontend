@@ -22,7 +22,7 @@
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
-        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
+        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full" ref="form">
             <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <h3 class="flex items-center gap-2 text-lg">
                     <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
@@ -31,8 +31,8 @@
 
                 <div class="flex flex-wrap md:flex-nowrap items-start gap-4">
                     <div class="relative flex flex-col items-center justify-center gap-2 w-32 h-32 rounded-full bg-white shrink-0">
-                        <img class="w-20 h-20 object-cover" :src="logoBlob" v-if="logoBlob" />
-                        <img class="w-20 h-20 object-cover" src="~/assets/images/panel-icons/knife-fork.svg" v-else />
+                        <img class="w-20 max-h-20 object-cover" :src="logoBlob" v-if="logoBlob" />
+                        <img class="w-20 max-h-20 object-cover" src="~/assets/images/panel-icons/knife-fork.svg" v-else />
                     </div>
                     <div class="flex flex-col gap-2 p-2 w-full bg-dolphin rounded-lg shadow-nr25">
                         <ul class="flex items-center gap-2">
@@ -55,7 +55,7 @@
                         <div
                             class="flex flex-col justify-center gap-2 w-full h-44"
                             v-show="iconMode === 'upload'"
-                            v-if="checkLimitations([['customizable-category-logo', false]], brand)"
+                            v-if="checkLimitations([['customizable-category-logo', true]], brand)"
                         >
                             <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 1 }) }}</small>
                             <div
@@ -104,6 +104,24 @@
                     v-model="name.values[formLang]"
                     :error="errorField == `name.${formLang}` ? responseMessage : ''"
                 />
+                <Switch :label="$t('panel.menu.Show as new category')" v-model:value="showAsNew" />
+                <Switch :label="$t('panel.menu.Hide This Category')" v-model:value="hide" />
+                <hr class="w-full opacity-20" />
+                <small> {{ $t("panel.menu.You can select specific branches for this category") }} </small>
+                <MultiSelectDropDown
+                    class="w-full flex-grow"
+                    :formHtmlObject="form"
+                    :label="$t('panel.branches.Branches')"
+                    :options="branches.list"
+                    v-slot="{ option }"
+                    v-model:selected-options="selectedBranches.list"
+                    :error="errorField == 'selectedBranches' ? responseMessage : ''"
+                >
+                    <span :value="option.value">{{ option.name }}</span>
+                </MultiSelectDropDown>
+                <small class="text-xs opacity-75">
+                    {{ $t("panel.menu.If you dont select any branches this category will be available for all of your branches") }}
+                </small>
                 <hr class="w-full opacity-20" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
@@ -155,7 +173,9 @@
 
 <script setup>
 import Input from "~/components/form/Input.vue";
+import Switch from "~/components/form/Switch.vue";
 import FormLangList from "~/components/panel/FormLangList.vue";
+import MultiSelectDropDown from "~/components/form/MultiSelectDropDown.vue";
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
@@ -178,11 +198,15 @@ useHead({ title: title });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
+const form = ref(); // Dom Ref
 const formLang = ref("default");
 const errorField = ref("");
 const responseMessage = ref("");
 
 const name = reactive({ values: { default: "" } });
+const selectedBranches = reactive({ list: [] });
+const showAsNew = ref(false);
+const hide = ref(false);
 
 const iconMode = ref("list");
 const selectedIconMode = ref("list");
@@ -218,7 +242,7 @@ const save = async () => {
 
     const data = new FormData();
 
-    if (logo.value.files[0] && selectedIconMode.value === "upload") {
+    if (logo.value.files?.[0] && selectedIconMode.value === "upload") {
         if (logo.value.files[0].size > 1_048_576) {
             responseMessage.value = t("panel.Images must be less than nMB", { size: 1 });
             saving.value = false;
@@ -226,9 +250,12 @@ const save = async () => {
         }
         data.append("uploadedIcon", logo.value.files[0]);
     }
-    if (logoBlob.value && selectedIconMode.value === "list") data.append(`selectedIcon`, selectedIconMode.value);
-    data.append(`iconMode.`, selectedIconMode.value);
+    if (logoBlob.value && selectedIconMode.value === "list") data.append(`selectedIcon`, logoBlob.value);
+    data.append(`iconMode`, selectedIconMode.value);
     for (const val in name.values) data.append(`name.${val}`, name.values[val]);
+    data.append(`showAsNew`, showAsNew.value);
+    data.append(`hide`, hide.value);
+    selectedBranches.list.forEach((branch) => data.append(`branches[]`, branch.value));
 
     await axios
         .post(`/api/v1/panel/menu-categories/`, data, {
@@ -264,7 +291,7 @@ const handleErrors = (err) => {
     // TODO : log errors in sentry type thing
 };
 
-// getStaffList -------------------------------------------------
+// getIconList -------------------------------------------------
 const icons = reactive({ list: [] });
 const getIconList_results = await useLazyAsyncData(() => getCategoryIconList(route.params.brandID, icons.list));
 const loadingIcons = computed(() => getIconList_results.pending.value);
@@ -277,4 +304,21 @@ const handleIconList_results = (data) => {
     icons.list = data._icons;
 };
 watch(getIconList_results.data, (val) => handleIconList_results(val), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
+
+// getBranchList -------------------------------------------------
+const branches = reactive({ list: [] });
+const getBranchList_results = await useLazyAsyncData(() => getBranchList(route.params.brandID));
+const loadingBranches = computed(() => getBranchList_results.pending.value);
+
+if (getBranchList_results.error.value) handleErrors(getBranchList_results.error.value);
+watch(getBranchList_results.error, (err) => handleErrors(err));
+
+const handleBranchList_results = (data) => {
+    branches.list = data._records.map((record) => {
+        return { name: record.name, value: record._id };
+    });
+};
+watch(getBranchList_results.data, (val) => handleBranchList_results(val), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
 </script>

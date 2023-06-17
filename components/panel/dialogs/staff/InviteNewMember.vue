@@ -93,6 +93,7 @@ import { useUserStore } from "@/stores/user";
 const { t } = useI18n();
 const localePath = useLocalePath();
 const route = useRoute();
+const nuxtApp = useNuxtApp();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
@@ -170,8 +171,7 @@ const handleBranchList_results = (data) => {
     });
     loadingBranches.value = false;
 };
-if (getBranchList_results.data.value) handleBranchList_results(getBranchList_results.data.value);
-watch(getBranchList_results.data, (val) => handleBranchList_results(val));
+watch(getBranchList_results.data, (val) => handleBranchList_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 
 // getRoleList -------------------------------------------------
@@ -188,7 +188,6 @@ const handleRoleList_results = (data) => {
     });
     loadingRoles.value = false;
 };
-if (getRoleList_results.data.value) handleRoleList_results(getRoleList_results.data.value);
-watch(getRoleList_results.data, (val) => handleRoleList_results(val));
+watch(getRoleList_results.data, (val) => handleRoleList_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 </script>
