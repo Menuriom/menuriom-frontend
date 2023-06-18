@@ -3,10 +3,8 @@
 <template>
     <div class="flex flex-col w-full">
         <ul class="flex gap-4 w-full pb-2 overflow-auto">
-            <li
-                class="relative flex flex-col items-center gap-4 p-4 pb-6 rounded-lg bg-white group shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
-            >
-                <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip rounded-xl">
+            <li class="relative flex flex-col items-center gap-4 p-4 pb-6 rounded-lg bg-white shadow-nr10 hover:shadow-nr15 transition-all">
+                <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip shadow-nr15 rounded-xl">
                     <img class="w-16 h-16 mt-2" src="~/assets/images/panel-icons/grid-2-light.png" alt="" />
                     <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">All</b>
                 </div>
@@ -17,18 +15,22 @@
                 </span>
             </li>
             <li
-                class="relative flex flex-col items-center gap-4 p-4 rounded-lg bg-white group shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
+                class="relative flex flex-col items-center gap-4 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
                 v-for="(category, i) in categories.list"
                 :key="i"
             >
                 <SlideMenu class="-my-2 z-10">
                     <button
                         class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
-                        @click="openEditDialog(i)"
+                        @click="toggleCategoryVisibility(i)"
                         v-if="checkPermissions(['main-panel.menu.items'], brand)"
                     >
-                        <Icon class="w-4 h-4 bg-white shrink-0" name="eye-slash.svg" folder="icons/light" size="16px" />
-                        <small>{{ $t("panel.menu.Hide This Category") }}</small>
+                        <div class="flex items-center gap-2" v-if="!hiding">
+                            <Icon class="w-4 h-4 bg-white shrink-0" name="eye-slash.svg" folder="icons/light" size="16px" />
+                            <small v-if="!category.hidden">{{ $t("panel.menu.Hide This Category") }}</small>
+                            <small v-else>{{ $t("panel.menu.Make Category Visible") }}</small>
+                        </div>
+                        <Loading size="h-4" v-else />
                     </button>
                     <nuxt-link
                         class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
@@ -48,11 +50,16 @@
                         <small>{{ $t("panel.menu.Delete Category") }}</small>
                     </button>
                 </SlideMenu>
-                <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip rounded-xl">
+                <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip shadow-nr15 rounded-xl">
                     <img class="w-16 h-16 mt-2" :src="category.icon" alt="" />
                     <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
                         {{ category.translation?.[locale]?.name || category.name }}
                     </b>
+                </div>
+                <div class="absolute top-8 start-2 flex flex-col gap-2">
+                    <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.hidden">
+                        {{ $t("panel.menu.Hidden") }}
+                    </span>
                 </div>
                 <span class="absolute bottom-0 flex items-center justify-center gap-1.5 w-full h-6 hover:cursor-grab active:cursor-grabbing">
                     <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
@@ -101,13 +108,15 @@
 import Dialog from "~/components/panel/Dialog.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
 import axios from "axios";
+import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-const { locale, t } = useI18n();
+const { localeProperties, locale, t } = useI18n();
 const route = useRoute();
 const nuxtApp = useNuxtApp();
 const localePath = useLocalePath();
+const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
@@ -157,6 +166,42 @@ const deleteRecord = async () => {
             // TODO : log errors in sentry type thing
         })
         .finally(() => (deleting.value = false));
+};
+// -------------------------------------------------
+
+// visibility ----------------------------------------
+const hiding = ref(false);
+const toggleCategoryVisibility = async (index) => {
+    if (hiding.value) return;
+    hiding.value = true;
+
+    responseMessage.value = "";
+    errorField.value = "";
+
+    const id = categories.list[index]._id;
+    if (!id) {
+        hiding.value = false;
+        return;
+    }
+
+    await axios
+        .post(`/api/v1/panel/menu-categories/hide/${id}`, {}, { headers: { brand: route.params.brandID } })
+        .then((response) => {
+            categories.list[index].hidden = !categories.list[index].hidden;
+        })
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
+            toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+        })
+        .finally(() => (hiding.value = false));
 };
 // -------------------------------------------------
 

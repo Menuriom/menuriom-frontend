@@ -284,6 +284,7 @@ export default {
             "New Item": "New Item",
 
             "Hide This Category": "Hide This Category",
+            "Make Category Visible": "Make It Visible",
             "Show as new category": "Show as new category",
             "Edit This Category": "Edit This Category",
             "Delete Category": "Delete Category",

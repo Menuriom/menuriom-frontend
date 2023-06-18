@@ -284,6 +284,7 @@ export default {
             "New Item": "ایتم جدید",
 
             "Hide This Category": "مخفی کردن دسته‌بندی",
+            "Make Category Visible": "نمایش دسته‌بندی",
             "Show as new category": "نمایش به عنوان دسته‌بندی جدید",
             "Edit This Category": "ویرایش این دسته‌بندی",
             "Delete Category": "حذف دسته‌بندی",
