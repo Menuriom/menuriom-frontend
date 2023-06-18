@@ -107,7 +107,7 @@ export const getBranchList = async (brandID) => {
 };
 // ---------------------------------------------------------
 
-// menu ---------------------------------------------------------
+// menu category ---------------------------------------------------------
 export const getCategoryIconList = async (brandID, records = []) => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/icons`, { brand: brandID });
     const params = [];
@@ -145,6 +145,24 @@ export const getCategoryList = async (brandID) => {
         });
 
     return { _categories, _canCreateNewCategory };
+};
+export const getCategoryInfo = async (categoryID, brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/menu-categories/${categoryID}`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _info = {};
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _info = response.data;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _info };
 };
 // ---------------------------------------------------------
 

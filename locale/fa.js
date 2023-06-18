@@ -113,6 +113,7 @@ export default {
         Congratulations: "تبریک",
         Ok: "خُب",
         Save: "ذخیره",
+        "Save Changes": "ثبت تغییرات",
         Delete: "حذف",
         Select: "انتخاب",
         Search: "جستجو",
@@ -148,7 +149,7 @@ export default {
             "Language Settings": "تنظیمات زبان",
             Branches: "شعبه ها",
             Menu: "مدیریت منو",
-            "Menu Editor": "وایرایش منو",
+            "Menu Editor": "ویرایش منو",
             "Style Editor": "ویرایش ظاهر منو",
             "QR Code": "بارکد کیو ار",
             "Splash Screen": "صفحه کاور",
@@ -279,6 +280,7 @@ export default {
             "You are editing the general menu": "شما درحال ویرایش منو کلی هستید",
             "You are editing a specific menu": "شما درحال ویرایش یک منو خاص هستید",
             "New Category": "دسته‌بندی جدید",
+            "Edit Category": "ویرایش دسته‌بندی",
             "New Item": "ایتم جدید",
 
             "Hide This Category": "مخفی کردن دسته‌بندی",
@@ -293,11 +295,13 @@ export default {
             "Select From List": "انتخاب از لیست",
             "Create Category": "ساخت دسته‌بندی",
             "New category has been created": "دسته‌بندی جدید ایجاد شد",
+            "Category has been updated": "دسته‌بندی ویرایش شد",
             "You can select specific branches for this category": "شما میتوانید این دسته‌بندی را فقط برای یکسری شعبه در نظر بگیرید",
             "If you dont select any branches this category will be available for all of your branches":
                 "اگر شعبه ای را برای این دسته‌بندی درنظر نگیرید، این دسته‌بندی برای تمام شعبه های شما نمایش داده میشود",
 
             deletingCategoryDesc: "با حذف این دسته‌بندی، تمام ایتم های اختصاص یافته به این دسته‌بندی نیز حذف میشوند",
+            Hidden: "پنهان",
         },
 
         staff: {

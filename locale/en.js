@@ -113,6 +113,7 @@ export default {
         Congratulations: "Congratulations",
         Ok: "Ok",
         Save: "Save",
+        "Save Changes": "Save Changes",
         Delete: "Delete",
         Select: "Select",
         Search: "Search",
@@ -279,6 +280,7 @@ export default {
             "You are editing the general menu": "You are editing the general menu",
             "You are editing a specific menu": "You are editing a specific menu",
             "New Category": "New Category",
+            "Edit Category": "Edit Category",
             "New Item": "New Item",
 
             "Hide This Category": "Hide This Category",
@@ -293,11 +295,13 @@ export default {
             "Select From List": "Select From List",
             "Create Category": "Create Category",
             "New category has been created": "New category has been created",
+            "Category has been updated": "Category has been updated",
             "You can select specific branches for this category": "You can select specific branches for this category",
             "If you dont select any branches this category will be available for all of your branches":
                 "If you dont select any branches, this category will be available for all of your branches",
 
             deletingCategoryDesc: "By deleting this category, all items assigned to this category will also be deleted",
+            Hidden: "Hidden",
         },
 
         staff: {
