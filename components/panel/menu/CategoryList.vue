@@ -8,65 +8,70 @@
                     <img class="w-16 h-16 mt-2" src="~/assets/images/panel-icons/grid-2-light.png" alt="" />
                     <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">All</b>
                 </div>
-                <span class="absolute bottom-0 flex items-center justify-center gap-1.5 w-full h-6 hover:cursor-grab active:cursor-grabbing">
-                    <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                    <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                    <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                </span>
             </li>
-            <li
-                class="relative flex flex-col items-center gap-4 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
-                v-for="(category, i) in categories.list"
-                :key="i"
+            <Draggable
+                tag="ul"
+                class="flex gap-4"
+                v-model="categories.list"
+                @start="resetSavingOrder()"
+                @end="saveOrder()"
+                handle=".grab_area"
+                item-key="order"
             >
-                <SlideMenu class="-my-2 z-10">
-                    <button
-                        class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
-                        @click="toggleCategoryVisibility(i)"
-                        v-if="checkPermissions(['main-panel.menu.items'], brand)"
+                <template #item="{ element: category, index: i }">
+                    <li
+                        class="relative flex flex-col items-center gap-4 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
                     >
-                        <div class="flex items-center gap-2" v-if="!hiding">
-                            <Icon class="w-4 h-4 bg-white shrink-0" name="eye-slash.svg" folder="icons/light" size="16px" />
-                            <small v-if="!category.hidden">{{ $t("panel.menu.Hide This Category") }}</small>
-                            <small v-else>{{ $t("panel.menu.Make Category Visible") }}</small>
+                        <SlideMenu class="-my-2 z-10">
+                            <button
+                                class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
+                                @click="toggleCategoryVisibility(i)"
+                                v-if="checkPermissions(['main-panel.menu.items'], brand)"
+                            >
+                                <div class="flex items-center gap-2" v-if="!hiding">
+                                    <Icon class="w-4 h-4 bg-white shrink-0" name="eye-slash.svg" folder="icons/light" size="16px" />
+                                    <small v-if="!category.hidden">{{ $t("panel.menu.Hide This Category") }}</small>
+                                    <small v-else>{{ $t("panel.menu.Make Category Visible") }}</small>
+                                </div>
+                                <Loading size="h-4" v-else />
+                            </button>
+                            <nuxt-link
+                                class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
+                                :to="localePath(`/panel/${route.params.brandID}/menu/category/${category._id}`)"
+                                v-if="checkPermissions(['main-panel.menu.items'], brand)"
+                            >
+                                <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                                <small>{{ $t("panel.menu.Edit This Category") }}</small>
+                            </nuxt-link>
+                            <hr class="w-full opacity-40" />
+                            <button
+                                class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300"
+                                @click="openDeleteDialog(i)"
+                                v-if="checkPermissions(['main-panel.menu.items'], brand)"
+                            >
+                                <Icon class="w-4 h-4 bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="16px" />
+                                <small>{{ $t("panel.menu.Delete Category") }}</small>
+                            </button>
+                        </SlideMenu>
+                        <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip shadow-nr15 rounded-xl">
+                            <img class="w-16 h-16 mt-2" :src="category.icon" alt="" />
+                            <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
+                                {{ category.translation?.[locale]?.name || category.name }}
+                            </b>
                         </div>
-                        <Loading size="h-4" v-else />
-                    </button>
-                    <nuxt-link
-                        class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
-                        :to="localePath(`/panel/${route.params.brandID}/menu/category/${category._id}`)"
-                        v-if="checkPermissions(['main-panel.menu.items'], brand)"
-                    >
-                        <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
-                        <small>{{ $t("panel.menu.Edit This Category") }}</small>
-                    </nuxt-link>
-                    <hr class="w-full opacity-40" />
-                    <button
-                        class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300"
-                        @click="openDeleteDialog(i)"
-                        v-if="checkPermissions(['main-panel.menu.items'], brand)"
-                    >
-                        <Icon class="w-4 h-4 bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="16px" />
-                        <small>{{ $t("panel.menu.Delete Category") }}</small>
-                    </button>
-                </SlideMenu>
-                <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip shadow-nr15 rounded-xl">
-                    <img class="w-16 h-16 mt-2" :src="category.icon" alt="" />
-                    <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
-                        {{ category.translation?.[locale]?.name || category.name }}
-                    </b>
-                </div>
-                <div class="absolute top-8 start-2 flex flex-col gap-2">
-                    <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.hidden">
-                        {{ $t("panel.menu.Hidden") }}
-                    </span>
-                </div>
-                <span class="absolute bottom-0 flex items-center justify-center gap-1.5 w-full h-6 hover:cursor-grab active:cursor-grabbing">
-                    <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                    <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                    <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                </span>
-            </li>
+                        <div class="absolute top-8 start-2 flex flex-col gap-2">
+                            <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.hidden">
+                                {{ $t("panel.menu.Hidden") }}
+                            </span>
+                        </div>
+                        <span class="grab_area absolute bottom-0 flex items-center justify-center gap-1.5 w-full h-6 hover:cursor-grab active:cursor-grabbing">
+                            <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
+                            <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
+                            <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
+                        </span>
+                    </li>
+                </template>
+            </Draggable>
         </ul>
 
         <Teleport to="body">
@@ -107,6 +112,7 @@
 <script setup>
 import Dialog from "~/components/panel/Dialog.vue";
 import SlideMenu from "~/components/panel/SlideMenu.vue";
+import Draggable from "vuedraggable";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
@@ -122,9 +128,8 @@ const userStore = useUserStore();
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
-// TODO : category max is hard 100
-// only pro tier can upload category logos : others can only pick (we need icon picker [jesus])
-// icon picker : list of icons with urls and groups like drinks and salads etc
+// TODO
+// add scleton loading for category loading
 
 const searchQuery = ref("");
 
@@ -205,6 +210,37 @@ const toggleCategoryVisibility = async (index) => {
 };
 // -------------------------------------------------
 
+// save the order ----------------------------------------
+let saveOrderTimeout;
+const saveOrder = () => {
+    saveOrderTimeout = setTimeout(async () => {
+        responseMessage.value = "";
+        errorField.value = "";
+
+        const orderedCategories = categories.list.map((item, i) => ({ _id: item._id, order: i }));
+
+        await axios
+            .post(`/api/v1/panel/menu-categories/update-order/`, { orderedCategories }, { headers: { brand: route.params.brandID } })
+            .then((response) => {
+                toast.success(t("panel.menu.Category order saved"), { timeout: 2000, rtl: localeProperties.value.dir == "rtl" });
+            })
+            .catch((err) => {
+                if (typeof err.response !== "undefined" && err.response.data) {
+                    const errors = err.response.data.errors || err.response.data.message;
+                    if (typeof errors === "object") {
+                        responseMessage.value = errors[0].errors[0];
+                        errorField.value = errors[0].property;
+                    }
+                } else responseMessage.value = t("Something went wrong!");
+                toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            });
+    }, 3000);
+};
+const resetSavingOrder = () => {
+    clearTimeout(saveOrderTimeout);
+};
+// -------------------------------------------------
+
 const handleErrors = (err) => {
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
@@ -215,7 +251,7 @@ const handleErrors = (err) => {
     // TODO : log errors in sentry type thing
 };
 
-// getStaffList -------------------------------------------------
+// getCategoryList -------------------------------------------------
 const categories = reactive({ list: [] });
 const canCreateNewCategory = ref(true);
 const getCategoryList_results = await useLazyAsyncData(() => getCategoryList(route.params.brandID));

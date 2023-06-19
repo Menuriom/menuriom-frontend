@@ -166,6 +166,29 @@ export const getCategoryInfo = async (categoryID, brandID) => {
 };
 // ---------------------------------------------------------
 
+// menu items / dishes ---------------------------------------------------------
+export const getDishesList = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/menu-items`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _items = [];
+    let _canCreateNewDish = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _items = response.data.records;
+            _canCreateNewDish = response.data.canCreateNewDish;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _items, _canCreateNewDish };
+};
+// ---------------------------------------------------------
+
 // staff ---------------------------------------------------------
 export const getStaffList = async (brandID, branchID, records = [], pp = 25, lastRecordID, searchQuery = "") => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/staff`, { brand: brandID });

@@ -303,6 +303,11 @@ export default {
 
             deletingCategoryDesc: "با حذف این دسته‌بندی، تمام ایتم های اختصاص یافته به این دسته‌بندی نیز حذف میشوند",
             Hidden: "پنهان",
+            "Category order saved": "ترتیب دسته‌بندی ها بروز شد",
+
+            "New Menu Item": "منو ایتم جدید",
+            "Item Images": "عکس های ایتم",
+            "Add Image": "افزودن عکس",
         },
 
         staff: {

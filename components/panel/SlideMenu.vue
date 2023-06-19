@@ -10,7 +10,7 @@
         </button>
         <Transition name="slide-down" appear>
             <menu
-                class="absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 w-full p-2 bg-pencil-tip bg-opacity-95 text-white rounded-lg transition-all"
+                class="absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 w-full p-2 bg-neutral-700 text-white rounded-lg transition-all"
                 v-if="!!open"
             >
                 <hr class="w-1/2 border-b-2 my-1 mx-auto" />

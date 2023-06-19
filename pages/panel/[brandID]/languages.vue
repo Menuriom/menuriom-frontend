@@ -96,6 +96,9 @@ import axios from "axios";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
 
+// TODO
+// add new setting for tax percent and other service percentages
+
 const { t } = useI18n();
 const route = useRoute();
 const nuxtApp = useNuxtApp();

@@ -303,6 +303,11 @@ export default {
 
             deletingCategoryDesc: "By deleting this category, all items assigned to this category will also be deleted",
             Hidden: "Hidden",
+            "Category order saved": "Category order saved",
+
+            "New Menu Item": "New Menu Item",
+            "Item Images": "Item Images",
+            "Add Image": "Add Image",
         },
 
         staff: {
