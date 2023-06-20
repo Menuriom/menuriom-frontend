@@ -76,9 +76,9 @@
                             </div>
                         </div>
                         <div class="flex flex-col items-center justify-center gap-1 h-44" v-show="iconMode === 'upload'" v-else>
-                            <span class="opacity-75 text-sm">{{ $t("panel.menu.This feature is for the pro plan only") }}.</span>
+                            <span class="opacity-75 text-sm">{{ $t("panel.This feature is for the pro plan only") }}.</span>
                             <nuxt-link class="text-purple-300 text-sm underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
-                                {{ $t("panel.menu.Upgrade your plan to get this feature") }}.
+                                {{ $t("panel.Upgrade your plan to get this feature") }}.
                             </nuxt-link>
                         </div>
                         <div class="flex flex-col justify-center gap-4 w-full h-44" v-show="iconMode === 'list'">

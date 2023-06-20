@@ -15,6 +15,7 @@
                 <Icon class="w-4 h-4 bg-white" name="cog.svg" folder="icons" size="16px" />
             </nuxt-link>
         </div>
+        <small class="text-xs opacity-75 -mt-2">{{ $t("panel.languages.By selecting different language, you can translate text fields") }}</small>
         <hr class="w-full opacity-20" />
         <ul class="flex lg:flex-col gap-2 w-full pb-2 overflow-auto" v-if="!loadingSettings">
             <li

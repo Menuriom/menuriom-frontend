@@ -131,6 +131,9 @@ export default {
         "End of the list": "End of the list",
         "Payment Results": "Payment Results",
         "Drag & drop your logo or click to select": "Drag & drop your logo, or click to select",
+        "This feature is for the pro plan only": "This feature is for the pro plan only",
+        "This feature is for the standard plan and above only": "This feature is for the standard plan and above only",
+        "Upgrade your plan to get this feature": "Upgrade your plan to get this feature",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -290,8 +293,6 @@ export default {
             "Delete Category": "Delete Category",
             "Category Icon": "Category Icon",
             "Category Name": "Category Name",
-            "This feature is for the pro plan only": "This feature is for the pro plan only",
-            "Upgrade your plan to get this feature": "Upgrade your plan to get this feature",
             "File Upload": "File Upload",
             "Select From List": "Select From List",
             "Create Category": "Create Category",
@@ -308,6 +309,29 @@ export default {
             "New Menu Item": "New Menu Item",
             "Item Images": "Item Images",
             "Add Image": "Add Image",
+            "General Info": "General Info",
+            "Item Name": "Item Name",
+            Description: "Description",
+            Price: "Price",
+            "between 0 and 99": "between 0 and 99",
+            Discount: "Discount",
+            "Item Discount Tag": "Item Discount Tag",
+            "Activate Discount": "Activate Discount",
+            "When activated discount will be calculated and shown for this item": "When activated discount will be calculated and shown for this item",
+            "Create New Item": "Create New Item",
+            "Hide this item": "Hide this item",
+            "Pin to the top of category": "Pin to the top of category",
+            "Mark as sold out": "Mark as sold out",
+            "Item is pinned": "Item is pinned",
+            "Item is hidden": "Item is hidden",
+            "Variant Name": "Variant Name",
+            "Item Variants": "Item Variants",
+            "You can add different variants of this item with different price points":
+                "You can add different variants of this item with different price points",
+            VariantExamples: "hotness level, meat doneness level, or different preparations",
+
+            "Select which days you want this item to be available with a special of the day tag":
+                "Select which days you want this item to be available with a 'special of the day' tag",
         },
 
         staff: {
@@ -366,6 +390,7 @@ export default {
         },
 
         languages: {
+            "By selecting different language, you can translate text fields": "By selecting different language, you can translate text fields",
             "Select your menu languages and setup your currency unit": "Select your menu languages and setup your currency unit",
             "Menu Languages": "Menu Languages",
             Currency: "Currency",

@@ -131,6 +131,9 @@ export default {
         "End of the list": "انتهای لیست",
         "Payment Results": "نتیجه پرداخت",
         "Drag & drop your logo or click to select": "عکس را در باکس بیاندازید، یا برای انتخاب کلیک کنید",
+        "This feature is for the pro plan only": "این قابلیت فقط برای طرح حرفه ای موجود است",
+        "This feature is for the standard plan and above only": "این قابلیت فقط برای طرح استاندارد و بالاتر موجود است",
+        "Upgrade your plan to get this feature": "برای استفاده از این ویژگی طرح خود را ارتقا دهید",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -290,8 +293,6 @@ export default {
             "Delete Category": "حذف دسته‌بندی",
             "Category Icon": "ایکون دسته‌بندی",
             "Category Name": "نام دسته‌بندی",
-            "This feature is for the pro plan only": "این قابلیت فقط برای طرح حرفه ای موجود است",
-            "Upgrade your plan to get this feature": "برای استفاده از این ویژگی طرح خود را ارتقا دهید",
             "File Upload": "آپلود فایل",
             "Select From List": "انتخاب از لیست",
             "Create Category": "ساخت دسته‌بندی",
@@ -308,6 +309,29 @@ export default {
             "New Menu Item": "منو ایتم جدید",
             "Item Images": "عکس های ایتم",
             "Add Image": "افزودن عکس",
+            "General Info": "اطلاعات کلی",
+            "Item Name": "نام ایتم",
+            Description: "توضیحات",
+            Price: "قیمت",
+            "between 0 and 99": "بین 0 تا 99",
+            Discount: "تخفیف",
+            "Item Discount Tag": "تگ تخفیف",
+            "Activate Discount": "فعالسازی تگ تخفیف",
+            "When activated discount will be calculated and shown for this item": "با فعال شدن تخفیف برای این کالا محاسبه و نمایش داده می شود",
+            "Create New Item": "ساخت ایتم جدید",
+            "Hide this item": "مخفی کردن ایتم",
+            "Pin to the top of category": "پین کردن ایتم",
+            "Mark as sold out": "نمایش به عنوان تمام شده",
+            "Item is pinned": "پین شده",
+            "Item is hidden": "مخفی شده",
+            "Variant Name": "نوع",
+            "Item Variants": "نوع های مختلف ایتم",
+            "You can add different variants of this item with different price points":
+                "شما می توانید نوع های مختلفی از این کالا را با قیمت های مختلف اضافه کنید",
+            VariantExamples: "دجه تندی، میزان پخت گوشت ویا آماده سازی های گوناگون",
+
+            "Select which days you want this item to be available with a special of the day tag":
+                "انتخاب کنید که چه روزهایی می‌خواهید این مورد با برچسب 'ویژه روز' در دسترس باشد",
         },
 
         staff: {
@@ -365,6 +389,7 @@ export default {
         },
 
         languages: {
+            "By selecting different language, you can translate text fields": "با انتخاب زبان های متفاوت، میتوانید فیلد های متنی را ترجمه کنید",
             "Select your menu languages and setup your currency unit": "زبان های منو و واحد پولی که تو منو نمایش داده میشه انتخاب کن",
             "Menu Languages": "زبان های منو",
             Currency: "واحد پولی",

@@ -24,11 +24,29 @@
         <hr class="w-full border-gray-300 opacity-50" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
+                <div class="flex flex-wrap items-center gap-2">
+                    <Switch :label="$t('panel.menu.Hide this item')" v-model:value="hidden" />
+                    <small class="flex items-center gap-1 text-purple-300 text-xs" v-if="hidden">
+                        <Icon class="w-4 h-4 bg-purple-300" name="eye-slash.svg" folder="icons/light" size="16px" />
+                        {{ $t(`panel.menu.Item is hidden`) }}
+                    </small>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2" v-if="checkLimitations([['item-highlighting', true]], brand)">
+                    <Switch :label="$t('panel.menu.Pin to the top of category')" v-model:value="pinned" />
+                    <small class="flex items-center gap-1 text-purple-300 text-xs" v-if="pinned">
+                        <Icon class="w-4 h-4 bg-purple-300 -rotate-45" name="thumbtack.svg" folder="icons/light" size="16px" />
+                        {{ $t(`panel.menu.Item is pinned`) }}
+                    </small>
+                </div>
+
+                <hr class="w-full opacity-20" />
+
                 <div class="flex flex-col gap-1">
                     <h3 class="flex items-center gap-2 text-lg">
                         <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.menu.Item Images") }}
-                        <small class="px-2 rounded-md bg-zinc-800 opacity-75">{{ $t("panel.up to n", { number: 5 }) }}</small>
+                        <small class="px-2 rounded-md bg-zinc-800 opacity-75">{{ $t("panel.up to n", { number: 3 }) }}</small>
                     </h3>
                     <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 2 }) }}</small>
                 </div>
@@ -49,67 +67,123 @@
                         </form>
                     </li>
                 </ul>
-                <hr class="w-full opacity-20" />
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="newspaper.svg" folder="icons/light" size="20px" />
-                    {{ $t("panel.menu.General Info") }}
-                </h3>
-                <Input
-                    :label="$t('panel.menu.Branch Name')"
-                    :required="formLang == 'default'"
-                    v-model="name.values[formLang]"
-                    :error="errorField == `name.${formLang}` ? responseMessage : ''"
-                />
-                <div class="flex flex-wrap md:flex-nowrap items-start gap-4 w-full">
-                    <!-- TODO : add little flag icon on the corner of any dual language field showing the current lang -->
-                    <Input
-                        name="address"
-                        class="w-full flex-grow"
-                        :label="$t('panel.menu.Branch Address')"
-                        :required="formLang == 'default'"
-                        v-model="address.values[formLang]"
-                        :error="errorField == `address.${formLang}` ? responseMessage : ''"
-                    />
-                    <Input
-                        name="postalCode"
-                        :placeholder="$t('panel.menu.10 digit number')"
-                        class="w-full md:w-52 flex-shrink-0"
-                        :label="$t('panel.menu.Branch Postal Code')"
-                        mask="##########"
-                        v-model="postalCode"
-                        :error="errorField == 'postalCode' ? responseMessage : ''"
-                    />
-                </div>
+
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <h3 class="flex items-center gap-2 text-lg">
-                        <Icon class="w-5 h-5 bg-white" name="phone-rotary.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.menu.Phone Numbers") }}
+                        <Icon class="w-5 h-5 bg-white" name="newspaper.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.menu.General Info") }}
                     </h3>
+                    <Switch :label="$t('panel.menu.Mark as sold out')" v-model:value="soldOut" />
+                </div>
+                <div class="flex flex-wrap md:flex-nowrap items-start gap-4 w-full">
+                    <Input
+                        class="w-full grow"
+                        :label="$t('panel.menu.Item Name')"
+                        :required="formLang == 'default'"
+                        v-model="name.values[formLang]"
+                        :error="errorField == `name.${formLang}` ? responseMessage : ''"
+                    />
+                    <Input
+                        class="w-full md:w-56 shrink-0"
+                        :label="$t('panel.menu.Price')"
+                        :required="true"
+                        v-model="price"
+                        mask="###########"
+                        :unit="$t('pricing.Toman')"
+                        :error="errorField == `price` ? responseMessage : ''"
+                    />
+                </div>
+                <Input
+                    :label="$t('panel.menu.Description')"
+                    :required="formLang == 'default'"
+                    v-model="description.values[formLang]"
+                    :error="errorField == `description.${formLang}` ? responseMessage : ''"
+                />
+
+                <hr class="w-full opacity-20" />
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex flex-col gap-2">
+                        <h3 class="flex items-center gap-2 text-lg">
+                            <Icon class="w-5 h-5 bg-white" name="falafel.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.menu.Item Variants") }}
+                        </h3>
+                        <small class="flex flex-col gap-1">
+                            {{ $t("panel.menu.You can add different variants of this item with different price points") }}
+                            <span class="text-xs opacity-75">({{ $t("panel.menu.VariantExamples") }})</span>
+                        </small>
+                    </div>
                     <button
                         class="btn flex items-center justify-center gap-2 p-2.5 text-xs rounded-md border-2 text-purple-300 border-neutral-300"
-                        @click="telephoneNumbers.push('')"
+                        @click="addNewVariant()"
                         type="button"
                     >
                         <Icon class="w-3 h-3 bg-purple-300" name="plus.svg" folder="icons" size="12px" />
-                        <!-- {{ $t("panel.menu.Add Phone Number") }} -->
                     </button>
                 </div>
-                <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === 'telephoneNumbers' && responseMessage !== ''">
+                <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === 'variants' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <ul class="flex flex-col gap-4">
-                    <li class="flex items-center gap-2" v-for="(number, i) in telephoneNumbers" :key="number">
-                        <Input placeholder="021 22334455" name="tel" mask="###########" class="w-full md:w-52 flex-grow" v-model="telephoneNumbers[i]" />
+                    <li class="flex items-center gap-2" v-for="(variant, i) in variants" :key="i">
+                        <Input :label="$t('panel.menu.Variant Name')" class="w-full flex-grow" v-model="variants[i].name.values[formLang]" />
+                        <Input
+                            class="w-full md:w-44 shrink-0"
+                            :label="$t('panel.menu.Price')"
+                            mask="###########"
+                            :unit="$t('pricing.Toman')"
+                            v-model="variants[i].price"
+                        />
                         <button
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer flex-shrink-0"
-                            @click="telephoneNumbers.splice(i, 1)"
+                            @click="variants.splice(i, 1)"
                         >
                             <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.Delete") }}</small>
                         </button>
                     </li>
                 </ul>
+                <hr class="w-full opacity-20" />
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                    <h3 class="flex items-center gap-2 text-lg">
+                        <Icon class="w-5 h-5 bg-white" name="badge-percent.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.menu.Item Discount Tag") }}
+                    </h3>
+                    <Switch
+                        :label="$t('panel.menu.Activate Discount')"
+                        v-model:value="discountActive"
+                        v-if="checkLimitations([['item-highlighting', true]], brand)"
+                    />
+                </div>
+                <div class="flex flex-col gap-2" v-if="checkLimitations([['item-highlighting', true]], brand)">
+                    <Input
+                        class="w-full md:w-44 shrink-0"
+                        :placeholder="$t('panel.menu.between 0 and 99')"
+                        :label="$t('panel.menu.Discount')"
+                        :disabled="checkLimitations([['item-highlighting', false]], brand)"
+                        :disabledReason="$t('panel.avaialbe for standard plan and above')"
+                        mask="##"
+                        unit="%"
+                        v-model="discountPercentage"
+                        :error="errorField == 'discountPercentage' ? responseMessage : ''"
+                    />
+                    <small class="opacity-75"> {{ $t("panel.menu.When activated discount will be calculated and shown for this item") }} </small>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-1" v-else>
+                    <span class="opacity-75 text-sm">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
+                    <nuxt-link class="text-purple-300 text-sm underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                        {{ $t("panel.Upgrade your plan to get this feature") }}.
+                    </nuxt-link>
+                </div>
+                <hr class="w-full opacity-20" />
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                    <h3 class="flex items-center gap-2 text-lg">
+                        <Icon class="w-5 h-5 bg-white" name="calendar-range.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.menu.Special of the day tag") }}
+                    </h3>
+                    <Switch :label="$t('panel.menu.Activate Discount')" v-model:value="daysSpecialActive" />
+                </div>
+                <small class="opacity-75"> {{ $t("panel.menu.Select which days you want this item to be available with a special of the day tag") }} </small>
                 <hr class="w-full opacity-20" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
@@ -123,7 +197,7 @@
                 <div class="flex flex-wrap items-center gap-4">
                     <nuxt-link
                         class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-lg border-2 border-neutral-300 flex-shrink-0"
-                        :to="localePath(`/panel/${route.params.brandID}/branches`)"
+                        :to="localePath(`/panel/${route.params.brandID}/menu/editor`)"
                     >
                         <Icon
                             class="w-3 h-3 py-2 bg-white"
@@ -137,13 +211,11 @@
                     <button
                         class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
                         :class="{ 'opacity-50': saving }"
-                        :disabled="saving"
                         @click="save()"
-                        v-if="checkPermissions(['main-panel.menu.add'], brand)"
                     >
                         <span class="flex items-center gap-2" v-if="!saving">
                             <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
-                            {{ $t("panel.menu.Create Branch") }}
+                            {{ $t("panel.menu.Create New Item") }}
                         </span>
                         <Loading v-else />
                     </button>
@@ -161,6 +233,7 @@
 
 <script setup>
 import Input from "~/components/form/Input.vue";
+import Switch from "~/components/form/Switch.vue";
 import FormLangList from "~/components/panel/FormLangList.vue";
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
@@ -168,7 +241,7 @@ import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-// TODO : add map to record the location of branch to show in menu 
+// TODO : add map to record the location of branch to show in menu
 // TODO : item-highlighting menu-tag-option : we have this two limitations here
 
 // items have up to 3 images
@@ -212,9 +285,16 @@ const responseMessage = ref("");
 
 const gallery = ref([]);
 const name = reactive({ values: { default: "" } });
-const address = reactive({ values: { default: "" } });
-const postalCode = ref("");
-const telephoneNumbers = ref(["", ""]);
+const description = reactive({ values: { default: "" } });
+const price = ref("");
+const discountActive = ref(false);
+const discountPercentage = ref("");
+const daysSpecialActive = ref(false);
+const daysSpecialList = ref([]);
+const hidden = ref(false);
+const pinned = ref(false);
+const soldOut = ref(false);
+const variants = ref([{ name: { values: { default: "" } }, price: "" }]);
 
 const addImages = () => {
     const files = [...fileInput.value.files];
@@ -239,6 +319,11 @@ const addImages = () => {
     }
 };
 const removeImage = (index) => gallery.value.splice(index, 1);
+
+const addNewVariant = () => {
+    variants.value.push({ name: { values: { default: "" } }, price: "" });
+    setLangVariables(languageList);
+};
 
 // saving ----------------------------------------
 const percentage = ref(0);
@@ -284,10 +369,15 @@ const save = async () => {
 };
 // -------------------------------------------------
 
+let languageList = [];
 const setLangVariables = (translations) => {
+    languageList = translations;
     for (const lang in translations) {
         if (!name.values[lang]) name.values[lang] = "";
-        if (!address.values[lang]) address.values[lang] = "";
+        if (!description.values[lang]) description.values[lang] = "";
+        for (const variant of variants.value) {
+            if (!variant.name.values[lang]) variant.name.values[lang] = "";
+        }
     }
 };
 </script>
