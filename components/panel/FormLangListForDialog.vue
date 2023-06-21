@@ -1,31 +1,16 @@
 <style scoped></style>
 
 <template>
-    <div class="sticky lg:top-0 flex flex-col gap-4 w-full lg:w-72 p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-                <Icon class="w-5 h-5 bg-white" name="language.svg" folder="icons/light" size="20px" />
-                <h3 class="text-lg">{{ $t("panel.Languages") }}</h3>
-            </div>
-            <nuxt-link
-                class="btn flex items-center justify-center gap-2 text-xs border p-2 rounded-md"
-                :to="localePath(`/panel/${brandID}/languages`)"
-                :title="$t('panel.side-menu.Language Settings')"
-            >
-                <Icon class="w-4 h-4 bg-white" name="cog.svg" folder="icons" size="16px" />
-            </nuxt-link>
-        </div>
-        <small class="text-xs opacity-75 -mt-2">{{ $t("panel.languages.By selecting different language, you can translate text fields") }}</small>
-        <hr class="w-full opacity-20" />
-        <ul class="flex lg:flex-col gap-2 w-full pb-2 overflow-auto" v-if="!loadingSettings">
+    <div class="flex flex-col gap-4 w-full lg:w-72 rounded-lg text-white">
+        <ul class="flex gap-2 w-full overflow-auto" v-if="!loadingSettings">
             <li
                 class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer flex-shrink-0"
                 :class="{ 'bg-neutral-100 text-pencil-tip': formLang == 'default' }"
                 @click="$emit('update:formLang', 'default')"
             >
                 <div class="flex items-center gap-2">
-                    <img class="w-6" :src="`/gradient-icons/${formLang == 'default' ? 'dark' : 'light'}/earth-america.png`" alt="" />
-                    <span class="first-letter:capitalize">{{ $t("panel.Default") }}</span>
+                    <img class="w-5" :src="`/gradient-icons/${formLang == 'default' ? 'dark' : 'light'}/earth-america.png`" alt="" />
+                    <span class="first-letter:capitalize text-xs">{{ $t("panel.Default") }}</span>
                 </div>
             </li>
             <li
@@ -36,8 +21,8 @@
                 @click="$emit('update:formLang', lang)"
             >
                 <div class="flex items-center gap-2">
-                    <img class="w-6" :src="`/flags/${lang}.png`" alt="" />
-                    <span class="first-letter:capitalize">{{ lang }}</span>
+                    <img class="w-5" :src="`/flags/${lang}.png`" alt="" />
+                    <span class="first-letter:capitalize text-xs">{{ lang }}</span>
                 </div>
             </li>
         </ul>
