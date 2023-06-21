@@ -330,8 +330,23 @@ export default {
                 "You can add different variants of this item with different price points",
             VariantExamples: "hotness level, meat doneness level, or different preparations",
 
+            "Special Of The Day Tag": "Special Of The Day Tag",
+            "Activate Special Tag": "Activate Special Tag",
             "Select which days you want this item to be available with a special of the day tag":
                 "Select which days you want this item to be available with a 'special of the day' tag",
+
+            "Side Item Groups": "Side Item Groups",
+            "Side Items": "Side Items",
+            "Add Selected Groups": "Add Selected Groups",
+            "Create New Group": "Create New Group",
+            "New Side Item Group": "New Side Item Group",
+            "You havent created any side groups yet": "You haven't created any side groups yet",
+            "You can add optional side items that can be available when ordering": "You can add optional side items that can be available when ordering",
+            "Select Side Items": "Select Side Items",
+            "Select side item groups that you want to add to this item of the menu": "Select side item groups that you want to add to this item of the menu",
+            "Maximum That User Can Select": "Maximum That User Can Select",
+            "Leave it empty to specify no limit for the user": "Leave it empty to specify no limit for the user",
+            "Maximum Limit": "Maximum Limit",
         },
 
         staff: {

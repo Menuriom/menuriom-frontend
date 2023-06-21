@@ -2,18 +2,19 @@
 
 <template>
     <div class="flex flex-col gap-4 md:gap-6 w-full">
-        <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-1">
+        <header class="relative flex flex-wrap items-center justify-between gap-4 text-white isolate">
+            <div class="absolute -top-4 w-full h-72 bg-pencil-tip rounded-2xl"></div>
+            <div class="relative flex flex-col gap-2 px-4">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.brands.Your Brands") }}</h1>
                 </div>
-                <small class="hidden sm:flex text-sm">
+                <small class="flex text-xs md:text-sm">
                     {{ $t("panel.brands.Create new brands, edit your brand details, or manage brands that you are staff of") }}
                 </small>
             </div>
             <nuxt-link
-                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                class="btn relative flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
                 :to="localePath('/panel/brand/creation')"
                 v-if="canCreateNewBrand"
             >
@@ -21,8 +22,8 @@
                 {{ $t("panel.brands.New Brand") }}
             </nuxt-link>
         </header>
-        <hr class="w-full border-gray-300 opacity-50" />
-        <section class="flex flex-col w-full">
+        <!-- <hr class="w-full border-gray-300 opacity-50" /> -->
+        <section class="flex flex-col w-full px-4">
             <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-show="!loading">
                 <li
                     class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
@@ -118,7 +119,7 @@
                     </div>
                 </li>
                 <li
-                    class="w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
+                    class="relative w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
                     v-if="canCreateNewBrand && records.list.length > 0"
                 >
                     <nuxt-link class="flex flex-col items-center justify-center gap-4 w-full h-full p-3" :to="localePath(`/panel/brand/creation`)">

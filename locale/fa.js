@@ -328,10 +328,26 @@ export default {
             "Item Variants": "نوع های مختلف ایتم",
             "You can add different variants of this item with different price points":
                 "شما می توانید نوع های مختلفی از این کالا را با قیمت های مختلف اضافه کنید",
-            VariantExamples: "دجه تندی، میزان پخت گوشت ویا آماده سازی های گوناگون",
+            VariantExamples: "مناسب برای درجه تندی، میزان پخت گوشت و یا آماده سازی های گوناگون",
 
+            "Special Of The Day Tag": "تگ ویژه روز",
+            "Activate Special Tag": "فعالسازی تگ روز",
             "Select which days you want this item to be available with a special of the day tag":
-                "انتخاب کنید که چه روزهایی می‌خواهید این مورد با برچسب 'ویژه روز' در دسترس باشد",
+                "انتخاب کنید که چه روزهایی می‌خواهید این ایتم منو با برچسب 'ویژه روز' در دسترس باشد",
+
+            "Side Item Groups": "لیست ایتم های جانبی",
+            "Side Items": "موارد جانبی",
+            "Add Selected Groups": "افزودن گروه های انتخابی",
+            "Create New Group": "ساخت گروه جدید",
+            "New Side Item Group": "گروه ایتم جدید",
+            "You havent created any side groups yet": "شما هنوز هیچ گروه ای ایجاد نکرده اید",
+            "You can add optional side items that can be available when ordering": "میتوانید ایتم های جانبی قابل سفارش را به این محصول اضافه کنید",
+            "Select Side Items": "انتخاب ایتم های جانبی",
+            "Select side item groups that you want to add to this item of the menu":
+                "گروه ایتم های جانبی که میخواهید به این ایتم از منو اضافه شود را انتخاب کنید",
+            "Maximum That User Can Select": "حداکثری که کاربر می تواند انتخاب کند",
+            "Leave it empty to specify no limit for the user": "برای اعمال نکردن محدودیت فیلد را خالی بگذارید",
+            "Maximum Limit": "حداکثر قابل انتخاب",
         },
 
         staff: {
