@@ -24,8 +24,8 @@
         <hr class="w-full border-gray-300 opacity-50" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full" ref="form">
             <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
+                <h3 class="flex items-center gap-2 text-lg font-bold">
+                    <Icon class="w-5 h-5 gradient-re" name="images.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.menu.Category Icon") }}
                 </h3>
 

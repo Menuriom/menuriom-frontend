@@ -24,12 +24,12 @@
         <hr class="w-full border-gray-300 opacity-50" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-                <div class="flex flex-wrap items-center gap-2">
-                    <Switch :label="$t('panel.menu.Hide this item')" v-model:value="hidden" />
-                    <small class="flex items-center gap-1 text-purple-300 text-xs" v-if="hidden">
-                        <Icon class="w-4 h-4 bg-purple-300" name="eye-slash.svg" folder="icons/light" size="16px" />
-                        {{ $t(`panel.menu.Item is hidden`) }}
-                    </small>
+                <!-- TODO : change other switches like hide switch -->
+                <div class="flex flex-wrap items-center gap-2 w-full max-w-screen-2xs p-2 rounded-lg bg-neutral-800">
+                    <Icon class="w-4 h-4 gradient-re" name="eye-slash.svg" folder="icons/light" size="16px" />
+                    <span class="text-sm">{{ $t("panel.menu.Hide this item") }}</span>
+                    <small class="flex items-center gap-1 text-purple-300 text-xs" v-if="hidden"> {{ $t(`panel.menu.Item is hidden`) }} </small>
+                    <Switch class="ms-auto" v-model:value="hidden" />
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2" v-if="checkLimitations([['item-highlighting', true]], brand)">
@@ -43,10 +43,10 @@
                 <hr class="w-full opacity-20" />
 
                 <div class="flex flex-col gap-1">
-                    <h3 class="flex items-center gap-2 text-lg">
-                        <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="images.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.menu.Item Images") }}
-                        <small class="px-2 rounded-md bg-zinc-800 opacity-75">{{ $t("panel.up to n", { number: 3 }) }}</small>
+                        <small class="px-2 rounded-md bg-zinc-800 font-normal opacity-75">{{ $t("panel.up to n", { number: 3 }) }}</small>
                     </h3>
                     <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 2 }) }}</small>
                 </div>
@@ -70,8 +70,8 @@
 
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-center justify-between gap-4">
-                    <h3 class="flex items-center gap-2 text-lg">
-                        <Icon class="w-5 h-5 bg-white" name="newspaper.svg" folder="icons/light" size="20px" />
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="newspaper.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.menu.General Info") }}
                     </h3>
                     <Switch :label="$t('panel.menu.Mark as sold out')" v-model:value="soldOut" />
@@ -104,8 +104,8 @@
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <div class="flex flex-col gap-2">
-                        <h3 class="flex items-center gap-2 text-lg">
-                            <Icon class="w-5 h-5 bg-white" name="falafel.svg" folder="icons/light" size="20px" />
+                        <h3 class="flex items-center gap-2 text-lg font-bold">
+                            <Icon class="w-5 h-5 gradient-re" name="falafel.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.menu.Item Variants") }}
                         </h3>
                         <small class="flex flex-col gap-1">
@@ -125,7 +125,7 @@
                     <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <ul class="flex flex-col gap-4">
-                    <li class="flex items-center gap-2" v-for="(variant, i) in variants" :key="i">
+                    <li class="flex flex-wrap md:flex-nowrap items-center gap-2" v-for="(variant, i) in variants" :key="i">
                         <Input :label="$t('panel.menu.Variant Name')" class="w-full flex-grow" v-model="variants[i].name.values[formLang]" />
                         <Input
                             class="w-full md:w-44 shrink-0"
@@ -145,8 +145,8 @@
                 </ul>
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-start justify-between gap-2">
-                    <h3 class="flex items-center gap-2 text-lg">
-                        <Icon class="w-5 h-5 bg-white" name="badge-percent.svg" folder="icons/light" size="20px" />
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="badge-percent.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.menu.Item Discount Tag") }}
                     </h3>
                     <Switch
@@ -169,7 +169,7 @@
                     />
                     <small class="opacity-75"> {{ $t("panel.menu.When activated discount will be calculated and shown for this item") }} </small>
                 </div>
-                <div class="flex flex-col items-center justify-center gap-1" v-else>
+                <div class="flex flex-col items-center justify-center gap-1 p-4 rounded-md bg-neutral-800 shadow-nr10" v-else>
                     <span class="opacity-75 text-sm">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
                     <nuxt-link class="text-purple-300 text-sm underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
                         {{ $t("panel.Upgrade your plan to get this feature") }}.
@@ -177,13 +177,61 @@
                 </div>
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-start justify-between gap-2">
-                    <h3 class="flex items-center gap-2 text-lg">
-                        <Icon class="w-5 h-5 bg-white" name="calendar-range.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.menu.Special of the day tag") }}
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="calendar-range.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.menu.Special Of The Day Tag") }}
                     </h3>
-                    <Switch :label="$t('panel.menu.Activate Discount')" v-model:value="daysSpecialActive" />
+                    <Switch
+                        :label="$t('panel.menu.Activate Special Tag')"
+                        v-model:value="specialDaysActive"
+                        v-if="checkLimitations([['item-highlighting', true]], brand)"
+                    />
                 </div>
-                <small class="opacity-75"> {{ $t("panel.menu.Select which days you want this item to be available with a special of the day tag") }} </small>
+                <small class="opacity-75 -mt-2">
+                    {{ $t("panel.menu.Select which days you want this item to be available with a special of the day tag") }}
+                </small>
+                <ul class="flex flex-wrap gap-3 w-full" v-if="checkLimitations([['item-highlighting', true]], brand)">
+                    <li
+                        class="flex items-center gap-1 me-3 select-none cursor-pointer"
+                        v-for="day in ['Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays', 'Sundays']"
+                        @click="specialDaysList.has(day) ? specialDaysList.delete(day) : specialDaysList.add(day)"
+                    >
+                        <span
+                            class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
+                            :class="[specialDaysList.has(day) ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue' : 'border-zinc-500']"
+                        >
+                            <Icon class="w-4 h-4 bg-pencil-tip" name="Check.svg" folder="icons/basil" size="22px" />
+                        </span>
+                        {{ day }}
+                    </li>
+                </ul>
+                <div class="flex flex-col items-center justify-center gap-1 p-4 rounded-md bg-neutral-800 shadow-nr10" v-else>
+                    <span class="opacity-75 text-sm">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
+                    <nuxt-link class="text-purple-300 text-sm underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                        {{ $t("panel.Upgrade your plan to get this feature") }}.
+                    </nuxt-link>
+                </div>
+                <hr class="w-full opacity-20" />
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex flex-col gap-2">
+                        <h3 class="flex items-center gap-2 text-lg font-bold">
+                            <Icon class="w-5 h-5 gradient-re" name="list-tree.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.menu.Side Items") }}
+                        </h3>
+                        <small class="opacity-75">
+                            {{ $t("panel.menu.You can add optional side items that can be available when ordering") }}
+                        </small>
+                    </div>
+                    <button
+                        class="btn flex items-center justify-center gap-2 p-2.5 text-xs rounded-md border-2 text-purple-300 border-neutral-300"
+                        @click="panelStore.openPopUp('side-item-picker')"
+                        type="button"
+                    >
+                        <Icon class="w-4 h-4 bg-purple-300" name="bars-progress.svg" folder="icons/light" size="16px" />
+                        {{ $t("panel.menu.Select Side Items") }}
+                    </button>
+                </div>
+                <ul></ul>
                 <hr class="w-full opacity-20" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
@@ -228,6 +276,12 @@
                 @updateLanguages="setLangVariables($event)"
             />
         </section>
+
+        <Teleport to="body">
+            <SideItemsPicker v-if="panelStore.popUpOpened == 'side-item-picker'" />
+            <SideItemCreator v-if="panelStore.popUpOpened == 'side-item-creator'" />
+            <SideItemEditor v-if="panelStore.popUpOpened == 'side-item-editor'" />
+        </Teleport>
     </div>
 </template>
 
@@ -236,6 +290,9 @@ import Input from "~/components/form/Input.vue";
 import Switch from "~/components/form/Switch.vue";
 import FormLangList from "~/components/panel/FormLangList.vue";
 import Loading from "~/components/Loading.vue";
+const SideItemsPicker = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemsPicker.vue"));
+const SideItemCreator = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemCreator.vue"));
+const SideItemEditor = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemEditor.vue"));
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
@@ -289,8 +346,8 @@ const description = reactive({ values: { default: "" } });
 const price = ref("");
 const discountActive = ref(false);
 const discountPercentage = ref("");
-const daysSpecialActive = ref(false);
-const daysSpecialList = ref([]);
+const specialDaysActive = ref(false);
+const specialDaysList = ref(new Set());
 const hidden = ref(false);
 const pinned = ref(false);
 const soldOut = ref(false);

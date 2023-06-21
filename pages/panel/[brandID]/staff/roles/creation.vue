@@ -31,8 +31,8 @@
                     :error="errorField == `roleName` ? responseMessage : ''"
                 />
                 <hr class="w-full opacity-20" />
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="shield.svg" folder="icons/light" size="20px" />
+                <h3 class="flex items-center gap-2 text-lg font-bold">
+                    <Icon class="w-5 h-5 gradient-re" name="shield.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.staff.roles.Permissions") }}
                 </h3>
                 <small class="text-xs opacity-75 -mt-2">

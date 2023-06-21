@@ -25,8 +25,8 @@
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <div class="flex flex-col gap-1">
-                    <h3 class="flex items-center gap-2 text-lg">
-                        <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="images.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.branches.Branch Images") }}
                         <small class="px-2 rounded-md bg-zinc-800 opacity-75">{{ $t("panel.up to n", { number: 5 }) }}</small>
                     </h3>
@@ -50,8 +50,8 @@
                     </li>
                 </ul>
                 <hr class="w-full opacity-20" />
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="newspaper.svg" folder="icons/light" size="20px" />
+                <h3 class="flex items-center gap-2 text-lg font-bold">
+                    <Icon class="w-5 h-5 gradient-re" name="newspaper.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.branches.General Info") }}
                 </h3>
                 <Input
@@ -81,8 +81,8 @@
                 </div>
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-center justify-between gap-4">
-                    <h3 class="flex items-center gap-2 text-lg">
-                        <Icon class="w-5 h-5 bg-white" name="phone-rotary.svg" folder="icons/light" size="20px" />
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="phone-rotary.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.branches.Phone Numbers") }}
                     </h3>
                     <button
