@@ -2,14 +2,13 @@
 
 <template>
     <div class="flex flex-col gap-4 md:gap-6 w-full">
-        <header class="relative flex flex-wrap items-center justify-between gap-4 text-white isolate">
-            <div class="absolute -top-4 w-full h-72 bg-pencil-tip rounded-2xl"></div>
-            <div class="relative flex flex-col gap-2 px-4">
-                <div class="flex items-center gap-2">
+        <header class="relative flex flex-wrap items-center justify-between gap-4">
+            <div class="relative flex flex-col gap-1">
+                <div class="flex items-center gap-1">
                     <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.brands.Your Brands") }}</h1>
                 </div>
-                <small class="flex text-xs md:text-sm">
+                <small class="text-xs md:text-sm">
                     {{ $t("panel.brands.Create new brands, edit your brand details, or manage brands that you are staff of") }}
                 </small>
             </div>
@@ -22,8 +21,8 @@
                 {{ $t("panel.brands.New Brand") }}
             </nuxt-link>
         </header>
-        <!-- <hr class="w-full border-gray-300 opacity-50" /> -->
-        <section class="flex flex-col w-full px-4">
+        <hr class="w-full border-gray-400 opacity-50" />
+        <section class="flex flex-col w-full">
             <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-show="!loading">
                 <li
                     class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"

@@ -25,7 +25,7 @@
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <!-- TODO : change other switches like hide switch -->
-                <div class="flex flex-wrap items-center gap-2 w-full max-w-screen-2xs p-2 rounded-lg bg-neutral-800">
+                <div class="flex flex-wrap items-center gap-2 w-full max-w-screen-xs p-2 rounded-lg bg-neutral-800">
                     <Icon class="w-4 h-4 gradient-re" name="eye-slash.svg" folder="icons/light" size="16px" />
                     <span class="text-sm">{{ $t("panel.menu.Hide this item") }}</span>
                     <small class="flex items-center gap-1 text-purple-300 text-xs" v-if="hidden"> {{ $t(`panel.menu.Item is hidden`) }} </small>

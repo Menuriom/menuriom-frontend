@@ -19,11 +19,7 @@ main {
 </style>
 
 <template>
-    <div
-        class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-50 overflow-clip"
-        :class="{ 'blur-sm': panelStore.popUpOpened != '' }"
-        id="app"
-    >
+    <div class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-50 overflow-clip" id="app">
         <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
             <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
             <Header />
