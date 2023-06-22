@@ -278,9 +278,10 @@
         </section>
 
         <Teleport to="body">
-            <SideItemsPicker v-if="panelStore.popUpOpened == 'side-item-picker'" />
+            <SideItemsPicker v-model.sideItemList="sideItemList" v-if="panelStore.popUpOpened == 'side-item-picker'" />
             <SideItemCreator v-if="panelStore.popUpOpened == 'side-item-creator'" />
             <SideItemEditor v-if="panelStore.popUpOpened == 'side-item-editor'" />
+            <SideItemDelete v-if="panelStore.popUpOpened == 'side-item-delete'" />
         </Teleport>
     </div>
 </template>
@@ -293,6 +294,7 @@ import Loading from "~/components/Loading.vue";
 const SideItemsPicker = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemsPicker.vue"));
 const SideItemCreator = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemCreator.vue"));
 const SideItemEditor = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemEditor.vue"));
+const SideItemDelete = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemDelete.vue"));
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
@@ -352,6 +354,7 @@ const hidden = ref(false);
 const pinned = ref(false);
 const soldOut = ref(false);
 const variants = ref([{ name: { values: { default: "" } }, price: "" }]);
+const sideItemList = ref(new Set());
 
 const addImages = () => {
     const files = [...fileInput.value.files];

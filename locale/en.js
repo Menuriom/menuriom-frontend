@@ -114,6 +114,7 @@ export default {
         Ok: "Ok",
         Save: "Save",
         "Save Changes": "Save Changes",
+        Edit: "Edit",
         Delete: "Delete",
         Select: "Select",
         Search: "Search",
@@ -347,6 +348,11 @@ export default {
             "Maximum That User Can Select": "Maximum That User Can Select",
             "Leave it empty to specify no limit for the user": "Leave it empty to specify no limit for the user",
             "Maximum Limit": "Maximum Limit",
+            "Group Name": "Group Name",
+            "You can add up to 20 items": "You can add up to 20 items",
+            "Add New Item": "Add New Item",
+            "Create Item Group": "Create Item Group",
+            "New side group has been created": "New side group has been created",
         },
 
         staff: {

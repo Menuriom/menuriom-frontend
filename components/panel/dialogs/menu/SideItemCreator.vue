@@ -32,7 +32,7 @@
             />
             <hr class="opacity-25" />
             <small class="flex flex-col gap-1"> {{ $t("panel.menu.You can add up to 20 items") }} </small>
-            <ul class="flex flex-col gap-4">
+            <ul class="flex flex-col gap-4 p-1 max-h-96 overflow-auto">
                 <li class="flex flex-wrap md:flex-nowrap items-center gap-2" v-for="(item, i) in items" :key="i">
                     <Input :label="$t('panel.menu.Item Name')" class="w-full flex-grow" v-model="items[i].name.values[formLang]" />
                     <Input
@@ -47,11 +47,10 @@
                         @click="items.splice(i, 1)"
                     >
                         <Icon class="w-5 h-5 bg-red-300" name="trash-can.svg" folder="icons/light" size="20px" />
-                        <!-- <small>{{ $t("panel.Delete") }}</small> -->
                     </button>
                 </li>
             </ul>
-            <button class="flex items-center gap-2 w-max text-xs text-purple-300" @click="addNewItem()" type="button">
+            <button class="flex items-center gap-2 w-max text-xs text-purple-300" @click="addNewItem()" type="button" v-if="items.length < 20">
                 <Icon class="w-3 h-3 bg-purple-300" name="plus.svg" folder="icons" size="12px" />
                 {{ $t("panel.menu.Add New Item") }}
             </button>
@@ -64,7 +63,32 @@
                 <Input class="w-full" :label="$t('panel.menu.Maximum Limit')" mask="##" v-model="maximum" />
             </div>
             <hr class="opacity-25" />
-            <button></button>
+            <div class="flex flex-wrap items-center gap-4">
+                <button
+                    class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-md border-2 border-neutral-300 flex-shrink-0"
+                    @click="panelStore.openPopUp('side-item-picker')"
+                >
+                    <Icon
+                        class="w-3 h-3 py-2 bg-white"
+                        :class="[localeProperties.dir == 'rtl' ? 'rotate-45' : '-rotate-[135deg]']"
+                        name="arrow-angle.svg"
+                        folder="icons"
+                        size="12px"
+                    />
+                    {{ $t("panel.Go Back") }}
+                </button>
+                <button
+                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white grow"
+                    :class="{ 'opacity-50': saving }"
+                    @click="save()"
+                >
+                    <span class="flex items-center gap-2" v-if="!saving">
+                        <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
+                        {{ $t("panel.menu.Create Item Group") }}
+                    </span>
+                    <Loading v-else />
+                </button>
+            </div>
         </div>
     </Dialog>
 </template>
@@ -73,15 +97,17 @@
 import Input from "~/components/form/Input.vue";
 import FormLangListForDialog from "~/components/panel/FormLangListForDialog.vue";
 import Dialog from "~/components/panel/Dialog.vue";
+import axios from "axios";
+import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
+const { localeProperties, t } = useI18n();
 const route = useRoute();
 const localePath = useLocalePath();
+const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
-
-// TODO : max items in a group is 20
 
 const formLang = ref("default");
 const errorField = ref("");
@@ -89,10 +115,14 @@ const responseMessage = ref("");
 
 const name = reactive({ values: { default: "" } });
 const description = reactive({ values: { default: "" } });
-const items = ref([{ name: { values: { default: "" } }, price: "" }]);
-const maximum = ref('');
+const items = ref([
+    { name: { values: { default: "" } }, price: "" },
+    { name: { values: { default: "" } }, price: "" },
+]);
+const maximum = ref("");
 
 const addNewItem = () => {
+    if (items.value.length >= 20) return;
     items.value.push({ name: { values: { default: "" } }, price: "" });
     setLangVariables(languageList);
 };
@@ -108,4 +138,43 @@ const setLangVariables = (translations) => {
         }
     }
 };
+
+// saving ----------------------------------------
+const saving = ref(false);
+const save = async () => {
+    if (saving.value) return;
+    saving.value = true;
+
+    formLang.value = "default";
+    responseMessage.value = "";
+    errorField.value = "";
+
+    const data = new FormData();
+    for (const val in name.values) data.append(`name.${val}`, name.values[val]);
+    for (const val in description.values) data.append(`description.${val}`, description.values[val]);
+    if (maximum.value) data.append("maximum", maximum.value);
+    items.value.forEach((item) => {
+        if (item.name) data.append("items[]", JSON.stringify(item));
+    });
+
+    await axios
+        .post(`/api/v1/panel/menu-sides`, data, { headers: { brand: route.params.brandID } })
+        .then((response) => {
+            toast.success(t(`panel.menu.New side group has been created`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            panelStore.openPopUp("side-item-picker");
+        })
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
+        })
+        .finally(() => (saving.value = false));
+};
+// -------------------------------------------------
 </script>

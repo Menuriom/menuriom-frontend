@@ -187,6 +187,26 @@ export const getDishesList = async (brandID) => {
 
     return { _items, _canCreateNewDish };
 };
+export const getSideItemGroupList = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/menu-sides`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _records = [];
+    let _canCreateNewGroup = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _records = response.data.records;
+            _canCreateNewGroup = response.data.canCreateNewGroup;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _records, _canCreateNewGroup };
+};
 // ---------------------------------------------------------
 
 // staff ---------------------------------------------------------

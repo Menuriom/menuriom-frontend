@@ -114,6 +114,7 @@ export default {
         Ok: "خُب",
         Save: "ذخیره",
         "Save Changes": "ثبت تغییرات",
+        Edit: "ویرایش",
         Delete: "حذف",
         Select: "انتخاب",
         Search: "جستجو",
@@ -348,6 +349,11 @@ export default {
             "Maximum That User Can Select": "حداکثری که کاربر می تواند انتخاب کند",
             "Leave it empty to specify no limit for the user": "برای اعمال نکردن محدودیت فیلد را خالی بگذارید",
             "Maximum Limit": "حداکثر قابل انتخاب",
+            "Group Name": "نام گروه",
+            "You can add up to 20 items": "تا 20 ایتم میتوانید اضافه کنید",
+            "Add New Item": "افزودن ایتم جدید",
+            "Create Item Group": "ساخت گروه ایتم",
+            "New side group has been created": "گروه ایتم های جانبی ساخته شد",
         },
 
         staff: {
