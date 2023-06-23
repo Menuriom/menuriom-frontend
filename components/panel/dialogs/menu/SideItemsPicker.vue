@@ -25,22 +25,23 @@
                     <Icon class="w-4 h-4 bg-purple-300" name="plus.svg" folder="icons" size="16px" />
                     <span class="text-purple-300 text-xs">{{ $t("panel.menu.Create New Group") }}</span>
                 </li>
-                <li class="flex flex-wrap items-center gap-4 p-4 bg-neutral-800 rounded-lg cursor-pointer" v-for="(item, i) in sideItemGroups.list" :key="i">
-                    <span
-                        class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
-                        :class="[selectedItemGroups.has(item) ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue' : 'border-zinc-500']"
-                        @click="selectItemGroup(item)"
-                    >
-                        <Icon class="w-4 h-4 bg-neutral-800" name="Check.svg" folder="icons/basil" size="20px" />
-                    </span>
-                    <div class="flex flex-col grow" @click="selectItemGroup(item)">
+                <li class="flex flex-wrap items-center gap-4 bg-neutral-800 rounded-lg" v-for="(item, id) in sideItemGroups.list" :key="id">
+                    <div class="flex items-center justify-center h-14 ps-4 cursor-pointer" @click="toggleItemGroupSelection(item, id)">
+                        <span
+                            class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
+                            :class="[selectedItemGroups.has(id) ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue' : 'border-zinc-500']"
+                        >
+                            <Icon class="w-4 h-4 bg-neutral-800" name="Check.svg" folder="icons/basil" size="20px" />
+                        </span>
+                    </div>
+                    <div class="flex flex-col py-4 cursor-pointer grow" @click="toggleItemGroupSelection(item, id)">
                         <h4 class="font-bold">{{ item.translation?.[locale]?.name || item.name }}</h4>
                         <small class="text-xs opacity-75">{{ item.translation?.[locale]?.description || item.description }}</small>
                     </div>
-                    <div class="flex flex-wrap items-center gap-1">
+                    <div class="flex flex-wrap items-center gap-1 pe-4">
                         <button
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-blue-500 hover:bg-opacity-10 text-blue-300 cursor-pointer shrink-0"
-                            @click="$emit('openDelete', item)"
+                            @click="$emit('openEdit', item)"
                             :title="$t('panel.Edit')"
                         >
                             <Icon class="w-5 h-5 bg-neutral-300" name="pen-to-square.svg" folder="icons/light" size="18px" />
@@ -56,18 +57,18 @@
                 </li>
             </ul>
             <Loading v-if="loadingGroups" />
-            <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
+            <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!loadingGroups && errorField === '' && responseMessage !== ''">
                 <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
             <hr class="opacity-25" />
-            <button
+            <!-- <button
                 class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white flex-shrink-0"
-                @click="$emit('update:sideItemList', selectedItemGroups)"
+                @click="saveSelected()"
                 v-if="selectedItemGroups.size > 0"
             >
                 <Icon class="w-4 h-4 bg-white" name="bars-progress.svg" folder="icons/light" size="16px" />
                 {{ $t("panel.menu.Add Selected Groups") }}
-            </button>
+            </button> -->
         </div>
     </Dialog>
 </template>
@@ -75,28 +76,30 @@
 <script setup>
 import Dialog from "~/components/panel/Dialog.vue";
 import { usePanelStore } from "@/stores/panel";
-import { useUserStore } from "@/stores/user";
 
 const { locale, t } = useI18n();
 const route = useRoute();
 const localePath = useLocalePath();
 const nuxtApp = useNuxtApp();
 const panelStore = usePanelStore();
-const userStore = useUserStore();
 
 const props = defineProps({
-    sideItemList: Set,
+    selectedSideItemList: Map,
 });
 
-const emit = defineEmits(["openDelete", "update:sideItemList"]);
+const emit = defineEmits(["openEdit", "openDelete", "update:selectedSideItemList"]);
 
 const errorField = ref("");
 const responseMessage = ref("");
 
-const selectedItemGroups = ref(new Set(props.sideItemList));
-const selectItemGroup = (item) => {
-    selectedItemGroups.value.has(item) ? selectedItemGroups.value.delete(item) : selectedItemGroups.value.add(item);
+const selectedItemGroups = ref(props.selectedSideItemList);
+const toggleItemGroupSelection = (item, id) => {
+    selectedItemGroups.value.has(id) ? selectedItemGroups.value.delete(id) : selectedItemGroups.value.set(id, item);
 };
+// const saveSelected = () => {
+//     emit("update:selectedSideItemList", selectedItemGroups.value);
+//     panelStore.closePopUp();
+// };
 
 const handleErrors = (err) => {
     errorField.value = "data";
@@ -109,7 +112,7 @@ const handleErrors = (err) => {
 };
 
 // getCategoryList -------------------------------------------------
-const sideItemGroups = reactive({ list: [] });
+const sideItemGroups = reactive({ list: {} });
 const canCreateNewGroup = ref(true);
 const getGroupList_results = await useLazyAsyncData(() => getSideItemGroupList(route.params.brandID));
 const loadingGroups = computed(() => getGroupList_results.pending.value);
@@ -119,10 +122,9 @@ watch(getGroupList_results.error, (err) => handleErrors(err));
 
 const handleGroupList_results = (data) => {
     if (!data) return;
-    sideItemGroups.list = data._records;
+    data._records.forEach((record) => (sideItemGroups.list[record._id] = record));
     canCreateNewGroup.value = data._canCreateNewGroup;
 };
 watch(getGroupList_results.data, (val) => handleGroupList_results(val), { immediate: process.server || nuxtApp.isHydrating });
-
 // -------------------------------------------------
 </script>
