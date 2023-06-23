@@ -1,9 +1,9 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 md:gap-6 w-full">
+    <div class="flex flex-col gap-4 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/plate-utensils-dark.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.menu.New Menu Item") }}</h1>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </header>
-        <hr class="w-full border-gray-300 opacity-50" />
+        <hr class="w-full border-gray-300 opacity-25" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <!-- TODO : change other switches like hide switch -->
@@ -212,26 +212,7 @@
                     </nuxt-link>
                 </div>
                 <hr class="w-full opacity-20" />
-                <div class="flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex flex-col gap-2">
-                        <h3 class="flex items-center gap-2 text-lg font-bold">
-                            <Icon class="w-5 h-5 gradient-re" name="list-tree.svg" folder="icons/light" size="20px" />
-                            {{ $t("panel.menu.Side Items") }}
-                        </h3>
-                        <small class="opacity-75">
-                            {{ $t("panel.menu.You can add optional side items that can be available when ordering") }}
-                        </small>
-                    </div>
-                    <button
-                        class="btn flex items-center justify-center gap-2 p-2.5 text-xs rounded-md border-2 text-purple-300 border-neutral-300"
-                        @click="panelStore.openPopUp('side-item-picker')"
-                        type="button"
-                    >
-                        <Icon class="w-4 h-4 bg-purple-300" name="bars-progress.svg" folder="icons/light" size="16px" />
-                        {{ $t("panel.menu.Select Side Items") }}
-                    </button>
-                </div>
-                <ul></ul>
+                <SideItemsList v-model:sideItemList="sideItemList" />
                 <hr class="w-full opacity-20" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
@@ -276,13 +257,6 @@
                 @updateLanguages="setLangVariables($event)"
             />
         </section>
-
-        <Teleport to="body">
-            <SideItemsPicker v-model.sideItemList="sideItemList" v-if="panelStore.popUpOpened == 'side-item-picker'" />
-            <SideItemCreator v-if="panelStore.popUpOpened == 'side-item-creator'" />
-            <SideItemEditor v-if="panelStore.popUpOpened == 'side-item-editor'" />
-            <SideItemDelete v-if="panelStore.popUpOpened == 'side-item-delete'" />
-        </Teleport>
     </div>
 </template>
 
@@ -291,10 +265,7 @@ import Input from "~/components/form/Input.vue";
 import Switch from "~/components/form/Switch.vue";
 import FormLangList from "~/components/panel/FormLangList.vue";
 import Loading from "~/components/Loading.vue";
-const SideItemsPicker = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemsPicker.vue"));
-const SideItemCreator = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemCreator.vue"));
-const SideItemEditor = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemEditor.vue"));
-const SideItemDelete = defineAsyncComponent(() => import("~/components/panel/dialogs/menu/SideItemDelete.vue"));
+const SideItemsList = defineAsyncComponent(() => import("~/components/panel/menu/SideItemsList.vue"));
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
@@ -321,6 +292,9 @@ import { useUserStore } from "@/stores/user";
 
 // TODO
 // side items creation and edit are on seprate page
+
+// TODO
+// edit tags section : make it 3 cards side by side
 
 const { localeProperties, t } = useI18n();
 const route = useRoute();
@@ -354,7 +328,7 @@ const hidden = ref(false);
 const pinned = ref(false);
 const soldOut = ref(false);
 const variants = ref([{ name: { values: { default: "" } }, price: "" }]);
-const sideItemList = ref(new Set());
+const sideItemList = ref(new Map());
 
 const addImages = () => {
     const files = [...fileInput.value.files];

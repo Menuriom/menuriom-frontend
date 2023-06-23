@@ -69,9 +69,9 @@
         <Teleport to="body">
             <Dialog name="delete-confirmation" :title="$t('panel.menu.Delete Menu Item')">
                 <div class="flex flex-col gap-3">
-                    <hr class="w-full opacity-30 my-2" />
+                    <hr class="w-full opacity-30 mt-2" />
                     <h2 class="text-xl" v-html="$t('panel.menu.You are about to delete this item', { name: dishes.list[indexToDelete].name })" />
-                    <p class="text-sm opacity-75">
+                    <p class="text-sm opacity-75 -mt-2">
                         {{ $t("panel.menu.deletingMenuItemDesc") }}
                     </p>
                     <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">

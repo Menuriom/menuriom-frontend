@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 md:gap-6 w-full">
+    <div class="flex flex-col gap-4 w-full">
         <header class="relative flex flex-wrap items-center justify-between gap-4">
             <div class="relative flex flex-col gap-1">
                 <div class="flex items-center gap-1">
