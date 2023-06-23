@@ -341,6 +341,7 @@ export default {
             "Add Selected Groups": "افزودن گروه های انتخابی",
             "Create New Group": "ساخت گروه جدید",
             "New Side Item Group": "گروه ایتم جدید",
+            "Edit Side Item Group": "ویرایش گروه ایتم",
             "You havent created any side groups yet": "شما هنوز هیچ گروه ای ایجاد نکرده اید",
             "You can add optional side items that can be available when ordering": "میتوانید ایتم های جانبی قابل سفارش را به این محصول اضافه کنید",
             "Select Side Items": "انتخاب ایتم های جانبی",
@@ -354,6 +355,10 @@ export default {
             "Add New Item": "افزودن ایتم جدید",
             "Create Item Group": "ساخت گروه ایتم",
             "New side group has been created": "گروه ایتم های جانبی ساخته شد",
+            "Side group has been updated": "گروه ایتم های جانبی ویرایش شد",
+            "Delete Side Items Group": "حذف گروه ایتم های جانبی",
+            "Delete Items Group": "حذف گروه",
+            deletingSideItemsGroupDesc: "با حذف این گروه، آن را از تمام آیتم های منو که قبلاً این گروه را داشتند نیز حذف می کنید",
         },
 
         staff: {

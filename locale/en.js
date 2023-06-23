@@ -341,6 +341,7 @@ export default {
             "Add Selected Groups": "Add Selected Groups",
             "Create New Group": "Create New Group",
             "New Side Item Group": "New Side Item Group",
+            "Edit Side Item Group": "Edit Side Item Group",
             "You havent created any side groups yet": "You haven't created any side groups yet",
             "You can add optional side items that can be available when ordering": "You can add optional side items that can be available when ordering",
             "Select Side Items": "Select Side Items",
@@ -353,6 +354,10 @@ export default {
             "Add New Item": "Add New Item",
             "Create Item Group": "Create Item Group",
             "New side group has been created": "New side group has been created",
+            "Side group has been updated": "Side group has been updated",
+            "Delete Side Items Group": "Delete Side Items Group",
+            "Delete Items Group": "Delete Items Group",
+            deletingSideItemsGroupDesc: "By deleting this group, you are also removing it from all menu items that previously had this group",
         },
 
         staff: {
