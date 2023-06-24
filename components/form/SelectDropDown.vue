@@ -32,10 +32,15 @@ span {
             ref="dropdown"
         >
             <div class="relative flex items-center w-full" tabindex="0" @click="toggleDropdown()">
-                <img class="w-6 ms-3 object-contain" :src="selectedOption.icon" v-if="selectedOption.icon">
+                <img
+                    class="ms-3 object-contain"
+                    :class="[label ? 'pb-1 mt-6 -me-1' : customPadding, label ? 'w-5' : 'w-6']"
+                    :src="selectedOption.icon"
+                    v-if="selectedOption.icon"
+                />
                 <input
                     class="w-full bg-transparent rounded-b-md outline-none text-sm select-none"
-                    :class="[!!label ? 'p-1 px-3 pb-1.5 mt-6' : customPadding]"
+                    :class="[label ? 'p-1 px-3 pb-1.5 mt-6' : customPadding]"
                     :required="required"
                     :name="name"
                     :value="selectedOption.name"

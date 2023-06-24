@@ -23,21 +23,23 @@
         </header>
         <hr class="w-full border-gray-300 opacity-25" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
-            <div class="flex flex-col gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-                <!-- TODO : change other switches like hide switch -->
-                <div class="flex flex-wrap items-center gap-2 w-full max-w-screen-xs p-2 rounded-lg bg-neutral-800">
-                    <Icon class="w-4 h-4 gradient-re" name="eye-slash.svg" folder="icons/light" size="16px" />
-                    <span class="text-sm">{{ $t("panel.menu.Hide this item") }}</span>
-                    <small class="flex items-center gap-1 text-purple-300 text-xs" v-if="hidden"> {{ $t(`panel.menu.Item is hidden`) }} </small>
-                    <Switch class="ms-auto" v-model:value="hidden" />
-                </div>
-
-                <div class="flex flex-wrap items-center gap-2" v-if="checkLimitations([['item-highlighting', true]], brand)">
-                    <Switch :label="$t('panel.menu.Pin to the top of category')" v-model:value="pinned" />
-                    <small class="flex items-center gap-1 text-purple-300 text-xs" v-if="pinned">
-                        <Icon class="w-4 h-4 bg-purple-300 -rotate-45" name="thumbtack.svg" folder="icons/light" size="16px" />
-                        {{ $t(`panel.menu.Item is pinned`) }}
-                    </small>
+            <div class="flex flex-col gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35" ref="form">
+                <div class="flex flex-wrap items-center gap-2">
+                    <div class="flex flex-wrap items-center gap-2 w-full max-w-max p-2 rounded-lg bg-neutral-800">
+                        <Icon class="w-4 h-4 gradient-re" name="eye-slash.svg" folder="icons/light" size="16px" />
+                        <span class="text-sm">{{ $t("panel.menu.Hide this item") }}</span>
+                        <small class="flex items-center gap-1 text-purple-300 text-xs" v-if="hidden"> {{ $t(`panel.menu.Item is hidden`) }} </small>
+                        <Switch class="ms-2" v-model:value="hidden" />
+                    </div>
+                    <div
+                        class="flex flex-wrap items-center gap-2 w-full max-w-max p-2 rounded-lg bg-neutral-800"
+                        v-if="checkLimitations([['item-highlighting', true]], brand)"
+                    >
+                        <Icon class="w-4 h-4 gradient-re -rotate-45" name="thumbtack.svg" folder="icons/light" size="16px" />
+                        <span class="text-sm">{{ $t("panel.menu.Pin to the top of category") }}</span>
+                        <small class="flex items-center gap-1 text-purple-300 text-xs" v-if="pinned"> {{ $t(`panel.menu.Item is pinned`) }} </small>
+                        <Switch class="ms-2" v-model:value="pinned" />
+                    </div>
                 </div>
 
                 <hr class="w-full opacity-20" />
@@ -74,7 +76,10 @@
                         <Icon class="w-5 h-5 gradient-re" name="newspaper.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.menu.General Info") }}
                     </h3>
-                    <Switch :label="$t('panel.menu.Mark as sold out')" v-model:value="soldOut" />
+                    <div class="flex flex-wrap items-center gap-2 w-full max-w-max p-2 rounded-lg bg-neutral-800">
+                        <small class="text-sm">{{ $t("panel.menu.Mark as sold out") }}</small>
+                        <Switch v-model:value="soldOut" />
+                    </div>
                 </div>
                 <div class="flex flex-wrap md:flex-nowrap items-start gap-4 w-full">
                     <Input
@@ -100,7 +105,33 @@
                     v-model="description.values[formLang]"
                     :error="errorField == `description.${formLang}` ? responseMessage : ''"
                 />
-
+                <SelectDropDown
+                    :required="true"
+                    :formHtmlObject="form"
+                    :label="$t('panel.menu.Category')"
+                    :options="categories.list"
+                    v-slot="{ option }"
+                    v-model:selected-option="selectedCategory.option"
+                    :error="errorField == 'selectedCategory' ? responseMessage : ''"
+                >
+                    <span class="flex items-center gap-2" :value="option.value"><img class="w-5" :src="option.icon" /> {{ option.name }}</span>
+                </SelectDropDown>
+                <hr class="w-full opacity-20" />
+                <small> {{ $t("panel.menu.You can select specific branches for this item") }} </small>
+                <MultiSelectDropDown
+                    class="w-full flex-grow"
+                    :formHtmlObject="form"
+                    :label="$t('panel.branches.Branches')"
+                    :options="branches.list"
+                    v-slot="{ option }"
+                    v-model:selected-options="selectedBranches.list"
+                    :error="errorField == 'selectedBranches' ? responseMessage : ''"
+                >
+                    <span :value="option.value">{{ option.name }}</span>
+                </MultiSelectDropDown>
+                <small class="text-xs opacity-75">
+                    {{ $t("panel.menu.If you dont select any branches this item will be available for all of your branches that its category allows") }}
+                </small>
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <div class="flex flex-col gap-2">
@@ -144,72 +175,87 @@
                     </li>
                 </ul>
                 <hr class="w-full opacity-20" />
-                <div class="flex flex-wrap items-start justify-between gap-2">
-                    <h3 class="flex items-center gap-2 text-lg font-bold">
-                        <Icon class="w-5 h-5 gradient-re" name="badge-percent.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.menu.Item Discount Tag") }}
-                    </h3>
-                    <Switch
-                        :label="$t('panel.menu.Activate Discount')"
-                        v-model:value="discountActive"
-                        v-if="checkLimitations([['item-highlighting', true]], brand)"
-                    />
+                <h3 class="flex items-center gap-2 text-lg font-bold">
+                    <Icon class="w-5 h-5 gradient-re" name="tag.svg" folder="icons/light" size="20px" />
+                    {{ $t("panel.menu.Tags And Highlighting") }}
+                </h3>
+                <!-- TODO : add custom tags (3 at max) : user can fill custom text tags -->
+                <div
+                    class="flex flex-wrap items-center gap-2 w-full max-w-max p-2 rounded-lg bg-neutral-800"
+                    v-if="checkLimitations([['menu-tag-option', false]], brand)"
+                >
+                    <Icon class="w-6 h-6 gradient-re" name="new.svg" folder="icons/light" size="24px" />
+                    <span class="text-sm">{{ $t("panel.menu.Show as new item") }}</span>
+                    <Switch class="ms-2" v-model:value="showAsNew" />
                 </div>
-                <div class="flex flex-col gap-2" v-if="checkLimitations([['item-highlighting', true]], brand)">
-                    <Input
-                        class="w-full md:w-44 shrink-0"
-                        :placeholder="$t('panel.menu.between 0 and 99')"
-                        :label="$t('panel.menu.Discount')"
-                        :disabled="checkLimitations([['item-highlighting', false]], brand)"
-                        :disabledReason="$t('panel.avaialbe for standard plan and above')"
-                        mask="##"
-                        unit="%"
-                        v-model="discountPercentage"
-                        :error="errorField == 'discountPercentage' ? responseMessage : ''"
-                    />
-                    <small class="opacity-75"> {{ $t("panel.menu.When activated discount will be calculated and shown for this item") }} </small>
-                </div>
-                <div class="flex flex-col items-center justify-center gap-1 p-4 rounded-md bg-neutral-800 shadow-nr10" v-else>
-                    <span class="opacity-75 text-sm">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
-                    <nuxt-link class="text-purple-300 text-sm underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
-                        {{ $t("panel.Upgrade your plan to get this feature") }}.
-                    </nuxt-link>
-                </div>
-                <hr class="w-full opacity-20" />
-                <div class="flex flex-wrap items-start justify-between gap-2">
-                    <h3 class="flex items-center gap-2 text-lg font-bold">
-                        <Icon class="w-5 h-5 gradient-re" name="calendar-range.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.menu.Special Of The Day Tag") }}
-                    </h3>
-                    <Switch
-                        :label="$t('panel.menu.Activate Special Tag')"
-                        v-model:value="specialDaysActive"
-                        v-if="checkLimitations([['item-highlighting', true]], brand)"
-                    />
-                </div>
-                <small class="opacity-75 -mt-2">
-                    {{ $t("panel.menu.Select which days you want this item to be available with a special of the day tag") }}
-                </small>
-                <ul class="flex flex-wrap gap-3 w-full" v-if="checkLimitations([['item-highlighting', true]], brand)">
-                    <li
-                        class="flex items-center gap-1 me-3 select-none cursor-pointer"
-                        v-for="day in ['Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays', 'Sundays']"
-                        @click="specialDaysList.has(day) ? specialDaysList.delete(day) : specialDaysList.add(day)"
-                    >
-                        <span
-                            class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
-                            :class="[specialDaysList.has(day) ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue' : 'border-zinc-500']"
+                <div class="flex flex-wrap md:flex-nowrap gap-4 w-full">
+                    <div class="flex flex-col gap-4 w-full p-4 rounded-md bg-neutral-800 shadow-nr10">
+                        <div class="flex flex-wrap items-start justify-between gap-2">
+                            <h3 class="flex items-center gap-2">
+                                <Icon class="w-4 h-4 bg-white" name="badge-percent.svg" folder="icons/light" size="16px" />
+                                {{ $t("panel.menu.Item Discount Tag") }}
+                            </h3>
+                            <!-- :label="$t('panel.menu.Activate Discount')" -->
+                            <Switch v-model:value="discountActive" v-if="checkLimitations([['item-highlighting', false]], brand)" />
+                        </div>
+                        <small class="opacity-75 -mt-2"> {{ $t("panel.menu.When activated discount will be calculated and shown for this item") }} </small>
+                        <hr class="w-full opacity-20" />
+                        <Input
+                            class="w-full shrink-0"
+                            :placeholder="$t('panel.menu.between 0 and 99')"
+                            :label="$t('panel.menu.Discount')"
+                            mask="##"
+                            unit="%"
+                            v-model="discountPercentage"
+                            :error="errorField == 'discountPercentage' ? responseMessage : ''"
+                            v-if="checkLimitations([['item-highlighting', false]], brand)"
+                        />
+                        <small class="flex flex-wrap gap-0.5 w-full max-w-max p-2 rounded-md border border-neutral-600 bg-pencil-tip" v-else>
+                            <span class="opacity-75">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
+                            <nuxt-link class="text-purple-300 underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                                {{ $t("panel.Upgrade your plan to get this feature") }}.
+                            </nuxt-link>
+                        </small>
+                    </div>
+                    <div class="flex flex-col gap-4 w-full p-4 rounded-md bg-neutral-800 shadow-nr10">
+                        <div class="flex flex-wrap items-start justify-between gap-2">
+                            <h3 class="flex items-center gap-2">
+                                <Icon class="w-4 h-4 bg-white" name="calendar-range.svg" folder="icons/light" size="16px" />
+                                {{ $t("panel.menu.Special Of The Day Tag") }}
+                            </h3>
+                            <!-- :label="$t('panel.menu.Activate Special Tag')" -->
+                            <Switch v-model:value="specialDaysActive" v-if="checkLimitations([['item-highlighting', false]], brand)" />
+                        </div>
+                        <small class="opacity-75 -mt-2">
+                            {{ $t("panel.menu.Select which days you want this item to be available with a special of the day tag") }}
+                        </small>
+                        <hr class="w-full opacity-20" />
+                        <ul
+                            class="grid gap-2 w-full"
+                            style="grid-template-columns: repeat(auto-fill, minmax(110px, 1fr))"
+                            v-if="checkLimitations([['item-highlighting', false]], brand)"
                         >
-                            <Icon class="w-4 h-4 bg-pencil-tip" name="Check.svg" folder="icons/basil" size="22px" />
-                        </span>
-                        {{ day }}
-                    </li>
-                </ul>
-                <div class="flex flex-col items-center justify-center gap-1 p-4 rounded-md bg-neutral-800 shadow-nr10" v-else>
-                    <span class="opacity-75 text-sm">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
-                    <nuxt-link class="text-purple-300 text-sm underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
-                        {{ $t("panel.Upgrade your plan to get this feature") }}.
-                    </nuxt-link>
+                            <li
+                                class="flex items-center gap-1 me-2 text-sm select-none cursor-pointer"
+                                v-for="day in ['Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays', 'Sundays']"
+                                @click="specialDaysList.has(day) ? specialDaysList.delete(day) : specialDaysList.add(day)"
+                            >
+                                <span
+                                    class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
+                                    :class="[specialDaysList.has(day) ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue' : 'border-zinc-500']"
+                                >
+                                    <Icon class="w-4 h-4 bg-pencil-tip" name="Check.svg" folder="icons/basil" size="22px" />
+                                </span>
+                                {{ $t(day) }}
+                            </li>
+                        </ul>
+                        <small class="flex flex-wrap gap-0.5 w-full max-w-max p-2 rounded-md border border-neutral-600 bg-pencil-tip" v-else>
+                            <span class="opacity-75">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
+                            <nuxt-link class="text-purple-300 underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                                {{ $t("panel.Upgrade your plan to get this feature") }}.
+                            </nuxt-link>
+                        </small>
+                    </div>
                 </div>
                 <hr class="w-full opacity-20" />
                 <SideItemsList v-model:sideItemList="sideItemList" />
@@ -263,6 +309,8 @@
 <script setup>
 import Input from "~/components/form/Input.vue";
 import Switch from "~/components/form/Switch.vue";
+import SelectDropDown from "~/components/form/SelectDropDown.vue";
+import MultiSelectDropDown from "~/components/form/MultiSelectDropDown.vue";
 import FormLangList from "~/components/panel/FormLangList.vue";
 import Loading from "~/components/Loading.vue";
 const SideItemsList = defineAsyncComponent(() => import("~/components/panel/menu/SideItemsList.vue"));
@@ -271,34 +319,14 @@ import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-// TODO : add map to record the location of branch to show in menu
-// TODO : item-highlighting menu-tag-option : we have this two limitations here
-
-// items have up to 3 images
-// items have default base price
-// items have a name
-// items have a description
-
-// items can be hidden
-// items can be show as new (pro - menu-tag-option)
-// items can be marked as "sold out"
-// items can be marked as "todays special" (base on week days name) (only will be showed on that day) (standard and up - item-highlighting)
-
-// items can be pinned at the top of their categories (pinned items style can be different than normal items) (standard and up - item-highlighting)
+// TODO
+// pinned items style can be different than normal items
 // items can have max 3 tags with whatever text user inputs (pro - menu-tag-option)
-// items can have discounts (standard and up - item-highlighting)
-// items can have side-items which is in groups and only groups can be added to an item (multiple side-items can be added) (sides have prices group name and max item that can be selected)
-// items can have variant like [with grilled chicken or fried] [spicy hot fire] and different variants can have different prices
-
-// TODO
-// side items creation and edit are on seprate page
-
-// TODO
-// edit tags section : make it 3 cards side by side
 
 const { localeProperties, t } = useI18n();
 const route = useRoute();
 const router = useRouter();
+const nuxtApp = useNuxtApp();
 const toast = useToast();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
@@ -309,6 +337,7 @@ useHead({ title: title });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
+const form = ref(""); // DOM ref
 const fileInput = ref(""); // DOM ref
 const fileInputForm = ref(""); // DOM ref
 
@@ -319,6 +348,8 @@ const responseMessage = ref("");
 const gallery = ref([]);
 const name = reactive({ values: { default: "" } });
 const description = reactive({ values: { default: "" } });
+const selectedCategory = reactive({ option: { name: "", value: "" } });
+const selectedBranches = reactive({ list: [] });
 const price = ref("");
 const discountActive = ref(false);
 const discountPercentage = ref("");
@@ -327,6 +358,7 @@ const specialDaysList = ref(new Set());
 const hidden = ref(false);
 const pinned = ref(false);
 const soldOut = ref(false);
+const showAsNew = ref(false);
 const variants = ref([{ name: { values: { default: "" } }, price: "" }]);
 const sideItemList = ref(new Map());
 
@@ -334,9 +366,9 @@ const addImages = () => {
     const files = [...fileInput.value.files];
     fileInputForm.value.reset();
 
-    // limit user to upload at max 5 images
-    if (files.length + gallery.value.length > 5) {
-        toast.error(t(`panel.max file count is n`, { count: 5 }), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+    // limit user to upload at max 3 images
+    if (files.length + gallery.value.length > 3) {
+        toast.error(t(`panel.max file count is n`, { count: 3 }), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
         return;
     }
 
@@ -359,6 +391,18 @@ const addNewVariant = () => {
     setLangVariables(languageList);
 };
 
+let languageList = [];
+const setLangVariables = (translations) => {
+    languageList = translations;
+    for (const lang in translations) {
+        if (!name.values[lang]) name.values[lang] = "";
+        if (!description.values[lang]) description.values[lang] = "";
+        for (const variant of variants.value) {
+            if (!variant.name.values[lang]) variant.name.values[lang] = "";
+        }
+    }
+};
+
 // saving ----------------------------------------
 const percentage = ref(0);
 const saving = ref(false);
@@ -372,12 +416,29 @@ const save = async () => {
 
     const data = new FormData();
     gallery.value.forEach((image) => data.append("gallery", image.file));
+
     for (const val in name.values) data.append(`name.${val}`, name.values[val]);
-    for (const val in address.values) data.append(`address.${val}`, address.values[val]);
-    if (postalCode.value) data.append("postalCode", postalCode.value);
-    telephoneNumbers.value.forEach((number) => {
-        if (number) data.append("telephoneNumbers[]", number);
+    for (const val in description.values) data.append(`description.${val}`, description.values[val]);
+    if (selectedCategory.option.value) data.append("selectedCategory", selectedCategory.option.value);
+    data.append("price", price.value);
+
+    data.append("discountActive", discountActive.value);
+    data.append("discountPercentage", discountPercentage.value);
+
+    data.append("specialDaysActive", specialDaysActive.value);
+    specialDaysList.value.forEach((day) => data.append("specialDaysList[]", day));
+
+    data.append("hidden", hidden.value);
+    data.append("pinned", pinned.value);
+    data.append("soldOut", soldOut.value);
+    data.append("showAsNew", showAsNew.value);
+    
+    variants.value.forEach((variant) => {
+        if (variant.name) data.append("variants[]", JSON.stringify(variant));
     });
+    
+    sideItemList.value.forEach((item, id) => data.append("sideItemList[]", id));
+    selectedBranches.list.forEach((branch) => data.append(`branches[]`, branch.value));
 
     await axios
         .post(`/api/v1/panel/branches/${route.params.brandID}`, data, {
@@ -403,15 +464,47 @@ const save = async () => {
 };
 // -------------------------------------------------
 
-let languageList = [];
-const setLangVariables = (translations) => {
-    languageList = translations;
-    for (const lang in translations) {
-        if (!name.values[lang]) name.values[lang] = "";
-        if (!description.values[lang]) description.values[lang] = "";
-        for (const variant of variants.value) {
-            if (!variant.name.values[lang]) variant.name.values[lang] = "";
-        }
-    }
+const handleErrors = (err) => {
+    errorField.value = "data";
+    if (typeof err.response !== "undefined" && err.response.data) {
+        const errors = err.response.data.errors || err.response.data.message;
+        if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
+    } else responseMessage.value = t("Something went wrong!");
+    if (process.server) console.log({ err });
+    // TODO : log errors in sentry type thing
 };
+
+// getCategoryList -------------------------------------------------
+const categories = reactive({ list: [] });
+const getCategoryList_results = await useLazyAsyncData(() => getCategoryList(route.params.brandID));
+const loadingCategories = computed(() => getCategoryList_results.pending.value);
+
+if (getCategoryList_results.error.value) handleErrors(getCategoryList_results.error.value);
+watch(getCategoryList_results.error, (err) => handleErrors(err));
+
+const handleCategoryList_results = (data) => {
+    if (!data) return;
+    categories.list = data._categories.map((record) => {
+        return { icon: record.icon, name: record.name, value: record._id };
+    });
+};
+watch(getCategoryList_results.data, (val) => handleCategoryList_results(val), { immediate: process.server || nuxtApp.isHydrating });
+
+// -------------------------------------------------
+
+// getBranchList -------------------------------------------------
+const branches = reactive({ list: [] });
+const getBranchList_results = await useLazyAsyncData(() => getBranchList(route.params.brandID));
+const loadingBranches = computed(() => getBranchList_results.pending.value);
+
+if (getBranchList_results.error.value) handleErrors(getBranchList_results.error.value);
+watch(getBranchList_results.error, (err) => handleErrors(err));
+
+const handleBranchList_results = (data) => {
+    branches.list = data._records.map((record) => {
+        return { name: record.name, value: record._id };
+    });
+};
+watch(getBranchList_results.data, (val) => handleBranchList_results(val), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
 </script>

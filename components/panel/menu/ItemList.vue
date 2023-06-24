@@ -121,6 +121,8 @@ const userStore = useUserStore();
 // TODO
 // add scleton loading for menu item loading
 
+// ordering with different branches and different categories selected may cuase problem with current numbering system
+
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
 const searchQuery = ref("");

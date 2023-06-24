@@ -77,7 +77,7 @@ const props = defineProps({
 
 const emit = defineEmits(["update:sideItemList"]);
 
-const selectedSideItemList = ref(new Map(props.sideItemList));
+const selectedSideItemList = ref(props.sideItemList);
 
 const itemToDelete = ref();
 const openDeleteDialog = (item) => {

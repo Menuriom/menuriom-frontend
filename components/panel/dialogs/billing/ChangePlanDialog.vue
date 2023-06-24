@@ -114,7 +114,7 @@
                 <div class="flex flex-wrap items-center gap-2" v-if="!actionNotAllowed">
                     <SelectDropDown
                         class="w-40 shrink-0"
-                        customPadding="px-3 py-4"
+                        customPadding="me-3 py-3.5"
                         :formHtmlObject="form"
                         :options="gateway.list"
                         v-slot="{ option }"

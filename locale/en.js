@@ -2,6 +2,13 @@ export default {
     Cancel: "Cancel",
     "Not Now": "Not Now",
     "Something went wrong!": "Something went wrong!",
+    Mondays: "Mondays",
+    Tuesdays: "Tuesdays",
+    Wednesdays: "Wednesdays",
+    Thursdays: "Thursdays",
+    Fridays: "Fridays",
+    Saturdays: "Saturdays",
+    Sundays: "Sundays",
 
     auth: {
         welcome: "Welcome to Menuriom",
@@ -287,6 +294,8 @@ export default {
             "Edit Category": "Edit Category",
             "New Item": "New Item",
 
+            Category: "Category",
+            Categories: "Categories",
             "Hide This Category": "Hide This Category",
             "Make Category Visible": "Make It Visible",
             "Show as new category": "Show as new category",
@@ -329,13 +338,14 @@ export default {
             "Item Variants": "Item Variants",
             "You can add different variants of this item with different price points":
                 "You can add different variants of this item with different price points",
-            VariantExamples: "hotness level, meat doneness level, or different preparations",
+            VariantExamples: "hotness levels, doneness levels, or different preparations",
 
             "Special Of The Day Tag": "Special Of The Day Tag",
             "Activate Special Tag": "Activate Special Tag",
             "Select which days you want this item to be available with a special of the day tag":
                 "Select which days you want this item to be available with a 'special of the day' tag",
 
+            "Tags And Highlighting": "Tags And Highlighting",
             "Side Item Groups": "Side Item Groups",
             "Side Items": "Side Items",
             "Add Selected Groups": "Add Selected Groups",
@@ -358,6 +368,11 @@ export default {
             "Delete Side Items Group": "Delete Side Items Group",
             "Delete Items Group": "Delete Items Group",
             deletingSideItemsGroupDesc: "By deleting this group, you are also removing it from all menu items that previously had this group",
+            "Show as new item": "Show as new item",
+
+            "You can select specific branches for this item": "You can select specific branches for this item",
+            "If you dont select any branches this item will be available for all of your branches that its category allows":
+                "If you don't select any branches, this item will be available for all of your branches that its category allows",
         },
 
         staff: {

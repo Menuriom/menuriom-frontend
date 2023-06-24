@@ -2,6 +2,13 @@ export default {
     Cancel: "لغو",
     "Not Now": "حالا نه",
     "Something went wrong!": "مشکلی رخ داده",
+    Mondays: "دوشنبه ها",
+    Tuesdays: "سه شنبه ها",
+    Wednesdays: "چهارشنبه ها",
+    Thursdays: "پنجشنبه ها",
+    Fridays: "جمعه ها",
+    Saturdays: "شنبه ها",
+    Sundays: "یکشنبه ها",
 
     auth: {
         welcome: "به منوریوم خوش اومدی",
@@ -287,6 +294,8 @@ export default {
             "Edit Category": "ویرایش دسته‌بندی",
             "New Item": "ایتم جدید",
 
+            Category: "دسته‌بندی",
+            Categories: "دسته‌بندی ها",
             "Hide This Category": "مخفی کردن دسته‌بندی",
             "Make Category Visible": "نمایش دسته‌بندی",
             "Show as new category": "نمایش به عنوان دسته‌بندی جدید",
@@ -329,13 +338,14 @@ export default {
             "Item Variants": "نوع های مختلف ایتم",
             "You can add different variants of this item with different price points":
                 "شما می توانید نوع های مختلفی از این کالا را با قیمت های مختلف اضافه کنید",
-            VariantExamples: "مناسب برای درجه تندی، میزان پخت گوشت و یا آماده سازی های گوناگون",
+            VariantExamples: "مناسب برای درجه تندی، میزان پخت و یا آماده سازی های گوناگون",
 
             "Special Of The Day Tag": "تگ ویژه روز",
             "Activate Special Tag": "فعالسازی تگ روز",
             "Select which days you want this item to be available with a special of the day tag":
                 "انتخاب کنید که چه روزهایی می‌خواهید این ایتم منو با برچسب 'ویژه روز' در دسترس باشد",
 
+            "Tags And Highlighting": "تگ ها و هایلایت ",
             "Side Item Groups": "لیست ایتم های جانبی",
             "Side Items": "موارد جانبی",
             "Add Selected Groups": "افزودن گروه های انتخابی",
@@ -359,6 +369,11 @@ export default {
             "Delete Side Items Group": "حذف گروه ایتم های جانبی",
             "Delete Items Group": "حذف گروه",
             deletingSideItemsGroupDesc: "با حذف این گروه، آن را از تمام آیتم های منو که قبلاً این گروه را داشتند نیز حذف می کنید",
+            "Show as new item": "نمایش به عنوان ایتم جدید",
+
+            "You can select specific branches for this item": "شما میتوانید این ایتم منو را فقط برای یکسری شعبه خاص در نظر بگیرید",
+            "If you dont select any branches this item will be available for all of your branches that its category allows":
+                "اگر شعبه ای را برای این ایتم درنظر نگیرید، این ایتم برای تمام شعبه هایی که دسته‌بندی ایتم اجازه بدهد نمایش داده میشود",
         },
 
         staff: {
