@@ -142,6 +142,7 @@ export default {
         "This feature is for the pro plan only": "این قابلیت فقط برای طرح حرفه ای موجود است",
         "This feature is for the standard plan and above only": "این قابلیت فقط برای طرح استاندارد و بالاتر موجود است",
         "Upgrade your plan to get this feature": "برای استفاده از این ویژگی طرح خود را ارتقا دهید",
+        "The first image will be the main image": "تصویر اول، به عنوان تصویر اصلی انتخاب میشود",
 
         profile: {
             "Your Profile": "حساب کاربری",
@@ -370,6 +371,7 @@ export default {
             "Delete Items Group": "حذف گروه",
             deletingSideItemsGroupDesc: "با حذف این گروه، آن را از تمام آیتم های منو که قبلاً این گروه را داشتند نیز حذف می کنید",
             "Show as new item": "نمایش به عنوان ایتم جدید",
+            "New menu item has been created": "ایتم منو جدید ایجاد شد",
 
             "You can select specific branches for this item": "شما میتوانید این ایتم منو را فقط برای یکسری شعبه خاص در نظر بگیرید",
             "If you dont select any branches this item will be available for all of your branches that its category allows":

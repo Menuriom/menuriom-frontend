@@ -14,7 +14,7 @@
                 v-if="!!open"
             >
                 <hr class="w-1/2 border-b-2 my-1 mx-auto" />
-                <div class="flex flex-col gap-2 w-full">
+                <div class="flex flex-col gap-1 w-full">
                     <slot />
                 </div>
             </menu>

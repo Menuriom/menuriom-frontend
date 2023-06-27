@@ -142,6 +142,7 @@ export default {
         "This feature is for the pro plan only": "This feature is for the pro plan only",
         "This feature is for the standard plan and above only": "This feature is for the standard plan and above only",
         "Upgrade your plan to get this feature": "Upgrade your plan to get this feature",
+        "The first image will be the main image": "The first image will be the main image",
 
         profile: {
             "Your Profile": "Your Profile",
@@ -369,6 +370,7 @@ export default {
             "Delete Items Group": "Delete Items Group",
             deletingSideItemsGroupDesc: "By deleting this group, you are also removing it from all menu items that previously had this group",
             "Show as new item": "Show as new item",
+            "New menu item has been created": "New menu item has been created",
 
             "You can select specific branches for this item": "You can select specific branches for this item",
             "If you dont select any branches this item will be available for all of your branches that its category allows":

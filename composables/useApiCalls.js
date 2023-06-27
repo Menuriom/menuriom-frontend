@@ -179,7 +179,7 @@ export const getDishesList = async (brandID) => {
         .get(url, { headers: headers })
         .then((response) => {
             _items = response.data.records;
-            _canCreateNewDish = response.data.canCreateNewDish;
+            _canCreateNewDish = response.data.canCreateNewItem;
         })
         .catch((e) => {
             throw e;

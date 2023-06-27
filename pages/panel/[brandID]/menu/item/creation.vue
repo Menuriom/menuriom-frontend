@@ -69,6 +69,7 @@
                         </form>
                     </li>
                 </ul>
+                <small class="text-xs opacity-75">{{ $t("panel.The first image will be the main image") }}</small>
 
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-center justify-between gap-4">
@@ -237,7 +238,7 @@
                         >
                             <li
                                 class="flex items-center gap-1 me-2 text-sm select-none cursor-pointer"
-                                v-for="day in ['Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays', 'Sundays']"
+                                v-for="day in ['Saturdays', 'Sundays', 'Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays']"
                                 @click="specialDaysList.has(day) ? specialDaysList.delete(day) : specialDaysList.add(day)"
                             >
                                 <span
@@ -423,31 +424,31 @@ const save = async () => {
     data.append("price", price.value);
 
     data.append("discountActive", discountActive.value);
-    data.append("discountPercentage", discountPercentage.value);
+    data.append("discountPercentage", discountPercentage.value || 0);
 
     data.append("specialDaysActive", specialDaysActive.value);
-    specialDaysList.value.forEach((day) => data.append("specialDaysList[]", day));
+    specialDaysList.value.forEach((day) => data.append("specialDaysList[]", day.toLowerCase()));
 
     data.append("hidden", hidden.value);
     data.append("pinned", pinned.value);
     data.append("soldOut", soldOut.value);
     data.append("showAsNew", showAsNew.value);
-    
+
     variants.value.forEach((variant) => {
         if (variant.name) data.append("variants[]", JSON.stringify(variant));
     });
-    
+
     sideItemList.value.forEach((item, id) => data.append("sideItemList[]", id));
     selectedBranches.list.forEach((branch) => data.append(`branches[]`, branch.value));
 
     await axios
-        .post(`/api/v1/panel/branches/${route.params.brandID}`, data, {
+        .post(`/api/v1/panel/menu-items`, data, {
             headers: { brand: route.params.brandID },
             onUploadProgress: (event) => (percentage.value = parseInt(Math.round((event.loaded / event.total) * 100))),
         })
         .then((response) => {
-            toast.success(t(`panel.menu.New branch created`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
-            router.push(localePath(`/panel/${route.params.brandID}/branches`));
+            toast.success(t(`panel.menu.New menu item has been created`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            router.push(localePath(`/panel/${route.params.brandID}/menu/editor`));
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {

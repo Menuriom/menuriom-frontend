@@ -13,7 +13,7 @@
         >
             <template #item="{ element: dish, index: i }">
                 <li
-                    class="relative flex flex-col items-center gap-4 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
+                    class="relative flex items-center gap-4 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
                 >
                     <SlideMenu class="-my-2 z-10">
                         <button
@@ -46,21 +46,20 @@
                             <small>{{ $t("panel.menu.Delete Item") }}</small>
                         </button>
                     </SlideMenu>
-                    <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip shadow-nr15 rounded-xl">
-                        <img class="w-16 h-16 mt-2" :src="dish.icon" alt="" />
-                        <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
-                            {{ dish.translation?.[locale]?.name || dish.name }}
-                        </b>
+                    <div class="flex flex-col items-center justify-center gap-2 w-32 h-32 shadow-nr5 rounded-xl shrink-0">
+                        <img class="w-full object-contain" :src="dish.images[0]" alt="" />
                     </div>
+                    <b class="w-full text-sm whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
+                        {{ dish.translation?.[locale]?.name || dish.name }}
+                    </b>
                     <div class="absolute top-8 start-2 flex flex-col gap-2">
                         <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="dish.hidden">
                             {{ $t("panel.menu.Hidden") }}
                         </span>
                     </div>
-                    <span class="grab_area absolute bottom-0 flex items-center justify-center gap-1.5 w-full h-6 hover:cursor-grab active:cursor-grabbing">
-                        <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                        <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                        <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
+                    <span class="grab_area absolute start-1.5 flex flex-col items-center justify-center gap-1.5 hover:cursor-grab active:cursor-grabbing shrink-0">
+                        <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
+                        <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
                     </span>
                 </li>
             </template>
