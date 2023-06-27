@@ -12,9 +12,7 @@
             item-key="order"
         >
             <template #item="{ element: dish, index: i }">
-                <li
-                    class="relative flex items-center gap-4 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
-                >
+                <li class="relative flex items-center gap-4 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden">
                     <SlideMenu class="-my-2 z-10">
                         <button
                             class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
@@ -46,24 +44,74 @@
                             <small>{{ $t("panel.menu.Delete Item") }}</small>
                         </button>
                     </SlideMenu>
-                    <div class="flex flex-col items-center justify-center gap-2 w-32 h-32 shadow-nr5 rounded-xl shrink-0">
+                    <div class="flex flex-col items-center justify-center gap-2 w-24 h-24 shadow-nr5 rounded-xl shrink-0">
                         <img class="w-full object-contain" :src="dish.images[0]" alt="" />
                     </div>
-                    <b class="w-full text-sm whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
-                        {{ dish.translation?.[locale]?.name || dish.name }}
-                    </b>
+                    <div class="flex flex-col gap-2 w-full max-w-screen-xs">
+                        <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
+                            {{ dish.translation?.[locale]?.name || dish.name }}
+                        </h4>
+                        <p class="w-full -mt-1.5 text-sm whitespace-nowrap text-ellipsis overflow-hidden opacity-75">
+                            {{ dish.translation?.[locale]?.description || dish.description }}
+                        </p>
+                        <hr class="w-full" />
+                        <div class="flex items-center gap-1">
+                            <span class="flex items-baseline font-bold text-emerald-900 opacity-60 text-xl" dir="auto">
+                                {{ Intl.NumberFormat(locale).format(dish.price / 1000) }}
+                                <small>,{{ ["", "", ""].fill(Intl.NumberFormat(locale).format(0), 0, 3).join("") }}</small>
+                            </span>
+                            <span class="f-inter text-sm font-extralight"> {{ $t("pricing.Toman") }} </span>
+                            <!-- TODO : add dicount tag next to price if active -->
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2 w-full max-w-screen-xs mx-auto">
+                        <div class="flex items-center gap-2">
+                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.pinned }">
+                                <Icon class="w-4 h-4 -rotate-45" :class="[dish.pinned ? 'bg-white' : 'bg-black']" name="thumbtack.svg" folder="icons/light" size="16px" />
+                            </button>
+                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.pinned">
+                                {{ $t(`panel.menu.Item is pinned`) }}
+                            </small>
+                            <small class="" v-else>{{ $t("panel.menu.Pin to the top of category") }}</small>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.soldOut }">
+                                <Icon class="w-4 h-4" :class="[dish.soldOut ? 'bg-white' : 'bg-black']" name="xmark-to-slot.svg" folder="icons/light" size="16px" />
+                            </button>
+                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.soldOut">
+                                {{ $t("SOLD OUT") }}
+                            </small>
+                            <small class="" v-else>{{ $t("panel.menu.Mark as sold out") }}</small>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.hidden }">
+                                <Icon class="w-4 h-4" :class="[dish.hidden ? 'bg-white' : 'bg-black']" name="eye-slash.svg" folder="icons/light" size="16px" />
+                            </button>
+                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.hidden">
+                                {{ $t(`panel.menu.Item is hidden`) }}
+                            </small>
+                            <small class="" v-else>{{ $t("panel.menu.Hide this item") }}</small>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2 w-full max-w-screen-xs">is it new list of special days</div>
+                    <div class="flex flex-col gap-2 w-full max-w-screen-xs">variants with prices side item groupings names</div>
+                    <!-- TODO : show menu item like count if limitations allows it "menu-item-like" -->
                     <div class="absolute top-8 start-2 flex flex-col gap-2">
                         <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="dish.hidden">
                             {{ $t("panel.menu.Hidden") }}
                         </span>
                     </div>
-                    <span class="grab_area absolute start-1.5 flex flex-col items-center justify-center gap-1.5 hover:cursor-grab active:cursor-grabbing shrink-0">
+                    <span
+                        class="grab_area absolute start-1.5 flex flex-col items-center justify-center gap-1.5 hover:cursor-grab active:cursor-grabbing shrink-0"
+                    >
                         <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
                         <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
                     </span>
                 </li>
             </template>
         </Draggable>
+
+        <!-- TODO : add state for when there is not category or items available -->
 
         <Teleport to="body">
             <Dialog name="delete-confirmation" :title="$t('panel.menu.Delete Menu Item')">

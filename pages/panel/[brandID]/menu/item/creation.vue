@@ -183,7 +183,7 @@
                 <!-- TODO : add custom tags (3 at max) : user can fill custom text tags -->
                 <div
                     class="flex flex-wrap items-center gap-2 w-full max-w-max p-2 rounded-lg bg-neutral-800"
-                    v-if="checkLimitations([['menu-tag-option', false]], brand)"
+                    v-if="checkLimitations([['menu-tag-option', true]], brand)"
                 >
                     <Icon class="w-6 h-6 gradient-re" name="new.svg" folder="icons/light" size="24px" />
                     <span class="text-sm">{{ $t("panel.menu.Show as new item") }}</span>
@@ -197,7 +197,7 @@
                                 {{ $t("panel.menu.Item Discount Tag") }}
                             </h3>
                             <!-- :label="$t('panel.menu.Activate Discount')" -->
-                            <Switch v-model:value="discountActive" v-if="checkLimitations([['item-highlighting', false]], brand)" />
+                            <Switch v-model:value="discountActive" v-if="checkLimitations([['item-highlighting', true]], brand)" />
                         </div>
                         <small class="opacity-75 -mt-2"> {{ $t("panel.menu.When activated discount will be calculated and shown for this item") }} </small>
                         <hr class="w-full opacity-20" />
@@ -209,7 +209,7 @@
                             unit="%"
                             v-model="discountPercentage"
                             :error="errorField == 'discountPercentage' ? responseMessage : ''"
-                            v-if="checkLimitations([['item-highlighting', false]], brand)"
+                            v-if="checkLimitations([['item-highlighting', true]], brand)"
                         />
                         <small class="flex flex-wrap gap-0.5 w-full max-w-max p-2 rounded-md border border-neutral-600 bg-pencil-tip" v-else>
                             <span class="opacity-75">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
@@ -225,7 +225,7 @@
                                 {{ $t("panel.menu.Special Of The Day Tag") }}
                             </h3>
                             <!-- :label="$t('panel.menu.Activate Special Tag')" -->
-                            <Switch v-model:value="specialDaysActive" v-if="checkLimitations([['item-highlighting', false]], brand)" />
+                            <Switch v-model:value="specialDaysActive" v-if="checkLimitations([['item-highlighting', true]], brand)" />
                         </div>
                         <small class="opacity-75 -mt-2">
                             {{ $t("panel.menu.Select which days you want this item to be available with a special of the day tag") }}
@@ -234,7 +234,7 @@
                         <ul
                             class="grid gap-2 w-full"
                             style="grid-template-columns: repeat(auto-fill, minmax(110px, 1fr))"
-                            v-if="checkLimitations([['item-highlighting', false]], brand)"
+                            v-if="checkLimitations([['item-highlighting', true]], brand)"
                         >
                             <li
                                 class="flex items-center gap-1 me-2 text-sm select-none cursor-pointer"

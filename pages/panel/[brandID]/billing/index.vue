@@ -234,13 +234,14 @@
             </div>
         </section>
 
+        <hr class="w-full border-gray-300 opacity-50" />
+
         <section class="flex flex-col gap-4 w-full pb-6" name="Billing History">
             <header class="flex items-center gap-2">
                 <img class="w-9" src="~/assets/images/panel-icons/money-bill-transfer-dark.png" alt="" />
                 <h1 class="text-2xl/tight md:text-3xl/tight font-bold">{{ $t("panel.billing.Billing History") }}</h1>
             </header>
-            <!-- TODO : add date range for billing history -->
-            <hr class="w-full border-gray-300 opacity-50" />
+            <!-- TODO : add date range for billing history -->    
             <ul class="flex flex-col gap-4" v-if="bills.list.length">
                 <li
                     class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 p-4 bg-white rounded-lg shadow-nr10"

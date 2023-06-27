@@ -9,6 +9,7 @@ export default {
     Fridays: "جمعه ها",
     Saturdays: "شنبه ها",
     Sundays: "یکشنبه ها",
+    "SOLD OUT": "تمام شده",
 
     auth: {
         welcome: "به منوریوم خوش اومدی",

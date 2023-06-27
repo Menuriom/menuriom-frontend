@@ -9,6 +9,7 @@ export default {
     Fridays: "Fridays",
     Saturdays: "Saturdays",
     Sundays: "Sundays",
+    "SOLD OUT": "SOLD OUT",
 
     auth: {
         welcome: "Welcome to Menuriom",
