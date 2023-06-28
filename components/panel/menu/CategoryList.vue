@@ -3,10 +3,10 @@
 <template>
     <div class="flex flex-col w-full">
         <ul class="flex gap-4 w-full pb-2 overflow-auto">
-            <li class="relative flex flex-col items-center gap-4 p-4 pb-6 rounded-lg bg-white shadow-nr10 hover:shadow-nr15 transition-all">
-                <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip shadow-nr15 rounded-xl">
+            <li class="relative flex flex-col items-center gap-4 w-48 h-44 p-4 pb-6 rounded-lg bg-white shadow-nr10 hover:shadow-nr15 transition-all">
+                <div class="flex flex-col items-center justify-center gap-2 w-32 h-32 bg-pencil-tip shadow-nr15 rounded-xl">
                     <img class="w-16 h-16 mt-2" src="~/assets/images/panel-icons/grid-2-light.png" alt="" />
-                    <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">All</b>
+                    <h4 class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">All</h4>
                 </div>
             </li>
             <Draggable
@@ -20,7 +20,7 @@
             >
                 <template #item="{ element: category, index: i }">
                     <li
-                        class="relative flex flex-col items-center gap-4 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
+                        class="relative flex flex-col items-center justify-center w-48 h-44 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
                     >
                         <SlideMenu class="-my-2 z-10">
                             <button
@@ -53,18 +53,18 @@
                                 <small>{{ $t("panel.menu.Delete Category") }}</small>
                             </button>
                         </SlideMenu>
-                        <div class="flex flex-col items-center justify-center gap-2 w-40 h-40 bg-pencil-tip shadow-nr15 rounded-xl">
+                        <div class="flex flex-col items-center justify-center gap-2 w-32 h-32 bg-pencil-tip shadow-nr15 rounded-xl">
                             <img class="w-16 h-16 mt-2" :src="category.icon" alt="" />
-                            <b class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
+                            <h4 class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
                                 {{ category.translation?.[locale]?.name || category.name }}
-                            </b>
+                            </h4>
                         </div>
                         <div class="absolute top-8 start-2 flex flex-col gap-2">
                             <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.hidden">
                                 {{ $t("panel.menu.Hidden") }}
                             </span>
                         </div>
-                        <span class="grab_area absolute bottom-0 flex items-center justify-center gap-1.5 w-full h-6 hover:cursor-grab active:cursor-grabbing">
+                        <span class="grab_area absolute bottom-1.5 flex items-center justify-center gap-1.5 w-full h-5 hover:cursor-grab active:cursor-grabbing">
                             <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
                             <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
                             <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />

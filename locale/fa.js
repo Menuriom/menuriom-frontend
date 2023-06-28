@@ -2,14 +2,15 @@ export default {
     Cancel: "لغو",
     "Not Now": "حالا نه",
     "Something went wrong!": "مشکلی رخ داده",
-    Mondays: "دوشنبه ها",
-    Tuesdays: "سه شنبه ها",
-    Wednesdays: "چهارشنبه ها",
-    Thursdays: "پنجشنبه ها",
-    Fridays: "جمعه ها",
-    Saturdays: "شنبه ها",
-    Sundays: "یکشنبه ها",
+    mondays: "دوشنبه ها",
+    tuesdays: "سه شنبه ها",
+    wednesdays: "چهارشنبه ها",
+    thursdays: "پنجشنبه ها",
+    fridays: "جمعه ها",
+    saturdays: "شنبه ها",
+    sundays: "یکشنبه ها",
     "SOLD OUT": "تمام شده",
+    New: "جدید",
 
     auth: {
         welcome: "به منوریوم خوش اومدی",
@@ -114,6 +115,7 @@ export default {
 
         "Compare Plans": "مقایسه پلن ها",
         "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
+        OFF: "تخفیف",
     },
 
     panel: {
@@ -340,7 +342,7 @@ export default {
             "Item Variants": "نوع های مختلف ایتم",
             "You can add different variants of this item with different price points":
                 "شما می توانید نوع های مختلفی از این کالا را با قیمت های مختلف اضافه کنید",
-            VariantExamples: "مناسب برای درجه تندی، میزان پخت و یا آماده سازی های گوناگون",
+            VariantExamples: "مناسب برای درجه تندی، میزان پخت، اندازه های مختلف و یا آماده سازی های گوناگون",
 
             "Special Of The Day Tag": "تگ ویژه روز",
             "Activate Special Tag": "فعالسازی تگ روز",
@@ -377,6 +379,11 @@ export default {
             "You can select specific branches for this item": "شما میتوانید این ایتم منو را فقط برای یکسری شعبه خاص در نظر بگیرید",
             "If you dont select any branches this item will be available for all of your branches that its category allows":
                 "اگر شعبه ای را برای این ایتم درنظر نگیرید، این ایتم برای تمام شعبه هایی که دسته‌بندی ایتم اجازه بدهد نمایش داده میشود",
+
+            "No day is selected": "هیچ روزی انتخاب نشده",
+            "Add this tag": "افزودن این تگ",
+            "No variants for this item": "بدون نوع خاص",
+            "Add variants": "افزودن نوع های مختلف",
         },
 
         staff: {

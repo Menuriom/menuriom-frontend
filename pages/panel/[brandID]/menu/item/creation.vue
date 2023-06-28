@@ -238,7 +238,7 @@
                         >
                             <li
                                 class="flex items-center gap-1 me-2 text-sm select-none cursor-pointer"
-                                v-for="day in ['Saturdays', 'Sundays', 'Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays']"
+                                v-for="day in ['saturdays', 'sundays', 'mondays', 'tuesdays', 'wednesdays', 'thursdays', 'fridays']"
                                 @click="specialDaysList.has(day) ? specialDaysList.delete(day) : specialDaysList.add(day)"
                             >
                                 <span

@@ -2,14 +2,15 @@ export default {
     Cancel: "Cancel",
     "Not Now": "Not Now",
     "Something went wrong!": "Something went wrong!",
-    Mondays: "Mondays",
-    Tuesdays: "Tuesdays",
-    Wednesdays: "Wednesdays",
-    Thursdays: "Thursdays",
-    Fridays: "Fridays",
-    Saturdays: "Saturdays",
-    Sundays: "Sundays",
+    mondays: "Mondays",
+    tuesdays: "Tuesdays",
+    wednesdays: "Wednesdays",
+    thursdays: "Thursdays",
+    fridays: "Fridays",
+    saturdays: "Saturdays",
+    sundays: "Sundays",
     "SOLD OUT": "SOLD OUT",
+    New: "New",
 
     auth: {
         welcome: "Welcome to Menuriom",
@@ -114,6 +115,7 @@ export default {
 
         "Compare Plans": "Compare Plans",
         "Overview of what is included in our different plans": "Overview of what is included in our different plans",
+        OFF: "OFF",
     },
 
     panel: {
@@ -340,7 +342,7 @@ export default {
             "Item Variants": "Item Variants",
             "You can add different variants of this item with different price points":
                 "You can add different variants of this item with different price points",
-            VariantExamples: "hotness levels, doneness levels, or different preparations",
+            VariantExamples: "hotness levels, doneness levels, different portion sizes, or different preparations",
 
             "Special Of The Day Tag": "Special Of The Day Tag",
             "Activate Special Tag": "Activate Special Tag",
@@ -376,6 +378,11 @@ export default {
             "You can select specific branches for this item": "You can select specific branches for this item",
             "If you dont select any branches this item will be available for all of your branches that its category allows":
                 "If you don't select any branches, this item will be available for all of your branches that its category allows",
+
+            "No day is selected": "No day is selected",
+            "Add this tag": "Add this tag",
+            "No variants for this item": "No variants for this item",
+            "Add variants": "Add variants",
         },
 
         staff: {

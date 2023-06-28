@@ -1,4 +1,11 @@
-<style scoped></style>
+<style scoped>
+.mask {
+    background-image: linear-gradient(90deg, theme("colors.violet") 0%, theme("colors.baby-blue") 100%);
+    mix-blend-mode: plus-lighter;
+    mask: url("~/assets/images/pattern.webp");
+    mask-size: 200px;
+    mask-position: 20px 20px;
+}</style>
 
 <template>
     <div class="flex flex-col gap-4 w-full">
@@ -22,8 +29,9 @@
             </nuxt-link>
         </header>
         <hr class="w-full border-gray-400 opacity-50" />
-        <section class="flex flex-col w-full">
-            <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-show="!loading">
+        <section class="relative flex flex-col w-full">
+            <div class="absolute -top-4 w-full h-40 bg-pencil-tip rounded-lg"><div class="absolute mask inset-0"></div></div>
+            <ul class="grid gap-3 px-4 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-show="!loading">
                 <li
                     class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
                     v-for="(brand, i) in records.list"

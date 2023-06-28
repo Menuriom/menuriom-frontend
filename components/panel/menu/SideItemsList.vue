@@ -5,7 +5,7 @@
         <div class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex flex-col gap-2">
                 <h3 class="flex items-center gap-2 text-lg font-bold">
-                    <Icon class="w-5 h-5 gradient-re" name="list-tree.svg" folder="icons/light" size="20px" />
+                    <Icon class="w-5 h-5 gradient-re" name="list-tree2.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.menu.Side Items") }}
                 </h3>
                 <small class="opacity-75">

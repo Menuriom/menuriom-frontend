@@ -12,78 +12,41 @@
             item-key="order"
         >
             <template #item="{ element: dish, index: i }">
-                <li class="relative flex items-center gap-4 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden">
-                    <SlideMenu class="-my-2 z-10">
-                        <button
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
-                            @click="toggleDishVisibility(i)"
-                            v-if="checkPermissions(['main-panel.menu.items'], brand)"
-                        >
-                            <div class="flex items-center gap-2" v-if="!hiding">
-                                <Icon class="w-4 h-4 bg-white shrink-0" name="eye-slash.svg" folder="icons/light" size="16px" />
-                                <small v-if="!dish.hidden">{{ $t("panel.menu.Hide This Item") }}</small>
-                                <small v-else>{{ $t("panel.menu.Make Item Visible") }}</small>
-                            </div>
-                            <Loading size="h-4" v-else />
-                        </button>
-                        <nuxt-link
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
-                            :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
-                            v-if="checkPermissions(['main-panel.menu.items'], brand)"
-                        >
-                            <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
-                            <small>{{ $t("panel.menu.Edit This Item") }}</small>
-                        </nuxt-link>
-                        <hr class="w-full opacity-40" />
-                        <button
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300"
-                            @click="openDeleteDialog(i)"
-                            v-if="checkPermissions(['main-panel.menu.items'], brand)"
-                        >
-                            <Icon class="w-4 h-4 bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="16px" />
-                            <small>{{ $t("panel.menu.Delete Item") }}</small>
-                        </button>
-                    </SlideMenu>
-                    <div class="flex flex-col items-center justify-center gap-2 w-24 h-24 shadow-nr5 rounded-xl shrink-0">
+                <li class="relative flex items-center gap-4 p-4 ps-8 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden">
+                    <div class="flex flex-col items-center justify-center gap-2 w-24 h-24 shadow-nr15 rounded-xl shrink-0">
                         <img class="w-full object-contain" :src="dish.images[0]" alt="" />
                     </div>
-                    <div class="flex flex-col gap-2 w-full max-w-screen-xs">
+                    <h6
+                        class="absolute top-3 start-6 p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm"
+                        v-if="dish.showAsNew"
+                    >
+                        {{ $t("New") }}
+                    </h6>
+                    <div class="flex flex-col gap-2 w-full max-w-screen-xs shrink-0">
                         <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
                             {{ dish.translation?.[locale]?.name || dish.name }}
                         </h4>
-                        <p class="w-full -mt-1.5 text-sm whitespace-nowrap text-ellipsis overflow-hidden opacity-75">
+                        <p class="w-full -mt-1.5 text-xs whitespace-nowrap text-ellipsis overflow-hidden opacity-75">
                             {{ dish.translation?.[locale]?.description || dish.description }}
                         </p>
                         <hr class="w-full" />
-                        <div class="flex items-center gap-1">
+                        <div class="flex flex-wrap items-center gap-1">
                             <span class="flex items-baseline font-bold text-emerald-900 opacity-60 text-xl" dir="auto">
                                 {{ Intl.NumberFormat(locale).format(dish.price / 1000) }}
-                                <small>,{{ ["", "", ""].fill(Intl.NumberFormat(locale).format(0), 0, 3).join("") }}</small>
+                                <small class="text-sm">,{{ Array(3).fill(Intl.NumberFormat(locale).format(0)).join("") }}</small>
                             </span>
-                            <span class="f-inter text-sm font-extralight"> {{ $t("pricing.Toman") }} </span>
-                            <!-- TODO : add dicount tag next to price if active -->
+                            <span class="f-inter text-sm font-extralight me-2"> {{ $t("pricing.Toman") }} </span>
+                            <div
+                                class="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-rose-600 bg-opacity-75 text-white shadow-nr15"
+                                v-if="dish.discountActive"
+                            >
+                                <h5 class="text-xs font-bold">1{{ dish.discountPercentage }}%</h5>
+                                <small class="font-extralight opacity-75">{{ $t("pricing.OFF") }}</small>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-2 w-full max-w-screen-xs mx-auto">
-                        <div class="flex items-center gap-2">
-                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.pinned }">
-                                <Icon class="w-4 h-4 -rotate-45" :class="[dish.pinned ? 'bg-white' : 'bg-black']" name="thumbtack.svg" folder="icons/light" size="16px" />
-                            </button>
-                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.pinned">
-                                {{ $t(`panel.menu.Item is pinned`) }}
-                            </small>
-                            <small class="" v-else>{{ $t("panel.menu.Pin to the top of category") }}</small>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.soldOut }">
-                                <Icon class="w-4 h-4" :class="[dish.soldOut ? 'bg-white' : 'bg-black']" name="xmark-to-slot.svg" folder="icons/light" size="16px" />
-                            </button>
-                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.soldOut">
-                                {{ $t("SOLD OUT") }}
-                            </small>
-                            <small class="" v-else>{{ $t("panel.menu.Mark as sold out") }}</small>
-                        </div>
-                        <div class="flex items-center gap-2">
+                    <div class="flex flex-col gap-2 w-full max-w-screen-2xs shrink-0">
+                        <div class="flex items-center gap-2 max-w-max cursor-pointer" @click="dish.hidden = !dish.hidden">
                             <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.hidden }">
                                 <Icon class="w-4 h-4" :class="[dish.hidden ? 'bg-white' : 'bg-black']" name="eye-slash.svg" folder="icons/light" size="16px" />
                             </button>
@@ -92,14 +55,114 @@
                             </small>
                             <small class="" v-else>{{ $t("panel.menu.Hide this item") }}</small>
                         </div>
+                        <div class="flex items-center gap-2 max-w-max cursor-pointer" @click="dish.soldOut = !dish.soldOut">
+                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.soldOut }">
+                                <Icon
+                                    class="w-4 h-4"
+                                    :class="[dish.soldOut ? 'bg-white' : 'bg-black']"
+                                    name="xmark-to-slot.svg"
+                                    folder="icons/light"
+                                    size="16px"
+                                />
+                            </button>
+                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.soldOut">
+                                {{ $t("SOLD OUT") }}
+                            </small>
+                            <small class="" v-else>{{ $t("panel.menu.Mark as sold out") }}</small>
+                        </div>
+                        <div class="flex items-center gap-2 max-w-max cursor-pointer" @click="dish.pinned = !dish.pinned">
+                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.pinned }">
+                                <Icon
+                                    class="w-4 h-4 -rotate-45"
+                                    :class="[dish.pinned ? 'bg-white' : 'bg-black']"
+                                    name="thumbtack.svg"
+                                    folder="icons/light"
+                                    size="16px"
+                                />
+                            </button>
+                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.pinned">
+                                {{ $t(`panel.menu.Item is pinned`) }}
+                            </small>
+                            <small class="" v-else>{{ $t("panel.menu.Pin to the top of category") }}</small>
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-2 w-full max-w-screen-xs">is it new list of special days</div>
-                    <div class="flex flex-col gap-2 w-full max-w-screen-xs">variants with prices side item groupings names</div>
+                    <div class="flex flex-col gap-2 w-full h-full max-w-screen-2xs shrink-0">
+                        <h4 class="flex items-center gap-1 text-sm font-semibold">
+                            <Icon class="w-4 h-4 bg-pencil-tip" name="calendar-range.svg" folder="icons/light" size="16px" />
+                            {{ $t("panel.menu.Special Of The Day Tag") }}
+                            <span class="bg-neutral-200 h-0.5 grow"></span>
+                        </h4>
+                        <ul class="flex flex-wrap items-center gap-4 w-full" v-if="dish.specialDaysActive && dish.specialDaysList.length > 0">
+                            <li class="flex items-center gap-1 text-xs" v-for="day in dish.specialDaysList">
+                                <span class="w-2.5 h-2.5 rounded-full bg-baby-blue"></span> {{ $t(day) }}
+                            </li>
+                        </ul>
+                        <div class="flex flex-col rounded-md" v-else>
+                            <small class="opacity-75">{{ $t("panel.menu.No day is selected") }}</small>
+                            <nuxt-link
+                                class="text-violet underline underline-offset-4 text-xs"
+                                :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
+                            >
+                                {{ $t("panel.menu.Add this tag") }}
+                            </nuxt-link>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2 w-full h-full max-w-screen-2xs">
+                        <h4 class="flex items-center gap-1 text-sm font-semibold">
+                            <Icon class="w-5 h-5 bg-black" name="falafel.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.menu.Item Variants") }}
+                            <span class="bg-neutral-200 h-0.5 grow"></span>
+                        </h4>
+                        <ul class="flex flex-col gap-1 w-full" v-if="dish.variants.length > 0">
+                            <li class="flex items-center gap-1" v-for="variant in dish.variants">
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-600 bg-opacity-40 shrink-0"></span>
+                                <small class="me-1 whitespace-nowrap text-ellipsis overflow-hidden">
+                                    {{ variant.translation?.[locale]?.name || variant.name }}
+                                </small>
+                                <div class="flex items-center gap-1">
+                                    <small class="text-emerald-900">{{ Intl.NumberFormat(locale).format(dish.price) }}</small>
+                                    <span class="f-inter text-xs font-extralight me-2"> {{ $t("pricing.Toman") }} </span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="flex flex-col rounded-md" v-else>
+                            <small class="opacity-75">{{ $t("panel.menu.No variants for this item") }}</small>
+                            <nuxt-link
+                                class="text-violet underline underline-offset-4 text-xs"
+                                :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
+                            >
+                                {{ $t("panel.menu.Add variants") }}
+                            </nuxt-link>
+                        </div>
+                    </div>
+                    <!-- <div class="flex flex-col gap-2 w-full h-full max-w-screen-2xs">
+                        <h4 class="flex items-center gap-1 text-sm font-semibold">
+                            <Icon class="w-5 h-5 bg-black" name="list-tree2.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.menu.Side Items") }}
+                            <span class="bg-neutral-200 h-0.5 grow"></span>
+                        </h4>
+                    </div> -->
                     <!-- TODO : show menu item like count if limitations allows it "menu-item-like" -->
-                    <div class="absolute top-8 start-2 flex flex-col gap-2">
-                        <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="dish.hidden">
-                            {{ $t("panel.menu.Hidden") }}
-                        </span>
+                    <div class="flex flex-wrap md:flex-col items-center gap-4 max-w-max ms-auto shrink-0">
+                        <nuxt-link
+                            class="flex items-center gap-2 p-2 rounded-md bg-neutral-100 hover:bg-dolphin group/btn"
+                            :title="$t('panel.Edit')"
+                            :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
+                        >
+                            <Icon
+                                class="w-5 h-5 bg-stone-500 group-hover/btn:bg-stone-200 shrink-0"
+                                name="pen-to-square.svg"
+                                folder="icons/light"
+                                size="20px"
+                            />
+                        </nuxt-link>
+                        <button
+                            class="flex items-center gap-2 p-2 rounded-md bg-neutral-100 hover:bg-dolphin group/btn"
+                            @click="openDeleteDialog(i)"
+                            :title="$t('panel.Delete')"
+                        >
+                            <Icon class="w-5 h-5 bg-red-600 group-hover/btn:bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="20px" />
+                        </button>
                     </div>
                     <span
                         class="grab_area absolute start-1.5 flex flex-col items-center justify-center gap-1.5 hover:cursor-grab active:cursor-grabbing shrink-0"
@@ -110,6 +173,8 @@
                 </li>
             </template>
         </Draggable>
+
+        <span class="my-2"></span>
 
         <!-- TODO : add state for when there is not category or items available -->
 
