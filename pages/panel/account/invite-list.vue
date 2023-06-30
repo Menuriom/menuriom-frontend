@@ -26,7 +26,7 @@
             </li>
         </ul>
         <Loading class="w-full my-4" v-if="loading" />
-        <button class="btn w-max p-2.5 border-2 border-black rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
+        <button class="btn w-max p-2.5 border bg-white rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
             {{ $t("panel.Load More") }}
         </button>
         <small class="text-xs opacity-75" v-if="noMoreRecords && records.list.length > 0">{{ $t("panel.End of the list") }}</small>

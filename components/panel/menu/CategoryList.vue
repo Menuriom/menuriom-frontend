@@ -1,17 +1,21 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col w-full">
-        <ul class="flex gap-4 w-full pb-2 overflow-auto">
+    <div class="flex gap-4 w-full pb-2 overflow-auto">
+        <!-- <ul class="flex gap-4 w-full pb-2 overflow-auto">
             <li class="relative flex flex-col items-center gap-4 w-48 h-44 p-4 pb-6 rounded-lg bg-white shadow-nr10 hover:shadow-nr15 transition-all">
                 <div class="flex flex-col items-center justify-center gap-2 w-32 h-32 bg-pencil-tip shadow-nr15 rounded-xl">
                     <img class="w-16 h-16 mt-2" src="~/assets/images/panel-icons/grid-2-light.png" alt="" />
                     <h4 class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">All</h4>
                 </div>
             </li>
+        </ul> -->
+        <!-- :class="{ 'flex-row-reverse': localeProperties.dir === 'rtl' }" -->
+        <div class="flex max-w-max">
             <Draggable
                 tag="ul"
                 class="flex gap-4"
+                :class="{ 'flex-row-reverse': localeProperties.dir === 'rtl' }"
                 v-model="categories.list"
                 @start="resetSavingOrder()"
                 @end="saveOrder()"
@@ -72,7 +76,7 @@
                     </li>
                 </template>
             </Draggable>
-        </ul>
+        </div>
 
         <Teleport to="body">
             <Dialog name="delete-confirmation" :title="$t('panel.menu.Delete Category')">

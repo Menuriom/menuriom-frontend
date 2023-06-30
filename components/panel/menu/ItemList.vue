@@ -12,39 +12,44 @@
             item-key="order"
         >
             <template #item="{ element: dish, index: i }">
-                <li class="relative flex items-center gap-4 p-4 ps-8 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden">
-                    <div class="flex flex-col items-center justify-center gap-2 w-24 h-24 shadow-nr15 rounded-xl shrink-0">
-                        <img class="w-full object-contain" :src="dish.images[0]" alt="" />
-                    </div>
+                <li
+                    class="relative h-auto flex flex-wrap 2xl:flex-nowrap items-center gap-4 p-4 ps-8 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
+                >
                     <h6
                         class="absolute top-3 start-6 p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm"
                         v-if="dish.showAsNew"
                     >
                         {{ $t("New") }}
                     </h6>
-                    <div class="flex flex-col gap-2 w-full max-w-screen-xs shrink-0">
-                        <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
-                            {{ dish.translation?.[locale]?.name || dish.name }}
-                        </h4>
-                        <p class="w-full -mt-1.5 text-xs whitespace-nowrap text-ellipsis overflow-hidden opacity-75">
-                            {{ dish.translation?.[locale]?.description || dish.description }}
-                        </p>
-                        <hr class="w-full" />
-                        <div class="flex flex-wrap items-center gap-1">
-                            <span class="flex items-baseline font-bold text-emerald-900 opacity-60 text-xl" dir="auto">
-                                {{ Intl.NumberFormat(locale).format(dish.price / 1000) }}
-                                <small class="text-sm">,{{ Array(3).fill(Intl.NumberFormat(locale).format(0)).join("") }}</small>
-                            </span>
-                            <span class="f-inter text-sm font-extralight me-2"> {{ $t("pricing.Toman") }} </span>
-                            <div
-                                class="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-rose-600 bg-opacity-75 text-white shadow-nr15"
-                                v-if="dish.discountActive"
-                            >
-                                <h5 class="text-xs font-bold">1{{ dish.discountPercentage }}%</h5>
-                                <small class="font-extralight opacity-75">{{ $t("pricing.OFF") }}</small>
+                    <div class="flex flex-wrap xl:flex-nowrap items-center gap-4 w-full max-w-md shrink-0">
+                        <div class="flex flex-col items-center justify-center gap-2 w-24 h-24 shadow-nr15 rounded-xl shrink-0">
+                            <img class="w-full object-contain" :src="dish.images[0]" alt="" />
+                        </div>
+                        <div class="flex flex-col gap-2 w-full max-w-xs shrink-0">
+                            <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
+                                {{ dish.translation?.[locale]?.name || dish.name }}
+                            </h4>
+                            <p class="w-full -mt-1.5 text-xs whitespace-nowrap text-ellipsis overflow-hidden opacity-75">
+                                {{ dish.translation?.[locale]?.description || dish.description }}
+                            </p>
+                            <hr class="w-full" />
+                            <div class="flex flex-wrap items-center gap-1">
+                                <span class="flex items-baseline font-bold text-emerald-900 opacity-60 text-xl" dir="auto">
+                                    {{ Intl.NumberFormat(locale).format(dish.price / 1000) }}
+                                    <small class="text-sm">,{{ Array(3).fill(Intl.NumberFormat(locale).format(0)).join("") }}</small>
+                                </span>
+                                <span class="f-inter text-sm font-extralight me-2"> {{ $t("pricing.Toman") }} </span>
+                                <div
+                                    class="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-rose-600 bg-opacity-75 text-white shadow-nr15"
+                                    v-if="dish.discountActive"
+                                >
+                                    <h5 class="text-xs font-bold">{{ dish.discountPercentage }}%</h5>
+                                    <small class="font-extralight opacity-75">{{ $t("pricing.OFF") }}</small>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="flex flex-col gap-2 w-full max-w-screen-2xs shrink-0">
                         <div class="flex items-center gap-2 max-w-max cursor-pointer" @click="dish.hidden = !dish.hidden">
                             <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.hidden }">
@@ -70,7 +75,7 @@
                             </small>
                             <small class="" v-else>{{ $t("panel.menu.Mark as sold out") }}</small>
                         </div>
-                        <div class="flex items-center gap-2 max-w-max cursor-pointer" @click="dish.pinned = !dish.pinned">
+                        <div class="flex items-center gap-2 max-w-max cursor-pointer" @click="dish.pinned = !dish.pinned" v-if="checkLimitations([['item-highlighting', true]], brand)">
                             <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.pinned }">
                                 <Icon
                                     class="w-4 h-4 -rotate-45"
@@ -86,7 +91,7 @@
                             <small class="" v-else>{{ $t("panel.menu.Pin to the top of category") }}</small>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-2 w-full h-full max-w-screen-2xs shrink-0">
+                    <div class="flex flex-col gap-2 w-full max-w-screen-2xs shrink-0">
                         <h4 class="flex items-center gap-1 text-sm font-semibold">
                             <Icon class="w-4 h-4 bg-pencil-tip" name="calendar-range.svg" folder="icons/light" size="16px" />
                             {{ $t("panel.menu.Special Of The Day Tag") }}
@@ -107,7 +112,7 @@
                             </nuxt-link>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-2 w-full h-full max-w-screen-2xs">
+                    <div class="flex flex-col gap-2 w-full max-w-screen-2xs">
                         <h4 class="flex items-center gap-1 text-sm font-semibold">
                             <Icon class="w-5 h-5 bg-black" name="falafel.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.menu.Item Variants") }}
@@ -135,7 +140,7 @@
                             </nuxt-link>
                         </div>
                     </div>
-                    <!-- <div class="flex flex-col gap-2 w-full h-full max-w-screen-2xs">
+                    <!-- <div class="flex flex-col gap-2 w-full max-w-screen-2xs">
                         <h4 class="flex items-center gap-1 text-sm font-semibold">
                             <Icon class="w-5 h-5 bg-black" name="list-tree2.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.menu.Side Items") }}
@@ -145,27 +150,18 @@
                     <!-- TODO : show menu item like count if limitations allows it "menu-item-like" -->
                     <div class="flex flex-wrap md:flex-col items-center gap-4 max-w-max ms-auto shrink-0">
                         <nuxt-link
-                            class="flex items-center gap-2 p-2 rounded-md bg-neutral-100 hover:bg-dolphin group/btn"
+                            class="btn flex items-center gap-2 p-2 rounded-md bg-dolphin"
                             :title="$t('panel.Edit')"
                             :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
                         >
-                            <Icon
-                                class="w-5 h-5 bg-stone-500 group-hover/btn:bg-stone-200 shrink-0"
-                                name="pen-to-square.svg"
-                                folder="icons/light"
-                                size="20px"
-                            />
+                            <Icon class="w-5 h-5 bg-stone-200 shrink-0" name="pen-to-square.svg" folder="icons/light" size="18px" />
                         </nuxt-link>
-                        <button
-                            class="flex items-center gap-2 p-2 rounded-md bg-neutral-100 hover:bg-dolphin group/btn"
-                            @click="openDeleteDialog(i)"
-                            :title="$t('panel.Delete')"
-                        >
-                            <Icon class="w-5 h-5 bg-red-600 group-hover/btn:bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="20px" />
+                        <button class="btn flex items-center gap-2 p-2 rounded-md bg-dolphin" @click="openDeleteDialog(i)" :title="$t('panel.Delete')">
+                            <Icon class="w-5 h-5 bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="18px" />
                         </button>
                     </div>
                     <span
-                        class="grab_area absolute start-1.5 flex flex-col items-center justify-center gap-1.5 hover:cursor-grab active:cursor-grabbing shrink-0"
+                        class="grab_area absolute top-11 start-1.5 flex flex-col items-center justify-center gap-1.5 hover:cursor-grab active:cursor-grabbing shrink-0"
                     >
                         <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
                         <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
@@ -234,6 +230,12 @@ const userStore = useUserStore();
 // add scleton loading for menu item loading
 
 // ordering with different branches and different categories selected may cuase problem with current numbering system
+
+// TODO : show all items with heading of their category (one ul for every category - show all)
+// and when user clicket at a category scroll to specific category heading
+// user can change order of items in a category or change category by moving onto a category
+// make headings sticky
+// there is no need to an all category this way
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 

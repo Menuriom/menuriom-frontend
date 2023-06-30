@@ -23,4 +23,6 @@ import Faqs from "~/components/web/home/Faqs.vue";
 
 useHead({ title: `Create highly versatile online QR menus - Menuriom` });
 definePageMeta({ layout: "default" });
+
+// TODO : make main buttons and secondary buttons the same for all the website including the panel
 </script>

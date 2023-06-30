@@ -15,7 +15,7 @@
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <button
-                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-lg border-2 border-black flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white flex-shrink-0"
                     @click="panelStore.openPopUp('sent-invites')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
@@ -23,7 +23,7 @@
                     {{ $t("panel.side-menu.Sent Invites") }}
                 </button>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white flex-shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
@@ -134,7 +134,7 @@
                 </li>
             </ul>
             <Loading v-if="loading" />
-            <button class="btn w-max p-2.5 border-2 border-black rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
+            <button class="btn w-max p-2.5 border bg-white rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
                 {{ $t("panel.Load More") }}
             </button>
             <small class="text-xs opacity-75" v-if="noMoreRecords && records.list.length > 0">{{ $t("panel.End of the list") }}</small>

@@ -103,7 +103,7 @@
                     </div>
                     <div class="flex flex-wrap items-center gap-4 w-full">
                         <button
-                            class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow"
+                            class="btn flex items-center justify-center gap-3 p-3 border text-sm rounded-md grow"
                             @click="panelStore.openPopUp('change-plan-dialog')"
                             v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
                         >
@@ -111,7 +111,7 @@
                             {{ $t("panel.billing.Upgrade-Downgrade Plan") }}
                         </button>
                         <button
-                            class="btn flex items-center justify-center gap-3 p-3 border-2 border-dolphin text-sm rounded-lg grow"
+                            class="btn flex items-center justify-center gap-3 p-3 border text-sm rounded-md grow"
                             @click="panelStore.openPopUp('change-plan-dialog')"
                             v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
                         >
@@ -300,7 +300,7 @@
                 </li>
             </ul>
             <Loading v-if="loadingBills" />
-            <button class="btn w-max p-2.5 border-2 border-black rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreBills">
+            <button class="btn w-max p-2.5 border bg-white rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreBills">
                 {{ $t("panel.Load More") }}
             </button>
             <small class="text-xs opacity-75" v-if="noMoreBills && bills.list.length > 0">{{ $t("panel.End of the list") }}</small>

@@ -297,6 +297,7 @@ export default {
             "New Category": "New Category",
             "Edit Category": "Edit Category",
             "New Item": "New Item",
+            "Items": "Items",
 
             Category: "Category",
             Categories: "Categories",
@@ -321,6 +322,7 @@ export default {
             "Category order saved": "Category order saved",
 
             "New Menu Item": "New Menu Item",
+            "Edit Menu Item": "Edit Menu Item",
             "Item Images": "Item Images",
             "Add Image": "Add Image",
             "General Info": "General Info",
@@ -333,6 +335,7 @@ export default {
             "Activate Discount": "Activate Discount",
             "When activated discount will be calculated and shown for this item": "When activated discount will be calculated and shown for this item",
             "Create New Item": "Create New Item",
+            "Edit Item": "Edit Item",
             "Hide this item": "Hide this item",
             "Pin to the top of category": "Pin to the top of category",
             "Mark as sold out": "Mark as sold out",
@@ -383,6 +386,7 @@ export default {
             "Add this tag": "Add this tag",
             "No variants for this item": "No variants for this item",
             "Add variants": "Add variants",
+            "Menu item has been updated": "Menu item has been updated",
         },
 
         staff: {

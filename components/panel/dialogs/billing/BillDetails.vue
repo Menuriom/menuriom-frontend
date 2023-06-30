@@ -101,7 +101,7 @@
                 </div>
             </li>
             <Loading v-if="loadingTransactions" />
-            <button class="btn w-max p-2.5 py-1.5 ms-2 border-2 border-white rounded-md text-white text-xs" @click="loadMore()" v-if="!noMoreTransactions">
+            <button class="btn w-max p-2.5 py-1.5 ms-2 border border-neutral-500 rounded-md text-white text-xs" @click="loadMore()" v-if="!noMoreTransactions">
                 {{ $t("panel.Load More") }}
             </button>
             <small class="text-xs opacity-75" v-if="noMoreTransactions && transactions.list.length > 0">{{ $t("panel.End of the list") }}</small>

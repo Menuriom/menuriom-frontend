@@ -297,6 +297,7 @@ export default {
             "New Category": "دسته‌بندی جدید",
             "Edit Category": "ویرایش دسته‌بندی",
             "New Item": "ایتم جدید",
+            Items: "ایتم ها",
 
             Category: "دسته‌بندی",
             Categories: "دسته‌بندی ها",
@@ -321,6 +322,7 @@ export default {
             "Category order saved": "ترتیب دسته‌بندی ها بروز شد",
 
             "New Menu Item": "منو ایتم جدید",
+            "Edit Menu Item": "ویرایش ایتم منو",
             "Item Images": "عکس های ایتم",
             "Add Image": "افزودن عکس",
             "General Info": "اطلاعات کلی",
@@ -333,6 +335,7 @@ export default {
             "Activate Discount": "فعالسازی تگ تخفیف",
             "When activated discount will be calculated and shown for this item": "با فعال شدن تخفیف برای این کالا محاسبه و نمایش داده می شود",
             "Create New Item": "ساخت ایتم جدید",
+            "Edit Item": "ویرایش ایتم",
             "Hide this item": "مخفی کردن ایتم",
             "Pin to the top of category": "پین کردن ایتم",
             "Mark as sold out": "نمایش به عنوان تمام شده",
@@ -384,6 +387,7 @@ export default {
             "Add this tag": "افزودن این تگ",
             "No variants for this item": "بدون نوع خاص",
             "Add variants": "افزودن نوع های مختلف",
+            "Menu item has been updated": "ایتم منو ویرایش شد",
         },
 
         staff: {
