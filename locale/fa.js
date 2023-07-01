@@ -388,6 +388,8 @@ export default {
             "No variants for this item": "بدون نوع خاص",
             "Add variants": "افزودن نوع های مختلف",
             "Menu item has been updated": "ایتم منو ویرایش شد",
+            "Delete Menu Item": "حذف ایتم منو",
+            "This Category Has No Items": "این دسته‌بندی ایتم ندارد",
         },
 
         staff: {

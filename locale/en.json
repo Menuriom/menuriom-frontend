@@ -23,7 +23,8 @@
         "menu": {
             "For": "For {branch}",
             "You are about to delete this category": "You are about to delete category <b>{name}</b>",
-            "You are about to delete this side items group": "You are about to delete side items group <b>{name}</b>"
+            "You are about to delete this side items group": "You are about to delete side items group <b>{name}</b>",
+            "You are about to delete this item": "You are about to delete item <b>{name}</b>"
         },
         "staff": {
             "You are about to remove this member": "You are about to remove {member}",

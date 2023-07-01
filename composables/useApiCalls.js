@@ -173,19 +173,21 @@ export const getDishesList = async (brandID) => {
     url = encodeURI(`${url}?${params.join("&")}`);
 
     let _items = [];
+    let _categories = [];
     let _canCreateNewDish = false;
 
     await axios
         .get(url, { headers: headers })
         .then((response) => {
             _items = response.data.records;
+            _categories = response.data.categories;
             _canCreateNewDish = response.data.canCreateNewItem;
         })
         .catch((e) => {
             throw e;
         });
 
-    return { _items, _canCreateNewDish };
+    return { _items, _canCreateNewDish, _categories };
 };
 export const getMenuItem = async (ItemID, brandID) => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/menu-items/${ItemID}`, { brand: brandID });

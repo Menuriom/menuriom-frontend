@@ -387,6 +387,8 @@ export default {
             "No variants for this item": "No variants for this item",
             "Add variants": "Add variants",
             "Menu item has been updated": "Menu item has been updated",
+            "Delete Menu Item": "Delete Menu Item",
+            "This Category Has No Items": "This Category Has No Items",
         },
 
         staff: {
