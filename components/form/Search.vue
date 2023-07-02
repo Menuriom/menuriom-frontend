@@ -22,7 +22,11 @@ input::placeholder {
 
 <template>
     <div class="flex flex-col gap-1">
-        <div class="wrapper relative flex items-center p-2 gap-2 bg-neutral-700 text-white rounded-md" :class="{ 'input-box-shadow': !!shadow }" @click="focus()">
+        <div
+            class="wrapper relative flex items-center p-2 gap-2 bg-neutral-700 text-white rounded-md"
+            :class="{ 'input-box-shadow': !!shadow }"
+            @click="focus()"
+        >
             <button class="flex items-center justify-center p-1 rounded-md shrink-0 cursor-pointer" @click="$emit(`search`)">
                 <Icon class="icon w-5 h-5 gradient shrink-0" name="search.svg" folder="icons/light" size="18px" />
             </button>
@@ -33,6 +37,7 @@ input::placeholder {
                 :value="modelValue"
                 :placeholder="`${$t(`panel.Search`)}...`"
                 :dir="modelValue ? 'auto' : ''"
+                @keyup="keyup($event)"
                 @input="updateData($event.target.value)"
                 @focus="isFocused = true"
                 @blur="isFocused = false"
@@ -62,6 +67,10 @@ const input = ref(""); // Dom Ref
 
 let isFocused = ref(false);
 const focus = () => input.value.focus();
+
+const keyup = (e) => {
+    if (e.key === "Enter") emit("search");
+};
 
 const updateData = (val) => {
     emit("update:modelValue", val);

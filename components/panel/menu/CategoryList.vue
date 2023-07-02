@@ -16,7 +16,7 @@
                 tag="ul"
                 class="flex gap-4"
                 :class="{ 'flex-row-reverse': localeProperties.dir === 'rtl' }"
-                v-model="categories.list"
+                v-model="filteredCategories.list"
                 @start="resetSavingOrder()"
                 @end="saveOrder()"
                 handle=".grab_area"
@@ -24,9 +24,9 @@
             >
                 <template #item="{ element: category, index: i }">
                     <li
-                        class="relative flex flex-col items-center justify-center w-48 h-44 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
+                        class="relative flex flex-col items-center justify-center w-48 h-48 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
                     >
-                        <SlideMenu class="-my-2 z-10">
+                        <SlideMenu class="z-10">
                             <button
                                 class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
                                 @click="toggleCategoryVisibility(i)"
@@ -57,22 +57,25 @@
                                 <small>{{ $t("panel.menu.Delete Category") }}</small>
                             </button>
                         </SlideMenu>
-                        <div class="flex flex-col items-center justify-center gap-2 w-32 h-32 bg-pencil-tip shadow-nr15 rounded-xl">
-                            <img class="w-16 h-16 mt-2" :src="category.icon" alt="" />
-                            <h4 class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
+                        <div class="flex flex-col items-center justify-center gap-2 w-36 h-36 bg-neutral-100 shadow-inner rounded-md">
+                            <img class="w-16 h-16 mt-2" :src="category.icon" alt="" loading="lazy" />
+                            <h4 class="w-full text-sm text-pencil-tip whitespace-nowrap text-ellipsis overflow-hidden text-center px-2 font-semibold">
                                 {{ category.translation?.[locale]?.name || category.name }}
                             </h4>
                         </div>
-                        <div class="absolute top-8 start-2 flex flex-col gap-2">
+                        <div class="absolute top-8 start-2 flex flex-col items-start gap-2">
                             <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.hidden">
                                 {{ $t("panel.menu.Hidden") }}
                             </span>
+                            <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.showAsNew">
+                                {{ $t("New") }}
+                            </span>
                         </div>
-                        <span class="grab_area absolute bottom-1.5 flex items-center justify-center gap-1.5 w-full h-5 hover:cursor-grab active:cursor-grabbing">
+                        <!-- <span class="grab_area absolute bottom-1.5 flex items-center justify-center gap-1.5 w-full h-5 hover:cursor-grab active:cursor-grabbing">
                             <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
                             <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
                             <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                        </span>
+                        </span> -->
                     </li>
                 </template>
             </Draggable>
@@ -257,6 +260,7 @@ const handleErrors = (err) => {
 
 // getCategoryList -------------------------------------------------
 const categories = reactive({ list: [] });
+const filteredCategories = reactive({ list: [] });
 const canCreateNewCategory = ref(true);
 const getCategoryList_results = await useLazyAsyncData(() => getCategoryList(route.params.brandID));
 const loadingCategories = computed(() => getCategoryList_results.pending.value);
@@ -266,10 +270,18 @@ watch(getCategoryList_results.error, (err) => handleErrors(err));
 
 const handleCategoryList_results = (data) => {
     if (!data) return;
-    categories.list = data._categories;
+    categories.list = filteredCategories.list = data._categories;
     canCreateNewCategory.value = data._canCreateNewCategory;
 };
 watch(getCategoryList_results.data, (val) => handleCategoryList_results(val), { immediate: process.server || nuxtApp.isHydrating });
 
 // -------------------------------------------------
+
+const search = (query) => {
+    filteredCategories.list = categories.list.filter((category) => {
+        return category.name.toLowerCase().includes(query) || category.translation?.[locale.value]?.name.toLowerCase().includes(query);
+    });
+};
+
+defineExpose({ search });
 </script>

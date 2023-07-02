@@ -288,6 +288,7 @@ export default {
         },
 
         menu: {
+            "Managing and editing your restaurant menu items and categories": "مدیریت و ویرایش آیتم ها و دسته بندی های منوی رستوران",
             "Menu Editor": "ویرایشگر منو",
             "For Branch": "برای شعبه",
             "Edit Menu Style": "ویرایش ظاهر منو",
@@ -390,6 +391,7 @@ export default {
             "Menu item has been updated": "ایتم منو ویرایش شد",
             "Delete Menu Item": "حذف ایتم منو",
             "This Category Has No Items": "این دسته‌بندی ایتم ندارد",
+            "Menu items order updated": "ترتیب ایتم ها بروز شد",
         },
 
         staff: {

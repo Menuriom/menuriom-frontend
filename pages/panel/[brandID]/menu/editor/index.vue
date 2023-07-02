@@ -8,10 +8,11 @@
                     <img class="w-9" src="~/assets/images/panel-icons/cards-blank-dark.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.side-menu.Menu Editor") }}</h1>
                 </div>
-                <small class="hidden sm:flex gap-1 text-sm">
+                <!-- <small class="hidden sm:flex gap-1 text-sm">
                     {{ $t("panel.menu.You are editing the general menu") }}.
                     <span v-html="$t('panel.menu.For', { branch: `<b>all branches</b>` })" />
-                </small>
+                </small> -->
+                <small class="hidden sm:flex gap-1 text-sm"> {{ $t("panel.menu.Managing and editing your restaurant menu items and categories") }}. </small>
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <button
@@ -34,7 +35,7 @@
         <!-- TODO : when editing a menu item add button to save the item for general menu or one branch specific -->
         <div class="flex flex-wrap items-center justify-between gap-4">
             <!-- TODO : add single search bar that can search both in category and menus at same time -->
-            <Search class="w-full max-w-xs" v-model="searchQuery" />
+            <Search class="w-full max-w-xs" v-model="searchQuery" @search="search()" @clear:search="clearSearch()" />
             <!-- <label class="flex flex-wrap items-center gap-2">
                 <small class="text-sm">{{ $t("panel.menu.For Branch") }}</small>
                 <SelectDropDown
@@ -63,7 +64,7 @@
                     {{ $t("panel.menu.New Category") }}
                 </nuxt-link>
             </header>
-            <CategoryList />
+            <CategoryList ref="categoryListRef" />
         </section>
 
         <hr class="w-full border-gray-300 opacity-50" />
@@ -79,7 +80,7 @@
                     {{ $t("panel.menu.New Item") }}
                 </nuxt-link>
             </header>
-            <ItemList />
+            <ItemList ref="itemListRef" />
         </section>
 
         <!-- <Teleport to="body"> </Teleport> -->
@@ -90,8 +91,10 @@
 import Search from "~/components/form/Search.vue";
 import SelectDropDown from "~/components/form/SelectDropDown.vue";
 import Loading from "~/components/Loading.vue";
-const CategoryList = defineAsyncComponent(() => import("~/components/panel/menu/CategoryList.vue"));
-const ItemList = defineAsyncComponent(() => import("~/components/panel/menu/ItemList.vue"));
+// const CategoryList = defineAsyncComponent(() => import("~/components/panel/menu/CategoryList.vue"));
+import CategoryList from "~/components/panel/menu/CategoryList.vue";
+// const ItemList = defineAsyncComponent(() => import("~/components/panel/menu/ItemList.vue"));
+import ItemList from "~/components/panel/menu/ItemList.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
@@ -111,8 +114,20 @@ const form = ref(); // Dom Ref
 const errorField = ref("");
 const responseMessage = ref("");
 
+const categoryListRef = ref(); // Dom Ref
+const itemListRef = ref(); // Dom Ref
+
 const forBranch = ref({ value: null, name: "General Menu (all branch)" });
 const searchQuery = ref("");
+const search = () => {
+    const query = searchQuery.value.toLowerCase();
+    itemListRef.value.search(query);
+    categoryListRef.value.search(query);
+};
+const clearSearch = () => {
+    searchQuery.value = "";
+    search();
+};
 
 const handleErrors = (err) => {
     errorField.value = "data";

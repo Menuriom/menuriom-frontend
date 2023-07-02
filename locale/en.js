@@ -288,6 +288,7 @@ export default {
         },
 
         menu: {
+            "Managing and editing your restaurant menu items and categories": "Managing and editing your restaurant menu items and categories",
             "Menu Editor": "Menu Editor",
             "For Branch": "For Branch",
             "Edit Menu Style": "Edit Menu Style",
@@ -389,6 +390,7 @@ export default {
             "Menu item has been updated": "Menu item has been updated",
             "Delete Menu Item": "Delete Menu Item",
             "This Category Has No Items": "This Category Has No Items",
+            "Menu items order updated": "Menu items order updated",
         },
 
         staff: {

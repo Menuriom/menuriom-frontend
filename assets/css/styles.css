@@ -95,8 +95,21 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
 .fade-leave-active { transition: all 0.2s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
-.flip-list-move { transition: transform 0.5s; }
+/* ===================================================================== */
+.dropdown-box {
+    display: grid;
+    grid-template-rows: 0fr;
+    margin-top: -0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+.dropdown-box.open {
+    grid-template-rows: 1fr;
+    margin-top: 0;
+}
 
+.dropdown-box-inner {
+    overflow: hidden;
+}
 /* ===================================================================== */
 
 .rotate-pop {
