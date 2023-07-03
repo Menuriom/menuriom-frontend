@@ -202,6 +202,7 @@ const deleteRecord = async () => {
 // -------------------------------------------------
 
 const handleErrors = (err) => {
+    console.log({ err });
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;

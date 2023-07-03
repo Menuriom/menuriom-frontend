@@ -15,7 +15,6 @@
             <Draggable
                 tag="ul"
                 class="flex gap-4"
-                :class="{ 'flex-row-reverse': localeProperties.dir === 'rtl' }"
                 v-model="filteredCategories.list"
                 @start="resetSavingOrder()"
                 @end="saveOrder()"

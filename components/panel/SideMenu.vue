@@ -157,7 +157,7 @@ aside > div {
                         </li>
                     </button>
                     <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('menu') }" name="menu">
-                        <ul class="sub_menu flex flex-col">
+                        <ul class="sub_menu flex flex-col gap-1">
                             <nuxt-link
                                 class="link"
                                 :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/editor`)"
@@ -215,7 +215,7 @@ aside > div {
                         </li>
                     </button>
                     <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('staff') }" name="staff">
-                        <ul class="sub_menu flex flex-col">
+                        <ul class="sub_menu flex flex-col gap-1">
                             <nuxt-link
                                 class="link"
                                 :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/members`)"
@@ -264,7 +264,7 @@ aside > div {
                         </li>
                     </button>
                     <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('settings') }" name="settings">
-                        <ul class="sub_menu flex flex-col">
+                        <ul class="sub_menu flex flex-col gap-1">
                             <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/languages`)">
                                 <li class="flex items-center gap-3">
                                     <!-- <Icon class="w-5 h-5 bg-white" name="language.svg" folder="icons/light" size="20px" /> -->

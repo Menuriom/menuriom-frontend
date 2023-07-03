@@ -20,6 +20,7 @@
                             name="grip-dots.svg"
                             folder="icons/light"
                             size="20px"
+                            v-if="!inSearchMode"
                         />
                         <img class="h-6 grayscale" :src="filteredDishes.list[k][0].category.icon" alt="" />
                         <h3 class="">
@@ -226,6 +227,7 @@
                                     </div>
                                     <span
                                         class="grab_area absolute top-11 start-1.5 flex flex-col items-center justify-center gap-1.5 hover:cursor-grab active:cursor-grabbing shrink-0"
+                                        v-if="!inSearchMode"
                                     >
                                         <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
                                         <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
@@ -389,8 +391,8 @@ const saveOrder = () => {
         errorField.value = "";
 
         const orderedGroup = [];
-        for (let k = 0; k < dishes.list.length; k++) {
-            const categories = dishes.list[k];
+        for (let k = 0; k < filteredDishes.list.length; k++) {
+            const categories = filteredDishes.list[k];
             orderedGroup.push({ category: { _id: categories[0].category._id, order: k }, items: [] });
             for (let i = 0; i < categories.length; i++) {
                 const item = categories[i];
@@ -450,7 +452,13 @@ watch(getDishList_results.data, (val) => handleDishList_results(val), { immediat
 
 // -------------------------------------------------
 
+const inSearchMode = ref(false);
 const search = (query) => {
+    // if (query) inSearchMode.value = true;
+    // else inSearchMode.value = false;
+
+    inSearchMode.value = !!query;
+
     filteredDishes.list = dishes.list.map((categories) => {
         return categories.filter((item, i) => {
             if (i === 0) return true;
