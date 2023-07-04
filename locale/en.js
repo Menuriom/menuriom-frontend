@@ -493,7 +493,6 @@ export default {
             "Issue Date": "Issue Date",
             "Due Date": "Due Date",
             "Your Last Bill": "Your Last Bill",
-            "Payment Details": "Payment Details",
             "Pay This Bill": "Pay This Bill",
             "Your plan and payment period successfully updated": "Your plan and payment period were successfully updated",
             "There is no transactions for this bill": "There is no transactions for this bill",

@@ -1,9 +1,11 @@
 <style scoped></style>
 
 <template>
-    <div>
-        <!-- <canvas id="canvas" style="width: 256px; height: 256px" ref="canvasEl"></canvas> -->
-        <generateSVG class="shadow-nr15" />
+    <div class="flex flex-col items-start gap-2">
+        <canvas id="canvas" class="shadow-nr15 rounded-xl" style="width: 256px; height: 256px" ref="canvasEl"></canvas>
+        <!-- <generateSVG class="shadow-nr15" /> -->
+        <button class="btn p-2 rounded-md bg-white border" @click="saveCanvas()">Save</button>
+        <p>make sure the colors has a good contrast in order to code be scannable</p>
     </div>
 </template>
 
@@ -11,7 +13,6 @@
 import QR from "~/composables/qrcodegen";
 import { h } from "vue";
 
-const defaultErrorCorrectLevel = "Q";
 const ErrorCorrectLevelMap = {
     L: QR.QrCode.Ecc.LOW,
     M: QR.QrCode.Ecc.MEDIUM,
@@ -28,7 +29,7 @@ const SUPPORTS_PATH2D = () => {
     return true;
 };
 
-function generatePath(modules, margin = 0) {
+const generatePath = (modules, margin = 0) => {
     const ops = [];
     modules.forEach(function (row, y) {
         let start = null;
@@ -52,20 +53,30 @@ function generatePath(modules, margin = 0) {
         });
     });
     return ops.join("");
-}
+};
+
+const loadImage = (src) => {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = resolve(img);
+        img.onerror = (e) => reject(e);
+    });
+};
 
 // ====================================================
+
+const value = "https://menuriom.com/r/64490245ee8237588e025c8b/";
+const level = "H";
+const margin = 4;
+const size = 512;
+const background = "#fff";
+const foreground = "#000";
+const dotStyle = "image";
 
 const numCells = ref(0);
 const fgPath = ref("");
 const generateSVG = () => {
-    const value = "https://menuriom.com/r/64490245ee8237588e025c8b";
-    const level = "H" || defaultErrorCorrectLevel;
-    const margin = 4;
-    const size = 256;
-    const background = "#fff";
-    const foreground = "#000";
-
     const cells = QR.QrCode.encodeText(value, ErrorCorrectLevelMap[level]).getModules();
     numCells.value = cells.length + margin * 2;
     console.log({ numCells: numCells.value });
@@ -73,12 +84,6 @@ const generateSVG = () => {
     const imageSize = 12;
     const pos = numCells.value / 2 - imageSize / 2;
 
-    // Drawing strategy: instead of a rect per module, we're going to create a
-    // single path for the dark modules and layer that on top of a light rect,
-    // for a total of 2 DOM nodes. We pay a bit more in string concat but that's
-    // way faster than DOM ops.
-    // For level 1, 441 nodes -> 2
-    // For level 40, 31329 -> 2
     fgPath.value = generatePath(cells, margin);
 
     const props = {
@@ -99,42 +104,150 @@ const generateSVG = () => {
 };
 
 const canvasEl = ref(); // Dom Ref
-const generateCanvas = () => {
-    const value = "https://menuriom.com";
-    const level = "" || defaultErrorCorrectLevel;
-    const margin = 0;
-    const size = 256;
-    const background = "#fff";
-    const foreground = "#000";
-
+const generateCanvas = (customDot) => {
+    const radiuos = 0.55;
     const canvas = canvasEl.value;
     const ctx = canvas.getContext("2d");
 
     const cells = QR.QrCode.encodeText(value, ErrorCorrectLevelMap[level]).getModules();
-    const numCells = cells.length + margin * 2;
+    numCells.value = cells.length + margin * 2;
 
     const devicePixelRatio = window.devicePixelRatio || 1;
-
-    const scale = (size / numCells) * devicePixelRatio;
+    const scale = (size / numCells.value) * devicePixelRatio;
     canvas.height = canvas.width = size * devicePixelRatio;
     ctx.scale(scale, scale);
 
-    ctx.fillStyle = background;
-    ctx.fillRect(0, 0, numCells, numCells);
+    const grd = ctx.createLinearGradient(0, numCells.value / 2, numCells.value / 2, numCells.value);
+    grd.addColorStop(0, "#3871cd");
+    grd.addColorStop(1, "#2e2f5f");
 
-    ctx.fillStyle = foreground;
-    if (SUPPORTS_PATH2D()) {
+    ctx.fillStyle = background;
+    ctx.fillRect(0, 0, numCells.value, numCells.value);
+
+    ctx.fillStyle = grd || foreground;
+    ctx.strokeStyle = grd || foreground;
+    // if (SUPPORTS_PATH2D()) {
+    if (0) {
         ctx.fill(new Path2D(generatePath(cells, margin)));
     } else {
+        console.log({ customDot });
+        if (customDot && dotStyle === "image") {
+            cells.forEach((row, rdx) => {
+                row.forEach((cell, cdx) => {
+                    if (!cell) return;
+                    ctx.drawImage(customDot, cdx + margin, rdx + margin, 1, 1);
+                });
+            });
+        }
         cells.forEach(function (row, rdx) {
             row.forEach(function (cell, cdx) {
-                if (cell) ctx.fillRect(cdx + margin, rdx + margin, 1, 1);
+                if (!cell) return;
+                ctx.beginPath();
+                switch (dotStyle) {
+                    case "square":
+                        ctx.fillRect(cdx + margin, rdx + margin, 1.05, 1.05);
+                        break;
+                    case "square-dot":
+                        ctx.fillRect(cdx + margin, rdx + margin, radiuos * 1.3, radiuos * 1.3);
+                        break;
+                    case "triangle":
+                        ctx.ellipse(cdx + margin + radiuos, rdx + margin + radiuos, radiuos, radiuos, Math.PI / 4, 4.7, 2 * Math.PI);
+                        ctx.stroke();
+                        break;
+                    case "half-moon":
+                        ctx.ellipse(cdx + margin + radiuos, rdx + margin + radiuos, radiuos, radiuos, Math.PI / 4, 0, 1.2 * Math.PI);
+                        ctx.fill();
+                        break;
+                    case "half-moon2":
+                        ctx.ellipse(cdx + margin + radiuos, rdx + margin + radiuos, radiuos, radiuos, Math.PI / 4, 3, 2 * Math.PI);
+                        ctx.fill();
+                        break;
+                    case "pins":
+                        ctx.ellipse(cdx + margin + radiuos, rdx + margin + radiuos, radiuos / 2.5, radiuos / 2.5, Math.PI / 1, 4, 2 * Math.PI);
+                        ctx.stroke();
+                        break;
+                    case "pins2":
+                        ctx.ellipse(cdx + margin + radiuos, rdx + margin + radiuos, radiuos / 2.5, radiuos / 2.5, Math.PI / 1, 2, 1.25 * Math.PI);
+                        ctx.stroke();
+                        break;
+                    case "dot":
+                        ctx.arc(cdx + margin + radiuos, rdx + margin + radiuos, radiuos, radiuos, 2 * Math.PI);
+                        ctx.fill();
+                        break;
+                }
             });
         });
     }
+
+    customCorners(ctx, radiuos);
+    setLogo(ctx);
+};
+const setLogo = (ctx) => {
+    const imageSize = Math.min(value.length / 2.5, 11);
+    const pos = numCells.value / 2 - imageSize / 2;
+    const bgRectMargin = 2;
+    const borderRadius = 10;
+
+    ctx.shadowColor = "#0006";
+    // ctx.shadowColor = "#0008";
+    ctx.shadowOffsetY = 15;
+    ctx.shadowBlur = 20;
+    ctx.fillStyle = background;
+    ctx.beginPath();
+    ctx.roundRect(pos - bgRectMargin / 2, pos - bgRectMargin / 2, imageSize + bgRectMargin, imageSize + bgRectMargin, borderRadius);
+    ctx.fill();
+    ctx.shadowColor = "#0001";
+
+    ctx.beginPath();
+    ctx.roundRect(pos, pos, imageSize, imageSize, Math.max(borderRadius - 1, 0));
+    ctx.fill();
+
+    ctx.clip();
+    const img = new Image();
+    // img.src = "/file/logos/d7af7f85-bbd4-42f7-b067-733273217f9c.webp";
+    img.src = "/pricing/pro-g.png";
+    img.src = "/fake-logo-dark.svg";
+    // img.src = "/logo.svg";
+    img.onload = () => ctx.drawImage(img, pos, pos, imageSize, imageSize);
+    ctx.restore();
+};
+const customCorners = (ctx, radiuos) => {
+    const offset = margin - 0.2;
+    ctx.fillStyle = background;
+    ctx.beginPath();
+    ctx.rect(0 + offset, 0 + offset, 8, 8);
+    ctx.rect(numCells.value - (7.5 + offset), 0 + offset, 8.2, 8);
+    ctx.rect(0 + offset, numCells.value - (8 + offset), 8, 8.2);
+    ctx.fill();
+
+    ctx.strokeStyle = "#454545";
+    const cornersRadius = 1;
+    ctx.beginPath();
+    ctx.roundRect(0 + margin + radiuos, 0 + margin + radiuos, 6, 6, cornersRadius);
+    ctx.roundRect(numCells.value - (6 + margin + radiuos), 0 + margin + radiuos, 6, 6, cornersRadius);
+    ctx.roundRect(0 + margin + radiuos, numCells.value - (6 + margin + radiuos), 6, 6, cornersRadius);
+    ctx.stroke();
+
+    ctx.fillStyle = "#9f74cd";
+    const cornersCenterRadius = 1;
+    ctx.beginPath();
+    ctx.roundRect(1.5 + margin + radiuos, 1.5 + margin + radiuos, 3, 3, cornersCenterRadius);
+    ctx.roundRect(numCells.value - (4.5 + margin + +radiuos), 1.5 + margin + radiuos, 3, 3, cornersCenterRadius);
+    ctx.roundRect(1.5 + margin + radiuos, numCells.value - (4.5 + margin + radiuos), 3, 3, cornersCenterRadius);
+    ctx.fill();
 };
 
-// onMounted(() => {
-//     generateCanvas();
-// });
+onMounted(async () => {
+    // TODO : customDot images not loading currectly
+    const img = await loadImage("/icons/code.svg");
+    generateCanvas(img);
+});
+
+const saveCanvas = () => {
+    const dataURL = canvasEl.value.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.download = "QR-Code.png";
+    a.href = dataURL;
+    a.click();
+};
 </script>

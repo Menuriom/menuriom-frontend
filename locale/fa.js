@@ -492,7 +492,6 @@ export default {
             "Issue Date": "تاریخ صدور",
             "Due Date": "مهلت پرداخت",
             "Your Last Bill": "اخرین صورتحساب",
-            "Payment Details": "جزئیات پرداخت",
             "Pay This Bill": "پرداخت صورتحساب",
             "Your plan and payment period successfully updated": "طرح و دوره پرداخت شما با موفقیت به روز شد",
             "There is no transactions for this bill": "تراکنشی برای این صورتحساب وجود ندارد",
