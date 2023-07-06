@@ -298,7 +298,7 @@ export default {
             "New Category": "New Category",
             "Edit Category": "Edit Category",
             "New Item": "New Item",
-            "Items": "Items",
+            Items: "Items",
 
             Category: "Category",
             Categories: "Categories",
@@ -501,6 +501,13 @@ export default {
                 "Any unpaid renewal bill for your current plan will be canceled upon successful plan change",
             "because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade":
                 "because less than 5 days of your current plan remaining, you need to pay the whole price of the plan to upgrade",
+        },
+
+        qrcode: {
+            "QR Code Editor":"QR Code Editor",
+            "Build and customize your QR code":"Build and customize your QR code",
+            "QR Code Style":"QR Code Style",
+            "QR Code Stand Frame":"QR Code Stand Frame",
         },
 
         payment: {

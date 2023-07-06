@@ -502,6 +502,13 @@ export default {
                 "به این علت که کمتر از 5 روز از اشتراک کنونی شما مانده، برای ارتقا باید کل قیمت اشتراک جدید را پرداخت کنید",
         },
 
+        qrcode: {
+            "QR Code Editor": "ویرایشگر کد کیو-ار",
+            "Build and customize your QR code": "ساخت و شخصی سازی کد کیو-ار",
+            "QR Code Style": "ظاهر کد کیو-ار",
+            "QR Code Stand Frame": "قاب و فریم کد کیو-ار",
+        },
+
         payment: {
             "Payment Successful": "پرداخت موفق",
             "Payment Failed": "پرداخت ناموفق",
