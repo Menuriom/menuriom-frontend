@@ -45,41 +45,60 @@
             </li>
         </ul>
         <hr class="w-full border-gray-300 opacity-50" />
-        <div class="flex flex-wrap-reverse gap-4">
-            <div class="flex flex-col gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-                link ------------ bg and fg colors ------------ dotImage randomSize ------------ customCorner ------------ withLogo
+        <div class="flex flex-wrap-reverse justify-center gap-4">
+            <div class="flex flex-col items-start gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-sm">link to your menu:</span>
+                    <a class="bg-neutral-800 px-2 py-1 rounded-md text-sm text-neutral-300 hover:text-violet" :href="link" target="_blank">{{ link }}</a>
+                </div>
+                <hr class="w-full opacity-20" />
+                <Input class="w-48" type="color" :label="$t('panel.qrcode.Background Color')" v-model="backgroundColor1" @input="renderOverlays()" />
+                <Input class="w-48" type="color" :label="$t('panel.qrcode.Foreground Color')" v-model="foregroundColor1" @input="renderOverlays()" />
+                <Switch class="" :label="$t('panel.qrcode.Randomize Dot Size')" v-model:value="randomSize" @update:value="renderAll()" />
+                <Switch class="" :label="$t('panel.qrcode.Custom Corners')" v-model:value="customCorner" @update:value="renderOverlays()" />
+                <!-- bg and fg colors -->
+                <!-- ------------ -->
+                <!-- dotImage -->
+                <!-- randomSize -->
+                <!-- ------------ -->
+                <!-- customCorner -->
+                <!-- ------------ -->
+                <!-- withLogo -->
             </div>
-            <div class="flex flex-col gap-4 w-full max-w-screen-2xs">
+            <div class="flex flex-col gap-4 w-full max-w-screen-xs p-4 rounded-lg bg-pencil-tip text-white shadow-nr10">
                 <small class="w-full opacity-75 -mb-2">Make sure the colors have good contrast so that the code is easily scannable</small>
-                <canvas class="w-full max-w-screen-2xs aspect-square shadow-nr15 rounded-xl" ref="canvasEl"></canvas>
+                <canvas class="w-full max-w-screen-xs aspect-square shadow-nr15 rounded-xl" ref="canvasEl"></canvas>
                 <!-- <generateSVG class="shadow-nr15" /> -->
-                <button class="btn text-sm p-2 rounded-md bg-white border" @click="saveCanvas()">Download QR Code</button>
+                <button class="btn text-sm p-2 rounded-md bg-violet" @click="saveCanvas()">Download QR Code</button>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import Input from "~/components/form/Input.vue";
+import Switch from "~/components/form/Switch.vue";
 import QR from "~/composables/qrcodegen";
-import { h } from "vue";
 
 // TODO : image and random size is for standard and up
 // pro can access more images and brand logo
 // basic can have custom corners and gradient
 
 const route = useRoute();
+const runtimeConfig = useRuntimeConfig();
 
 const selectedTab = "qrcode";
 
-const value = `https://menuriom.com/r/${route.params.brandID}/`;
+const link = `${runtimeConfig.public.BASE_URL}/r/${route.params.brandID}`;
+// const value = `https://menuriom.com/r/${route.params.brandID}/`;
 const borderMargin = ref(4);
 const rotateTheCode = ref(true);
-const size = 512;
+const size = 1024;
 
 const backgroundGradient = ref(false);
 const backgroundGradientType = ref("Linear"); // Linear | Radial
 const backgroundGradientAngle = ref(0); // 0 | 45 | 90
-const backgroundColor1 = ref("#fff");
+const backgroundColor1 = ref("#ffffff");
 const backgroundColor2 = ref("#fff");
 
 const foregroundGradient = ref(false);
@@ -88,7 +107,6 @@ const foregroundGradientAngle = ref(0); // 0 | 45 | 90
 const foregroundColor1 = ref("#000");
 const foregroundColor2 = ref("#000");
 
-const dotStyle = "image";
 const dotImage = ref("/icons/qr-dots/Square.svg");
 const radius = ref(1);
 const randomSize = ref(false);
@@ -99,6 +117,7 @@ const cornerCenterColor = ref("#000");
 const cornerRingRadius = ref(0.2); // 0 - 2 : .1
 const cornerCenterRadius = ref(0.1); // 0 - 2 : .1
 
+let logoImg;
 const withLogo = ref(false);
 const logoPadding = ref(2);
 const logoBorderRadius = ref(1); // 0 - 7 : 1
@@ -106,108 +125,60 @@ const logoShadow = ref(true);
 const logoShadowIntensity = ref(5); // 2 - 9 : 1
 const logoSrc = ref("/file/logos/d7af7f85-bbd4-42f7-b067-733273217f9c.webp");
 
+let img;
 const cellNumbers = ref(0);
+const cellLength = ref(0);
 
-// SVG method -------------------------------------------------
-const generatePath = (modules, margin = 0) => {
-    const ops = [];
-    modules.forEach(function (row, y) {
-        let start = null;
-        row.forEach(function (cell, x) {
-            if (!cell && start !== null) {
-                ops.push(`M${start + margin} ${y + margin}h${x - start}v1H${start + margin}z`);
-                start = null;
-                return;
-            }
-            if (x === row.length - 1) {
-                if (!cell) return;
-                if (start === null) ops.push(`M${x + margin},${y + margin} h1v1H${x + margin}z`);
-                else ops.push(`M${start + margin},${y + margin} h${x + 1 - start}v1H${start + margin}z`);
-                return;
-            }
-            if (cell && start === null) start = x;
-        });
-    });
-    return ops.join("");
-};
-const generateSVG = () => {
-    const cells = QR.QrCode.encodeText(value, QR.QrCode.Ecc.HIGH).getModules();
-    cellNumbers.value = cells.length + margin * 2;
-    console.log({ cellNumbers: cellNumbers.value });
-
-    const imageSize = 12;
-    const pos = cellNumbers.value / 2 - imageSize / 2;
-
-    const fgPath = generatePath(cells, margin);
-
-    const props = {
-        width: size,
-        height: size,
-        "shape-rendering": `crispEdges`,
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: `0 0 ${cellNumbers.value} ${cellNumbers.value}`,
-    };
-
-    return h("svg", props, [
-        // ...
-        h("path", { fill: background, d: `M0,0 h${cellNumbers.value}v${cellNumbers.value}H0z` }),
-        h("path", { fill: foreground, d: fgPath }),
-        h("rect", { x: pos, y: pos, height: imageSize, width: imageSize, fill: background, rx: "2" }),
-        h("image", { href: "/avatar.webp", x: pos, y: pos, height: imageSize, width: imageSize }),
-    ]);
-};
-// -------------------------------------------------
-
+const cells = QR.QrCode.encodeText(link, QR.QrCode.Ecc.HIGH).getModules();
 const canvasEl = ref(); // Dom Ref
-const generateCanvas = (customDot) => {
+let IMCctx;
+
+const drawQR = () => {
     const canvas = canvasEl.value;
     const ctx = canvas.getContext("2d");
 
     const margin = borderMargin.value;
-    const cells = QR.QrCode.encodeText(value, QR.QrCode.Ecc.HIGH).getModules();
+    cellLength.value = cells.length;
     cellNumbers.value = cells.length + margin * 2;
 
     const devicePixelRatio = window.devicePixelRatio || 1;
-    const scale = (size / cellNumbers.value) * devicePixelRatio;
-    canvas.height = canvas.width = size * devicePixelRatio;
-    ctx.scale(scale, scale);
+    const canvasScale = (size / cellNumbers.value) * devicePixelRatio;
+    canvas.width = canvas.height = size * devicePixelRatio;
+    ctx.scale(canvasScale, canvasScale);
 
-    // draw dot modules
-    if (dotStyle === "image" && customDot) {
-        ctx.imageSmoothingQuality = "high";
-        cells.forEach((row, rdx) => {
-            row.forEach((cell, cdx) => {
-                if (!cell) return;
-                const dotSize = randomSize.value ? radius.value * Math.max(Math.random(), 0.6) : radius.value;
-                if (rotateTheCode.value) ctx.drawImage(customDot, rdx + margin, cdx + margin, dotSize, dotSize);
-                else ctx.drawImage(customDot, cdx + margin, rdx + margin, dotSize, dotSize);
-            });
+    const imageModuleCanvas = document.createElement("canvas");
+    imageModuleCanvas.width = imageModuleCanvas.height = canvas.width * 6;
+    IMCctx = imageModuleCanvas.getContext("2d");
+    IMCctx.scale(canvasScale * 6, canvasScale * 6);
+    IMCctx.imageSmoothingQuality = "high";
+    IMCctx.globalCompositeOperation = "luminosity";
+
+    renderAll();
+};
+
+const renderAll = () => {
+    drawModules();
+    renderOverlays();
+};
+
+const drawModules = () => {
+    IMCctx.clearRect(0, 0, cellNumbers.value, cellNumbers.value);
+    cells.forEach((row, rdx) => {
+        row.forEach((cell, cdx) => {
+            if (!cell) return;
+            const dotSize = randomSize.value ? radius.value * Math.max(Math.random(), 0.65) : radius.value;
+            if (rotateTheCode.value) IMCctx.drawImage(img, rdx, cdx, dotSize + 0.025, dotSize + 0.025);
+            else IMCctx.drawImage(img, cdx, rdx, dotSize + 0.025, dotSize + 0.025);
         });
-    } else {
-        // vector drawings
-        cells.forEach(function (row, rdx) {
-            row.forEach(function (cell, cdx) {
-                if (!cell) return;
-                const dotSize = randomSize.value ? radius.value * Math.max(Math.random(), 0.6) : radius.value;
-                switch (dotStyle) {
-                    case "square-dot":
-                        ctx.fillRect(cdx + margin + 0.2, rdx + margin + 0.2, dotSize * 0.8, dotSize * 0.8);
-                        break;
-                    case "dot":
-                        ctx.beginPath();
-                        ctx.arc(cdx + margin + dotSize * 0.5, rdx + margin + dotSize * 0.5, dotSize * 0.5, dotSize * 0.5, 2 * Math.PI);
-                        ctx.fill();
-                        break;
-                    default:
-                        ctx.fillRect(cdx + margin, rdx + margin, dotSize + 0.05, dotSize + 0.05); // square
-                        break;
-                }
-            });
-        });
-    }
+    });
+};
+
+const renderOverlays = () => {
+    const ctx = canvasEl.value.getContext("2d");
+    const margin = borderMargin.value;
 
     const foregroundFillStyle = foregroundGradient.value
-        ? gradientGenerator(ctx, {
+        ? gradientGenerator({
               type: foregroundGradientType.value,
               color1: foregroundColor1.value,
               color2: foregroundColor2.value,
@@ -216,7 +187,7 @@ const generateCanvas = (customDot) => {
         : foregroundColor1.value;
 
     const backgroundFillStyle = backgroundGradient.value
-        ? gradientGenerator(ctx, {
+        ? gradientGenerator({
               type: backgroundGradientType.value,
               color1: backgroundColor1.value,
               color2: backgroundColor2.value,
@@ -224,10 +195,15 @@ const generateCanvas = (customDot) => {
           })
         : backgroundColor1.value;
 
+    // draw the code
+    ctx.globalCompositeOperation = "destination-atop";
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(IMCctx.canvas, 0, 0, IMCctx.canvas.width, IMCctx.canvas.width, margin, margin, cellNumbers.value, cellNumbers.value);
+
     // draw foreground
     ctx.globalCompositeOperation = "source-in";
     ctx.fillStyle = foregroundFillStyle;
-    ctx.fillRect(margin, margin, cells.length, cells.length);
+    ctx.fillRect(margin, margin, cellLength.value, cellLength.value);
 
     // draw background
     ctx.globalCompositeOperation = "destination-over";
@@ -235,13 +211,17 @@ const generateCanvas = (customDot) => {
     ctx.fillRect(0, 0, cellNumbers.value, cellNumbers.value);
 
     ctx.globalCompositeOperation = "source-over";
-    if (customCorner.value) customCorners(ctx, backgroundFillStyle);
-    if (withLogo.value) setLogo(ctx, backgroundFillStyle);
+    if (customCorner.value) drawCorners(backgroundFillStyle);
+    if (withLogo.value) drawLogo(backgroundFillStyle);
 };
 
-const setLogo = (ctx, backgroundFillStyle) => {
-    const imageSize = Math.min(value.length / 2.5, 11);
+const drawLogo = (backgroundFillStyle) => {
+    const ctx = canvasEl.value.getContext("2d");
+
+    const imageSize = Math.min(link.length / 2.5, 11);
     const pos = cellNumbers.value / 2 - imageSize / 2;
+
+    ctx.save();
 
     if (logoShadow.value) {
         ctx.shadowColor = `#000${logoShadowIntensity.value}`;
@@ -266,22 +246,23 @@ const setLogo = (ctx, backgroundFillStyle) => {
     ctx.fill();
 
     ctx.clip();
-    const img = new Image();
-    img.src = logoSrc.value;
-    img.onload = () => ctx.drawImage(img, pos, pos, imageSize, imageSize);
+    logoImg.src = logoSrc.value;
+    logoImg.onload = () => ctx.drawImage(img, pos, pos, imageSize, imageSize);
+    // TODO : we dont need to draw logo image over and over : make it so that it draw once
+
     ctx.restore();
 };
 
-const customCorners = (ctx, backgroundFillStyle) => {
+const drawCorners = (backgroundFillStyle) => {
+    const ctx = canvasEl.value.getContext("2d");
     const margin = borderMargin.value;
     let offset = margin - 0.2;
 
-    // TODO : make it work for gradient with globalCompositeOperation
     // hide the corners
     ctx.fillStyle = backgroundFillStyle;
     ctx.beginPath();
     ctx.rect(0 + offset, 0 + offset, 8, 8);
-    ctx.rect(cellNumbers.value - (7.5 + offset), 0 + offset, 8.2, 8);
+    ctx.rect(cellNumbers.value - (7.9 + offset), 0 + offset, 8.2, 8);
     ctx.rect(0 + offset, cellNumbers.value - (8 + offset), 8, 8.2);
     ctx.fill();
 
@@ -304,9 +285,10 @@ const customCorners = (ctx, backgroundFillStyle) => {
     ctx.fill();
 };
 
-const gradientGenerator = (ctx, options = { type: "Linear", color1: "", color2: "", angle: 0 }) => {
+const gradientGenerator = (options = { type: "Linear", color1: "", color2: "", angle: 0 }) => {
     if (!options.color2) return options.color1;
     const width = cellNumbers.value;
+    const ctx = canvasEl.value.getContext("2d");
 
     let grd;
     switch (options.type) {
@@ -326,34 +308,40 @@ const gradientGenerator = (ctx, options = { type: "Linear", color1: "", color2: 
 };
 
 onMounted(async () => {
-    const img = new Image();
-    img.src = dotImage.value;
+    // basic
     // img.src = "/icons/qr-dots/Dot.svg";
     // img.src = "/icons/qr-dots/Square-Dot.svg";
     // img.src = "/icons/qr-dots/Square.svg";
 
-    // TODO : Sort dots for standard and pro plans
-
-    // img.src = "/icons/qr-dots/Rectangle-Fade.svg";
+    // standard
     // img.src = "/icons/qr-dots/Bars.svg";
-    // img.src = "/icons/qr-dots/Skull.svg";
     // img.src = "/icons/qr-dots/Sparkle.svg";
     // img.src = "/icons/qr-dots/Star.svg";
+    // img.src = "/icons/qr-dots/Tile.svg";
+    // img.src = "/icons/qr-dots/Panel.svg";
+    // img.src = "/icons/qr-dots/Octagon.svg";
     // img.src = "/icons/qr-dots/Squares.svg";
+    // img.src = "/icons/qr-dots/Rectangle-Fade.svg";
+
+    // pro
+    // img.src = "/icons/qr-dots/Circle-Heart.svg";
     // img.src = "/icons/qr-dots/Square-Rounded.svg";
+    // img.src = "/icons/qr-dots/Skull.svg";
     // img.src = "/icons/qr-dots/Sushi-Roll.svg";
     // img.src = "/icons/qr-dots/Taco.svg";
-    // img.src = "/icons/qr-dots/Tile.svg";
     // img.src = "/icons/qr-dots/Pie-Cake.svg";
     // img.src = "/icons/qr-dots/Pie.svg";
     // img.src = "/icons/qr-dots/Paw.svg";
-    // img.src = "/icons/qr-dots/Panel.svg";
     // img.src = "/icons/qr-dots/Moon.svg";
-    // img.src = "/icons/qr-dots/Octagon.svg";
     // img.src = "/icons/qr-dots/Fire.svg";
-    // img.src = "/icons/qr-dots/Circle-Heart.svg";
 
-    img.onload = () => generateCanvas(img);
+    // TODO : add more svg for pro
+
+    // make image objects
+    img = logoImg = new Image();
+
+    img.src = dotImage.value;
+    img.onload = () => drawQR();
 });
 
 const saveCanvas = () => {

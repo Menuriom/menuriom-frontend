@@ -69,8 +69,8 @@ export default {
         FeedbackSystemDesc: "امکان نظردهی توسط مشتریان",
         ComboLists: "لیست بهترین ها",
         ComboListsDesc: "لیست ایتم هایی که با هم پیشنهاد میشند",
-        CustomQRCode: "کد کیو ار سفارشی شده",
-        CustomQRCodeDesc: "امکان شخصی سازی کدهای کیو ار",
+        CustomQRCode: "کد QR سفارشی شده",
+        CustomQRCodeDesc: "امکان شخصی سازی کدهای QR",
 
         "See all the features": "مشاهده همه ویژگی ها",
     },
@@ -166,7 +166,7 @@ export default {
             Menu: "مدیریت منو",
             "Menu Editor": "ویرایش منو",
             "Style Editor": "ویرایش ظاهر منو",
-            "QR Code": "بارکد کیو ار",
+            "QR Code": "بارکد QR",
             "Splash Screen": "صفحه کاور",
             "Manage Staff": "مدیریت خدمه",
             "Staff Members": "اعضای خدمه",
@@ -503,10 +503,15 @@ export default {
         },
 
         qrcode: {
-            "QR Code Editor": "ویرایشگر کد کیو-ار",
-            "Build and customize your QR code": "ساخت و شخصی سازی کد کیو-ار",
-            "QR Code Style": "ظاهر کد کیو-ار",
-            "QR Code Stand Frame": "قاب و فریم کد کیو-ار",
+            "QR Code Editor": "ویرایشگر کد QR",
+            "Build and customize your QR code": "ساخت و شخصی سازی کد QR",
+            "QR Code Style": "ظاهر کد QR",
+            "QR Code Stand Frame": "قاب و فریم کد QR",
+
+            "Background Color": "رنگ پیش زمینه",
+            "Foreground Color": "رنگ پس زمینه",
+            "Randomize Dot Size": "رندوم سازی سایز نقطه ها",
+            "Custom Corners": "استایل دهی به گوشه ها",
         },
 
         payment: {

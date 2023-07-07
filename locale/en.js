@@ -504,10 +504,15 @@ export default {
         },
 
         qrcode: {
-            "QR Code Editor":"QR Code Editor",
-            "Build and customize your QR code":"Build and customize your QR code",
-            "QR Code Style":"QR Code Style",
-            "QR Code Stand Frame":"QR Code Stand Frame",
+            "QR Code Editor": "QR Code Editor",
+            "Build and customize your QR code": "Build and customize your QR code",
+            "QR Code Style": "QR Code Style",
+            "QR Code Stand Frame": "QR Code Stand Frame",
+
+            "Background Color": "Background Color",
+            "Foreground Color": "Foreground Color",
+            "Randomize Dot Size": "Randomize Dot Size",
+            "Custom Corners": "Custom Corners",
         },
 
         payment: {
