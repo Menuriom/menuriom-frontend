@@ -513,6 +513,12 @@ export default {
             "Foreground Color": "Foreground Color",
             "Randomize Dot Size": "Randomize Dot Size",
             "Custom Corners": "Custom Corners",
+            "Mono Color": "Mono Color",
+            "Gradient": "Gradient",
+            "Ring Color": "Ring Color",
+            "Center Color": "Center Color",
+            "Ring Radius": "Ring Radius",
+            "Center Radius": "Center Radius",
         },
 
         payment: {

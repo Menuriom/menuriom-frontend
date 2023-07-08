@@ -22,7 +22,7 @@
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
-        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
+        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-screen-lg p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <Input
                     :label="$t('panel.staff.roles.Role Name')"

@@ -22,7 +22,7 @@
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-25" />
-        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
+        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35" ref="form">
                 <div class="flex flex-wrap items-center gap-2">
                     <div class="flex flex-wrap items-center gap-2 w-full max-w-max p-2 rounded-lg bg-neutral-800">

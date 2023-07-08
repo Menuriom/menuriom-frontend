@@ -45,31 +45,183 @@
             </li>
         </ul>
         <hr class="w-full border-gray-300 opacity-50" />
-        <div class="flex flex-wrap-reverse justify-center gap-4">
+        <div class="flex flex-wrap-reverse items-start gap-4">
             <div class="flex flex-col items-start gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="text-sm">link to your menu:</span>
                     <a class="bg-neutral-800 px-2 py-1 rounded-md text-sm text-neutral-300 hover:text-violet" :href="link" target="_blank">{{ link }}</a>
                 </div>
                 <hr class="w-full opacity-20" />
-                <Input class="w-48" type="color" :label="$t('panel.qrcode.Background Color')" v-model="backgroundColor1" @input="renderOverlays()" />
-                <Input class="w-48" type="color" :label="$t('panel.qrcode.Foreground Color')" v-model="foregroundColor1" @input="renderOverlays()" />
+                <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        {{ $t("panel.qrcode.Background Color") }}
+                    </h3>
+                    <div class="flex items-center gap-1">
+                        <small>{{ $t("panel.qrcode.Mono Color") }}</small>
+                        <Switch v-model:value="backgroundGradient" @update:value="renderAll()" />
+                        <small>{{ $t("panel.qrcode.Gradient") }}</small>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-start gap-4">
+                    <div class="flex flex-col gap-1" v-if="backgroundGradient">
+                        <small class="text-xs">Gradient Type</small>
+                        <div class="flex items-center gap-1">
+                            <span
+                                class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
+                                @click="switchBgGradientType('Linear')"
+                            >
+                                <Icon
+                                    class="w-5 h-5"
+                                    :class="[backgroundGradientType == 'Linear' ? 'bg-purple-300' : 'bg-white']"
+                                    name="gradient-linear.svg"
+                                    folder="icons/light"
+                                    size="20px"
+                                />
+                            </span>
+                            <span
+                                class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
+                                @click="switchBgGradientType('Radial')"
+                            >
+                                <Icon
+                                    class="w-5 h-5"
+                                    :class="[backgroundGradientType == 'Radial' ? 'bg-purple-300' : 'bg-white']"
+                                    name="gradient-radial.svg"
+                                    folder="icons/light"
+                                    size="20px"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1" v-if="backgroundGradient && backgroundGradientType == 'Linear'">
+                        <small class="text-xs">Gradient Angle</small>
+                        <div class="flex items-center gap-1 p-1 py-0.5 rounded-md border-2 border-neutral-500 cursor-pointer" @click="switchBgGradientAngle()">
+                            <Icon class="w-4 h-4 bg-white" name="angle.svg" folder="icons/light" size="18px" />
+                            <small>{{ backgroundGradientAngle }}</small
+                            >°
+                        </div>
+                    </div>
+                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Background Color')" v-model="backgroundColor1" @input="renderOverlays()" />
+                    <Input
+                        class="w-48"
+                        type="color"
+                        :label="`${$t('panel.qrcode.Background Color')} 2`"
+                        v-model="backgroundColor2"
+                        @input="renderOverlays()"
+                        v-if="backgroundGradient"
+                    />
+                </div>
+                <hr class="w-full border-gray-300 opacity-25" />
+                <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        {{ $t("panel.qrcode.Foreground Color") }}
+                    </h3>
+                    <div class="flex items-center gap-1">
+                        <small>{{ $t("panel.qrcode.Mono Color") }}</small>
+                        <Switch v-model:value="foregroundGradient" @update:value="renderAll()" />
+                        <small>{{ $t("panel.qrcode.Gradient") }}</small>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-start gap-4">
+                    <div class="flex flex-col gap-1" v-if="foregroundGradient">
+                        <small class="text-xs">Gradient Type</small>
+                        <div class="flex items-center gap-1">
+                            <span
+                                class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
+                                @click="switchFgGradientType('Linear')"
+                            >
+                                <Icon
+                                    class="w-5 h-5"
+                                    :class="[foregroundGradientType == 'Linear' ? 'bg-purple-300' : 'bg-white']"
+                                    name="gradient-linear.svg"
+                                    folder="icons/light"
+                                    size="20px"
+                                />
+                            </span>
+                            <span
+                                class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
+                                @click="switchFgGradientType('Radial')"
+                            >
+                                <Icon
+                                    class="w-5 h-5"
+                                    :class="[foregroundGradientType == 'Radial' ? 'bg-purple-300' : 'bg-white']"
+                                    name="gradient-radial.svg"
+                                    folder="icons/light"
+                                    size="20px"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1" v-if="foregroundGradient && foregroundGradientType == 'Linear'">
+                        <small class="text-xs">Gradient Angle</small>
+                        <div class="flex items-center gap-1 p-1 py-0.5 rounded-md border-2 border-neutral-500 cursor-pointer" @click="switchFgGradientAngle()">
+                            <Icon class="w-4 h-4 bg-white" name="angle.svg" folder="icons/light" size="18px" />
+                            <small>{{ foregroundGradientAngle }}</small
+                            >°
+                        </div>
+                    </div>
+                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Foreground Color')" v-model="foregroundColor1" @input="renderOverlays()" />
+                    <Input
+                        class="w-48"
+                        type="color"
+                        :label="`${$t('panel.qrcode.Foreground Color')} 2`"
+                        v-model="foregroundColor2"
+                        @input="renderOverlays()"
+                        v-if="foregroundGradient"
+                    />
+                </div>
+                <hr class="w-full opacity-20" />
                 <Switch class="" :label="$t('panel.qrcode.Randomize Dot Size')" v-model:value="randomSize" @update:value="renderAll()" />
-                <Switch class="" :label="$t('panel.qrcode.Custom Corners')" v-model:value="customCorner" @update:value="renderOverlays()" />
-                <!-- bg and fg colors -->
                 <!-- ------------ -->
                 <!-- dotImage -->
                 <!-- randomSize -->
                 <!-- ------------ -->
-                <!-- customCorner -->
-                <!-- ------------ -->
-                <!-- withLogo -->
+                <hr class="w-full opacity-20" />
+                <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        {{ $t("panel.qrcode.Custom Corners") }}
+                    </h3>
+                    <Switch v-model:value="customCorner" @update:value="renderOverlays()" />
+                </div>
+                <div class="flex flex-wrap items-center gap-4" v-if="customCorner">
+                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Ring Color')" v-model="cornerRingColor" @input="renderOverlays()" />
+                    <div class="flex flex-col gap-2">
+                        <small class="text-xs">{{ $t("panel.qrcode.Ring Radius") }}</small>
+                        <input class="input-range w-24" type="range" max="3.5" step="0.1" v-model="cornerRingRadius" @input="renderOverlays()" />
+                    </div>
+                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Center Color')" v-model="cornerCenterColor" @input="renderOverlays()" />
+                    <div class="flex flex-col gap-2">
+                        <small class="text-xs">{{ $t("panel.qrcode.Center Radius") }}</small>
+                        <input class="input-range w-24" type="range" max="2" step="0.1" v-model="cornerCenterRadius" @input="renderOverlays()" />
+                    </div>
+                </div>
+                <hr class="w-full opacity-20" />
+                <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        {{ $t("panel.qrcode.Center Logo") }}
+                    </h3>
+                    <Switch v-model:value="withLogo" @update:value="renderOverlays()" />
+                </div>
+                <div class="flex flex-wrap items-center gap-4" v-if="withLogo">
+                    <div class="flex flex-col gap-2">
+                        <small class="text-xs">{{ $t("panel.qrcode.Padding") }}</small>
+                        <input class="input-range w-24" type="range" max="3" step="1" v-model="logoPadding" @input="renderOverlays()" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <small class="text-xs">{{ $t("panel.qrcode.Radius") }}</small>
+                        <input class="input-range w-24" type="range" min="1" max="7" step="1" v-model="logoBorderRadius" @input="renderOverlays()" />
+                    </div>
+                    <Switch v-model:value="logoShadow" @update:value="renderOverlays()" />
+                    <div class="flex flex-col gap-2">
+                        <small class="text-xs">{{ $t("panel.qrcode.Radius") }}</small>
+                        <input class="input-range w-24" type="range" max="9" step="1" v-model="logoShadowIntensity" @input="renderOverlays()" />
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-col gap-4 w-full max-w-screen-xs p-4 rounded-lg bg-pencil-tip text-white shadow-nr10">
+            <div class="sticky lg:bottom-0 flex flex-col items-center gap-4 w-full md:max-w-screen-xs p-4 rounded-lg bg-pencil-tip text-white shadow-nr10">
                 <small class="w-full opacity-75 -mb-2">Make sure the colors have good contrast so that the code is easily scannable</small>
                 <canvas class="w-full max-w-screen-xs aspect-square shadow-nr15 rounded-xl" ref="canvasEl"></canvas>
                 <!-- <generateSVG class="shadow-nr15" /> -->
-                <button class="btn text-sm p-2 rounded-md bg-violet" @click="saveCanvas()">Download QR Code</button>
+                <button class="btn w-full text-sm p-2 rounded-md bg-violet" @click="saveCanvas()">Download QR Code</button>
             </div>
         </div>
     </div>
@@ -78,6 +230,7 @@
 <script setup>
 import Input from "~/components/form/Input.vue";
 import Switch from "~/components/form/Switch.vue";
+import RangeSlider from "~/components/form/RangeSlider.vue";
 import QR from "~/composables/qrcodegen";
 
 // TODO : image and random size is for standard and up
@@ -90,20 +243,41 @@ const runtimeConfig = useRuntimeConfig();
 const selectedTab = "qrcode";
 
 const link = `${runtimeConfig.public.BASE_URL}/r/${route.params.brandID}`;
-// const value = `https://menuriom.com/r/${route.params.brandID}/`;
 const borderMargin = ref(4);
 const rotateTheCode = ref(true);
 const size = 1024;
 
 const backgroundGradient = ref(false);
 const backgroundGradientType = ref("Linear"); // Linear | Radial
+const switchBgGradientType = (type) => {
+    if (type) backgroundGradientType.value = type;
+    else backgroundGradientType.value = backgroundGradientType.value === "Linear" ? "Radial" : "Linear";
+    renderOverlays();
+};
 const backgroundGradientAngle = ref(0); // 0 | 45 | 90
+const switchBgGradientAngle = () => {
+    if (backgroundGradientAngle.value == 0) backgroundGradientAngle.value = 45;
+    else if (backgroundGradientAngle.value == 45) backgroundGradientAngle.value = 90;
+    else if (backgroundGradientAngle.value == 90) backgroundGradientAngle.value = 0;
+    renderOverlays();
+};
 const backgroundColor1 = ref("#ffffff");
 const backgroundColor2 = ref("#fff");
 
 const foregroundGradient = ref(false);
 const foregroundGradientType = ref("Linear"); // Linear | Radial
+const switchFgGradientType = (type) => {
+    if (type) foregroundGradientType.value = type;
+    else foregroundGradientType.value = foregroundGradientType.value === "Linear" ? "Radial" : "Linear";
+    renderOverlays();
+};
 const foregroundGradientAngle = ref(0); // 0 | 45 | 90
+const switchFgGradientAngle = () => {
+    if (foregroundGradientAngle.value == 0) foregroundGradientAngle.value = 45;
+    else if (foregroundGradientAngle.value == 45) foregroundGradientAngle.value = 90;
+    else if (foregroundGradientAngle.value == 90) foregroundGradientAngle.value = 0;
+    renderOverlays();
+};
 const foregroundColor1 = ref("#000");
 const foregroundColor2 = ref("#000");
 
@@ -114,13 +288,13 @@ const randomSize = ref(false);
 const customCorner = ref(false);
 const cornerRingColor = ref("#000");
 const cornerCenterColor = ref("#000");
-const cornerRingRadius = ref(0.2); // 0 - 2 : .1
-const cornerCenterRadius = ref(0.1); // 0 - 2 : .1
+const cornerRingRadius = ref(0); // 0 - 2 : .1
+const cornerCenterRadius = ref(0); // 0 - 2 : .1
 
 let logoImg;
-const withLogo = ref(false);
+const withLogo = ref(true);
 const logoPadding = ref(2);
-const logoBorderRadius = ref(1); // 0 - 7 : 1
+const logoBorderRadius = ref(6); // 0 - 7 : 1
 const logoShadow = ref(true);
 const logoShadowIntensity = ref(5); // 2 - 9 : 1
 const logoSrc = ref("/file/logos/d7af7f85-bbd4-42f7-b067-733273217f9c.webp");
@@ -221,36 +395,36 @@ const drawLogo = (backgroundFillStyle) => {
     const imageSize = Math.min(link.length / 2.5, 11);
     const pos = cellNumbers.value / 2 - imageSize / 2;
 
-    ctx.save();
+    ctx.fillStyle = backgroundFillStyle;
 
     if (logoShadow.value) {
         ctx.shadowColor = `#000${logoShadowIntensity.value}`;
         ctx.shadowOffsetY = 15;
         ctx.shadowBlur = 20;
     }
-
-    ctx.fillStyle = backgroundFillStyle;
     ctx.beginPath();
     ctx.roundRect(
-        pos - logoPadding.value / 2,
-        pos - logoPadding.value / 2,
-        imageSize + logoPadding.value,
-        imageSize + logoPadding.value,
-        logoBorderRadius.value
+        pos - Number(logoPadding.value) / 2,
+        pos - Number(logoPadding.value) / 2,
+        imageSize + Number(logoPadding.value),
+        imageSize + Number(logoPadding.value),
+        Number(logoBorderRadius.value)
     );
     ctx.fill();
-
+    
     ctx.shadowColor = `#0000`;
     ctx.beginPath();
-    ctx.roundRect(pos, pos, imageSize, imageSize, Math.max(logoBorderRadius.value - 1, 0));
+    ctx.roundRect(pos, pos, imageSize, imageSize, Math.max(Number(logoBorderRadius.value) - 1, 0));
     ctx.fill();
-
-    ctx.clip();
+    
     logoImg.src = logoSrc.value;
-    logoImg.onload = () => ctx.drawImage(img, pos, pos, imageSize, imageSize);
+    logoImg.onload = () => {
+        ctx.save();
+        ctx.clip();
+        ctx.drawImage(img, pos, pos, imageSize, imageSize);
+        ctx.restore();
+    };
     // TODO : we dont need to draw logo image over and over : make it so that it draw once
-
-    ctx.restore();
 };
 
 const drawCorners = (backgroundFillStyle) => {
@@ -295,7 +469,7 @@ const gradientGenerator = (options = { type: "Linear", color1: "", color2: "", a
         case "Linear":
             if (options.angle === 0) grd = ctx.createLinearGradient(0, width / 2, width, width / 2);
             if (options.angle === 45) grd = ctx.createLinearGradient(0, 0, width, width);
-            if (options.angle === 90) grd = ctx.createLinearGradient(width / 2, width / 2, width / 2, width);
+            if (options.angle === 90) grd = ctx.createLinearGradient(width / 2, 0, width / 2, width);
             break;
         case "Radial":
             grd = ctx.createRadialGradient(width / 2, width / 2, width / 5, width / 2, width / 2, width / 1.8);

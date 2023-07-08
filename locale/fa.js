@@ -512,6 +512,12 @@ export default {
             "Foreground Color": "رنگ پس زمینه",
             "Randomize Dot Size": "رندوم سازی سایز نقطه ها",
             "Custom Corners": "استایل دهی به گوشه ها",
+            "Mono Color": "تک رنگ",
+            Gradient: "گرادیان",
+            "Ring Color": "رتگ حلقه",
+            "Center Color": "رنگ مرکز",
+            "Ring Radius": "شعاع حلقه",
+            "Center Radius": "شعاع مرکز",
         },
 
         payment: {
