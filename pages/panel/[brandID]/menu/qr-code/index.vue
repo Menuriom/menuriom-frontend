@@ -48,14 +48,16 @@
         <div class="flex flex-wrap-reverse items-start gap-4">
             <div class="flex flex-col items-start gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-sm">link to your menu:</span>
+                    <span class="text-sm">{{ $t("panel.qrcode.Link to your menu") }}:</span>
                     <a class="bg-neutral-800 px-2 py-1 rounded-md text-sm text-neutral-300 hover:text-violet" :href="link" target="_blank">{{ link }}</a>
                 </div>
                 <hr class="w-full opacity-20" />
-                <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+                <div class="flex flex-wrap items-center gap-4 w-full">
                     <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="square.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.qrcode.Background Color") }}
                     </h3>
+                    <span class="w-6 h-0.5 bg-neutral-500"></span>
                     <div class="flex items-center gap-1">
                         <small>{{ $t("panel.qrcode.Mono Color") }}</small>
                         <Switch v-model:value="backgroundGradient" @update:value="renderAll()" />
@@ -64,7 +66,7 @@
                 </div>
                 <div class="flex flex-wrap items-start gap-4">
                     <div class="flex flex-col gap-1" v-if="backgroundGradient">
-                        <small class="text-xs">Gradient Type</small>
+                        <small class="text-xs">{{ $t("panel.qrcode.Gradient Type") }}</small>
                         <div class="flex items-center gap-1">
                             <span
                                 class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
@@ -93,11 +95,10 @@
                         </div>
                     </div>
                     <div class="flex flex-col gap-1" v-if="backgroundGradient && backgroundGradientType == 'Linear'">
-                        <small class="text-xs">Gradient Angle</small>
+                        <small class="text-xs">{{ $t("panel.qrcode.Gradient Angle") }}</small>
                         <div class="flex items-center gap-1 p-1 py-0.5 rounded-md border-2 border-neutral-500 cursor-pointer" @click="switchBgGradientAngle()">
                             <Icon class="w-4 h-4 bg-white" name="angle.svg" folder="icons/light" size="18px" />
-                            <small>{{ backgroundGradientAngle }}</small
-                            >°
+                            <small> {{ backgroundGradientAngle }} </small>°
                         </div>
                     </div>
                     <Input class="w-48" type="color" :label="$t('panel.qrcode.Background Color')" v-model="backgroundColor1" @input="renderOverlays()" />
@@ -111,10 +112,12 @@
                     />
                 </div>
                 <hr class="w-full border-gray-300 opacity-25" />
-                <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+                <div class="flex flex-wrap items-center gap-4 w-full">
                     <h3 class="flex items-center gap-2 text-lg font-bold">
-                        {{ $t("panel.qrcode.Foreground Color") }}
+                        <Icon class="w-5 h-5 gradient-re" name="qrcode.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.qrcode.Barcode Color") }}
                     </h3>
+                    <span class="w-6 h-0.5 bg-neutral-500"></span>
                     <div class="flex items-center gap-1">
                         <small>{{ $t("panel.qrcode.Mono Color") }}</small>
                         <Switch v-model:value="foregroundGradient" @update:value="renderAll()" />
@@ -123,7 +126,7 @@
                 </div>
                 <div class="flex flex-wrap items-start gap-4">
                     <div class="flex flex-col gap-1" v-if="foregroundGradient">
-                        <small class="text-xs">Gradient Type</small>
+                        <small class="text-xs">{{ $t("panel.qrcode.Gradient Type") }}</small>
                         <div class="flex items-center gap-1">
                             <span
                                 class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
@@ -152,32 +155,66 @@
                         </div>
                     </div>
                     <div class="flex flex-col gap-1" v-if="foregroundGradient && foregroundGradientType == 'Linear'">
-                        <small class="text-xs">Gradient Angle</small>
+                        <small class="text-xs">{{ $t("panel.qrcode.Gradient Angle") }}</small>
                         <div class="flex items-center gap-1 p-1 py-0.5 rounded-md border-2 border-neutral-500 cursor-pointer" @click="switchFgGradientAngle()">
                             <Icon class="w-4 h-4 bg-white" name="angle.svg" folder="icons/light" size="18px" />
-                            <small>{{ foregroundGradientAngle }}</small
-                            >°
+                            <small> {{ foregroundGradientAngle }} </small>°
                         </div>
                     </div>
-                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Foreground Color')" v-model="foregroundColor1" @input="renderOverlays()" />
+                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Barcode Color')" v-model="foregroundColor1" @input="renderOverlays()" />
                     <Input
                         class="w-48"
                         type="color"
-                        :label="`${$t('panel.qrcode.Foreground Color')} 2`"
+                        :label="`${$t('panel.qrcode.Barcode Color')} 2`"
                         v-model="foregroundColor2"
                         @input="renderOverlays()"
                         v-if="foregroundGradient"
                     />
                 </div>
                 <hr class="w-full opacity-20" />
-                <Switch class="" :label="$t('panel.qrcode.Randomize Dot Size')" v-model:value="randomSize" @update:value="renderAll()" />
-                <!-- ------------ -->
-                <!-- dotImage -->
-                <!-- randomSize -->
-                <!-- ------------ -->
-                <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-center justify-between gap-4 w-full">
                     <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="grid.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.qrcode.Pixles") }}
+                    </h3>
+                </div>
+                <div class="flex flex-wrap items-center gap-4" v-if="checkLimitations([['menu-templates', true]], brand)">
+                    <div class="flex items-center gap-2">
+                        <Switch v-model:value="randomSize" @update:value="renderAll()" />
+                        <small class="text-xs">{{ $t("panel.qrcode.Randomize Dot Size") }}</small>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <Switch v-model:value="rotateTheCode" @update:value="renderAll()" />
+                        <small class="text-xs">{{ $t("panel.qrcode.Rotate The Barcode") }}</small>
+                    </div>
+                </div>
+                <ul class="flex flex-wrap items-start justify-start gap-2 w-full max-h-52 overflow-auto">
+                    <li
+                        class="relative flex items-center justify-center w-16 h-16 p-1.5 rounded-lg shadow-nr15 cursor-pointer"
+                        :class="[dotImage === item.image ? 'gradient' : 'bg-dolphin']"
+                        v-for="(item, i) in dotImageList"
+                        :key="i"
+                        @click="changeDotImage(item)"
+                    >
+                        <Icon
+                            class="absolute top-1 end-1 w-4 h-4 bg-white z-2"
+                            name="lock-keyhole.svg"
+                            folder="icons"
+                            size="16px"
+                            v-if="currentPlan.lvl < item.lvl"
+                        />
+                        <img
+                            class="w-12 h-12 p-2 object-contain bg-white rounded-md"
+                            :class="[currentPlan.lvl >= item.lvl ? '' : 'opacity-50']"
+                            :src="item.image"
+                            loading="lazy"
+                        />
+                    </li>
+                </ul>
+                <hr class="w-full opacity-20" />
+                <div class="flex flex-wrap items-center gap-4 w-full">
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="expand-wide.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.qrcode.Custom Corners") }}
                     </h3>
                     <Switch v-model:value="customCorner" @update:value="renderOverlays()" />
@@ -195,33 +232,58 @@
                     </div>
                 </div>
                 <hr class="w-full opacity-20" />
-                <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+                <div class="flex flex-wrap items-center gap-4 w-full">
                     <h3 class="flex items-center gap-2 text-lg font-bold">
-                        {{ $t("panel.qrcode.Center Logo") }}
+                        <Icon class="w-5 h-5 gradient-re" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.qrcode.Add Restaurant Logo") }}
                     </h3>
                     <Switch v-model:value="withLogo" @update:value="renderOverlays()" />
                 </div>
-                <div class="flex flex-wrap items-center gap-4" v-if="withLogo">
-                    <div class="flex flex-col gap-2">
-                        <small class="text-xs">{{ $t("panel.qrcode.Padding") }}</small>
-                        <input class="input-range w-24" type="range" max="3" step="1" v-model="logoPadding" @input="renderOverlays()" />
+                <div class="flex flex-wrap gap-4" v-if="withLogo">
+                    <small
+                        class="flex flex-wrap items-start w-full max-w-sm p-3 rounded-md border border-neutral-600 bg-pencil-tip"
+                        v-if="!checkLimitations([['logo-in-qr', true]], brand)"
+                    >
+                        <span class="opacity-75">{{ $t("panel.This feature is for the pro plan only") }}.</span>
+                        <nuxt-link class="text-purple-300 underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                            {{ $t("panel.Upgrade your plan to get this feature") }}.
+                        </nuxt-link>
+                    </small>
+                    <div
+                        class="flex flex-wrap items-start gap-4 p-3 border-2 border-neutral-500 rounded-lg"
+                        v-if="checkLimitations([['logo-in-qr', true]], brand)"
+                    >
+                        <div class="flex flex-col gap-2">
+                            <small class="text-xs">{{ $t("panel.qrcode.Padding") }}</small>
+                            <input class="input-range w-24" type="range" max="3" step="1" v-model="logoPadding" @input="renderOverlays()" />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <small class="text-xs">{{ $t("panel.qrcode.Radius") }}</small>
+                            <input class="input-range w-24" type="range" min="1" max="7" step="1" v-model="logoBorderRadius" @input="renderOverlays()" />
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-2">
-                        <small class="text-xs">{{ $t("panel.qrcode.Radius") }}</small>
-                        <input class="input-range w-24" type="range" min="1" max="7" step="1" v-model="logoBorderRadius" @input="renderOverlays()" />
-                    </div>
-                    <Switch v-model:value="logoShadow" @update:value="renderOverlays()" />
-                    <div class="flex flex-col gap-2">
-                        <small class="text-xs">{{ $t("panel.qrcode.Radius") }}</small>
-                        <input class="input-range w-24" type="range" max="9" step="1" v-model="logoShadowIntensity" @input="renderOverlays()" />
+                    <div
+                        class="flex flex-wrap items-start gap-4 p-2 border-2 border-neutral-500 rounded-lg"
+                        v-if="checkLimitations([['logo-in-qr', true]], brand)"
+                    >
+                        <div class="flex flex-col gap-2">
+                            <small class="text-xs">{{ $t("panel.qrcode.Shadow") }}</small>
+                            <Switch v-model:value="logoShadow" @update:value="renderOverlays()" />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <small class="text-xs">{{ $t("panel.qrcode.Shadow Intensity") }}</small>
+                            <input class="input-range w-24" type="range" max="9" step="1" v-model="logoShadowIntensity" @input="renderOverlays()" />
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="sticky lg:bottom-0 flex flex-col items-center gap-4 w-full md:max-w-screen-xs p-4 rounded-lg bg-pencil-tip text-white shadow-nr10">
-                <small class="w-full opacity-75 -mb-2">Make sure the colors have good contrast so that the code is easily scannable</small>
+                <small class="w-full opacity-75 text-justify">
+                    {{ $t("panel.qrcode.Make sure the colors have good contrast so that the code is easily scannable") }}
+                </small>
                 <canvas class="w-full max-w-screen-xs aspect-square shadow-nr15 rounded-xl" ref="canvasEl"></canvas>
                 <!-- <generateSVG class="shadow-nr15" /> -->
-                <button class="btn w-full text-sm p-2 rounded-md bg-violet" @click="saveCanvas()">Download QR Code</button>
+                <button class="btn w-full text-sm p-2 rounded-md bg-violet grow" @click="saveCanvas()">{{ $t("panel.qrcode.Download QR Code") }}</button>
             </div>
         </div>
     </div>
@@ -230,21 +292,31 @@
 <script setup>
 import Input from "~/components/form/Input.vue";
 import Switch from "~/components/form/Switch.vue";
-import RangeSlider from "~/components/form/RangeSlider.vue";
 import QR from "~/composables/qrcodegen";
+import { usePanelStore } from "@/stores/panel";
+import { useUserStore } from "@/stores/user";
 
-// TODO : image and random size is for standard and up
-// pro can access more images and brand logo
-// basic can have custom corners and gradient
+// TODO : make a save buttton to save all setting for the qr code
+// save button should also save a copy of the qr in the server (1qr code for single brand)
 
+const { localeProperties, t } = useI18n();
+const nuxtApp = useNuxtApp();
 const route = useRoute();
 const runtimeConfig = useRuntimeConfig();
+const panelStore = usePanelStore();
+const userStore = useUserStore();
+
+const title = computed(() => `${t("panel.qrcode.QR Code Editor")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: title });
+
+const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
+const allowLogoInQR = checkLimitations([["logo-in-qr", true]], brand.value);
 
 const selectedTab = "qrcode";
 
 const link = `${runtimeConfig.public.BASE_URL}/r/${route.params.brandID}`;
 const borderMargin = ref(4);
-const rotateTheCode = ref(true);
+const rotateTheCode = ref(false);
 const size = 1024;
 
 const backgroundGradient = ref(false);
@@ -262,7 +334,7 @@ const switchBgGradientAngle = () => {
     renderOverlays();
 };
 const backgroundColor1 = ref("#ffffff");
-const backgroundColor2 = ref("#fff");
+const backgroundColor2 = ref("#ffffff");
 
 const foregroundGradient = ref(false);
 const foregroundGradientType = ref("Linear"); // Linear | Radial
@@ -278,26 +350,68 @@ const switchFgGradientAngle = () => {
     else if (foregroundGradientAngle.value == 90) foregroundGradientAngle.value = 0;
     renderOverlays();
 };
-const foregroundColor1 = ref("#000");
-const foregroundColor2 = ref("#000");
+const foregroundColor1 = ref("#000000");
+const foregroundColor2 = ref("#000000");
 
+const dotImageList = ref([
+    { for: "Basic Plan", lvl: 0, image: "/icons/qr-dots/Square.svg" },
+    { for: "Basic Plan", lvl: 0, image: "/icons/qr-dots/Square-Dot.svg" },
+    { for: "Basic Plan", lvl: 0, image: "/icons/qr-dots/Dot.svg" },
+
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Windows.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Bars.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Sparkle.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Star.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Tile.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Panel.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Octagon.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares2.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Rectangle-Fade.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Favorite.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Ring-Dot.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Arc.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Balls.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Circle-Dot.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Pages.svg" },
+
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Coffee.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Puzzle.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Baseball.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Egg.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Egg-Fried.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Circle-Heart.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Square-Rounded.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Skull.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Sushi-Roll.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Pizza.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Burger.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Taco.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Pie-Cake.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Pie.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Paw.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Moon.svg" },
+    { for: "Pro Plan", lvl: 2, image: "/icons/qr-dots/Fire.svg" },
+]);
 const dotImage = ref("/icons/qr-dots/Square.svg");
+const changeDotImage = (item) => {
+    if (currentPlan.lvl >= item.lvl) img.src = dotImage.value = item.image;
+};
 const radius = ref(1);
 const randomSize = ref(false);
 
-const customCorner = ref(false);
+const customCorner = ref(true);
 const cornerRingColor = ref("#000");
 const cornerCenterColor = ref("#000");
 const cornerRingRadius = ref(0); // 0 - 2 : .1
 const cornerCenterRadius = ref(0); // 0 - 2 : .1
 
 let logoImg;
-const withLogo = ref(true);
+const withLogo = ref(false);
 const logoPadding = ref(2);
-const logoBorderRadius = ref(6); // 0 - 7 : 1
+const logoBorderRadius = ref(2); // 0 - 7 : 1
 const logoShadow = ref(true);
 const logoShadowIntensity = ref(5); // 2 - 9 : 1
-const logoSrc = ref("/file/logos/d7af7f85-bbd4-42f7-b067-733273217f9c.webp");
 
 let img;
 const cellNumbers = ref(0);
@@ -382,7 +496,8 @@ const renderOverlays = () => {
     // draw background
     ctx.globalCompositeOperation = "destination-over";
     ctx.fillStyle = backgroundFillStyle;
-    ctx.fillRect(0, 0, cellNumbers.value, cellNumbers.value);
+    ctx.roundRect(0, 0, cellNumbers.value, cellNumbers.value, 2);
+    ctx.fill();
 
     ctx.globalCompositeOperation = "source-over";
     if (customCorner.value) drawCorners(backgroundFillStyle);
@@ -411,19 +526,20 @@ const drawLogo = (backgroundFillStyle) => {
         Number(logoBorderRadius.value)
     );
     ctx.fill();
-    
+
     ctx.shadowColor = `#0000`;
     ctx.beginPath();
     ctx.roundRect(pos, pos, imageSize, imageSize, Math.max(Number(logoBorderRadius.value) - 1, 0));
     ctx.fill();
-    
-    logoImg.src = logoSrc.value;
+
     logoImg.onload = () => {
         ctx.save();
         ctx.clip();
-        ctx.drawImage(img, pos, pos, imageSize, imageSize);
+        ctx.drawImage(logoImg, pos, pos, imageSize, imageSize);
         ctx.restore();
     };
+    if (allowLogoInQR) logoImg.src = brand.value.logo;
+    else logoImg.src = "/logo.svg";
     // TODO : we dont need to draw logo image over and over : make it so that it draw once
 };
 
@@ -482,38 +598,11 @@ const gradientGenerator = (options = { type: "Linear", color1: "", color2: "", a
 };
 
 onMounted(async () => {
-    // basic
-    // img.src = "/icons/qr-dots/Dot.svg";
-    // img.src = "/icons/qr-dots/Square-Dot.svg";
-    // img.src = "/icons/qr-dots/Square.svg";
-
-    // standard
-    // img.src = "/icons/qr-dots/Bars.svg";
-    // img.src = "/icons/qr-dots/Sparkle.svg";
-    // img.src = "/icons/qr-dots/Star.svg";
-    // img.src = "/icons/qr-dots/Tile.svg";
-    // img.src = "/icons/qr-dots/Panel.svg";
-    // img.src = "/icons/qr-dots/Octagon.svg";
-    // img.src = "/icons/qr-dots/Squares.svg";
-    // img.src = "/icons/qr-dots/Rectangle-Fade.svg";
-
-    // pro
-    // img.src = "/icons/qr-dots/Circle-Heart.svg";
-    // img.src = "/icons/qr-dots/Square-Rounded.svg";
-    // img.src = "/icons/qr-dots/Skull.svg";
-    // img.src = "/icons/qr-dots/Sushi-Roll.svg";
-    // img.src = "/icons/qr-dots/Taco.svg";
-    // img.src = "/icons/qr-dots/Pie-Cake.svg";
-    // img.src = "/icons/qr-dots/Pie.svg";
-    // img.src = "/icons/qr-dots/Paw.svg";
-    // img.src = "/icons/qr-dots/Moon.svg";
-    // img.src = "/icons/qr-dots/Fire.svg";
-
     // TODO : add more svg for pro
 
-    // make image objects
-    img = logoImg = new Image();
+    logoImg = new Image();
 
+    img = new Image();
     img.src = dotImage.value;
     img.onload = () => drawQR();
 });
@@ -525,4 +614,29 @@ const saveCanvas = () => {
     a.href = dataURL;
     a.click();
 };
+
+// getCurrentPlan -------------------------------------------------
+const currentPlan = reactive({
+    plan: { icon: "", name: "", translation: {} },
+    lvl: 0,
+});
+const getCurrentPlan_results = await useLazyAsyncData(() => getCurrentPlan(route.params.brandID));
+const loadingCurrentPlan = computed(() => getCurrentPlan_results.pending.value);
+
+const handleCurrentPlan_results = (data) => {
+    if (!data) return;
+    currentPlan.plan = data._currentPlan.plan;
+    switch (currentPlan.plan.translation.en.name) {
+        case "Pro Plan":
+            currentPlan.lvl = 2;
+            break;
+        case "Standard Plan":
+            currentPlan.lvl = 3;
+            break;
+        default:
+            currentPlan.lvl = 0;
+    }
+};
+watch(getCurrentPlan_results.data, (val) => handleCurrentPlan_results(val), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
 </script>

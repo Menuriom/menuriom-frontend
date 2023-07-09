@@ -509,7 +509,7 @@ export default {
             "QR Code Stand Frame": "قاب و فریم کد QR",
 
             "Background Color": "رنگ پیش زمینه",
-            "Foreground Color": "رنگ پس زمینه",
+            "Barcode Color": "رنگ بارکد",
             "Randomize Dot Size": "رندوم سازی سایز نقطه ها",
             "Custom Corners": "استایل دهی به گوشه ها",
             "Mono Color": "تک رنگ",
@@ -518,6 +518,18 @@ export default {
             "Center Color": "رنگ مرکز",
             "Ring Radius": "شعاع حلقه",
             "Center Radius": "شعاع مرکز",
+            "Add Restaurant Logo": "افزودن لوگو رستوران",
+            Padding: "حاشیه",
+            Radius: "شعاع گوشه ها",
+            Pixles: "پیکسل ها",
+            "Rotate The Barcode": "بارکد چرخیده",
+            Shadow: "سایه",
+            "Shadow Intensity": "شدت سایه",
+            "Link to your menu": "لینک منو شما",
+            "Gradient Type": "نوع گرادیان",
+            "Gradient Angle": "زاویه گرادیان",
+            "Download QR Code": "دانلود کد QR",
+            "Make sure the colors have good contrast so that the code is easily scannable": "برای راحت تر اسکن شد کن، مطمئن شوید که رنگ پیش زمینه نسبت به رنگ بارکد از کنتراست بالایی برخوردار باشد",
         },
 
         payment: {
