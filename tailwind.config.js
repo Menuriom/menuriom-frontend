@@ -7,7 +7,7 @@ module.exports = {
             colors: {
                 violet: "#9f74cd",
                 "baby-blue": "#7ecfe1",
-                "pencil-tip": "#373737",
+                "pencil-tip": "#323232",
                 "dolphin": "#464646",
             },
             boxShadow: {

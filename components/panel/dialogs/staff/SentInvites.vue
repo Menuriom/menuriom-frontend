@@ -39,7 +39,7 @@
                 </transition-group>
             </ul>
             <Loading v-if="loading" />
-            <button class="btn w-max p-2 border-2 rounded-md text-zinc-200 text-xs" @click="loadMore()" v-if="!noMoreRecords">
+            <button class="btn w-max p-2 border border-neutral-500 rounded-md text-zinc-200 text-xs" @click="loadMore()" v-if="!noMoreRecords">
                 {{ $t("panel.Load More") }}
             </button>
             <small class="text-xs opacity-75" v-if="noMoreRecords">{{ $t("panel.End of the list") }}</small>

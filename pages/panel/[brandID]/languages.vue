@@ -1,9 +1,9 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 md:gap-6 w-full">
+    <div class="flex flex-col gap-4 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/language-dark.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.side-menu.Language Settings") }}</h1>
@@ -95,6 +95,9 @@ import { getBrandSettings, getLanguages, getCurrencies } from "~/composables/use
 import axios from "axios";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
+
+// TODO
+// add new setting for tax percent and other service percentages
 
 const { t } = useI18n();
 const route = useRoute();

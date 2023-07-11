@@ -3,7 +3,7 @@
 <template>
     <div class="flex flex-col gap-4 w-full" ref="form">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/user-group-dark.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.staff.Staff Members") }}</h1>
@@ -15,7 +15,7 @@
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <button
-                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-lg border-2 border-black flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white flex-shrink-0"
                     @click="panelStore.openPopUp('sent-invites')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
@@ -23,7 +23,7 @@
                     {{ $t("panel.side-menu.Sent Invites") }}
                 </button>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white flex-shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
@@ -134,7 +134,7 @@
                 </li>
             </ul>
             <Loading v-if="loading" />
-            <button class="btn w-max p-2.5 border-2 border-black rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
+            <button class="btn w-max p-2.5 border bg-white rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
                 {{ $t("panel.Load More") }}
             </button>
             <small class="text-xs opacity-75" v-if="noMoreRecords && records.list.length > 0">{{ $t("panel.End of the list") }}</small>
@@ -147,7 +147,7 @@
             <Dialog name="delete-confirmation" :title="$t('panel.staff.Remove Staff')" v-if="panelStore.popUpOpened == 'delete-confirmation'">
                 <div class="flex flex-col gap-3">
                     <!-- <img class="w-44 mx-auto" src="~/assets/images/empty.webp" /> -->
-                    <hr class="w-full opacity-30 my-2" />
+                    <hr class="w-full opacity-30 mt-2" />
                     <h2
                         class="text-xl"
                         v-html="
@@ -156,7 +156,7 @@
                             })
                         "
                     />
-                    <p class="text-sm opacity-75">
+                    <p class="text-sm opacity-75 -mt-2">
                         {{ $t("panel.staff.deletingStaffDesc") }}
                     </p>
                     <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">

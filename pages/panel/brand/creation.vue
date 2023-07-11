@@ -3,7 +3,7 @@
 <template>
     <div class="flex flex-col items-center gap-4 md:gap-6 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col items-center gap-2">
+            <div class="flex flex-col items-center gap-1">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.brands.Create New Brand") }}</h1>
@@ -14,10 +14,10 @@
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
-        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
+        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="fork-knife.svg" folder="icons/light" size="20px" />
+                <h3 class="flex items-center gap-2 text-lg font-bold">
+                    <Icon class="w-5 h-5 gradient-re" name="fork-knife.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.brands.Brand Details") }}
                 </h3>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4">
@@ -58,14 +58,14 @@
                     <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <hr class="w-full opacity-25" />
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="store.svg" folder="icons/light" size="20px" />
+                <h3 class="flex items-center gap-2 text-lg font-bold">
+                    <Icon class="w-5 h-5 gradient-re" name="store.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.brands.How many branches does your business have?") }}
                 </h3>
                 <RangeSlider v-model="branchSize" :label="$t('panel.brands.Branch')" :min="1" :max="20" />
                 <hr class="w-full opacity-25" />
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="newspaper.svg" folder="icons/light" size="20px" />
+                <h3 class="flex items-center gap-2 text-lg font-bold">
+                    <Icon class="w-5 h-5 gradient-re" name="newspaper.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.brands.Your main branch info") }}
                 </h3>
                 <Input

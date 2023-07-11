@@ -1,9 +1,9 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 md:gap-6 w-full">
+    <div class="flex flex-col gap-4 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/store-dark.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.branches.Branches") }}</h1>
@@ -105,9 +105,9 @@
             <Dialog name="delete-confirmation" :title="$t('panel.branches.Delete Branch')">
                 <div class="flex flex-col gap-3">
                     <!-- <img class="w-44 mx-auto" src="~/assets/images/empty.webp" /> -->
-                    <hr class="w-full opacity-30 my-2" />
+                    <hr class="w-full opacity-30 mt-2" />
                     <h2 class="text-xl" v-html="$t('panel.branches.You are about to delete this branch', { name: records.list[indexToDelete].name })" />
-                    <p class="text-sm opacity-75">
+                    <p class="text-sm opacity-75 -mt-2">
                         {{ $t("panel.branches.deletingBranchDesc") }}
                     </p>
                     <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
@@ -202,6 +202,7 @@ const deleteRecord = async () => {
 // -------------------------------------------------
 
 const handleErrors = (err) => {
+    console.log({ err });
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;

@@ -1,19 +1,26 @@
-<style scoped></style>
+<style scoped>
+.mask {
+    background-image: linear-gradient(90deg, theme("colors.violet") 0%, theme("colors.baby-blue") 100%);
+    mix-blend-mode: plus-lighter;
+    mask: url("~/assets/images/pattern.webp");
+    mask-size: 200px;
+    mask-position: 20px 20px;
+}</style>
 
 <template>
-    <div class="flex flex-col gap-4 md:gap-6 w-full">
-        <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
-                <div class="flex items-center gap-2">
+    <div class="flex flex-col gap-4 w-full">
+        <header class="relative flex flex-wrap items-center justify-between gap-4">
+            <div class="relative flex flex-col gap-1">
+                <div class="flex items-center gap-1">
                     <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.brands.Your Brands") }}</h1>
                 </div>
-                <small class="hidden sm:flex text-sm">
+                <small class="text-xs md:text-sm">
                     {{ $t("panel.brands.Create new brands, edit your brand details, or manage brands that you are staff of") }}
                 </small>
             </div>
             <nuxt-link
-                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                class="btn relative flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
                 :to="localePath('/panel/brand/creation')"
                 v-if="canCreateNewBrand"
             >
@@ -21,9 +28,10 @@
                 {{ $t("panel.brands.New Brand") }}
             </nuxt-link>
         </header>
-        <hr class="w-full border-gray-300 opacity-50" />
-        <section class="flex flex-col w-full">
-            <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-show="!loading">
+        <hr class="w-full border-gray-400 opacity-50" />
+        <section class="relative flex flex-col w-full">
+            <div class="absolute -top-4 w-full h-40 bg-pencil-tip rounded-lg"><div class="absolute mask inset-0"></div></div>
+            <ul class="grid gap-3 px-4 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-show="!loading">
                 <li
                     class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
                     v-for="(brand, i) in records.list"
@@ -118,7 +126,7 @@
                     </div>
                 </li>
                 <li
-                    class="w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
+                    class="relative w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
                     v-if="canCreateNewBrand && records.list.length > 0"
                 >
                     <nuxt-link class="flex flex-col items-center justify-center gap-4 w-full h-full p-3" :to="localePath(`/panel/brand/creation`)">
@@ -140,13 +148,13 @@
                 </div>
                 <div class="flex flex-wrap items-center justify-center gap-4">
                     <nuxt-link
-                        class="btn flex items-center gap-2 border-2 border-black bg-violet text-white p-3 rounded-md"
+                        class="btn flex items-center gap-2 bg-violet text-white p-3 rounded-md"
                         :to="localePath(`/panel/brand/creation`)"
                     >
                         <Icon class="w-5 h-5 bg-white" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.brands.Create New Brand") }}
                     </nuxt-link>
-                    <nuxt-link class="btn flex items-center gap-2 border-2 border-black p-3 rounded-md" :to="localePath(`/panel/account/invite-list`)">
+                    <nuxt-link class="btn flex items-center gap-2 border bg-white p-3 rounded-md" :to="localePath(`/panel/account/invite-list`)">
                         <Icon class="w-5 h-5 bg-black" name="envelope-open-text.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.brands.Check Invite List") }}
                     </nuxt-link>

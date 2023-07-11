@@ -3,7 +3,7 @@
 <template>
     <div class="flex flex-col gap-4 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/shield.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.staff.Staff Roles") }}</h1>
@@ -76,9 +76,9 @@
             <Dialog name="delete-confirmation" :title="$t('panel.staff.Delete Role')" v-if="panelStore.popUpOpened == 'delete-confirmation'">
                 <div class="flex flex-col gap-3">
                     <!-- <img class="w-28 mx-auto" src="~/assets/images/delete.webp" /> -->
-                    <hr class="w-full opacity-30 my-2" />
+                    <hr class="w-full opacity-30 mt-2" />
                     <h2 class="text-xl" v-html="$t('panel.staff.You are about to delete this role', { role: records.list[indexToDelete].name })" />
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
+                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
                         {{ $t("panel.staff.By deleting this role, you need to assign a new role to all staff members that previously had this role") }}
                     </small>
                     <hr class="w-full opacity-40" />

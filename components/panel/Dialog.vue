@@ -15,9 +15,9 @@
 </style>
 
 <template>
-    <Transition name="fade" appear>
+    <Transition name="fade" mode="out-in">
         <dialog aria-modal="true" class="dialog fixed inset-0 flex items-center justify-center" :class="{ open: open }" v-if="open">
-            <div class="backdrop fixed inset-0 bg-neutral-500 bg-opacity-30 backdrop-grayscale" @click="close()"></div>
+            <div class="backdrop fixed inset-0 bg-neutral-900 bg-opacity-60 backdrop-grayscale" @click="close()"></div>
             <Transition name="slide-down" appear>
                 <div
                     class="box flex flex-col gap-3 p-3 sm:p-6 rounded-xl shadow-2xl md:w-max max-w-lg bg-pencil-tip text-white"

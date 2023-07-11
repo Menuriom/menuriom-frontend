@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col h-full">
+    <div class="flex flex-col h-full w-full max-w-screen-xl mx-auto">
         <NuxtPage />
     </div>
 </template>

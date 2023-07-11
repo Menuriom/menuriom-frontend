@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full lg:w-72 p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
+    <div class="sticky lg:top-0 flex flex-col gap-4 w-full sm:w-auto lg:w-72 p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
         <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2">
                 <Icon class="w-5 h-5 bg-white" name="language.svg" folder="icons/light" size="20px" />
@@ -15,6 +15,7 @@
                 <Icon class="w-4 h-4 bg-white" name="cog.svg" folder="icons" size="16px" />
             </nuxt-link>
         </div>
+        <small class="text-xs opacity-75 -mt-2">{{ $t("panel.languages.By selecting different language, you can translate text fields") }}</small>
         <hr class="w-full opacity-20" />
         <ul class="flex lg:flex-col gap-2 w-full pb-2 overflow-auto" v-if="!loadingSettings">
             <li

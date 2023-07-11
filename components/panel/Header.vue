@@ -10,7 +10,7 @@ header {
 </style>
 
 <template>
-    <header class="flex items-center justify-between gap-3 rounded-lg mt-2 p-2 md:p-3 max-w-screen-4xl h-14 md:h-16 bg-pencil-tip shadow-nr15 z-20">
+    <header class="flex items-center justify-between gap-3 rounded-lg mt-2 p-2 max-w-screen-4xl h-14 bg-pencil-tip shadow-nr15 z-20">
         <div class="flex items-center gap-3 flex-grow">
             <button
                 class="toggle flex items-center justify-center hover:bg-neutral-600 rounded-full transition-colors"
@@ -24,7 +24,7 @@ header {
                 </div>
             </button>
             <nuxt-link class="flex items-center justify-center p-1 rounded-md gradient" :to="localePath('/')" v-else>
-                <img class="relative h-7 md:h-9" src="/logo.svg" title="Menuriom" alt="Menuriom" />
+                <img class="relative h-7" src="/logo.svg" title="Menuriom" alt="Menuriom" />
             </nuxt-link>
 
             <nuxt-link class="flex items-center justify-center h-7 md:h-9 overflow-hidden group" :to="localePath('/')">

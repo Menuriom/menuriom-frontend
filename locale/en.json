@@ -20,6 +20,12 @@
         "branches": {
             "You are about to delete this branch": "You are about to delete branch <b>{name}</b>"
         },
+        "menu": {
+            "For": "For {branch}",
+            "You are about to delete this category": "You are about to delete category <b>{name}</b>",
+            "You are about to delete this side items group": "You are about to delete side items group <b>{name}</b>",
+            "You are about to delete this item": "You are about to delete item <b>{name}</b>"
+        },
         "staff": {
             "You are about to remove this member": "You are about to remove {member}",
             "You are about to delete this role": "You are about to delete role {role}"
@@ -33,6 +39,9 @@
             "You are downgrading your plan from X to Y": "You are downgrading your plan from {fromPlan} to {toPlan}",
             "because X days left from your current plan you need to pay the plan price difference for these X days to upgrade your plan": "because {days} days left from your current plan, you need to pay the plan price difference for these {days} days to upgrade your plan",
             "planChangeDaysWillBeLossed": "Still {remainingDays} days remaining from your current plan, if you downgrade your plan these {remainingDays} days will also be converted to {toPlan}"
+        },
+        "payment": {
+            "errorWithCode": "Payment failed with error code of {code}"
         }
     }
 }

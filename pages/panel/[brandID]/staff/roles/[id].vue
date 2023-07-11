@@ -1,9 +1,9 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 md:gap-6 w-full">
+    <div class="flex flex-col gap-4 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/shield.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.staff.roles.Edit Role") }}</h1>
@@ -22,7 +22,7 @@
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
-        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
+        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-screen-lg p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <Input
                     :label="$t('panel.staff.roles.Role Name')"
@@ -31,8 +31,8 @@
                     :error="errorField == `roleName` ? responseMessage : ''"
                 />
                 <hr class="w-full opacity-20" />
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="shield.svg" folder="icons/light" size="20px" />
+                <h3 class="flex items-center gap-2 text-lg font-bold">
+                    <Icon class="w-5 h-5 gradient-re" name="shield.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.staff.roles.Permissions") }}
                 </h3>
                 <small class="text-xs opacity-75 -mt-2">

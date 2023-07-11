@@ -43,6 +43,7 @@ input::placeholder {
                 @focus="isFocused = true"
                 @blur="isFocused = false"
             />
+            <small class="text-xs text-purple-300 pe-2 transition-all" :class="[isFocused || !!modelValue ? 'mt-5' : '']" v-if="unit">{{ unit }}</small>
             <span
                 class="absolute flex items-center gap-2 opacity-90 f-josefin"
                 :class="[isFocused || !!modelValue ? 'start-3 top-1.5 opacity-75' : 'start-4 top-4.5']"
@@ -76,6 +77,7 @@ const props = defineProps({
     modelValue: String,
     type: { type: String, default: "text" },
     mask: String,
+    unit: String,
     error: { type: String, default: "" },
     shadow: { type: Boolean, default: true },
     iconName: { type: String },

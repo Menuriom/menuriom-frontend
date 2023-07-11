@@ -1,9 +1,9 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 md:gap-6 w-full">
+    <div class="flex flex-col gap-4 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-2">
                     <img class="w-9" src="~/assets/images/panel-icons/store-dark.png" alt="" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.branches.Branch Creation") }}</h1>
@@ -22,11 +22,11 @@
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
-        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start justify-center gap-4 w-full">
+        <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full">
             <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <div class="flex flex-col gap-1">
-                    <h3 class="flex items-center gap-2 text-lg">
-                        <Icon class="w-5 h-5 bg-white" name="images.svg" folder="icons/light" size="20px" />
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="images.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.branches.Branch Images") }}
                         <small class="px-2 rounded-md bg-zinc-800 opacity-75">{{ $t("panel.up to n", { number: 5 }) }}</small>
                     </h3>
@@ -50,8 +50,8 @@
                     </li>
                 </ul>
                 <hr class="w-full opacity-20" />
-                <h3 class="flex items-center gap-2 text-lg">
-                    <Icon class="w-5 h-5 bg-white" name="newspaper.svg" folder="icons/light" size="20px" />
+                <h3 class="flex items-center gap-2 text-lg font-bold">
+                    <Icon class="w-5 h-5 gradient-re" name="newspaper.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.branches.General Info") }}
                 </h3>
                 <Input
@@ -82,8 +82,8 @@
                 </div>
                 <hr class="w-full opacity-20" />
                 <div class="flex flex-wrap items-center justify-between gap-4">
-                    <h3 class="flex items-center gap-2 text-lg">
-                        <Icon class="w-5 h-5 bg-white" name="phone-rotary.svg" folder="icons/light" size="20px" />
+                    <h3 class="flex items-center gap-2 text-lg font-bold">
+                        <Icon class="w-5 h-5 gradient-re" name="phone-rotary.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.branches.Phone Numbers") }}
                     </h3>
                     <button
