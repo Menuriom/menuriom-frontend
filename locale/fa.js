@@ -529,7 +529,10 @@ export default {
             "Gradient Type": "نوع گرادیان",
             "Gradient Angle": "زاویه گرادیان",
             "Download QR Code": "دانلود کد QR",
-            "Make sure the colors have good contrast so that the code is easily scannable": "برای راحت تر اسکن شد کن، مطمئن شوید که رنگ پیش زمینه نسبت به رنگ بارکد از کنتراست بالایی برخوردار باشد",
+            "Save Settings": "ذخیره تنظیمات",
+            "QR code settings are saved": "تنظیمات ذخیره شد",
+            "Make sure the colors have good contrast so that the code is easily scannable":
+                "برای راحت تر اسکن شد کن، مطمئن شوید که رنگ پیش زمینه نسبت به رنگ بارکد از کنتراست بالایی برخوردار باشد",
         },
 
         payment: {

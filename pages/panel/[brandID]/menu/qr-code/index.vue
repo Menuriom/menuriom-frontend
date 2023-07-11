@@ -276,13 +276,20 @@
                         </div>
                     </div>
                 </div>
+                <hr class="w-full opacity-20" />
+                <button class="btn flex items-center justify-center gap-2 p-2 rounded-md border-2 text-sm" @click="saveSettings()">
+                    <span class="flex items-center gap-2" v-if="!saving">
+                        <Icon class="w-4 h-4 bg-white" name="floppy-disk.svg" folder="icons/light" size="16px" />
+                        {{ $t("panel.qrcode.Save Settings") }}
+                    </span>
+                    <Loading v-else />
+                </button>
             </div>
             <div class="sticky lg:bottom-0 flex flex-col items-center gap-4 w-full md:max-w-screen-xs p-4 rounded-lg bg-pencil-tip text-white shadow-nr10">
                 <small class="w-full opacity-75 text-justify">
                     {{ $t("panel.qrcode.Make sure the colors have good contrast so that the code is easily scannable") }}
                 </small>
                 <canvas class="w-full max-w-screen-xs aspect-square shadow-nr15 rounded-xl" ref="canvasEl"></canvas>
-                <!-- <generateSVG class="shadow-nr15" /> -->
                 <button class="btn w-full text-sm p-2 rounded-md bg-violet grow" @click="saveCanvas()">{{ $t("panel.qrcode.Download QR Code") }}</button>
             </div>
         </div>
@@ -293,16 +300,16 @@
 import Input from "~/components/form/Input.vue";
 import Switch from "~/components/form/Switch.vue";
 import QR from "~/composables/qrcodegen";
+import axios from "axios";
+import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
-
-// TODO : make a save buttton to save all setting for the qr code
-// save button should also save a copy of the qr in the server (1qr code for single brand)
 
 const { localeProperties, t } = useI18n();
 const nuxtApp = useNuxtApp();
 const route = useRoute();
 const runtimeConfig = useRuntimeConfig();
+const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
@@ -311,6 +318,9 @@ useHead({ title: title });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 const allowLogoInQR = checkLimitations([["logo-in-qr", true]], brand.value);
+
+const responseMessage = ref("");
+const errorField = ref("");
 
 const selectedTab = "qrcode";
 
@@ -403,23 +413,23 @@ const randomSize = ref(false);
 const customCorner = ref(true);
 const cornerRingColor = ref("#000");
 const cornerCenterColor = ref("#000");
-const cornerRingRadius = ref(0); // 0 - 2 : .1
-const cornerCenterRadius = ref(0); // 0 - 2 : .1
+const cornerRingRadius = ref('0'); // 0 - 2 : .1
+const cornerCenterRadius = ref('0'); // 0 - 2 : .1
 
 let logoImg;
 const withLogo = ref(false);
-const logoPadding = ref(2);
-const logoBorderRadius = ref(2); // 0 - 7 : 1
+const logoPadding = ref('2');
+const logoBorderRadius = ref('2'); // 0 - 7 : 1
 const logoShadow = ref(true);
-const logoShadowIntensity = ref(5); // 2 - 9 : 1
+const logoShadowIntensity = ref('5'); // 2 - 9 : 1
 
 let img;
 const cellNumbers = ref(0);
 const cellLength = ref(0);
 
+let IMCctx;
 const cells = QR.QrCode.encodeText(link, QR.QrCode.Ecc.HIGH).getModules();
 const canvasEl = ref(); // Dom Ref
-let IMCctx;
 
 const drawQR = () => {
     const canvas = canvasEl.value;
@@ -607,6 +617,7 @@ onMounted(async () => {
     img.onload = () => drawQR();
 });
 
+// download qr code as png -------------------------------------------------
 const saveCanvas = () => {
     const dataURL = canvasEl.value.toDataURL("image/png");
     const a = document.createElement("a");
@@ -614,12 +625,97 @@ const saveCanvas = () => {
     a.href = dataURL;
     a.click();
 };
+// -------------------------------------------------
+
+// save qr code settings -------------------------------------------------
+const saving = ref(false);
+const saveSettings = async () => {
+    if (saving.value) return;
+    saving.value = true;
+
+    responseMessage.value = "";
+    errorField.value = "";
+
+    const data = {
+        link,
+        backgroundGradient: backgroundGradient.value,
+        backgroundGradientType: backgroundGradientType.value,
+        backgroundGradientAngle: backgroundGradientAngle.value,
+        backgroundColor1: backgroundColor1.value,
+        backgroundColor2: backgroundColor2.value,
+        foregroundGradient: foregroundGradient.value,
+        foregroundGradientType: foregroundGradientType.value,
+        foregroundGradientAngle: foregroundGradientAngle.value,
+        foregroundColor1: foregroundColor1.value,
+        foregroundColor2: foregroundColor2.value,
+        dotImage: dotImage.value,
+        randomSize: randomSize.value,
+        customCorner: customCorner.value,
+        cornerRingColor: cornerRingColor.value,
+        cornerCenterColor: cornerCenterColor.value,
+        cornerRingRadius: Number(cornerRingRadius.value),
+        cornerCenterRadius: Number(cornerCenterRadius.value),
+        withLogo: withLogo.value,
+        logoPadding: Number(logoPadding.value),
+        logoBorderRadius: Number(logoBorderRadius.value),
+        logoShadow: logoShadow.value,
+        logoShadowIntensity: logoShadowIntensity.value,
+    };
+
+    await axios
+        .post(`/api/v1/panel/menu-qrcode`, data, { headers: { brand: route.params.brandID } })
+        .then((response) => {
+            toast.success(t(`panel.qrcode.QR code settings are saved`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+        })
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+        })
+        .finally(() => (saving.value = false));
+};
+// -------------------------------------------------
+
+// loadQRCodeSettings -------------------------------------------------
+const loadQRCodeSettings_results = await useLazyAsyncData(() => loadQRCodeSettings(route.params.brandID));
+const loadingQRCodeSettings = computed(() => loadQRCodeSettings_results.pending.value);
+
+const handleLoadingQRCodeSettings_results = (data) => {
+    if (!data) return;
+    backgroundGradient.value = data._QRSettings.backgroundGradient || backgroundGradient.value;
+    backgroundGradientType.value = data._QRSettings.backgroundGradientType || backgroundGradientType.value;
+    backgroundGradientAngle.value = data._QRSettings.backgroundGradientAngle || backgroundGradientAngle.value;
+    backgroundColor1.value = data._QRSettings.backgroundColor1 || backgroundColor1.value;
+    backgroundColor2.value = data._QRSettings.backgroundColor2 || backgroundColor2.value;
+    foregroundGradient.value = data._QRSettings.foregroundGradient || foregroundGradient.value;
+    foregroundGradientType.value = data._QRSettings.foregroundGradientType || foregroundGradientType.value;
+    foregroundGradientAngle.value = data._QRSettings.foregroundGradientAngle || foregroundGradientAngle.value;
+    foregroundColor1.value = data._QRSettings.foregroundColor1 || foregroundColor1.value;
+    foregroundColor2.value = data._QRSettings.foregroundColor2 || foregroundColor2.value;
+    dotImage.value = data._QRSettings.dotImage || dotImage.value;
+    randomSize.value = data._QRSettings.randomSize || randomSize.value;
+    customCorner.value = data._QRSettings.customCorner || customCorner.value;
+    cornerRingColor.value = data._QRSettings.cornerRingColor || cornerRingColor.value;
+    cornerCenterColor.value = data._QRSettings.cornerCenterColor || cornerCenterColor.value;
+    cornerRingRadius.value = data._QRSettings.cornerRingRadius || cornerRingRadius.value;
+    cornerCenterRadius.value = data._QRSettings.cornerCenterRadius || cornerCenterRadius.value;
+    withLogo.value = data._QRSettings.withLogo || withLogo.value;
+    logoPadding.value = data._QRSettings.logoPadding || logoPadding.value;
+    logoBorderRadius.value = data._QRSettings.logoBorderRadius || logoBorderRadius.value;
+    logoShadow.value = data._QRSettings.logoShadow || logoShadow.value;
+    logoShadowIntensity.value = data._QRSettings.logoShadowIntensity || logoShadowIntensity.value;
+};
+watch(loadQRCodeSettings_results.data, (val) => handleLoadingQRCodeSettings_results(val), { immediate: process.server || nuxtApp.isHydrating });
+// -------------------------------------------------
 
 // getCurrentPlan -------------------------------------------------
-const currentPlan = reactive({
-    plan: { icon: "", name: "", translation: {} },
-    lvl: 0,
-});
+const currentPlan = reactive({ plan: { icon: "", name: "", translation: {} }, lvl: 0 });
 const getCurrentPlan_results = await useLazyAsyncData(() => getCurrentPlan(route.params.brandID));
 const loadingCurrentPlan = computed(() => getCurrentPlan_results.pending.value);
 

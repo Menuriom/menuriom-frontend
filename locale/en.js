@@ -530,6 +530,8 @@ export default {
             "Gradient Type": "Gradient Type",
             "Gradient Angle": "Gradient Angle",
             "Download QR Code": "Download QR Code",
+            "Save Settings": "Save Settings",
+            "QR code settings are saved": "QR code settings are saved",
             "Make sure the colors have good contrast so that the code is easily scannable":
                 "Make sure the colors have good contrast so that the code is easily scannable",
         },

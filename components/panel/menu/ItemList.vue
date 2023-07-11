@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex flex-col gap-2 w-full max-w-screen-2xs shrink-0">
+                                    <div class="flex flex-col gap-2 w-full max-w-screen-1.5xs shrink-0">
                                         <div
                                             class="flex items-center gap-2 max-w-max cursor-pointer"
                                             @click="toggleStates(k, i, 'hidden')"

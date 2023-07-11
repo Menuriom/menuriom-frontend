@@ -227,6 +227,27 @@ export const getSideItemGroupList = async (brandID) => {
 };
 // ---------------------------------------------------------
 
+// qr codes ---------------------------------------------------------
+export const loadQRCodeSettings = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/menu-qrcode`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _QRSettings = {};
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _QRSettings = response.data.qrSettings;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _QRSettings };
+};
+// ---------------------------------------------------------
+
 // staff ---------------------------------------------------------
 export const getStaffList = async (brandID, branchID, records = [], pp = 25, lastRecordID, searchQuery = "") => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/staff`, { brand: brandID });
