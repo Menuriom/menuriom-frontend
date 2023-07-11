@@ -13,8 +13,9 @@
                 </small>
             </div>
         </header>
-        <hr class="w-full border-gray-300 opacity-50" />
-        <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
+        <!-- <hr class="w-full border-gray-300 opacity-50" /> -->
+        <!-- TODO : design at least 10 ~ 20 templates to activate the next tab -->
+        <!-- <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
             <li
                 class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
                 :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === 'qrcode' }"
@@ -23,9 +24,9 @@
                 <Icon
                     class="w-4 h-4 shrink-0"
                     :class="[selectedTab === 'qrcode' ? 'bg-white' : 'bg-black']"
-                    name="Stack.svg"
-                    folder="icons/basil"
-                    size="20px"
+                    name="brush.svg"
+                    folder="icons/light"
+                    size="16px"
                 />
                 {{ $t("panel.qrcode.QR Code Style") }}
             </li>
@@ -37,15 +38,15 @@
                 <Icon
                     class="w-4 h-4 shrink-0"
                     :class="[selectedTab === 'qrcode-stand' ? 'bg-white' : 'bg-black']"
-                    name="Stack.svg"
-                    folder="icons/basil"
-                    size="20px"
+                    name="scanner-touchscreen.svg"
+                    folder="icons/light"
+                    size="16px"
                 />
                 {{ $t("panel.qrcode.QR Code Stand Frame") }}
             </li>
-        </ul>
+        </ul> -->
         <hr class="w-full border-gray-300 opacity-50" />
-        <div class="flex flex-wrap-reverse items-start gap-4">
+        <div class="flex flex-wrap-reverse items-end gap-4">
             <div class="flex flex-col items-start gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="text-sm">{{ $t("panel.qrcode.Link to your menu") }}:</span>
@@ -285,7 +286,7 @@
                     <Loading v-else />
                 </button>
             </div>
-            <div class="sticky lg:bottom-0 flex flex-col items-center gap-4 w-full md:max-w-screen-xs p-4 rounded-lg bg-pencil-tip text-white shadow-nr10">
+            <div class="sticky @7xl:top-0 flex flex-col items-center gap-4 w-full md:max-w-screen-xs p-4 rounded-lg bg-pencil-tip text-white shadow-nr10">
                 <small class="w-full opacity-75 text-justify">
                     {{ $t("panel.qrcode.Make sure the colors have good contrast so that the code is easily scannable") }}
                 </small>
@@ -322,7 +323,7 @@ const allowLogoInQR = checkLimitations([["logo-in-qr", true]], brand.value);
 const responseMessage = ref("");
 const errorField = ref("");
 
-const selectedTab = "qrcode";
+const selectedTab = ref("qrcode");
 
 const link = `${runtimeConfig.public.BASE_URL}/r/${route.params.brandID}`;
 const borderMargin = ref(4);
