@@ -187,7 +187,7 @@ aside > div {
                             </nuxt-link>
                             <nuxt-link
                                 class="link"
-                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu-style`)"
+                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/style`)"
                                 v-if="checkPermissions(['main-panel.menu.style'], brand)"
                             >
                                 <li class="flex items-center gap-3">
@@ -201,15 +201,6 @@ aside > div {
                             >
                                 <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.QR Code") }}</span>
-                                </li>
-                            </nuxt-link>
-                            <nuxt-link
-                                class="link"
-                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/splash-screen`)"
-                                v-if="checkPermissions(['main-panel.menu.style'], brand)"
-                            >
-                                <li class="flex items-center gap-3">
-                                    <span>{{ $t("panel.side-menu.Splash Screen") }}</span>
                                 </li>
                             </nuxt-link>
                         </ul>

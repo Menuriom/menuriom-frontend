@@ -25,7 +25,7 @@
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
         <section class="flex flex-wrap items-start gap-4 w-full" ref="sec">
-            <div class="flex flex-col gap-2 p-4 bg-white rounded-lg w-full max-w-3xl shadow-nr5 flex-grow">
+            <div class="flex flex-col gap-2 p-4 bg-white rounded-xl w-full max-w-3xl shadow-nr5 flex-grow">
                 <h2 class="text-2xl/none font-bold">{{ $t("panel.languages.Menu Languages") }}</h2>
                 <div class="flex flex-col">
                     <small>{{ $t("panel.languages.Choose which languages you want your menu to have") }}</small>
@@ -34,7 +34,7 @@
                 <hr class="w-full border-gray-300 opacity-50" />
                 <ul class="grid gap-2" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-if="!loadingLanguages">
                     <li
-                        class="flex items-center justify-between gap-2 p-2 rounded-md group"
+                        class="flex items-center justify-between gap-2 p-2 rounded-lg group"
                         :class="[settings.languages.includes(code) ? 'bg-dolphin text-white' : 'bg-neutral-50']"
                         v-for="(language, code) in languages.list"
                         :key="code"
@@ -57,18 +57,18 @@
                 <hr class="w-full border-gray-300 opacity-50" />
                 <div class="flex flex-wrap items-center gap-1">
                     <small class="text-sm">{{ $t("panel.languages.You can choose up to n languages", { n: 2 }) }} -</small>
-                    <nuxt-link class="text-xs hover:underline text-violet" :to="localePath(`/panel/${route.params.brandID}/billing/change-plan`)">
+                    <nuxt-link class="text-xs hover:underline text-violet" :to="localePath(`/panel/${route.params.brandID}/billing`)">
                         {{ $t("panel.languages.Upgrade your plan to support more languages") }}
                     </nuxt-link>
                 </div>
             </div>
-            <div class="flex flex-col gap-2 p-4 bg-white rounded-lg w-full md:w-max shadow-nr5 flex-shrink-0">
+            <div class="flex flex-col gap-2 p-4 bg-white rounded-xl w-full md:w-max shadow-nr5 flex-shrink-0">
                 <h2 class="text-2xl/none font-bold">{{ $t("panel.languages.Currency") }}</h2>
                 <small>{{ $t("panel.languages.Select what currency you want to show for your prices") }}</small>
                 <hr class="w-full border-gray-300 opacity-50" />
                 <ul class="flex flex-col gap-2 w-full max-w-screen-sm" v-if="!loadingCurrencies">
                     <li
-                        class="flex items-center justify-between gap-2 p-2 rounded-md cursor-pointer"
+                        class="flex items-center justify-between gap-2 p-3 rounded-lg cursor-pointer"
                         :class="[i == settings.currency ? 'bg-dolphin text-white' : 'bg-neutral-50']"
                         v-for="(currency, i) in currencies.list"
                         :key="i"

@@ -47,251 +47,276 @@
         </ul> -->
         <hr class="w-full border-gray-300 opacity-50" />
         <div class="flex flex-wrap-reverse items-end gap-4">
-            <div class="flex flex-col items-start gap-4 w-full max-w-4xl p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-sm">{{ $t("panel.qrcode.Link to your menu") }}:</span>
-                    <a class="bg-neutral-800 px-2 py-1 rounded-md text-sm text-neutral-300 hover:text-violet" :href="link" target="_blank">{{ link }}</a>
-                </div>
-                <hr class="w-full opacity-20" />
-                <div class="flex flex-wrap items-center gap-4 w-full">
-                    <h3 class="flex items-center gap-2 text-lg font-bold">
-                        <Icon class="w-5 h-5 gradient-re" name="square.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.qrcode.Background Color") }}
-                    </h3>
-                    <span class="w-6 h-0.5 bg-neutral-500"></span>
-                    <div class="flex items-center gap-1">
-                        <small>{{ $t("panel.qrcode.Mono Color") }}</small>
-                        <Switch v-model:value="backgroundGradient" @update:value="renderAll()" />
-                        <small>{{ $t("panel.qrcode.Gradient") }}</small>
-                    </div>
-                </div>
-                <div class="flex flex-wrap items-start gap-4">
-                    <div class="flex flex-col gap-1" v-if="backgroundGradient">
-                        <small class="text-xs">{{ $t("panel.qrcode.Gradient Type") }}</small>
-                        <div class="flex items-center gap-1">
-                            <span
-                                class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
-                                @click="switchBgGradientType('Linear')"
-                            >
-                                <Icon
-                                    class="w-5 h-5"
-                                    :class="[backgroundGradientType == 'Linear' ? 'bg-purple-300' : 'bg-white']"
-                                    name="gradient-linear.svg"
-                                    folder="icons/light"
-                                    size="20px"
-                                />
-                            </span>
-                            <span
-                                class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
-                                @click="switchBgGradientType('Radial')"
-                            >
-                                <Icon
-                                    class="w-5 h-5"
-                                    :class="[backgroundGradientType == 'Radial' ? 'bg-purple-300' : 'bg-white']"
-                                    name="gradient-radial.svg"
-                                    folder="icons/light"
-                                    size="20px"
-                                />
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-1" v-if="backgroundGradient && backgroundGradientType == 'Linear'">
-                        <small class="text-xs">{{ $t("panel.qrcode.Gradient Angle") }}</small>
-                        <div class="flex items-center gap-1 p-1 py-0.5 rounded-md border-2 border-neutral-500 cursor-pointer" @click="switchBgGradientAngle()">
-                            <Icon class="w-4 h-4 bg-white" name="angle.svg" folder="icons/light" size="18px" />
-                            <small> {{ backgroundGradientAngle }} </small>°
-                        </div>
-                    </div>
-                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Background Color')" v-model="backgroundColor1" @input="renderOverlays()" />
-                    <Input
-                        class="w-48"
-                        type="color"
-                        :label="`${$t('panel.qrcode.Background Color')} 2`"
-                        v-model="backgroundColor2"
-                        @input="renderOverlays()"
-                        v-if="backgroundGradient"
-                    />
-                </div>
-                <hr class="w-full border-gray-300 opacity-25" />
-                <div class="flex flex-wrap items-center gap-4 w-full">
-                    <h3 class="flex items-center gap-2 text-lg font-bold">
-                        <Icon class="w-5 h-5 gradient-re" name="qrcode.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.qrcode.Barcode Color") }}
-                    </h3>
-                    <span class="w-6 h-0.5 bg-neutral-500"></span>
-                    <div class="flex items-center gap-1">
-                        <small>{{ $t("panel.qrcode.Mono Color") }}</small>
-                        <Switch v-model:value="foregroundGradient" @update:value="renderAll()" />
-                        <small>{{ $t("panel.qrcode.Gradient") }}</small>
-                    </div>
-                </div>
-                <div class="flex flex-wrap items-start gap-4">
-                    <div class="flex flex-col gap-1" v-if="foregroundGradient">
-                        <small class="text-xs">{{ $t("panel.qrcode.Gradient Type") }}</small>
-                        <div class="flex items-center gap-1">
-                            <span
-                                class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
-                                @click="switchFgGradientType('Linear')"
-                            >
-                                <Icon
-                                    class="w-5 h-5"
-                                    :class="[foregroundGradientType == 'Linear' ? 'bg-purple-300' : 'bg-white']"
-                                    name="gradient-linear.svg"
-                                    folder="icons/light"
-                                    size="20px"
-                                />
-                            </span>
-                            <span
-                                class="flex items-center gap-1 p-1 rounded-md border-2 border-neutral-500 cursor-pointer"
-                                @click="switchFgGradientType('Radial')"
-                            >
-                                <Icon
-                                    class="w-5 h-5"
-                                    :class="[foregroundGradientType == 'Radial' ? 'bg-purple-300' : 'bg-white']"
-                                    name="gradient-radial.svg"
-                                    folder="icons/light"
-                                    size="20px"
-                                />
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-1" v-if="foregroundGradient && foregroundGradientType == 'Linear'">
-                        <small class="text-xs">{{ $t("panel.qrcode.Gradient Angle") }}</small>
-                        <div class="flex items-center gap-1 p-1 py-0.5 rounded-md border-2 border-neutral-500 cursor-pointer" @click="switchFgGradientAngle()">
-                            <Icon class="w-4 h-4 bg-white" name="angle.svg" folder="icons/light" size="18px" />
-                            <small> {{ foregroundGradientAngle }} </small>°
-                        </div>
-                    </div>
-                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Barcode Color')" v-model="foregroundColor1" @input="renderOverlays()" />
-                    <Input
-                        class="w-48"
-                        type="color"
-                        :label="`${$t('panel.qrcode.Barcode Color')} 2`"
-                        v-model="foregroundColor2"
-                        @input="renderOverlays()"
-                        v-if="foregroundGradient"
-                    />
-                </div>
-                <hr class="w-full opacity-20" />
+            <div class="flex flex-col items-start gap-4 w-full max-w-4xl">
                 <div class="flex flex-wrap items-center justify-between gap-4 w-full">
-                    <h3 class="flex items-center gap-2 text-lg font-bold">
-                        <Icon class="w-5 h-5 gradient-re" name="grid.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.qrcode.Pixles") }}
-                    </h3>
-                </div>
-                <div class="flex flex-wrap items-center gap-4" v-if="checkLimitations([['menu-templates', true]], brand)">
-                    <div class="flex items-center gap-2">
-                        <Switch v-model:value="randomSize" @update:value="renderAll()" />
-                        <small class="text-xs">{{ $t("panel.qrcode.Randomize Dot Size") }}</small>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-sm">{{ $t("panel.qrcode.Link to your menu") }}:</span>
+                        <a class="bg-white px-2 py-1 rounded-md text-sm text-black hover:text-violet border" :href="link" target="_blank">{{ link }}</a>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <Switch v-model:value="rotateTheCode" @update:value="renderAll()" />
-                        <small class="text-xs">{{ $t("panel.qrcode.Rotate The Barcode") }}</small>
-                    </div>
+                    <button class="btn flex items-center justify-center gap-2 p-3 border rounded-md text-sm" @click="saveSettings()">
+                        <span class="flex items-center gap-2" v-if="!saving">
+                            <Icon class="w-5 h-5 bg-dolphin" name="floppy-disk.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.qrcode.Save Settings") }}
+                        </span>
+                        <Loading v-else />
+                    </button>
                 </div>
-                <ul class="flex flex-wrap items-start justify-start gap-2 w-full max-h-52 overflow-auto">
-                    <li
-                        class="relative flex items-center justify-center w-16 h-16 p-1.5 rounded-lg shadow-nr15 cursor-pointer"
-                        :class="[dotImage === item.image ? 'gradient' : 'bg-dolphin']"
-                        v-for="(item, i) in dotImageList"
-                        :key="i"
-                        @click="changeDotImage(item)"
-                    >
-                        <Icon
-                            class="absolute top-1 end-1 w-4 h-4 bg-white z-2"
-                            name="lock-keyhole.svg"
-                            folder="icons"
-                            size="16px"
-                            v-if="currentPlan.lvl < item.lvl"
+
+                <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
+                    <div class="flex flex-wrap items-center gap-4 w-full">
+                        <h3 class="flex items-center gap-2 text-lg font-bold">
+                            <Icon class="w-5 h-5 gradient-re" name="square.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.qrcode.Background Color") }}
+                        </h3>
+                        <span class="w-6 h-0.5 bg-neutral-300"></span>
+                        <div class="flex items-center gap-1">
+                            <small>{{ $t("panel.qrcode.Mono Color") }}</small>
+                            <Switch_Light v-model:value="backgroundGradient" @update:value="renderAll()" />
+                            <small>{{ $t("panel.qrcode.Gradient") }}</small>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-start gap-4">
+                        <div class="flex flex-col gap-1" v-if="backgroundGradient">
+                            <small class="text-xs">{{ $t("panel.qrcode.Gradient Type") }}</small>
+                            <div class="flex items-center gap-1">
+                                <span
+                                    class="flex items-center gap-1 p-1.5 rounded-md bg-neutral-700 cursor-pointer"
+                                    @click="switchBgGradientType('Linear')"
+                                >
+                                    <Icon
+                                        class="w-5 h-5"
+                                        :class="[backgroundGradientType == 'Linear' ? 'bg-purple-300' : 'bg-white']"
+                                        name="gradient-linear.svg"
+                                        folder="icons/light"
+                                        size="20px"
+                                    />
+                                </span>
+                                <span
+                                    class="flex items-center gap-1 p-1.5 rounded-md bg-neutral-700 cursor-pointer"
+                                    @click="switchBgGradientType('Radial')"
+                                >
+                                    <Icon
+                                        class="w-5 h-5"
+                                        :class="[backgroundGradientType == 'Radial' ? 'bg-purple-300' : 'bg-white']"
+                                        name="gradient-radial.svg"
+                                        folder="icons/light"
+                                        size="20px"
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1" v-if="backgroundGradient && backgroundGradientType == 'Linear'">
+                            <small class="text-xs">{{ $t("panel.qrcode.Gradient Angle") }}</small>
+                            <div
+                                class="flex items-center gap-1 p-2 py-1 rounded-md bg-neutral-700 text-white cursor-pointer"
+                                @click="switchBgGradientAngle()"
+                            >
+                                <Icon class="w-4 h-4 bg-white" name="angle.svg" folder="icons/light" size="18px" />
+                                <small> {{ backgroundGradientAngle }} </small>°
+                            </div>
+                        </div>
+                        <Input class="w-48" type="color" :label="$t('panel.qrcode.Background Color')" v-model="backgroundColor1" @input="renderOverlays()" />
+                        <Input
+                            class="w-48"
+                            type="color"
+                            :label="`${$t('panel.qrcode.Background Color')} 2`"
+                            v-model="backgroundColor2"
+                            @input="renderOverlays()"
+                            v-if="backgroundGradient"
                         />
-                        <img
-                            class="w-12 h-12 p-2 object-contain bg-white rounded-md"
-                            :class="[currentPlan.lvl >= item.lvl ? '' : 'opacity-50']"
-                            :src="item.image"
-                            loading="lazy"
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
+                    <div class="flex flex-wrap items-center gap-4 w-full">
+                        <h3 class="flex items-center gap-2 text-lg font-bold">
+                            <Icon class="w-5 h-5 gradient-re" name="qrcode.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.qrcode.Barcode Color") }}
+                        </h3>
+                        <span class="w-6 h-0.5 bg-neutral-300"></span>
+                        <div class="flex items-center gap-1">
+                            <small>{{ $t("panel.qrcode.Mono Color") }}</small>
+                            <Switch_Light v-model:value="foregroundGradient" @update:value="renderAll()" />
+                            <small>{{ $t("panel.qrcode.Gradient") }}</small>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-start gap-4">
+                        <div class="flex flex-col gap-1" v-if="foregroundGradient">
+                            <small class="text-xs">{{ $t("panel.qrcode.Gradient Type") }}</small>
+                            <div class="flex items-center gap-1">
+                                <span
+                                    class="flex items-center gap-1 p-1.5 rounded-md bg-neutral-700 cursor-pointer"
+                                    @click="switchFgGradientType('Linear')"
+                                >
+                                    <Icon
+                                        class="w-5 h-5"
+                                        :class="[foregroundGradientType == 'Linear' ? 'bg-purple-300' : 'bg-white']"
+                                        name="gradient-linear.svg"
+                                        folder="icons/light"
+                                        size="20px"
+                                    />
+                                </span>
+                                <span
+                                    class="flex items-center gap-1 p-1.5 rounded-md bg-neutral-700 cursor-pointer"
+                                    @click="switchFgGradientType('Radial')"
+                                >
+                                    <Icon
+                                        class="w-5 h-5"
+                                        :class="[foregroundGradientType == 'Radial' ? 'bg-purple-300' : 'bg-white']"
+                                        name="gradient-radial.svg"
+                                        folder="icons/light"
+                                        size="20px"
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1" v-if="foregroundGradient && foregroundGradientType == 'Linear'">
+                            <small class="text-xs">{{ $t("panel.qrcode.Gradient Angle") }}</small>
+                            <div
+                                class="flex items-center gap-1 p-2 py-1 rounded-md bg-neutral-700 text-white cursor-pointer"
+                                @click="switchFgGradientAngle()"
+                            >
+                                <Icon class="w-4 h-4 bg-white" name="angle.svg" folder="icons/light" size="18px" />
+                                <small> {{ foregroundGradientAngle }} </small>°
+                            </div>
+                        </div>
+                        <Input class="w-48" type="color" :label="$t('panel.qrcode.Barcode Color')" v-model="foregroundColor1" @input="renderOverlays()" />
+                        <Input
+                            class="w-48"
+                            type="color"
+                            :label="`${$t('panel.qrcode.Barcode Color')} 2`"
+                            v-model="foregroundColor2"
+                            @input="renderOverlays()"
+                            v-if="foregroundGradient"
                         />
-                    </li>
-                </ul>
-                <hr class="w-full opacity-20" />
-                <div class="flex flex-wrap items-center gap-4 w-full">
-                    <h3 class="flex items-center gap-2 text-lg font-bold">
-                        <Icon class="w-5 h-5 gradient-re" name="expand-wide.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.qrcode.Custom Corners") }}
-                    </h3>
-                    <Switch v-model:value="customCorner" @update:value="renderOverlays()" />
-                </div>
-                <div class="flex flex-wrap items-center gap-4" v-if="customCorner">
-                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Ring Color')" v-model="cornerRingColor" @input="renderOverlays()" />
-                    <div class="flex flex-col gap-2">
-                        <small class="text-xs">{{ $t("panel.qrcode.Ring Radius") }}</small>
-                        <input class="input-range w-24" type="range" max="3.5" step="0.1" v-model="cornerRingRadius" @input="renderOverlays()" />
-                    </div>
-                    <Input class="w-48" type="color" :label="$t('panel.qrcode.Center Color')" v-model="cornerCenterColor" @input="renderOverlays()" />
-                    <div class="flex flex-col gap-2">
-                        <small class="text-xs">{{ $t("panel.qrcode.Center Radius") }}</small>
-                        <input class="input-range w-24" type="range" max="2" step="0.1" v-model="cornerCenterRadius" @input="renderOverlays()" />
                     </div>
                 </div>
-                <hr class="w-full opacity-20" />
-                <div class="flex flex-wrap items-center gap-4 w-full">
-                    <h3 class="flex items-center gap-2 text-lg font-bold">
-                        <Icon class="w-5 h-5 gradient-re" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
-                        {{ $t("panel.qrcode.Add Restaurant Logo") }}
-                    </h3>
-                    <Switch v-model:value="withLogo" @update:value="renderOverlays()" />
-                </div>
-                <div class="flex flex-wrap gap-4" v-if="withLogo">
-                    <small
-                        class="flex flex-wrap items-start w-full max-w-sm p-3 rounded-md border border-neutral-600 bg-pencil-tip"
-                        v-if="!checkLimitations([['logo-in-qr', true]], brand)"
-                    >
-                        <span class="opacity-75">{{ $t("panel.This feature is for the pro plan only") }}.</span>
-                        <nuxt-link class="text-purple-300 underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
-                            {{ $t("panel.Upgrade your plan to get this feature") }}.
-                        </nuxt-link>
-                    </small>
-                    <div
-                        class="flex flex-wrap items-start gap-4 p-3 border-2 border-neutral-500 rounded-lg"
-                        v-if="checkLimitations([['logo-in-qr', true]], brand)"
-                    >
-                        <div class="flex flex-col gap-2">
-                            <small class="text-xs">{{ $t("panel.qrcode.Padding") }}</small>
-                            <input class="input-range w-24" type="range" max="3" step="1" v-model="logoPadding" @input="renderOverlays()" />
+
+                <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
+                    <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+                        <h3 class="flex items-center gap-2 text-lg font-bold">
+                            <Icon class="w-5 h-5 gradient-re" name="grid.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.qrcode.Pixles") }}
+                        </h3>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4" v-if="checkLimitations([['menu-templates', true]], brand)">
+                        <div class="flex items-center gap-2">
+                            <Switch_Light v-model:value="randomSize" @update:value="renderAll()" />
+                            <small class="text-xs">{{ $t("panel.qrcode.Randomize Dot Size") }}</small>
                         </div>
-                        <div class="flex flex-col gap-2">
-                            <small class="text-xs">{{ $t("panel.qrcode.Radius") }}</small>
-                            <input class="input-range w-24" type="range" min="1" max="7" step="1" v-model="logoBorderRadius" @input="renderOverlays()" />
+                        <div class="flex items-center gap-2">
+                            <Switch_Light v-model:value="rotateTheCode" @update:value="renderAll()" />
+                            <small class="text-xs">{{ $t("panel.qrcode.Rotate The Barcode") }}</small>
                         </div>
                     </div>
-                    <div
-                        class="flex flex-wrap items-start gap-4 p-2 border-2 border-neutral-500 rounded-lg"
-                        v-if="checkLimitations([['logo-in-qr', true]], brand)"
-                    >
+                    <ul class="flex flex-wrap items-start justify-start gap-3 w-full max-h-48 overflow-auto">
+                        <li
+                            class="relative flex items-center justify-center w-16 h-16 rounded-lg border shadow-nr10 cursor-pointer"
+                            :class="[dotImage === item.image ? 'gradient' : 'bg-transparent']"
+                            v-for="(item, i) in dotImageList"
+                            :key="i"
+                            @click="changeDotImage(item)"
+                        >
+                            <Icon
+                                class="absolute top-1 end-1 w-4 h-4 bg-black z-2"
+                                name="lock-keyhole.svg"
+                                folder="icons"
+                                size="16px"
+                                v-if="currentPlan.lvl < item.lvl"
+                            />
+                            <img
+                                class="w-12 h-12 p-1.5 object-contain bg-white rounded-md"
+                                :class="[currentPlan.lvl >= item.lvl ? '' : 'opacity-50']"
+                                :src="item.image"
+                                loading="lazy"
+                            />
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
+                    <div class="flex flex-wrap items-center gap-4 w-full">
+                        <h3 class="flex items-center gap-2 text-lg font-bold">
+                            <Icon class="w-5 h-5 gradient-re" name="expand-wide.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.qrcode.Custom Corners") }}
+                        </h3>
+                        <Switch_Light v-model:value="customCorner" @update:value="renderOverlays()" />
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4" v-if="customCorner">
+                        <Input class="w-48" type="color" :label="$t('panel.qrcode.Ring Color')" v-model="cornerRingColor" @input="renderOverlays()" />
                         <div class="flex flex-col gap-2">
-                            <small class="text-xs">{{ $t("panel.qrcode.Shadow") }}</small>
-                            <Switch v-model:value="logoShadow" @update:value="renderOverlays()" />
+                            <small class="text-xs">{{ $t("panel.qrcode.Ring Radius") }}</small>
+                            <input class="input-range light w-24" type="range" max="3.5" step="0.1" v-model="cornerRingRadius" @input="renderOverlays()" />
                         </div>
+                        <Input class="w-48" type="color" :label="$t('panel.qrcode.Center Color')" v-model="cornerCenterColor" @input="renderOverlays()" />
                         <div class="flex flex-col gap-2">
-                            <small class="text-xs">{{ $t("panel.qrcode.Shadow Intensity") }}</small>
-                            <input class="input-range w-24" type="range" max="9" step="1" v-model="logoShadowIntensity" @input="renderOverlays()" />
+                            <small class="text-xs">{{ $t("panel.qrcode.Center Radius") }}</small>
+                            <input class="input-range light w-24" type="range" max="2" step="0.1" v-model="cornerCenterRadius" @input="renderOverlays()" />
                         </div>
                     </div>
                 </div>
-                <hr class="w-full opacity-20" />
-                <button class="btn flex items-center justify-center gap-2 p-2 rounded-md border-2 text-sm" @click="saveSettings()">
+
+                <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
+                    <div class="flex flex-wrap items-center gap-4 w-full">
+                        <h3 class="flex items-center gap-2 text-lg font-bold">
+                            <Icon class="w-5 h-5 gradient-re" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.qrcode.Add Restaurant Logo") }}
+                        </h3>
+                        <Switch_Light v-model:value="withLogo" @update:value="renderOverlays()" />
+                    </div>
+                    <div class="flex flex-wrap gap-4" v-if="withLogo">
+                        <small
+                            class="flex flex-wrap items-start w-full max-w-sm p-3 rounded-md bg-neutral-800 text-white"
+                            v-if="!checkLimitations([['logo-in-qr', true]], brand)"
+                        >
+                            <span class="opacity-75">{{ $t("panel.This feature is for the pro plan only") }}.</span>
+                            <nuxt-link class="text-purple-300 underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                                {{ $t("panel.Upgrade your plan to get this feature") }}.
+                            </nuxt-link>
+                        </small>
+                        <div
+                            class="flex flex-wrap items-start gap-4 p-3 border-2 rounded-lg"
+                            v-if="checkLimitations([['logo-in-qr', true]], brand)"
+                        >
+                            <div class="flex flex-col gap-2">
+                                <small class="text-xs">{{ $t("panel.qrcode.Padding") }}</small>
+                                <input class="input-range light w-24" type="range" max="3" step="1" v-model="logoPadding" @input="renderOverlays()" />
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <small class="text-xs">{{ $t("panel.qrcode.Radius") }}</small>
+                                <input class="input-range light w-24" type="range" min="1" max="7" step="1" v-model="logoBorderRadius" @input="renderOverlays()" />
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-wrap items-start gap-4 p-2 border-2 rounded-lg"
+                            v-if="checkLimitations([['logo-in-qr', true]], brand)"
+                        >
+                            <div class="flex flex-col gap-2">
+                                <small class="text-xs">{{ $t("panel.qrcode.Shadow") }}</small>
+                                <Switch_Light v-model:value="logoShadow" @update:value="renderOverlays()" />
+                            </div>
+                            <div class="flex flex-col gap-2.5">
+                                <small class="text-xs">{{ $t("panel.qrcode.Shadow Intensity") }}</small>
+                                <input class="input-range light w-24" type="range" max="9" step="1" v-model="logoShadowIntensity" @input="renderOverlays()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <button class="btn flex items-center justify-center gap-2 p-3 bg-violet text-white rounded-md text-sm" @click="saveSettings()">
                     <span class="flex items-center gap-2" v-if="!saving">
                         <Icon class="w-4 h-4 bg-white" name="floppy-disk.svg" folder="icons/light" size="16px" />
                         {{ $t("panel.qrcode.Save Settings") }}
                     </span>
                     <Loading v-else />
-                </button>
+                </button> -->
             </div>
             <div class="sticky @7xl:top-0 flex flex-col items-center gap-4 w-full md:max-w-screen-xs p-4 rounded-lg bg-pencil-tip text-white shadow-nr10">
                 <small class="w-full opacity-75 text-justify">
                     {{ $t("panel.qrcode.Make sure the colors have good contrast so that the code is easily scannable") }}
                 </small>
                 <canvas class="w-full max-w-screen-xs aspect-square shadow-nr15 rounded-xl" ref="canvasEl"></canvas>
-                <button class="btn w-full text-sm p-2 rounded-md bg-violet grow" @click="saveCanvas()">{{ $t("panel.qrcode.Download QR Code") }}</button>
+                <button class="btn w-full text-sm p-3 rounded-md bg-violet grow" @click="saveCanvas()">{{ $t("panel.qrcode.Download QR Code") }}</button>
             </div>
         </div>
     </div>
@@ -299,7 +324,7 @@
 
 <script setup>
 import Input from "~/components/form/Input.vue";
-import Switch from "~/components/form/Switch.vue";
+import Switch_Light from "~/components/form/Switch_Light.vue";
 import QR from "~/composables/qrcodegen";
 import axios from "axios";
 import { useToast } from "vue-toastification";
@@ -414,15 +439,15 @@ const randomSize = ref(false);
 const customCorner = ref(true);
 const cornerRingColor = ref("#000");
 const cornerCenterColor = ref("#000");
-const cornerRingRadius = ref('0'); // 0 - 2 : .1
-const cornerCenterRadius = ref('0'); // 0 - 2 : .1
+const cornerRingRadius = ref("0"); // 0 - 2 : .1
+const cornerCenterRadius = ref("0"); // 0 - 2 : .1
 
 let logoImg;
 const withLogo = ref(false);
-const logoPadding = ref('2');
-const logoBorderRadius = ref('2'); // 0 - 7 : 1
+const logoPadding = ref("2");
+const logoBorderRadius = ref("2"); // 0 - 7 : 1
 const logoShadow = ref(true);
-const logoShadowIntensity = ref('5'); // 2 - 9 : 1
+const logoShadowIntensity = ref("5"); // 2 - 9 : 1
 
 let img;
 const cellNumbers = ref(0);

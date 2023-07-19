@@ -16,21 +16,21 @@ input::placeholder {
 }
 
 .wrapper:has(input:focus) {
-    box-shadow: 0px 0px 0px 2px theme("colors.neutral.500");
+    box-shadow: 0px 0px 0px 2px theme("colors.neutral.300");
 }
 </style>
 
 <template>
     <div class="flex flex-col gap-1">
         <div
-            class="wrapper relative flex items-center bg-neutral-700 text-white rounded-md"
+            class="wrapper relative flex items-center bg-neutral-100 text-dolphin rounded-md"
             :class="{ error: !!error, 'input-box-shadow': !!shadow }"
             @click="focus()"
         >
             <input
                 ref="input"
                 class="w-full bg-transparent rounded-b-md outline-none text-sm"
-                :class="[!!label ? 'p-0.5 px-3 pb-2 mt-6' : 'p-4']"
+                :class="[!!label ? 'p-1 px-3 pb-2 mt-6' : 'p-4']"
                 v-maska
                 :data-maska="mask"
                 :required="required"
@@ -43,20 +43,20 @@ input::placeholder {
                 @focus="isFocused = true"
                 @blur="isFocused = false"
             />
-            <small class="text-xs text-purple-300 pe-2 transition-all" :class="[isFocused || !!modelValue ? 'mt-5' : '']" v-if="unit">{{ unit }}</small>
+            <small class="text-xs bg-purple-600 pe-2 transition-all" :class="[isFocused || !!modelValue ? 'mt-5' : '']" v-if="unit">{{ unit }}</small>
             <span
                 class="absolute flex items-center gap-2 opacity-90 f-josefin"
                 :class="[isFocused || !!modelValue ? 'start-3 top-2 opacity-75' : 'start-4 top-5']"
             >
                 <Icon
                     class="icon w-4 h-4 bg-zinc-100"
-                    :class="{ 'bg-purple-200': isFocused || !!modelValue }"
+                    :class="{ 'bg-purple-600': isFocused || !!modelValue }"
                     :name="iconName"
                     :folder="iconFolder"
                     :size="isFocused || !!modelValue ? '14px' : '16px'"
                     v-if="iconName"
                 />
-                <span class="flex text-xs opacity-90" :class="{ 'text-purple-200': isFocused || !!modelValue }"> {{ label }} </span>
+                <span class="flex text-xs opacity-90" :class="{ 'text-purple-600': isFocused || !!modelValue }"> {{ label }} </span>
                 <span class="absolute end-0 -me-3 text-rose-400 text-lg" v-show="required">*</span>
             </span>
         </div>
