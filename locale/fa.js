@@ -415,7 +415,7 @@ export default {
             "Custom Corners": "استایل دهی به گوشه ها",
             "Mono Color": "تک رنگ",
             Gradient: "گرادیان",
-            "Ring Color": "رتگ حلقه",
+            "Ring Color": "رنگ حلقه",
             "Center Color": "رنگ مرکز",
             "Ring Radius": "شعاع حلقه",
             "Center Radius": "شعاع مرکز",
