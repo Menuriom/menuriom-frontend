@@ -1,13 +1,15 @@
 <template>
     <ul class="flex flex-wrap gap-2">
         <li class="flex flex-col gap-3 w-[150px] p-3 bg-pencil-tip rounded-lg shadow-nr35" v-for="i in 8" :key="i">
-            <span class="w-full aspect-square rounded-lg bg-neutral-700"></span>
+            <span class="w-full aspect-square rounded-lg bg-neutral-700">
+                <img class="w-full h-full opacity-5" :src="`/sample-foods/sample-food${(i % 5) + 1}.webp`" alt="" />
+            </span>
             <span class="w-10/12 h-2 bg-stone-500 rounded-sm"></span>
             <div class="flex flex-col gap-1.5">
                 <span class="w-full h-0.5 bg-neutral-200 opacity-75"></span>
                 <span class="w-8/12 h-0.5 bg-neutral-200 opacity-75"></span>
             </div>
-            <hr class="w-full opacity-20" />
+            <hr class="w-full opacity-10" />
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center gap-1 text-base/none">
                     <b class="w-12 h-4 bg-white opacity-75 rounded"></b>

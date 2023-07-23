@@ -75,7 +75,7 @@
         <hr class="w-full border-gray-300 opacity-50" />
         <div class="flex flex-wrap @[1280px]:flex-nowrap items-start gap-4 w-full">
             <section class="flex flex-col items-start gap-4 w-full grow"></section>
-            <Phone class="sticky @7xl:top-0 shrink-0" />
+            <Phone class="sticky @7xl:top-0 shrink-0" :selectedTab="selectedTab" />
         </div>
     </div>
 </template>
