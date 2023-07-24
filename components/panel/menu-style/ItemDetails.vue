@@ -9,7 +9,7 @@
 </style>
 
 <template>
-    <component :is="Frame2" :marginTop="imageTopMargin">
+    <component :is="Frame1" :marginTop="imageTopMargin">
         <Body2 :imageTopMargin="imageTopMargin" />
     </component>
 </template>

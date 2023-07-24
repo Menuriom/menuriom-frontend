@@ -12,21 +12,30 @@
     <div class="flex flex-col items-center gap-4 w-full mt-4">
         <div id="details" class="flex flex-col items-start gap-4 w-full">
             <div class="flex flex-col items-start gap-3 w-full">
-                <h2 class="w-11/12 h-3 bg-stone-400 rounded"></h2>
+                <h2 class="w-9/12 h-3 bg-stone-400 rounded"></h2>
                 <div class="flex flex-col gap-2 w-full">
                     <span class="w-full h-1 bg-white opacity-50 rounded"></span>
                     <span class="w-full h-1 bg-white opacity-50 rounded"></span>
                     <span class="w-8/12 h-1 bg-white opacity-50 rounded"></span>
                 </div>
             </div>
-            <div class="flex items-start justify-between gap-2 w-full">
-                <div class="flex items-center gap-1">
-                    <Icon class="w-6 h-6 bg-rose-300" name="heart.svg" folder="icons/tabler" size="24px" />
-                    <small>34</small>
+            <div class="flex items-center justify-between gap-4 w-full">
+                <div class="flex items-center gap-2 opacity-50">
+                    <strong class="p-2 rounded-md text-xs border border-stone-400 bg-pencil-tip bg-opacity-75 text-white">
+                        <h6 class="w-4 h-1 bg-white rounded"></h6>
+                    </strong>
+                    <strong class="p-2 rounded-md text-xs border border-stone-400 bg-pencil-tip bg-opacity-75 text-white">
+                        <h6 class="w-8 h-1 bg-white rounded"></h6>
+                    </strong>
                 </div>
-                <div class="flex items-center gap-1">
-                    <Icon class="w-6 h-6 bg-white opacity-75" name="message.svg" folder="icons/tabler" size="22px" />
-                    <small>. . .</small>
+                <div class="flex items-start gap-2">
+                    <div class="flex items-center gap-1 p-2 py-1 bg-dolphin rounded-full shadow-nr35">
+                        <Icon class="w-5 h-5 bg-rose-300" name="heart.svg" folder="icons/tabler" size="20px" />
+                        <small class="text-xs">34</small>
+                    </div>
+                    <div class="flex items-center gap-1 px-2 py-1 bg-dolphin rounded-full shadow-nr35">
+                        <Icon class="w-5 h-5 bg-white opacity-75" name="message.svg" folder="icons/tabler" size="20px" />
+                    </div>
                 </div>
             </div>
         </div>

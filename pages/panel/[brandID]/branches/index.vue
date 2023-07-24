@@ -13,7 +13,7 @@
                 </small>
             </div>
             <nuxt-link
-                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white flex-shrink-0"
                 :to="localePath(`/panel/${route.params.brandID}/branches/creation`)"
                 v-if="checkPermissions(['main-panel.branches.add'], brand)"
             >

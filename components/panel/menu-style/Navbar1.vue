@@ -3,7 +3,7 @@
         <button class="flex items-center justify-center w-10 h-10 bg-dolphin rounded-full">
             <Icon class="w-7 h-7 shrink-0 bg-white" name="bell-ringing.svg" folder="icons/tabler" size="28px" />
         </button>
-        <button class="flex items-center justify-center w-14 h-14 bg-dolphin rounded-full">
+        <button class="flex items-center justify-center w-16 h-16 bg-dolphin rounded-full border-4 border-pencil-tip">
             <Icon class="w-7 h-7 shrink-0 bg-stone-400" name="building-store.svg" folder="icons/tabler" size="28px" />
         </button>
         <button class="flex items-center justify-center w-10 h-10 bg-dolphin rounded-full">

@@ -15,7 +15,7 @@
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <button
-                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md border bg-white flex-shrink-0"
                     @click="panelStore.openPopUp('sent-invites')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
@@ -23,7 +23,7 @@
                     {{ $t("panel.side-menu.Sent Invites") }}
                 </button>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white border border-transparent flex-shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >

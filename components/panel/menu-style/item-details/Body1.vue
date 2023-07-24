@@ -11,13 +11,13 @@
 <template>
     <div class="flex flex-col items-center gap-4 w-full">
         <div id="images" class="flex items-center gap-4 w-max" :style="`margin-top: -${imageTopMargin / 4}rem`">
-            <div class="w-60 aspect-square rounded-xl bg-neutral-600 shadow-nr25 overflow-hidden">
+            <div class="w-56 aspect-square rounded-xl bg-neutral-600 shadow-nr25 overflow-hidden">
                 <img class="w-full h-full object-contain opacity-10" src="/sample-foods/sample-food1.webp" alt="" />
             </div>
-            <div class="w-60 aspect-square rounded-xl bg-neutral-600 shadow-nr25 overflow-hidden">
+            <div class="w-56 aspect-square rounded-xl bg-neutral-600 shadow-nr25 overflow-hidden">
                 <img class="w-full h-full object-contain opacity-10" src="/sample-foods/sample-food2.webp" alt="" />
             </div>
-            <div class="w-60 aspect-square rounded-xl bg-neutral-600 shadow-nr25 overflow-hidden">
+            <div class="w-56 aspect-square rounded-xl bg-neutral-600 shadow-nr25 overflow-hidden">
                 <img class="w-full h-full object-contain opacity-10" src="/sample-foods/sample-food3.webp" alt="" />
             </div>
         </div>
@@ -30,25 +30,32 @@
         <div class="flex flex-col items-start gap-4 w-full overflow-auto grow">
             <div id="details" class="flex items-start gap-4 w-full">
                 <div class="flex flex-col items-start gap-3 grow">
-                    <h2 class="w-11/12 h-3 bg-stone-400 rounded"></h2>
+                    <div class="flex items-center gap-2 opacity-50">
+                        <strong class="p-2 rounded-md text-xs border border-stone-400 bg-pencil-tip bg-opacity-75 text-white">
+                            <h6 class="w-4 h-1 bg-white rounded"></h6>
+                        </strong>
+                        <strong class="p-2 rounded-md text-xs border border-stone-400 bg-pencil-tip bg-opacity-75 text-white">
+                            <h6 class="w-8 h-1 bg-white rounded"></h6>
+                        </strong>
+                    </div>
+                    <h2 class="w-9/12 h-3 bg-stone-400 rounded"></h2>
                     <div class="flex flex-col gap-2 w-full">
                         <span class="w-full h-1 bg-white opacity-50 rounded"></span>
                         <span class="w-full h-1 bg-white opacity-50 rounded"></span>
                         <span class="w-8/12 h-1 bg-white opacity-50 rounded"></span>
                     </div>
                 </div>
-                <div class="flex flex-col items-start gap-2">
-                    <div class="flex items-center gap-1">
-                        <Icon class="w-6 h-6 bg-rose-300" name="heart.svg" folder="icons/tabler" size="24px" />
-                        <small>34</small>
+                <div class="flex flex-col items-end gap-2">
+                    <div class="flex flex-col items-center gap-1 p-2 bg-dolphin rounded-full shadow-nr35">
+                        <Icon class="w-5 h-5 bg-rose-300" name="heart.svg" folder="icons/tabler" size="20px" />
+                        <small class="text-xs">34</small>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <Icon class="w-6 h-6 bg-white opacity-75" name="message.svg" folder="icons/tabler" size="22px" />
-                        <small>. . .</small>
+                    <div class="flex flex-col items-center gap-1 p-2 bg-dolphin rounded-full shadow-nr35">
+                        <Icon class="w-5 h-5 bg-white opacity-75" name="message.svg" folder="icons/tabler" size="20px" />
                     </div>
                 </div>
             </div>
-            <ul id="types" class="flex items-start gap-4 w-full mt-2 overflow-auto">
+            <ul id="types" class="flex items-start gap-4 w-full overflow-auto">
                 <li
                     class="flex flex-col gap-4 p-3 rounded-lg border border-white border-opacity-5 cursor-pointer shadow-nr25"
                     :class="[selectedType == i ? 'bg-white' : 'bg-pencil-tip']"
