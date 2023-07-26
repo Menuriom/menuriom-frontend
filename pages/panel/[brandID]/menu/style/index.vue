@@ -74,8 +74,17 @@
         </ul>
         <hr class="w-full border-gray-300 opacity-50" />
         <div class="flex flex-wrap @[1280px]:flex-nowrap items-start gap-4 w-full">
-            <section class="flex flex-col items-start gap-4 w-full grow"></section>
-            <Phone class="sticky @7xl:top-0 shrink-0" :selectedTab="selectedTab" />
+            <section class="flex flex-col items-start gap-4 w-full grow">
+                <!-- ... -->
+            </section>
+            <Phone
+                class="sticky @7xl:top-0 shrink-0"
+                :selectedTab="selectedTab"
+                :baseColorOptions="baseColorOptions"
+                :headerOptions="headerOptions"
+                :searchOptions="searchOptions"
+                :categoriesOptions="categoriesOptions"
+            />
         </div>
     </div>
 </template>
@@ -96,4 +105,20 @@ useHead({ title: title });
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
 const selectedTab = ref("MainMenuStyle");
+
+const baseColorOptions = reactive({
+    textColor: "#232323",
+    bgColor: "#FCFCFD",
+    primaryColor: "#E2E2E2",
+    accentColor: "#7E7967",
+});
+const headerOptions = reactive({
+    component: "Header2",
+});
+const searchOptions = reactive({
+    component: "Search1",
+});
+const categoriesOptions = reactive({
+    component: "Categories1",
+});
 </script>

@@ -7,8 +7,11 @@
             v-for="i in 6"
             :key="i"
         >
-            <span class="w-28 aspect-square rounded-lg bg-neutral-700 shrink-0" :style="`margin-top: -${imageMargin / 4}rem`">
+            <span class="relative w-28 aspect-square rounded-lg bg-neutral-700 shrink-0" :style="`margin-top: -${imageMargin / 4}rem`">
                 <img class="w-full h-full opacity-5" :src="`/sample-foods/sample-food${(i % 5) + 1}.webp`" alt="" />
+                <div id="sold-out" class="absolute start-3 top-9 -rotate-45 p-2 px-3 rounded-md bg-pencil-tip bg-opacity-75 backdrop-blur-sm" v-if="i == 2">
+                    Sold Out
+                </div>
             </span>
             <div class="flex flex-col gap-2 w-full h-full grow">
                 <div class="flex items-center gap-1 opacity-50">
@@ -35,13 +38,6 @@
                         <Icon class="w-5 h-5 shrink-0 bg-pencil-tip" name="plus.svg" folder="icons/tabler" size="18px" />
                     </button>
                 </div>
-            </div>
-            <div
-                id="sold-out"
-                class="absolute start-4 top-12 -rotate-45 p-2 px-4 rounded-md bg-pencil-tip bg-opacity-75 backdrop-blur-sm"
-                v-if="i == 2"
-            >
-                Sold Out
             </div>
         </li>
     </ul>
