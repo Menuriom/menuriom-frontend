@@ -23,75 +23,123 @@
         <div
             id="screen"
             class="screen flex flex-col items-center w-full p-4 overflow-auto isolate"
-            :style="`background-color: ${baseColorOptions.bgColor}; color: ${baseColorOptions.textColor};`"
+            :style="`background-color: ${baseColorOptions.bgMainColor}; color: ${baseColorOptions.textColor};`"
         >
-            <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="~/assets/images/pattern2.png" alt="" />
+            <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="/patterns/pattern7.png" alt="" />
 
             <div
                 id="status-bar"
-                class="sticky top-0 flex items-center justify-between w-full h-7 px-6 pt-1 grayscale z-3 shrink-0"
-                :style="`background-color: ${baseColorOptions.primaryColor};`"
+                class="sticky top-0 flex items-center justify-between w-full h-7 px-6 pt-1 grayscale z-6 shrink-0"
+                :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
             >
                 <div class="text-xs text-white mix-blend-difference">12:59</div>
-                <div class="flex items-center gap-1">
-                    <img class="w-4 mix-blend-difference" src="/icons/tabler/antenna-bars-5.svg" alt="" />
-                    <img class="w-4 mix-blend-difference" src="/icons/tabler/wifi.svg" alt="" />
-                    <img class="w-4 mix-blend-difference" src="/icons/tabler/battery-3.svg" alt="" />
+                <div class="flex items-center">
+                    <img class="w-4.5 mix-blend-difference" src="/icons/tabler/antenna-bars-5.svg" alt="" />
+                    <img class="w-4.5 mix-blend-difference" src="/icons/tabler/wifi.svg" alt="" />
+                    <img class="w-4.5 mix-blend-difference" src="/icons/tabler/battery-3.svg" alt="" />
                 </div>
             </div>
 
             <component
                 name="header"
+                class="z-5"
                 :is="headers[headerOptions.component]"
                 :brand="brand"
                 :baseColorOptions="baseColorOptions"
                 textColor=""
-                bgColor=""
+                bgMainColor=""
+                bgSecondaryColor=""
                 primaryColor=""
                 accentColor=""
                 bgImage="/patterns/pattern2.png"
-                bgImageOpacity="70"
+                bgImageOpacity="20"
                 bgImageRotation="5"
                 logoRadius="50"
             />
 
-            <Offers1 />
+            <component
+                name="offers"
+                class="z-4"
+                :is="offers[offerOptions.component]"
+                :baseColorOptions="baseColorOptions"
+                textColor=""
+                bgMainColor=""
+                bgSecondaryColor=""
+                primaryColor=""
+                accentColor=""
+            />
 
             <component
                 name="search"
+                class="z-3"
                 :is="searchs[searchOptions.component]"
                 :baseColorOptions="baseColorOptions"
                 textColor=""
-                bgColor=""
+                bgMainColor=""
+                bgSecondaryColor=""
                 primaryColor=""
                 accentColor=""
             />
 
             <component
                 name="categories"
+                class="z-2"
                 :is="categories[categoriesOptions.component]"
                 :baseColorOptions="baseColorOptions"
                 textColor=""
-                bgColor=""
+                bgMainColor=""
+                bgSecondaryColor=""
                 primaryColor=""
                 accentColor=""
                 :icon="true"
                 flow="row"
+                radius="12"
             />
 
             <div id="item-groups" class="flex flex-col gap-4 w-full p-2">
-                <ItemHeader1 />
-                <h4 class="flex items-baseline gap-1 w-full p-2 rounded-md bg-neutral-900 text-xs shadow-nr15">
-                    <span class="w-10/12 h-1 my-1 bg-stone-400"></span>
+                <component
+                    name="itemHeaders"
+                    :is="itemHeaders[itemHeaderOptions.component]"
+                    :baseColorOptions="baseColorOptions"
+                    textColor=""
+                    bgMainColor=""
+                    bgSecondaryColor=""
+                    primaryColor=""
+                    accentColor=""
+                />
+                <h4
+                    class="flex flex-col gap-1 w-full p-2 rounded-md border border-neutral-500 border-opacity-20 text-xs shadow-nr15"
+                    :style="`background-color: ${baseColorOptions.bgMainColor};`"
+                >
+                    <span class="w-10/12 h-1 rounded" :style="`background-color: ${baseColorOptions.accentColor};`"></span>
+                    <span class="w-4/12 h-1 rounded" :style="`background-color: ${baseColorOptions.accentColor};`"></span>
                 </h4>
-                <!-- <ItemList1 :imageMargin="14" /> -->
-                <!-- <ItemList2 :imageMargin="20" /> -->
-                <ItemList3 :zigzag="true" :imageMargin="0" />
+                <component
+                    name="itemList"
+                    :is="itemLists[itemListOptions.component]"
+                    :baseColorOptions="baseColorOptions"
+                    textColor=""
+                    bgMainColor=""
+                    bgSecondaryColor=""
+                    primaryColor=""
+                    accentColor=""
+                    :zigzag="true"
+                    :imageMargin="0"
+                />
             </div>
 
-            <!-- <Navbar1 :border="true" /> -->
-            <Navbar2 :text="false" />
-            <!-- <Navbar3 :text="true" /> -->
+            <component
+                name="navbar"
+                :is="navbars[navbarOptions.component]"
+                :baseColorOptions="baseColorOptions"
+                textColor=""
+                bgMainColor=""
+                bgSecondaryColor=""
+                primaryColor=""
+                accentColor=""
+                :border="true"
+                :text="true"
+            />
 
             <ItemDetails v-if="selectedTab === 'ItemsDialogStyle'" />
             <StoreInfo :brand="brand" v-if="selectedTab === 'RestaurantDetailsPage'" />
@@ -101,14 +149,6 @@
 </template>
 
 <script setup>
-import Offers1 from "./Offers1.vue";
-import Navbar1 from "./Navbar1.vue";
-import Navbar2 from "./Navbar2.vue";
-import Navbar3 from "./Navbar3.vue";
-import ItemList1 from "./ItemList1.vue";
-import ItemList2 from "./ItemList2.vue";
-import ItemList3 from "./ItemList3.vue";
-import ItemHeader1 from "./ItemHeader1.vue";
 import ItemDetails from "./ItemDetails.vue";
 import StoreInfo from "./StoreInfo.vue";
 import SplashScreen from "./SplashScreen.vue";
@@ -124,6 +164,10 @@ const props = defineProps({
     headerOptions: { type: Object },
     searchOptions: { type: Object },
     categoriesOptions: { type: Object },
+    offerOptions: { type: Object },
+    itemHeaderOptions: { type: Object },
+    itemListOptions: { type: Object },
+    navbarOptions: { type: Object },
 });
 
 const headers = {
@@ -133,8 +177,24 @@ const headers = {
 const searchs = {
     Search1: defineAsyncComponent(() => import("./Search1.vue")),
 };
+const offers = {
+    Offers1: defineAsyncComponent(() => import("./Offers1.vue")),
+};
 const categories = {
     Categories1: defineAsyncComponent(() => import("./Categories1.vue")),
+};
+const itemHeaders = {
+    ItemHeader1: defineAsyncComponent(() => import("./ItemHeader1.vue")),
+};
+const itemLists = {
+    ItemList1: defineAsyncComponent(() => import("./ItemList1.vue")),
+    ItemList2: defineAsyncComponent(() => import("./ItemList2.vue")),
+    ItemList3: defineAsyncComponent(() => import("./ItemList3.vue")),
+};
+const navbars = {
+    Navbar1: defineAsyncComponent(() => import("./Navbar1.vue")),
+    Navbar2: defineAsyncComponent(() => import("./Navbar2.vue")),
+    Navbar3: defineAsyncComponent(() => import("./Navbar3.vue")),
 };
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});

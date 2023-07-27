@@ -166,8 +166,8 @@ const route = useRoute();
 const localePath = useLocalePath();
 const nuxtApp = useNuxtApp();
 
-const title = computed(() => `${t("panel.Payment Results")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.Payment Results")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: `${t("panel.Payment Results")} - ${t("panel.Your Menuriom Panel")}` });
 
 const showBillInfo = ref(false);
 

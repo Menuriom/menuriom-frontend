@@ -84,6 +84,10 @@
                 :headerOptions="headerOptions"
                 :searchOptions="searchOptions"
                 :categoriesOptions="categoriesOptions"
+                :offerOptions="offerOptions"
+                :itemHeaderOptions="itemHeaderOptions"
+                :itemListOptions="itemListOptions"
+                :navbarOptions="navbarOptions"
             />
         </div>
     </div>
@@ -99,26 +103,41 @@ const { t } = useI18n();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.menu-style.Menu Style Editor")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// TODO : remove t() function from all computed properties and from head tags if any
+// const title = computed(() => `${t("panel.menu-style.Menu Style Editor")} - ${t("panel.Your Menuriom Panel")}`);
+// useHead({ title: title });
+useHead({ title: `${t("panel.menu-style.Menu Style Editor")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
 const selectedTab = ref("MainMenuStyle");
 
 const baseColorOptions = reactive({
-    textColor: "#232323",
-    bgColor: "#FCFCFD",
-    primaryColor: "#E2E2E2",
-    accentColor: "#7E7967",
+    textColor: "#FCFCFD",
+    bgMainColor: "#323232",
+    bgSecondaryColor: "#545454",
+    primaryColor: "#c1aace",
+    accentColor: "#649eaf",
 });
 const headerOptions = reactive({
     component: "Header2",
+});
+const offerOptions = reactive({
+    component: "Offers1",
 });
 const searchOptions = reactive({
     component: "Search1",
 });
 const categoriesOptions = reactive({
     component: "Categories1",
+});
+const itemHeaderOptions = reactive({
+    component: "ItemHeader1",
+});
+const itemListOptions = reactive({
+    component: "ItemList1",
+});
+const navbarOptions = reactive({
+    component: "Navbar2",
 });
 </script>

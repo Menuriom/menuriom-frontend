@@ -245,8 +245,9 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.brands.Your Brands")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.brands.Your Brands")} - ${t("panel.Your Menuriom Panel")}`);
+// useHead({ title: title });
+useHead({ title: `${t("panel.brands.Your Brands")} - ${t("panel.Your Menuriom Panel")}` });
 
 // TODO : if user has only one brand and he is the owner of that brand, redirect user to the brand-edit page
 // TODO : add branch count and staff list to brands
