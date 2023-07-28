@@ -339,8 +339,8 @@ const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.qrcode.QR Code Editor")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.qrcode.QR Code Editor")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: `${t("panel.qrcode.QR Code Editor")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 const allowLogoInQR = checkLimitations([["logo-in-qr", true]], brand.value);

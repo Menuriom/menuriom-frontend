@@ -52,21 +52,25 @@
         style="width: calc(360px - 1rem); height: calc(715px - 1rem); border-radius: 3.25rem"
     >
         <div
-            class="splash-screen relative flex flex-col items-center justify-center gap-4 w-full h-full bg-pencil-tip rounded-2xl isolate overflow-hidden"
+            class="splash-screen relative flex flex-col items-center justify-center gap-4 w-full h-full rounded-2xl isolate overflow-hidden"
+            :style="`background-color: ${baseColorOptions.bgMainColor};`"
             :class="{ off: showAnimation }"
             @click="beginAnimation()"
         >
-            <img class="absolute -z-10 rotate-45 w-[30rem] max-w-none opacity-10 pointer-events-none" src="~/assets/images/pattern2.png" alt="" />
+            <img class="absolute -z-10 rotate-0 w-[30rem] max-w-none opacity-10 pointer-events-none" src="/patterns/pattern6.png" alt="" />
 
-            <div class="flex items-center justify-center w-36 h-36 p-6 bg-dolphin rounded-full shadow-nr25">
+            <div
+                class="flex items-center justify-center w-36 h-36 p-6 rounded-full shadow-nr25"
+                :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
+            >
                 <img class="w-full h-full object-contain rounded-full shadow-nr15" :src="brand.logo" alt="" />
             </div>
             <div class="flex flex-col items-center">
-                <h3 class="text-white rounded font-bold text-2xl">{{ brand.name }}</h3>
-                <small class="text-white opacity-75 text-xs">{{ brand.slogan }}</small>
+                <h3 class="rounded font-bold text-2xl" :style="`color: ${baseColorOptions.textColor};`">{{ brand.name }}</h3>
+                <small class="opacity-75 text-xs" :style="`color: ${baseColorOptions.textColor};`">{{ brand.slogan }}</small>
             </div>
 
-            <LineScroll class="absolute start-0 top-1/2 -z-10 -mt-16 opacity-40" :rotation="30" />
+            <LineScroll class="absolute start-0 top-1/2 -z-10 -mt-16 opacity-40" :baseColorOptions="baseColorOptions" :rotation="30" />
         </div>
     </div>
 </template>
@@ -76,6 +80,12 @@ import LineScroll from "./LineScroll.vue";
 
 const props = defineProps({
     brand: { type: Object },
+    baseColorOptions: { type: Object },
+    textColor: { type: String },
+    bgMainColor: { type: String },
+    bgSecondaryColor: { type: String },
+    primaryColor: { type: String },
+    accentColor: { type: String },
 });
 
 let showAnimation = ref(false);

@@ -43,7 +43,7 @@
             <component
                 name="header"
                 class="z-5"
-                :is="headers[headerOptions.component]"
+                :is="headers[mainMenuStyleOptions.headerOptions.component]"
                 :brand="brand"
                 :baseColorOptions="baseColorOptions"
                 textColor=""
@@ -60,7 +60,7 @@
             <component
                 name="offers"
                 class="z-4"
-                :is="offers[offerOptions.component]"
+                :is="offers[mainMenuStyleOptions.offerOptions.component]"
                 :baseColorOptions="baseColorOptions"
                 textColor=""
                 bgMainColor=""
@@ -72,7 +72,7 @@
             <component
                 name="search"
                 class="z-3"
-                :is="searchs[searchOptions.component]"
+                :is="searchs[mainMenuStyleOptions.searchOptions.component]"
                 :baseColorOptions="baseColorOptions"
                 textColor=""
                 bgMainColor=""
@@ -84,7 +84,7 @@
             <component
                 name="categories"
                 class="z-2"
-                :is="categories[categoriesOptions.component]"
+                :is="categories[mainMenuStyleOptions.categoriesOptions.component]"
                 :baseColorOptions="baseColorOptions"
                 textColor=""
                 bgMainColor=""
@@ -99,7 +99,7 @@
             <div id="item-groups" class="flex flex-col gap-4 w-full p-2">
                 <component
                     name="itemHeaders"
-                    :is="itemHeaders[itemHeaderOptions.component]"
+                    :is="itemHeaders[mainMenuStyleOptions.itemHeaderOptions.component]"
                     :baseColorOptions="baseColorOptions"
                     textColor=""
                     bgMainColor=""
@@ -116,7 +116,7 @@
                 </h4>
                 <component
                     name="itemList"
-                    :is="itemLists[itemListOptions.component]"
+                    :is="itemLists[mainMenuStyleOptions.itemListOptions.component]"
                     :baseColorOptions="baseColorOptions"
                     textColor=""
                     bgMainColor=""
@@ -130,7 +130,7 @@
 
             <component
                 name="navbar"
-                :is="navbars[navbarOptions.component]"
+                :is="navbars[mainMenuStyleOptions.navbarOptions.component]"
                 :baseColorOptions="baseColorOptions"
                 textColor=""
                 bgMainColor=""
@@ -141,9 +141,23 @@
                 :text="true"
             />
 
-            <ItemDetails v-if="selectedTab === 'ItemsDialogStyle'" />
-            <StoreInfo :brand="brand" v-if="selectedTab === 'RestaurantDetailsPage'" />
-            <SplashScreen :brand="brand" v-if="selectedTab === 'SplashScreen'" />
+            <ItemDetails :baseColorOptions="baseColorOptions" :itemsDialogStyleOptions="itemsDialogStyleOptions" v-if="selectedTab === 'ItemsDialogStyle'" />
+            <StoreInfo
+                :brand="brand"
+                :baseColorOptions="baseColorOptions"
+                :restaurantDetailsPageOptions="restaurantDetailsPageOptions"
+                v-if="selectedTab === 'RestaurantDetailsPage'"
+            />
+            <SplashScreen
+                :brand="brand"
+                :baseColorOptions="baseColorOptions"
+                textColor=""
+                bgMainColor=""
+                bgSecondaryColor=""
+                primaryColor=""
+                accentColor=""
+                v-if="selectedTab === 'SplashScreen'"
+            />
         </div>
     </div>
 </template>
@@ -161,13 +175,9 @@ const userStore = useUserStore();
 const props = defineProps({
     selectedTab: { type: String },
     baseColorOptions: { type: Object },
-    headerOptions: { type: Object },
-    searchOptions: { type: Object },
-    categoriesOptions: { type: Object },
-    offerOptions: { type: Object },
-    itemHeaderOptions: { type: Object },
-    itemListOptions: { type: Object },
-    navbarOptions: { type: Object },
+    mainMenuStyleOptions: { type: Object },
+    itemsDialogStyleOptions: { type: Object },
+    restaurantDetailsPageOptions: { type: Object },
 });
 
 const headers = {

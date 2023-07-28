@@ -20,49 +20,85 @@
         <span class="mt-2"></span>
 
         <div class="flex flex-col items-center gap-4">
-            <div class="flex items-center justify-center w-24 h-24 p-4 bg-dolphin rounded-full shadow-nr25">
+            <div
+                class="flex items-center justify-center w-28 h-28 p-4 rounded-full shadow-nr25"
+                :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
+            >
                 <img class="w-full h-full object-contain rounded-full shadow-nr15" :src="brand.logo" alt="" />
             </div>
             <div class="flex flex-col items-center">
-                <h3 class="text-white font-bold text-xl">{{ brand.name }}</h3>
-                <small class="text-white opacity-60 text-xxs">{{ brand.slogan }}</small>
+                <h3 class="font-bold text-xl" :style="`color: ${baseColorOptions.textColor};`">{{ brand.name }}</h3>
+                <small class="opacity-60 text-xxs" :style="`color: ${baseColorOptions.textColor};`">{{ brand.slogan }}</small>
             </div>
         </div>
 
         <ul class="flex items-center gap-2 w-full overflow-auto">
             <li
-                class="flex items-center gap-1 p-2 mt-1 bg-pencil-tip shadow-nr15 border border-neutral-200 border-opacity-10 rounded-md"
+                class="flex items-center gap-1 p-2 mt-1 shadow-nr15 border border-neutral-500 border-opacity-20 rounded-md"
+                :style="`background-color: ${baseColorOptions.bgMainColor};`"
                 v-for="i in 4"
                 :key="i"
             >
                 <Icon class="w-4 h-4 shrink-0 bg-red-400" name="map-pin-filled.svg" folder="icons/tabler" size="16px" />
-                <span class="w-16 h-1.5 bg-white opacity-90 rounded"></span>
+                <span class="w-16 h-1 opacity-90 rounded" :style="`background-color: ${baseColorOptions.textColor};`"></span>
             </li>
         </ul>
 
-        <div class="flex flex-col items-center gap-1 p-4 rounded-lg bg-pencil-tip bg-opacity-60 backdrop-blur-sm">
-            <Icon class="w-7 h-7 shrink-0 bg-stone-400" name="building-store.svg" folder="icons/tabler" size="28px" />
-            <span class="text-sm text-white"><b class="text-stone-400">Sunday</b> through <b class="text-stone-400">Friday</b></span>
-            <span class="text-sm text-white" dir="ltr">9:00 AM - 12:00 PM</span>
+        <div
+            class="flex flex-col items-center gap-1 p-4 rounded-lg border border-neutral-500 border-opacity-20 backdrop-blur-sm"
+            :style="`background-color: ${baseColorOptions.primaryColor};`"
+        >
+            <Icon
+                class="w-7 h-7 shrink-0"
+                :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
+                name="building-store.svg"
+                folder="icons/tabler"
+                size="28px"
+            />
+            <span class="text-sm" :style="`color: ${baseColorOptions.textColor};`">
+                <b :style="`color: ${baseColorOptions.bgSecondaryColor};`">Sunday</b>
+                through
+                <b :style="`color: ${baseColorOptions.bgSecondaryColor};`">Friday</b>
+            </span>
+            <span class="text-sm" :style="`color: ${baseColorOptions.textColor};`" dir="ltr">
+                <b :style="`color: ${baseColorOptions.bgSecondaryColor};`">9:00</b> AM - <b :style="`color: ${baseColorOptions.bgSecondaryColor};`">12:00</b> PM
+            </span>
         </div>
 
-        <div class="flex flex-col items-center gap-2">
-            <!-- <Icon class="w-6 h-6 shrink-0 bg-stone-400" name="phone-call.svg" folder="icons/tabler" size="24px" /> -->
-            <a class="text-lg/none" href="tel:0212345678" dir="ltr">021 <span class="inline-block w-20 h-3 bg-white rounded-sm"></span></a>
-            <a class="text-lg/none" href="tel:0212345678" dir="ltr">021 <span class="inline-block w-20 h-3 bg-white rounded-sm"></span></a>
+        <div class="flex flex-col items-center gap-2" :style="`color: ${baseColorOptions.textColor};`">
+            <a class="text-lg/none" href="tel:0212345678" dir="ltr">
+                021 <span class="inline-block w-24 h-3.5 rounded-sm" :style="`background-color: ${baseColorOptions.textColor};`"></span>
+            </a>
+            <a class="text-lg/none" href="tel:0212345678" dir="ltr">
+                021 <span class="inline-block w-24 h-3.5 rounded-sm" :style="`background-color: ${baseColorOptions.textColor};`"></span>
+            </a>
         </div>
 
-        <a class="flex items-center gap-1 text-sm" href="" title="Follow Us On Instagram" dir="ltr">
-            <div class="insta-gradient flex items-center justify-center rounded-lg">
-                <Icon class="w-6 h-6 bg-white" name="brand-instagram.svg" folder="icons/tabler" size="24px" />
-            </div>
-            @{{ brand.name }}
-        </a>
+        <div class="flex flex-wrap items-center gap-4">
+            <a class="flex items-center gap-1 text-sm" :style="`color: ${baseColorOptions.textColor};`" href="" dir="ltr" v-for="(item, i) in socials" :key="i">
+                <!-- <img class="w-6 h-6" width="24px" src="/socials/instagram.png" alt="" /> -->
+                <Icon
+                    class="w-8 h-8 shrink-0"
+                    :style="`background-color: ${baseColorOptions.accentColor};`"
+                    :name="`brand-${item}.svg`"
+                    folder="icons/tabler"
+                    size="32px"
+                />
+            </a>
+        </div>
     </div>
 </template>
 
 <script setup>
 const props = defineProps({
     brand: { type: Object },
+    baseColorOptions: { type: Object },
+    textColor: { type: String },
+    bgMainColor: { type: String },
+    bgSecondaryColor: { type: String },
+    primaryColor: { type: String },
+    accentColor: { type: String },
 });
+
+const socials = ref(["instagram", "twitter", "telegram", "whatsapp"]);
 </script>

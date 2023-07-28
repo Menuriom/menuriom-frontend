@@ -14,6 +14,28 @@
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
+        <div class="flex flex-wrap items-center gap-4">
+            <div class="relative flex items-center justify-center">
+                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.textColor};`"></span>
+                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.textColor" />
+            </div>
+            <div class="relative flex items-center justify-center">
+                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.bgMainColor};`"></span>
+                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.bgMainColor" />
+            </div>
+            <div class="relative flex items-center justify-center">
+                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"></span>
+                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.bgSecondaryColor" />
+            </div>
+            <div class="relative flex items-center justify-center">
+                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.primaryColor};`"></span>
+                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.primaryColor" />
+            </div>
+            <div class="relative flex items-center justify-center">
+                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.accentColor};`"></span>
+                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.accentColor" />
+            </div>
+        </div>
         <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
             <li
                 class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
@@ -81,13 +103,9 @@
                 class="sticky @7xl:top-0 shrink-0"
                 :selectedTab="selectedTab"
                 :baseColorOptions="baseColorOptions"
-                :headerOptions="headerOptions"
-                :searchOptions="searchOptions"
-                :categoriesOptions="categoriesOptions"
-                :offerOptions="offerOptions"
-                :itemHeaderOptions="itemHeaderOptions"
-                :itemListOptions="itemListOptions"
-                :navbarOptions="navbarOptions"
+                :mainMenuStyleOptions="mainMenuStyleOptions"
+                :itemsDialogStyleOptions="itemsDialogStyleOptions"
+                :restaurantDetailsPageOptions="restaurantDetailsPageOptions"
             />
         </div>
     </div>
@@ -103,9 +121,6 @@ const { t } = useI18n();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-// TODO : remove t() function from all computed properties and from head tags if any
-// const title = computed(() => `${t("panel.menu-style.Menu Style Editor")} - ${t("panel.Your Menuriom Panel")}`);
-// useHead({ title: title });
 useHead({ title: `${t("panel.menu-style.Menu Style Editor")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
@@ -119,25 +134,33 @@ const baseColorOptions = reactive({
     primaryColor: "#c1aace",
     accentColor: "#649eaf",
 });
-const headerOptions = reactive({
-    component: "Header2",
+
+// MainMenuStyle options --------------------------------
+const mainMenuStyleOptions = reactive({
+    headerOptions: { component: "Header2" },
+    offerOptions: { component: "Offers1" },
+    searchOptions: { component: "Search1" },
+    categoriesOptions: { component: "Categories1" },
+    itemHeaderOptions: { component: "ItemHeader1" },
+    itemListOptions: { component: "ItemList1" },
+    navbarOptions: { component: "Navbar2" },
 });
-const offerOptions = reactive({
-    component: "Offers1",
+// -------------------------------------------
+
+// ItemsDialogStyle options --------------------------------
+const itemsDialogStyleOptions = reactive({
+    frameOptions: { component: "Frame2" },
+    bodyOptions: { component: "Body2" },
 });
-const searchOptions = reactive({
-    component: "Search1",
+// -------------------------------------------
+
+// RestaurantDetailsPage --------------------------------
+const restaurantDetailsPageOptions = reactive({
+    frameOptions: { component: "Frame3" },
+    bodyOptions: { component: "Body1" },
 });
-const categoriesOptions = reactive({
-    component: "Categories1",
-});
-const itemHeaderOptions = reactive({
-    component: "ItemHeader1",
-});
-const itemListOptions = reactive({
-    component: "ItemList1",
-});
-const navbarOptions = reactive({
-    component: "Navbar2",
-});
+// -------------------------------------------
+
+// SplashScreen --------------------------------
+// -------------------------------------------
 </script>

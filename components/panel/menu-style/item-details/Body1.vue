@@ -9,61 +9,82 @@
 </style>
 
 <template>
-    <div class="flex flex-col items-center gap-4 w-full">
+    <div class="flex flex-col items-center gap-4 w-full pt-4">
         <div id="images" class="flex items-center gap-4 w-max" :style="`margin-top: -${imageTopMargin / 4}rem`">
-            <div class="w-56 aspect-square rounded-xl bg-neutral-600 shadow-nr25 overflow-hidden">
-                <img class="w-full h-full object-contain opacity-10" src="/sample-foods/sample-food1.webp" alt="" />
+            <div class="w-56 aspect-square rounded-xl shadow-nr15 overflow-hidden" :style="`background-color: ${baseColorOptions.bgSecondaryColor};`">
+                <img class="w-full h-full object-contain opacity-20" src="/sample-foods/sample-food1.webp" alt="" />
             </div>
-            <div class="w-56 aspect-square rounded-xl bg-neutral-600 shadow-nr25 overflow-hidden">
-                <img class="w-full h-full object-contain opacity-10" src="/sample-foods/sample-food2.webp" alt="" />
+            <div class="w-56 aspect-square rounded-xl shadow-nr15 overflow-hidden" :style="`background-color: ${baseColorOptions.bgSecondaryColor};`">
+                <img class="w-full h-full object-contain opacity-20" src="/sample-foods/sample-food2.webp" alt="" />
             </div>
-            <div class="w-56 aspect-square rounded-xl bg-neutral-600 shadow-nr25 overflow-hidden">
-                <img class="w-full h-full object-contain opacity-10" src="/sample-foods/sample-food3.webp" alt="" />
+            <div class="w-56 aspect-square rounded-xl shadow-nr15 overflow-hidden" :style="`background-color: ${baseColorOptions.bgSecondaryColor};`">
+                <img class="w-full h-full object-contain opacity-20" src="/sample-foods/sample-food3.webp" alt="" />
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <span class="w-4 h-2 bg-stone-400 rounded-full"></span>
-            <span class="w-2 h-2 bg-white opacity-20 rounded-full"></span>
-            <span class="w-2 h-2 bg-white opacity-20 rounded-full"></span>
+            <span class="w-4 h-2 rounded-full" :style="`background-color: ${baseColorOptions.primaryColor};`"></span>
+            <span class="w-2 h-2 opacity-20 rounded-full" :style="`background-color: ${baseColorOptions.textColor};`"></span>
+            <span class="w-2 h-2 opacity-20 rounded-full" :style="`background-color: ${baseColorOptions.textColor};`"></span>
         </div>
 
-        <div class="flex flex-col items-start gap-4 w-full overflow-auto grow">
+        <div class="flex flex-col items-start gap-4 w-full p-4 pt-0 overflow-auto grow">
             <div id="details" class="flex items-start gap-4 w-full">
                 <div class="flex flex-col items-start gap-3 grow">
-                    <div class="flex items-center gap-2 opacity-50">
-                        <strong class="p-2 rounded-md text-xs border border-stone-400 bg-pencil-tip bg-opacity-75 text-white">
-                            <h6 class="w-4 h-1 bg-white rounded"></h6>
+                    <div class="flex items-center gap-2 opacity-90">
+                        <strong
+                            class="p-2 rounded-md text-xs border border-neutral-500 border-opacity-20"
+                            :style="`background-color: ${baseColorOptions.accentColor};`"
+                        >
+                            <h6 class="w-4 h-1 rounded" :style="`background-color: ${baseColorOptions.textColor};`"></h6>
                         </strong>
-                        <strong class="p-2 rounded-md text-xs border border-stone-400 bg-pencil-tip bg-opacity-75 text-white">
-                            <h6 class="w-8 h-1 bg-white rounded"></h6>
+                        <strong
+                            class="p-2 rounded-md text-xs border border-neutral-500 border-opacity-20"
+                            :style="`background-color: ${baseColorOptions.accentColor};`"
+                        >
+                            <h6 class="w-8 h-1 rounded" :style="`background-color: ${baseColorOptions.textColor};`"></h6>
                         </strong>
                     </div>
-                    <h2 class="w-9/12 h-3 bg-stone-400 rounded"></h2>
+                    <h2 class="w-9/12 h-3 rounded" :style="`background-color: ${baseColorOptions.textColor};`"></h2>
                     <div class="flex flex-col gap-2 w-full">
-                        <span class="w-full h-1 bg-white opacity-50 rounded"></span>
-                        <span class="w-full h-1 bg-white opacity-50 rounded"></span>
-                        <span class="w-8/12 h-1 bg-white opacity-50 rounded"></span>
+                        <span class="w-full h-1 opacity-60 rounded" :style="`background-color: ${baseColorOptions.textColor};`"></span>
+                        <span class="w-full h-1 opacity-60 rounded" :style="`background-color: ${baseColorOptions.textColor};`"></span>
+                        <span class="w-8/12 h-1 opacity-60 rounded" :style="`background-color: ${baseColorOptions.textColor};`"></span>
                     </div>
                 </div>
                 <div class="flex flex-col items-end gap-2">
-                    <div class="flex flex-col items-center gap-1 p-2 bg-dolphin rounded-full shadow-nr35">
-                        <Icon class="w-5 h-5 bg-rose-300" name="heart.svg" folder="icons/tabler" size="20px" />
-                        <small class="text-xs">34</small>
+                    <div
+                        class="flex flex-col items-center gap-1 p-2 rounded-full shadow-nr15"
+                        :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
+                    >
+                        <Icon class="w-5 h-5 bg-rose-400" name="heart.svg" folder="icons/tabler" size="20px" />
+                        <small class="text-xs" :style="`color: ${baseColorOptions.textColor};`">34</small>
                     </div>
-                    <div class="flex flex-col items-center gap-1 p-2 bg-dolphin rounded-full shadow-nr35">
-                        <Icon class="w-5 h-5 bg-white opacity-75" name="message.svg" folder="icons/tabler" size="20px" />
+                    <div
+                        class="flex flex-col items-center gap-1 p-2 rounded-full shadow-nr15"
+                        :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
+                    >
+                        <Icon
+                            class="w-5 h-5"
+                            :style="`background-color: ${baseColorOptions.textColor};`"
+                            name="message.svg"
+                            folder="icons/tabler"
+                            size="20px"
+                        />
                     </div>
                 </div>
             </div>
-            <ul id="types" class="flex items-start gap-4 w-full overflow-auto">
+            <ul id="types" class="flex items-start gap-4 w-full pb-4 -mb-4 overflow-auto">
                 <li
-                    class="flex flex-col gap-4 p-3 rounded-lg border border-white border-opacity-5 cursor-pointer shadow-nr25"
-                    :class="[selectedType == i ? 'bg-white' : 'bg-pencil-tip']"
+                    class="flex flex-col gap-4 p-3 rounded-lg border border-neutral-500 border-opacity-20 cursor-pointer shadow-nr15"
+                    :style="`background-color: ${selectedType == i ? baseColorOptions.primaryColor : baseColorOptions.bgMainColor};`"
                     v-for="i in 4"
                     :key="i"
                     @click="selectedType = i"
                 >
-                    <h3 class="w-8 h-1 rounded-full opacity-60" :class="[selectedType == i ? 'bg-pencil-tip' : 'bg-white']"></h3>
+                    <h3
+                        class="w-8 h-1 rounded-full opacity-75"
+                        :style="`background-color: ${selectedType == i ? baseColorOptions.bgMainColor : baseColorOptions.textColor};`"
+                    ></h3>
                 </li>
             </ul>
             <ul id="toppings" class="flex flex-col items-start gap-4 w-full">
@@ -73,22 +94,37 @@
                     :key="i"
                     @click="selectedTopings.has(i) ? selectedTopings.delete(i) : selectedTopings.add(i)"
                 >
-                    <span class="rounded opacity-60 border-2" :class="[selectedTopings.has(i) ? 'bg-pencil-tip' : 'bg-white']">
-                        <Icon class="w-3 h-3 bg-pencil-tip" name="Check.svg" folder="icons/basil" size="16px" />
+                    <span
+                        class="rounded opacity-80 border-2"
+                        :style="`
+                        background-color: ${selectedTopings.has(i) ? baseColorOptions.bgMainColor : baseColorOptions.primaryColor};
+                        border-color: ${baseColorOptions.primaryColor};
+                        `"
+                    >
+                        <Icon class="w-3 h-3" :style="`background-color: ${baseColorOptions.bgMainColor};`" name="Check.svg" folder="icons/basil" size="16px" />
                     </span>
-                    <h3 class="w-20 h-2.5 rounded-full bg-white opacity-25"></h3>
-                    <span class="w-8 h-2 ms-auto rounded-full bg-stone-400 opacity-75"></span>
+                    <h3 class="w-20 h-2 rounded-full opacity-75" :style="`background-color: ${baseColorOptions.textColor};`"></h3>
+                    <span class="w-8 h-2 ms-auto rounded-full opacity-75" :style="`background-color: ${baseColorOptions.textColor};`"></span>
                 </li>
             </ul>
-            <hr class="w-full opacity-10 mt-auto" />
+            <hr class="w-full border-neutral-500 opacity-25 mt-auto" />
             <div id="price" class="flex flex-wrap items-center justify-between gap-4 w-full">
                 <div class="flex items-center gap-2">
-                    <span class="w-16 h-5 bg-white opacity-75 rounded"></span>
-                    <span class="w-3 h-5 bg-stone-400 rounded"></span>
+                    <span class="w-16 h-5 opacity-75 rounded" :style="`background-color: ${baseColorOptions.textColor};`"></span>
+                    <span class="w-3 h-5 rounded" :style="`background-color: ${baseColorOptions.accentColor};`"></span>
                 </div>
-                <button class="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-white text-pencil-tip shadow-nr35 shrink-0">
-                    <span class="w-16 h-2 bg-dolphin opacity-75 rounded"></span>
-                    <Icon class="w-5 h-5 shrink-0 bg-pencil-tip" name="plus.svg" folder="icons/tabler" size="20px" />
+                <button
+                    class="flex items-center justify-center gap-2 px-4 py-2 rounded-full shadow-nr35 shrink-0"
+                    :style="`background-color: ${baseColorOptions.primaryColor};`"
+                >
+                    <span class="w-16 h-1.5 opacity-75 rounded" :style="`background-color: ${baseColorOptions.bgMainColor};`"></span>
+                    <Icon
+                        class="w-5 h-5 shrink-0"
+                        :style="`background-color: ${baseColorOptions.bgMainColor};`"
+                        name="plus.svg"
+                        folder="icons/tabler"
+                        size="20px"
+                    />
                 </button>
             </div>
         </div>
@@ -97,6 +133,12 @@
 
 <script setup>
 const props = defineProps({
+    baseColorOptions: { type: Object },
+    textColor: { type: String },
+    bgMainColor: { type: String },
+    bgSecondaryColor: { type: String },
+    primaryColor: { type: String },
+    accentColor: { type: String },
     imageTopMargin: { type: Number },
 });
 

@@ -9,18 +9,41 @@
 </style>
 
 <template>
-    <component :is="Frame1">
-        <Body1 :brand="brand" />
+    <component
+        :is="frames[restaurantDetailsPageOptions.frameOptions.component]"
+        :baseColorOptions="baseColorOptions"
+        textColor=""
+        bgMainColor=""
+        bgSecondaryColor=""
+        primaryColor=""
+        accentColor=""
+    >
+        <component
+            :is="bodies[restaurantDetailsPageOptions.bodyOptions.component]"
+            :baseColorOptions="baseColorOptions"
+            textColor=""
+            bgMainColor=""
+            bgSecondaryColor=""
+            primaryColor=""
+            accentColor=""
+            :brand="brand"
+        />
     </component>
 </template>
 
 <script setup>
-import Frame1 from "./store-info/Frame1.vue";
-import Frame2 from "./store-info/Frame2.vue";
-import Frame3 from "./store-info/Frame3.vue";
-import Body1 from "./store-info/Body1.vue";
-
 const props = defineProps({
     brand: { type: Object },
+    baseColorOptions: { type: Object },
+    restaurantDetailsPageOptions: { type: Object },
 });
+
+const frames = {
+    Frame1: defineAsyncComponent(() => import("./store-info/Frame1.vue")),
+    Frame2: defineAsyncComponent(() => import("./store-info/Frame2.vue")),
+    Frame3: defineAsyncComponent(() => import("./store-info/Frame3.vue")),
+};
+const bodies = {
+    Body1: defineAsyncComponent(() => import("./store-info/Body1.vue")),
+};
 </script>

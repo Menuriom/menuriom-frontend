@@ -122,8 +122,8 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.branches.Branch Creation")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.branches.Branch Creation")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: `${t("panel.branches.Branch Creation")} - ${t("panel.Your Menuriom Panel")}` });
 
 const errorField = ref("");
 const responseMessage = ref("");
