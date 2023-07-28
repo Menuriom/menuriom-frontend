@@ -393,6 +393,48 @@ export default {
             "Menu items order updated": "Menu items order updated",
         },
 
+        "menu-style": {
+            "Menu Style Editor": "Menu Style Editor",
+            "Style your menu that suit your restaurant scheme": "Style your menu that suit your restaurant scheme",
+            "Main Menu Style": "Main Menu Style",
+            "Items Dialog Style": "Items Dialog Style",
+            "Restaurant Details Page": "Restaurant Details Page",
+            "Splash Screen": "Splash Screen",
+        },
+
+        qrcode: {
+            "QR Code Editor": "QR Code Editor",
+            "Build and customize your QR code": "Build and customize your QR code",
+            "QR Code Style": "QR Code Style",
+            "QR Code Stand Frame": "QR Code Stand Frame",
+
+            "Background Color": "Background Color",
+            "Barcode Color": "Barcode Color",
+            "Randomize Dot Size": "Randomize Dot Size",
+            "Custom Corners": "Custom Corners",
+            "Mono Color": "Mono Color",
+            Gradient: "Gradient",
+            "Ring Color": "Ring Color",
+            "Center Color": "Center Color",
+            "Ring Radius": "Ring Radius",
+            "Center Radius": "Center Radius",
+            "Add Restaurant Logo": "Add Restaurant Logo",
+            Padding: "Padding",
+            Radius: "Radius",
+            Pixles: "Pixles",
+            "Rotate The Barcode": "Rotate The Barcode",
+            Shadow: "Shadow",
+            "Shadow Intensity": "Shadow Intensity",
+            "Link to your menu": "Link to your menu",
+            "Gradient Type": "Gradient Type",
+            "Gradient Angle": "Gradient Angle",
+            "Download QR Code": "Download QR Code",
+            "Save Settings": "Save Settings",
+            "QR code settings are saved": "QR code settings are saved",
+            "Make sure the colors have good contrast so that the code is easily scannable":
+                "Make sure the colors have good contrast so that the code is easily scannable",
+        },
+
         staff: {
             "Staff Members": "Staff Members",
             "Invite new staff to your team and manage their access": "Invite new staff to your team and manage their access",
@@ -501,37 +543,6 @@ export default {
                 "Any unpaid renewal bill for your current plan will be canceled upon successful plan change",
             "because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade":
                 "because less than 5 days of your current plan remaining, you need to pay the whole price of the plan to upgrade",
-        },
-
-        qrcode: {
-            "QR Code Editor": "QR Code Editor",
-            "Build and customize your QR code": "Build and customize your QR code",
-            "QR Code Style": "QR Code Style",
-            "QR Code Stand Frame": "QR Code Stand Frame",
-
-            "Background Color": "Background Color",
-            "Barcode Color": "Barcode Color",
-            "Randomize Dot Size": "Randomize Dot Size",
-            "Custom Corners": "Custom Corners",
-            "Mono Color": "Mono Color",
-            Gradient: "Gradient",
-            "Ring Color": "Ring Color",
-            "Center Color": "Center Color",
-            "Ring Radius": "Ring Radius",
-            "Center Radius": "Center Radius",
-            "Add Restaurant Logo": "Add Restaurant Logo",
-            Padding: "Padding",
-            Radius: "Radius",
-            Pixles: "Pixles",
-            "Rotate The Barcode": "Rotate The Barcode",
-            Shadow: "Shadow",
-            "Shadow Intensity": "Shadow Intensity",
-            "Link to your menu": "Link to your menu",
-            "Gradient Type": "Gradient Type",
-            "Gradient Angle": "Gradient Angle",
-            "Download QR Code": "Download QR Code",
-            "Make sure the colors have good contrast so that the code is easily scannable":
-                "Make sure the colors have good contrast so that the code is easily scannable",
         },
 
         payment: {

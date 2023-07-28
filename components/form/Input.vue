@@ -1,6 +1,6 @@
 <style scoped>
 .input-box-shadow {
-    box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 10%);
+    /* box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 5%); */
 }
 
 .error {
@@ -16,7 +16,7 @@ input::placeholder {
 }
 
 .wrapper:has(input:focus) {
-    box-shadow: 0px 0px 0px 2px theme("colors.zinc.500");
+    box-shadow: 0px 0px 0px 2px theme("colors.neutral.500");
 }
 </style>
 
@@ -30,7 +30,7 @@ input::placeholder {
             <input
                 ref="input"
                 class="w-full bg-transparent rounded-b-md outline-none text-sm"
-                :class="[!!label ? 'p-1 px-3 pb-1.5 mt-6' : 'p-4']"
+                :class="[!!label ? 'p-0.5 px-3 pb-2 mt-6' : 'p-4']"
                 v-maska
                 :data-maska="mask"
                 :required="required"
@@ -46,11 +46,11 @@ input::placeholder {
             <small class="text-xs text-purple-300 pe-2 transition-all" :class="[isFocused || !!modelValue ? 'mt-5' : '']" v-if="unit">{{ unit }}</small>
             <span
                 class="absolute flex items-center gap-2 opacity-90 f-josefin"
-                :class="[isFocused || !!modelValue ? 'start-3 top-1.5 opacity-75' : 'start-4 top-4.5']"
+                :class="[isFocused || !!modelValue ? 'start-3 top-2 opacity-75' : 'start-4 top-5']"
             >
                 <Icon
                     class="icon w-4 h-4 bg-zinc-100"
-                    :class="{ 'bg-purple-300': isFocused || !!modelValue }"
+                    :class="{ 'bg-purple-200': isFocused || !!modelValue }"
                     :name="iconName"
                     :folder="iconFolder"
                     :size="isFocused || !!modelValue ? '14px' : '16px'"

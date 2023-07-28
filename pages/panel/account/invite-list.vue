@@ -52,7 +52,8 @@ const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-useHead({ title: computed(() => t("panel.account.Invitations List")) });
+// useHead({ title: computed(() => t("panel.account.Invitations List")) });
+useHead({ title: t("panel.account.Invitations List") });
 
 const errorField = ref("");
 const responseMessage = ref("");

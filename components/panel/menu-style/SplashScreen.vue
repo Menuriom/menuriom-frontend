@@ -1,0 +1,97 @@
+<style scoped>
+*::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+* {
+    scrollbar-width: none;
+}
+
+.splash-screen {
+    opacity: 1;
+}
+.splash-screen.off {
+    animation: opacity-swing 2s ease;
+    animation: slide-up 2s ease;
+    animation: slide-left 2s ease;
+    animation: fall 2s ease;
+    animation: zoom-fade 2s ease;
+}
+
+@keyframes opacity-swing {
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes slide-up {
+    100% {
+        transform: translateY(-100%);
+    }
+}
+@keyframes slide-left {
+    100% {
+        transform: translateX(-100%);
+    }
+}
+@keyframes fall {
+    100% {
+        transform: translate(100%, 150%) rotate(60deg);
+    }
+}
+@keyframes zoom-fade {
+    100% {
+        opacity: 0;
+        transform: scale(3, 3);
+    }
+}
+</style>
+
+<template>
+    <div
+        class="fixed flex items-center justify-center px-2.5 z-20 overflow-hidden"
+        style="width: calc(360px - 1rem); height: calc(715px - 1rem); border-radius: 3.25rem"
+    >
+        <div
+            class="splash-screen relative flex flex-col items-center justify-center gap-4 w-full h-full rounded-2xl isolate overflow-hidden"
+            :style="`background-color: ${baseColorOptions.bgMainColor};`"
+            :class="{ off: showAnimation }"
+            @click="beginAnimation()"
+        >
+            <img class="absolute -z-10 rotate-0 w-[30rem] max-w-none opacity-10 pointer-events-none" src="/patterns/pattern6.png" alt="" />
+
+            <div
+                class="flex items-center justify-center w-36 h-36 p-6 rounded-full shadow-nr25"
+                :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
+            >
+                <img class="w-full h-full object-contain rounded-full shadow-nr15" :src="brand.logo" alt="" />
+            </div>
+            <div class="flex flex-col items-center">
+                <h3 class="rounded font-bold text-2xl" :style="`color: ${baseColorOptions.textColor};`">{{ brand.name }}</h3>
+                <small class="opacity-75 text-xs" :style="`color: ${baseColorOptions.textColor};`">{{ brand.slogan }}</small>
+            </div>
+
+            <LineScroll class="absolute start-0 top-1/2 -z-10 -mt-16 opacity-40" :baseColorOptions="baseColorOptions" :rotation="30" />
+        </div>
+    </div>
+</template>
+
+<script setup>
+import LineScroll from "./LineScroll.vue";
+
+const props = defineProps({
+    brand: { type: Object },
+    baseColorOptions: { type: Object },
+    textColor: { type: String },
+    bgMainColor: { type: String },
+    bgSecondaryColor: { type: String },
+    primaryColor: { type: String },
+    accentColor: { type: String },
+});
+
+let showAnimation = ref(false);
+const beginAnimation = () => {
+    if (showAnimation.value !== false) return;
+    showAnimation.value = true;
+    setTimeout(() => (showAnimation.value = false), 3000);
+};
+</script>

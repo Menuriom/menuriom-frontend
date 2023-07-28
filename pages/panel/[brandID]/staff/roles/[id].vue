@@ -173,8 +173,8 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.staff.roles.Edit Role")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.staff.roles.Edit Role")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: `${t("panel.staff.roles.Edit Role")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 

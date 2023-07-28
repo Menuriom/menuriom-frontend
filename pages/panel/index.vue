@@ -2,10 +2,13 @@
 .mask {
     background-image: linear-gradient(90deg, theme("colors.violet") 0%, theme("colors.baby-blue") 100%);
     mix-blend-mode: plus-lighter;
-    mask: url("~/assets/images/pattern.webp");
+    mask: url("~/assets/images/pattern2.png");
+    /* mask: url("~/assets/images/pattern.webp"); */
     mask-size: 200px;
     mask-position: 20px 20px;
-}</style>
+    opacity: 0.75;
+}
+</style>
 
 <template>
     <div class="flex flex-col gap-4 w-full">
@@ -30,38 +33,38 @@
         </header>
         <hr class="w-full border-gray-400 opacity-50" />
         <section class="relative flex flex-col w-full">
-            <div class="absolute -top-4 w-full h-40 bg-pencil-tip rounded-lg"><div class="absolute mask inset-0"></div></div>
-            <ul class="grid gap-3 px-4 w-full" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-show="!loading">
+            <div class="absolute -top-6 w-full h-40 bg-dolphin rounded-lg shadow-nr25"><div class="absolute mask inset-0"></div></div>
+            <ul class="grid gap-6 px-6 w-full" style="grid-template-columns: repeat(auto-fill, minmax(245px, 1fr))" v-show="!loading">
                 <li
-                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
+                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-xl bg-pencil-tip text-white group shadow-nr5 hover:shadow-nr35 transition-all overflow-hidden"
                     v-for="(brand, i) in records.list"
                     :key="i"
                 >
                     <div class="absolute top-4 start-4 flex flex-col gap-2">
                         <nuxt-link
-                            class="btn flex items-center gap-1 p-2 rounded-md bg-pencil-tip"
+                            class="btn flex items-center gap-1 p-2 rounded-md bg-white"
                             :to="localePath(`/panel/${brand._id}`)"
                             :title="$t(`panel.brands.Go To Dashboard`)"
                             v-if="checkPermissions(['panel'], brand)"
                         >
                             <!-- <Icon class="w-5 h-5 bg-white" name="column-light.svg" folder="icons/light" size="20px" /> -->
-                            <img class="w-4" src="~/assets/images/panel-icons/rectangles-mixed.png" alt="" />
+                            <img class="w-4" src="~/assets/images/panel-icons/rectangles-mixed-dark.png" alt="" />
                         </nuxt-link>
                         <nuxt-link
-                            class="btn flex items-center gap-1 p-2 rounded-md bg-pencil-tip"
+                            class="btn flex items-center gap-1 p-2 rounded-md bg-white"
                             :to="localePath(`/orders-panel/${panelStore.selectedBrandId}`)"
                             :title="$t('panel.side-menu.Orders')"
                             v-if="checkPermissions(['orders-panel'], brand)"
                         >
-                            <img class="w-4" src="~/assets/images/panel-icons/cash-register-light.png" alt="" />
+                            <img class="w-4" src="~/assets/images/panel-icons/cash-register.png" alt="" />
                         </nuxt-link>
                         <nuxt-link
-                            class="btn flex items-center gap-1 p-2 rounded-md bg-pencil-tip"
+                            class="btn flex items-center gap-1 p-2 rounded-md bg-white"
                             :to="localePath(`/ordering-app/${panelStore.selectedBrandId}`)"
                             :title="$t('panel.side-menu.Ordering App')"
                             v-if="checkPermissions(['ordering-app'], brand)"
                         >
-                            <img class="w-4" src="~/assets/images/panel-icons/mobile-button-light.png" alt="" />
+                            <img class="w-4" src="~/assets/images/panel-icons/mobile-button.png" alt="" />
                         </nuxt-link>
                     </div>
                     <SlideMenu class="z-10">
@@ -96,8 +99,8 @@
                         </button>
                     </SlideMenu>
                     <nuxt-link class="btn rounded-full -mt-2 mb-4" :to="localePath(`/panel/${brand._id}`)" :title="$t(`panel.brands.Go To Dashboard`)">
-                        <img class="w-24 h-24 rounded-full object-cover shadow-nr15 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
-                        <img class="w-24 h-24 rounded-full object-cover shadow-nr15 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                        <img class="w-28 h-28 rounded-full object-cover shadow-nr15 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
+                        <img class="w-28 h-28 rounded-full object-cover shadow-nr15 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                     </nuxt-link>
                     <div class="flex flex-wrap items-center justify-between gap-2 w-full flex-grow">
                         <h4 class="text-lg/none font-semibold flex-grow">{{ brand.name }}</h4>
@@ -106,22 +109,22 @@
                     <hr class="w-full border-zinc-300" />
                     <div class="flex items-center justify-between gap-4 w-full">
                         <ul class="flex items-center">
-                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10">
-                                <img class="w-full h-full object-contain grayscale" src="/avatar.svg" alt="" />
+                            <li class="flex items-center justify-center w-8 h-8 bg-dolphin rounded-full shadow-nr10">
+                                <img class="w-full h-full object-contain" src="/avatar.webp" alt="" />
                             </li>
-                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10 -ms-3">
-                                <img class="w-full h-full object-contain grayscale" src="/avatar.svg" alt="" />
+                            <li class="flex items-center justify-center w-8 h-8 bg-dolphin rounded-full shadow-nr10 -ms-3">
+                                <img class="w-full h-full object-contain" src="/avatar.webp" alt="" />
                             </li>
-                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10 -ms-3">
-                                <img class="w-full h-full object-contain grayscale" src="/avatar.svg" alt="" />
+                            <li class="flex items-center justify-center w-8 h-8 bg-dolphin rounded-full shadow-nr10 -ms-3">
+                                <img class="w-full h-full object-contain" src="/avatar.webp" alt="" />
                             </li>
-                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 rounded-full shadow-nr10 -ms-3 z-2">
+                            <li class="flex items-center justify-center w-8 h-8 bg-neutral-200 text-dolphin rounded-full shadow-nr10 -ms-3 z-2">
                                 <small>3+</small>
                             </li>
                         </ul>
                         <div class="flex items-center gap-1" :title="$t('panel.brands.Branch')">
-                            <Icon class="w-5 h-5 bg-black" name="house.svg" folder="icons/light" size="20px" />
-                            <h5 class="font-semibold">2</h5>
+                            <Icon class="w-5 h-5 bg-white" name="house.svg" folder="icons/light" size="20px" />
+                            <h5 class="">2</h5>
                         </div>
                     </div>
                 </li>
@@ -147,10 +150,7 @@
                     </small>
                 </div>
                 <div class="flex flex-wrap items-center justify-center gap-4">
-                    <nuxt-link
-                        class="btn flex items-center gap-2 bg-violet text-white p-3 rounded-md"
-                        :to="localePath(`/panel/brand/creation`)"
-                    >
+                    <nuxt-link class="btn flex items-center gap-2 bg-violet text-white p-3 rounded-md" :to="localePath(`/panel/brand/creation`)">
                         <Icon class="w-5 h-5 bg-white" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.brands.Create New Brand") }}
                     </nuxt-link>
@@ -245,8 +245,9 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.brands.Your Brands")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.brands.Your Brands")} - ${t("panel.Your Menuriom Panel")}`);
+// useHead({ title: title });
+useHead({ title: `${t("panel.brands.Your Brands")} - ${t("panel.Your Menuriom Panel")}` });
 
 // TODO : if user has only one brand and he is the owner of that brand, redirect user to the brand-edit page
 // TODO : add branch count and staff list to brands

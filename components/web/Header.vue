@@ -83,10 +83,10 @@ nav {
                             >
                                 <li class="w-full p-3 hover:bg-neutral-100 rounded-lg" v-for="(item, i) in features.list" :key="i">
                                     <nuxt-link class="flex items-center gap-2" :to="localePath(`/features#${item.title.toLowerCase().replaceAll(' ', '-')}`)">
-                                        <img class="w-8" :src="item.icon" :alt="item.title" />
+                                        <img class="w-8" :src="item.icon" :alt="$t(`header.${item.title}`)" />
                                         <div class="flex flex-col">
-                                            <h4 class="f-inter font-semibold opacity-70">{{ item.title }}</h4>
-                                            <small class="text-xs opacity-75">{{ item.desc }}</small>
+                                            <h4 class="f-inter font-semibold opacity-70">{{ $t(`header.${item.title}`) }}</h4>
+                                            <small class="text-xs opacity-75">{{ $t(`header.${item.desc}`) }}</small>
                                         </div>
                                     </nuxt-link>
                                 </li>
@@ -180,29 +180,26 @@ import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 
 const localePath = useLocalePath();
-const { locale, t } = useI18n();
+const { locale } = useI18n();
 
 const userStore = useUserStore();
 const user = storeToRefs(userStore);
 
 const featureDropdown = ref(null); //Ref to DOM
 const featureListOpen = ref(false);
-const features = computed(() => {
-    return {
-        list: [
-            { icon: "/gradient-icons/dark/palette.png", title: t("header.Templates&Customization"), desc: t("header.Templates&CustomizationDesc") },
-            { icon: "/gradient-icons/dark/store.png", title: t("header.MultipleBranches"), desc: t("header.MultipleBranchesDesc") },
-            { icon: "/gradient-icons/dark/fire.png", title: t("header.ItemSpecialazation"), desc: t("header.ItemSpecialazationDesc") },
-            { icon: "/gradient-icons/dark/clipboard-list-check.png", title: t("header.OrderingSystem"), desc: t("header.OrderingSystemDesc") },
-            { icon: "/gradient-icons/dark/earth-america.png", title: t("header.MenuTranslation"), desc: t("header.MenuTranslationDesc") },
-            { icon: "/gradient-icons/dark/bell-on.png", title: t("header.ServerCall"), desc: t("header.ServerCallDesc") },
-            { icon: "/gradient-icons/dark/comments-question-check.png", title: t("header.FeedbackSystem"), desc: t("header.FeedbackSystemDesc") },
-            { icon: "/gradient-icons/dark/object-intersect.png", title: t("header.ComboLists"), desc: t("header.ComboListsDesc") },
-            { icon: "/gradient-icons/dark/qrcode.png", title: t("header.CustomQRCode"), desc: t("header.CustomQRCodeDesc") },
-        ],
-    };
+const features = reactive({
+    list: [
+        { icon: "/gradient-icons/dark/palette.png", title: "Templates&Customization", desc: "Templates&CustomizationDesc" },
+        { icon: "/gradient-icons/dark/store.png", title: "MultipleBranches", desc: "MultipleBranchesDesc" },
+        { icon: "/gradient-icons/dark/fire.png", title: "ItemSpecialazation", desc: "ItemSpecialazationDesc" },
+        { icon: "/gradient-icons/dark/clipboard-list-check.png", title: "OrderingSystem", desc: "OrderingSystemDesc" },
+        { icon: "/gradient-icons/dark/earth-america.png", title: "MenuTranslation", desc: "MenuTranslationDesc" },
+        { icon: "/gradient-icons/dark/bell-on.png", title: "ServerCall", desc: "ServerCallDesc" },
+        { icon: "/gradient-icons/dark/comments-question-check.png", title: "FeedbackSystem", desc: "FeedbackSystemDesc" },
+        { icon: "/gradient-icons/dark/object-intersect.png", title: "ComboLists", desc: "ComboListsDesc" },
+        { icon: "/gradient-icons/dark/qrcode.png", title: "CustomQRCode", desc: "CustomQRCodeDesc" },
+    ],
 });
-// reactive({});
 
 const menuOpen = ref(false);
 

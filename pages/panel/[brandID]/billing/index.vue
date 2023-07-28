@@ -165,7 +165,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 p-1 sm:p-4 w-full border-2 bg-white rounded-lg shadow-nr5 grow" v-else>
+                <div class="flex flex-col gap-4 p-0 sm:p-4 w-full sm:border-2 bg-white rounded-lg shadow-nr5 grow" v-else>
                     <div class="flex flex-wrap items-start justify-center gap-4 w-full">
                         <div class="flex flex-wrap items-center gap-4 p-2 md:p-0 grow">
                             <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Upgrade Your Plan Now") }}</h3>
@@ -185,11 +185,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-wrap items-start gap-4 grow">
+                    <div class="flex flex-wrap xl:flex-nowrap items-start gap-4 grow">
                         <div
-                            class="plan-card relative flex flex-col gap-4 w-full md:w-80 p-4 rounded-xl bg-pencil-tip shadow-nr15 grow"
+                            class="plan-card relative flex flex-col gap-4 w-full p-4 rounded-xl bg-pencil-tip shadow-nr15 cursor-pointer grow"
                             v-for="(plan, i) in purchasablePlans.plans.filter((plan) => plan.monthlyPrice != 0 && plan.yearlyPrice != 0)"
                             :key="i"
+                            @click="checkPermissions(['main-panel.billing.change-plan'], brand) ? panelStore.openPopUp('change-plan-dialog') : ''"
                         >
                             <div class="flex items-center gap-2">
                                 <img class="w-10" :src="plan.icon" :alt="plan.name" />
@@ -201,22 +202,15 @@
                                 v-if="plan.monthlyPrice > 0"
                             >
                                 <div class="flex flex-wrap items-baseline gap-1">
-                                    <b class="f-inter text-emerald-100 text-4xl">
+                                    <b class="f-inter text-emerald-100 text-3xl">
                                         {{ Intl.NumberFormat(locale).format((priceType === "monthly" ? plan.monthlyPrice : plan.yearlyPrice) / 1000)
                                         }}<span class="text-xs">,000</span>
                                     </b>
                                     <b class="f-inter text-baby-blue">{{ $t("pricing.Toman") }}</b>
                                     <small class="">/ {{ priceType == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</small>
                                 </div>
-                                <button
-                                    class="btn gradient w-full md:w-max p-4 py-2 text-white rounded-md shrink-0"
-                                    @click="panelStore.openPopUp('change-plan-dialog')"
-                                    v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
-                                >
-                                    {{ $t("panel.billing.Purchase") }}
-                                </button>
                             </div>
-                            <div class="plan-card-list grid md:absolute start-0 top-full w-full bg-dolphin rounded-b-xl shadow-nr35">
+                            <div class="plan-card-list grid md:absolute start-0 top-full w-full bg-pencil-tip rounded-b-xl shadow-nr35">
                                 <ul class="flex flex-col gap-4 w-full overflow-hidden">
                                     <li class="flex items-center gap-2">
                                         <Icon class="relative w-4 h-4 bg-baby-blue" name="plus.svg" folder="icons" size="16px" />
@@ -226,6 +220,9 @@
                                         <Icon class="relative w-4 h-4 bg-baby-blue" name="check.svg" folder="icons" size="16px" />
                                         <small class="opacity-90 text-white text-sm">{{ plan.translation?.[locale]?.listings[j] || feature }}</small>
                                     </li>
+                                    <button class="gradient w-full p-4 py-2 text-white rounded-md shrink-0">
+                                        {{ $t("panel.billing.Purchase") }}
+                                    </button>
                                 </ul>
                             </div>
                         </div>
@@ -241,7 +238,7 @@
                 <img class="w-9" src="~/assets/images/panel-icons/money-bill-transfer-dark.png" alt="" />
                 <h1 class="text-2xl/tight md:text-3xl/tight font-bold">{{ $t("panel.billing.Billing History") }}</h1>
             </header>
-            <!-- TODO : add date range for billing history -->    
+            <!-- TODO : add date range for billing history -->
             <ul class="flex flex-col gap-4" v-if="bills.list.length">
                 <li
                     class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 p-4 bg-white rounded-lg shadow-nr10"
@@ -338,8 +335,8 @@ const nuxtApp = useNuxtApp();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.billing.Billing")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.billing.Billing")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: `${t("panel.billing.Billing")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 

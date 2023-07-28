@@ -124,8 +124,8 @@ const toast = useToast();
 const userStore = useUserStore();
 const { brands } = storeToRefs(userStore);
 
-const title = computed(() => `${t("panel.brands.General Info")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.brands.General Info")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: `${t("panel.brands.General Info")} - ${t("panel.Your Menuriom Panel")}` });
 
 const formLang = ref("default");
 const errorField = ref("");

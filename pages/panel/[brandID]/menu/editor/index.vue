@@ -15,13 +15,13 @@
                 <small class="hidden sm:flex gap-1 text-sm"> {{ $t("panel.menu.Managing and editing your restaurant menu items and categories") }}. </small>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-                <button
+                <nuxt-link
                     class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white flex-shrink-0"
-                    @click="panelStore.openPopUp('sent-invites')"
+                    :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/style`)"
                 >
                     <Icon class="w-5 h-5 bg-black" name="brush.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.menu.Edit Menu Style") }}
-                </button>
+                </nuxt-link>
                 <button
                     class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white flex-shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
@@ -105,8 +105,8 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.menu.Menu Editor")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.menu.Menu Editor")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: `${t("panel.menu.Menu Editor")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 

@@ -13,7 +13,7 @@
                 </small>
             </div>
             <nuxt-link
-                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white flex-shrink-0"
                 :to="localePath(`/panel/${route.params.brandID}/branches/creation`)"
                 v-if="checkPermissions(['main-panel.branches.add'], brand)"
             >
@@ -151,8 +151,8 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-const title = computed(() => `${t("panel.branches.Branches")} - ${t("panel.Your Menuriom Panel")}`);
-useHead({ title: title });
+// const title = computed(() => `${t("panel.branches.Branches")} - ${t("panel.Your Menuriom Panel")}`);
+useHead({ title: `${t("panel.branches.Branches")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 

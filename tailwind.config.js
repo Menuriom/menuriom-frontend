@@ -7,8 +7,8 @@ module.exports = {
             colors: {
                 violet: "#9f74cd",
                 "baby-blue": "#7ecfe1",
-                "pencil-tip": "#323232",
-                "dolphin": "#464646",
+                "pencil-tip": "#2a2a2a",
+                dolphin: "#3f3f3f",
             },
             boxShadow: {
                 nr5: "0 10px 20px -5px rgba(0, 0, 0, 0.05)",
@@ -27,14 +27,17 @@ module.exports = {
                 "4xl": "1920px",
             },
             spacing: {
-                "4.5": "1.125rem/* 18px */",
+                4.5: "1.125rem/* 18px */",
                 18: "4.5rem/* 72px */",
                 22: "5.5rem/* 88px */",
+            },
+            fontSize: {
+                xxs: "10px",
             },
         },
     },
     variants: {
         extend: {},
     },
-    plugins: [],
+    plugins: [require("@tailwindcss/container-queries")],
 };

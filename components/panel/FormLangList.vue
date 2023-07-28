@@ -17,7 +17,7 @@
         </div>
         <small class="text-xs opacity-75 -mt-2">{{ $t("panel.languages.By selecting different language, you can translate text fields") }}</small>
         <hr class="w-full opacity-20" />
-        <ul class="flex lg:flex-col gap-2 w-full pb-2 overflow-auto" v-if="!loadingSettings">
+        <ul class="flex lg:flex-col gap-2 w-full pb-2 md:pb-0 overflow-auto" v-if="!loadingSettings">
             <li
                 class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer flex-shrink-0"
                 :class="{ 'bg-neutral-100 text-pencil-tip': formLang == 'default' }"
