@@ -22,10 +22,13 @@ li:hover .icon {
 <template>
     <div class="relative" ref="dropdown">
         <div class="flex items-center gap-1 cursor-pointer" @click="toggleDropdown()">
-            <img class="w-9 h-9 rounded-md object-contain bg-zinc-100" :src="userStore.avatar" alt="" />
+            <img class="w-8 h-8 md:w-9 md:h-9 rounded-md object-contain bg-neutral-200" :src="userStore.avatar" alt="" />
         </div>
         <transition name="slide-up" mode="out-in" appear>
-            <ul class="list absolute top-10 -end-10 md:-end-4 flex flex-col gap-1 p-3 bg-pencil-tip text-white shadow-lg rounded-xl" v-if="open">
+            <ul
+                class="list absolute top-10 -end-10 md:-end-4 flex flex-col gap-1 p-3 bg-pencil-tip text-white border border-neutral-500 border-opacity-50 shadow-lg rounded-xl"
+                v-if="open"
+            >
                 <li class="flex flex-col w-full p-2">
                     <!-- TODO : make skeleton fallback for when users data is loading -->
                     <h3 class="text-sm font-bold capitalize">{{ `${userStore.name} ${userStore.family}` }}</h3>

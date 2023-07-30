@@ -14,90 +14,169 @@
             </div>
         </header>
         <hr class="w-full border-gray-300 opacity-50" />
-        <div class="flex flex-wrap items-center gap-4">
-            <div class="relative flex items-center justify-center">
-                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.textColor};`"></span>
-                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.textColor" />
-            </div>
-            <div class="relative flex items-center justify-center">
-                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.bgMainColor};`"></span>
-                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.bgMainColor" />
-            </div>
-            <div class="relative flex items-center justify-center">
-                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"></span>
-                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.bgSecondaryColor" />
-            </div>
-            <div class="relative flex items-center justify-center">
-                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.primaryColor};`"></span>
-                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.primaryColor" />
-            </div>
-            <div class="relative flex items-center justify-center">
-                <span class="inline-block w-10 h-10 shadow-nr10 rounded-full" :style="`background-color: ${baseColorOptions.accentColor};`"></span>
-                <input class="absolute inset-0 w-full h-full rounded-full opacity-0" type="color" v-model="baseColorOptions.accentColor" />
-            </div>
-        </div>
-        <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
-            <li
-                class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
-                :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === 'MainMenuStyle' }"
-                @click="selectedTab = 'MainMenuStyle'"
-            >
-                <Icon
-                    class="w-4 h-4 shrink-0"
-                    :class="[selectedTab === 'MainMenuStyle' ? 'bg-white' : 'bg-black']"
-                    name="cards-blank.svg"
-                    folder="icons/light"
-                    size="16px"
-                />
-                {{ $t("panel.menu-style.Main Menu Style") }}
-            </li>
-            <li
-                class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
-                :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === 'ItemsDialogStyle' }"
-                @click="selectedTab = 'ItemsDialogStyle'"
-            >
-                <Icon
-                    class="w-4 h-4 shrink-0"
-                    :class="[selectedTab === 'ItemsDialogStyle' ? 'bg-white' : 'bg-black']"
-                    name="list-dropdown.svg"
-                    folder="icons/light"
-                    size="16px"
-                />
-                {{ $t("panel.menu-style.Items Dialog Style") }}
-            </li>
-            <li
-                class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
-                :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === 'RestaurantDetailsPage' }"
-                @click="selectedTab = 'RestaurantDetailsPage'"
-            >
-                <Icon
-                    class="w-4 h-4 shrink-0"
-                    :class="[selectedTab === 'RestaurantDetailsPage' ? 'bg-white' : 'bg-black']"
-                    name="memo.svg"
-                    folder="icons/light"
-                    size="16px"
-                />
-                {{ $t("panel.menu-style.Restaurant Details Page") }}
-            </li>
-            <li
-                class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
-                :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === 'SplashScreen' }"
-                @click="selectedTab = 'SplashScreen'"
-            >
-                <Icon
-                    class="w-4 h-4 shrink-0"
-                    :class="[selectedTab === 'SplashScreen' ? 'bg-white' : 'bg-black']"
-                    name="disc-drive.svg"
-                    folder="icons/light"
-                    size="16px"
-                />
-                {{ $t("panel.menu-style.Splash Screen") }}
-            </li>
-        </ul>
-        <hr class="w-full border-gray-300 opacity-50" />
         <div class="flex flex-wrap @[1280px]:flex-nowrap items-start gap-4 w-full">
             <section class="flex flex-col items-start gap-4 w-full grow">
+                <div class="flex flex-wrap gap-4">
+                    <ColorPicker :label="`text color`" v-model:color="baseColorOptions.textColor" />
+                    <ColorPicker :label="`background color 1`" v-model:color="baseColorOptions.bgMainColor" />
+                    <ColorPicker :label="`background color 2`" v-model:color="baseColorOptions.bgSecondaryColor" />
+                    <ColorPicker :label="`primary color`" v-model:color="baseColorOptions.primaryColor" />
+                    <ColorPicker :label="`accent color`" v-model:color="baseColorOptions.accentColor" />
+                </div>
+                <!-- TODO : make this tab list a array and loop through that -->
+                <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
+                    <li
+                        class="flex items-center gap-2 text-sm p-2 px-4 border-2 rounded-lg shrink-0 cursor-pointer"
+                        :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === 'MainMenuStyle' }"
+                        @click="selectedTab = 'MainMenuStyle'"
+                    >
+                        <Icon
+                            class="w-5 h-5 shrink-0"
+                            :class="[selectedTab === 'MainMenuStyle' ? 'bg-white' : 'bg-black']"
+                            name="cards-blank.svg"
+                            folder="icons/light"
+                            size="20px"
+                        />
+                        {{ $t("panel.menu-style.Main Menu Style") }}
+                    </li>
+                    <li
+                        class="flex items-center gap-2 text-sm p-2 px-4 border-2 rounded-lg shrink-0 cursor-pointer"
+                        :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === 'ItemsDialogStyle' }"
+                        @click="selectedTab = 'ItemsDialogStyle'"
+                    >
+                        <Icon
+                            class="w-5 h-5 shrink-0"
+                            :class="[selectedTab === 'ItemsDialogStyle' ? 'bg-white' : 'bg-black']"
+                            name="list-dropdown.svg"
+                            folder="icons/light"
+                            size="20px"
+                        />
+                        {{ $t("panel.menu-style.Items Dialog Style") }}
+                    </li>
+                    <li
+                        class="flex items-center gap-2 text-sm p-2 px-4 border-2 rounded-lg shrink-0 cursor-pointer"
+                        :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === 'RestaurantDetailsPage' }"
+                        @click="selectedTab = 'RestaurantDetailsPage'"
+                    >
+                        <Icon
+                            class="w-5 h-5 shrink-0"
+                            :class="[selectedTab === 'RestaurantDetailsPage' ? 'bg-white' : 'bg-black']"
+                            name="memo.svg"
+                            folder="icons/light"
+                            size="20px"
+                        />
+                        {{ $t("panel.menu-style.Restaurant Details Page") }}
+                    </li>
+                    <li
+                        class="flex items-center gap-2 text-sm p-2 px-4 border-2 rounded-lg shrink-0 cursor-pointer"
+                        :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === 'SplashScreen' }"
+                        @click="selectedTab = 'SplashScreen'"
+                    >
+                        <Icon
+                            class="w-5 h-5 shrink-0"
+                            :class="[selectedTab === 'SplashScreen' ? 'bg-white' : 'bg-black']"
+                            name="disc-drive.svg"
+                            folder="icons/light"
+                            size="20px"
+                        />
+                        {{ $t("panel.menu-style.Splash Screen") }}
+                    </li>
+                </ul>
+                <hr class="w-full border-gray-300 opacity-50" />
                 <!-- ... -->
+                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h5>Header Section</h5>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
+                    <div class="flex flex-col gap-2 overflow-hidden">
+                        <small>you can change colors for each section (make sure to unlock the color sync first)</small>
+                        <div class="flex flex-wrap gap-4">
+                            <ColorPicker
+                                :label="`text color`"
+                                v-model:color="mainMenuStyleOptions.headerOptions.textColor"
+                                :baseColor="baseColorOptions.textColor"
+                            />
+                            <ColorPicker
+                                :label="`background color 1`"
+                                v-model:color="mainMenuStyleOptions.headerOptions.bgMainColor"
+                                :baseColor="baseColorOptions.bgMainColor"
+                            />
+                            <ColorPicker
+                                :label="`background color 2`"
+                                v-model:color="mainMenuStyleOptions.headerOptions.bgSecondaryColor"
+                                :baseColor="baseColorOptions.bgSecondaryColor"
+                            />
+                            <ColorPicker
+                                :label="`primary color`"
+                                v-model:color="mainMenuStyleOptions.headerOptions.primaryColor"
+                                :baseColor="baseColorOptions.primaryColor"
+                            />
+                            <ColorPicker
+                                :label="`accent color`"
+                                v-model:color="mainMenuStyleOptions.headerOptions.accentColor"
+                                :baseColor="baseColorOptions.accentColor"
+                            />
+                        </div>
+                    </div>
+                </Wrapper>
+                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h5>Offers Section</h5>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
+                </Wrapper>
+                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h5>Search Section</h5>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
+                </Wrapper>
+                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h5>Categories Section</h5>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
+                </Wrapper>
+                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h5>Item's Title Section</h5>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
+                </Wrapper>
+                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h5>Items Section</h5>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
+                </Wrapper>
+                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h5>Navbar Section</h5>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
+                </Wrapper>
             </section>
             <Phone
                 class="sticky @7xl:top-0 shrink-0"
@@ -112,6 +191,8 @@
 </template>
 
 <script setup>
+import ColorPicker from "@/components/form/ColorPicker.vue";
+import Wrapper from "~/components/form/Wrapper.vue";
 import Phone from "@/components/panel/menu-style/Phone.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
@@ -127,17 +208,26 @@ const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] |
 
 const selectedTab = ref("MainMenuStyle");
 
+const testColor = ref();
+
 const baseColorOptions = reactive({
-    textColor: "#FCFCFD",
-    bgMainColor: "#323232",
-    bgSecondaryColor: "#545454",
-    primaryColor: "#c1aace",
-    accentColor: "#649eaf",
+    textColor: "#FCFCFDFF",
+    bgMainColor: "#323232FF",
+    bgSecondaryColor: "#545454FF",
+    primaryColor: "#C1AACEFF",
+    accentColor: "#649EAFFF",
 });
 
 // MainMenuStyle options --------------------------------
 const mainMenuStyleOptions = reactive({
-    headerOptions: { component: "Header2" },
+    headerOptions: {
+        component: "Header2",
+        textColor: "#000000ff",
+        bgMainColor: "#000000ff",
+        bgSecondaryColor: "#000000ff",
+        primaryColor: "#000000ff",
+        accentColor: "#000000ff",
+    },
     offerOptions: { component: "Offers1" },
     searchOptions: { component: "Search1" },
     categoriesOptions: { component: "Categories1" },

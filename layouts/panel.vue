@@ -22,11 +22,12 @@ main {
     <div class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-50 overflow-clip" id="app">
         <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
             <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
+            <!-- <Header_Dark /> -->
             <Header />
-            <div class="relative flex w-full h-0 p-2 flex-grow">
+            <div class="relative flex w-full h-0  flex-grow">
                 <SideMenu v-if="!dontShowMenu" />
                 <!-- <SideMenuWhite v-if="!dontShowMenu" /> -->
-                <main class="relative py-3 px-1 md:p-3 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
+                <main class="relative py-3 px-1 md:px-3 pt-5 me-2 flex-grow max-h-full overflow-auto" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>
             </div>
@@ -45,6 +46,7 @@ main {
 
 <script setup>
 import Header from "~/components/panel/Header.vue";
+import Header_Dark from "~/components/panel/Header_Dark.vue";
 import Blob from "~/components/web/Blob.vue";
 const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
 const SideMenuWhite = defineAsyncComponent(() => import("~/components/panel/SideMenuWhite.vue"));

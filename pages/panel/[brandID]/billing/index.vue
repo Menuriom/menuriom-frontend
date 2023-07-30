@@ -120,7 +120,10 @@
                         </button>
                     </div>
                 </div>
-                <div class="flex flex-col gap-2 p-4 w-full border-2 bg-white rounded-lg shadow-nr5 grow" v-if="bills.list.length > 0 && lastBill.billNumber">
+                <div
+                    class="flex flex-col gap-2 p-4 w-full border-2 border-neutral-300 border-dashed bg-white rounded-lg shadow-nr5 grow"
+                    v-if="bills.list.length > 0 && lastBill.billNumber"
+                >
                     <div class="flex flex-wrap items-center gap-4 w-full">
                         <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Your Last Bill") }}</h3>
                         <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
@@ -233,7 +236,7 @@
 
         <hr class="w-full border-gray-300 opacity-50" />
 
-        <section class="flex flex-col gap-4 w-full pb-6" name="Billing History">
+        <section class="flex flex-col gap-4 w-full pb-2" name="Billing History">
             <header class="flex items-center gap-2">
                 <img class="w-9" src="~/assets/images/panel-icons/money-bill-transfer-dark.png" alt="" />
                 <h1 class="text-2xl/tight md:text-3xl/tight font-bold">{{ $t("panel.billing.Billing History") }}</h1>
