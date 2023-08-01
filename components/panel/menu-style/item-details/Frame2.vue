@@ -5,7 +5,7 @@
     >
         <div
             class="flex flex-col items-center gap-4 w-full max-h-[40rem] rounded-xl shadow-nr35"
-            :style="`margin-top: ${marginTop / 4}rem; background-color: ${baseColorOptions.bgMainColor};`"
+            :style="`margin-top: ${marginTop / 4}rem; background-color: ${baseColors.bgMainColor};`"
         >
             <span class="w-4/12 h-1.5 mt-4 -mb-4 rounded-full bg-neutral-300 bg-opacity-75 mix-blend-difference" v-if="!marginTop"></span>
             <slot />
@@ -16,7 +16,7 @@
 <script setup>
 const props = defineProps({
     marginTop: { type: Number },
-    baseColorOptions: { type: Object },
+    baseColors: { type: Object },
     textColor: { type: String },
     bgMainColor: { type: String },
     bgSecondaryColor: { type: String },

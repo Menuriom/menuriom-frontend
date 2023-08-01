@@ -55,7 +55,7 @@
         <hr class="w-full border-gray-300 opacity-50" />
         <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
             <li
-                class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
+                class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-md shrink-0 cursor-pointer"
                 :class="{ 'border-dolphin bg-pencil-tip text-white': selectedBranch === '' }"
                 @click="selectedBranch = ''"
             >
@@ -63,7 +63,7 @@
                 {{ $t("panel.staff.All Branches") }}
             </li>
             <li
-                class="text-sm p-1 px-2 border-2 rounded-lg shrink-0 cursor-pointer"
+                class="text-sm p-1 px-2 border-2 rounded-md shrink-0 cursor-pointer"
                 :class="{ 'border-dolphin bg-pencil-tip text-white': selectedBranch === branch._id }"
                 v-for="(branch, i) in branches.list"
                 :key="i"

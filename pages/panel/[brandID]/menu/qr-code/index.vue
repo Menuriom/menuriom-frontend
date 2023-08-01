@@ -62,20 +62,23 @@
                     </button>
                 </div>
 
-                <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
-                    <div class="flex flex-wrap items-center gap-4 w-full">
-                        <h3 class="flex items-center gap-2 text-lg font-bold">
-                            <Icon class="w-5 h-5 gradient-re" name="square.svg" folder="icons/light" size="20px" />
-                            {{ $t("panel.qrcode.Background Color") }}
-                        </h3>
-                        <span class="w-6 h-0.5 bg-neutral-300"></span>
-                        <div class="flex items-center gap-1">
+                <Wrapper class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5" :defaultState="1">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h3 class="flex items-center gap-2 text-lg font-bold">
+                                <Icon class="w-5 h-5 gradient-re" name="square.svg" folder="icons/light" size="20px" />
+                                {{ $t("panel.qrcode.Background Color") }}
+                            </h3>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
+                    <div class="flex flex-wrap items-end gap-4 overflow-hidden">
+                        <div class="flex items-center gap-1 p-2 py-3 border border-neutral-500 border-opacity-25 rounded-md">
                             <small>{{ $t("panel.qrcode.Mono Color") }}</small>
                             <Switch_Light v-model:value="backgroundGradient" @update:value="renderAll()" />
                             <small>{{ $t("panel.qrcode.Gradient") }}</small>
                         </div>
-                    </div>
-                    <div class="flex flex-wrap items-start gap-4">
                         <div class="flex flex-col gap-1" v-if="backgroundGradient">
                             <small class="text-xs">{{ $t("panel.qrcode.Gradient Type") }}</small>
                             <div class="flex items-center gap-1">
@@ -143,22 +146,25 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </Wrapper>
 
-                <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
-                    <div class="flex flex-wrap items-center gap-4 w-full">
-                        <h3 class="flex items-center gap-2 text-lg font-bold">
-                            <Icon class="w-5 h-5 gradient-re" name="qrcode.svg" folder="icons/light" size="20px" />
-                            {{ $t("panel.qrcode.Barcode Color") }}
-                        </h3>
-                        <span class="w-6 h-0.5 bg-neutral-300"></span>
-                        <div class="flex items-center gap-1">
+                <Wrapper class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5" :defaultState="1">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h3 class="flex items-center gap-2 text-lg font-bold">
+                                <Icon class="w-5 h-5 gradient-re" name="qrcode.svg" folder="icons/light" size="20px" />
+                                {{ $t("panel.qrcode.Barcode Color") }}
+                            </h3>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
+                    <div class="flex flex-wrap items-end gap-4 overflow-hidden">
+                        <div class="flex items-center gap-1 p-2 py-3 border border-neutral-500 border-opacity-25 rounded-md">
                             <small>{{ $t("panel.qrcode.Mono Color") }}</small>
                             <Switch_Light v-model:value="foregroundGradient" @update:value="renderAll()" />
                             <small>{{ $t("panel.qrcode.Gradient") }}</small>
                         </div>
-                    </div>
-                    <div class="flex flex-wrap items-start gap-4">
                         <div class="flex flex-col gap-1" v-if="foregroundGradient">
                             <small class="text-xs">{{ $t("panel.qrcode.Gradient Type") }}</small>
                             <div class="flex items-center gap-1">
@@ -226,15 +232,19 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </Wrapper>
 
-                <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
-                    <div class="flex flex-wrap items-center justify-between gap-4 w-full">
-                        <h3 class="flex items-center gap-2 text-lg font-bold">
-                            <Icon class="w-5 h-5 gradient-re" name="grid.svg" folder="icons/light" size="20px" />
-                            {{ $t("panel.qrcode.Pixles") }}
-                        </h3>
-                    </div>
+                <Wrapper class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
+                    <template #title>
+                        <div class="flex items-center justify-between gap-2 w-full">
+                            <h3 class="flex items-center gap-2 text-lg font-bold">
+                                <Icon class="w-5 h-5 gradient-re" name="grid.svg" folder="icons/light" size="20px" />
+                                {{ $t("panel.qrcode.Pixles") }}
+                            </h3>
+                            <span class="h-0.5 bg-neutral-200 grow"></span>
+                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                        </div>
+                    </template>
                     <div class="flex flex-wrap items-center gap-4" v-if="checkLimitations([['menu-templates', true]], brand)">
                         <div class="flex items-center gap-2">
                             <Switch_Light v-model:value="randomSize" @update:value="renderAll()" />
@@ -268,17 +278,18 @@
                             />
                         </li>
                     </ul>
-                </div>
+                </Wrapper>
 
                 <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
-                    <div class="flex flex-wrap items-center gap-4 w-full">
+                    <div class="flex flex-wrap items-center gap-2 w-full">
                         <h3 class="flex items-center gap-2 text-lg font-bold">
                             <Icon class="w-5 h-5 gradient-re" name="expand-wide.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.qrcode.Custom Corners") }}
                         </h3>
                         <Switch_Light v-model:value="customCorner" @update:value="renderOverlays()" />
+                        <span class="w-2 grow h-0.5 bg-neutral-500 bg-opacity-20"></span>
                     </div>
-                    <div class="flex flex-wrap items-center gap-4" v-if="customCorner">
+                    <div class="flex flex-wrap items-end gap-4 overflow-hidden" v-if="customCorner">
                         <div class="flex flex-col items-start gap-1">
                             <label class="text-xs">{{ `${$t("panel.qrcode.Ring Color")}` }}</label>
                             <div class="relative flex items-center justify-center">
@@ -293,10 +304,6 @@
                                     @input="renderOverlays()"
                                 />
                             </div>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <small class="text-xs">{{ $t("panel.qrcode.Ring Radius") }}</small>
-                            <input class="input-range light w-24" type="range" max="3.5" step="0.1" v-model="cornerRingRadius" @input="renderOverlays()" />
                         </div>
                         <div class="flex flex-col items-start gap-1">
                             <label class="text-xs">{{ `${$t("panel.qrcode.Center Color")}` }}</label>
@@ -313,20 +320,27 @@
                                 />
                             </div>
                         </div>
-                        <div class="flex flex-col gap-2">
-                            <small class="text-xs">{{ $t("panel.qrcode.Center Radius") }}</small>
-                            <input class="input-range light w-24" type="range" max="2" step="0.1" v-model="cornerCenterRadius" @input="renderOverlays()" />
+                        <div class="flex flex-wrap gap-2 p-2 rounded-md border border-neutral-500 border-opacity-25">
+                            <div class="flex flex-col gap-1">
+                                <small class="text-xs">{{ $t("panel.qrcode.Ring Radius") }}</small>
+                                <input class="input-range light w-24" type="range" max="3.5" step="0.1" v-model="cornerRingRadius" @input="renderOverlays()" />
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <small class="text-xs">{{ $t("panel.qrcode.Center Radius") }}</small>
+                                <input class="input-range light w-24" type="range" max="2" step="0.1" v-model="cornerCenterRadius" @input="renderOverlays()" />
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
-                    <div class="flex flex-wrap items-center gap-4 w-full">
+                    <div class="flex flex-wrap items-center gap-2 w-full">
                         <h3 class="flex items-center gap-2 text-lg font-bold">
                             <Icon class="w-5 h-5 gradient-re" name="square-dashed-circle-plus.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.qrcode.Add Restaurant Logo") }}
                         </h3>
                         <Switch_Light v-model:value="withLogo" @update:value="renderOverlays()" />
+                        <span class="w-2 grow h-0.5 bg-neutral-500 bg-opacity-20"></span>
                     </div>
                     <div class="flex flex-wrap gap-4" v-if="withLogo">
                         <small
@@ -338,12 +352,12 @@
                                 {{ $t("panel.Upgrade your plan to get this feature") }}.
                             </nuxt-link>
                         </small>
-                        <div class="flex flex-wrap items-start gap-4 p-3 border rounded-lg" v-if="checkLimitations([['logo-in-qr', true]], brand)">
-                            <div class="flex flex-col gap-2">
+                        <div class="flex flex-wrap items-end gap-4 p-2 border rounded-lg" v-if="checkLimitations([['logo-in-qr', true]], brand)">
+                            <div class="flex flex-col gap-1">
                                 <small class="text-xs">{{ $t("panel.qrcode.Padding") }}</small>
                                 <input class="input-range light w-24" type="range" max="3" step="1" v-model="logoPadding" @input="renderOverlays()" />
                             </div>
-                            <div class="flex flex-col gap-2">
+                            <div class="flex flex-col gap-1">
                                 <small class="text-xs">{{ $t("panel.qrcode.Radius") }}</small>
                                 <input
                                     class="input-range light w-24"
@@ -356,12 +370,12 @@
                                 />
                             </div>
                         </div>
-                        <div class="flex flex-wrap items-start gap-4 p-2 border rounded-lg" v-if="checkLimitations([['logo-in-qr', true]], brand)">
-                            <div class="flex flex-col gap-2">
+                        <div class="flex flex-wrap items-end gap-4 p-2 border rounded-lg" v-if="checkLimitations([['logo-in-qr', true]], brand)">
+                            <div class="flex flex-col gap-1">
                                 <small class="text-xs">{{ $t("panel.qrcode.Shadow") }}</small>
                                 <Switch_Light v-model:value="logoShadow" @update:value="renderOverlays()" />
                             </div>
-                            <div class="flex flex-col gap-2.5">
+                            <div class="flex flex-col gap-1">
                                 <small class="text-xs">{{ $t("panel.qrcode.Shadow Intensity") }}</small>
                                 <input class="input-range light w-24" type="range" max="9" step="1" v-model="logoShadowIntensity" @input="renderOverlays()" />
                             </div>
@@ -391,6 +405,7 @@
 <script setup>
 import Input from "~/components/form/Input.vue";
 import Switch_Light from "~/components/form/Switch_Light.vue";
+import Wrapper from "~/components/form/Wrapper.vue";
 import QR from "~/composables/qrcodegen";
 import axios from "axios";
 import { useToast } from "vue-toastification";
@@ -702,7 +717,7 @@ const gradientGenerator = (options = { type: "Linear", color1: "", color2: "", a
 onMounted(() => {
     // TODO : add more svg for pro
     logoImg = new Image();
-    
+
     img = new Image();
     img.src = dotImage.value;
     img.onload = () => drawQR();

@@ -12,9 +12,12 @@
 </template>
 
 <script setup>
-const openState = ref(0);
+const props = defineProps({
+    defaultState: { type: Number, default: 0 },
+});
+
+const openState = ref(props.defaultState || 0);
 const changeOpenState = () => {
-    console.log(1);
     openState.value = openState.value ? 0 : 1;
 };
 </script>

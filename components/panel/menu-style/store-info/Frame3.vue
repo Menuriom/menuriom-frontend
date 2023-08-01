@@ -5,15 +5,15 @@
     >
         <div
             class="relative flex flex-col items-center p-4 w-full h-[40rem] rounded-xl shadow-nr35 isolate"
-            :style="`background-color: ${baseColorOptions.bgMainColor};`"
+            :style="`background-color: ${baseColors.bgMainColor};`"
         >
             <img class="absolute bottom-0 -z-10 w-96 max-w-none opacity-10 pointer-events-none" src="/patterns/pattern4.png" alt="" />
 
             <button
                 class="absolute -top-4 flex items-center justify-center p-2 rounded-full shadow-nr15 transition-all hover:scale-125"
-                :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
+                :style="`background-color: ${baseColors.bgSecondaryColor};`"
             >
-                <Icon class="w-5 h-5 rotate-45" :style="`background-color: ${baseColorOptions.textColor};`" name="plus.svg" folder="icons/tabler" size="20px" />
+                <Icon class="w-5 h-5 rotate-45" :style="`background-color: ${baseColors.textColor};`" name="plus.svg" folder="icons/tabler" size="20px" />
             </button>
 
             <slot />
@@ -23,7 +23,7 @@
 
 <script setup>
 const props = defineProps({
-    baseColorOptions: { type: Object },
+    baseColors: { type: Object },
     textColor: { type: String },
     bgMainColor: { type: String },
     bgSecondaryColor: { type: String },

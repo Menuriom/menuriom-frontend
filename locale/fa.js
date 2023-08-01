@@ -401,6 +401,20 @@ export default {
             "Items Dialog Style": "جزئیات ایتم",
             "Restaurant Details Page": "مشخصات رستوران",
             "Splash Screen": "صفحه لودینگ",
+
+            "text color": "رنگ متن",
+            "background main": "پس زمینه اصلی",
+            "background accent": "پس زمینه ثانوی",
+            "primary color": "رنگ اصلی",
+            "accent color": "رنگ ثانوی",
+
+            "Header Section": "قسمت سرتیتر",
+            "Header Type": "نوع سرتیتر",
+            "Logo Radius": "گردی گوشه لوگو",
+            "you can change colors for each section (make sure to unlock the color sync first)":
+                "رنگ هر بخش را میتوانید جداگانه تغییر دهید (ابتدا قفل رنگ را باز کنید)",
+            Header1: "باریک",
+            Header2: "بزرگ",
         },
 
         qrcode: {
@@ -409,7 +423,7 @@ export default {
             "QR Code Style": "ظاهر کد QR",
             "QR Code Stand Frame": "قاب و فریم کد QR",
 
-            "Background Color": "رنگ پیش زمینه",
+            "Background Color": "رنگ پس زمینه",
             "Barcode Color": "رنگ بارکد",
             "Randomize Dot Size": "رندوم سازی سایز نقطه ها",
             "Custom Corners": "استایل دهی به گوشه ها",

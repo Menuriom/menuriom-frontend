@@ -400,6 +400,20 @@ export default {
             "Items Dialog Style": "Items Dialog Style",
             "Restaurant Details Page": "Restaurant Details Page",
             "Splash Screen": "Splash Screen",
+
+            "text color": "text color",
+            "background main": "background main",
+            "background accent": "background accent",
+            "primary color": "primary color",
+            "accent color": "accent color",
+
+            "Header Section": "Header Section",
+            "Header Type": "Header Type",
+            "Logo Radius": "Logo Radius",
+            "you can change colors for each section (make sure to unlock the color sync first)":
+                "you can change colors for each section (make sure to unlock the color sync first)",
+            Header1: "Slim",
+            Header2: "Fat",
         },
 
         qrcode: {

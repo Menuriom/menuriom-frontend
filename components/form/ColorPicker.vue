@@ -12,14 +12,14 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 1rem;
-    border-radius: 3px;
+    border-radius: 2rem;
     cursor: pointer;
     background: linear-gradient(270deg, v-bind("color.slice(0, 7)") 0%, transparent 100%);
 }
 input[type="range"]::-moz-range-track {
     width: 100%;
     height: 1rem;
-    border-radius: 3px;
+    border-radius: 2rem;
     cursor: pointer;
     background: linear-gradient(270deg, v-bind("color.slice(0, 7)") 0%, transparent 100%);
 }
@@ -45,7 +45,7 @@ input[type="range"]::-moz-range-thumb {
 </style>
 
 <template>
-    <div class="relative flex flex-col items-start gap-2 w-40 border p-2 rounded-lg isolate">
+    <div class="relative flex flex-col items-start gap-2 w-40 border p-2 rounded-md isolate">
         <div class="flex items-center justify-between gap-1 w-full">
             <label class="flex items-center gap-2 text-xs grow" v-if="label">{{ label }} </label>
             <!-- <span class="h-0.5 bg-dolphin grow"></span> -->
@@ -69,14 +69,14 @@ input[type="range"]::-moz-range-thumb {
                 <Icon
                     class="w-4 h-4"
                     :class="[!isColorLocked ? 'bg-pencil-tip bg-opacity-30' : 'bg-white ']"
-                    name="lock-keyhole.svg"
+                    :name="isColorLocked ? 'lock-keyhole.svg' : 'lock-keyhole-open.svg'"
                     folder="icons"
                     size="14px"
                 />
             </button>
         </div>
-        <div class="relative flex flex-col items-center justify-center w-full h-4">
-            <span class="tile absolute inset-0 -z-10 rounded-sm"></span>
+        <div class="relative flex flex-col items-center justify-center w-full h-4 -mt-1">
+            <span class="tile absolute inset-0 -z-10 rounded-full"></span>
             <input
                 class="w-full"
                 type="range"
@@ -109,7 +109,7 @@ const updateTransparency = (transparency) => {
     if (!isColorLocked.value) emit("update:color", `${hue}${b10_to_b16(transparency)}`);
 };
 
-const isColorLocked = ref(false);
+const isColorLocked = ref(baseColor.value ? true : false);
 const lockColor = () => {
     isColorLocked.value = !isColorLocked.value;
     if (isColorLocked.value) emit("update:color", baseColor.value);

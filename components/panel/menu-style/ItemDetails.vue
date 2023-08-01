@@ -11,7 +11,7 @@
 <template>
     <component
         :is="frames[itemsDialogStyleOptions.frameOptions.component]"
-        :baseColorOptions="baseColorOptions"
+        :baseColors="baseColors"
         textColor=""
         bgMainColor=""
         bgSecondaryColor=""
@@ -21,7 +21,7 @@
     >
         <component
             :is="bodies[itemsDialogStyleOptions.bodyOptions.component]"
-            :baseColorOptions="baseColorOptions"
+            :baseColors="baseColors"
             textColor=""
             bgMainColor=""
             bgSecondaryColor=""
@@ -34,7 +34,7 @@
 
 <script setup>
 const props = defineProps({
-    baseColorOptions: { type: Object },
+    baseColors: { type: Object },
     itemsDialogStyleOptions: { type: Object },
 });
 

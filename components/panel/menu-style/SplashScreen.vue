@@ -53,7 +53,7 @@
     >
         <div
             class="splash-screen relative flex flex-col items-center justify-center gap-4 w-full h-full rounded-2xl isolate overflow-hidden"
-            :style="`background-color: ${baseColorOptions.bgMainColor};`"
+            :style="`background-color: ${baseColors.bgMainColor};`"
             :class="{ off: showAnimation }"
             @click="beginAnimation()"
         >
@@ -61,16 +61,16 @@
 
             <div
                 class="flex items-center justify-center w-36 h-36 p-6 rounded-full shadow-nr25"
-                :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
+                :style="`background-color: ${baseColors.bgSecondaryColor};`"
             >
                 <img class="w-full h-full object-contain rounded-full shadow-nr15" :src="brand.logo" alt="" />
             </div>
             <div class="flex flex-col items-center">
-                <h3 class="rounded font-bold text-2xl" :style="`color: ${baseColorOptions.textColor};`">{{ brand.name }}</h3>
-                <small class="opacity-75 text-xs" :style="`color: ${baseColorOptions.textColor};`">{{ brand.slogan }}</small>
+                <h3 class="rounded font-bold text-2xl" :style="`color: ${baseColors.textColor};`">{{ brand.name }}</h3>
+                <small class="opacity-75 text-xs" :style="`color: ${baseColors.textColor};`">{{ brand.slogan }}</small>
             </div>
 
-            <LineScroll class="absolute start-0 top-1/2 -z-10 -mt-16 opacity-40" :baseColorOptions="baseColorOptions" :rotation="30" />
+            <LineScroll class="absolute start-0 top-1/2 -z-10 -mt-16 opacity-40" :baseColors="baseColors" :rotation="30" />
         </div>
     </div>
 </template>
@@ -80,7 +80,7 @@ import LineScroll from "./LineScroll.vue";
 
 const props = defineProps({
     brand: { type: Object },
-    baseColorOptions: { type: Object },
+    baseColors: { type: Object },
     textColor: { type: String },
     bgMainColor: { type: String },
     bgSecondaryColor: { type: String },

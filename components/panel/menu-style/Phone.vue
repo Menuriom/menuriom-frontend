@@ -23,14 +23,14 @@
         <div
             id="screen"
             class="screen flex flex-col items-center w-full p-4 overflow-auto isolate"
-            :style="`background-color: ${baseColorOptions.bgMainColor}; color: ${baseColorOptions.textColor};`"
+            :style="`background-color: ${baseColors.bgMainColor}; color: ${baseColors.textColor};`"
         >
             <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="/patterns/pattern7.png" alt="" />
 
             <div
                 id="status-bar"
                 class="sticky top-0 flex items-center justify-between w-full h-7 px-6 pt-1 grayscale z-6 shrink-0"
-                :style="`background-color: ${baseColorOptions.bgSecondaryColor};`"
+                :style="`background-color: ${baseColors.bgSecondaryColor};`"
             >
                 <div class="text-xs text-white mix-blend-difference">12:59</div>
                 <div class="flex items-center">
@@ -45,23 +45,15 @@
                 class="z-5"
                 :is="headers[mainMenuStyleOptions.headerOptions.component]"
                 :brand="brand"
-                :baseColorOptions="baseColorOptions"
-                textColor=""
-                bgMainColor=""
-                bgSecondaryColor=""
-                primaryColor=""
-                accentColor=""
-                bgImage="/patterns/pattern2.png"
-                bgImageOpacity="20"
-                bgImageRotation="5"
-                logoRadius="50"
+                :baseColors="baseColors"
+                :options="mainMenuStyleOptions.headerOptions"
             />
 
             <component
                 name="offers"
                 class="z-4"
                 :is="offers[mainMenuStyleOptions.offerOptions.component]"
-                :baseColorOptions="baseColorOptions"
+                :baseColors="baseColors"
                 textColor=""
                 bgMainColor=""
                 bgSecondaryColor=""
@@ -73,7 +65,7 @@
                 name="search"
                 class="z-3"
                 :is="searchs[mainMenuStyleOptions.searchOptions.component]"
-                :baseColorOptions="baseColorOptions"
+                :baseColors="baseColors"
                 textColor=""
                 bgMainColor=""
                 bgSecondaryColor=""
@@ -85,7 +77,7 @@
                 name="categories"
                 class="z-2"
                 :is="categories[mainMenuStyleOptions.categoriesOptions.component]"
-                :baseColorOptions="baseColorOptions"
+                :baseColors="baseColors"
                 textColor=""
                 bgMainColor=""
                 bgSecondaryColor=""
@@ -100,7 +92,7 @@
                 <component
                     name="itemHeaders"
                     :is="itemHeaders[mainMenuStyleOptions.itemHeaderOptions.component]"
-                    :baseColorOptions="baseColorOptions"
+                    :baseColors="baseColors"
                     textColor=""
                     bgMainColor=""
                     bgSecondaryColor=""
@@ -109,15 +101,15 @@
                 />
                 <h4
                     class="flex flex-col gap-1 w-full p-2 rounded-md border border-neutral-500 border-opacity-20 text-xs shadow-nr15"
-                    :style="`background-color: ${baseColorOptions.bgMainColor};`"
+                    :style="`background-color: ${baseColors.bgMainColor};`"
                 >
-                    <span class="w-10/12 h-1 rounded" :style="`background-color: ${baseColorOptions.accentColor};`"></span>
-                    <span class="w-4/12 h-1 rounded" :style="`background-color: ${baseColorOptions.accentColor};`"></span>
+                    <span class="w-10/12 h-1 rounded" :style="`background-color: ${baseColors.accentColor};`"></span>
+                    <span class="w-4/12 h-1 rounded" :style="`background-color: ${baseColors.accentColor};`"></span>
                 </h4>
                 <component
                     name="itemList"
                     :is="itemLists[mainMenuStyleOptions.itemListOptions.component]"
-                    :baseColorOptions="baseColorOptions"
+                    :baseColors="baseColors"
                     textColor=""
                     bgMainColor=""
                     bgSecondaryColor=""
@@ -131,7 +123,7 @@
             <component
                 name="navbar"
                 :is="navbars[mainMenuStyleOptions.navbarOptions.component]"
-                :baseColorOptions="baseColorOptions"
+                :baseColors="baseColors"
                 textColor=""
                 bgMainColor=""
                 bgSecondaryColor=""
@@ -141,16 +133,16 @@
                 :text="true"
             />
 
-            <ItemDetails :baseColorOptions="baseColorOptions" :itemsDialogStyleOptions="itemsDialogStyleOptions" v-if="selectedTab === 'ItemsDialogStyle'" />
+            <ItemDetails :baseColors="baseColors" :itemsDialogStyleOptions="itemsDialogStyleOptions" v-if="selectedTab === 'ItemsDialogStyle'" />
             <StoreInfo
                 :brand="brand"
-                :baseColorOptions="baseColorOptions"
+                :baseColors="baseColors"
                 :restaurantDetailsPageOptions="restaurantDetailsPageOptions"
                 v-if="selectedTab === 'RestaurantDetailsPage'"
             />
             <SplashScreen
                 :brand="brand"
-                :baseColorOptions="baseColorOptions"
+                :baseColors="baseColors"
                 textColor=""
                 bgMainColor=""
                 bgSecondaryColor=""
@@ -174,7 +166,7 @@ const userStore = useUserStore();
 
 const props = defineProps({
     selectedTab: { type: String },
-    baseColorOptions: { type: Object },
+    baseColors: { type: Object },
     mainMenuStyleOptions: { type: Object },
     itemsDialogStyleOptions: { type: Object },
     restaurantDetailsPageOptions: { type: Object },

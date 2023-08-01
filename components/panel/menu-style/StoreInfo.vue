@@ -11,7 +11,7 @@
 <template>
     <component
         :is="frames[restaurantDetailsPageOptions.frameOptions.component]"
-        :baseColorOptions="baseColorOptions"
+        :baseColors="baseColors"
         textColor=""
         bgMainColor=""
         bgSecondaryColor=""
@@ -20,7 +20,7 @@
     >
         <component
             :is="bodies[restaurantDetailsPageOptions.bodyOptions.component]"
-            :baseColorOptions="baseColorOptions"
+            :baseColors="baseColors"
             textColor=""
             bgMainColor=""
             bgSecondaryColor=""
@@ -34,7 +34,7 @@
 <script setup>
 const props = defineProps({
     brand: { type: Object },
-    baseColorOptions: { type: Object },
+    baseColors: { type: Object },
     restaurantDetailsPageOptions: { type: Object },
 });
 

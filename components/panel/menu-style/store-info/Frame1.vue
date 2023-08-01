@@ -16,17 +16,17 @@
         <img class="absolute bottom-1/2 -z-10 w-full opacity-30 pointer-events-none" src="~/assets/images/pattern2.png" alt="" />
         <div
             class="relative flex flex-col items-center px-4 py-6 w-full max-h-[40rem] rounded-2xl shadow-nr35 isolate"
-            :style="`background-color: ${baseColorOptions.bgMainColor};`"
+            :style="`background-color: ${baseColors.bgMainColor};`"
         >
             <img class="absolute bottom-0 -z-10 w-full opacity-5 pointer-events-none" src="~/assets/images/pattern2.png" alt="" />
 
             <button
                 class="absolute -top-4 flex items-center justify-center p-2 rounded-full shadow-nr35 transition-all hover:scale-125"
-                :style="`background-color: ${baseColorOptions.textColor};`"
+                :style="`background-color: ${baseColors.textColor};`"
             >
                 <Icon
                     class="w-5 h-5 rotate-45"
-                    :style="`background-color: ${baseColorOptions.bgMainColor};`"
+                    :style="`background-color: ${baseColors.bgMainColor};`"
                     name="plus.svg"
                     folder="icons/tabler"
                     size="20px"
@@ -40,7 +40,7 @@
 
 <script setup>
 const props = defineProps({
-    baseColorOptions: { type: Object },
+    baseColors: { type: Object },
     textColor: { type: String },
     bgMainColor: { type: String },
     bgSecondaryColor: { type: String },

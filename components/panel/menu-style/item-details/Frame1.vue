@@ -15,15 +15,15 @@
     >
         <div
             class="flex flex-col items-center gap-4 p-0 w-full max-h-[40rem] rounded-xl shadow-nr35"
-            :style="`margin-top: ${marginTop / 4}rem; background-color: ${baseColorOptions.bgMainColor};`"
+            :style="`margin-top: ${marginTop / 4}rem; background-color: ${baseColors.bgMainColor};`"
         >
             <button
                 class="absolute top-8 flex items-center justify-center p-2 rounded-full shadow-nr35 transition-all hover:scale-125"
-                :style="`background-color: ${baseColorOptions.textColor};`"
+                :style="`background-color: ${baseColors.textColor};`"
             >
                 <Icon
                     class="w-5 h-5 rotate-45"
-                    :style="`background-color: ${baseColorOptions.bgMainColor};`"
+                    :style="`background-color: ${baseColors.bgMainColor};`"
                     name="plus.svg"
                     folder="icons/tabler"
                     size="20px"
@@ -37,7 +37,7 @@
 <script setup>
 const props = defineProps({
     marginTop: { type: Number },
-    baseColorOptions: { type: Object },
+    baseColors: { type: Object },
     textColor: { type: String },
     bgMainColor: { type: String },
     bgSecondaryColor: { type: String },
