@@ -48,7 +48,7 @@
 
 <template>
     <div
-        class="fixed flex items-center justify-center px-2.5 z-20 overflow-hidden"
+        class="absolute flex items-center justify-center px-2.5 z-20 overflow-hidden"
         style="width: calc(360px - 1rem); height: calc(715px - 1rem); border-radius: 3.25rem"
     >
         <div

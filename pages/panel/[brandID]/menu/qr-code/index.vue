@@ -257,21 +257,21 @@
                     </div>
                     <ul class="flex flex-wrap items-start justify-start gap-3 w-full max-h-48 overflow-auto">
                         <li
-                            class="relative flex items-center justify-center w-16 h-16 rounded-lg border shadow-nr10 cursor-pointer"
-                            :class="[dotImage === item.image ? 'gradient' : 'bg-transparent']"
+                            class="relative flex items-center justify-center w-16 h-16  rounded-lg shadow-nr10 cursor-pointer"
+                            :class="[dotImage === item.image ? 'bg-violet' : 'bg-pencil-tip']"
                             v-for="(item, i) in dotImageList"
                             :key="i"
                             @click="changeDotImage(item)"
                         >
                             <Icon
-                                class="absolute top-1 end-1 w-4 h-4 bg-black z-2"
+                                class="absolute top-1.5 end-1.5 w-4 h-4 bg-white z-2"
                                 name="lock-keyhole.svg"
                                 folder="icons"
                                 size="16px"
                                 v-if="currentPlan.lvl < item.lvl"
                             />
                             <img
-                                class="w-12 h-12 p-1.5 object-contain bg-white rounded-md"
+                                class="w-14 h-14 p-1.5 object-contain bg-neutral-50 rounded-md"
                                 :class="[currentPlan.lvl >= item.lvl ? '' : 'opacity-50']"
                                 :src="item.image"
                                 loading="lazy"

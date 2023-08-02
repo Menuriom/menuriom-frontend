@@ -54,11 +54,7 @@
                 class="z-4"
                 :is="offers[mainMenuStyleOptions.offerOptions.component]"
                 :baseColors="baseColors"
-                textColor=""
-                bgMainColor=""
-                bgSecondaryColor=""
-                primaryColor=""
-                accentColor=""
+                :options="mainMenuStyleOptions.offerOptions"
             />
 
             <component
@@ -93,11 +89,7 @@
                     name="itemHeaders"
                     :is="itemHeaders[mainMenuStyleOptions.itemHeaderOptions.component]"
                     :baseColors="baseColors"
-                    textColor=""
-                    bgMainColor=""
-                    bgSecondaryColor=""
-                    primaryColor=""
-                    accentColor=""
+                    :options="mainMenuStyleOptions.itemHeaderOptions"
                 />
                 <h4
                     class="flex flex-col gap-1 w-full p-2 rounded-md border border-neutral-500 border-opacity-20 text-xs shadow-nr15"
@@ -140,16 +132,7 @@
                 :restaurantDetailsPageOptions="restaurantDetailsPageOptions"
                 v-if="selectedTab === 'RestaurantDetailsPage'"
             />
-            <SplashScreen
-                :brand="brand"
-                :baseColors="baseColors"
-                textColor=""
-                bgMainColor=""
-                bgSecondaryColor=""
-                primaryColor=""
-                accentColor=""
-                v-if="selectedTab === 'SplashScreen'"
-            />
+            <SplashScreen :brand="brand" :baseColors="baseColors" v-if="selectedTab === 'SplashScreen'" />
         </div>
     </div>
 </template>

@@ -1,5 +1,6 @@
 <template>
     <div class="relative flex items-start justify-between gap-4 w-full px-2 pt-4 mb-2 isolate shrink-0">
+        <!-- TODO : make image as background image so that you can repeat it in x and y axis -->
         <div class="absolute start-0 top-0 w-full h-20 isolate -z-10 overflow-hidden" :style="`background-color: ${options.bgSecondaryColor};`">
             <img class="absolute" :style="`opacity: ${options.bgImageOpacity}%; rotate: ${options.bgImageRotation}deg;`" :src="options.bgImage" alt="" />
         </div>

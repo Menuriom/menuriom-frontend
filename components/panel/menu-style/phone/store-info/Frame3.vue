@@ -1,6 +1,6 @@
 <template>
     <div
-        class="fixed flex items-end justify-center p-2.5 bg-black bg-opacity-60 backdrop-blur-md z-20 overflow-hidden"
+        class="absolute flex items-end justify-center p-2.5 bg-black bg-opacity-60 backdrop-blur-md z-20 overflow-hidden"
         style="width: calc(360px - 1rem); height: calc(715px - 1rem); border-radius: 3.25rem"
     >
         <div

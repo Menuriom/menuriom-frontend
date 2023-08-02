@@ -411,6 +411,9 @@ export default {
             "Header Section": "قسمت سرتیتر",
             "Header Type": "نوع سرتیتر",
             "Logo Radius": "گردی گوشه لوگو",
+            "Background Pattern": "طرح پس زمینه",
+            "Background Pattern Opacity": "شفافیت طرح پس زمینه",
+            "Background Pattern Rotations": "زاویه طرح پس زمینه",
             "you can change colors for each section (make sure to unlock the color sync first)":
                 "رنگ هر بخش را میتوانید جداگانه تغییر دهید (ابتدا قفل رنگ را باز کنید)",
             Header1: "باریک",

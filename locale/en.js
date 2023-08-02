@@ -410,6 +410,9 @@ export default {
             "Header Section": "Header Section",
             "Header Type": "Header Type",
             "Logo Radius": "Logo Radius",
+            "Background Pattern": "Background Pattern",
+            "Background Pattern Opacity": "Background Pattern Opacity",
+            "Background Pattern Rotations": "Background Pattern Rotations",
             "you can change colors for each section (make sure to unlock the color sync first)":
                 "you can change colors for each section (make sure to unlock the color sync first)",
             Header1: "Slim",

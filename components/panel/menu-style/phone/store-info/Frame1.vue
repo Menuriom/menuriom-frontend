@@ -10,7 +10,7 @@
 
 <template>
     <div
-        class="fixed flex items-center justify-center p-6 bg-black bg-opacity-60 backdrop-blur-md z-20 overflow-hidden"
+        class="absolute flex items-center justify-center p-6 bg-black bg-opacity-60 backdrop-blur-md z-20 overflow-hidden"
         style="width: calc(360px - 1rem); height: calc(715px - 1rem); border-radius: 3.25rem"
     >
         <img class="absolute bottom-1/2 -z-10 w-full opacity-30 pointer-events-none" src="~/assets/images/pattern2.png" alt="" />
