@@ -11,6 +11,7 @@ export default {
     sundays: "یکشنبه ها",
     "SOLD OUT": "تمام شده",
     New: "جدید",
+    "Coming soon": "بزودی",
 
     auth: {
         welcome: "به منوریوم خوش اومدی",
@@ -412,12 +413,18 @@ export default {
             "Header Type": "نوع سرتیتر",
             "Logo Radius": "گردی گوشه لوگو",
             "Background Pattern": "طرح پس زمینه",
-            "Background Pattern Opacity": "شفافیت طرح پس زمینه",
-            "Background Pattern Rotations": "زاویه طرح پس زمینه",
+            "Pattern Opacity": "شفافیت طرح پس زمینه",
+            "Pattern Rotations": "زاویه طرح پس زمینه",
+            "Pattern Size": "سایز طرح پس زمینه",
             "you can change colors for each section (make sure to unlock the color sync first)":
                 "رنگ هر بخش را میتوانید جداگانه تغییر دهید (ابتدا قفل رنگ را باز کنید)",
             Header1: "باریک",
             Header2: "بزرگ",
+
+            "Offers Section": "قسمت بنر تخفیفات",
+
+            "Search Section": "قسمت جستجو",
+            "Show search section": "نمایش قسمت جستجو",
         },
 
         qrcode: {

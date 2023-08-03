@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5" :defaultState="1">
+    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5" :defaultState="0">
         <template #title>
             <div class="flex items-center justify-between gap-2 w-full">
                 <h3 class="font-bold">{{ $t("panel.menu-style.Header Section") }}</h3>
@@ -105,12 +105,16 @@
                 </div>
                 <div class="flex flex-col gap-2" v-if="headerOptions.withPattern">
                     <div class=" flex flex-col items-start gap-1">
-                        <label class="text-sm">{{$t("panel.menu-style.Background Pattern Opacity")}}</label>
+                        <label class="text-sm">{{$t("panel.menu-style.Pattern Opacity")}}</label>
                         <input class="input-range light w-44" type="range" min="10" max="100" step="10" v-model="headerOptions.bgImageOpacity" />
                     </div>
                     <div class=" flex flex-col items-start gap-1">
-                        <label class="text-sm">{{$t("panel.menu-style.Background Pattern Rotations")}}</label>
-                        <input class="input-range light w-44" type="range" min="0" max="360" step="10" v-model="headerOptions.bgImageRotation" />
+                        <label class="text-sm">{{$t("panel.menu-style.Pattern Rotations")}}</label>
+                        <input class="input-range light w-44" type="range" min="-180" max="180" step="5" v-model="headerOptions.bgImageRotation" />
+                    </div>
+                    <div class=" flex flex-col items-start gap-1">
+                        <label class="text-sm">{{$t("panel.menu-style.Pattern Size")}}</label>
+                        <input class="input-range light w-44" type="range" min="10" max="100" step="10" v-model="headerOptions.bgImageSize" />
                     </div>
                 </div>
             </div>

@@ -11,6 +11,7 @@ export default {
     sundays: "Sundays",
     "SOLD OUT": "SOLD OUT",
     New: "New",
+    "Coming soon": "Coming soon",
 
     auth: {
         welcome: "Welcome to Menuriom",
@@ -411,12 +412,18 @@ export default {
             "Header Type": "Header Type",
             "Logo Radius": "Logo Radius",
             "Background Pattern": "Background Pattern",
-            "Background Pattern Opacity": "Background Pattern Opacity",
-            "Background Pattern Rotations": "Background Pattern Rotations",
+            "Pattern Opacity": "Pattern Opacity",
+            "Pattern Rotations": "Pattern Rotations",
+            "Pattern Size": "Pattern Size",
             "you can change colors for each section (make sure to unlock the color sync first)":
                 "you can change colors for each section (make sure to unlock the color sync first)",
             Header1: "Slim",
             Header2: "Fat",
+
+            "Offers Section": "Offers Section",
+
+            "Search Section": "Search Section",
+            "Show search section": "Show search section",
         },
 
         qrcode: {

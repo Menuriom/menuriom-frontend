@@ -5,8 +5,12 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                // violet: "#967ad6",
+                // "baby-blue": "#cf7296",
+
                 violet: "#9f74cd",
                 "baby-blue": "#7ecfe1",
+
                 "pencil-tip": "#2a2a2a",
                 dolphin: "#3f3f3f",
             },

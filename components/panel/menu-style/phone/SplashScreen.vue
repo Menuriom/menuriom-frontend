@@ -57,7 +57,7 @@
             :class="{ off: showAnimation }"
             @click="beginAnimation()"
         >
-            <img class="absolute -z-10 rotate-0 w-[30rem] max-w-none opacity-10 pointer-events-none" src="/patterns/pattern6.png" alt="" />
+            <img class="absolute -z-10 rotate-0 w-[30rem] max-w-none opacity-10 pointer-events-none" src="/patterns/pattern6.webp" alt="" />
 
             <div
                 class="flex items-center justify-center w-36 h-36 p-6 rounded-full shadow-nr25"

@@ -1,9 +1,20 @@
+<style scoped>
+.pattern-bg {
+    background-repeat: repeat;
+    background-size: 80px;
+}
+</style>
+
 <template>
     <div
         class="sticky top-7 flex items-center justify-between gap-2 w-full mb-2 p-2 shadow-nr15 isolate overflow-hidden shrink-0"
         :style="`background-color: ${options.bgSecondaryColor};`"
     >
-        <img class="absolute -z-10" :style="`opacity: ${options.bgImageOpacity}%; rotate: ${options.bgImageRotation}deg;`" :src="options.bgImage" alt="" />
+        <div
+            class="pattern-bg absolute -top-1/2 w-96 aspect-square -z-10"
+            :style="`background-image: url('${options.bgImage}'); background-size: ${options.bgImageSize}%; background-color: ${options.bgSecondaryColor}; opacity: ${options.bgImageOpacity}%; rotate: ${options.bgImageRotation}deg;`"
+            v-if="options.withPattern"
+        ></div>
         <div class="flex items-center gap-1">
             <div
                 class="flex items-center justify-center w-12 h-12 p-1.5 shadow-nr25 shrink-0 overflow-hidden"
@@ -38,9 +49,9 @@
 <script setup>
 const props = defineProps({
     brand: { type: Object },
-    baseColors: { type: Object },
     options: { type: Object },
-
+    
+    // baseColors: { type: Object },
     // bgImage: { type: String },
     // bgImageOpacity: { type: String }, // 10 - 100 : 10
     // bgImageRotation: { type: String }, // 0 - 90 : 10

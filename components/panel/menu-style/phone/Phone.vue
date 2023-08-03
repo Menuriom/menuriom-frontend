@@ -25,7 +25,7 @@
             class="screen flex flex-col items-center w-full p-4 overflow-auto isolate"
             :style="`background-color: ${baseColors.bgMainColor}; color: ${baseColors.textColor};`"
         >
-            <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="/patterns/pattern7.png" alt="" />
+            <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="/patterns/pattern7.webp" alt="" />
 
             <div
                 id="status-bar"
@@ -45,7 +45,6 @@
                 class="z-5"
                 :is="headers[mainMenuStyleOptions.headerOptions.component]"
                 :brand="brand"
-                :baseColors="baseColors"
                 :options="mainMenuStyleOptions.headerOptions"
             />
 
@@ -57,17 +56,7 @@
                 :options="mainMenuStyleOptions.offerOptions"
             />
 
-            <component
-                name="search"
-                class="z-3"
-                :is="searchs[mainMenuStyleOptions.searchOptions.component]"
-                :baseColors="baseColors"
-                textColor=""
-                bgMainColor=""
-                bgSecondaryColor=""
-                primaryColor=""
-                accentColor=""
-            />
+            <component name="search" class="z-3" :is="searchs[mainMenuStyleOptions.searchOptions.component]" :options="mainMenuStyleOptions.searchOptions" />
 
             <component
                 name="categories"

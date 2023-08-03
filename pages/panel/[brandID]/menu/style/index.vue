@@ -45,29 +45,24 @@
 
                 <hr class="w-full border-gray-300 opacity-50" />
 
-                <HeaderSection :brand="brand" :patterns="patterns" :baseColors="baseColors" :headerOptions="mainMenuStyleOptions.headerOptions" />
+                <HeaderSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :headerOptions="mainMenuStyleOptions.headerOptions" />
 
                 <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
                     <template #title>
                         <div class="flex items-center justify-between gap-2 w-full">
-                            <h3>Offers Section</h3>
+                            <h3 class="font-bold">{{ $t("panel.menu-style.Offers Section") }}</h3>
                             <span class="h-0.5 bg-neutral-200 grow"></span>
                             <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
                         </div>
                     </template>
                     <div class="flex flex-col gap-2 overflow-hidden">
-                        <span>coming soon</span>
+                        <span class="w-full text-violet border border-neutral-500 border-opacity-25 rounded-md p-2">{{ $t("Coming soon") }}...</span>
                     </div>
                 </Wrapper>
-                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
-                    <template #title>
-                        <div class="flex items-center justify-between gap-2 w-full">
-                            <h3>Search Section</h3>
-                            <span class="h-0.5 bg-neutral-200 grow"></span>
-                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
-                        </div>
-                    </template>
-                </Wrapper>
+
+                <SearchSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :searchOptions="mainMenuStyleOptions.searchOptions" />
+
+               
                 <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
                     <template #title>
                         <div class="flex items-center justify-between gap-2 w-full">
@@ -122,6 +117,7 @@ import ColorPicker from "@/components/form/ColorPicker.vue";
 import Wrapper from "~/components/form/Wrapper.vue";
 import Phone from "@/components/panel/menu-style/phone/Phone.vue";
 import HeaderSection from "@/components/panel/menu-style/HeaderSection.vue";
+import SearchSection from "@/components/panel/menu-style/SearchSection.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
@@ -177,12 +173,21 @@ const mainMenuStyleOptions = reactive({
         accentColor: baseColors.accentColor || "#000000ff",
         withPattern: false,
         bgImage: "",
+        bgImageSize: "30",
         bgImageOpacity: "20",
-        bgImageRotation: "5",
+        bgImageRotation: "0",
         logoRadius: "50",
     },
     offerOptions: { component: "Offers1" },
-    searchOptions: { component: "Search1" },
+    searchOptions: {
+        component: "Search1",
+        textColor: baseColors.textColor || "#000000ff",
+        bgMainColor: baseColors.bgMainColor || "#000000ff",
+        bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
+        primaryColor: baseColors.primaryColor || "#000000ff",
+        accentColor: baseColors.accentColor || "#000000ff",
+        active: true,
+    },
     categoriesOptions: { component: "Categories1" },
     itemHeaderOptions: { component: "ItemHeader1" },
     itemListOptions: { component: "ItemList1" },

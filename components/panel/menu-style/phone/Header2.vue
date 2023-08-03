@@ -1,8 +1,18 @@
+<style scoped>
+.pattern-bg {
+    background-repeat: repeat;
+    background-size: 80px;
+}
+</style>
+
 <template>
     <div class="relative flex items-start justify-between gap-4 w-full px-2 pt-4 mb-2 isolate shrink-0">
-        <!-- TODO : make image as background image so that you can repeat it in x and y axis -->
-        <div class="absolute start-0 top-0 w-full h-20 isolate -z-10 overflow-hidden" :style="`background-color: ${options.bgSecondaryColor};`">
-            <img class="absolute" :style="`opacity: ${options.bgImageOpacity}%; rotate: ${options.bgImageRotation}deg;`" :src="options.bgImage" alt="" />
+        <div class="absolute start-0 top-0 w-full h-20 -z-10 overflow-hidden" :style="`background-color: ${options.bgSecondaryColor};`">
+            <div
+                class="pattern-bg absolute -top-1/2 w-96 aspect-square"
+                :style="`background-image: url('${options.bgImage}'); background-size: ${options.bgImageSize}%; background-color: ${options.bgSecondaryColor}; opacity: ${options.bgImageOpacity}%; rotate: ${options.bgImageRotation}deg;`"
+                v-if="options.withPattern"
+            ></div>
         </div>
         <div class="flex items-start gap-2 w-full">
             <div
@@ -40,9 +50,9 @@
 <script setup>
 const props = defineProps({
     brand: { type: Object },
-    baseColors: { type: Object },
     options: { type: Object },
-
+    
+    // baseColors: { type: Object },
     // bgImage: { type: String },
     // bgImageOpacity: { type: String }, // 10 - 100 : 10
     // bgImageRotation: { type: String }, // 0 - 90 : 10

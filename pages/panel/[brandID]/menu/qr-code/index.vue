@@ -257,7 +257,7 @@
                     </div>
                     <ul class="flex flex-wrap items-start justify-start gap-3 w-full max-h-48 overflow-auto">
                         <li
-                            class="relative flex items-center justify-center w-16 h-16  rounded-lg shadow-nr10 cursor-pointer"
+                            class="relative flex items-center justify-center w-16 h-16 rounded-lg shadow-nr10 cursor-pointer"
                             :class="[dotImage === item.image ? 'bg-violet' : 'bg-pencil-tip']"
                             v-for="(item, i) in dotImageList"
                             :key="i"
@@ -721,6 +721,8 @@ onMounted(() => {
     img = new Image();
     img.src = dotImage.value;
     img.onload = () => drawQR();
+
+    // setTimeout(() => renderAll(), 2000);
 });
 
 // download qr code as png -------------------------------------------------
@@ -816,7 +818,9 @@ const handleLoadingQRCodeSettings_results = (data) => {
     logoBorderRadius.value = data._QRSettings.logoBorderRadius || logoBorderRadius.value;
     logoShadow.value = data._QRSettings.logoShadow || logoShadow.value;
     logoShadowIntensity.value = data._QRSettings.logoShadowIntensity || logoShadowIntensity.value;
-    if (process.client && !nuxtApp.isHydrating && !nuxtApp.payload.serverRendered) renderAll();
+    try {
+        renderAll();
+    } catch (e) {}
 };
 watch(loadQRCodeSettings_results.data, (val) => handleLoadingQRCodeSettings_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
