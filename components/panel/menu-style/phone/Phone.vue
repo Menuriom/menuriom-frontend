@@ -56,21 +56,21 @@
                 :options="mainMenuStyleOptions.offerOptions"
             />
 
-            <component name="search" class="z-3" :is="searchs[mainMenuStyleOptions.searchOptions.component]" :options="mainMenuStyleOptions.searchOptions" />
+            <component
+                name="search"
+                class="z-3"
+                :is="searchs[mainMenuStyleOptions.searchOptions.component]"
+                :baseColors="baseColors"
+                :options="mainMenuStyleOptions.searchOptions"
+            />
 
             <component
                 name="categories"
                 class="z-2"
+                :class="[mainMenuStyleOptions.searchOptions.active ? 'top-20' : 'top-7']"
                 :is="categories[mainMenuStyleOptions.categoriesOptions.component]"
                 :baseColors="baseColors"
-                textColor=""
-                bgMainColor=""
-                bgSecondaryColor=""
-                primaryColor=""
-                accentColor=""
-                :icon="true"
-                flow="row"
-                radius="12"
+                :options="mainMenuStyleOptions.categoriesOptions"
             />
 
             <div id="item-groups" class="flex flex-col gap-4 w-full p-2">
@@ -80,13 +80,6 @@
                     :baseColors="baseColors"
                     :options="mainMenuStyleOptions.itemHeaderOptions"
                 />
-                <h4
-                    class="flex flex-col gap-1 w-full p-2 rounded-md border border-neutral-500 border-opacity-20 text-xs shadow-nr15"
-                    :style="`background-color: ${baseColors.bgMainColor};`"
-                >
-                    <span class="w-10/12 h-1 rounded" :style="`background-color: ${baseColors.accentColor};`"></span>
-                    <span class="w-4/12 h-1 rounded" :style="`background-color: ${baseColors.accentColor};`"></span>
-                </h4>
                 <component
                     name="itemList"
                     :is="itemLists[mainMenuStyleOptions.itemListOptions.component]"
@@ -104,14 +97,8 @@
             <component
                 name="navbar"
                 :is="navbars[mainMenuStyleOptions.navbarOptions.component]"
-                :baseColors="baseColors"
-                textColor=""
-                bgMainColor=""
-                bgSecondaryColor=""
-                primaryColor=""
-                accentColor=""
                 :border="true"
-                :text="true"
+                :options="mainMenuStyleOptions.navbarOptions"
             />
 
             <ItemDetails :baseColors="baseColors" :itemsDialogStyleOptions="itemsDialogStyleOptions" v-if="selectedTab === 'ItemsDialogStyle'" />
@@ -159,6 +146,7 @@ const categories = {
 };
 const itemHeaders = {
     ItemHeader1: defineAsyncComponent(() => import("./ItemHeader1.vue")),
+    ItemHeader2: defineAsyncComponent(() => import("./ItemHeader2.vue")),
 };
 const itemLists = {
     ItemList1: defineAsyncComponent(() => import("./ItemList1.vue")),

@@ -131,12 +131,6 @@
                         v-model:color="headerOptions.bgSecondaryColor"
                         :baseColor="baseColors.bgSecondaryColor"
                     />
-                    <ColorPicker
-                        :label="$t('panel.menu-style.primary color')"
-                        v-model:color="headerOptions.primaryColor"
-                        :baseColor="baseColors.primaryColor"
-                    />
-                    <ColorPicker :label="$t('panel.menu-style.accent color')" v-model:color="headerOptions.accentColor" :baseColor="baseColors.accentColor" />
                 </div>
                 <small class="text-xs">
                     {{ $t("panel.menu-style.you can change colors for each section (make sure to unlock the color sync first)") }}

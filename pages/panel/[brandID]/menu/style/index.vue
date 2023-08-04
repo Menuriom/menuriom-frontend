@@ -56,31 +56,16 @@
                         </div>
                     </template>
                     <div class="flex flex-col gap-2 overflow-hidden">
-                        <span class="w-full text-violet border border-neutral-500 border-opacity-25 rounded-md p-2">{{ $t("Coming soon") }}...</span>
+                        <small class="w-full text-violet border border-neutral-500 border-opacity-25 rounded-md p-2">{{ $t("Coming soon") }}...</small>
                     </div>
                 </Wrapper>
 
                 <SearchSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :searchOptions="mainMenuStyleOptions.searchOptions" />
 
-               
-                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
-                    <template #title>
-                        <div class="flex items-center justify-between gap-2 w-full">
-                            <h3>Categories Section</h3>
-                            <span class="h-0.5 bg-neutral-200 grow"></span>
-                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
-                        </div>
-                    </template>
-                </Wrapper>
-                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
-                    <template #title>
-                        <div class="flex items-center justify-between gap-2 w-full">
-                            <h3>Item's Title Section</h3>
-                            <span class="h-0.5 bg-neutral-200 grow"></span>
-                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
-                        </div>
-                    </template>
-                </Wrapper>
+                <CategoriesSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :categoriesOptions="mainMenuStyleOptions.categoriesOptions" />
+
+                <ItemHeaderSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :itemHeaderOptions="mainMenuStyleOptions.itemHeaderOptions" />
+
                 <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
                     <template #title>
                         <div class="flex items-center justify-between gap-2 w-full">
@@ -90,15 +75,8 @@
                         </div>
                     </template>
                 </Wrapper>
-                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
-                    <template #title>
-                        <div class="flex items-center justify-between gap-2 w-full">
-                            <h3>Navbar Section</h3>
-                            <span class="h-0.5 bg-neutral-200 grow"></span>
-                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
-                        </div>
-                    </template>
-                </Wrapper>
+
+                <NavbarSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :navbarOptions="mainMenuStyleOptions.navbarOptions" />
             </section>
             <Phone
                 class="sticky @7xl:top-0 shrink-0"
@@ -118,6 +96,9 @@ import Wrapper from "~/components/form/Wrapper.vue";
 import Phone from "@/components/panel/menu-style/phone/Phone.vue";
 import HeaderSection from "@/components/panel/menu-style/HeaderSection.vue";
 import SearchSection from "@/components/panel/menu-style/SearchSection.vue";
+import CategoriesSection from "@/components/panel/menu-style/CategoriesSection.vue";
+import ItemHeaderSection from "~/components/panel/menu-style/ItemHeaderSection.vue";
+import NavbarSection from "~/components/panel/menu-style/NavbarSection.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
@@ -188,10 +169,41 @@ const mainMenuStyleOptions = reactive({
         accentColor: baseColors.accentColor || "#000000ff",
         active: true,
     },
-    categoriesOptions: { component: "Categories1" },
-    itemHeaderOptions: { component: "ItemHeader1" },
+    categoriesOptions: {
+        component: "Categories1",
+        textColor: baseColors.textColor || "#000000ff",
+        bgMainColor: baseColors.bgMainColor || "#000000ff",
+        bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
+        primaryColor: baseColors.primaryColor || "#000000ff",
+        accentColor: baseColors.accentColor || "#000000ff",
+        orientation: "col",
+        orientations: ["row", "col"],
+        cornerRadius: "10",
+        withIcon: true,
+    },
+    itemHeaderOptions: {
+        component: "ItemHeader1",
+        componentList: ["ItemHeader1", "ItemHeader2"],
+        textColor: baseColors.textColor || "#000000ff",
+        bgMainColor: baseColors.bgMainColor || "#000000ff",
+        bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
+        primaryColor: baseColors.primaryColor || "#000000ff",
+        accentColor: baseColors.accentColor || "#000000ff",
+        withIcon: true,
+        cornerRadius: "20",
+    },
     itemListOptions: { component: "ItemList1" },
-    navbarOptions: { component: "Navbar2" },
+    navbarOptions: {
+        component: "Navbar2",
+        componentList: ["Navbar1", "Navbar2", "Navbar3"],
+        textColor: baseColors.textColor || "#000000ff",
+        bgMainColor: baseColors.bgMainColor || "#000000ff",
+        bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
+        primaryColor: baseColors.primaryColor || "#000000ff",
+        accentColor: baseColors.accentColor || "#000000ff",
+        withText: true,
+        radius: "50",
+    },
 });
 // -------------------------------------------
 

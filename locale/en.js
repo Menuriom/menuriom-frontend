@@ -424,6 +424,25 @@ export default {
 
             "Search Section": "Search Section",
             "Show search section": "Show search section",
+
+            "Categories Section": "Categories Section",
+            "Show categories icons": "Show categories icons",
+            Orientation: "Orientation",
+            "orient-col": "Vertical",
+            "orient-row": "Horizontal",
+            "Corner Radius": "Corner Radius",
+
+            "Items Title Section": "Items Title Section",
+            "Items Title Type": "Items Title Type",
+            ItemHeader1: "Aligned",
+            ItemHeader2: "Centered",
+
+            "Navbar Section": "Navbar Section",
+            "Navbar Type": "Navbar Type",
+            "Show text": "Show text",
+            Navbar1: "Island Bold",
+            Navbar2: "Island Normal",
+            Navbar3: "Fill Space",
         },
 
         qrcode: {

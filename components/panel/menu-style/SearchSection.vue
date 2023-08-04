@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5" :defaultState="1">
+    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5" :defaultState="0">
         <template #title>
             <div class="flex items-center justify-between gap-2 w-full">
                 <h3 class="font-bold">{{ $t("panel.menu-style.Search Section") }}</h3>
@@ -27,12 +27,6 @@
                         v-model:color="searchOptions.bgSecondaryColor"
                         :baseColor="baseColors.bgSecondaryColor"
                     />
-                    <ColorPicker
-                        :label="$t('panel.menu-style.primary color')"
-                        v-model:color="searchOptions.primaryColor"
-                        :baseColor="baseColors.primaryColor"
-                    />
-                    <ColorPicker :label="$t('panel.menu-style.accent color')" v-model:color="searchOptions.accentColor" :baseColor="baseColors.accentColor" />
                 </div>
                 <small class="text-xs">
                     {{ $t("panel.menu-style.you can change colors for each section (make sure to unlock the color sync first)") }}

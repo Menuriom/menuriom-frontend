@@ -405,9 +405,9 @@ export default {
 
             "text color": "رنگ متن",
             "background main": "پس زمینه اصلی",
-            "background accent": "پس زمینه ثانوی",
+            "background accent": "پس زمینه ثانویه",
             "primary color": "رنگ اصلی",
-            "accent color": "رنگ ثانوی",
+            "accent color": "رنگ ثانویه",
 
             "Header Section": "قسمت سرتیتر",
             "Header Type": "نوع سرتیتر",
@@ -425,6 +425,25 @@ export default {
 
             "Search Section": "قسمت جستجو",
             "Show search section": "نمایش قسمت جستجو",
+
+            "Categories Section": "قسمت دسته‌بندی ها",
+            "Show categories icons": "نمایش ایکون دسته‌بندی ها",
+            Orientation: "جهت",
+            "orient-col": "عمودی",
+            "orient-row": "افقی",
+            "Corner Radius": "گردی گوشه ها",
+
+            "Items Title Section": "قسمت عنوان ایتم ها",
+            "Items Title Type": "نوع عنوان",
+            ItemHeader1: "یک راستا",
+            ItemHeader2: "وسط چین",
+
+            "Navbar Section": "قسمت نوار ابزار",
+            "Navbar Type": "نوع نوار",
+            "Show text": "نمایش متن",
+            Navbar1: "شناور برجسته",
+            Navbar2: "شناور معمولی",
+            Navbar3: "عریض",
         },
 
         qrcode: {
