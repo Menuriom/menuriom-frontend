@@ -444,6 +444,14 @@ export default {
             Navbar1: "شناور برجسته",
             Navbar2: "شناور معمولی",
             Navbar3: "عریض",
+
+            "Items List Section": "قسمت لیست ایتم ها",
+            "Items Style": "استایل ایتم ها",
+            ItemList1: "دو ردیف",
+            ItemList2: "تمام صفحه",
+            ItemList3: "ردیف به ردیف",
+            "Thumbnail Overflow": "بیرون زدگی عکس",
+            "Show items in zig-zag": "نمایش به صورت زیگ زاگ",
         },
 
         qrcode: {

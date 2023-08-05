@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5" :defaultState="1">
+    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5" :defaultState="0">
         <template #title>
             <div class="flex items-center justify-between gap-2 w-full">
                 <h3 class="font-bold">{{ $t("panel.menu-style.Navbar Section") }}</h3>
@@ -68,8 +68,6 @@
 import ColorPicker from "@/components/form/ColorPicker.vue";
 import Switch_Light from "~/components/form/Switch_Light.vue";
 import Wrapper from "~/components/form/Wrapper.vue";
-
-const route = useRoute();
 
 const props = defineProps({
     brand: { type: Object },

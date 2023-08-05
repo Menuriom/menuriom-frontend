@@ -66,15 +66,7 @@
 
                 <ItemHeaderSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :itemHeaderOptions="mainMenuStyleOptions.itemHeaderOptions" />
 
-                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
-                    <template #title>
-                        <div class="flex items-center justify-between gap-2 w-full">
-                            <h3>Items Section</h3>
-                            <span class="h-0.5 bg-neutral-200 grow"></span>
-                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
-                        </div>
-                    </template>
-                </Wrapper>
+                <ItemListSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :itemListOptions="mainMenuStyleOptions.itemListOptions" />
 
                 <NavbarSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :navbarOptions="mainMenuStyleOptions.navbarOptions" />
             </section>
@@ -98,6 +90,7 @@ import HeaderSection from "@/components/panel/menu-style/HeaderSection.vue";
 import SearchSection from "@/components/panel/menu-style/SearchSection.vue";
 import CategoriesSection from "@/components/panel/menu-style/CategoriesSection.vue";
 import ItemHeaderSection from "~/components/panel/menu-style/ItemHeaderSection.vue";
+import ItemListSection from "~/components/panel/menu-style/ItemListSection.vue";
 import NavbarSection from "~/components/panel/menu-style/NavbarSection.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
@@ -192,7 +185,23 @@ const mainMenuStyleOptions = reactive({
         withIcon: true,
         cornerRadius: "20",
     },
-    itemListOptions: { component: "ItemList1" },
+    itemListOptions: {
+        component: "ItemList1",
+        componentList: ["ItemList1", "ItemList2", "ItemList3"],
+        textColor: baseColors.textColor || "#000000ff",
+        bgMainColor: baseColors.bgMainColor || "#000000ff",
+        bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
+        primaryColor: baseColors.primaryColor || "#000000ff",
+        accentColor: baseColors.accentColor || "#000000ff",
+        withPattern: false,
+        bgImage: "",
+        bgImageSize: "30",
+        bgImageOpacity: "20",
+        bgImageRotation: "0",
+        cornerRadius: "16",
+        imageMargin: "0",
+        zigzag: false,
+    },
     navbarOptions: {
         component: "Navbar2",
         componentList: ["Navbar1", "Navbar2", "Navbar3"],

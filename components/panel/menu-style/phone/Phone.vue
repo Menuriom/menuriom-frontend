@@ -4,8 +4,11 @@
     height: 717px;
 }
 .phone .screen,
-.bg-image {
+.pattern-bg-wrapper {
     border-radius: 3.85rem;
+}
+.pattern-bg {
+    background-repeat: repeat;
 }
 
 *::-webkit-scrollbar {
@@ -25,7 +28,18 @@
             class="screen flex flex-col items-center w-full p-4 overflow-auto isolate"
             :style="`background-color: ${baseColors.bgMainColor}; color: ${baseColors.textColor};`"
         >
-            <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="/patterns/pattern7.webp" alt="" />
+            <!-- <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="/patterns/pattern7.webp" alt="" /> -->
+
+            <div
+                class="pattern-bg-wrapper absolute bottom-0 w-full h-96 -z-10 overflow-hidden"
+                :style="`background-color: ${baseColors.bgMainColor};`"
+            >
+                <div
+                    class="pattern-bg absolute w-96 aspect-square"
+                    :style="`background-image: url('${mainMenuStyleOptions.itemListOptions.bgImage}'); background-size: ${mainMenuStyleOptions.itemListOptions.bgImageSize}%; background-color: ${baseColors.bgMainColor}; opacity: ${mainMenuStyleOptions.itemListOptions.bgImageOpacity}%; rotate: ${mainMenuStyleOptions.itemListOptions.bgImageRotation}deg;`"
+                    v-if="mainMenuStyleOptions.itemListOptions.withPattern"
+                ></div>
+            </div>
 
             <div
                 id="status-bar"
@@ -84,22 +98,12 @@
                     name="itemList"
                     :is="itemLists[mainMenuStyleOptions.itemListOptions.component]"
                     :baseColors="baseColors"
-                    textColor=""
-                    bgMainColor=""
-                    bgSecondaryColor=""
-                    primaryColor=""
-                    accentColor=""
+                    :options="mainMenuStyleOptions.itemListOptions"
                     :zigzag="true"
-                    :imageMargin="0"
                 />
             </div>
 
-            <component
-                name="navbar"
-                :is="navbars[mainMenuStyleOptions.navbarOptions.component]"
-                :border="true"
-                :options="mainMenuStyleOptions.navbarOptions"
-            />
+            <component name="navbar" :is="navbars[mainMenuStyleOptions.navbarOptions.component]" :border="true" :options="mainMenuStyleOptions.navbarOptions" />
 
             <ItemDetails :baseColors="baseColors" :itemsDialogStyleOptions="itemsDialogStyleOptions" v-if="selectedTab === 'ItemsDialogStyle'" />
             <StoreInfo

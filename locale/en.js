@@ -443,6 +443,14 @@ export default {
             Navbar1: "Island Bold",
             Navbar2: "Island Normal",
             Navbar3: "Fill Space",
+
+            "Items List Section": "Items List Section",
+            "Items Style": "Items Style",
+            ItemList1: "2 in a row",
+            ItemList2: "full page",
+            ItemList3: "row by row",
+            "Thumbnail Overflow": "Thumbnail Overflow",
+            "Show items in zig-zag": "Show items in zig-zag",
         },
 
         qrcode: {
