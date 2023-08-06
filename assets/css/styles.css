@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;700;800&display=swap'); */
@@ -23,17 +23,32 @@
 /* *::-webkit-scrollbar-track-piece { background-color: theme("colors.zinc.800"); border-radius: 2px; } */
 *::-webkit-scrollbar-thumb { background: theme("colors.zinc.600"); border-radius: 2px; box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1); }
 
-@font-face { font-family: "IranyekanRegular"; src: local('Roboto'), url("../fonts/iranyekanwebregular.woff2"); font-display: swap; }
-@font-face { font-family: "IranyekanBold"; src: local('Roboto'), url("../fonts/iranyekanwebbold.woff2"); font-display: swap; }
-@font-face { font-family: "Kalameh"; src: local('Roboto'), url("../fonts/KalamehWeb-Regular.woff2"); font-weight: 400; font-display: swap; }
+/* @font-face { font-family: "IranyekanRegular"; src: local('Roboto'), url("../fonts/iranyekanwebregular.woff2"); font-display: swap; }
+@font-face { font-family: "IranyekanBold"; src: local('Roboto'), url("../fonts/iranyekanwebbold.woff2"); font-display: swap; } */
+
+/* good for text */
+@font-face { font-family: "Shabnam"; src: local('Roboto'), url("../fonts/Shabnam-FD.woff2"); font-display: swap; }
+
+/* good for title */
+/* @font-face { font-family: "Kalameh"; src: local('Roboto'), url("../fonts/KalamehWeb-Regular.woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Kalameh"; src: local('Roboto'), url("../fonts/KalamehWeb-Bold.woff2"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Kalameh"; src: local('Roboto'), url("../fonts/KalamehWeb-ExtraBold.woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Kalameh"; src: local('Roboto'), url("../fonts/KalamehWeb-ExtraBold.woff2"); font-weight: 800; font-display: swap; } */
+
+/* good for title */
+/* @font-face { font-family: "YekanBakh"; src: local('Roboto'), url("../fonts/Yekan-Bakh-FaNum-Regular.woff"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "YekanBakh"; src: local('Roboto'), url("../fonts/Yekan-Bakh-FaNum-Bold.woff"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "YekanBakh"; src: local('Roboto'), url("../fonts/Yekan-Bakh-FaNum-Fat.woff"); font-weight: 800; font-display: swap; } */
+
+/* good for text & title */
+@font-face { font-family: "Estedad"; src: local('Roboto'), url("../fonts/Estedad-Regular.woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Estedad"; src: local('Roboto'), url("../fonts/Estedad-Bold.woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Estedad"; src: local('Roboto'), url("../fonts/Estedad-ExtraBold.woff2"); font-weight: 800; font-display: swap; }
 
 *,html { scroll-behavior: smooth; }
 /* html { color-scheme: dark light; } */
 
 body {
-    font-family: "Poppins", "Inter", "IranyekanRegular";
+    font-family: "Poppins", "Inter", "Shabnam";
     display: flex; flex-direction: column;
     margin: 0; padding: 0;
     overflow-x: hidden;
@@ -43,10 +58,10 @@ body {
 nav, nav ul, .scroll-thin { scrollbar-width: thin; }
 nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollbar { width: 4px; height: 4px; }
 
-*:is(h1, h2, h3, h4, h5, h6) { font-family: "Inter", "Kalameh"; }
+*:is(h1, h2, h3, h4, h5, h6) { font-family: "Inter", "Estedad"; }
 
-.f-inter { font-family: "Inter", "Kalameh" !important; }
-.f-poppins { font-family: "Poppins", "IranyekanRegular" !important; }
+.f-inter { font-family: "Inter", "Estedad" !important; }
+.f-poppins { font-family: "Poppins", "Shabnam" !important; }
 
 .z-1 { z-index: 1; }
 .z-2 { z-index: 2; }

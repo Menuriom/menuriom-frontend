@@ -451,6 +451,18 @@ export default {
             ItemList3: "row by row",
             "Thumbnail Overflow": "Thumbnail Overflow",
             "Show items in zig-zag": "Show items in zig-zag",
+
+            "Frame Style": "Frame Style",
+            "Content Style": "Content Style",
+            "item-details-Body1": "Image First",
+            "item-details-Body2": "Title First",
+            "item-details-Frame1": "Float Dialog",
+            "item-details-Frame2": "Drawer From Bottom",
+
+            "restaurant-details-Body1": "Normal",
+            "restaurant-details-Frame1": "Float Dialog",
+            "restaurant-details-Frame2": "Drawer From Bottom",
+            "restaurant-details-Frame3": "Drawer With X",
         },
 
         qrcode: {

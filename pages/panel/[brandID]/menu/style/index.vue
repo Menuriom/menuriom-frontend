@@ -45,30 +45,48 @@
 
                 <hr class="w-full border-gray-300 opacity-50" />
 
-                <HeaderSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :headerOptions="mainMenuStyleOptions.headerOptions" />
-
-                <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
-                    <template #title>
-                        <div class="flex items-center justify-between gap-2 w-full">
-                            <h3 class="font-bold">{{ $t("panel.menu-style.Offers Section") }}</h3>
-                            <span class="h-0.5 bg-neutral-200 grow"></span>
-                            <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                <div class="flex flex-col gap-4 w-full" v-show="selectedTab === 'MainMenuStyle'">
+                    <HeaderSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :headerOptions="mainMenuStyleOptions.headerOptions" />
+                    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
+                        <template #title>
+                            <div class="flex items-center justify-between gap-2 w-full">
+                                <h3 class="font-bold">{{ $t("panel.menu-style.Offers Section") }}</h3>
+                                <span class="h-0.5 bg-neutral-200 grow"></span>
+                                <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                            </div>
+                        </template>
+                        <div class="flex flex-col gap-2 overflow-hidden">
+                            <small class="w-full text-violet border border-neutral-500 border-opacity-25 rounded-md p-2">{{ $t("Coming soon") }}...</small>
                         </div>
-                    </template>
-                    <div class="flex flex-col gap-2 overflow-hidden">
-                        <small class="w-full text-violet border border-neutral-500 border-opacity-25 rounded-md p-2">{{ $t("Coming soon") }}...</small>
-                    </div>
-                </Wrapper>
+                    </Wrapper>
+                    <SearchSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :searchOptions="mainMenuStyleOptions.searchOptions" />
+                    <CategoriesSection
+                        :brand="brand"
+                        :base-colors="baseColors"
+                        :patterns="patterns"
+                        :categoriesOptions="mainMenuStyleOptions.categoriesOptions"
+                    />
+                    <ItemHeaderSection
+                        :brand="brand"
+                        :base-colors="baseColors"
+                        :patterns="patterns"
+                        :itemHeaderOptions="mainMenuStyleOptions.itemHeaderOptions"
+                    />
+                    <ItemListSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :itemListOptions="mainMenuStyleOptions.itemListOptions" />
+                    <NavbarSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :navbarOptions="mainMenuStyleOptions.navbarOptions" />
+                </div>
 
-                <SearchSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :searchOptions="mainMenuStyleOptions.searchOptions" />
+                <ItemDetailsSection :base-colors="baseColors" :itemsDialogStyleOptions="itemsDialogStyleOptions" v-show="selectedTab === 'ItemsDialogStyle'" />
 
-                <CategoriesSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :categoriesOptions="mainMenuStyleOptions.categoriesOptions" />
+                <RestaurantDetailsSection
+                    :brand="brand"
+                    :patterns="patterns"
+                    :base-colors="baseColors"
+                    :restaurantDetailsPageOptions="restaurantDetailsPageOptions"
+                    v-show="selectedTab === 'RestaurantDetailsPage'"
+                />
 
-                <ItemHeaderSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :itemHeaderOptions="mainMenuStyleOptions.itemHeaderOptions" />
-
-                <ItemListSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :itemListOptions="mainMenuStyleOptions.itemListOptions" />
-
-                <NavbarSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :navbarOptions="mainMenuStyleOptions.navbarOptions" />
+                <div class="flex flex-col gap-4 w-full" v-show="selectedTab === 'SplashScreen'"></div>
             </section>
             <Phone
                 class="sticky @7xl:top-0 shrink-0"
@@ -91,6 +109,8 @@ import SearchSection from "@/components/panel/menu-style/SearchSection.vue";
 import CategoriesSection from "@/components/panel/menu-style/CategoriesSection.vue";
 import ItemHeaderSection from "~/components/panel/menu-style/ItemHeaderSection.vue";
 import ItemListSection from "~/components/panel/menu-style/ItemListSection.vue";
+import ItemDetailsSection from "~/components/panel/menu-style/ItemDetailsSection.vue";
+import RestaurantDetailsSection from "~/components/panel/menu-style/RestaurantDetailsSection.vue";
 import NavbarSection from "~/components/panel/menu-style/NavbarSection.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
@@ -218,15 +238,38 @@ const mainMenuStyleOptions = reactive({
 
 // ItemsDialogStyle options --------------------------------
 const itemsDialogStyleOptions = reactive({
-    frameOptions: { component: "Frame2" },
-    bodyOptions: { component: "Body2" },
+    textColor: baseColors.textColor || "#000000ff",
+    bgMainColor: baseColors.bgMainColor || "#000000ff",
+    bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
+    primaryColor: baseColors.primaryColor || "#000000ff",
+    accentColor: baseColors.accentColor || "#000000ff",
+    frameComponent: "Frame2",
+    frameComponentList: ["Frame1", "Frame2"],
+    bodyComponent: "Body2",
+    bodyComponentList: ["Body1", "Body2"],
+    cornerRadius: "16",
+    imageMargin: "0",
 });
 // -------------------------------------------
 
 // RestaurantDetailsPage --------------------------------
 const restaurantDetailsPageOptions = reactive({
-    frameOptions: { component: "Frame3" },
-    bodyOptions: { component: "Body1" },
+    textColor: baseColors.textColor || "#000000ff",
+    bgMainColor: baseColors.bgMainColor || "#000000ff",
+    bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
+    primaryColor: baseColors.primaryColor || "#000000ff",
+    accentColor: baseColors.accentColor || "#000000ff",
+    frameComponent: "Frame3",
+    frameComponentList: ["Frame1", "Frame2", "Frame3"],
+    bodyComponent: "Body1",
+    bodyComponentList: ["Body1"],
+    withPattern: false,
+    bgImage: "",
+    bgImageSize: "30",
+    bgImageOpacity: "20",
+    bgImageRotation: "0",
+    marginTop: "0",
+    cornerRadius: "16",
 });
 // -------------------------------------------
 

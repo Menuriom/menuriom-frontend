@@ -30,10 +30,7 @@
         >
             <!-- <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="/patterns/pattern7.webp" alt="" /> -->
 
-            <div
-                class="pattern-bg-wrapper absolute bottom-0 w-full h-96 -z-10 overflow-hidden"
-                :style="`background-color: ${baseColors.bgMainColor};`"
-            >
+            <div class="pattern-bg-wrapper absolute bottom-0 w-full h-96 -z-10 overflow-hidden" :style="`background-color: ${baseColors.bgMainColor};`">
                 <div
                     class="pattern-bg absolute w-96 aspect-square"
                     :style="`background-image: url('${mainMenuStyleOptions.itemListOptions.bgImage}'); background-size: ${mainMenuStyleOptions.itemListOptions.bgImageSize}%; background-color: ${baseColors.bgMainColor}; opacity: ${mainMenuStyleOptions.itemListOptions.bgImageOpacity}%; rotate: ${mainMenuStyleOptions.itemListOptions.bgImageRotation}deg;`"

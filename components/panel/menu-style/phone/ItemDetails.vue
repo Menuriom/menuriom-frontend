@@ -9,26 +9,8 @@
 </style>
 
 <template>
-    <component
-        :is="frames[itemsDialogStyleOptions.frameOptions.component]"
-        :baseColors="baseColors"
-        textColor=""
-        bgMainColor=""
-        bgSecondaryColor=""
-        primaryColor=""
-        accentColor=""
-        :marginTop="imageTopMargin"
-    >
-        <component
-            :is="bodies[itemsDialogStyleOptions.bodyOptions.component]"
-            :baseColors="baseColors"
-            textColor=""
-            bgMainColor=""
-            bgSecondaryColor=""
-            primaryColor=""
-            accentColor=""
-            :marginTop="imageTopMargin"
-        />
+    <component :is="frames[itemsDialogStyleOptions.frameComponent]" :baseColors="baseColors" :options="itemsDialogStyleOptions">
+        <component :is="bodies[itemsDialogStyleOptions.bodyComponent]" :baseColors="baseColors" :options="itemsDialogStyleOptions" />
     </component>
 </template>
 
@@ -46,6 +28,4 @@ const bodies = {
     Body1: defineAsyncComponent(() => import("./item-details/Body1.vue")),
     Body2: defineAsyncComponent(() => import("./item-details/Body2.vue")),
 };
-
-const imageTopMargin = ref(0);
 </script>

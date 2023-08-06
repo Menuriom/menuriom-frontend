@@ -9,24 +9,12 @@
 </style>
 
 <template>
-    <component
-        :is="frames[restaurantDetailsPageOptions.frameOptions.component]"
-        :baseColors="baseColors"
-        textColor=""
-        bgMainColor=""
-        bgSecondaryColor=""
-        primaryColor=""
-        accentColor=""
-    >
+    <component :is="frames[restaurantDetailsPageOptions.frameComponent]" :baseColors="baseColors" :options="restaurantDetailsPageOptions">
         <component
-            :is="bodies[restaurantDetailsPageOptions.bodyOptions.component]"
-            :baseColors="baseColors"
-            textColor=""
-            bgMainColor=""
-            bgSecondaryColor=""
-            primaryColor=""
-            accentColor=""
+            :is="bodies[restaurantDetailsPageOptions.bodyComponent]"
             :brand="brand"
+            :baseColors="baseColors"
+            :options="restaurantDetailsPageOptions"
         />
     </component>
 </template>

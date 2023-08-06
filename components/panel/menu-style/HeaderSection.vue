@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5" :defaultState="0">
+    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5" :defaultState="1">
         <template #title>
             <div class="flex items-center justify-between gap-2 w-full">
                 <h3 class="font-bold">{{ $t("panel.menu-style.Header Section") }}</h3>

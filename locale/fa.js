@@ -452,6 +452,18 @@ export default {
             ItemList3: "ردیف به ردیف",
             "Thumbnail Overflow": "بیرون زدگی عکس",
             "Show items in zig-zag": "نمایش به صورت زیگ زاگ",
+
+            "Frame Style": "استایل فریم",
+            "Content Style": "استایل محتوا",
+            "item-details-Body1": "اول عکس",
+            "item-details-Body2": "اول توضیحات",
+            "item-details-Frame1": "باکس معلق",
+            "item-details-Frame2": "کشویی از پایین",
+
+            "restaurant-details-Body1": "معمولی",
+            "restaurant-details-Frame1": "باکس معلق",
+            "restaurant-details-Frame2": "کشویی از پایین",
+            "restaurant-details-Frame3": "کشویی با X",
         },
 
         qrcode: {

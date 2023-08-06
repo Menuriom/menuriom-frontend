@@ -14,20 +14,14 @@
         style="width: calc(360px - 1rem); height: calc(715px - 1rem); border-radius: 3.25rem"
     >
         <div
-            class="flex flex-col items-center gap-4 p-0 w-full max-h-[40rem] rounded-xl shadow-nr35"
-            :style="`margin-top: ${marginTop / 4}rem; background-color: ${baseColors.bgMainColor};`"
+            class="flex flex-col items-center gap-4 p-0 w-full max-h-[40rem] shadow-nr35"
+            :style="`margin-top: ${options.imageMargin / 4}rem; background-color: ${options.bgMainColor}; border-radius: ${options.cornerRadius}px;`"
         >
             <button
                 class="absolute top-8 flex items-center justify-center p-2 rounded-full shadow-nr35 transition-all hover:scale-125"
-                :style="`background-color: ${baseColors.textColor};`"
+                :style="`background-color: ${options.textColor};`"
             >
-                <Icon
-                    class="w-5 h-5 rotate-45"
-                    :style="`background-color: ${baseColors.bgMainColor};`"
-                    name="plus.svg"
-                    folder="icons/tabler"
-                    size="20px"
-                />
+                <Icon class="w-5 h-5 rotate-45" :style="`background-color: ${options.bgMainColor};`" name="plus.svg" folder="icons/tabler" size="20px" />
             </button>
             <slot />
         </div>
@@ -36,12 +30,7 @@
 
 <script setup>
 const props = defineProps({
-    marginTop: { type: Number },
-    baseColors: { type: Object },
-    textColor: { type: String },
-    bgMainColor: { type: String },
-    bgSecondaryColor: { type: String },
-    primaryColor: { type: String },
-    accentColor: { type: String },
+    options: { type: Object },
+    // baseColors: { type: Object },
 });
 </script>
