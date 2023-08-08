@@ -1,6 +1,6 @@
 <style scoped>
 .input-box-shadow {
-    box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 10%);
+    box-shadow: 0px 10px 15px -10px rgba(0, 0, 0, 10%);
 }
 
 .error {
@@ -23,7 +23,7 @@ input::placeholder {
 <template>
     <div class="flex flex-col gap-1">
         <div
-            class="wrapper relative flex items-center p-2 gap-2 bg-neutral-700 text-white rounded-md"
+            class="wrapper relative flex items-center p-2 gap-2 bg-white text-pencil-tip rounded-md"
             :class="{ 'input-box-shadow': !!shadow }"
             @click="focus()"
         >
@@ -43,11 +43,11 @@ input::placeholder {
                 @blur="isFocused = false"
             />
             <button
-                class="flex items-center justify-center bg-neutral-500 p-1 rounded-md shrink-0 cursor-pointer"
+                class="flex items-center justify-center bg-neutral-200 p-1 rounded-md shrink-0 cursor-pointer"
                 v-if="modelValue"
                 @click="$emit(`clear:search`)"
             >
-                <Icon class="icon w-5 h-5 bg-white" name="Cross.svg" folder="icons/basil" size="24px" />
+                <Icon class="icon w-5 h-5 bg-dolphin" name="Cross.svg" folder="icons/basil" size="24px" />
             </button>
         </div>
     </div>

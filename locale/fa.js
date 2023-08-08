@@ -11,6 +11,7 @@ export default {
     sundays: "یکشنبه ها",
     "SOLD OUT": "تمام شده",
     New: "جدید",
+    "Coming soon": "بزودی",
 
     auth: {
         welcome: "به منوریوم خوش اومدی",
@@ -401,6 +402,74 @@ export default {
             "Items Dialog Style": "جزئیات ایتم",
             "Restaurant Details Page": "مشخصات رستوران",
             "Splash Screen": "صفحه لودینگ",
+
+            "text color": "رنگ متن",
+            "background main": "پس زمینه اصلی",
+            "background accent": "پس زمینه ثانویه",
+            "primary color": "رنگ اصلی",
+            "accent color": "رنگ ثانویه",
+
+            "Header Section": "قسمت سرتیتر",
+            "Header Type": "نوع سرتیتر",
+            "Logo Radius": "گردی گوشه لوگو",
+            "Background Pattern": "طرح پس زمینه",
+            "Pattern Opacity": "شفافیت طرح پس زمینه",
+            "Pattern Rotations": "زاویه طرح پس زمینه",
+            "Pattern Size": "سایز طرح پس زمینه",
+            "you can change colors for each section (make sure to unlock the color sync first)":
+                "رنگ هر بخش را میتوانید جداگانه تغییر دهید (ابتدا قفل رنگ را باز کنید)",
+            Header1: "باریک",
+            Header2: "بزرگ",
+
+            "Offers Section": "قسمت بنر تخفیفات",
+
+            "Search Section": "قسمت جستجو",
+            "Show search section": "نمایش قسمت جستجو",
+
+            "Categories Section": "قسمت دسته‌بندی ها",
+            "Show categories icons": "نمایش ایکون دسته‌بندی ها",
+            Orientation: "جهت",
+            "orient-col": "عمودی",
+            "orient-row": "افقی",
+            "Corner Radius": "گردی گوشه ها",
+
+            "Items Title Section": "قسمت عنوان ایتم ها",
+            "Items Title Type": "نوع عنوان",
+            ItemHeader1: "یک راستا",
+            ItemHeader2: "وسط چین",
+
+            "Navbar Section": "قسمت نوار ابزار",
+            "Navbar Type": "نوع نوار",
+            "Show text": "نمایش متن",
+            Navbar1: "شناور برجسته",
+            Navbar2: "شناور معمولی",
+            Navbar3: "عریض",
+
+            "Items List Section": "قسمت لیست ایتم ها",
+            "Items Style": "استایل ایتم ها",
+            ItemList1: "دو ردیف",
+            ItemList2: "تمام صفحه",
+            ItemList3: "ردیف به ردیف",
+            "Thumbnail Overflow": "بیرون زدگی عکس",
+            "Show items in zig-zag": "نمایش به صورت زیگ زاگ",
+
+            "Frame Style": "استایل فریم",
+            "Content Style": "استایل محتوا",
+            "item-details-Body1": "اول عکس",
+            "item-details-Body2": "اول توضیحات",
+            "item-details-Frame1": "باکس معلق",
+            "item-details-Frame2": "کشویی از پایین",
+
+            "restaurant-details-Body1": "معمولی",
+            "restaurant-details-Frame1": "باکس معلق",
+            "restaurant-details-Frame2": "کشویی از پایین",
+            "restaurant-details-Frame3": "کشویی با X",
+
+            Animation: "انیمیشن",
+            "Line Text": "متن اسلایدی",
+            "Line Rotation": "زاویه متن",
+            Text: "متن",
+            "try out the animation by clicking on the phone screen": "برای مشاهده انیمیشن روی صفحه موبایل کلیک کنید",
         },
 
         qrcode: {
@@ -409,7 +478,7 @@ export default {
             "QR Code Style": "ظاهر کد QR",
             "QR Code Stand Frame": "قاب و فریم کد QR",
 
-            "Background Color": "رنگ پیش زمینه",
+            "Background Color": "رنگ پس زمینه",
             "Barcode Color": "رنگ بارکد",
             "Randomize Dot Size": "رندوم سازی سایز نقطه ها",
             "Custom Corners": "استایل دهی به گوشه ها",

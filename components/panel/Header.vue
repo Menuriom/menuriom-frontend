@@ -1,11 +1,12 @@
 <style scoped>
 header {
     width: calc(100% - 1rem);
+    box-shadow: 0px 5px 30px -7px rgba(0, 0, 0, 15%);
 }
 
 .toggle {
-    width: 2.75rem;
-    height: 2.75rem;
+    /* width: 2.75rem;
+    height: 2.75rem; */
 }
 
 .toggle div {
@@ -17,10 +18,10 @@ header {
 </style>
 
 <template>
-    <header class="flex items-center justify-between gap-3 rounded-lg mt-2 p-2 max-w-screen-4xl h-14 bg-white shadow-nr10 z-20">
+    <header class="flex items-center justify-between gap-3 rounded-lg mt-2 p-2 max-w-screen-4xl h-14 bg-white z-20">
         <div class="flex items-center gap-3 flex-grow">
             <button
-                class="toggle flex items-center justify-center hover:bg-neutral-100 rounded-full transition-colors"
+                class="toggle flex items-center justify-center w-10 h-10 hover:bg-neutral-200 rounded-lg transition-colors"
                 @click="panelStore.toggleSideMenu()"
                 v-if="!dontShowToggle"
             >

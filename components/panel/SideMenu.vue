@@ -1,11 +1,14 @@
 <style scoped>
 aside {
-    width: 275px;
+    width: calc(275px + 0.5rem);
     height: calc(100% - 1rem);
+    padding-block: 0.5rem;
+    padding-inline-start: .5rem;
     transition: all 0.2s ease-in-out;
 }
 aside.close {
     width: 0px;
+    padding-inline: 0px;
 }
 
 aside > div {
@@ -62,8 +65,8 @@ aside > div {
 </style>
 
 <template>
-    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 flex-shrink-0 shadow-nr35" :class="{ close: !panelStore.sideMenuOpen }">
-        <div class="flex flex-col gap-4 h-full p-4 bg-pencil-tip text-white rounded-lg">
+    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 shrink-0" :class="{ close: !panelStore.sideMenuOpen }">
+        <div class="flex flex-col gap-4 h-full p-4 bg-pencil-tip text-white rounded-lg shadow-nr35">
             <nuxt-link
                 class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin cursor-pointer transition-all group"
                 :to="localePath(`/panel/`)"

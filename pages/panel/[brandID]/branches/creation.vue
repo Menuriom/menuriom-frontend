@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full">
+    <div class="relative flex flex-col gap-4 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-2">
@@ -168,7 +168,7 @@ import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-// TODO : add map to record the location of branch to show in menu 
+// TODO : add map to record the location of branch to show in menu
 
 const { localeProperties, t } = useI18n();
 const route = useRoute();

@@ -11,6 +11,7 @@ export default {
     sundays: "Sundays",
     "SOLD OUT": "SOLD OUT",
     New: "New",
+    "Coming soon": "Coming soon",
 
     auth: {
         welcome: "Welcome to Menuriom",
@@ -400,6 +401,74 @@ export default {
             "Items Dialog Style": "Items Dialog Style",
             "Restaurant Details Page": "Restaurant Details Page",
             "Splash Screen": "Splash Screen",
+
+            "text color": "text color",
+            "background main": "background main",
+            "background accent": "background accent",
+            "primary color": "primary color",
+            "accent color": "accent color",
+
+            "Header Section": "Header Section",
+            "Header Type": "Header Type",
+            "Logo Radius": "Logo Radius",
+            "Background Pattern": "Background Pattern",
+            "Pattern Opacity": "Pattern Opacity",
+            "Pattern Rotations": "Pattern Rotations",
+            "Pattern Size": "Pattern Size",
+            "you can change colors for each section (make sure to unlock the color sync first)":
+                "you can change colors for each section (make sure to unlock the color sync first)",
+            Header1: "Slim",
+            Header2: "Fat",
+
+            "Offers Section": "Offers Section",
+
+            "Search Section": "Search Section",
+            "Show search section": "Show search section",
+
+            "Categories Section": "Categories Section",
+            "Show categories icons": "Show categories icons",
+            Orientation: "Orientation",
+            "orient-col": "Vertical",
+            "orient-row": "Horizontal",
+            "Corner Radius": "Corner Radius",
+
+            "Items Title Section": "Items Title Section",
+            "Items Title Type": "Items Title Type",
+            ItemHeader1: "Aligned",
+            ItemHeader2: "Centered",
+
+            "Navbar Section": "Navbar Section",
+            "Navbar Type": "Navbar Type",
+            "Show text": "Show text",
+            Navbar1: "Island Bold",
+            Navbar2: "Island Normal",
+            Navbar3: "Fill Space",
+
+            "Items List Section": "Items List Section",
+            "Items Style": "Items Style",
+            ItemList1: "2 in a row",
+            ItemList2: "full page",
+            ItemList3: "row by row",
+            "Thumbnail Overflow": "Thumbnail Overflow",
+            "Show items in zig-zag": "Show items in zig-zag",
+
+            "Frame Style": "Frame Style",
+            "Content Style": "Content Style",
+            "item-details-Body1": "Image First",
+            "item-details-Body2": "Title First",
+            "item-details-Frame1": "Float Dialog",
+            "item-details-Frame2": "Drawer From Bottom",
+
+            "restaurant-details-Body1": "Normal",
+            "restaurant-details-Frame1": "Float Dialog",
+            "restaurant-details-Frame2": "Drawer From Bottom",
+            "restaurant-details-Frame3": "Drawer With X",
+
+            Animation: "Animation",
+            "Line Text": "Line Text",
+            "Line Rotation": "Line Rotation",
+            Text: "Text",
+            "try out the animation by clicking on the phone screen": "try out the animation by clicking on the phone's screen",
         },
 
         qrcode: {
