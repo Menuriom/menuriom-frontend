@@ -6,7 +6,7 @@
             <slot name="title" />
         </div>
         <div class="grid flex-col gap-2 transition-all" :style="`grid-template-rows: ${openState}fr;`">
-            <slot class="overflow-hidden" />
+            <slot />
         </div>
     </div>
 </template>

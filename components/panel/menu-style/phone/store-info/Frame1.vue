@@ -22,7 +22,6 @@
             class="relative flex flex-col items-center px-4 py-6 w-full max-h-[40rem] shadow-nr35 isolate"
             :style="`background-color: ${options.bgMainColor}; border-radius: ${options.cornerRadius > 24 ? 24 : options.cornerRadius}px;`"
         >
-            <!-- <img class="absolute bottom-0 -z-10 w-full opacity-5 pointer-events-none" src="~/assets/images/pattern2.png" alt="" /> -->
             <div class="absolute bottom-0 w-full h-full overflow-hidden">
                 <div
                     class="pattern-bg absolute bottom-0 -z-10 w-[30rem] max-w-none aspect-square pointer-events-none"

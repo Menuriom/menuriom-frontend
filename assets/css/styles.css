@@ -223,3 +223,32 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
     font-family: "Poppins", "Inter", "IranyekanRegular" !important;
 }
 /* .Vue-Toastification =================================== */
+
+/* splash screen animations ========================================= */
+@keyframes SPLASH_opacity-swing {
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes SPLASH_slide-up {
+    100% {
+        transform: translateY(-100%);
+    }
+}
+@keyframes SPLASH_slide-left {
+    100% {
+        transform: translateX(-100%);
+    }
+}
+@keyframes SPLASH_fall {
+    100% {
+        transform: translate(100%, 150%) rotate(60deg);
+    }
+}
+@keyframes SPLASH_zoom-fade {
+    100% {
+        opacity: 0;
+        transform: scale(3, 3);
+    }
+}
+/* splash screen animations ========================================= */

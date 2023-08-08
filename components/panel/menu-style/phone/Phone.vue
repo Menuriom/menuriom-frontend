@@ -109,7 +109,7 @@
                 :restaurantDetailsPageOptions="restaurantDetailsPageOptions"
                 v-if="selectedTab === 'RestaurantDetailsPage'"
             />
-            <SplashScreen :brand="brand" :baseColors="baseColors" v-if="selectedTab === 'SplashScreen'" />
+            <SplashScreen :brand="brand" :baseColors="baseColors" :splashScreenOptions="splashScreenOptions" v-if="selectedTab === 'SplashScreen'" />
         </div>
     </div>
 </template>
@@ -130,6 +130,7 @@ const props = defineProps({
     mainMenuStyleOptions: { type: Object },
     itemsDialogStyleOptions: { type: Object },
     restaurantDetailsPageOptions: { type: Object },
+    splashScreenOptions: { type: Object },
 });
 
 const headers = {

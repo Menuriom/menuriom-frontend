@@ -11,38 +11,10 @@
     opacity: 1;
 }
 .splash-screen.off {
-    animation: opacity-swing 2s ease;
-    animation: slide-up 2s ease;
-    animation: slide-left 2s ease;
-    animation: fall 2s ease;
-    animation: zoom-fade 2s ease;
-}
-
-@keyframes opacity-swing {
-    100% {
-        opacity: 0;
-    }
-}
-@keyframes slide-up {
-    100% {
-        transform: translateY(-100%);
-    }
-}
-@keyframes slide-left {
-    100% {
-        transform: translateX(-100%);
-    }
-}
-@keyframes fall {
-    100% {
-        transform: translate(100%, 150%) rotate(60deg);
-    }
-}
-@keyframes zoom-fade {
-    100% {
-        opacity: 0;
-        transform: scale(3, 3);
-    }
+    /* animation: v-bind("splashScreenOptions.transition"); */
+    animation-name: v-bind("transitionAnimation");
+    animation-duration: 2s;
+    animation-timing-function: ease;
 }
 </style>
 
@@ -53,24 +25,41 @@
     >
         <div
             class="splash-screen relative flex flex-col items-center justify-center gap-4 w-full h-full rounded-2xl isolate overflow-hidden"
-            :style="`background-color: ${baseColors.bgMainColor};`"
+            :style="`background-color: ${splashScreenOptions.bgMainColor};`"
             :class="{ off: showAnimation }"
             @click="beginAnimation()"
         >
-            <img class="absolute -z-10 rotate-0 w-[30rem] max-w-none opacity-10 pointer-events-none" src="/patterns/pattern6.webp" alt="" />
+            <!-- <img class="absolute -z-10 rotate-0 w-[30rem] max-w-none opacity-10 pointer-events-none" src="/patterns/pattern6.webp" alt="" /> -->
+            <div class="absolute flex items-center justify-center w-full h-full overflow-hidden">
+                <div
+                    class="bg-repeat absolute -z-10 w-[40rem] max-w-none aspect-square pointer-events-none"
+                    :style="`
+                    background-image: url('${splashScreenOptions.bgImage}');
+                    background-size: ${splashScreenOptions.bgImageSize}%;
+                    background-color: ${splashScreenOptions.bgMainColor};
+                    opacity: ${splashScreenOptions.bgImageOpacity}%;
+                    rotate: ${splashScreenOptions.bgImageRotation}deg;`"
+                    v-if="splashScreenOptions.withPattern"
+                ></div>
+            </div>
 
             <div
-                class="flex items-center justify-center w-36 h-36 p-6 rounded-full shadow-nr25"
-                :style="`background-color: ${baseColors.bgSecondaryColor};`"
+                class="flex items-center justify-center w-36 h-36 p-6 shadow-nr25"
+                :style="`background-color: ${splashScreenOptions.bgSecondaryColor}; border-radius: ${splashScreenOptions.cornerRadius}px;`"
             >
-                <img class="w-full h-full object-contain rounded-full shadow-nr15" :src="brand.logo" alt="" />
+                <img
+                    class="w-full h-full object-contain shadow-nr15"
+                    :style="`border-radius: ${splashScreenOptions.cornerRadius - 10}px;`"
+                    :src="brand.logo"
+                    alt=""
+                />
             </div>
             <div class="flex flex-col items-center">
-                <h3 class="rounded font-bold text-2xl" :style="`color: ${baseColors.textColor};`">{{ brand.name }}</h3>
-                <small class="opacity-75 text-xs" :style="`color: ${baseColors.textColor};`">{{ brand.slogan }}</small>
+                <h3 class="rounded font-bold text-2xl" :style="`color: ${splashScreenOptions.textColor};`">{{ brand.name }}</h3>
+                <small class="opacity-75 text-xs" :style="`color: ${splashScreenOptions.textColor};`">{{ brand.slogan }}</small>
             </div>
 
-            <LineScroll class="absolute start-0 top-1/2 -z-10 -mt-16 opacity-40" :baseColors="baseColors" :rotation="30" />
+            <LineScroll class="absolute start-0 top-1/2 -z-10 -mt-16 opacity-40" :options="splashScreenOptions" v-if="splashScreenOptions.withLine" />
         </div>
     </div>
 </template>
@@ -81,17 +70,21 @@ import LineScroll from "./LineScroll.vue";
 const props = defineProps({
     brand: { type: Object },
     baseColors: { type: Object },
-    textColor: { type: String },
-    bgMainColor: { type: String },
-    bgSecondaryColor: { type: String },
-    primaryColor: { type: String },
-    accentColor: { type: String },
+    splashScreenOptions: { type: Object },
 });
 
 let showAnimation = ref(false);
+let timeout;
+
+const transitionAnimation = computed(() => {
+    showAnimation.value = false;
+    clearTimeout(timeout);
+    return `SPLASH_${props.splashScreenOptions.transition}`;
+});
+
 const beginAnimation = () => {
     if (showAnimation.value !== false) return;
     showAnimation.value = true;
-    setTimeout(() => (showAnimation.value = false), 3000);
+    timeout = setTimeout(() => (showAnimation.value = false), 3000);
 };
 </script>

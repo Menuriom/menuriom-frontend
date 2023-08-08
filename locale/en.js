@@ -463,6 +463,12 @@ export default {
             "restaurant-details-Frame1": "Float Dialog",
             "restaurant-details-Frame2": "Drawer From Bottom",
             "restaurant-details-Frame3": "Drawer With X",
+
+            Animation: "Animation",
+            "Line Text": "Line Text",
+            "Line Rotation": "Line Rotation",
+            Text: "Text",
+            "try out the animation by clicking on the phone screen": "try out the animation by clicking on the phone's screen",
         },
 
         qrcode: {

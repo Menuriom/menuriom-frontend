@@ -464,6 +464,12 @@ export default {
             "restaurant-details-Frame1": "باکس معلق",
             "restaurant-details-Frame2": "کشویی از پایین",
             "restaurant-details-Frame3": "کشویی با X",
+
+            Animation: "انیمیشن",
+            "Line Text": "متن اسلایدی",
+            "Line Rotation": "زاویه متن",
+            Text: "متن",
+            "try out the animation by clicking on the phone screen": "برای مشاهده انیمیشن روی صفحه موبایل کلیک کنید",
         },
 
         qrcode: {
