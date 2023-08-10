@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col items-center w-screen bg-white overflow-clip" id="app">
+    <div class="flex flex-col items-center w-screen bg-bgPrimary text-fgPrimary overflow-clip" id="app">
         <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
             <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
             <Header />

@@ -10,9 +10,15 @@ module.exports = {
 
                 violet: "#9f74cd",
                 "baby-blue": "#7ecfe1",
-
                 "pencil-tip": "#2a2a2a",
                 dolphin: "#3f3f3f",
+
+                fgPrimary: "#ffffff",
+                bgPrimary: "#222222",
+                bgAccent: "#282828",
+                bgSecondary: "#3c3c3c",
+                primary: "#9c85b2",
+                secondary: "#98c7d0",
             },
             boxShadow: {
                 nr5: "0 10px 20px -5px rgba(0, 0, 0, 0.05)",
@@ -20,6 +26,12 @@ module.exports = {
                 nr15: "0 10px 20px -5px rgba(0, 0, 0, 0.15)",
                 nr25: "0 10px 20px -5px rgba(0, 0, 0, 0.25)",
                 nr35: "0 10px 20px -5px rgba(0, 0, 0, 0.35)",
+
+                mr5: "0 20px 40px -10px rgba(0, 0, 0, 0.05)",
+                mr10: "0 20px 40px -10px rgba(0, 0, 0, 0.1)",
+                mr15: "0 20px 40px -10px rgba(0, 0, 0, 0.15)",
+                mr25: "0 20px 40px -10px rgba(0, 0, 0, 0.25)",
+                mr35: "0 20px 40px -10px rgba(0, 0, 0, 0.35)",
             },
             screens: {
                 "1.5xs": "160px",
@@ -37,6 +49,9 @@ module.exports = {
             },
             fontSize: {
                 xxs: "10px",
+            },
+            borderRadius: {
+                "4xl": "2rem",
             },
         },
     },
