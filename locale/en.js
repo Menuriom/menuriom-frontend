@@ -85,10 +85,13 @@ export default {
         "Sign Up Now For Free": "Sign Up Now For Free",
 
         "The Best Way To Create Online Menus": "The Best Way To Create Online Menus",
+        "The Best Way To Manage Orders": "The Best Way To Manage Orders",
         "Follow Us On Instagram": "Follow Us On Instagram",
+        "Message Us On Telegram": "Message Us On Telegram",
         Pricing: "Pricing",
         Faqs: "Faqs",
         About: "About",
+        Demo: "Demo",
         "Request Feature": "Request Feature",
         "Contact Us": "Contact Us",
         "Help Center": "Help Center",
@@ -100,6 +103,7 @@ export default {
 
     pricing: {
         Pricing: "Pricing",
+        PRICING: "PRICING",
         PricingSlogan: "No matter the size of your business, we got you covered!",
         PricingSubText: "Start creating instantly. Start free.",
 
@@ -117,6 +121,20 @@ export default {
         "Compare Plans": "Compare Plans",
         "Overview of what is included in our different plans": "Overview of what is included in our different plans",
         OFF: "OFF",
+    },
+
+    "contact-us": {
+        "Contact Us": "Contact Us",
+        contactDescription:
+            "Looking for more information or want to try one of our paid plans? Submit your information and we will follow up with you as soon as possible.",
+        "Have a simple question?": "Have a simple question?",
+        "Name & Family": "Name & Family",
+        "Email Address": "Email Address",
+        "Your Message": "Your Message",
+        "Send": "Send",
+        "Check out our FAQ": "Check out our FAQ",
+        "Send Us An Email": "Send Us An Email",
+        "Follow Us": "Follow Us",
     },
 
     panel: {

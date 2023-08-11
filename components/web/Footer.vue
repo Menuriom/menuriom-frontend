@@ -2,7 +2,7 @@
 .insta-gradient {
     position: relative;
     z-index: 1;
-    background-image: linear-gradient(87.28deg, #e2d55a -2.39%, #cb30e5 36.32%, rgba(248, 65, 163, 0.88) 75.04%, rgba(235, 97, 97, 0.94) 109.79%);
+    background-image: linear-gradient(45.28deg, #e2d55a 1.39%, rgba(235, 97, 97, 0.94) 36.32%, rgba(248, 65, 163, 0.88) 75.04%, #cb30e5 109.79%);
 }
 .insta-gradient::before {
     content: "";
@@ -11,7 +11,7 @@
     width: 100%;
     height: 100%;
     border-radius: 0.75rem;
-    background: linear-gradient(270.28deg, #e2d55a -2.39%, #cb30e5 36.32%, rgba(248, 65, 163, 0.88) 75.04%, rgba(235, 97, 97, 0.94) 109.79%);
+    background: linear-gradient(220.28deg, #e2d55a 2.39%, rgba(235, 97, 97, 0.94) 36.32%, rgba(248, 65, 163, 0.88) 75.04%, #cb30e5 109.79%);
     opacity: 0;
     transition: opacity 0.4s;
     z-index: -1;
@@ -26,6 +26,16 @@
     border: 0.65rem solid theme("colors.bgAccent");
     border-radius: 2rem;
 }
+
+.wrapper {
+    display: grid;
+    grid-template-columns: auto 0fr;
+    transition: all 0.3s;
+}
+.wrapper:hover {
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+}
 </style>
 
 <template>
@@ -36,7 +46,7 @@
                     {{ $t("footer.Start Building Your First Menu For Free") }}
                 </h4>
                 <button
-                    class="bg-fgPrimary text-bgPrimary p-4 px-6 text-xl font-bold rounded-xl hover:shadow-mr15 transition-all"
+                    class="bg-fgPrimary text-bgPrimary p-4 px-6 hover:px-10 text-xl font-bold rounded-xl hover:shadow-mr15 transition-all"
                     :to="localePath('/authenticate')"
                 >
                     {{ $t("footer.Sign Up Now For Free") }}
@@ -45,69 +55,89 @@
             <img class="w-64 lg:w-auto lg:-mt-28 -mb-10" src="~/assets/images/iPhone.webp" alt="iPhone" />
         </div>
         <div class="flex flex-wrap items-center justify-center lg:justify-between gap-16 w-full max-w-screen-xl">
-            <div class="flex flex-col items-start gap-6">
+            <div class="flex flex-col items-start gap-10">
                 <div class="flex flex-wrap justify-center items-center gap-4">
-                    <div class="gradient-re flex items-center justify-center p-1 rounded-md">
-                        <img class="w-20 h-20 -ml-0.5" src="/logo.svg" alt="Menuriom" />
-                    </div>
-                    <div class="flex flex-col items-start">
-                        <img class="h-18" src="/logo-text-white.svg" alt="Menuriom" v-if="locale == 'en'" />
-                        <img class="h-18" src="/logo-text-white-fa.svg" alt="منوریوم" v-if="locale == 'fa'" />
-                        <small class="text-white text-xs -mt-1.5" :class="{ 'ms-10': locale == 'fa' }">
-                            {{ $t("footer.The Best Way To Create Online Menus") }}
+                    <img class="w-24 aspect-square" src="/logos/logo7-dark.png" alt="Menuriom" />
+                    <div class="flex flex-col items-start gap-2">
+                        <img class="h-12" src="/logos/logo-text-en-light.svg" alt="Menuriom" v-if="locale == 'en'" />
+                        <img class="h-12" src="/logos/logo-text-fa-light.svg" alt="منوریوم" v-if="locale == 'fa'" />
+                        <small class="text-fgPrimary text-xs opacity-75">
+                            {{ $t("footer.The Best Way To Manage Orders") }}
                         </small>
                     </div>
                 </div>
-                <div class="flex flex-wrap justify-center items-center gap-6">
-                    <a class="insta-gradient flex items-center gap-2 rounded-xl p-2" href="" title="Follow Us On Instagram">
-                        <Icon class="w-8 h-8 bg-white" name="instagram.svg" folder="icons" size="32px" />
-                        <small class="text-white">{{ $t("footer.Follow Us On Instagram") }}</small>
+                <div class="flex flex-wrap justify-center items-center gap-4">
+                    <a class="insta-gradient wrapper items-center rounded-xl p-2 overflow-hidden group" href="" title="Follow Us On Instagram">
+                        <span class="drop-shadow-md">
+                            <Icon class="w-8 h-8 bg-fgPrimary shrink-0" name="instagram.svg" folder="icons" size="32px" />
+                        </span>
+                        <small class="text-fgPrimary whitespace-nowrap overflow-hidden">
+                            {{ $t("footer.Follow Us On Instagram") }}
+                        </small>
                     </a>
-                    <a class="flex items-center gap-2" href="mailto:menuriom@gmail.com" title="menuriom email address">
-                        <Icon class="w-4 h-4 bg-white" name="envelop.svg" folder="icons" size="16px" />
-                        <span class="text-white">Menuriom@gmail.com</span>
+                    <a class="wrapper flex items-center rounded-xl p-2 bg-sky-400" href="" title="Message Us On Telegram">
+                        <span class="drop-shadow-md">
+                            <Icon class="w-8 h-8 bg-fgPrimary" name="telegram.svg" folder="icons" size="32px" />
+                        </span>
+                        <small class="text-fgPrimary whitespace-nowrap overflow-hidden">
+                            {{ $t("footer.Message Us On Telegram") }}
+                        </small>
+                    </a>
+                    <a
+                        class="relative flex items-center gap-3 border border-neutral-500 border-opacity-25 p-3 rounded-xl overflow-hidden isolate group"
+                        href="mailto:menuriom@gmail.com"
+                        title="menuriom email address"
+                    >
+                        <span class="absolute inset-0 bg-secondary scale-0 group-hover:scale-100 rounded-xl transition-all -z-10"></span>
+                        <Icon class="w-5 h-5 bg-fgPrimary group-hover:bg-bgSecondary" name="envelop.svg" folder="icons" size="20px" />
+                        <span class="text-fgPrimary group-hover:text-bgSecondary">Menuriom@gmail.com</span>
                     </a>
                 </div>
             </div>
             <nav class="flex flex-col sm:flex-row flex-wrap items-start gap-10 md:gap-16">
                 <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/pricing')">{{ $t("footer.Pricing") }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/pricing')">{{ $t("footer.Pricing") }}</nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/faqs')">{{ $t("footer.Faqs") }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/faqs')">{{ $t("footer.Faqs") }}</nuxt-link>
+                    </li>
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/demo')">{{ $t("footer.Demo") }}</nuxt-link>
                     </li>
                 </ul>
                 <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/request-feature')">
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/request-feature')">
                             {{ $t("footer.Request Feature") }}
                         </nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/contact')">{{ $t("footer.Contact Us") }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/contact')">{{ $t("footer.Contact Us") }}</nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/help-center')">{{ $t("footer.Help Center") }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/help-center')">{{
+                            $t("footer.Help Center")
+                        }}</nuxt-link>
                     </li>
                 </ul>
                 <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/privacy-policy')">
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/privacy-policy')">
                             {{ $t("footer.Privacy Policy") }}
                         </nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-white group-hover:text-purple-300" :to="localePath('/terms')">{{ $t("footer.Term Of Service") }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/terms')">{{ $t("footer.Term Of Service") }}</nuxt-link>
                     </li>
                     <LangSwitch :showText="true" textColor="white" />
                 </ul>
             </nav>
         </div>
-        <hr class="gradient-re w-full max-w-screen-xl h-0.5 border-0 -my-4 -mb-8" />
-        <div class="flex flex-col items-center gap-2 mb-2">
-            <span class="f-inter text-xs sm:text-sm text-center text-white"> Menuriom.com © {{ year }} - {{ $t("footer.copyright") }} </span>
-            <!-- <small class="text-white text-xs">Made With <b class="text-rose-400">❤</b> by the 2Idiots</small> -->
+        <hr class="gradient-re w-full max-w-screen-xl h-0.5 border-0 opacity-50 -my-4 -mb-8" />
+        <div class="flex flex-col items-center gap-1 mb-2">
+            <span class="f-inter text-xs sm:text-sm text-center text-fgPrimary"> Menuriom.com © {{ year }} - {{ $t("footer.copyright") }} </span>
+            <small class="text-fgPrimary text-xs opacity-75">Made With <b class="gradient-text">❤</b> by the Default°Studio</small>
         </div>
     </footer>
 </template>

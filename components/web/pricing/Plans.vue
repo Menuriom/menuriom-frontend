@@ -40,7 +40,7 @@
                     <ul class="flex flex-col gap-4 flex-grow">
                         <li class="flex items-center gap-2" v-if="i > 0">
                             <Icon class="relative w-4 h-4 bg-secondary" name="plus.svg" folder="icons" size="16px" />
-                            <small class="opacity-90 text-sky-200">{{ $t("pricing.Everything on previous plan") }}</small>
+                            <small class="opacity-90 text-primary">{{ $t("pricing.Everything on previous plan") }}</small>
                         </li>
                         <li class="flex items-center gap-2" v-for="(feature, j) in item.features" :key="j">
                             <Icon class="relative w-4 h-4 bg-secondary" name="check.svg" folder="icons" size="16px" />

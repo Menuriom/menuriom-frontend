@@ -47,7 +47,7 @@ nav {
         class="fixed flex items-center justify-between gap-4 rounded-2xl mt-2 md:mt-4 p-2 max-w-screen-2xl bg-bgAccent shadow-mr25 z-20"
     >
         <nuxt-link class="flex items-center gap-2 overflow-hidden flex-shrink-0" :to="localePath('/')">
-            <img class="relative h-10 rounded-lg" src="/logos/logo6-dark.svg" title="Menuriom" alt="Menuriom" />
+            <img class="relative h-10 rounded-lg" src="/logos/logo7-dark.png" title="Menuriom" alt="Menuriom" />
             <!-- <div class="rounded-full p-1 bg-gradient-to-t from-primary to-secondary">
             </div> -->
             <img class="h-5 md:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
@@ -57,27 +57,27 @@ nav {
         <transition name="slide-up" appear>
             <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-screen-2xs lg:max-w-none p-6 lg:p-0" v-show="menuOpen">
                 <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary transition-all">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/demo')">
                             <span>{{ $t("header.Features") }}</span>
                         </nuxt-link>
                     </li>
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary transition-all">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/demo')">
                             <span>{{ $t("header.Demo") }}</span>
                         </nuxt-link>
                     </li>
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary transition-all">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')">
                             <span>{{ $t("header.Pricing") }} </span>
                         </nuxt-link>
                     </li>
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary transition-all">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/how-it-works')">
                             <span>{{ $t("header.How It Works") }} </span>
                         </nuxt-link>
                     </li>
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary transition-all">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')">
                             <span>{{ $t("header.Contact Us") }}</span>
                         </nuxt-link>

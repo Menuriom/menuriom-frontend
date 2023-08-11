@@ -81,14 +81,17 @@ export default {
         "Tell us what you want, we will get to work on implementing it": "به ما بگو چی میخوای، ما میذاریم تو برنامه که اضافه کنیمش",
         "Submit A Feature Request": "ثبت درخواست قابلیت جدید",
 
-        "Start Building Your First Menu For Free": "اولین منوتو رو همین الان رایگان بساز",
+        "Start Building Your First Menu For Free": "منو رستوران خودتون رو رایگان بسازید",
         "Sign Up Now For Free": "رایگان ثبت نام کنید",
 
         "The Best Way To Create Online Menus": "بهترین راه برای ساخت منوی آنلاین",
+        "The Best Way To Manage Orders": "بهترین راه برای مدیریت سفارشات",
         "Follow Us On Instagram": "اینستاگرام ما رو دنبال کن",
+        "Message Us On Telegram": "تو تلگرام به ما پیام بده",
         Pricing: "تعرفه ها",
         Faqs: "سوالات متداول",
         About: "درباره ما",
+        Demo: "نمونه منو",
         "Request Feature": "درخواست قابلیت جدید",
         "Contact Us": "تماس با ما",
         "Help Center": "مرکز دانش",
@@ -100,6 +103,7 @@ export default {
 
     pricing: {
         Pricing: "تعرفه ها",
+        PRICING: "تعرفه ها",
         PricingSlogan: "هر رستوران با هر اندازه ای که دارید، میتونید رو ما حساب کنید!",
         PricingSubText: "رایگان شروع کنید. رایگان بسازید.",
 
@@ -117,6 +121,20 @@ export default {
         "Compare Plans": "مقایسه پلن ها",
         "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
         OFF: "تخفیف",
+    },
+
+    "contact-us": {
+        "Contact Us": "تماس با ما",
+        contactDescription:
+            "به دنبال اطلاعات تکمیلی هستید یا قصد خرید یکی از پلن های پولی رو دارید؟ اطلاعات خود را ارسال کنید و ما در اسرع وقت با شما تماس خواهیم گرفت.",
+        "Have a simple question?": "فقط یه سوال ساده دارید؟",
+        "Name & Family": "نام کامل شما",
+        "Email Address": "آدرس ایمیل",
+        "Your Message": "متن پیام شما",
+        Send: "ارسال",
+        "Check out our FAQ": "به سوالات متداول سری بزنید",
+        "Send Us An Email": "پست الکترونیک ما",
+        "Follow Us": "شبکه های اجتماعی ما",
     },
 
     panel: {

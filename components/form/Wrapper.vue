@@ -5,7 +5,7 @@
         <div class="flex flex-col flex-wrap cursor-pointer" @click="changeOpenState()">
             <slot name="title" />
         </div>
-        <div class="grid flex-col gap-2 transition-all" :style="`grid-template-rows: ${openState}fr;`">
+        <div class="grid gap-2 transition-all" :style="`grid-template-rows: ${openState}fr;`">
             <slot />
         </div>
     </div>

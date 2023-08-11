@@ -23,7 +23,7 @@ input::placeholder {
 <template>
     <div class="flex flex-col gap-1">
         <div
-            class="wrapper relative flex items-center bg-neutral-700 text-white rounded-md"
+            class="wrapper relative flex items-center bg-bgSecondary bg-opacity-50 text-fgPrimary rounded-lg"
             :class="{ error: !!error, 'input-box-shadow': !!shadow }"
             @click="focus()"
         >
@@ -49,14 +49,13 @@ input::placeholder {
                 :class="[isFocused || !!modelValue ? 'start-3 top-2 opacity-75' : 'start-4 top-5']"
             >
                 <Icon
-                    class="icon w-4 h-4 bg-zinc-100"
-                    :class="{ 'bg-purple-200': isFocused || !!modelValue }"
+                    class="icon w-4 h-4 bg-fgPrimary"
                     :name="iconName"
                     :folder="iconFolder"
                     :size="isFocused || !!modelValue ? '14px' : '16px'"
                     v-if="iconName"
                 />
-                <span class="flex text-xs opacity-90" :class="{ 'text-purple-200': isFocused || !!modelValue }"> {{ label }} </span>
+                <span class="flex text-xs opacity-90" :class="{ 'text-secondary': isFocused || !!modelValue }"> {{ label }} </span>
                 <span class="absolute end-0 -me-3 text-rose-400 text-lg" v-show="required">*</span>
             </span>
         </div>
