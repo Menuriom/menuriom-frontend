@@ -39,7 +39,7 @@
                     <hr class="border-spacing-0.5 border-bgPrimary opacity-10" />
                     <ul class="flex flex-col gap-4 flex-grow">
                         <li class="flex items-center gap-2" v-if="i > 0">
-                            <Icon class="relative w-4 h-4 bg-secondary" name="plus.svg" folder="icons" size="16px" />
+                            <Icon class="relative w-4 h-4 bg-primary" name="plus.svg" folder="icons" size="14px" />
                             <small class="opacity-90 text-primary">{{ $t("pricing.Everything on previous plan") }}</small>
                         </li>
                         <li class="flex items-center gap-2" v-for="(feature, j) in item.features" :key="j">

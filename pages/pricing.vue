@@ -18,7 +18,7 @@
     <div class="relative flex flex-col items-center gap-10 w-full">
         <div class="relative flex flex-col items-center gap-4 p-4 mt-12 isolate">
             <div class="bar absolute h-24 rounded-2xl bg-gradient-to-r from-secondary to-primary opacity-75 shadow-mr25"></div>
-            <h1 class="f-inter text-5xl lg:text-6xl font-extrabold">{{ $t("pricing.PRICING") }}.</h1>
+            <h1 class="text-5xl lg:text-6xl font-extrabold">{{ $t("pricing.PRICING") }}.</h1>
             <p class="text-center text-xl md:text-2xl opacity-75">
                 {{ $t("pricing.PricingSlogan") }}
             </p>

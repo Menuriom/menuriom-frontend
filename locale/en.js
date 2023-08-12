@@ -131,10 +131,18 @@ export default {
         "Name & Family": "Name & Family",
         "Email Address": "Email Address",
         "Your Message": "Your Message",
-        "Send": "Send",
+        Send: "Send",
         "Check out our FAQ": "Check out our FAQ",
         "Send Us An Email": "Send Us An Email",
         "Follow Us": "Follow Us",
+    },
+
+    faqs: {
+        "Frequently Asked Questions": "Frequently Asked Questions",
+        "Ask what you dont know": "Ask what you dont know",
+        sells: "Sells",
+        accounts: "Accounts",
+        support: "Support",
     },
 
     panel: {

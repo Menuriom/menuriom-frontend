@@ -32,9 +32,11 @@
     grid-template-columns: auto 0fr;
     transition: all 0.3s;
 }
-.wrapper:hover {
-    grid-template-columns: auto 1fr;
-    gap: 0.5rem;
+@media (min-width: 720px) {
+    .wrapper:hover {
+        grid-template-columns: auto 1fr;
+        gap: 0.5rem;
+    }
 }
 </style>
 
@@ -54,10 +56,12 @@
             </div>
             <img class="w-64 lg:w-auto lg:-mt-28 -mb-10" src="~/assets/images/iPhone.webp" alt="iPhone" />
         </div>
-        <div class="flex flex-wrap items-center justify-center lg:justify-between gap-16 w-full max-w-screen-xl">
+        <div class="flex flex-wrap items-center justify-start lg:justify-between gap-16 w-full max-w-screen-xl">
             <div class="flex flex-col items-start gap-10">
                 <div class="flex flex-wrap justify-center items-center gap-4">
-                    <img class="w-24 aspect-square" src="/logos/logo7-dark.png" alt="Menuriom" />
+                    <div class="rounded-xl p-2 bg-gradient-to-t from-primary to-secondary">
+                        <img class="w-16 md:w-20 aspect-square" src="/logos/logo9-dark.webp" alt="Menuriom" />
+                    </div>
                     <div class="flex flex-col items-start gap-2">
                         <img class="h-12" src="/logos/logo-text-en-light.svg" alt="Menuriom" v-if="locale == 'en'" />
                         <img class="h-12" src="/logos/logo-text-fa-light.svg" alt="منوریوم" v-if="locale == 'fa'" />
@@ -94,8 +98,8 @@
                     </a>
                 </div>
             </div>
-            <nav class="flex flex-col sm:flex-row flex-wrap items-start gap-10 md:gap-16">
-                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
+            <nav class="flex flex-wrap items-start gap-10 md:gap-16">
+                <ul class="flex flex-col items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/pricing')">{{ $t("footer.Pricing") }}</nuxt-link>
                     </li>
@@ -106,29 +110,33 @@
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/demo')">{{ $t("footer.Demo") }}</nuxt-link>
                     </li>
                 </ul>
-                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
+                <ul class="flex flex-col items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/request-feature')">
                             {{ $t("footer.Request Feature") }}
                         </nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/contact')">{{ $t("footer.Contact Us") }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/contact-us')">
+                            {{ $t("footer.Contact Us") }}
+                        </nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/help-center')">{{
-                            $t("footer.Help Center")
-                        }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/help-center')">
+                            {{ $t("footer.Help Center") }}
+                        </nuxt-link>
                     </li>
                 </ul>
-                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
+                <ul class="flex flex-col items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/privacy-policy')">
                             {{ $t("footer.Privacy Policy") }}
                         </nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
-                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/terms')">{{ $t("footer.Term Of Service") }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/terms-of-service')">
+                            {{ $t("footer.Term Of Service") }}
+                        </nuxt-link>
                     </li>
                     <LangSwitch :showText="true" textColor="white" />
                 </ul>

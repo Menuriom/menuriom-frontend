@@ -5,7 +5,7 @@
         <div class="relative flex flex-col items-center gap-2">
             <h2 class="f-inter text-3xl font-bold text-fgPrimary">Frequently Asked Questions.</h2>
         </div>
-        <ul class="relative flex flex-col items-center gap-6 w-full max-w-screen-lg text-white">
+        <ul class="relative flex flex-col items-center gap-6 w-full max-w-screen-lg text-fgPrimary">
             <li
                 class="flex flex-col gap-4 p-6 w-full rounded-xl bg-bgAccent shadow-mr10 select-none"
                 v-for="(item, i) in faqs.list"

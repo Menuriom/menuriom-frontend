@@ -42,23 +42,20 @@ nav {
 </style>
 
 <template>
-    <header
-        ref="header"
-        class="fixed flex items-center justify-between gap-4 rounded-2xl mt-2 md:mt-4 p-2 max-w-screen-2xl bg-bgAccent shadow-mr25 z-20"
-    >
+    <header ref="header" class="fixed flex items-center justify-between gap-4 rounded-2xl mt-2 md:mt-4 p-2 max-w-screen-2xl bg-bgAccent shadow-mr25 z-20">
         <nuxt-link class="flex items-center gap-2 overflow-hidden flex-shrink-0" :to="localePath('/')">
-            <img class="relative h-10 rounded-lg" src="/logos/logo7-dark.png" title="Menuriom" alt="Menuriom" />
-            <!-- <div class="rounded-full p-1 bg-gradient-to-t from-primary to-secondary">
-            </div> -->
-            <img class="h-5 md:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
-            <img class="h-5 md:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
+            <div class="rounded-lg p-0.5 md:p-1 bg-gradient-to-t from-primary to-secondary">
+                <img class="relative h-8 rounded-md" src="/logos/logo9-dark.webp" title="Menuriom" alt="Menuriom" />
+            </div>
+            <img class="h-5 xl:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
+            <img class="h-5 xl:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
         </nuxt-link>
 
         <transition name="slide-up" appear>
             <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-screen-2xs lg:max-w-none p-6 lg:p-0" v-show="menuOpen">
                 <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/demo')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')">
                             <span>{{ $t("header.Features") }}</span>
                         </nuxt-link>
                     </li>
@@ -84,33 +81,35 @@ nav {
                     </li>
                 </ul>
                 <hr class="w-full h-0.5 bg-fgPrimary opacity-10 lg:hidden" />
-                <div class="flex items-center gap-4">
+                <div class="flex flex-wrap items-center gap-4">
                     <LangSwitch class="" textColor="white" :showText="true" />
-                    <span class="w-0.5 h-full lg:hidden text-gray-400"></span>
-                    <nuxt-link
-                        class="link md:hidden p-2 hover:px-3 rounded-md"
-                        :to="localePath('/authenticate')"
-                        title="Login into user panel"
-                        v-if="!user.email.value"
-                    >
-                        {{ $t("header.Login") }}
-                    </nuxt-link>
-                    <nuxt-link
-                        class="link 2sm:hidden p-2 hover:px-3 rounded-xl bg-primary text-fgPrimary shadow-md"
-                        :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
-                        :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
-                    >
-                        <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
-                        <span v-else>{{ $t("header.Your Dashboard") }}</span>
-                    </nuxt-link>
+                    <!-- <span class="w-0.5 h-full lg:hidden text-gray-400"></span> -->
+                    <div class="flex items-center gap-2">
+                        <nuxt-link
+                            class="link md:hidden p-2 px-3 hover:px-5 rounded-lg bg-fgPrimary text-bgPrimary transition-all"
+                            :to="localePath('/authenticate')"
+                            title="Login into user panel"
+                            v-if="!user.email.value"
+                        >
+                            {{ $t("header.Login") }}
+                        </nuxt-link>
+                        <nuxt-link
+                            class="link 2sm:hidden p-2 px-3 hover:px-5 rounded-lg bg-primary text-fgPrimary transition-all"
+                            :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
+                            :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
+                        >
+                            <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
+                            <span v-else>{{ $t("header.Your Dashboard") }}</span>
+                        </nuxt-link>
+                    </div>
                 </div>
             </nav>
         </transition>
 
         <div class="flex items-center gap-2 xl:gap-4 flex-shrink-0">
-            <span class="w-0.5 h-7 hidden lg:flex bg-fgPrimary opacity-30"></span>
+            <span class="w-0.5 h-7 -ms-4 hidden lg:flex bg-fgPrimary opacity-30"></span>
             <nuxt-link
-                class="link hidden md:flex p-2 hover:px-3 rounded-md"
+                class="link hidden md:flex p-2 hover:px-4 rounded-lg hover:bg-bgSecondary hover:text-secondary transition-all"
                 :to="localePath(`/authenticate`)"
                 title="Login into user panel"
                 v-if="!user.email.value"
@@ -118,7 +117,7 @@ nav {
                 {{ $t("header.Login") }}
             </nuxt-link>
             <nuxt-link
-                class="hidden 2sm:flex text-sm p-2 hover:px-3 rounded-lg bg-primary text-fgPrimary shadow-md transition-all"
+                class="hidden 2sm:flex text-sm p-2.5 hover:px-4 rounded-lg bg-primary text-fgPrimary shadow-md transition-all"
                 :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
                 :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
             >

@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <section class="flex flex-col items-center w-full p-4">
+    <section class="flex flex-col items-center gap-4 w-full p-4">
         <div class="flex flex-col items-center gap-2 w-full">
             <h2 class="f-inter text-2xl lg:text-5xl font-bold text-fgPrimary">PRICING.</h2>
             <h4 class="f-poppins lg:text-2xl opacity-50 text-fgPrimary text-center">Start creating instantly. Start free.</h4>

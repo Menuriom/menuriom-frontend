@@ -137,6 +137,14 @@ export default {
         "Follow Us": "شبکه های اجتماعی ما",
     },
 
+    faqs: {
+        "Frequently Asked Questions": "سوالات متداول",
+        "Ask what you dont know": "چطور میتونیم کمکتون کنیم",
+        sells: "فروش",
+        accounts: "حساب ها",
+        support: "پشتیبانی",
+    },
+
     panel: {
         "Your Menuriom Panel": "پنل منوریوم شما",
         Congratulations: "تبریک",
