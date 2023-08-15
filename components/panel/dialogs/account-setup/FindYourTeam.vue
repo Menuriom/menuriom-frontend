@@ -10,24 +10,23 @@
             <ul class="flex items-center gap-2">
                 <li class="w-2.5 h-2.5 rounded-full bg-neutral-500"></li>
                 <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>
-                <li class="w-2.5 h-2.5 rounded-full bg-neutral-500"></li>
-                <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>
-                <li class="w-2.5 h-2.5 rounded-full bg-violet"></li>
+                <li class="w-2.5 h-2.5 rounded-full bg-primary"></li>
             </ul>
-            <hr class="w-full border-0 h-0.5 gradient" />
+            <!-- <hr class="w-full border-0 h-0.5 gradient" /> -->
+            <hr class="w-3/4 border-neutral-500 border-opacity-40" />
             <h4 class="text-lg">{{ $t("panel.account-setup.Select from your list of staff invites") }}</h4>
             <ul class="flex flex-col gap-2 w-full" v-if="!loading && records.list.length > 0">
                 <li
-                    class="flex items-center gap-4 p-4 rounded-md bg-dolphin hover:bg-neutral-700 cursor-pointer"
+                    class="flex items-center gap-4 p-6 rounded-xl bg-bgSecondary bg-opacity-50 hover:bg-opacity-75 cursor-pointer"
                     v-for="(invite, i) in records.list"
                     :key="i"
                     @click="selectInvite(i)"
                 >
-                    <img class="w-12 h-12 rounded-full object-cover bg-pencil-tip shadow-xl shrink-0" :src="invite.brand.logo" v-if="invite.brand.logo" />
-                    <img class="w-12 h-12 rounded-full object-cover bg-pencil-tip shadow-xl shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
-                    <div class="flex flex-col gap-2 grow">
+                    <img class="w-12 h-12 rounded-full object-cover shadow-xl shrink-0" :src="invite.brand.logo" v-if="invite.brand.logo" />
+                    <img class="w-12 h-12 rounded-full object-cover shadow-xl shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                    <div class="flex flex-col gap-1 grow">
                         <h5 class="font-bold">{{ invite.brand.name }}</h5>
-                        <p class="text-xs opacity-90" v-html="$t('panel.account-setup.roleInviteDesc', { role: invite.role.name })" />
+                        <p class="text-xs opacity-75" v-html="$t('panel.account-setup.roleInviteDesc', { role: invite.role.name })" />
                     </div>
                     <span
                         class="flex items-center justify-center w-5 h-5 border-2 border-baby-blue rounded-full shrink-0"
@@ -41,7 +40,7 @@
                 <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
             <button
-                class="btn w-full p-3 rounded bg-violet"
+                class="btn w-full text-sm p-3 rounded-xl bg-primary"
                 :class="{ 'opacity-50': accepting }"
                 :disabled="accepting"
                 @click="acceptInvites()"
@@ -52,13 +51,16 @@
                 </span>
                 <Loading v-else />
             </button>
-            <div class="flex flex-col items-center gap-2 my-4" v-if="!loading && records.list.length === 0">
+            <div
+                class="flex flex-col items-center gap-2 w-full bg-bgSecondary bg-opacity-50 p-6 rounded-2xl shadow-mr25"
+                v-if="!loading && records.list.length === 0"
+            >
                 <img class="" src="~/assets/images/envelop.png" alt="" />
                 <p class="opacity-75">{{ $t("panel.account-setup.You Have No Invitations Yet") }}</p>
             </div>
             <Loading v-if="loading" />
-            <hr class="w-full opacity-25" />
-            <button class="w-max text-xs" :disabled="loading" @click="panelStore.openPopUp('select-account-type')">
+            <hr class="w-3/4 border-neutral-500 border-opacity-40" />
+            <button class="w-max text-xs text-secondary hover:underline" :disabled="loading" @click="panelStore.openPopUp('select-account-type')">
                 {{ $t("panel.Go Back") }}
             </button>
         </div>

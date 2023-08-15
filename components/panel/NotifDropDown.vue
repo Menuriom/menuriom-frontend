@@ -2,23 +2,23 @@
 
 <template>
     <div class="relative" ref="dropdown">
-        <div class="relative flex items-center gap-1 cursor-pointer hover:bg-neutral-100 hover:p-1 transition-all rounded-full" @click="toggleDropdown()">
-            <Icon class="w-7 h-7 bg-pencil-tip" name="cowbell.svg" folder="icons" size="20px" />
+        <div class="relative flex items-center gap-1 cursor-pointer hover:bg-bgSecondary p-0.5 hover:px-2 transition-all rounded-full" @click="toggleDropdown()">
+            <Icon class="w-7 h-7 bg-fgPrimary" name="cowbell.svg" folder="icons" size="20px" />
             <span class="gradient absolute top-1 start-0 w-2.5 h-2.5 rounded-full border-white"></span>
         </div>
         <transition name="slide-up" mode="out-in" appear>
             <div
-                class="absolute top-10 -end-10 md:-end-4 flex flex-col gap-3 w-screen max-w-screen-2xs p-3 bg-pencil-tip text-white border border-neutral-500 borderop50 shadow-lg rounded-xl"
+                class="absolute top-12 -end-10 md:-end-4 flex flex-col gap-3 w-screen max-w-screen-2xs p-3 bg-bgAccent text-white shadow-mr35 rounded-2xl"
                 v-if="open"
             >
                 <div class="flex items-center justify-between gap-2 w-full p-1 px-2">
                     <h4 class="font-semibold">Notifications</h4>
-                    <button class="text-xs text-purple-300 hover:text-violet underline underline-offset-2">Clear All</button>
+                    <button class="text-xs text-secondary opacity-80 hover:opacity-100 underline underline-offset-2">Clear All</button>
                 </div>
                 <hr class="w-full mx-auto opacity-25" />
                 <ul class="flex flex-col gap-1">
                     <nuxt-link :to="localePath('/panel/')">
-                        <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-dolphin rounded-md cursor-pointer">
+                        <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-dolphin rounded-xl cursor-pointer">
                             <div class="flex items-center gap-2">
                                 <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
                                 <span class="text-sm">{{ $t("panel.profile.Your Profile") }}</span>
@@ -27,7 +27,7 @@
                         </li>
                     </nuxt-link>
                     <nuxt-link :to="localePath('/panel/')">
-                        <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-dolphin rounded-md cursor-pointer">
+                        <li class="flex flex-col gap-2 w-full p-2.5 hover:bg-dolphin rounded-xl cursor-pointer">
                             <div class="flex items-center gap-2">
                                 <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
                                 <span class="text-sm">{{ $t("panel.profile.Your Profile") }}</span>
