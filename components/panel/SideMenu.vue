@@ -3,7 +3,7 @@ aside {
     width: calc(275px + 0.5rem);
     height: calc(100% - 1rem);
     padding-block: 0.5rem;
-    padding-inline-start: .5rem;
+    padding-inline-start: 0.5rem;
     transition: all 0.2s ease-in-out;
 }
 aside.close {
@@ -19,7 +19,7 @@ aside > div {
 .link {
     transition: all 0.2s;
     padding: 0.65rem 0.5rem;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     border-color: transparent;
 }
@@ -30,16 +30,17 @@ aside > div {
     background-color: theme("colors.neutral.600");
 }
 .link.toggler_active {
-    border: 1px solid theme("colors.neutral.600");
+    /* border: 1px solid theme("colors.neutral.700"); */
+    box-shadow: inset theme("boxShadow.mr35");
 }
 
 .sub_menu {
     margin-inline-start: 1rem;
     padding-inline-start: 0.5rem;
-    border-inline-start: 1px solid theme("colors.zinc.400");
+    border-inline-start: 2px solid theme("colors.zinc.700");
 }
 .sub_menu:hover {
-    border-inline-start: 1px solid theme("colors.violet");
+    border-inline-start: 2px solid theme("colors.primary");
 }
 .sub_menu_wrapper {
     height: 0px;
@@ -66,23 +67,23 @@ aside > div {
 
 <template>
     <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 shrink-0" :class="{ close: !panelStore.sideMenuOpen }">
-        <div class="flex flex-col gap-4 h-full p-4 bg-pencil-tip text-white rounded-lg shadow-nr35">
+        <div class="flex flex-col gap-4 h-full p-4 bg-bgSecondary bg-opacity-40 rounded-2xl shadow-mr35">
             <nuxt-link
-                class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin cursor-pointer transition-all group"
+                class="flex items-center gap-2 p-2 rounded-xl hover:bg-neutral-600 bg-bgSecondary cursor-pointer transition-all group"
                 :to="localePath(`/panel/`)"
             >
-                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
-                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
-                <div class="flex flex-col gap-1 w-full">
-                    <h4 class="font-semibold whitespace-nowrap text-ellipsis overflow-hidden w-36">{{ brand.name }}</h4>
-                    <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-28 text-purple-300">{{ brand.role }}</span>
+                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 shrink-0" :src="brand.logo" v-if="brand.logo" />
+                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                <div class="flex flex-col gap-1 w-full grow">
+                    <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">{{ brand.name }}</h4>
+                    <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-full text-purple-300">{{ brand.role }}</span>
                 </div>
-                <Icon class="w-3 h-3 bg-white group-hover:-rotate-90 transition-all flex-shrink-0" name="arrow.svg" folder="icons" size="12px" />
+                <Icon class="w-5 h-5 bg-fgPrimary group-hover:rotate-180 transition-all shrink-0" name="caret-left.svg" folder="icons/tabler" size="20px" />
             </nuxt-link>
 
-            <div class="flex items-center gap-2 w-full" v-if="panelStore.selectedBrandId !== ''">
+            <div class="flex items-center gap-1.5 w-full" v-if="panelStore.selectedBrandId !== ''">
                 <nuxt-link
-                    class="btn relative flex items-center justify-center gap-2 p-2 rounded bg-white text-pencil-tip flex-grow"
+                    class="btn relative flex items-center justify-center gap-2 p-2 px-1 hover:px-4 rounded-lg bg-fgPrimary text-pencil-tip grow"
                     :to="localePath(`/orders-panel/${panelStore.selectedBrandId}`)"
                     v-if="checkPermissions(['orders-panel'], brand)"
                 >
@@ -91,7 +92,7 @@ aside > div {
                     <span class="absolute -top-1.5 end-1 gradient w-3 h-3 rounded-full"></span>
                 </nuxt-link>
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-2 rounded bg-white text-pencil-tip flex-grow"
+                    class="btn flex items-center justify-center gap-2 p-2 px-1 hover:px-4 rounded-lg bg-fgPrimary text-pencil-tip grow"
                     :to="localePath(`/ordering-app/${panelStore.selectedBrandId}`)"
                     v-if="checkPermissions(['ordering-app'], brand)"
                 >
@@ -100,10 +101,10 @@ aside > div {
                 </nuxt-link>
             </div>
 
-            <hr class="w-full opacity-30" />
+            <hr class="w-full opacity-20" />
 
             <nav
-                class="flex flex-col items-center gap-2 pe-1 w-full max-h-full overflow-y-auto overflow-x-hidden flex-grow text-sm"
+                class="flex flex-col items-center gap-2 pe-1 w-full max-h-full overflow-y-auto overflow-x-hidden grow text-sm"
                 ref="nav"
                 v-if="panelStore.selectedBrandId !== ''"
             >
@@ -114,7 +115,7 @@ aside > div {
                         v-if="checkPermissions(['main-panel.dashboard.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/rectangles-mixed-light.png" alt="" />
+                            <Icon class="w-6 h-6 gradient" name="column-light.svg" folder="icons/light" size="22px" />
                             <span>{{ $t("panel.side-menu.Dashboard") }}</span>
                         </li>
                     </nuxt-link>
@@ -124,7 +125,8 @@ aside > div {
                         v-if="checkPermissions(['main-panel.customer-feedback.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/comments-light.png" alt="" />
+                            <Icon class="w-6 h-6 gradient" name="comments-light.svg" folder="icons/light" size="22px" />
+                            <!-- <img class="w-5" src="~/assets/images/panel-icons/comments-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
                         </li>
                     </nuxt-link>
@@ -137,30 +139,36 @@ aside > div {
                         v-if="checkPermissions(['main-panel.branches.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/store-light.png" alt="" />
+                            <Icon class="w-6 h-6 gradient" name="store.svg" folder="icons/light" size="22px" />
+                            <!-- <img class="w-5" src="~/assets/images/panel-icons/store-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Branches") }}</span>
                         </li>
                     </nuxt-link>
                     <button
                         class="link"
-                        :class="{ toggler_active: openSubMenus.includes('menu') }"
-                        @click="toggleSubMenu('menu')"
+                        :class="{ toggler_active: openSubMenus2.has('menu') }"
+                        @click="toggleSubMenu2('menu')"
                         v-if="checkPermissions(['main-panel.menu.items', 'main-panel.menu.style', 'main-panel.menu.qr-code'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/cards-blank-light.png" alt="" />
+                            <Icon class="w-6 h-6 gradient" name="cards-blank.svg" folder="icons/light" size="22px" />
+                            <!-- <img class="w-5" src="~/assets/images/panel-icons/cards-blank-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Menu") }}</span>
                             <Icon
-                                class="sub_menu_toggler bg-white"
-                                :class="{ open: openSubMenus.includes('menu') }"
+                                class="sub_menu_toggler bg-fgPrimary"
+                                :class="{ open: openSubMenus2.has('menu') }"
                                 name="arrow.svg"
                                 folder="icons"
                                 size="12px"
                             />
                         </li>
                     </button>
-                    <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('menu') }" name="menu">
-                        <ul class="sub_menu flex flex-col gap-1">
+                    <div
+                        class="grid transition-all"
+                        :class="{ '-mb-2': !openSubMenus2.has('menu') }"
+                        :style="`grid-template-rows: ${openSubMenus2.has('menu') ? 1 : 0}fr;`"
+                    >
+                        <ul class="sub_menu flex flex-col gap-1 overflow-hidden">
                             <nuxt-link
                                 class="link"
                                 :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/editor`)"
@@ -192,24 +200,29 @@ aside > div {
                     </div>
                     <button
                         class="link"
-                        :class="{ toggler_active: openSubMenus.includes('staff') }"
-                        @click="toggleSubMenu('staff')"
+                        :class="{ toggler_active: openSubMenus2.has('staff') }"
+                        @click="toggleSubMenu2('staff')"
                         v-if="checkPermissions(['main-panel.staff.view', 'main-panel.staff.invite', 'main-panel.staff.roles'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/user-group-light.png" alt="" />
+                            <Icon class="w-6 h-6 gradient" name="user-group-light.svg" folder="icons/light" size="22px" />
+                            <!-- <img class="w-5" src="~/assets/images/panel-icons/user-group-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Manage Staff") }}</span>
                             <Icon
-                                class="sub_menu_toggler bg-white"
-                                :class="{ open: openSubMenus.includes('staff') }"
+                                class="sub_menu_toggler bg-fgPrimary"
+                                :class="{ open: openSubMenus2.has('staff') }"
                                 name="arrow.svg"
                                 folder="icons"
                                 size="12px"
                             />
                         </li>
                     </button>
-                    <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('staff') }" name="staff">
-                        <ul class="sub_menu flex flex-col gap-1">
+                    <div
+                        class="grid transition-all"
+                        :class="{ '-mb-2': !openSubMenus2.has('staff') }"
+                        :style="`grid-template-rows: ${openSubMenus2.has('staff') ? 1 : 0}fr;`"
+                    >
+                        <ul class="sub_menu flex flex-col gap-1 overflow-hidden">
                             <nuxt-link
                                 class="link"
                                 :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/members`)"
@@ -241,27 +254,32 @@ aside > div {
                     </div>
                     <button
                         class="link"
-                        :class="{ toggler_active: openSubMenus.includes('settings') }"
-                        @click="toggleSubMenu('settings')"
+                        :class="{ toggler_active: openSubMenus2.has('settings') }"
+                        @click="toggleSubMenu2('settings')"
                         v-if="checkPermissions(['main-panel.settings'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/gear-light.png" alt="" />
+                            <Icon class="w-6 h-6 gradient" name="gear-light.svg" folder="icons/light" size="22px" />
+                            <!-- <img class="w-5" src="~/assets/images/panel-icons/gear-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Settings") }}</span>
                             <Icon
-                                class="sub_menu_toggler bg-white"
-                                :class="{ open: openSubMenus.includes('settings') }"
+                                class="sub_menu_toggler bg-fgPrimary"
+                                :class="{ open: openSubMenus2.has('settings') }"
                                 name="arrow.svg"
                                 folder="icons"
                                 size="12px"
                             />
                         </li>
                     </button>
-                    <div class="sub_menu_wrapper" :class="{ '-my-1': !openSubMenus.includes('settings') }" name="settings">
-                        <ul class="sub_menu flex flex-col gap-1">
+                    <div
+                        class="grid transition-all"
+                        :class="{ '-mb-2': !openSubMenus2.has('settings') }"
+                        :style="`grid-template-rows: ${openSubMenus2.has('settings') ? 1 : 0}fr;`"
+                    >
+                        <ul class="sub_menu flex flex-col gap-1 overflow-hidden">
                             <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/languages`)">
                                 <li class="flex items-center gap-3">
-                                    <!-- <Icon class="w-5 h-5 bg-white" name="language.svg" folder="icons/light" size="20px" /> -->
+                                    <!-- <Icon class="w-5 h-5 bg-fgPrimary" name="language.svg" folder="icons/light" size="20px" /> -->
                                     <span>{{ $t("panel.side-menu.Language Settings") }}</span>
                                 </li>
                             </nuxt-link>
@@ -276,29 +294,39 @@ aside > div {
                         v-if="checkPermissions(['main-panel.billing'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/money-bills-light.png" alt="" />
+                            <Icon class="w-6 h-6 gradient" name="money-bills.svg" folder="icons/light" size="22px" />
+                            <!-- <img class="w-5" src="~/assets/images/panel-icons/money-bills-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
                         </li>
                     </nuxt-link>
                     <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
                         <li class="flex items-center gap-3">
-                            <img class="w-5" src="~/assets/images/panel-icons/message-question-light.png" alt="" />
+                            <Icon class="w-6 h-6 gradient" name="message-question-light.svg" folder="icons/light" size="22px" />
+                            <!-- <img class="w-5" src="~/assets/images/panel-icons/message-question-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Support") }}</span>
                         </li>
                     </nuxt-link>
                 </ul>
             </nav>
 
-            <div class="relative flex flex-col items-center p-2 md:p-6 md:py-4 bg-black rounded-xl shadow-lg overflow-hidden shrink-0">
+            <div class="relative flex flex-col items-center p-2 md:p-4 bg-bgPrimary rounded-xl shadow-inner overflow-hidden shrink-0">
                 <span class="absolute end-1/2 -top-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
                 <span class="absolute end-10 -bottom-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
                 <span class="absolute -end-4 -bottom-14 -rotate-45 gradient-re w-24 h-24 rounded-2xl"></span>
-                <div class="relative flex flex-col items-center justify-between gap-2">
-                    <small class="hidden 2sm:flex text-sm opacity-75">Remove The Limitations</small>
-                    <h5 class="hidden 2sm:flex gradient-text text-2xl font-black -mt-2">Upgrade To Pro</h5>
-                    <nuxt-link class="flex items-center gap-2 p-1 px-4 bg-pencil-tip rounded-xl shadow-xl" :to="localePath('/panel/billing/upgrade')">
-                        <img class="w-9 md:w-12" src="~/assets/images/icons/sparkles.png" alt="" />
-                        <b class="text-xl">Go Pro</b>
+                <div class="relative flex flex-col items-center justify-between gap-4">
+                    <div class="flex items-start gap-2">
+                        <img class="w-11 mix-blend-exclusion" src="/pricing/pro-g.png" alt="pro" />
+                        <div class="flex flex-col">
+                            <h5 class="hidden 2sm:flex gradient-text text-xl font-black whitespace-nowrap">Upgrade To Pro</h5>
+                            <small class="hidden 2sm:flex text-xs opacity-60">Remove The Limitations</small>
+                        </div>
+                    </div>
+                    <nuxt-link
+                        class="btn flex items-center gap-2 p-1 px-4 hover:px-8 bg-fgPrimary text-bgAccent rounded-xl shadow-xl"
+                        :to="localePath('/panel/billing/upgrade')"
+                    >
+                        <img class="w-8 md:w-10 animate-pulse" src="~/assets/images/icons/sparkles.png" alt="" />
+                        <b class="text-xl/none">Go Pro</b>
                     </nuxt-link>
                 </div>
             </div>
@@ -319,6 +347,7 @@ const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] |
 
 // toggle sub menus open and close state
 const openSubMenus = reactive([]);
+const openSubMenus2 = ref(new Set());
 const nav = ref(null);
 const toggleSubMenu = (subMenuName) => {
     const subMenuHeight = nav.value.querySelector(`.sub_menu_wrapper[name="${subMenuName}"] > ul`).clientHeight;
@@ -336,6 +365,9 @@ const toggleSubMenu = (subMenuName) => {
         }, 200);
         openSubMenus.push(subMenuName);
     }
+};
+const toggleSubMenu2 = (subMenuName) => {
+    openSubMenus2.value.has(subMenuName) ? openSubMenus2.value.delete(subMenuName) : openSubMenus2.value.add(subMenuName);
 };
 // --------------------------
 </script>
