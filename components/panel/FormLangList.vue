@@ -1,36 +1,36 @@
 <style scoped></style>
 
 <template>
-    <div class="sticky lg:top-0 flex flex-col gap-4 w-full sm:w-auto lg:w-72 p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
+    <div class="sticky lg:top-0 flex flex-col gap-4 w-full sm:w-auto lg:w-72 p-4 rounded-2xl bg-bgAccent tegradient shadow-nr10">
         <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-                <Icon class="w-5 h-5 bg-white" name="language.svg" folder="icons/light" size="20px" />
+                <Icon class="w-6 h-6 bg-white" name="language.svg" folder="icons/duo" size="24px" />
                 <h3 class="text-lg">{{ $t("panel.Languages") }}</h3>
             </div>
             <nuxt-link
-                class="btn flex items-center justify-center gap-2 text-xs border p-2 rounded-md"
+                class="btn flex items-center justify-center gap-2 text-xs border border-bgSecondary p-2 hover:px-4 rounded-xl"
                 :to="localePath(`/panel/${brandID}/languages`)"
                 :title="$t('panel.side-menu.Language Settings')"
             >
-                <Icon class="w-4 h-4 bg-white" name="cog.svg" folder="icons" size="16px" />
+                <Icon class="w-4 h-4 gradient" name="gear.svg" folder="icons/duo" size="16px" />
             </nuxt-link>
         </div>
+        <hr class="w-full border-bgSecondary" />
         <small class="text-xs opacity-75 -mt-2">{{ $t("panel.languages.By selecting different language, you can translate text fields") }}</small>
-        <hr class="w-full opacity-20" />
         <ul class="flex lg:flex-col gap-2 w-full pb-2 md:pb-0 overflow-auto" v-if="!loadingSettings">
             <li
-                class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer flex-shrink-0"
-                :class="{ 'bg-neutral-100 text-pencil-tip': formLang == 'default' }"
+                class="flex items-center justify-between gap-3 p-3 rounded-xl transition-all cursor-pointer flex-shrink-0"
+                :class="[formLang == 'default' ? 'bg-fgPrimary text-bgPrimary' : 'bg-bgSecondary bg-opacity-50']"
                 @click="$emit('update:formLang', 'default')"
             >
                 <div class="flex items-center gap-2">
-                    <img class="w-6" :src="`/gradient-icons/${formLang == 'default' ? 'dark' : 'light'}/earth-america.png`" alt="" />
+                    <Icon class="w-6 h-6 gradient" name="earth-america.svg" folder="icons/duo" size="24px" />
                     <span class="first-letter:capitalize">{{ $t("panel.Default") }}</span>
                 </div>
             </li>
             <li
-                class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer flex-shrink-0"
-                :class="{ 'bg-neutral-100 text-pencil-tip': formLang == lang }"
+                class="flex items-center justify-between gap-3 p-3 rounded-xl transition-all cursor-pointer flex-shrink-0"
+                :class="[formLang == lang ? 'bg-fgPrimary text-bgPrimary' : 'bg-bgSecondary bg-opacity-50']"
                 v-for="(lang, i) in settings.languages"
                 :key="i"
                 @click="$emit('update:formLang', lang)"

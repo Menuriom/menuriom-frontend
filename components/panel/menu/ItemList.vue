@@ -28,7 +28,7 @@
                         </h3>
                         <button class="p-1.5" @click="filteredDishes.list[k][0].category.close = !filteredDishes.list[k][0].category.close">
                             <Icon
-                                class="w-3 h-3 bg-violet ms-2 transition-all"
+                                class="w-3 h-3 bg-primary ms-2 transition-all"
                                 :class="{ '-rotate-90': filteredDishes.list[k][0].category.close }"
                                 name="arrow.svg"
                                 folder="icons"
@@ -166,7 +166,7 @@
                                         <div class="flex flex-col rounded-md" v-else>
                                             <small class="opacity-75">{{ $t("panel.menu.No day is selected") }}</small>
                                             <nuxt-link
-                                                class="text-violet underline underline-offset-4 text-xs"
+                                                class="text-primary underline underline-offset-4 text-xs"
                                                 :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
                                             >
                                                 {{ $t("panel.menu.Add this tag") }}
@@ -194,7 +194,7 @@
                                         <div class="flex flex-col rounded-md" v-else>
                                             <small class="opacity-75">{{ $t("panel.menu.No variants for this item") }}</small>
                                             <nuxt-link
-                                                class="text-violet underline underline-offset-4 text-xs"
+                                                class="text-primary underline underline-offset-4 text-xs"
                                                 :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
                                             >
                                                 {{ $t("panel.menu.Add variants") }}

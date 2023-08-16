@@ -52,7 +52,7 @@
                             <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
                         <button
-                            class="flex items-center justify-center w-full p-4 rounded-xl bg-violet hover:scale-x-105 hover:shadow-mr35 transition-all"
+                            class="flex items-center justify-center w-full p-4 rounded-xl bg-primary hover:scale-x-105 hover:shadow-mr35 transition-all"
                             :class="{ 'opacity-75 cursor-not-allowed': loading }"
                             :disabled="loading"
                         >
@@ -89,7 +89,7 @@
                             <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
                         <button
-                            class="flex items-center justify-center w-full p-4 rounded-xl bg-violet hover:scale-x-105 hover:shadow-mr35 transition-all"
+                            class="flex items-center justify-center w-full p-4 rounded-xl bg-primary hover:scale-x-105 hover:shadow-mr35 transition-all"
                             :class="{ 'opacity-75 cursor-not-allowed': loading }"
                             :disabled="loading"
                         >
@@ -144,7 +144,7 @@
                             <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
                         <button
-                            class="flex items-center justify-center w-full p-4 rounded-xl bg-violet hover:scale-x-105 hover:shadow-mr35 transition-all"
+                            class="flex items-center justify-center w-full p-4 rounded-xl bg-primary hover:scale-x-105 hover:shadow-mr35 transition-all"
                             :class="{ 'opacity-75 cursor-not-allowed': loading }"
                             :disabled="loading"
                         >

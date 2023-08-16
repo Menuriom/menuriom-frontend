@@ -57,7 +57,7 @@
             <header class="flex flex-wrap items-center justify-between gap-4">
                 <h2 class="text-xl md:text-2xl/tight font-bold">{{ $t("panel.menu.Categories") }}</h2>
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-violet text-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-primary text-white flex-shrink-0"
                     :to="localePath(`/panel/${route.params.brandID}/menu/category/creation`)"
                 >
                     <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
@@ -73,7 +73,7 @@
             <header class="flex flex-wrap items-center justify-between gap-4">
                 <h2 class="text-xl md:text-2xl/tight font-bold">{{ $t("panel.menu.Items") }}</h2>
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-violet text-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-primary text-white flex-shrink-0"
                     :to="localePath(`/panel/${route.params.brandID}/menu/item/creation`)"
                 >
                     <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />

@@ -60,7 +60,7 @@
                     <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
-                    <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75': loading }" :disabled="loading" @click="editingAccess()">
+                    <button class="btn w-full p-3 rounded bg-primary" :class="{ 'opacity-75': loading }" :disabled="loading" @click="editingAccess()">
                         <span v-if="!loading"> {{ $t("panel.Save") }} </span>
                         <Loading v-else />
                     </button>

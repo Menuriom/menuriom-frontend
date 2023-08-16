@@ -78,7 +78,7 @@
                     {{ $t("panel.Go Back") }}
                 </button>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white grow"
+                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-primary text-white grow"
                     :class="{ 'opacity-50': saving }"
                     @click="save()"
                 >

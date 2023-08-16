@@ -18,7 +18,7 @@
             </div>
             <ul class="flex flex-col gap-2 w-full">
                 <li
-                    class="flex flex-col items-center gap-2 p-4 bg-neutral-800 rounded-lg border-2 border-transparent hover:border-violet cursor-pointer"
+                    class="flex flex-col items-center gap-2 p-4 bg-neutral-800 rounded-lg border-2 border-transparent hover:border-primary cursor-pointer"
                     @click="panelStore.openPopUp('side-item-creator')"
                     v-if="canCreateNewGroup"
                 >
@@ -62,7 +62,7 @@
             </small>
             <hr class="opacity-25" />
             <!-- <button
-                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white flex-shrink-0"
+                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-primary text-white flex-shrink-0"
                 @click="saveSelected()"
                 v-if="selectedItemGroups.size > 0"
             >

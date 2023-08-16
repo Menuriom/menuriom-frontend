@@ -22,7 +22,7 @@
                         <span class="flex items-center justify-center w-5 h-5 p-0.5 rounded-full border-2 border-neutral-500 border-opacity-50">
                             <b
                                 class="inline-block w-full h-full rounded-full"
-                                :class="{ 'bg-violet shadow-xl shadow-violet': categoriesOptions.orientation == orient }"
+                                :class="{ 'bg-primary shadow-xl shadow-primary': categoriesOptions.orientation == orient }"
                             ></b>
                         </span>
                         <span class="text-sm me-2">{{ $t(`panel.menu-style.orient-${orient}`) }}</span>

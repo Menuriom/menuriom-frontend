@@ -100,40 +100,40 @@
             </div>
             <nav class="flex flex-wrap items-start gap-10 md:gap-16">
                 <ul class="flex flex-col items-start gap-3 sm:gap-5">
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/pricing')">{{ $t("footer.Pricing") }}</nuxt-link>
                     </li>
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/faqs')">{{ $t("footer.Faqs") }}</nuxt-link>
                     </li>
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/demo')">{{ $t("footer.Demo") }}</nuxt-link>
                     </li>
                 </ul>
                 <ul class="flex flex-col items-start gap-3 sm:gap-5">
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/request-feature')">
                             {{ $t("footer.Request Feature") }}
                         </nuxt-link>
                     </li>
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/contact-us')">
                             {{ $t("footer.Contact Us") }}
                         </nuxt-link>
                     </li>
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/help-center')">
                             {{ $t("footer.Help Center") }}
                         </nuxt-link>
                     </li>
                 </ul>
                 <ul class="flex flex-col items-start gap-3 sm:gap-5">
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/privacy-policy')">
                             {{ $t("footer.Privacy Policy") }}
                         </nuxt-link>
                     </li>
-                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-violet group">
+                    <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/terms-of-service')">
                             {{ $t("footer.Term Of Service") }}
                         </nuxt-link>

@@ -95,6 +95,21 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
     -webkit-text-fill-color: transparent;
 }
 
+.img-bg {
+    /* background-image: 
+    repeating-linear-gradient(45deg, transparent 5px, theme("colors.bgSecondary") 5px, theme("colors.bgSecondary") 10px,
+        theme("colors.bgPrimary") 10px, theme("colors.bgPrimary") 35px, theme("colors.primary") 35px, theme("colors.primary") 40px,
+        theme("colors.bgSecondary") 40px, theme("colors.bgSecondary") 50px, hsla(197, 62%, 11%, 0) 50px, hsla(197, 62%, 11%, 0) 60px,
+        theme("colors.primary") 60px, theme("colors.primary") 70px, theme("colors.secondary") 70px, theme("colors.secondary") 80px,
+        hsla(35, 91%, 65%, 0) 80px, hsla(35, 91%, 65%, 0) 90px, theme("colors.primary") 90px, theme("colors.primary") 110px,
+        theme("colors.bgPrimary") 110px, theme("colors.bgPrimary") 120px, theme("colors.bgSecondary") 120px, theme("colors.bgSecondary") 140px
+    ); */
+
+   background-image: linear-gradient(to right, transparent 50%, rgba(255, 255, 255, 0.05) 50%), linear-gradient(to bottom, transparent 50%, rgba(255, 255, 255, 0.05) 50%);
+   background-size: 30px 30px;
+    
+}
+
 /* range input -------------------------------------- */
 .input-range {
     -webkit-appearance: none; height: 1rem; margin-top: .1rem; border-radius: 1rem;

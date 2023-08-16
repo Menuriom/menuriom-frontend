@@ -288,7 +288,7 @@ export default {
 
         branches: {
             Branches: "Branches",
-            "Here you can manage your branches and customize their menu": "Here you can manage your branches and customize their menu",
+            "Here you can manage your business branches and their info": "Here you can manage your business branches and their info",
             "New Branch": "New Branch",
             "Create New Branch": "Create New Branch",
             "Customize This Branch Menu": "Customize This Branch Menu",

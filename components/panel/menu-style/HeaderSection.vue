@@ -22,7 +22,7 @@
                         <span class="flex items-center justify-center w-5 h-5 p-0.5 rounded-full border-2 border-neutral-500 border-opacity-50">
                             <b
                                 class="inline-block w-full h-full rounded-full"
-                                :class="{ 'bg-violet shadow-xl shadow-violet': headerOptions.component == item }"
+                                :class="{ 'bg-primary shadow-xl shadow-primary': headerOptions.component == item }"
                             ></b>
                         </span>
                         <span class="text-sm me-2">{{ $t(`panel.menu-style.${item}`) }}</span>
@@ -43,14 +43,14 @@
                         <span class="w-1 border border-neutral-500 opacity-25 grow"></span>
                         <ul class="flex items-center gap-2">
                             <li
-                                class="p-1 px-2 text-xs rounded-md border border-violet cursor-pointer"
+                                class="p-1 px-2 text-xs rounded-md border border-primary cursor-pointer"
                                 :class="[patternMode == 'upload' ? 'bg-pencil-tip text-white ' : 'text-pencil-tip']"
                                 @click="patternMode = 'upload'"
                             >
                                 {{ $t("panel.menu.File Upload") }}
                             </li>
                             <li
-                                class="p-1 px-2 text-xs rounded-md border border-violet cursor-pointer"
+                                class="p-1 px-2 text-xs rounded-md border border-primary cursor-pointer"
                                 :class="[patternMode == 'list' ? 'bg-pencil-tip text-white' : 'text-pencil-tip']"
                                 @click="patternMode = 'list'"
                             >
@@ -67,11 +67,11 @@
                         >
                             <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 1 }) }}</small>
                             <div
-                                class="relative flex items-center justify-center w-full rounded-lg border-2 border-dashed border-neutral-400 hover:border-violet grow"
+                                class="relative flex items-center justify-center w-full rounded-lg border-2 border-dashed border-neutral-400 hover:border-primary grow"
                             >
                                 <div class="flex flex-col items-center justify-center gap-2 w-full">
-                                    <Icon class="w-5 h-5 bg-violet" name="images.svg" folder="icons/light" size="20px" />
-                                    <span class="text-sm text-violet">{{ $t("panel.Drag & drop your logo or click to select") }}</span>
+                                    <Icon class="w-5 h-5 bg-primary" name="images.svg" folder="icons/light" size="20px" />
+                                    <span class="text-sm text-primary">{{ $t("panel.Drag & drop your logo or click to select") }}</span>
                                 </div>
                                 <input
                                     class="absolute inset-0 opacity-0 cursor-pointer"
@@ -84,7 +84,7 @@
                         </div>
                         <div class="flex flex-col items-center justify-center gap-1 h-28" v-show="patternMode === 'upload'" v-else>
                             <span class="opacity-75 text-sm">{{ $t("panel.This feature is for the pro plan only") }}.</span>
-                            <nuxt-link class="text-violet text-sm underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                            <nuxt-link class="text-primary text-sm underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
                                 {{ $t("panel.Upgrade your plan to get this feature") }}.
                             </nuxt-link>
                         </div>
@@ -92,7 +92,7 @@
                             <ul class="flex flex-wrap items-start gap-2 w-full h-full overflow-auto">
                                 <li
                                     class="bg-pencil-tip p-2 rounded-md border-4 cursor-pointer"
-                                    :class="[headerOptions.bgImage === pattern ? 'border-violet' : 'border-transparent']"
+                                    :class="[headerOptions.bgImage === pattern ? 'border-primary' : 'border-transparent']"
                                     v-for="(pattern, i) in patterns"
                                     :key="i"
                                     @click="selectPatternFromList(pattern)"

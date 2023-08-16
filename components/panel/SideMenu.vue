@@ -115,7 +115,8 @@ aside > div {
                         v-if="checkPermissions(['main-panel.dashboard.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <Icon class="w-6 h-6 gradient" name="column-light.svg" folder="icons/light" size="22px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="column-light.svg" folder="icons/light" size="22px" /> -->
+                            <Icon class="w-5 h-5 gradient" name="rectangles-mixed.svg" folder="icons/duo" size="20px" />
                             <span>{{ $t("panel.side-menu.Dashboard") }}</span>
                         </li>
                     </nuxt-link>
@@ -125,7 +126,8 @@ aside > div {
                         v-if="checkPermissions(['main-panel.customer-feedback.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <Icon class="w-6 h-6 gradient" name="comments-light.svg" folder="icons/light" size="22px" />
+                            <Icon class="w-5 h-5 gradient" name="comments.svg" folder="icons/duo" size="20px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="comments-light.svg" folder="icons/light" size="22px" /> -->
                             <!-- <img class="w-5" src="~/assets/images/panel-icons/comments-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
                         </li>
@@ -139,7 +141,8 @@ aside > div {
                         v-if="checkPermissions(['main-panel.branches.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <Icon class="w-6 h-6 gradient" name="store.svg" folder="icons/light" size="22px" />
+                            <Icon class="w-5 h-5 gradient" name="store.svg" folder="icons/duo" size="20px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="store.svg" folder="icons/light" size="22px" /> -->
                             <!-- <img class="w-5" src="~/assets/images/panel-icons/store-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Branches") }}</span>
                         </li>
@@ -151,7 +154,8 @@ aside > div {
                         v-if="checkPermissions(['main-panel.menu.items', 'main-panel.menu.style', 'main-panel.menu.qr-code'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <Icon class="w-6 h-6 gradient" name="cards-blank.svg" folder="icons/light" size="22px" />
+                            <Icon class="w-5 h-5 gradient" name="cards-blank.svg" folder="icons/duo" size="20px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="cards-blank.svg" folder="icons/light" size="22px" /> -->
                             <!-- <img class="w-5" src="~/assets/images/panel-icons/cards-blank-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Menu") }}</span>
                             <Icon
@@ -205,7 +209,8 @@ aside > div {
                         v-if="checkPermissions(['main-panel.staff.view', 'main-panel.staff.invite', 'main-panel.staff.roles'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <Icon class="w-6 h-6 gradient" name="user-group-light.svg" folder="icons/light" size="22px" />
+                            <Icon class="w-5 h-5 gradient" name="user-group.svg" folder="icons/duo" size="20px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="user-group-light.svg" folder="icons/light" size="22px" /> -->
                             <!-- <img class="w-5" src="~/assets/images/panel-icons/user-group-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Manage Staff") }}</span>
                             <Icon
@@ -259,7 +264,8 @@ aside > div {
                         v-if="checkPermissions(['main-panel.settings'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <Icon class="w-6 h-6 gradient" name="gear-light.svg" folder="icons/light" size="22px" />
+                            <Icon class="w-5 h-5 gradient" name="gear.svg" folder="icons/duo" size="20px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="gear-light.svg" folder="icons/light" size="22px" /> -->
                             <!-- <img class="w-5" src="~/assets/images/panel-icons/gear-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Settings") }}</span>
                             <Icon
@@ -294,14 +300,16 @@ aside > div {
                         v-if="checkPermissions(['main-panel.billing'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <Icon class="w-6 h-6 gradient" name="money-bills.svg" folder="icons/light" size="22px" />
+                            <Icon class="w-5 h-5 gradient" name="money-bills.svg" folder="icons/duo" size="20px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="money-bills.svg" folder="icons/light" size="22px" /> -->
                             <!-- <img class="w-5" src="~/assets/images/panel-icons/money-bills-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
                         </li>
                     </nuxt-link>
                     <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
                         <li class="flex items-center gap-3">
-                            <Icon class="w-6 h-6 gradient" name="message-question-light.svg" folder="icons/light" size="22px" />
+                            <Icon class="w-5 h-5 gradient" name="message-question.svg" folder="icons/duo" size="20px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="message-question-light.svg" folder="icons/light" size="22px" /> -->
                             <!-- <img class="w-5" src="~/assets/images/panel-icons/message-question-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Support") }}</span>
                         </li>

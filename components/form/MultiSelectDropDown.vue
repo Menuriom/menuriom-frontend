@@ -58,11 +58,11 @@ span {
                 </span>
             </div>
             <span class="flex items-center my-2 mx-1 border-s-2 border-neutral-600" tabindex="0" @click="toggleDropdown()">
-                <Icon class="w-4 h-4 bg-violet mx-2" name="arrow.svg" folder="icons" size="14px" />
+                <Icon class="w-4 h-4 bg-primary mx-2" name="arrow.svg" folder="icons" size="14px" />
             </span>
             <transition :name="openDirection === 'top' ? 'slide-down' : 'slide-up'" appear>
                 <ul
-                    class="list scroll-thin absolute w-full bg-dolphin border-2 border-violet rounded-md shadow-lg z-10"
+                    class="list scroll-thin absolute w-full bg-dolphin border-2 border-primary rounded-md shadow-lg z-10"
                     :class="[openDirection === 'top' ? 'bottom-full mb-2' : 'top-full mt-2']"
                     tabindex="0"
                     v-if="open"

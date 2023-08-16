@@ -50,7 +50,7 @@ input[type="range"]::-moz-range-thumb {
             <label class="flex items-center gap-2 text-xs grow" v-if="label">{{ label }} </label>
             <button
                 class="flex items-center justify-center p-1 rounded border border-neutral-500 border-opacity-50 shadow-nr15 shrink-0"
-                :class="[!isColorLocked ? 'bg-white' : 'bg-violet']"
+                :class="[!isColorLocked ? 'bg-white' : 'bg-primary']"
                 @click="lockColor()"
                 v-if="baseColor"
             >

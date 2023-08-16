@@ -164,7 +164,7 @@
                             {{ $t(`panel.payment.${lastBill.status}`) }}
                         </span>
                         <div v-if="lastBill.status == 'notPaid' && checkPermissions(['main-panel.billing.pay'], brand)">
-                            <button class="btn w-max p-3 px-6 text-sm bg-violet text-white rounded-lg">{{ $t("panel.billing.Pay This Bill") }}</button>
+                            <button class="btn w-max p-3 px-6 text-sm bg-primary text-white rounded-lg">{{ $t("panel.billing.Pay This Bill") }}</button>
                         </div>
                     </div>
                 </div>

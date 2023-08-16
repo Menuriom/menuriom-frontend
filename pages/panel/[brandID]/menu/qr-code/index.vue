@@ -51,7 +51,7 @@
                 <div class="flex flex-wrap items-center justify-between gap-4 w-full">
                     <div class="flex flex-wrap items-center gap-2">
                         <span class="text-sm">{{ $t("panel.qrcode.Link to your menu") }}:</span>
-                        <a class="bg-white px-2 py-1 rounded-md text-sm text-black hover:text-violet border" :href="link" target="_blank">{{ link }}</a>
+                        <a class="bg-white px-2 py-1 rounded-md text-sm text-black hover:text-primary border" :href="link" target="_blank">{{ link }}</a>
                     </div>
                     <button class="btn flex items-center justify-center gap-2 p-3 border rounded-md text-sm" @click="saveSettings()">
                         <span class="flex items-center gap-2" v-if="!saving">
@@ -88,7 +88,7 @@
                                 >
                                     <Icon
                                         class="w-5 h-5"
-                                        :class="[backgroundGradientType == 'Linear' ? 'bg-violet' : 'bg-neutral-600']"
+                                        :class="[backgroundGradientType == 'Linear' ? 'bg-primary' : 'bg-neutral-600']"
                                         name="gradient-linear.svg"
                                         folder="icons/light"
                                         size="20px"
@@ -100,7 +100,7 @@
                                 >
                                     <Icon
                                         class="w-5 h-5"
-                                        :class="[backgroundGradientType == 'Radial' ? 'bg-violet' : 'bg-neutral-600']"
+                                        :class="[backgroundGradientType == 'Radial' ? 'bg-primary' : 'bg-neutral-600']"
                                         name="gradient-radial.svg"
                                         folder="icons/light"
                                         size="20px"
@@ -174,7 +174,7 @@
                                 >
                                     <Icon
                                         class="w-5 h-5"
-                                        :class="[foregroundGradientType == 'Linear' ? 'bg-violet' : 'bg-neutral-600']"
+                                        :class="[foregroundGradientType == 'Linear' ? 'bg-primary' : 'bg-neutral-600']"
                                         name="gradient-linear.svg"
                                         folder="icons/light"
                                         size="20px"
@@ -186,7 +186,7 @@
                                 >
                                     <Icon
                                         class="w-5 h-5"
-                                        :class="[foregroundGradientType == 'Radial' ? 'bg-violet' : 'bg-neutral-600']"
+                                        :class="[foregroundGradientType == 'Radial' ? 'bg-primary' : 'bg-neutral-600']"
                                         name="gradient-radial.svg"
                                         folder="icons/light"
                                         size="20px"
@@ -258,7 +258,7 @@
                     <ul class="flex flex-wrap items-start justify-start gap-3 w-full max-h-48 overflow-auto">
                         <li
                             class="relative flex items-center justify-center w-16 h-16 rounded-lg shadow-nr10 cursor-pointer"
-                            :class="[dotImage === item.image ? 'bg-violet' : 'bg-pencil-tip']"
+                            :class="[dotImage === item.image ? 'bg-primary' : 'bg-pencil-tip']"
                             v-for="(item, i) in dotImageList"
                             :key="i"
                             @click="changeDotImage(item)"
@@ -383,7 +383,7 @@
                     </div>
                 </div>
 
-                <!-- <button class="btn flex items-center justify-center gap-2 p-3 bg-violet text-white rounded-md text-sm" @click="saveSettings()">
+                <!-- <button class="btn flex items-center justify-center gap-2 p-3 bg-primary text-white rounded-md text-sm" @click="saveSettings()">
                     <span class="flex items-center gap-2" v-if="!saving">
                         <Icon class="w-4 h-4 bg-white" name="floppy-disk.svg" folder="icons/light" size="16px" />
                         {{ $t("panel.qrcode.Save Settings") }}
@@ -396,7 +396,7 @@
                     {{ $t("panel.qrcode.Make sure the colors have good contrast so that the code is easily scannable") }}
                 </small>
                 <canvas class="w-full max-w-screen-xs aspect-square shadow-nr15 rounded-xl" ref="canvasEl"></canvas>
-                <button class="btn w-full text-sm p-3 rounded-md bg-violet grow" @click="saveCanvas()">{{ $t("panel.qrcode.Download QR Code") }}</button>
+                <button class="btn w-full text-sm p-3 rounded-md bg-primary grow" @click="saveCanvas()">{{ $t("panel.qrcode.Download QR Code") }}</button>
             </div>
         </div>
     </div>

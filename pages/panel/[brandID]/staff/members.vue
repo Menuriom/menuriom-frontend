@@ -23,7 +23,7 @@
                     {{ $t("panel.side-menu.Sent Invites") }}
                 </button>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white border border-transparent flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-primary text-white border border-transparent flex-shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
@@ -109,7 +109,7 @@
                         <h4 class="font-semibold">{{ `${staff.user.name} ${staff.user.family}` }}</h4>
                         <p class="text-xs opacity-75">{{ staff.user.email ? staff.user.email : staff.user.mobile }}</p>
                     </div>
-                    <small class="border border-violet text-violet p-0.5 px-2 rounded">{{ staff.role.name }}</small>
+                    <small class="border border-primary text-primary p-0.5 px-2 rounded">{{ staff.role.name }}</small>
                     <hr class="w-3/4 border-b-2 border-dolphin opacity-10 rounded-full" />
                     <div class="flex flex-wrap items-center justify-between gap-2 p-2 rounded-md w-full bg-neutral-100">
                         <small>{{ $t("panel.staff.Joined At") }}:</small>
@@ -117,7 +117,7 @@
                     </div>
                 </li>
                 <li
-                    class="w-full rounded-lg bg-white hover:border-2 border-violet shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
+                    class="w-full rounded-lg bg-white hover:border-2 border-primary shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
                     v-if="!loading"
                 >
                     <button
@@ -127,8 +127,8 @@
                     >
                         <img class="down-pop w-20 object-contain" src="~/assets/images/team.webp" />
                         <div class="flex items-center gap-2">
-                            <Icon class="w-3 h-3 bg-violet" name="plus.svg" folder="icons" size="12px" />
-                            <small class="text-sm text-violet">{{ $t("panel.staff.Invite New Member") }}</small>
+                            <Icon class="w-3 h-3 bg-primary" name="plus.svg" folder="icons" size="12px" />
+                            <small class="text-sm text-primary">{{ $t("panel.staff.Invite New Member") }}</small>
                         </div>
                     </button>
                 </li>

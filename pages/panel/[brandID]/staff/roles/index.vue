@@ -14,7 +14,7 @@
                 </small>
             </div>
             <nuxt-link
-                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-primary text-white flex-shrink-0"
                 :to="localePath(`/panel/${route.params.brandID}/staff/roles/creation`)"
                 v-if="records.list.length < 15 && checkPermissions(['main-panel.staff.roles'], brand)"
             >

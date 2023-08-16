@@ -10,13 +10,13 @@
                 </div>
                 <div class="flex items-center gap-1 text-sm ms-2">
                     <nuxt-link :to="localePath(`/panel/${route.params.brandID}`)">
-                        <Icon class="w-4 h-4 bg-pencil-tip hover:bg-violet" name="house.svg" folder="icons/light" size="16px" />
+                        <Icon class="w-4 h-4 bg-pencil-tip hover:bg-primary" name="house.svg" folder="icons/light" size="16px" />
                     </nuxt-link>
-                    <span>&gt;</span>
-                    <nuxt-link class="hover:text-violet" :to="localePath(`/panel/${route.params.brandID}/menu/editor`)">
+                    <span class="opacity-60">&gt;</span>
+                    <nuxt-link class="hover:text-primary" :to="localePath(`/panel/${route.params.brandID}/menu/editor`)">
                         {{ $t("panel.menu.Menu Editor") }}
                     </nuxt-link>
-                    <span>&gt;</span>
+                    <span class="opacity-60">&gt;</span>
                     <span>{{ $t("panel.menu.Edit Category") }}</span>
                 </div>
             </div>
@@ -37,14 +37,14 @@
                     <div class="flex flex-col gap-2 p-2 w-full bg-dolphin rounded-lg shadow-nr25">
                         <ul class="flex items-center gap-2">
                             <li
-                                class="p-1 px-2 text-xs rounded-md border border-violet cursor-pointer"
+                                class="p-1 px-2 text-xs rounded-md border border-primary cursor-pointer"
                                 :class="[iconMode == 'upload' ? 'bg-white text-black' : 'text-white']"
                                 @click="iconMode = 'upload'"
                             >
                                 {{ $t("panel.menu.File Upload") }}
                             </li>
                             <li
-                                class="p-1 px-2 text-xs rounded-md border border-violet cursor-pointer"
+                                class="p-1 px-2 text-xs rounded-md border border-primary cursor-pointer"
                                 :class="[iconMode == 'list' ? 'bg-white text-black' : 'text-white']"
                                 @click="iconMode = 'list'"
                             >
@@ -59,7 +59,7 @@
                         >
                             <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 1 }) }}</small>
                             <div
-                                class="relative flex items-center justify-center w-full rounded-lg border-2 border-dashed border-neutral-400 hover:border-violet grow"
+                                class="relative flex items-center justify-center w-full rounded-lg border-2 border-dashed border-neutral-400 hover:border-primary grow"
                             >
                                 <div class="flex flex-col items-center justify-center gap-2 w-full">
                                     <Icon class="w-5 h-5 bg-purple-300" name="images.svg" folder="icons/light" size="20px" />
@@ -85,7 +85,7 @@
                             <ul class="flex flex-wrap items-start gap-2 w-full h-full overflow-auto">
                                 <li
                                     class="bg-pencil-tip p-3 rounded-md border-4 cursor-pointer"
-                                    :class="[logoBlob === icon ? 'border-violet' : 'border-transparent']"
+                                    :class="[logoBlob === icon ? 'border-primary' : 'border-transparent']"
                                     v-for="(icon, i) in icons.list"
                                     :key="i"
                                     @click="selectIconFromList(icon)"
@@ -147,7 +147,7 @@
                         {{ $t("panel.Go Back") }}
                     </nuxt-link>
                     <button
-                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-primary text-white flex-shrink-0"
                         :class="{ 'opacity-50': saving }"
                         :disabled="saving"
                         @click="save()"

@@ -1,11 +1,11 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full">
+    <div class="flex flex-col gap-6 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-1">
+            <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
-                    <img class="w-9" src="~/assets/images/panel-icons/language-dark.png" alt="" />
+                    <Icon class="w-9 h-9 gradient" name="language.svg" folder="icons/duo" size="36px" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.side-menu.Language Settings") }}</h1>
                 </div>
                 <!-- <small class="hidden sm:flex text-sm">
@@ -13,70 +13,79 @@
                 </small> -->
             </div>
             <button
-                class="btn flex items-center justify-center gap-2 text-sm p-3 px-6 rounded-lg bg-violet text-white"
+                class="btn flex items-center justify-center gap-2 text-sm p-3 hover:px-6 rounded-xl bg-primary"
                 :class="{ 'opacity-50 cursor-not-allowed': saving }"
                 :disabled="saving"
                 @click="saveSetting()"
                 v-if="checkPermissions(['main-panel.settings'], brand)"
             >
-                <Icon class="w-4 h-4 bg-white" name="floppy-disk.svg" folder="icons" size="16px" />
+                <Icon class="w-4 h-4 bg-fgPrimary" name="floppy-disk.svg" folder="icons" size="16px" />
                 {{ $t("panel.Save") }}
             </button>
         </header>
-        <hr class="w-full border-gray-300 opacity-50" />
+        <hr class="w-full border-bgSecondary" />
         <section class="flex flex-wrap items-start gap-4 w-full" ref="sec">
-            <div class="flex flex-col gap-2 p-4 bg-white rounded-xl w-full max-w-3xl shadow-nr5 flex-grow">
+            <div class="flex flex-col gap-4 p-4 bg-bgAccent rounded-2xl w-full max-w-3xl shadow-nr15 flex-grow">
                 <h2 class="text-2xl/none font-bold">{{ $t("panel.languages.Menu Languages") }}</h2>
-                <div class="flex flex-col">
+                <div class="flex flex-col opacity-75">
                     <small>{{ $t("panel.languages.Choose which languages you want your menu to have") }}</small>
                     <small>{{ $t("panel.languages.You can translate your menu items and your restaurant info base on languages you choose") }}</small>
                 </div>
-                <hr class="w-full border-gray-300 opacity-50" />
+                <hr class="w-full border-bgSecondary" />
                 <ul class="grid gap-2" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))" v-if="!loadingLanguages">
                     <li
-                        class="flex items-center justify-between gap-2 p-2 rounded-lg group"
-                        :class="[settings.languages.includes(code) ? 'bg-dolphin text-white' : 'bg-neutral-50']"
+                        class="flex items-center justify-between gap-2 p-3 rounded-xl group"
+                        :class="[settings.languages.includes(code) ? 'bg-fgPrimary text-bgPrimary' : 'bg-bgSecondary bg-opacity-50']"
                         v-for="(language, code) in languages.list"
                         :key="code"
-                        @click="toggleLang(code)"
                     >
                         <div class="flex items-center gap-2">
                             <img class="w-10" :src="`/flags/${code}.png`" alt="" />
                             <span class="first-letter:capitalize">{{ language }}</span>
                         </div>
-                        <small class="p-2 text-rose-300 underline underline-offset-2 cursor-pointer" v-if="settings.languages.includes(code)">
+                        <small
+                            class="btn p-2 text-rose-400 hover:text-fgPrimary bg-rose-50 hover:bg-rose-400 rounded-xl cursor-pointer"
+                            v-if="settings.languages.includes(code)"
+                            @click="toggleLang(code)"
+                        >
                             {{ $t("panel.Delete") }}
                         </small>
-                        <small class="p-2 hidden group-hover:flex underline underline-offset-2 cursor-pointer" v-else>{{ $t("panel.Select") }}</small>
-                        <!-- <span class="flex items-center justify-center w-5 h-5 bg-violet rounded-full" v-if="settings.languages.includes(code)">
+                        <small
+                            class="btn p-2 text-secondary hover:text-bgPrimary bg-bgSecondary hover:bg-secondary rounded-xl hidden group-hover:flex cursor-pointer"
+                            @click="toggleLang(code)"
+                            v-else
+                        >
+                            {{ $t("panel.Select") }}
+                        </small>
+                        <!-- <span class="flex items-center justify-center w-5 h-5 bg-primary rounded-full" v-if="settings.languages.includes(code)">
                             <Icon class="w-5 h-5 bg-dolphin" name="check.svg" folder="icons" size="14px" />
                         </span> -->
                     </li>
                 </ul>
                 <Loading v-else />
-                <hr class="w-full border-gray-300 opacity-50" />
+                <hr class="w-full border-bgSecondary" />
                 <div class="flex flex-wrap items-center gap-1">
                     <small class="text-sm">{{ $t("panel.languages.You can choose up to n languages", { n: 2 }) }} -</small>
-                    <nuxt-link class="text-xs hover:underline text-violet" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                    <nuxt-link class="text-sm hover:underline text-primary" :to="localePath(`/panel/${route.params.brandID}/billing`)">
                         {{ $t("panel.languages.Upgrade your plan to support more languages") }}
                     </nuxt-link>
                 </div>
             </div>
-            <div class="flex flex-col gap-2 p-4 bg-white rounded-xl w-full md:w-max shadow-nr5 flex-shrink-0">
+            <div class="flex flex-col gap-4 p-4 bg-bgAccent rounded-2xl w-full md:w-max shadow-nr15 shrink-0">
                 <h2 class="text-2xl/none font-bold">{{ $t("panel.languages.Currency") }}</h2>
-                <small>{{ $t("panel.languages.Select what currency you want to show for your prices") }}</small>
-                <hr class="w-full border-gray-300 opacity-50" />
+                <small class="opacity-75">{{ $t("panel.languages.Select what currency you want to show for your prices") }}</small>
+                <hr class="w-full border-bgSecondary" />
                 <ul class="flex flex-col gap-2 w-full max-w-screen-sm" v-if="!loadingCurrencies">
                     <li
-                        class="flex items-center justify-between gap-2 p-3 rounded-lg cursor-pointer"
-                        :class="[i == settings.currency ? 'bg-dolphin text-white' : 'bg-neutral-50']"
+                        class="flex items-center justify-between gap-2 p-3 rounded-xl cursor-pointer"
+                        :class="[i == settings.currency ? 'bg-fgPrimary text-bgPrimary' : 'bg-bgSecondary bg-opacity-50']"
                         v-for="(currency, i) in currencies.list"
                         :key="i"
                         @click="settings.currency = i"
                     >
                         <span>{{ currency }}</span>
-                        <span class="flex items-center justify-center w-5 h-5 bg-violet rounded-full" v-if="i == settings.currency">
-                            <Icon class="w-5 h-5 bg-dolphin" name="check.svg" folder="icons" size="14px" />
+                        <span class="flex items-center justify-center w-6 h-6 bg-primary rounded-full" v-if="i == settings.currency">
+                            <Icon class="w-5 h-5 bg-black" name="check.svg" folder="icons" size="14px" />
                         </span>
                     </li>
                 </ul>
@@ -84,7 +93,7 @@
             </div>
         </section>
         <!-- <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="errorField === 'data' && responseMessage !== ''">
-            <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+            <Icon class="icon w-4 h-4 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
         </small> -->
     </div>
 </template>

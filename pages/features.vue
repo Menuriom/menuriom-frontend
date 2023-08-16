@@ -35,7 +35,7 @@
                         </div>
                         <div class="flex flex-col items-center 1.5xl:items-start gap-2 w-full">
                             <h4 class="f-inter text-center 1.5xl:text-start text-3xl lg:text-5xl font-bold">{{ item.title }}</h4>
-                            <span class="flex w-full h-4 bg-violet rounded-sm"></span>
+                            <span class="flex w-full h-4 bg-primary rounded-sm"></span>
                             <p class="text-center 1.5xl:text-start lg:text-xl opacity-75">{{ item.desc }}</p>
                         </div>
                     </div>

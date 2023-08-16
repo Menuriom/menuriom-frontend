@@ -42,7 +42,7 @@
                 <p class="text-xs text-black opacity-75 text-center">{{ $t("panel.payment.Please contact our support for more info") }}</p>
             </div>
 
-            <nuxt-link class="text-sm text-violet underline underline-offset-4 mt-4" :to="localePath(`/panel/${brandID}/billing`)">
+            <nuxt-link class="text-sm text-primary underline underline-offset-4 mt-4" :to="localePath(`/panel/${brandID}/billing`)">
                 {{ $t("panel.payment.Go back to billing page") }}
             </nuxt-link>
         </div>
@@ -109,7 +109,7 @@
                     <h2 class="font-bold shrink-0">{{ $t("panel.payment.Bill Info") }}</h2>
                     <span class="w-full h-0.5 bg-neutral-600 grow"></span>
                     <Icon
-                        class="w-4 h-4 bg-violet transition-all shrink-0"
+                        class="w-4 h-4 bg-primary transition-all shrink-0"
                         :class="{ 'rotate-90': showBillInfo }"
                         name="arrow.svg"
                         folder="icons"

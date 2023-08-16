@@ -62,7 +62,7 @@ input[type="range"]::-moz-range-thumb {
             />
             <button
                 class="relative flex items-center justify-center p-1 me-0.5 rounded border border-neutral-500 border-opacity-50 shadow-nr15 shrink-0"
-                :class="[!isColorLocked ? 'bg-white' : 'bg-violet']"
+                :class="[!isColorLocked ? 'bg-white' : 'bg-primary']"
                 @click="lockColor()"
                 v-if="baseColor"
             >

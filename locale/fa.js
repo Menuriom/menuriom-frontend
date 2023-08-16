@@ -288,7 +288,7 @@ export default {
 
         branches: {
             Branches: "شعبه ها",
-            "Here you can manage your branches and customize their menu": "اینجا میتونی شعبه های رستورانتو مدیریت کنی و منوهاشون رو سفارشی کنی",
+            "Here you can manage your business branches and their info": "اینجا شما میتونید شعبه ها و اطلاعات شعبه های خودتون رو مدیریت کنید",
             "New Branch": "شعبه جدید",
             "Create New Branch": "ساخت شعبه جدید",
             "Customize This Branch Menu": "سفارشی سازی منوی این شعبه",
@@ -587,10 +587,10 @@ export default {
 
         languages: {
             "By selecting different language, you can translate text fields": "با انتخاب زبان های متفاوت، میتوانید فیلد های متنی را ترجمه کنید",
-            "Select your menu languages and setup your currency unit": "زبان های منو و واحد پولی که تو منو نمایش داده میشه انتخاب کن",
+            "Select your menu languages and setup your currency unit": "زبان های منو و واحد پولی که داخل منو نمایش داده میشود رو انتخاب کنید",
             "Menu Languages": "زبان های منو",
             Currency: "واحد پولی",
-            "Choose which languages you want your menu to have": "زبان هایی که میخواهید داخل منو نمایش داده بشه رو انتخاب کنید",
+            "Choose which languages you want your menu to have": "زبان هایی که میخواهید داخل منو نمایش داده بشوند رو انتخاب کنید",
             "You can translate your menu items and your restaurant info base on languages you choose":
                 "بسته به زبان هایی که انتخاب میکنید، میتونید منو رو ترجمه کنید",
             "Upgrade your plan to support more languages": "برای انتخاب زبان های بیشتر پلن خود را ارتقا بدید",

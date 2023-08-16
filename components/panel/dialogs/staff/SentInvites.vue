@@ -19,7 +19,7 @@
                     >
                         <div class="flex flex-col items-start gap-1 grow">
                             <h2>{{ invite.email }}</h2>
-                            <small class="border border-violet text-purple-300 p-0.5 px-2 rounded">{{ invite.role.name }}</small>
+                            <small class="border border-primary text-purple-300 p-0.5 px-2 rounded">{{ invite.role.name }}</small>
                         </div>
                         <div class="flex items-center justify-center md:w-24">
                             <span

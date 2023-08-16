@@ -15,7 +15,7 @@
                     <p class="text-xs opacity-90" v-html="$t('panel.account-setup.roleInviteDesc', { role: invite.role.name })" />
                 </div>
                 <div class="flex items-center gap-2 shrink-0" v-if="!invite.loading">
-                    <button class="btn text-sm w-max p-3 rounded bg-violet shrink-0" @click="acceptInvite(invite, i)">
+                    <button class="btn text-sm w-max p-3 rounded bg-primary shrink-0" @click="acceptInvite(invite, i)">
                         {{ $t("panel.Accept") }}
                     </button>
                     <button class="btn text-sm w-max p-2.5 rounded border-2 shrink-0" @click="rejectInvite(invite, i)">

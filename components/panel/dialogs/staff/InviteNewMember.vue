@@ -59,7 +59,7 @@
                     <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
-                    <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75': loading }" :disabled="loading" @click="sendInvite()">
+                    <button class="btn w-full p-3 rounded bg-primary" :class="{ 'opacity-75': loading }" :disabled="loading" @click="sendInvite()">
                         <span v-if="!loading"> {{ $t("panel.staff.Send Invite") }} </span>
                         <Loading v-else />
                     </button>
@@ -74,7 +74,7 @@
                     </small>
                     <small class="opacity-75"> {{ $t("panel.staff.You can always revoke your sent invitations from sent invite list") }} </small>
                 </div>
-                <button class="text-sm text-violet underline underline-offset-2" @click="stage = 1">{{ $t("panel.staff.Send Another Invite") }}</button>
+                <button class="text-sm text-primary underline underline-offset-2" @click="stage = 1">{{ $t("panel.staff.Send Another Invite") }}</button>
             </div>
         </transition>
     </Dialog>

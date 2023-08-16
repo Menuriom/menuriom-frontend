@@ -10,13 +10,13 @@
                 </div>
                 <div class="flex items-center gap-1 text-sm ms-2">
                     <nuxt-link :to="localePath(`/panel/${route.params.brandID}`)">
-                        <Icon class="w-4 h-4 bg-pencil-tip hover:bg-violet" name="house.svg" folder="icons/light" size="16px" />
+                        <Icon class="w-4 h-4 bg-pencil-tip hover:bg-primary" name="house.svg" folder="icons/light" size="16px" />
                     </nuxt-link>
-                    <span>&gt;</span>
-                    <nuxt-link class="hover:text-violet" :to="localePath(`/panel/${route.params.brandID}/staff/roles`)">
+                    <span class="opacity-60">&gt;</span>
+                    <nuxt-link class="hover:text-primary" :to="localePath(`/panel/${route.params.brandID}/staff/roles`)">
                         {{ $t("panel.staff.Staff Roles") }}
                     </nuxt-link>
-                    <span>&gt;</span>
+                    <span class="opacity-60">&gt;</span>
                     <span>{{ $t("panel.staff.roles.Edit Role") }}</span>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                                     size="22px"
                                 />
                             </span>
-                            <h3 class="font-bold text-violet">{{ permissions[0].translation?.[locale]?.groupLabel || permissions[0].groupLabel }}</h3>
+                            <h3 class="font-bold text-primary">{{ permissions[0].translation?.[locale]?.groupLabel || permissions[0].groupLabel }}</h3>
                         </div>
                         <hr class="w-full opacity-20" />
                         <ul class="flex flex-col gap-5 w-full">
@@ -138,7 +138,7 @@
                         {{ $t("panel.Go Back") }}
                     </nuxt-link>
                     <button
-                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-primary text-white flex-shrink-0"
                         :class="{ 'opacity-50': saving }"
                         :disabled="saving"
                         @click="save()"

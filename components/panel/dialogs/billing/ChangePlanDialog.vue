@@ -126,7 +126,7 @@
                             <span :value="option.value">{{ option.name }}</span>
                         </div>
                     </SelectDropDown>
-                    <button class="btn p-3 rounded bg-violet grow" :class="{ 'opacity-75': loading }" :disabled="loading" @click="changePlan()">
+                    <button class="btn p-3 rounded bg-primary grow" :class="{ 'opacity-75': loading }" :disabled="loading" @click="changePlan()">
                         <span v-if="!loading && calculatedPrice > 0"> {{ $t("panel.billing.Head To Payment Gateway") }} </span>
                         <span v-else-if="!loading && calculatedPrice === 0"> {{ $t("panel.billing.Change Plan") }} </span>
                         <Loading v-else />
@@ -134,7 +134,7 @@
                 </div>
             </div>
             <div class="flex flex-col items-center justify-center gap-2 p-4 w-full h-48 bg-neutral-800 rounded-xl" v-else>
-                <span class="text-violet">{{ $t("panel.billing.No Action Needed") }}</span>
+                <span class="text-primary">{{ $t("panel.billing.No Action Needed") }}</span>
                 <small class="opacity-75">{{ $t("panel.billing.You have selected your current active plan and payment period") }}</small>
             </div>
         </div>

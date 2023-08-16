@@ -10,13 +10,13 @@
                 </div>
                 <div class="flex items-center gap-1 text-sm ms-2">
                     <nuxt-link :to="localePath(`/panel/${route.params.brandID}`)">
-                        <Icon class="w-4 h-4 bg-pencil-tip hover:bg-violet" name="house.svg" folder="icons/light" size="16px" />
+                        <Icon class="w-4 h-4 bg-pencil-tip hover:bg-primary" name="house.svg" folder="icons/light" size="16px" />
                     </nuxt-link>
-                    <span>&gt;</span>
-                    <nuxt-link class="hover:text-violet" :to="localePath(`/panel/${route.params.brandID}/menu/editor`)">
+                    <span class="opacity-60">&gt;</span>
+                    <nuxt-link class="hover:text-primary" :to="localePath(`/panel/${route.params.brandID}/menu/editor`)">
                         {{ $t("panel.menu.Menu Editor") }}
                     </nuxt-link>
-                    <span>&gt;</span>
+                    <span class="opacity-60">&gt;</span>
                     <span>{{ $t("panel.menu.Edit Menu Item") }}</span>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                             <Icon class="w-5 h-5 bg-rose-300" name="trash-can.svg" folder="icons/light" size="20px" />
                         </button>
                     </li>
-                    <li class="relative flex items-center justify-center w-40 h-28 rounded-lg border-2 border-dashed border-neutral-400 hover:border-violet">
+                    <li class="relative flex items-center justify-center w-40 h-28 rounded-lg border-2 border-dashed border-neutral-400 hover:border-primary">
                         <div class="flex flex-col items-center gap-2">
                             <Icon class="w-4 h-4 bg-purple-300" name="plus.svg" folder="icons" size="16px" />
                             <small class="text-purple-300">{{ $t("panel.menu.Add Image") }}</small>
@@ -285,7 +285,7 @@
                         {{ $t("panel.Go Back") }}
                     </nuxt-link>
                     <button
-                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-primary text-white flex-shrink-0"
                         :class="{ 'opacity-50': saving }"
                         @click="save()"
                     >

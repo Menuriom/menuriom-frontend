@@ -23,7 +23,7 @@
                 </small>
             </div>
             <nuxt-link
-                class="btn relative flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary text-fgPrimary flex-shrink-0"
+                class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary shrink-0"
                 :to="localePath('/panel/brand/creation')"
                 v-if="canCreateNewBrand"
             >

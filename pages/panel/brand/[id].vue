@@ -34,7 +34,7 @@ aside li a.router-link-exact-active {
                     <img class="w-14 h-14 object-cover rounded-full border shadow-nr5 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                     <div class="flex flex-col gap-1 w-full">
                         <h4 class="font-semibold whitespace-nowrap text-ellipsis overflow-hidden w-36">{{ brand.name }}</h4>
-                        <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-28 text-violet">{{ brand.role }}</span>
+                        <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-28 text-primary">{{ brand.role }}</span>
                     </div>
                 </div>
                 <nav class="flex flex-col w-full p-2 lg:max-w-xs rounded-lg bg-pencil-tip text-white shadow-nr10">

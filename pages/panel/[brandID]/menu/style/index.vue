@@ -56,7 +56,7 @@
                             </div>
                         </template>
                         <div class="flex flex-col gap-2 overflow-hidden">
-                            <small class="w-full text-violet border border-neutral-500 border-opacity-25 rounded-md p-2">{{ $t("Coming soon") }}...</small>
+                            <small class="w-full text-primary border border-neutral-500 border-opacity-25 rounded-md p-2">{{ $t("Coming soon") }}...</small>
                         </div>
                     </Wrapper>
                     <SearchSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :searchOptions="mainMenuStyleOptions.searchOptions" />
