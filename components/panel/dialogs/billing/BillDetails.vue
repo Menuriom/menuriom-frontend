@@ -8,36 +8,38 @@
     <Dialog name="bill-details" boxClass="max-w-xl">
         <template #title>
             <div class="flex items-center gap-2 w-full">
-                <img class="w-8" src="~/assets/images/panel-icons/money-bill-transfer.png" alt="" />
+                <Icon class="w-9 h-9 gradient" name="money-bill-transfer.svg" folder="icons/duo" size="36px" />
                 <h3 class="text-2xl font-bold text-center">{{ $t("panel.billing.Bill Details") }}</h3>
             </div>
         </template>
-        <div class="flex flex-col gap-2 md:w-screen max-w-lg p-2 md:p-4 border bg-white text-dolphin rounded-lg shadow-nr25" v-if="bill.billNumber">
+        <div class="flex flex-col gap-4 md:w-screen max-w-lg p-2 md:p-4 bg-bgPrimary rounded-2xl shadow-inner" v-if="bill.billNumber">
             <div class="flex items-center justify-between gap-4">
                 <h2 class="font-bold shrink-0">{{ $t("panel.payment.Bill Info") }}</h2>
-                <span class="w-full h-0.5 bg-neutral-200 grow"></span>
+                <span class="w-full h-0.5 bg-bgSecondary grow"></span>
             </div>
             <div class="flex flex-col gap-2">
-                <span class="opacity-90 text-sm">{{ $t("panel.payment.Bill Number") }} : {{ bill.billNumber }}</span>
+                <span class="text-sm text-secondary">
+                    {{ $t("panel.payment.Bill Number") }} : <span class="text-fgPrimary">{{ bill.billNumber }}</span>
+                </span>
                 <small class="opacity-75 -mt-1">{{ bill.translation?.[locale]?.description || bill.description }}</small>
                 <div class="flex flex-wrap items-center justify-between gap-2">
                     <div class="flex flex-wrap items-center gap-2">
-                        <span class="text-sm opacity-75">{{ $t("panel.payment.Payable Price") }} :</span>
-                        <span class="text-lime-700">
+                        <span class="text-sm text-secondary">{{ $t("panel.payment.Payable Price") }} :</span>
+                        <span class="text-emerald-300 font-bold text-xl">
                             {{ Intl.NumberFormat(locale).format(bill.payablePrice) }}
-                            <span class="f-inter text-sm font-extralight text-black">{{ $t("pricing.Toman") }}</span>
+                            <span class="f-inter text-sm font-extralight text-fgPrimary">{{ $t("pricing.Toman") }}</span>
                         </span>
                     </div>
-                    <small class="bg-rose-300 bg-opacity-25 text-rose-800 p-1 px-3 rounded-lg" v-if="bill.status == 'notPaid'">
+                    <small class="text-rose-300 bg-opacity-10 bg-rose-300 p-1 px-3 rounded-lg" v-if="bill.status == 'notPaid'">
                         {{ $t("panel.payment.notPaid") }}
                     </small>
-                    <small class="bg-blue-300 bg-opacity-25 text-blue-800 p-1 px-3 rounded-lg" v-if="bill.status == 'pendingPayment'">
+                    <small class="text-blue-300 bg-opacity-10 bg-blue-300 p-1 px-3 rounded-lg" v-if="bill.status == 'pendingPayment'">
                         {{ $t("panel.payment.pendingPayment") }}
                     </small>
-                    <small class="bg-emerald-300 bg-opacity-25 text-emerald-800 p-1 px-3 rounded-lg" v-if="bill.status == 'paid'">
+                    <small class="text-emerald-300 bg-opacity-10 bg-emerald-300 p-1 px-3 rounded-lg" v-if="bill.status == 'paid'">
                         {{ $t("panel.payment.paid") }}
                     </small>
-                    <small class="bg-red-300 bg-opacity-25 text-red-800 p-1 px-3 rounded-lg" v-if="bill.status == 'canceled'">
+                    <small class="text-red-300 bg-opacity-10 bg-red-300 p-1 px-3 rounded-lg" v-if="bill.status == 'canceled'">
                         {{ $t("panel.payment.canceled") }}
                     </small>
                 </div>
@@ -49,7 +51,7 @@
         </div>
         <ul class="transactions-list flex flex-col gap-4 pb-2 overflow-auto" v-if="transactions.list.length">
             <li
-                class="flex flex-col items-center justify-between gap-2 p-4 bg-dolphin text-white rounded-lg shadow-nr25"
+                class="flex flex-col items-center justify-between gap-2 p-4 bg-bgSecondary bg-opacity-50 rounded-2xl shadow-mr15"
                 v-for="(transaction, i) in transactions.list"
                 :key="i"
             >
@@ -59,34 +61,34 @@
                 </div>
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-1 w-full">
                     <span class="text-sm opacity-75">{{ $t("panel.payment.Payment Status") }}</span>
-                    <b class="flex items-center gap-1 text-blue-400" v-if="transaction.status == 'pending'">
-                        <div class="bg-blue-500 w-5 h-5 rounded-full">
-                            <Icon class="w-5 h-5 bg-blue-50" name="Sand-watch.svg" folder="icons/basil" size="20px" />
+                    <b class="flex items-center gap-2 text-blue-300" v-if="transaction.status == 'pending'">
+                        <div class="bg-blue-700 w-4 h-4 rounded-full">
+                            <Icon class="w-4 h-4 bg-blue-50" name="Sand-watch.svg" folder="icons/basil" size="16px" />
                         </div>
                         {{ $t("panel.payment.pendingPayment") }}
                     </b>
-                    <b class="flex items-center gap-1 text-emerald-400" v-if="transaction.status == 'ok'">
-                        <div class="bg-emerald-500 w-5 h-5 rounded-full">
-                            <Icon class="w-5 h-5 bg-emerald-50" name="Check.svg" folder="icons/basil" size="24px" />
+                    <b class="flex items-center gap-2 text-emerald-300" v-if="transaction.status == 'ok'">
+                        <div class="bg-emerald-700 w-4 h-4 rounded-full">
+                            <Icon class="w-4 h-4 bg-emerald-50" name="Check.svg" folder="icons/basil" size="20px" />
                         </div>
                         {{ $t("panel.payment.done") }}
                     </b>
-                    <b class="flex items-center gap-1 text-rose-400" v-if="transaction.status == 'canceled'">
-                        <div class="bg-rose-500 w-5 h-5 rounded-full">
-                            <Icon class="w-5 h-5 bg-rose-50" name="Cross.svg" folder="icons/basil" size="24px" />
+                    <b class="flex items-center gap-2 text-rose-300" v-if="transaction.status == 'canceled'">
+                        <div class="bg-rose-700 w-4 h-4 rounded-full">
+                            <Icon class="w-4 h-4 bg-rose-50" name="Cross.svg" folder="icons/basil" size="20px" />
                         </div>
                         {{ $t("panel.payment.canceled") }}
                     </b>
-                    <b class="flex items-center gap-1 text-red-400" v-if="transaction.status == 'error'">
-                        <div class="bg-red-500 w-5 h-5 rounded-full">
-                            <Icon class="w-5 h-5 bg-red-50" name="Info-circle.svg" folder="icons/basil" size="22px" />
+                    <b class="flex items-center gap-2 text-red-300" v-if="transaction.status == 'error'">
+                        <div class="bg-red-700 w-4 h-4 rounded-full">
+                            <Icon class="w-4 h-4 bg-red-50" name="Info-circle.svg" folder="icons/basil" size="18px" />
                         </div>
                         {{ $t("panel.payment.error") }}
                     </b>
                 </div>
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-1 w-full">
                     <span class="text-sm opacity-75">{{ $t("panel.payment.Payment Method") }}</span>
-                    <span class="p-1 px-2 rounded-md bg-pencil-tip">{{ transaction.method }}</span>
+                    <span class="p-1 px-2 rounded-xl bg-pencil-tip">{{ transaction.method }}</span>
                 </div>
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-1 w-full">
                     <span class="text-sm opacity-75">{{ $t("panel.payment.Transaction Time") }}</span>
@@ -95,13 +97,13 @@
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-1 w-full" v-if="transaction.paidPrice">
                     <span class="text-sm opacity-75">{{ $t("panel.payment.Paid Amount") }}</span>
                     <div class="flex items-center gap-1">
-                        <span class="font-bold text-emerald-100 text-xl">{{ Intl.NumberFormat(locale).format(transaction.paidPrice) }}</span>
+                        <span class="font-bold text-secondary text-xl">{{ Intl.NumberFormat(locale).format(transaction.paidPrice) }}</span>
                         <span class="f-inter text-sm"> {{ $t("pricing.Toman") }} </span>
                     </div>
                 </div>
             </li>
             <Loading v-if="loadingTransactions" />
-            <button class="btn w-max p-2.5 py-1.5 ms-2 border border-neutral-500 rounded-md text-white text-xs" @click="loadMore()" v-if="!noMoreTransactions">
+            <button class="btn w-max p-3 hover:px-6 border border-bgSecondary rounded-xl text-fgPrimary text-xs" @click="loadMore()" v-if="!noMoreTransactions">
                 {{ $t("panel.Load More") }}
             </button>
             <small class="text-xs opacity-75" v-if="noMoreTransactions && transactions.list.length > 0">{{ $t("panel.End of the list") }}</small>

@@ -25,7 +25,7 @@ li:hover .icon {
             <img class="w-8 h-8 md:w-9 md:h-9 rounded-full object-contain shadow-nr15" :src="userStore.avatar" alt="" />
         </div>
         <transition name="slide-up" mode="out-in" appear>
-            <ul class="list absolute top-12 -end-10 md:-end-4 flex flex-col gap-1 p-3 bg-bgAccent text-fgPrimary shadow-mr35 rounded-2xl" v-if="open">
+            <ul class="list absolute top-14 -mt-0.5 -end-10 md:-end-4 flex flex-col gap-1 p-3 bg-bgAccent text-fgPrimary shadow-mr35 rounded-2xl" v-if="open">
                 <li class="flex flex-col w-full p-2">
                     <!-- TODO : make skeleton fallback for when users data is loading -->
                     <h3 class="text-sm font-bold capitalize">{{ `${userStore.name} ${userStore.family}` }}</h3>

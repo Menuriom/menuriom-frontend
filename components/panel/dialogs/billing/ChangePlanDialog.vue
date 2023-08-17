@@ -4,23 +4,23 @@
     <Dialog name="change-plan-dialog" boxClass="max-w-xl">
         <template #title>
             <div class="flex items-center gap-2 w-full">
-                <img class="w-8" src="~/assets/images/panel-icons/money-check-dollar-pen-light.png" alt="" />
+                <Icon class="w-9 h-9 gradient" name="money-check-dollar-pen.svg" folder="icons/duo" size="36px" />
                 <h3 class="text-2xl font-bold text-center">{{ $t("panel.billing.Upgrade Or Downgrade Plan") }}</h3>
             </div>
         </template>
         <small class="-mt-1 text-xs opacity-75"> {{ $t("panel.billing.You can change your plan type or payment period") }} </small>
         <div class="flex flex-col items-center gap-4 md:w-screen max-w-lg mt-4" ref="form">
-            <div class="relative flex items-center gap-2 w-full max-w-max p-1 py-2 rounded-md bg-neutral-300 text-black shadow-inner">
+            <div class="relative flex items-center gap-2 w-full max-w-max p-2 py-3 rounded-xl bg-bgSecondary shadow-inner">
                 <span
-                    class="absolute w-32 h-7 shadow-md bg-white rounded-md transition-all"
-                    :class="[paymentPeriod == 'monthly' ? 'start-1' : 'start-32 ms-3']"
+                    class="absolute w-32 h-7 shadow-mr15 shadow-neutral-500 bg-fgPrimary rounded-lg transition-all"
+                    :class="[paymentPeriod == 'monthly' ? 'start-2' : 'start-36 ']"
                 ></span>
                 <span class="relative flex items-center justify-center w-32 text-sm cursor-pointer" @click="paymentPeriod = 'monthly'">
-                    {{ $t("pricing.Monthly") }}
+                    <span :class="[paymentPeriod == 'monthly' ? 'text-bgPrimary' : 'text-fgPrimary']">{{ $t("pricing.Monthly") }}</span>
                 </span>
                 <div class="relative flex items-center justify-center gap-1 w-32 text-sm cursor-pointer" @click="paymentPeriod = 'yearly'">
-                    <span>{{ $t("pricing.Annual") }}</span>
-                    <small class="f-inter px-2 rounded-full whitespace-nowrap text-[11px] bg-pencil-tip text-purple-200"> 10% Off </small>
+                    <span :class="[paymentPeriod == 'yearly' ? 'text-bgPrimary' : 'text-fgPrimary']">{{ $t("pricing.Annual") }}</span>
+                    <small class="f-inter px-2 rounded-full whitespace-nowrap text-[10px] bg-black text-purple-200"> 10% Off </small>
                 </div>
             </div>
 
@@ -30,14 +30,14 @@
             </div>
             <ul class="flex flex-col gap-2 w-full">
                 <li
-                    class="flex items-center justify-center w-full p-0.5 rounded-xl shadow-nr15 cursor-pointer"
-                    :class="[plan._id === selectedPlan._id ? 'gradient' : 'bg-neutral-600']"
+                    class="flex items-center justify-center w-full p-1 rounded-2xl cursor-pointer"
+                    :class="[plan._id === selectedPlan._id ? 'gradient' : 'bg-transparent']"
                     v-for="(plan, i) in purchasablePlans"
                     :key="i"
                     @click="changeSelectedPlan(plan._id)"
                 >
-                    <div class="flex items-center gap-4 p-4 bg-neutral-800 rounded-xl w-full">
-                        <img class="bg-dolphin p-2 rounded-md w-14" :src="plan.icon" :alt="plan.name" />
+                    <div class="flex items-center gap-4 p-4 bg-bgPrimary bg-opacity-80 rounded-2xl w-full">
+                        <img class="w-14 aspect-square bg-fgPrimary bg-opacity-10 p-2 rounded-xl shadow-nr15" :src="plan.icon" :alt="plan.name" />
                         <div class="flex flex-col justify-center gap-1">
                             <div class="flex flex-wrap items-center gap-2">
                                 <h3
@@ -46,18 +46,15 @@
                                 >
                                     {{ plan.translation?.[locale]?.name || plan.name }}
                                 </h3>
-                                <small
-                                    class="px-2 p-0.5 rounded-md border-2 border-emerald-100 border-opacity-50 text-emerald-100 text-xs"
-                                    v-if="currentPlan.plan._id === plan._id"
-                                >
+                                <small class="px-2 p-1 rounded-lg bg-emerald-100 bg-opacity-80 text-bgPrimary text-xs" v-if="currentPlan.plan._id === plan._id">
                                     {{ $t("panel.billing.Current Active Plan") }}
                                 </small>
                             </div>
                             <p class="text-xs text-white opacity-75">{{ plan.translation?.[locale]?.desc || plan.desc }}</p>
                         </div>
                         <span
-                            class="flex items-center justify-center w-5 h-5 ms-auto border-2 border-baby-blue rounded-full shrink-0"
-                            :class="[plan._id === selectedPlan._id ? 'bg-baby-blue border-baby-blue' : 'border-neutral-500']"
+                            class="flex items-center justify-center w-5 h-5 ms-auto border-2 border-secondary rounded-full shrink-0"
+                            :class="[plan._id === selectedPlan._id ? 'bg-secondary border-secondary' : 'border-bgSecondary']"
                         >
                             <Icon class="w-5 h-5 bg-neutral-800" name="Check.svg" folder="icons/basil" size="24px" v-if="plan._id === selectedPlan._id" />
                         </span>
@@ -69,11 +66,11 @@
                 <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Payment Details") }}</h3>
                 <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
             </div>
-            <div class="flex flex-col gap-4 p-4 w-full bg-neutral-800 rounded-xl" v-if="!nothingChanged">
+            <div class="flex flex-col gap-4 p-4 w-full bg-bgSecondary bg-opacity-30 rounded-xl" v-if="!nothingChanged">
                 <div class="flex flex-wrap items-center justify-between gap-2 w-full">
                     <h3>{{ $t("panel.billing.Selected Plan") }}:</h3>
                     <div class="flex flex-wrap items-center gap-2">
-                        <b class="gradient-text text-2xl">{{ selectedPlan.translation?.[locale]?.name || selectedPlan.name }}</b>
+                        <b class="f-inter gradient-text text-xl font-extrabold">{{ selectedPlan.translation?.[locale]?.name || selectedPlan.name }}</b>
                         <span class="p-1 px-3 rounded-md bg-dolphin text-sm">
                             {{ paymentPeriod === "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}
                         </span>
@@ -82,22 +79,22 @@
                 <div class="flex flex-wrap items-center justify-between gap-2 w-full" v-if="calculatedPrice > 0">
                     <h3>{{ $t("panel.billing.Payable Price") }}:</h3>
                     <div class="flex flex-wrap items-center gap-2">
-                        <b class="text-emerald-100 text-2xl">{{ Intl.NumberFormat(locale).format(calculatedPrice) }}</b>
+                        <b class="text-emerald-200 text-2xl">{{ Intl.NumberFormat(locale).format(calculatedPrice) }}</b>
                         <span class="text-sm"> {{ $t("pricing.Toman") }} </span>
                     </div>
                 </div>
                 <div class="text-center" v-else>
-                    <span class="text-sm text-emerald-100"> {{ $t("panel.billing.No Payment Required") }} </span>
+                    <span class="text-sm text-emerald-200"> {{ $t("panel.billing.No Payment Required") }} </span>
                 </div>
                 <ul class="flex flex-col gap-2 w-full" v-if="alerts.list.length > 0">
                     <li class="flex w-full" v-for="(alert, i) in alerts.list" :key="i">
                         <small
-                            class="text-sm bg-opacity-20 p-2 border rounded-md w-full"
+                            class="text-sm bg-opacity-20 p-2 rounded-xl w-full"
                             :class="{
-                                'text-blue-200 bg-blue-900 border-blue-900': alert.type === 'info',
-                                'text-emerald-200 bg-emerald-900 border-emerald-900': alert.type === 'success',
-                                'text-red-200 bg-red-900 border-red-900': alert.type === 'error',
-                                'text-orange-200 bg-orange-900 border-orange-900': alert.type === 'warning',
+                                'text-blue-200 bg-blue-400 ': alert.type === 'info',
+                                'text-emerald-200 bg-emerald-400 ': alert.type === 'success',
+                                'text-red-200 bg-red-400 ': alert.type === 'error',
+                                'text-orange-200 bg-orange-400 ': alert.type === 'warning',
                             }"
                         >
                             {{ alert.text }}
@@ -107,7 +104,7 @@
                 <small class="text-xs opacity-75" v-if="remainingDays <= 5">
                     {{ $t("panel.billing.Any unpaid renewal bill for your current plan will be canceled upon successful plan change") }}
                 </small>
-                <hr class="w-full opacity-30" />
+                <hr class="w-full border-bgSecondary" />
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
@@ -126,7 +123,7 @@
                             <span :value="option.value">{{ option.name }}</span>
                         </div>
                     </SelectDropDown>
-                    <button class="btn p-3 rounded bg-primary grow" :class="{ 'opacity-75': loading }" :disabled="loading" @click="changePlan()">
+                    <button class="btn p-3 hover:px-6 rounded-xl bg-primary grow" :class="{ 'opacity-75': loading }" :disabled="loading" @click="changePlan()">
                         <span v-if="!loading && calculatedPrice > 0"> {{ $t("panel.billing.Head To Payment Gateway") }} </span>
                         <span v-else-if="!loading && calculatedPrice === 0"> {{ $t("panel.billing.Change Plan") }} </span>
                         <Loading v-else />

@@ -67,7 +67,7 @@ aside > div {
 
 <template>
     <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 shrink-0" :class="{ close: !panelStore.sideMenuOpen }">
-        <div class="flex flex-col gap-4 h-full p-4 bg-bgSecondary bg-opacity-40 rounded-2xl shadow-mr35">
+        <div class="flex flex-col gap-4 h-full p-4 bg-bgAccent rounded-2xl shadow-mr35">
             <nuxt-link
                 class="flex items-center gap-2 p-2 rounded-xl hover:bg-neutral-600 bg-bgSecondary cursor-pointer transition-all group"
                 :to="localePath(`/panel/`)"

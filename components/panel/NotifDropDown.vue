@@ -8,7 +8,7 @@
         </div>
         <transition name="slide-up" mode="out-in" appear>
             <div
-                class="absolute top-12 -end-10 md:-end-4 flex flex-col gap-3 w-screen max-w-screen-2xs p-3 bg-bgAccent text-white shadow-mr35 rounded-2xl"
+                class="absolute top-12 mt-1 -end-10 md:-end-4 flex flex-col gap-3 w-screen max-w-screen-2xs p-3 bg-bgAccent text-white shadow-mr35 rounded-2xl"
                 v-if="open"
             >
                 <div class="flex items-center justify-between gap-2 w-full p-1 px-2">

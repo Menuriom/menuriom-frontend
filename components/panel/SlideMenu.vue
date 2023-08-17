@@ -1,7 +1,7 @@
 <style scoped>
 menu {
     width: calc(100% - 1rem);
-    border: 1px solid theme("colors.neutral.700");
+    /* border: 1px solid theme("colors.neutral.700"); */
     box-shadow: inset theme("boxShadow.nr35");
 }
 </style>

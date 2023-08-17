@@ -15,7 +15,7 @@
         <header class="relative flex flex-wrap items-center justify-between gap-4">
             <div class="relative flex flex-col gap-2">
                 <div class="flex items-center gap-2">
-                    <img class="w-9" src="~/assets/images/panel-icons/brand.png" alt="" />
+                    <Icon class="w-9 h-9 gradient" name="id-badge.svg" folder="icons/duo" size="36px" />
                     <h1 class="text-3xl md:text-4xl/tight font-bold">{{ $t("panel.brands.Your Brands") }}</h1>
                 </div>
                 <small class="text-xs md:text-sm opacity-75">

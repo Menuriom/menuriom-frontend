@@ -27,7 +27,7 @@ span {
 <template>
     <div class="flex flex-col gap-1">
         <div
-            class="wrapper relative flex bg-neutral-700 dark:bg-black2 text-white rounded-md"
+            class="wrapper relative flex bg-bgSecondary bg-opacity-50 dark:bg-black2 text-white rounded-xl"
             :class="{ error: !!error, 'input-box-shadow': !!shadow }"
             ref="dropdown"
         >
@@ -68,14 +68,14 @@ span {
             </span>
             <transition :name="openDirection === 'top' ? 'slide-down' : 'slide-up'" appear>
                 <ul
-                    class="list scroll-thin absolute w-full bg-dolphin border-2 border-primary rounded-md shadow-lg z-10"
+                    class="list scroll-thin absolute w-full bg-bgSecondary rounded-xl shadow-nr25 z-10"
                     :class="[openDirection === 'top' ? 'bottom-full mb-2' : 'top-full mt-2']"
                     tabindex="0"
                     v-show="open"
                 >
                     <li
-                        class="p-2 text-sm opacity-90 hover:bg-neutral-600 cursor-pointer"
-                        :class="{ 'bg-neutral-500': option.value == selectedOption.value }"
+                        class="p-2 text-sm hover:bg-secondary hover:bg-opacity-50 cursor-pointer"
+                        :class="{ 'bg-fgPrimary bg-opacity-10': option.value == selectedOption.value }"
                         v-for="(option, i) in options"
                         :key="i"
                         @click="selectOption(option)"

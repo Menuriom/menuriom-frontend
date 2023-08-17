@@ -23,7 +23,7 @@
                 <div class="flex flex-col gap-6 w-full max-w-sm h-full p-6 md:p-8 rounded-3xl bg-fgPrimary text-bgPrimary">
                     <!-- TODO: calculate prices base on priceType -->
                     <div class="flex items-center gap-2">
-                        <img class="w-10" :src="item.icon" :alt="item.title" />
+                        <img class="w-12 p-2 rounded-xl bg-bgSecondary bg-opacity-10" :src="item.icon" :alt="item.title" />
                         <h3 class="f-inter text-2xl font-bold">{{ item.title }}</h3>
                     </div>
                     <p class="text-sm">{{ item.desc }}</p>
