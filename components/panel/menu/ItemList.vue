@@ -261,7 +261,7 @@
                     <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
                         {{ $t("panel.brands.This action cannot be reversed") }}
                     </small>
-                    <hr class="w-full opacity-40" />
+                    <hr class="w-full opacity-20" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>

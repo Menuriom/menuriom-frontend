@@ -146,7 +146,7 @@
                         v-if="checkPermissions(['main-panel.branches.add'], brand)"
                     >
                         <span class="flex items-center gap-2" v-if="!saving">
-                            <Icon class="w-3 h-3 bg-fgPrimary" name="plus.svg" folder="icons" size="12px" />
+                            <Icon class="w-4 h-4 bg-fgPrimary" name="pen-to-square.svg" folder="icons/light" size="16px" />
                             {{ $t("panel.branches.Edit Details") }}
                         </span>
                         <Loading v-else />

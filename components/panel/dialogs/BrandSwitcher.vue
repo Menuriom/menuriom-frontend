@@ -31,7 +31,7 @@
                     </li>
                 </div>
             </ul>
-            <hr class="w-full opacity-40" />
+            <hr class="w-full opacity-20" />
             <nuxt-link
                 class="btn flex items-center justify-center gap-2 p-2.5 rounded-lg text-sm border-2 border-white"
                 :to="localePath('/panel/brands')"
