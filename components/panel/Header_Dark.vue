@@ -39,7 +39,7 @@ header {
                 <img class="h-5 md:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
             </nuxt-link>
         </div>
-        <div class="flex items-center gap-3 flex-shrink-0">
+        <div class="flex items-center gap-3 shrink-0">
             <a
                 class="hidden md:flex hover:bg-bgSecondary p-0.5 hover:px-2 transition-all rounded-full"
                 :href="localePath('/help-center')"

@@ -105,8 +105,8 @@
                                 </nuxt-link>
                             </div>
                             <nuxt-link class="btn rounded-full shrink-0" :to="localePath(`/panel/${brand._id}`)" :title="$t(`panel.brands.Go To Dashboard`)">
-                                <img class="w-28 h-28 rounded-2xl object-cover shadow-nr15 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
-                                <img class="w-28 h-28 rounded-2xl object-cover shadow-nr15 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                                <img class="w-28 h-28 rounded-2xl object-cover shadow-nr15 shrink-0" :src="brand.logo" v-if="brand.logo" />
+                                <img class="w-28 h-28 rounded-2xl object-cover shadow-nr15 shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                             </nuxt-link>
                         </div>
                         <div class="flex flex-wrap items-center justify-between gap-2 w-full grow">
@@ -176,7 +176,7 @@
             </div>
             <Loading v-if="loading" />
             <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
-                <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                <Icon class="icon w-4 h-4 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
         </section>
 
@@ -191,12 +191,12 @@
                         </p>
                     </div>
                     <small class="flex items-center gap-2 text-sm text-red-200 bg-red-700 bg-opacity-10 p-4 rounded-xl shadow-inner">
-                        <Icon class="icon w-5 h-5 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="20px" />
+                        <Icon class="icon w-5 h-5 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="20px" />
                         {{ $t("panel.brands.This action cannot be reversed") }}
                     </small>
                     <hr class="w-full border-neutral-500 border-opacity-40" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
-                        <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
                         <button class="btn w-full p-3 hover:px-6 rounded-xl bg-bgSecondary" :disabled="deleting" @click="panelStore.closePopUp()">
@@ -224,12 +224,12 @@
                         </p>
                     </div>
                     <small class="flex items-center gap-2 text-sm text-red-200 bg-red-700 bg-opacity-10 p-4 rounded-xl shadow-inner">
-                        <Icon class="icon w-5 h-5 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="20px" />
+                        <Icon class="icon w-5 h-5 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="20px" />
                         {{ $t("panel.brands.You need new invitation to join this brand again") }}
                     </small>
                     <hr class="w-full border-neutral-500 border-opacity-40" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
-                        <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
                         <button class="btn w-full p-3 hover:px-6 rounded-xl bg-bgSecondary" :disabled="leaving" @click="panelStore.closePopUp()">

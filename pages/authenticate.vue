@@ -49,7 +49,7 @@
                             :error="errorField == 'email' ? responseMessage : ''"
                         />
                         <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                            <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
                         <button
                             class="flex items-center justify-center w-full p-4 rounded-xl bg-primary hover:scale-x-105 hover:shadow-mr35 transition-all"
@@ -86,7 +86,7 @@
                             :error="errorField == 'code' ? responseMessage : ''"
                         />
                         <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                            <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
                         <button
                             class="flex items-center justify-center w-full p-4 rounded-xl bg-primary hover:scale-x-105 hover:shadow-mr35 transition-all"
@@ -141,7 +141,7 @@
                             :error="errorField == 'mobile' ? responseMessage : ''"
                         />
                         <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                            <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
                         <button
                             class="flex items-center justify-center w-full p-4 rounded-xl bg-primary hover:scale-x-105 hover:shadow-mr35 transition-all"

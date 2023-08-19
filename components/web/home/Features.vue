@@ -13,7 +13,7 @@
         <hr class="lg:hidden w-full h-1 mb-2 bg-primary border-none -my-16" />
 
         <div class="relative flex flex-col-reverse lg:flex-row items-center lg:items-start justify-center gap-8 lg:gap-24 xl:gap-40 w-full lg:mt-10 z-2">
-            <SpecialItems class="flex-shrink-0" />
+            <SpecialItems class="shrink-0" />
             <div class="flex flex-col items-start gap-6 max-w-xl p-6 bg-pencil-tip text-zinc-100 rounded-xl">
                 <img class="h-10" src="~/assets/images/custom-icons/light/fire.png" alt="fire" />
                 <h3 class="f-inter text-4xl font-bold">Highlight Specific Items In Your Menu</h3>

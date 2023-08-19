@@ -93,7 +93,7 @@
                     </small>
                     <hr class="w-full opacity-20" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
-                        <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
                         <button class="btn w-full p-3 rounded bg-dolphin" :disabled="deleting" @click="panelStore.closePopUp()">

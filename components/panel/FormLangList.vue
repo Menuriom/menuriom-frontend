@@ -19,7 +19,7 @@
         <small class="text-xs opacity-75 -mt-2">{{ $t("panel.languages.By selecting different language, you can translate text fields") }}</small>
         <ul class="flex lg:flex-col gap-2 w-full pb-2 md:pb-0 overflow-auto" v-if="!loadingSettings">
             <li
-                class="flex items-center justify-between gap-3 p-3 rounded-xl transition-all cursor-pointer flex-shrink-0"
+                class="flex items-center justify-between gap-3 p-3 rounded-xl transition-all cursor-pointer shrink-0"
                 :class="[formLang == 'default' ? 'bg-fgPrimary text-bgPrimary' : 'bg-bgSecondary bg-opacity-50']"
                 @click="$emit('update:formLang', 'default')"
             >
@@ -29,7 +29,7 @@
                 </div>
             </li>
             <li
-                class="flex items-center justify-between gap-3 p-3 rounded-xl transition-all cursor-pointer flex-shrink-0"
+                class="flex items-center justify-between gap-3 p-3 rounded-xl transition-all cursor-pointer shrink-0"
                 :class="[formLang == lang ? 'bg-fgPrimary text-bgPrimary' : 'bg-bgSecondary bg-opacity-50']"
                 v-for="(lang, i) in settings.languages"
                 :key="i"
@@ -44,7 +44,7 @@
         <Loading v-else />
         <small class="text-xs opacity-75" v-if="!loadingSettings && settings.languages.length == 0">{{ $t("panel.needMoreLang") }}</small>
         <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!loadingSettings && errorField === '' && responseMessage !== ''">
-            <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+            <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
         </small>
     </div>
 </template>

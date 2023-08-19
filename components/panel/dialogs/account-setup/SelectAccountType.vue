@@ -18,7 +18,7 @@
             <ul class="flex flex-col gap-3 w-full">
                 <div class="cursor-pointer rounded-2xl hover:bg-primary p-1 transition-all">
                     <li class="flex gap-3 w-full p-3 rounded-2xl bg-fgPrimary text-bgAccent" @click="selectOption('store-owner')">
-                        <div class="flex items-center justify-center w-16 h-16 p-1 rounded-xl bg-neutral-100 flex-shrink-0">
+                        <div class="flex items-center justify-center w-16 h-16 p-1 rounded-xl bg-neutral-100 shrink-0">
                             <img class="w-6" src="~/assets/images/panel-icons/store-dark.png" alt="" />
                         </div>
                         <div class="flex flex-col gap-1 flex-grow">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="cursor-pointer rounded-2xl hover:bg-primary p-1 transition-all">
                     <li class="flex gap-3 w-full p-3 rounded-2xl bg-fgPrimary text-bgAccent" @click="selectOption('staff-member')">
-                        <div class="flex items-center justify-center w-16 h-16 p-1 rounded-xl bg-neutral-100 flex-shrink-0">
+                        <div class="flex items-center justify-center w-16 h-16 p-1 rounded-xl bg-neutral-100 shrink-0">
                             <img class="w-6" src="~/assets/images/panel-icons/user-group-dark.png" alt="" />
                         </div>
                         <div class="flex flex-col gap-1 flex-grow">

@@ -23,12 +23,12 @@ input::placeholder {
 <template>
     <div class="flex flex-col gap-1">
         <div
-            class="wrapper relative flex items-center p-2 gap-2 bg-white text-pencil-tip rounded-md"
+            class="wrapper relative flex items-center p-2 gap-2 bg-bgSecondary bg-opacity-60 text-fgPrimary rounded-xl"
             :class="{ 'input-box-shadow': !!shadow }"
             @click="focus()"
         >
             <button class="flex items-center justify-center p-1 rounded-md shrink-0 cursor-pointer" @click="$emit(`search`)">
-                <Icon class="icon w-5 h-5 gradient shrink-0" name="search.svg" folder="icons/light" size="18px" />
+                <Icon class="icon w-5 h-5 gradient shrink-0" name="search.svg" folder="icons/tabler" size="20px" />
             </button>
             <input
                 ref="input"
@@ -43,11 +43,11 @@ input::placeholder {
                 @blur="isFocused = false"
             />
             <button
-                class="flex items-center justify-center bg-neutral-200 p-1 rounded-md shrink-0 cursor-pointer"
+                class="btn flex items-center justify-center p-1 hover:px-2 bg-fgPrimary bg-opacity-10 hover:bg-opacity-20 rounded-lg shrink-0 cursor-pointer"
                 v-if="modelValue"
                 @click="$emit(`clear:search`)"
             >
-                <Icon class="icon w-5 h-5 bg-dolphin" name="Cross.svg" folder="icons/basil" size="24px" />
+                <Icon class="icon w-4 h-4 bg-secondary" name="Cross.svg" folder="icons/basil" size="22px" />
             </button>
         </div>
     </div>

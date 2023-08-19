@@ -109,7 +109,7 @@
             <small class="text-xs opacity-75" v-if="noMoreTransactions && transactions.list.length > 0">{{ $t("panel.End of the list") }}</small>
         </ul>
         <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loadingTransactions && errorField === 'data' && responseMessage !== ''">
-            <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+            <Icon class="icon w-4 h-4 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
         </small>
         <div class="flex flex-col items-center gap-4 w-full my-10" v-if="!loadingTransactions && !transactions.list.length">
             <p class="text-sm opacity-50">{{ $t("panel.billing.There is no transactions for this bill") }}</p>

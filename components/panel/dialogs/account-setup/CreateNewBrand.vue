@@ -21,7 +21,7 @@
                     </h4>
                     <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4">
                         <div
-                            class="relative flex flex-col items-start justify-center gap-2 w-32 h-32 rounded-full hover:border-2 border-secondary bg-bgSecondary bg-opacity-50 flex-shrink-0"
+                            class="relative flex flex-col items-start justify-center gap-2 w-32 h-32 rounded-full hover:border-2 border-secondary bg-bgSecondary bg-opacity-50 shrink-0"
                         >
                             <img class="w-full h-full rounded-full object-contain" :src="logoBlob" v-if="logoBlob" />
                             <div class="flex flex-col items-center justify-center gap-2 w-full" v-else>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === 'logo' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <div class="flex flex-col gap-4 p-4 w-full rounded-2xl bg-bgPrimary bg-opacity-90 shadow-inner">
                     <h4 class="flex items-center gap-2">
@@ -86,7 +86,7 @@
                     />
                 </div>
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <div class="flex gap-2 w-full">
                     <button class="btn p-3 px-6 hover:px-10 text-xs rounded-xl bg-bgSecondary" :disabled="loading" @click="back()">

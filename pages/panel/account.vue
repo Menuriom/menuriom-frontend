@@ -38,13 +38,13 @@ aside li a.router-link-exact-active {
             <aside class="flex flex-col gap-4 w-full lg:max-w-xs">
                 <nav class="flex flex-col w-full p-2 lg:max-w-xs rounded-lg bg-pencil-tip text-white shadow-nr10">
                     <ul class="flex lg:flex-col gap-2 p-2 w-full overflow-auto">
-                        <li class="flex items-center text-sm flex-shrink-0">
+                        <li class="flex items-center text-sm shrink-0">
                             <nuxt-link class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800" :to="localePath(`/panel/account/profile`)">
                                 <img class="w-5" src="~/assets/images/panel-icons/user-edit.png" alt="" />
                                 {{ $t("panel.account.Profile") }}
                             </nuxt-link>
                         </li>
-                        <li class="flex items-center text-sm flex-shrink-0">
+                        <li class="flex items-center text-sm shrink-0">
                             <nuxt-link
                                 class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800"
                                 :to="localePath(`/panel/account/invite-list`)"
@@ -54,7 +54,7 @@ aside li a.router-link-exact-active {
                             </nuxt-link>
                         </li>
                         <hr class="my-2 opacity-30" />
-                        <li class="flex items-center text-sm flex-shrink-0">
+                        <li class="flex items-center text-sm shrink-0">
                             <nuxt-link
                                 class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800"
                                 :to="localePath(`/panel/account/notification-settings`)"
@@ -63,7 +63,7 @@ aside li a.router-link-exact-active {
                                 {{ $t("panel.account.Notification Settings") }}
                             </nuxt-link>
                         </li>
-                        <li class="flex items-center text-sm flex-shrink-0">
+                        <li class="flex items-center text-sm shrink-0">
                             <nuxt-link
                                 class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800"
                                 :to="localePath(`/panel/account/transactions`)"
@@ -72,7 +72,7 @@ aside li a.router-link-exact-active {
                                 {{ $t("panel.account.Transactions") }}
                             </nuxt-link>
                         </li>
-                        <li class="flex items-center text-sm flex-shrink-0">
+                        <li class="flex items-center text-sm shrink-0">
                             <nuxt-link class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800" :to="localePath(`/panel/account/sessions`)">
                                 <img class="w-5" src="~/assets/images/panel-icons/laptop-mobile.png" alt="" />
                                 {{ $t("panel.account.Sessions") }}

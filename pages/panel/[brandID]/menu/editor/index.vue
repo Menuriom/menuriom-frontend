@@ -16,14 +16,14 @@
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white shrink-0"
                     :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/style`)"
                 >
                     <Icon class="w-5 h-5 bg-black" name="brush.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.menu.Edit Menu Style") }}
                 </nuxt-link>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
                 >
                     <Icon class="w-5 h-5 bg-black" name="book-open.svg" folder="icons/light" size="20px" />
@@ -57,7 +57,7 @@
             <header class="flex flex-wrap items-center justify-between gap-4">
                 <h2 class="text-xl md:text-2xl/tight font-bold">{{ $t("panel.menu.Categories") }}</h2>
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-primary text-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-primary text-white shrink-0"
                     :to="localePath(`/panel/${route.params.brandID}/menu/category/creation`)"
                 >
                     <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
@@ -73,7 +73,7 @@
             <header class="flex flex-wrap items-center justify-between gap-4">
                 <h2 class="text-xl md:text-2xl/tight font-bold">{{ $t("panel.menu.Items") }}</h2>
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-primary text-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-primary text-white shrink-0"
                     :to="localePath(`/panel/${route.params.brandID}/menu/item/creation`)"
                 >
                     <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />

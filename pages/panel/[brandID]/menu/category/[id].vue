@@ -124,7 +124,7 @@
                 </small>
                 <hr class="w-full opacity-20" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <div class="flex flex-wrap items-center gap-2" v-if="saving && percentage > 0">
                     <small>{{ $t("panel.Uploading") }}</small>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="flex flex-wrap items-center gap-4">
                     <nuxt-link
-                        class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-lg border-2 border-neutral-300 flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-lg border-2 border-neutral-300 shrink-0"
                         :to="localePath(`/panel/${route.params.brandID}/menu/editor`)"
                     >
                         <Icon
@@ -147,7 +147,7 @@
                         {{ $t("panel.Go Back") }}
                     </nuxt-link>
                     <button
-                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-primary text-white flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-primary text-white shrink-0"
                         :class="{ 'opacity-50': saving }"
                         :disabled="saving"
                         @click="save()"

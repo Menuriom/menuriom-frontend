@@ -154,7 +154,7 @@
                     </button>
                 </div>
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === 'variants' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <ul class="flex flex-col gap-4">
                     <li class="flex flex-wrap md:flex-nowrap items-center gap-2" v-for="(variant, i) in variants" :key="i">
@@ -167,7 +167,7 @@
                             v-model="variants[i].price"
                         />
                         <button
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer flex-shrink-0"
+                            class="flex items-center gap-2 p-2 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer shrink-0"
                             @click="variants.splice(i, 1)"
                         >
                             <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
@@ -262,7 +262,7 @@
                 <SideItemsList v-model:sideItemList="sideItemList" />
                 <hr class="w-full opacity-20" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <div class="flex flex-wrap items-center gap-2" v-if="saving && percentage > 0">
                     <small>{{ $t("panel.Uploading") }}</small>
@@ -272,7 +272,7 @@
                 </div>
                 <div class="flex flex-wrap items-center gap-4">
                     <nuxt-link
-                        class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-lg border-2 border-neutral-300 flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-lg border-2 border-neutral-300 shrink-0"
                         :to="localePath(`/panel/${route.params.brandID}/menu/editor`)"
                     >
                         <Icon
@@ -285,7 +285,7 @@
                         {{ $t("panel.Go Back") }}
                     </nuxt-link>
                     <button
-                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-primary text-white flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-primary text-white shrink-0"
                         :class="{ 'opacity-50': saving }"
                         @click="save()"
                     >

@@ -39,7 +39,7 @@
                     />
                 </div>
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <button class="btn w-full p-3 hover:px-6 rounded-xl bg-primary" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
                     <span v-if="!loading"> {{ $t("auth.Continue") }} </span>

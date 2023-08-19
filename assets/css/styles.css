@@ -186,11 +186,12 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
 /* ===================================================================== */
 
 .rotate-pop {
-    animation: rotate-pop .5s ease;
+    animation: rotate-pop .75s ease;
 }
 @keyframes rotate-pop {
-    0% { transform: rotateZ(0) scale(0); }
-    100% { transform: rotateZ(720deg) scale(1); }
+    0% { transform: rotate(150deg) scale(0); }
+    50% { transform: rotate(-10deg) scale(1.3); }
+    100% { transform: scale(1); }
 }
 
 .down-pop {

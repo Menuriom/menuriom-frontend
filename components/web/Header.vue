@@ -43,7 +43,7 @@ nav {
 
 <template>
     <header ref="header" class="fixed flex items-center justify-between gap-4 rounded-2xl mt-2 md:mt-4 p-2 max-w-screen-2xl bg-bgAccent shadow-mr25 z-20">
-        <nuxt-link class="flex items-center gap-2 overflow-hidden flex-shrink-0" :to="localePath('/')">
+        <nuxt-link class="flex items-center gap-2 overflow-hidden shrink-0" :to="localePath('/')">
             <div class="rounded-lg p-0.5 md:p-1 bg-gradient-to-t from-primary to-secondary">
                 <img class="relative h-8 rounded-md" src="/logos/logo9-dark.webp" title="Menuriom" alt="Menuriom" />
             </div>
@@ -106,7 +106,7 @@ nav {
             </nav>
         </transition>
 
-        <div class="flex items-center gap-2 xl:gap-4 flex-shrink-0">
+        <div class="flex items-center gap-2 xl:gap-4 shrink-0">
             <span class="w-0.5 h-7 -ms-4 hidden lg:flex bg-fgPrimary opacity-30"></span>
             <nuxt-link
                 class="link hidden md:flex p-2 hover:px-4 rounded-lg hover:bg-bgSecondary hover:text-secondary transition-all"

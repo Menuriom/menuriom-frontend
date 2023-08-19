@@ -60,7 +60,7 @@ input::placeholder {
             </span>
         </div>
         <small class="flex items-start gap-0.5 text-xs text-rose-300" v-if="!!error">
-            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ error }}
+            <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ error }}
         </small>
     </div>
 </template>

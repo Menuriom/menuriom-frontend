@@ -37,7 +37,7 @@
                 </li>
             </ul>
             <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!accepting && errorField === '' && responseMessage !== ''">
-                <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
             <button
                 class="btn w-full text-sm p-3 rounded-xl bg-primary"

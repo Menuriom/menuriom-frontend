@@ -1,21 +1,21 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full" ref="form">
+    <div class="flex flex-col gap-6 w-full" ref="form">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-1">
+            <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
-                    <img class="w-9" src="~/assets/images/panel-icons/user-group-dark.png" alt="" />
+                    <Icon class="w-9 h-9 gradient" name="user-group.svg" folder="icons/duo" size="36px" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.staff.Staff Members") }}</h1>
                 </div>
-                <small class="hidden sm:flex text-sm">
+                <small class="hidden sm:flex text-sm opacity-75">
                     {{ $t("panel.staff.Invite new staff to your team and manage their access") }}
                     <!-- TODO : add i icon next to description of any page so that by clicking on it a pop-up opens and shows the general guide for the page -->
                 </small>
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md border bg-white flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-fgPrimary text-bgPrimary shrink-0"
                     @click="panelStore.openPopUp('sent-invites')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
@@ -23,11 +23,11 @@
                     {{ $t("panel.side-menu.Sent Invites") }}
                 </button>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-primary text-white border border-transparent flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary text-fgPrimary shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
-                    <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
+                    <Icon class="w-3 h-3 bg-fgPrimary" name="plus.svg" folder="icons" size="12px" />
                     {{ $t("panel.staff.Invite Members") }}
                 </button>
             </div>
@@ -52,19 +52,25 @@
                 </SelectDropDown>
             </label>
         </div>
-        <hr class="w-full border-gray-300 opacity-50" />
-        <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
+        <hr class="w-full border-bgSecondary" />
+        <ul class="scroll-thin flex items-center gap-2 w-full -my-3 overflow-auto shrink-0">
             <li
-                class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-md shrink-0 cursor-pointer"
-                :class="{ 'border-dolphin bg-pencil-tip text-white': selectedBranch === '' }"
+                class="btn flex items-center gap-2 text-sm p-2 px-3 hover:px-5 border-2 rounded-xl shrink-0 bg-bgAccent cursor-pointer"
+                :class="[selectedBranch === '' ? 'bg-bgSecondary border-primary border-opacity-75' : 'border-bgSecondary opacity-80']"
                 @click="selectedBranch = ''"
             >
-                <Icon class="w-4 h-4 shrink-0" :class="[selectedBranch === '' ? 'bg-white' : 'bg-black']" name="Stack.svg" folder="icons/basil" size="20px" />
+                <Icon
+                    class="w-4 h-4 shrink-0"
+                    :class="[selectedBranch === '' ? 'bg-primary  shadow-md shadow-primary' : 'bg-fgPrimary']"
+                    name="Stack.svg"
+                    folder="icons/basil"
+                    size="20px"
+                />
                 {{ $t("panel.staff.All Branches") }}
             </li>
             <li
-                class="text-sm p-1 px-2 border-2 rounded-md shrink-0 cursor-pointer"
-                :class="{ 'border-dolphin bg-pencil-tip text-white': selectedBranch === branch._id }"
+                class="btn text-sm p-2 px-3 hover:px-5 border-2 rounded-xl shrink-0 bg-bgAccent cursor-pointer"
+                :class="[selectedBranch === branch._id ? 'bg-bgSecondary border-primary border-opacity-75' : 'border-bgSecondary opacity-80']"
                 v-for="(branch, i) in branches.list"
                 :key="i"
                 @click="selectedBranch = branch._id"
@@ -72,29 +78,29 @@
                 {{ branch.name }}
             </li>
         </ul>
-        <hr class="w-full border-gray-300 opacity-50" />
+        <hr class="w-full border-bgSecondary" />
         <small class="flex items-center gap-1 -my-2" v-if="totalRecords > 0">
             <b>{{ filteredRecords.list.length }}</b> {{ $t("panel.record out of") }} <span>{{ totalRecords }}</span>
         </small>
         <section class="flex flex-col gap-4 w-full grow">
             <ul class="grid gap-3 w-full" style="grid-template-columns: repeat(auto-fill, minmax(230px, 1fr))">
                 <li
-                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-lg bg-white group shadow-nr5 hover:shadow-nr10 transition-all overflow-hidden"
+                    class="relative flex flex-col items-center gap-4 p-4 md:p-6 w-full rounded-2xl bg-bgAccent group shadow-nr15 hover:shadow-mr35 transition-all overflow-hidden"
                     v-for="(staff, i) in filteredRecords.list"
                     :key="i"
                 >
                     <SlideMenu class="-my-2 z-10">
                         <button
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
+                            class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30"
                             @click="openEditDialog(i)"
                             v-if="checkPermissions(['main-panel.staff.alter'], brand)"
                         >
-                            <Icon class="w-4 h-4 bg-white shrink-0" name="shield.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-fgPrimary shrink-0" name="shield.svg" folder="icons/light" size="16px" />
                             <small>{{ $t("panel.staff.Change Access Of Staff") }}</small>
                         </button>
-                        <hr class="w-full opacity-20" />
+                        <hr class="w-11/12 mx-auto opacity-10" />
                         <button
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer"
+                            class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30 text-red-300 cursor-pointer"
                             @click="openDeleteDialog(i)"
                             v-if="checkPermissions(['main-panel.staff.delete'], brand)"
                         >
@@ -109,15 +115,14 @@
                         <h4 class="font-semibold">{{ `${staff.user.name} ${staff.user.family}` }}</h4>
                         <p class="text-xs opacity-75">{{ staff.user.email ? staff.user.email : staff.user.mobile }}</p>
                     </div>
-                    <small class="border border-primary text-primary p-0.5 px-2 rounded">{{ staff.role.name }}</small>
-                    <hr class="w-3/4 border-b-2 border-dolphin opacity-10 rounded-full" />
-                    <div class="flex flex-wrap items-center justify-between gap-2 p-2 rounded-md w-full bg-neutral-100">
-                        <small>{{ $t("panel.staff.Joined At") }}:</small>
-                        <b class="text-xs">{{ new Date(staff.createdAt).toLocaleDateString(locale) }}</b>
+                    <small class="text-xs p-1 px-2 text-fgPrimary border-2 border-primary opacity-75 rounded-lg">{{ staff.role.name }}</small>
+                    <div class="flex flex-wrap items-center justify-between gap-2 p-2 px-4 rounded-xl w-full bg-bgSecondary shadow-mr15">
+                        <small class="text-secondary">{{ $t("panel.staff.Joined At") }}:</small>
+                        <span class="text-xs">{{ new Date(staff.createdAt).toLocaleDateString(locale) }}</span>
                     </div>
                 </li>
                 <li
-                    class="w-full rounded-lg bg-white hover:border-2 border-primary shadow-nr5 hover:shadow-nr10 transition-shadow overflow-hidden"
+                    class="w-full rounded-2xl bg-bgSecondary bg-opacity-50 border-0 hover:border-8 border-primary shadow-nr15 hover:shadow-mr35 transition-all group"
                     v-if="!loading"
                 >
                     <button
@@ -125,7 +130,7 @@
                         @click="panelStore.openPopUp('invite-new-member')"
                         v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                     >
-                        <img class="down-pop w-20 object-contain" src="~/assets/images/team.webp" />
+                        <img class="down-pop w-20 group-hover:w-24 object-contain transition-all" src="~/assets/images/team.webp" />
                         <div class="flex items-center gap-2">
                             <Icon class="w-3 h-3 bg-primary" name="plus.svg" folder="icons" size="12px" />
                             <small class="text-sm text-primary">{{ $t("panel.staff.Invite New Member") }}</small>
@@ -134,12 +139,16 @@
                 </li>
             </ul>
             <Loading v-if="loading" />
-            <button class="btn w-max p-2.5 border bg-white rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
+            <button
+                class="btn w-max p-3 hover:px-6 border border-bgSecondary hover:bg-fgPrimary hover:text-bgPrimary rounded-xl text-xs"
+                @click="loadMore()"
+                v-if="!noMoreRecords"
+            >
                 {{ $t("panel.Load More") }}
             </button>
             <small class="text-xs opacity-75" v-if="noMoreRecords && records.list.length > 0">{{ $t("panel.End of the list") }}</small>
             <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
-                <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                <Icon class="icon w-4 h-4 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
         </section>
 
@@ -162,9 +171,9 @@
                     <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
                         {{ $t("panel.staff.For this user to join your team again, you need to send them a new invite") }}
                     </small>
-                    <hr class="w-full opacity-20" />
+                    <hr class="w-11/12 mx-auto opacity-10" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
-                        <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
                         <button class="btn w-full p-3 rounded bg-dolphin" :disabled="deleting" @click="panelStore.closePopUp()">

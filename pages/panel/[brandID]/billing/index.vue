@@ -311,7 +311,7 @@
             </ul>
             <Loading v-if="loadingBills" />
             <button
-                class="btn w-max p-3 hover:px-6 border border-bgSecondary hover:bg-fgPrimary hover:text-bgPrimary rounded-xl text-xs font-bold"
+                class="btn w-max p-3 hover:px-6 border border-bgSecondary hover:bg-fgPrimary hover:text-bgPrimary rounded-xl text-xs"
                 @click="loadMore()"
                 v-if="!noMoreBills"
             >
@@ -319,7 +319,7 @@
             </button>
             <small class="text-xs opacity-75" v-if="noMoreBills && bills.list.length > 0">{{ $t("panel.End of the list") }}</small>
             <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loadingBills && errorField === 'data' && responseMessage !== ''">
-                <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                <Icon class="icon w-4 h-4 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
             <div class="flex flex-col items-center gap-4 w-full my-10" v-if="!bills.list.length">
                 <img class="w-40" src="~/assets/images/invoice.webp" alt="invoice" />

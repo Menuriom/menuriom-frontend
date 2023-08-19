@@ -34,7 +34,7 @@
             </span>
         </div>
         <div
-            class="relative flex flex-col items-center gap-4 w-full max-w-xl rounded-lg py-6 my-8 bg-pencil-tip bg-opacity-30 backdrop-blur-sm z-2 flex-shrink-0"
+            class="relative flex flex-col items-center gap-4 w-full max-w-xl rounded-lg py-6 my-8 bg-pencil-tip bg-opacity-30 backdrop-blur-sm z-2 shrink-0"
         >
             <img class="w-20 mb-4" src="~/assets/images/icons/gold-card.png" alt="features" />
             <h1 class="f-inter text-6xl font-extrabold text-center">Core Features</h1>

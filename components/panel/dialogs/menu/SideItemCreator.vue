@@ -43,7 +43,7 @@
                         v-model="items[i].price"
                     />
                     <button
-                        class="flex items-center gap-2 p-4 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer flex-shrink-0"
+                        class="flex items-center gap-2 p-4 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer shrink-0"
                         @click="items.splice(i, 1)"
                     >
                         <Icon class="w-5 h-5 bg-red-300" name="trash-can.svg" folder="icons/light" size="20px" />
@@ -65,7 +65,7 @@
             <hr class="opacity-25" />
             <div class="flex flex-wrap items-center gap-4">
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-md border-2 border-neutral-300 flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-md border-2 border-neutral-300 shrink-0"
                     @click="panelStore.openPopUp('side-item-picker')"
                 >
                     <Icon

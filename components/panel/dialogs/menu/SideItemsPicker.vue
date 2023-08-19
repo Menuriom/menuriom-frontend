@@ -58,11 +58,11 @@
             </ul>
             <Loading v-if="loadingGroups" />
             <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!loadingGroups && errorField === '' && responseMessage !== ''">
-                <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
             <hr class="opacity-25" />
             <!-- <button
-                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-primary text-white flex-shrink-0"
+                class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-primary text-white shrink-0"
                 @click="saveSelected()"
                 v-if="selectedItemGroups.size > 0"
             >

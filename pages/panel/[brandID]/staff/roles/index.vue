@@ -33,7 +33,7 @@
                 >
                     <SlideMenu class="-my-2 z-10">
                         <nuxt-link
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
+                            class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30"
                             :to="localePath(`/panel/${route.params.brandID}/staff/roles/${role._id}`)"
                             v-if="checkPermissions(['main-panel.staff.roles'], brand)"
                         >
@@ -42,7 +42,7 @@
                         </nuxt-link>
                         <hr class="w-full opacity-20" />
                         <button
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300 cursor-pointer"
+                            class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30 text-red-300 cursor-pointer"
                             @click="openDeleteDialog(i)"
                             v-if="checkPermissions(['main-panel.staff.roles'], brand)"
                         >
@@ -68,7 +68,7 @@
             </ul>
             <Loading v-if="loading" />
             <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
-                <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                <Icon class="icon w-4 h-4 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
         </section>
 
@@ -83,7 +83,7 @@
                     </small>
                     <hr class="w-full opacity-20" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
-                        <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
                         <button class="btn w-full p-3 rounded bg-dolphin" :disabled="deleting" @click="panelStore.closePopUp()">

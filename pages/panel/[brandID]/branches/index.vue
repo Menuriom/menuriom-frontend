@@ -87,7 +87,7 @@
                     </div>
                 </li>
                 <li
-                    class="w-full rounded-2xl bg-fgPrimary bg-opacity-10 border-0 hover:border-8 border-primary shadow-nr15 hover:shadow-mr35 transition-all group"
+                    class="w-full rounded-2xl bg-bgSecondary bg-opacity-50 border-0 hover:border-8 border-primary shadow-nr15 hover:shadow-mr35 transition-all group"
                 >
                     <nuxt-link
                         class="flex flex-col items-center justify-center gap-4 w-full h-full p-3 py-10"
@@ -104,7 +104,7 @@
             </ul>
             <Loading v-if="loading" />
             <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loading && errorField === 'data' && responseMessage !== ''">
-                <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                <Icon class="icon w-4 h-4 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
         </section>
 
@@ -123,7 +123,7 @@
                     </small>
                     <hr class="w-full border-neutral-500 border-opacity-40" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
-                        <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
                         <button class="btn w-full p-3 hover:px-6 rounded-xl bg-bgSecondary" :disabled="deleting" @click="panelStore.closePopUp()">

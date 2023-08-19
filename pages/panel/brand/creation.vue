@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === 'logo' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
             </div>
             <div class="flex flex-col gap-4 p-4 w-full rounded-2xl bg-bgAccent shadow-mr15">
@@ -85,7 +85,7 @@
                 />
             </div>
             <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
             <div class="flex gap-2 w-full">
                 <nuxt-link class="btn flex items-center gap-2 p-3 px-6 hover:px-8 text-sm rounded-xl bg-bgSecondary" :to="localePath(`/panel`)">

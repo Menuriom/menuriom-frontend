@@ -77,7 +77,7 @@
                     <Input
                         name="postalCode"
                         :placeholder="$t('panel.branches.10 digit number')"
-                        class="w-full md:w-52 flex-shrink-0"
+                        class="w-full md:w-52 shrink-0"
                         :label="$t('panel.branches.Branch Postal Code')"
                         mask="##########"
                         v-model="postalCode"
@@ -100,7 +100,7 @@
                     </button>
                 </div>
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === 'telephoneNumbers' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <ul class="flex flex-col gap-4">
                     <li class="flex items-center gap-2" v-for="(number, i) in telephoneNumbers" :key="number">
@@ -116,7 +116,7 @@
                 </ul>
                 <hr class="w-full border-bgSecondary" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <div class="flex flex-wrap items-center gap-2" v-if="saving && percentage > 0">
                     <small>{{ $t("panel.Uploading") }}</small>

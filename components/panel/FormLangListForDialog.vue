@@ -4,7 +4,7 @@
     <div class="flex flex-col gap-4 w-full lg:w-72 rounded-lg text-white">
         <ul class="flex gap-2 w-full overflow-auto" v-if="!loadingSettings">
             <li
-                class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer flex-shrink-0"
+                class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer shrink-0"
                 :class="{ 'bg-neutral-100 text-pencil-tip': formLang == 'default' }"
                 @click="$emit('update:formLang', 'default')"
             >
@@ -14,7 +14,7 @@
                 </div>
             </li>
             <li
-                class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer flex-shrink-0"
+                class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer shrink-0"
                 :class="{ 'bg-neutral-100 text-pencil-tip': formLang == lang }"
                 v-for="(lang, i) in settings.languages"
                 :key="i"
@@ -29,7 +29,7 @@
         <Loading v-else />
         <small class="text-xs opacity-75" v-if="!loadingSettings && settings.languages.length == 0">{{ $t("panel.needMoreLang") }}</small>
         <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!loadingSettings && errorField === '' && responseMessage !== ''">
-            <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+            <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
         </small>
     </div>
 </template>
