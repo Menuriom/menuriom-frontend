@@ -1,32 +1,34 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full" ref="form">
+    <div class="flex flex-col gap-6 w-full" ref="form">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-1">
+            <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
-                    <img class="w-9" src="~/assets/images/panel-icons/cards-blank-dark.png" alt="" />
+                    <Icon class="w-9 h-9 gradient" name="cards-blank.svg" folder="icons/duo" size="36px" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.side-menu.Menu Editor") }}</h1>
                 </div>
                 <!-- <small class="hidden sm:flex gap-1 text-sm">
                     {{ $t("panel.menu.You are editing the general menu") }}.
                     <span v-html="$t('panel.menu.For', { branch: `<b>all branches</b>` })" />
                 </small> -->
-                <small class="hidden sm:flex gap-1 text-sm"> {{ $t("panel.menu.Managing and editing your restaurant menu items and categories") }}. </small>
+                <small class="hidden sm:flex gap-1 text-sm opacity-75">
+                    {{ $t("panel.menu.Managing and editing your restaurant menu items and categories") }}.
+                </small>
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-bgSecondary shrink-0"
                     :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/style`)"
                 >
-                    <Icon class="w-5 h-5 bg-black" name="brush.svg" folder="icons/light" size="20px" />
+                    <Icon class="w-5 h-5 gradient" name="brush.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.menu.Edit Menu Style") }}
                 </nuxt-link>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-2.5 text-sm rounded-md border bg-white shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-bgSecondary shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
                 >
-                    <Icon class="w-5 h-5 bg-black" name="book-open.svg" folder="icons/light" size="20px" />
+                    <Icon class="w-5 h-5 gradient" name="book-open.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.menu.View Live Menu") }}
                 </button>
             </div>
@@ -51,13 +53,14 @@
             </label> -->
         </div>
 
-        <hr class="w-full border-gray-300 opacity-50" />
+        <!-- <hr class="w-full border-bgSecondary" /> -->
 
-        <section class="flex flex-col gap-4" name="Categories">
+        <section class="flex flex-col gap-6" name="Categories">
             <header class="flex flex-wrap items-center justify-between gap-4">
                 <h2 class="text-xl md:text-2xl/tight font-bold">{{ $t("panel.menu.Categories") }}</h2>
+                <hr class="border-bgSecondary grow" />
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-primary text-white shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary shrink-0"
                     :to="localePath(`/panel/${route.params.brandID}/menu/category/creation`)"
                 >
                     <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />
@@ -67,13 +70,14 @@
             <CategoryList ref="categoryListRef" />
         </section>
 
-        <hr class="w-full border-gray-300 opacity-50" />
+        <!-- <hr class="w-full border-bgSecondary" /> -->
 
-        <section class="flex flex-col gap-4" name="Menu Items">
+        <section class="flex flex-col gap-6" name="Menu Items">
             <header class="flex flex-wrap items-center justify-between gap-4">
                 <h2 class="text-xl md:text-2xl/tight font-bold">{{ $t("panel.menu.Items") }}</h2>
+                 <hr class="border-bgSecondary grow" />
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-3 py-2 text-sm rounded-md bg-primary text-white shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary shrink-0"
                     :to="localePath(`/panel/${route.params.brandID}/menu/item/creation`)"
                 >
                     <Icon class="w-3 h-3 bg-white" name="plus.svg" folder="icons" size="12px" />

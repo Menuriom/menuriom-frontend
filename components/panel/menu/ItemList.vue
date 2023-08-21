@@ -13,228 +13,257 @@
             group="categories"
         >
             <template #item="{ element: groups, index: k }">
-                <div class="flex flex-col gap-3">
-                    <div class="sticky top-4 flex items-center gap-1 max-w-max p-2 bg-pencil-tip text-white rounded-md shadow-nr10 z-2">
-                        <Icon
-                            class="group_grab_area w-5 h-5 bg-white rotate-90 hover:cursor-grab active:cursor-grabbing"
-                            name="grip-dots.svg"
-                            folder="icons/light"
-                            size="20px"
-                            v-if="!inSearchMode"
-                        />
-                        <img class="h-6 grayscale" :src="filteredDishes.list[k][0].category.icon" alt="" />
-                        <h3 class="">
+                <div class="flex flex-col gap-3 border-2 border-bgSecondary border-opacity-75 p-3 rounded-3xl">
+                    <div class="sticky -top-3 flex items-center gap-2 w-full px-2 bg-bgSecondary rounded-2xl shadow-nr10 z-2">
+                        <div class="group_grab_area">
+                            <Icon
+                                class="w-5 h-5 bg-secondary rotate-90 hover:cursor-grab active:cursor-grabbing"
+                                name="grip-dots.svg"
+                                folder="icons/light"
+                                size="20px"
+                                v-if="!inSearchMode"
+                            />
+                        </div>
+                        <img class="h-7" :src="filteredDishes.list[k][0].category.icon" alt="" />
+                        <h3 class="shrink-0">
                             {{ filteredDishes.list[k][0].category.translation?.[locale]?.name || filteredDishes.list[k][0].category.name }}
                         </h3>
-                        <button class="p-1.5" @click="filteredDishes.list[k][0].category.close = !filteredDishes.list[k][0].category.close">
+                        <button
+                            class="flex items-center gap-2 w-full py-3.5"
+                            @click="filteredDishes.list[k][0].category.close = !filteredDishes.list[k][0].category.close"
+                        >
+                            <span class="h-0.5 bg-primary bg-opacity-30 w-full grow"></span>
                             <Icon
-                                class="w-3 h-3 bg-primary ms-2 transition-all"
-                                :class="{ '-rotate-90': filteredDishes.list[k][0].category.close }"
-                                name="arrow.svg"
-                                folder="icons"
-                                size="12px"
+                                class="w-5 h-5 bg-primary transition-all"
+                                :class="{ 'rotate-90': filteredDishes.list[k][0].category.close }"
+                                name="caret-left.svg"
+                                folder="icons/tabler"
+                                size="24px"
                             />
                         </button>
                     </div>
                     <small class="opacity-75" v-if="!filteredDishes.list[k][1]">{{ $t("panel.menu.This Category Has No Items") }}</small>
 
                     <div class="dropdown-box" :class="{ open: !filteredDishes.list[k][0].category.close }">
-                        <Draggable
-                            tag="ul"
-                            class="flex flex-col gap-3 w-full ps-3 border-s-2 border-neutral-200 overflow-hidden"
-                            :class="{ 'pb-2': !filteredDishes.list[k][0].category.close }"
-                            v-model="filteredDishes.list[k]"
-                            @start="resetSavingOrder()"
-                            @end="saveOrder()"
-                            handle=".grab_area"
-                            item-key="order"
-                            group="items"
-                        >
-                            <template #item="{ element: dish, index: i }">
-                                <li
-                                    class="relative h-auto flex flex-wrap 2xl:flex-nowrap items-center gap-4 p-4 ps-8 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
-                                    v-if="dish._id"
-                                >
-                                    <h6
-                                        class="absolute top-3 start-6 p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm"
-                                        v-if="dish.showAsNew"
+                        <div class="w-full rounded-2xl overflow-hidden">
+                            <!-- :class="{ 'pb-2': !filteredDishes.list[k][0].category.close }" -->
+                            <Draggable
+                                tag="ul"
+                                class="flex flex-col gap-3 w-full"
+                                v-model="filteredDishes.list[k]"
+                                @start="resetSavingOrder()"
+                                @end="saveOrder()"
+                                handle=".grab_area"
+                                item-key="order"
+                                group="items"
+                            >
+                                <template #item="{ element: dish, index: i }">
+                                    <li
+                                        class="relative flex flex-wrap @6xl:flex-nowrap gap-4 p-4 ps-9 rounded-2xl group bg-bgAccent shadow-mr35 transition-all overflow-hidden"
+                                        v-if="dish._id"
                                     >
-                                        {{ $t("New") }}
-                                    </h6>
-                                    <div class="flex flex-wrap xl:flex-nowrap items-center gap-4 w-full max-w-md shrink-0">
-                                        <div class="flex flex-col items-center justify-center gap-2 w-24 h-24 shadow-nr15 rounded-xl shrink-0">
-                                            <img class="w-full object-contain" :src="dish.images[0]" alt="" loading="lazy" />
-                                        </div>
-                                        <div class="flex flex-col gap-2 w-full max-w-xs shrink-0">
-                                            <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
-                                                {{ dish.translation?.[locale]?.name || dish.name }}
-                                            </h4>
-                                            <p class="w-full -mt-1.5 text-xs whitespace-nowrap text-ellipsis overflow-hidden opacity-75">
-                                                {{ dish.translation?.[locale]?.description || dish.description }}
-                                            </p>
-                                            <hr class="w-full" />
-                                            <div class="flex flex-wrap items-center gap-1">
-                                                <span class="flex items-baseline font-bold text-emerald-900 opacity-60 text-xl" dir="auto">
-                                                    {{ Intl.NumberFormat(locale).format(dish.price / 1000) }}
-                                                    <small class="text-sm">,{{ Array(3).fill(Intl.NumberFormat(locale).format(0)).join("") }}</small>
-                                                </span>
-                                                <span class="f-inter text-sm font-extralight me-2"> {{ $t("pricing.Toman") }} </span>
-                                                <div
-                                                    class="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-rose-600 bg-opacity-75 text-white shadow-nr15"
-                                                    v-if="dish.discountActive"
-                                                >
-                                                    <h5 class="text-xs font-bold">{{ dish.discountPercentage }}%</h5>
-                                                    <small class="font-extralight opacity-75">{{ $t("pricing.OFF") }}</small>
+                                        <div class="flex flex-col gap-4 w-full max-w-lg">
+                                            <div class="flex flex-wrap 2sm:flex-nowrap items-center gap-4 w-full max-w-lg shrink-0">
+                                                <img
+                                                    class="w-28 aspect-square object-cover rounded-xl bg-fgPrimary"
+                                                    :src="dish.images[0]"
+                                                    alt=""
+                                                    loading="lazy"
+                                                />
+                                                <div class="flex flex-col gap-3 w-full">
+                                                    <div
+                                                        class="flex flex-col gap-1 bg-bgSecondary bg-opacity-50 w-full max-w-sm p-2.5 rounded-xl shadow-mr15 overflow-hidden"
+                                                    >
+                                                        <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
+                                                            {{ dish.translation?.[locale]?.name || dish.name }}
+                                                        </h4>
+                                                        <p class="w-full text-xs whitespace-nowrap text-ellipsis overflow-hidden opacity-75">
+                                                            {{ dish.translation?.[locale]?.description || dish.description }}
+                                                        </p>
+                                                    </div>
+                                                    <div class="flex flex-wrap gap-3">
+                                                        <span class="flex items-baseline font-bold text-emerald-300 text-2xl" dir="auto">
+                                                            {{ Intl.NumberFormat(locale).format(dish.price / 1000) }}
+                                                            <small>,{{ Intl.NumberFormat(locale).format(1000).substring(2) }}</small>
+                                                        </span>
+                                                        <span class="f-inter text-sm font-extralight -ms-2"> {{ $t("pricing.Toman") }} </span>
+                                                        <div
+                                                            class="flex items-center gap-1 px-2 py-0.5 rounded-xl bg-rose-400 bg-opacity-75 text-white shadow-nr5 shadow-rose-950"
+                                                            v-if="dish.discountActive"
+                                                        >
+                                                            <h5 class="text-xs font-bold">{{ dish.discountPercentage }}%</h5>
+                                                            <small class="font-extralight opacity-75">{{ $t("pricing.OFF") }}</small>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="flex flex-wrap items-center gap-2 w-full">
+                                                <button
+                                                    class="btn flex items-center gap-2 p-2 hover:px-4 border border-bgSecondary rounded-xl cursor-pointer"
+                                                    :class="{ 'bg-fgPrimary text-bgPrimary': dish.hidden }"
+                                                    @click="toggleStates(k, i, 'hidden')"
+                                                    v-if="!dish[`toggling_hidden`]"
+                                                >
+                                                    <Icon
+                                                        class="w-4 h-4"
+                                                        :class="[dish.hidden ? 'bg-primary' : 'bg-fgPrimary bg-opacity-30']"
+                                                        name="eye-slash.svg"
+                                                        folder="icons/light"
+                                                        size="16px"
+                                                    />
+                                                    <small class="" v-if="dish.hidden"> {{ $t(`panel.menu.Item is hidden`) }} </small>
+                                                    <small class="" v-else> {{ $t("panel.menu.Hide this item") }} </small>
+                                                </button>
+                                                <Loading v-if="dish[`toggling_hidden`]" />
+                                                <button
+                                                    class="btn flex items-center gap-2 p-2 hover:px-4 border border-bgSecondary rounded-xl cursor-pointer"
+                                                    :class="{ 'bg-fgPrimary text-bgPrimary': dish.soldOut }"
+                                                    @click="toggleStates(k, i, 'soldOut')"
+                                                    v-if="!dish[`toggling_soldOut`]"
+                                                >
+                                                    <Icon
+                                                        class="w-4 h-4"
+                                                        :class="[dish.soldOut ? 'bg-primary' : 'bg-fgPrimary bg-opacity-30']"
+                                                        name="xmark-to-slot.svg"
+                                                        folder="icons/light"
+                                                        size="16px"
+                                                    />
+                                                    <small class="" v-if="dish.soldOut"> {{ $t("SOLD OUT") }} </small>
+                                                    <small class="" v-else> {{ $t("panel.menu.Mark as sold out") }} </small>
+                                                </button>
+                                                <Loading v-if="dish[`toggling_soldOut`]" />
+                                                <button
+                                                    class="btn flex items-center gap-2 p-2 hover:px-4 border border-bgSecondary rounded-xl cursor-pointer"
+                                                    :class="{ 'bg-fgPrimary text-bgPrimary': dish.pinned }"
+                                                    @click="toggleStates(k, i, 'pinned')"
+                                                    v-if="checkLimitations([['item-highlighting', true]], brand) && !dish[`toggling_pinned`]"
+                                                >
+                                                    <Icon
+                                                        class="w-4 h-4 -rotate-45"
+                                                        :class="[dish.pinned ? 'bg-primary' : 'bg-fgPrimary bg-opacity-30']"
+                                                        name="thumbtack.svg"
+                                                        folder="icons/light"
+                                                        size="16px"
+                                                    />
+                                                    <small class="" v-if="dish.pinned"> {{ $t(`panel.menu.Item is pinned`) }} </small>
+                                                    <small class="" v-else> {{ $t("panel.menu.Pin to the top of category") }} </small>
+                                                </button>
+                                                <Loading v-if="dish[`toggling_pinned`]" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="flex flex-col gap-2 w-full max-w-screen-1.5xs shrink-0">
-                                        <div
-                                            class="flex items-center gap-2 max-w-max cursor-pointer"
-                                            @click="toggleStates(k, i, 'hidden')"
-                                            v-if="!dish[`toggling_hidden`]"
-                                        >
-                                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.hidden }">
-                                                <Icon
-                                                    class="w-4 h-4"
-                                                    :class="[dish.hidden ? 'bg-white' : 'bg-black']"
-                                                    name="eye-slash.svg"
-                                                    folder="icons/light"
-                                                    size="16px"
-                                                />
-                                            </button>
-                                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.hidden">
-                                                {{ $t(`panel.menu.Item is hidden`) }}
-                                            </small>
-                                            <small class="" v-else>{{ $t("panel.menu.Hide this item") }}</small>
+                                        <div class="flex flex-col gap-4 w-full max-w-screen-2xs bg-bgSecondary bg-opacity-30 shadow-mr15 p-3 rounded-2xl">
+                                            <h4 class="flex items-center gap-1 text-sm font-semibold">
+                                                <Icon class="w-5 h-5 gradient" name="calendar-range.svg" folder="icons/light" size="20px" />
+                                                {{ $t("panel.menu.Special Of The Day Tag") }}
+                                                <span class="bg-fgPrimary bg-opacity-10 h-0.5 grow"></span>
+                                            </h4>
+                                            <ul
+                                                class="flex flex-wrap items-center gap-2 w-full"
+                                                v-if="dish.specialDaysActive && dish.specialDaysList.length > 0"
+                                            >
+                                                <li
+                                                    class="flex items-center gap-2 text-xs bg-secondary bg-opacity-60 p-1 px-2 rounded-lg"
+                                                    v-for="day in dish.specialDaysList"
+                                                >
+                                                    <span class="w-2.5 h-2.5 rounded-full bg-bgPrimary bg-opacity-30"></span> {{ $t(day) }}
+                                                </li>
+                                            </ul>
+                                            <div class="flex flex-col rounded-md" v-else>
+                                                <small class="opacity-75">{{ $t("panel.menu.No day is selected") }}</small>
+                                                <nuxt-link
+                                                    class="text-primary underline underline-offset-4 text-xs"
+                                                    :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
+                                                >
+                                                    {{ $t("panel.menu.Add this tag") }}
+                                                </nuxt-link>
+                                            </div>
                                         </div>
-                                        <Loading v-if="dish[`toggling_hidden`]" />
-                                        <div
-                                            class="flex items-center gap-2 max-w-max cursor-pointer"
-                                            @click="toggleStates(k, i, 'soldOut')"
-                                            v-if="!dish[`toggling_soldOut`]"
-                                        >
-                                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.soldOut }">
-                                                <Icon
-                                                    class="w-4 h-4"
-                                                    :class="[dish.soldOut ? 'bg-white' : 'bg-black']"
-                                                    name="xmark-to-slot.svg"
-                                                    folder="icons/light"
-                                                    size="16px"
-                                                />
-                                            </button>
-                                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.soldOut">
-                                                {{ $t("SOLD OUT") }}
-                                            </small>
-                                            <small class="" v-else>{{ $t("panel.menu.Mark as sold out") }}</small>
+
+                                        <div class="flex flex-col gap-4 w-full max-w-screen-2xs bg-bgSecondary bg-opacity-30 shadow-mr15 p-3 rounded-2xl">
+                                            <h4 class="flex items-center gap-1 text-sm font-semibold">
+                                                <Icon class="w-5 h-5 gradient" name="falafel.svg" folder="icons/light" size="20px" />
+                                                {{ $t("panel.menu.Item Variants") }}
+                                                <span class="bg-fgPrimary bg-opacity-10 h-0.5 grow"></span>
+                                            </h4>
+                                            <ul class="flex flex-col gap-1 w-full" v-if="dish.variants.length > 0">
+                                                <li class="flex items-center gap-1" v-for="variant in dish.variants">
+                                                    <span class="w-2.5 h-2.5 rounded-full bg-primary shrink-0"></span>
+                                                    <small class="me-1 whitespace-nowrap text-ellipsis overflow-hidden">
+                                                        {{ variant.translation?.[locale]?.name || variant.name }}
+                                                    </small>
+                                                    <span class="w-1 h-0.5 rounded-full bg-bgPrimary grow"></span>
+                                                    <div class="flex items-center gap-1">
+                                                        <small class="text-emerald-300">{{ Intl.NumberFormat(locale).format(dish.price) }}</small>
+                                                        <span class="f-inter text-xs font-extralight me-2"> {{ $t("pricing.Toman") }} </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div class="flex flex-col rounded-md" v-else>
+                                                <small class="opacity-75">{{ $t("panel.menu.No variants for this item") }}</small>
+                                                <nuxt-link
+                                                    class="text-primary underline underline-offset-4 text-xs"
+                                                    :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
+                                                >
+                                                    {{ $t("panel.menu.Add variants") }}
+                                                </nuxt-link>
+                                            </div>
                                         </div>
-                                        <Loading v-if="dish[`toggling_soldOut`]" />
-                                        <div
-                                            class="flex items-center gap-2 max-w-max cursor-pointer"
-                                            @click="toggleStates(k, i, 'pinned')"
-                                            v-if="checkLimitations([['item-highlighting', true]], brand) && !dish[`toggling_pinned`]"
-                                        >
-                                            <button class="btn p-1.5 border border-neutral-400 rounded-md" :class="{ 'bg-dolphin': dish.pinned }">
-                                                <Icon
-                                                    class="w-4 h-4 -rotate-45"
-                                                    :class="[dish.pinned ? 'bg-white' : 'bg-black']"
-                                                    name="thumbtack.svg"
-                                                    folder="icons/light"
-                                                    size="16px"
-                                                />
-                                            </button>
-                                            <small class="p-2 py-1 rounded-md bg-neutral-400 bg-opacity-20 font-semibold" v-if="dish.pinned">
-                                                {{ $t(`panel.menu.Item is pinned`) }}
-                                            </small>
-                                            <small class="" v-else>{{ $t("panel.menu.Pin to the top of category") }}</small>
-                                        </div>
-                                        <Loading v-if="dish[`toggling_pinned`]" />
-                                    </div>
-                                    <div class="flex flex-col gap-2 w-full max-w-screen-2xs shrink-0">
-                                        <h4 class="flex items-center gap-1 text-sm font-semibold">
-                                            <Icon class="w-4 h-4 bg-pencil-tip" name="calendar-range.svg" folder="icons/light" size="16px" />
-                                            {{ $t("panel.menu.Special Of The Day Tag") }}
-                                            <span class="bg-neutral-200 h-0.5 grow"></span>
-                                        </h4>
-                                        <ul class="flex flex-wrap items-center gap-4 w-full" v-if="dish.specialDaysActive && dish.specialDaysList.length > 0">
-                                            <li class="flex items-center gap-1 text-xs" v-for="day in dish.specialDaysList">
-                                                <span class="w-2.5 h-2.5 rounded-full bg-baby-blue"></span> {{ $t(day) }}
-                                            </li>
-                                        </ul>
-                                        <div class="flex flex-col rounded-md" v-else>
-                                            <small class="opacity-75">{{ $t("panel.menu.No day is selected") }}</small>
+                                        <!-- <div class="flex flex-col gap-2 w-full max-w-screen-2xs">
+                                    <h4 class="flex items-center gap-1 text-sm font-semibold">
+                                        <Icon class="w-5 h-5 bg-black" name="list-tree2.svg" folder="icons/light" size="20px" />
+                                        {{ $t("panel.menu.Side Items") }}
+                                        <span class="bg-fgPrimary bg-opacity-10 h-0.5 grow"></span>
+                                    </h4>
+                                </div> -->
+                                        <!-- TODO : show menu item like count if limitations allows it "menu-item-like" -->
+                                        <div class="flex flex-wrap md:flex-col items-center gap-4 max-w-max ms-auto shrink-0">
                                             <nuxt-link
-                                                class="text-primary underline underline-offset-4 text-xs"
+                                                class="btn flex items-center gap-2 p-3 rounded-xl border border-bgSecondary hover:bg-sky-300 group/btn"
+                                                :title="$t('panel.Edit')"
                                                 :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
                                             >
-                                                {{ $t("panel.menu.Add this tag") }}
+                                                <Icon
+                                                    class="w-5 h-5 bg-sky-200 group-hover/btn:bg-bgPrimary shrink-0"
+                                                    name="pen-to-square.svg"
+                                                    folder="icons/light"
+                                                    size="18px"
+                                                />
                                             </nuxt-link>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col gap-2 w-full max-w-screen-2xs">
-                                        <h4 class="flex items-center gap-1 text-sm font-semibold">
-                                            <Icon class="w-5 h-5 bg-black" name="falafel.svg" folder="icons/light" size="20px" />
-                                            {{ $t("panel.menu.Item Variants") }}
-                                            <span class="bg-neutral-200 h-0.5 grow"></span>
-                                        </h4>
-                                        <ul class="flex flex-col gap-1 w-full" v-if="dish.variants.length > 0">
-                                            <li class="flex items-center gap-1" v-for="variant in dish.variants">
-                                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-600 bg-opacity-40 shrink-0"></span>
-                                                <small class="me-1 whitespace-nowrap text-ellipsis overflow-hidden">
-                                                    {{ variant.translation?.[locale]?.name || variant.name }}
-                                                </small>
-                                                <div class="flex items-center gap-1">
-                                                    <small class="text-emerald-900">{{ Intl.NumberFormat(locale).format(dish.price) }}</small>
-                                                    <span class="f-inter text-xs font-extralight me-2"> {{ $t("pricing.Toman") }} </span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="flex flex-col rounded-md" v-else>
-                                            <small class="opacity-75">{{ $t("panel.menu.No variants for this item") }}</small>
-                                            <nuxt-link
-                                                class="text-primary underline underline-offset-4 text-xs"
-                                                :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
+                                            <button
+                                                class="btn flex items-center gap-2 p-3 rounded-xl border border-bgSecondary hover:bg-rose-300 group/btn"
+                                                @click="openDeleteDialog(k, i)"
+                                                :title="$t('panel.Delete')"
                                             >
-                                                {{ $t("panel.menu.Add variants") }}
-                                            </nuxt-link>
+                                                <Icon
+                                                    class="w-5 h-5 bg-rose-200 group-hover/btn:bg-bgPrimary shrink-0"
+                                                    name="trash-can.svg"
+                                                    folder="icons/light"
+                                                    size="18px"
+                                                />
+                                            </button>
                                         </div>
-                                    </div>
-                                    <!-- <div class="flex flex-col gap-2 w-full max-w-screen-2xs">
-                                <h4 class="flex items-center gap-1 text-sm font-semibold">
-                                    <Icon class="w-5 h-5 bg-black" name="list-tree2.svg" folder="icons/light" size="20px" />
-                                    {{ $t("panel.menu.Side Items") }}
-                                    <span class="bg-neutral-200 h-0.5 grow"></span>
-                                </h4>
-                            </div> -->
-                                    <!-- TODO : show menu item like count if limitations allows it "menu-item-like" -->
-                                    <div class="flex flex-wrap md:flex-col items-center gap-4 max-w-max ms-auto shrink-0">
-                                        <nuxt-link
-                                            class="btn flex items-center gap-2 p-2 rounded-md bg-dolphin"
-                                            :title="$t('panel.Edit')"
-                                            :to="localePath(`/panel/${route.params.brandID}/menu/item/${dish._id}`)"
+                                        <div
+                                            class="absolute start-7 top-3 px-2 py-1 rounded-lg bg-primary bg-opacity-80 backdrop-blur-sm shadow-nr5"
+                                            v-if="dish.showAsNew"
                                         >
-                                            <Icon class="w-5 h-5 bg-stone-200 shrink-0" name="pen-to-square.svg" folder="icons/light" size="18px" />
-                                        </nuxt-link>
-                                        <button
-                                            class="btn flex items-center gap-2 p-2 rounded-md bg-dolphin"
-                                            @click="openDeleteDialog(k, i)"
-                                            :title="$t('panel.Delete')"
+                                            <h5 class="text-xs font-bold">
+                                                {{ $t("New") }}
+                                            </h5>
+                                        </div>
+                                        <span
+                                            class="grab_area absolute top-6 start-1.5 flex flex-col items-center justify-center gap-1.5 hover:cursor-grab active:cursor-grabbing shrink-0"
+                                            v-if="!inSearchMode"
                                         >
-                                            <Icon class="w-5 h-5 bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="18px" />
-                                        </button>
-                                    </div>
-                                    <span
-                                        class="grab_area absolute top-11 start-1.5 flex flex-col items-center justify-center gap-1.5 hover:cursor-grab active:cursor-grabbing shrink-0"
-                                        v-if="!inSearchMode"
-                                    >
-                                        <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
-                                        <Icon class="w-5 h-5 bg-black rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
-                                    </span>
-                                </li>
-                            </template>
-                        </Draggable>
+                                            <Icon class="w-5 h-5 bg-secondary rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
+                                            <Icon class="w-5 h-5 bg-secondary rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
+                                            <Icon class="w-5 h-5 bg-secondary rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
+                                            <Icon class="w-5 h-5 bg-secondary rotate-90" name="grip-dots.svg" folder="icons/light" size="20px" />
+                                        </span>
+                                    </li>
+                                </template>
+                            </Draggable>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -246,10 +275,9 @@
 
         <Teleport to="body">
             <Dialog name="delete-item-confirmation" :title="$t('panel.menu.Delete Menu Item')">
-                <div class="flex flex-col gap-3">
-                    <hr class="w-full opacity-30 mt-2" />
+                <div class="flex flex-col gap-4">
                     <h2
-                        class="text-xl"
+                        class="text-lg"
                         v-html="
                             $t('panel.menu.You are about to delete this item', {
                                 name:
@@ -258,19 +286,19 @@
                             })
                         "
                     />
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md">
+                    <small class="flex items-center gap-2 text-sm text-red-200 bg-red-700 bg-opacity-10 p-4 rounded-xl shadow-inner">
                         {{ $t("panel.brands.This action cannot be reversed") }}
                     </small>
-                    <hr class="w-full opacity-20" />
+                    <hr class="w-full border-neutral-500 border-opacity-40" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
-                        <button class="btn w-full p-3 rounded bg-dolphin" :disabled="deleting" @click="panelStore.closePopUp()">
+                        <button class="btn w-full p-3 hover:px-6 rounded-xl bg-bgSecondary" :disabled="deleting" @click="panelStore.closePopUp()">
                             {{ $t("Cancel") }}
                         </button>
                         <button
-                            class="btn w-full p-3 rounded bg-red-500"
+                            class="btn w-full p-3 hover:px-6 rounded-xl bg-red-400"
                             :class="{ 'opacity-75 cursor-not-allowed': deleting }"
                             :disabled="deleting"
                             @click="deleteRecord()"

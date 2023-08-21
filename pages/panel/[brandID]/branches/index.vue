@@ -114,7 +114,7 @@
                     <!-- <img class="w-44 mx-auto" src="~/assets/images/empty.webp" /> -->
                     <div class="flex flex-col gap-2 p-4 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
                         <h2 class="text-xl" v-html="$t('panel.branches.You are about to delete this branch', { name: records.list[indexToDelete].name })" />
-                        <p class="text-sm opacity-75 -mt-2">
+                        <p class="text-sm opacity-75">
                             {{ $t("panel.branches.deletingBranchDesc") }}
                         </p>
                     </div>

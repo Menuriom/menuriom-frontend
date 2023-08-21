@@ -154,33 +154,34 @@
 
         <Teleport to="body">
             <Dialog name="delete-confirmation" :title="$t('panel.staff.Remove Staff')" v-if="panelStore.popUpOpened == 'delete-confirmation'">
-                <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-4">
                     <!-- <img class="w-44 mx-auto" src="~/assets/images/empty.webp" /> -->
-                    <hr class="w-full opacity-30 mt-2" />
-                    <h2
-                        class="text-xl"
-                        v-html="
-                            $t('panel.staff.You are about to remove this member', {
-                                member: `${records.list[indexToDelete].user.name} ${records.list[indexToDelete].user.family}`,
-                            })
-                        "
-                    />
-                    <p class="text-sm opacity-75 -mt-2">
-                        {{ $t("panel.staff.deletingStaffDesc") }}
-                    </p>
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
+                    <div class="flex flex-col gap-2 p-4 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
+                        <h2
+                            class="text-xl"
+                            v-html="
+                                $t('panel.staff.You are about to remove this member', {
+                                    member: `${records.list[indexToDelete].user.name} ${records.list[indexToDelete].user.family}`,
+                                })
+                            "
+                        />
+                        <p class="text-sm opacity-75">
+                            {{ $t("panel.staff.deletingStaffDesc") }}
+                        </p>
+                    </div>
+                    <small class="flex items-center gap-2 text-sm text-red-200 bg-red-700 bg-opacity-10 p-4 rounded-xl shadow-inner">
                         {{ $t("panel.staff.For this user to join your team again, you need to send them a new invite") }}
                     </small>
-                    <hr class="w-11/12 mx-auto opacity-10" />
+                    <hr class="w-full border-neutral-500 border-opacity-40" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
-                        <button class="btn w-full p-3 rounded bg-dolphin" :disabled="deleting" @click="panelStore.closePopUp()">
+                        <button class="btn w-full p-3 hover:px-6 rounded-xl bg-bgSecondary" :disabled="deleting" @click="panelStore.closePopUp()">
                             {{ $t("Cancel") }}
                         </button>
                         <button
-                            class="btn w-full p-3 rounded bg-red-500"
+                            class="btn w-full p-3 hover:px-6 rounded-xl bg-red-400"
                             :class="{ 'opacity-75 cursor-not-allowed': deleting }"
                             :disabled="deleting"
                             @click="deleteRecord()"

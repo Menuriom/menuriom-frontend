@@ -14,7 +14,7 @@
         <div class="flex max-w-max">
             <Draggable
                 tag="ul"
-                class="flex gap-4"
+                class="flex gap-6"
                 v-model="filteredCategories.list"
                 @start="resetSavingOrder()"
                 @end="saveOrder()"
@@ -23,11 +23,11 @@
             >
                 <template #item="{ element: category, index: i }">
                     <li
-                        class="relative flex flex-col items-center justify-center w-48 h-48 p-4 rounded-lg group bg-white shadow-nr10 hover:shadow-nr15 transition-all overflow-hidden"
+                        class="relative flex flex-col items-center justify-center w-48 h-48 p-4 rounded-2xl group bg-bgSecondary bg-opacity-50 shadow-nr15 hover:shadow-mr25 transition-all overflow-hidden"
                     >
                         <SlideMenu class="z-10">
                             <button
-                                class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
+                                class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30"
                                 @click="toggleCategoryVisibility(i)"
                                 v-if="checkPermissions(['main-panel.menu.items'], brand)"
                             >
@@ -39,16 +39,16 @@
                                 <Loading size="h-4" v-else />
                             </button>
                             <nuxt-link
-                                class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin"
+                                class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30"
                                 :to="localePath(`/panel/${route.params.brandID}/menu/category/${category._id}`)"
                                 v-if="checkPermissions(['main-panel.menu.items'], brand)"
                             >
                                 <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
                                 <small>{{ $t("panel.menu.Edit This Category") }}</small>
                             </nuxt-link>
-                            <hr class="w-full opacity-20" />
+                            <hr class="w-11/12 mx-auto opacity-10" />
                             <button
-                                class="flex items-center gap-2 p-2 rounded-md hover:bg-dolphin text-red-300"
+                                class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30 text-red-300"
                                 @click="openDeleteDialog(i)"
                                 v-if="checkPermissions(['main-panel.menu.items'], brand)"
                             >
@@ -56,17 +56,17 @@
                                 <small>{{ $t("panel.menu.Delete Category") }}</small>
                             </button>
                         </SlideMenu>
-                        <div class="flex flex-col items-center justify-center gap-2 w-36 h-36 bg-neutral-100 shadow-inner rounded-md">
+                        <div class="flex flex-col items-center justify-center gap-2 w-36 h-36 bg-bgSecondary shadow-mr25 rounded-xl">
                             <img class="w-16 h-16 mt-2" :src="category.icon" alt="" loading="lazy" />
-                            <h4 class="w-full text-sm text-pencil-tip whitespace-nowrap text-ellipsis overflow-hidden text-center px-2 font-semibold">
+                            <h4 class="w-full whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
                                 {{ category.translation?.[locale]?.name || category.name }}
                             </h4>
                         </div>
                         <div class="absolute top-8 start-2 flex flex-col items-start gap-2">
-                            <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.hidden">
+                            <span class="p-1 rounded-md text-xs text-white bg-primary bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.hidden">
                                 {{ $t("panel.menu.Hidden") }}
                             </span>
-                            <span class="p-1 rounded-md text-xs text-white bg-neutral-500 bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.showAsNew">
+                            <span class="p-1 rounded-md text-xs text-white bg-secondary bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.showAsNew">
                                 {{ $t("New") }}
                             </span>
                         </div>
@@ -82,25 +82,26 @@
 
         <Teleport to="body">
             <Dialog name="delete-confirmation" :title="$t('panel.menu.Delete Category')">
-                <div class="flex flex-col gap-3">
-                    <hr class="w-full opacity-30 mt-2" />
-                    <h2 class="text-xl" v-html="$t('panel.menu.You are about to delete this category', { name: categories.list[indexToDelete].name })" />
-                    <p class="text-sm opacity-75 -mt-2">
-                        {{ $t("panel.menu.deletingCategoryDesc") }}
-                    </p>
-                    <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
+                <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-2 p-4 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
+                        <h2 class="text-xl" v-html="$t('panel.menu.You are about to delete this category', { name: categories.list[indexToDelete].name })" />
+                        <p class="text-sm opacity-75">
+                            {{ $t("panel.menu.deletingCategoryDesc") }}
+                        </p>
+                    </div>
+                    <small class="flex items-center gap-2 text-sm text-red-200 bg-red-700 bg-opacity-10 p-4 rounded-xl shadow-inner">
                         {{ $t("panel.brands.This action cannot be reversed") }}
                     </small>
-                    <hr class="w-full opacity-20" />
+                    <hr class="w-full border-neutral-500 border-opacity-40" />
                     <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
                     <div class="flex items-center gap-2 w-full">
-                        <button class="btn w-full p-3 rounded bg-dolphin" :disabled="deleting" @click="panelStore.closePopUp()">
+                        <button class="btn w-full p-3 hover:px-6 rounded-xl bg-bgSecondary" :disabled="deleting" @click="panelStore.closePopUp()">
                             {{ $t("Cancel") }}
                         </button>
                         <button
-                            class="btn w-full p-3 rounded bg-red-500"
+                            class="btn w-full p-3 hover:px-6 rounded-xl bg-red-400"
                             :class="{ 'opacity-75 cursor-not-allowed': deleting }"
                             :disabled="deleting"
                             @click="deleteRecord()"
