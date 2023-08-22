@@ -13,7 +13,7 @@
             group="categories"
         >
             <template #item="{ element: groups, index: k }">
-                <div class="flex flex-col gap-3 border-2 border-bgSecondary border-opacity-75 p-3 rounded-3xl">
+                <div class="flex flex-col gap-3 rounded-3xl">
                     <div class="sticky -top-3 flex items-center gap-2 w-full px-2 bg-bgSecondary rounded-2xl shadow-nr10 z-2">
                         <div class="group_grab_area">
                             <Icon
@@ -32,7 +32,7 @@
                             class="flex items-center gap-2 w-full py-3.5"
                             @click="filteredDishes.list[k][0].category.close = !filteredDishes.list[k][0].category.close"
                         >
-                            <span class="h-0.5 bg-primary bg-opacity-30 w-full grow"></span>
+                            <span class="h-0.5 bg-primary bg-opacity-5 w-full grow"></span>
                             <Icon
                                 class="w-5 h-5 bg-primary transition-all"
                                 :class="{ 'rotate-90': filteredDishes.list[k][0].category.close }"
@@ -59,7 +59,7 @@
                             >
                                 <template #item="{ element: dish, index: i }">
                                     <li
-                                        class="relative flex flex-wrap @6xl:flex-nowrap gap-4 p-4 ps-9 rounded-2xl group bg-bgAccent shadow-mr35 transition-all overflow-hidden"
+                                        class="relative flex flex-col md:flex-row items-center md:items-stretch flex-wrap @6xl:flex-nowrap gap-4 p-4 ps-9 rounded-2xl group bg-bgAccent shadow-mr35 transition-all overflow-hidden"
                                         v-if="dish._id"
                                     >
                                         <div class="flex flex-col gap-4 w-full max-w-lg">
@@ -70,10 +70,8 @@
                                                     alt=""
                                                     loading="lazy"
                                                 />
-                                                <div class="flex flex-col gap-3 w-full">
-                                                    <div
-                                                        class="flex flex-col gap-1 bg-bgSecondary bg-opacity-50 w-full max-w-sm p-2.5 rounded-xl shadow-mr15 overflow-hidden"
-                                                    >
+                                                <div class="flex flex-col gap-3 w-full overflow-hidden">
+                                                    <div class="flex flex-col gap-1 bg-bgSecondary bg-opacity-50 p-2.5 rounded-xl shadow-mr15">
                                                         <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
                                                             {{ dish.translation?.[locale]?.name || dish.name }}
                                                         </h4>
@@ -88,7 +86,7 @@
                                                         </span>
                                                         <span class="f-inter text-sm font-extralight -ms-2"> {{ $t("pricing.Toman") }} </span>
                                                         <div
-                                                            class="flex items-center gap-1 px-2 py-0.5 rounded-xl bg-rose-400 bg-opacity-75 text-white shadow-nr5 shadow-rose-950"
+                                                            class="flex items-center gap-1 px-2 py-0.5 rounded-xl bg-rose-400 bg-opacity-75 text-white shadow-nr10 shadow-rose-900"
                                                             v-if="dish.discountActive"
                                                         >
                                                             <h5 class="text-xs font-bold">{{ dish.discountPercentage }}%</h5>
@@ -152,7 +150,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="flex flex-col gap-4 w-full max-w-screen-2xs bg-bgSecondary bg-opacity-30 shadow-mr15 p-3 rounded-2xl">
+                                        <div class="flex flex-col gap-4 w-full max-w-screen-2xs p-3 rounded-2xl border border-bgSecondary border-opacity-50">
                                             <h4 class="flex items-center gap-1 text-sm font-semibold">
                                                 <Icon class="w-5 h-5 gradient" name="calendar-range.svg" folder="icons/light" size="20px" />
                                                 {{ $t("panel.menu.Special Of The Day Tag") }}
@@ -180,7 +178,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="flex flex-col gap-4 w-full max-w-screen-2xs bg-bgSecondary bg-opacity-30 shadow-mr15 p-3 rounded-2xl">
+                                        <div class="flex flex-col gap-4 w-full max-w-screen-2xs p-3 rounded-2xl border border-bgSecondary border-opacity-50">
                                             <h4 class="flex items-center gap-1 text-sm font-semibold">
                                                 <Icon class="w-5 h-5 gradient" name="falafel.svg" folder="icons/light" size="20px" />
                                                 {{ $t("panel.menu.Item Variants") }}
@@ -217,7 +215,7 @@
                                     </h4>
                                 </div> -->
                                         <!-- TODO : show menu item like count if limitations allows it "menu-item-like" -->
-                                        <div class="flex flex-wrap md:flex-col items-center gap-4 max-w-max ms-auto shrink-0">
+                                        <div class="flex flex-wrap md:flex-col items-center gap-4 md:ms-auto shrink-0">
                                             <nuxt-link
                                                 class="btn flex items-center gap-2 p-3 rounded-xl border border-bgSecondary hover:bg-sky-300 group/btn"
                                                 :title="$t('panel.Edit')"
@@ -265,6 +263,7 @@
                             </Draggable>
                         </div>
                     </div>
+                    <span class="w-full h-0.5 bg-bgSecondary mt-3"></span>
                 </div>
             </template>
         </Draggable>

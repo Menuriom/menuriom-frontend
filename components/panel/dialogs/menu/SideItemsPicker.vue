@@ -4,7 +4,7 @@
     <Dialog name="side-item-picker">
         <template #title>
             <div class="flex items-center gap-2 w-full">
-                <img class="w-8" src="~/assets/images/panel-icons/list-tree-light.png" alt="" />
+                <Icon class="w-8 h-8 gradient" name="list-tree.svg" folder="icons/duo" size="32px" />
                 <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.menu.Side Item Groups") }}</h3>
             </div>
         </template>
@@ -12,42 +12,46 @@
             <small class="opacity-75 -mt-1">
                 {{ $t("panel.menu.Select side item groups that you want to add to this item of the menu") }}
             </small>
-            <hr class="opacity-25" />
+            <hr class="border-bgSecondary" />
             <div class="flex flex-col items-center p-2" v-if="sideItemGroups.list.length == 0">
                 <span class="">{{ $t("panel.menu.You havent created any side groups yet") }}</span>
             </div>
             <ul class="flex flex-col gap-2 w-full">
                 <li
-                    class="flex flex-col items-center gap-2 p-4 bg-neutral-800 rounded-lg border-2 border-transparent hover:border-primary cursor-pointer"
+                    class="flex flex-col items-center gap-2 p-4 bg-bgSecondary bg-opacity-50 rounded-2xl border-2 border-transparent hover:border-primary cursor-pointer"
                     @click="panelStore.openPopUp('side-item-creator')"
                     v-if="canCreateNewGroup"
                 >
-                    <Icon class="w-4 h-4 bg-purple-300" name="plus.svg" folder="icons" size="16px" />
-                    <span class="text-purple-300 text-xs">{{ $t("panel.menu.Create New Group") }}</span>
+                    <Icon class="w-4 h-4 bg-primary" name="plus.svg" folder="icons" size="16px" />
+                    <span class="text-xs">{{ $t("panel.menu.Create New Group") }}</span>
                 </li>
-                <li class="flex flex-wrap items-center gap-4 bg-neutral-800 rounded-lg" v-for="(item, id) in sideItemGroups.list" :key="id">
+                <li
+                    class="flex flex-wrap items-center gap-4 bg-bgSecondary bg-opacity-50 rounded-2xl shadow-mr10"
+                    v-for="(item, id) in sideItemGroups.list"
+                    :key="id"
+                >
                     <div class="flex items-center justify-center h-14 ps-4 cursor-pointer" @click="toggleItemGroupSelection(item, id)">
                         <span
                             class="flex items-center justify-center w-4 h-4 border-2 rounded transition-all shrink-0"
-                            :class="[selectedItemGroups.has(id) ? 'border-baby-blue bg-baby-blue shadow-xl shadow-baby-blue' : 'border-zinc-500']"
+                            :class="[selectedItemGroups.has(id) ? 'border-secondary bg-secondary shadow-xl shadow-secondary' : 'border-zinc-500']"
                         >
                             <Icon class="w-4 h-4 bg-neutral-800" name="Check.svg" folder="icons/basil" size="20px" />
                         </span>
                     </div>
                     <div class="flex flex-col py-4 cursor-pointer grow" @click="toggleItemGroupSelection(item, id)">
                         <h4 class="font-bold">{{ item.translation?.[locale]?.name || item.name }}</h4>
-                        <small class="text-xs opacity-75">{{ item.translation?.[locale]?.description || item.description }}</small>
+                        <small class="text-xs opacity-80 text-secondary">{{ item.translation?.[locale]?.description || item.description }}</small>
                     </div>
                     <div class="flex flex-wrap items-center gap-1 pe-4">
                         <button
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-blue-500 hover:bg-opacity-10 text-blue-300 cursor-pointer shrink-0"
+                            class="flex items-center gap-2 p-2 rounded-xl hover:bg-blue-300 hover:bg-opacity-20 border border-fgPrimary border-opacity-10 cursor-pointer shrink-0"
                             @click="$emit('openEdit', item)"
                             :title="$t('panel.Edit')"
                         >
                             <Icon class="w-5 h-5 bg-neutral-300" name="pen-to-square.svg" folder="icons/light" size="18px" />
                         </button>
                         <button
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer shrink-0"
+                            class="flex items-center gap-2 p-2 rounded-xl hover:bg-rose-300 hover:bg-opacity-20 border border-fgPrimary border-opacity-10 cursor-pointer shrink-0"
                             @click="$emit('openDelete', item)"
                             :title="$t('panel.Delete')"
                         >
@@ -60,7 +64,7 @@
             <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!loadingGroups && errorField === '' && responseMessage !== ''">
                 <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
-            <hr class="opacity-25" />
+            <!-- <hr class="border-bgSecondary" /> -->
             <!-- <button
                 class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-primary text-white shrink-0"
                 @click="saveSelected()"

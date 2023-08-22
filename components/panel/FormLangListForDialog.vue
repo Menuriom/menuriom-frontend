@@ -1,11 +1,11 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full lg:w-72 rounded-lg text-white">
+    <div class="flex flex-col gap-4 w-full lg:w-72 rounded-lg">
         <ul class="flex gap-2 w-full overflow-auto" v-if="!loadingSettings">
             <li
-                class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer shrink-0"
-                :class="{ 'bg-neutral-100 text-pencil-tip': formLang == 'default' }"
+                class="flex items-center justify-between gap-2 p-2 bg-bgSecondary rounded-xl transition-all cursor-pointer shrink-0"
+                :class="{ 'bg-fgPrimary text-bgPrimary': formLang == 'default' }"
                 @click="$emit('update:formLang', 'default')"
             >
                 <div class="flex items-center gap-2">
@@ -14,8 +14,8 @@
                 </div>
             </li>
             <li
-                class="flex items-center justify-between gap-2 p-2 bg-dolphin rounded-md transition-all cursor-pointer shrink-0"
-                :class="{ 'bg-neutral-100 text-pencil-tip': formLang == lang }"
+                class="flex items-center justify-between gap-2 p-2 bg-bgSecondary rounded-xl transition-all cursor-pointer shrink-0"
+                :class="{ 'bg-fgPrimary text-bgPrimary': formLang == lang }"
                 v-for="(lang, i) in settings.languages"
                 :key="i"
                 @click="$emit('update:formLang', lang)"

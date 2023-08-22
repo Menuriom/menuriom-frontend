@@ -13,23 +13,24 @@
                 </small>
             </div>
             <button
-                class="btn flex items-center justify-center gap-2 p-2.5 text-xs rounded-md border-2 text-purple-300 border-neutral-300"
+                class="btn flex items-center justify-center gap-2 p-2 px-3 hover:px-6 text-sm rounded-xl bg-fgPrimary text-bgPrimary"
                 @click="panelStore.openPopUp('side-item-picker')"
                 type="button"
             >
-                <Icon class="w-4 h-4 bg-purple-300" name="bars-progress.svg" folder="icons/light" size="16px" />
+                <Icon class="w-4 h-4 bg-primary" name="bars-progress.svg" folder="icons/light" size="16px" />
                 {{ $t("panel.menu.Select Side Items") }}
             </button>
         </div>
         <ul class="flex flex-col gap-2 w-full">
             <li class="flex items-center gap-2 w-full" v-for="(item, i) in selectedSideItemList.values()" :key="i">
-                <div class="flex flex-wrap items-center gap-4 p-4 py-3 bg-neutral-700 rounded-lg grow">
-                    <div class="flex flex-col cursor-pointer grow" @click="selectItemGroup(item)">
+                <div class="flex flex-wrap items-center gap-4 p-3 bg-bgSecondary bg-opacity-75 rounded-2xl grow">
+                    <div class="flex flex-wrap items-center gap-2 cursor-pointer grow" @click="selectItemGroup(item)">
                         <h4 class="font-bold">{{ item.translation?.[locale]?.name || item.name }}</h4>
-                        <small class="text-xs opacity-75">{{ item.translation?.[locale]?.description || item.description }}</small>
+                        <span class="w-2 h-0.5 bg-bgPrimary"></span>
+                        <small class="text-xs opacity-80 text-secondary">{{ item.translation?.[locale]?.description || item.description }}</small>
                     </div>
                     <button
-                        class="flex items-center gap-2 p-2 rounded-md hover:bg-blue-500 hover:bg-opacity-10 text-blue-300 cursor-pointer shrink-0"
+                        class="flex items-center gap-2 p-2 rounded-xl hover:bg-blue-300 hover:bg-opacity-10 border border-fgPrimary border-opacity-10 cursor-pointer shrink-0"
                         @click="openEditDialog(item)"
                         :title="$t('panel.Edit')"
                     >
@@ -37,12 +38,12 @@
                     </button>
                 </div>
                 <button
-                    class="flex items-center gap-1 p-2 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer shrink-0"
+                    class="flex items-center gap-2 p-3.5 border border-bgSecondary rounded-xl hover:bg-rose-400 cursor-pointer group shrink-0"
                     @click="selectedSideItemList.delete(item._id)"
                     :title="$t('panel.Delete')"
                 >
-                    <Icon class="w-5 h-5 bg-red-300" name="Cross.svg" folder="icons/basil" size="24px" />
-                    <small>{{ $t("panel.Delete") }}</small>
+                    <Icon class="w-5 h-5 bg-red-300 group-hover:bg-fgPrimary" name="Cross.svg" folder="icons/basil" size="28px" />
+                    <small class="text-rose-300 group-hover:text-fgPrimary">{{ $t("panel.Delete") }}</small>
                 </button>
             </li>
         </ul>

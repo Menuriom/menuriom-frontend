@@ -2,25 +2,26 @@
 
 <template>
     <Dialog name="side-item-delete-confirmation" :title="$t('panel.menu.Delete Side Items Group')">
-        <div class="flex flex-col gap-3">
-            <hr class="w-full opacity-30 mt-2" />
-            <h2 class="text-xl" v-html="$t('panel.menu.You are about to delete this side items group', { name: item.name })" />
-            <p class="text-sm opacity-75 -mt-2">
-                {{ $t("panel.menu.deletingSideItemsGroupDesc") }}
-            </p>
-            <small class="text-sm text-red-200 bg-red-900 bg-opacity-20 p-2 border border-red-900 rounded-md mt-4">
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-2 p-4 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
+                <h2 class="text-xl" v-html="$t('panel.menu.You are about to delete this side items group', { name: item.name })" />
+                <p class="text-sm opacity-75 -mt-2">
+                    {{ $t("panel.menu.deletingSideItemsGroupDesc") }}
+                </p>
+            </div>
+            <small class="flex items-center gap-2 text-sm text-red-200 bg-red-700 bg-opacity-10 p-4 rounded-xl shadow-inner">
                 {{ $t("panel.brands.This action cannot be reversed") }}
             </small>
-            <hr class="w-full opacity-20" />
+            <hr class="w-full border-neutral-500 border-opacity-40" />
             <small class="flex items-start text-xs text-rose-300" v-if="responseMessage !== ''">
                 <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
             <div class="flex items-center gap-2 w-full">
-                <button class="btn w-full p-3 rounded bg-dolphin" :disabled="deleting" @click="panelStore.openPopUp('side-item-picker')">
+                <button class="btn w-full p-3 hover:px-6 rounded-xl bg-bgSecondary" :disabled="deleting" @click="panelStore.openPopUp('side-item-picker')">
                     {{ $t("Cancel") }}
                 </button>
                 <button
-                    class="btn w-full p-3 rounded bg-red-500"
+                    class="btn w-full p-3 hover:px-6 rounded-xl bg-red-400"
                     :class="{ 'opacity-75 cursor-not-allowed': deleting }"
                     :disabled="deleting"
                     @click="deleteRecord()"
