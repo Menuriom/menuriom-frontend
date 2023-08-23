@@ -1,9 +1,10 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
+    <div class="flex flex-col gap-6 w-full p-4 bg-bgAccent rounded-2xl shadow-mr15">
+        <small class="text-secondary opacity-80 -mb-4">{{ $t("panel.menu-style.try out the animation by clicking on the phone screen") }}</small>
         <div class="flex flex-wrap items-center gap-2">
-            <h5>{{ $t("panel.menu-style.Animation") }}</h5>
+            <h5 class="text-sm">{{ $t("panel.menu-style.Animation") }}</h5>
             <ul class="flex flex-wrap items-center gap-2">
                 <li
                     class="flex items-center gap-2 p-1.5 rounded-full border-2 border-neutral-500 border-opacity-25 shadow-nr5 cursor-pointer"
@@ -20,19 +21,18 @@
                     <span class="text-sm me-2">{{ item }}</span>
                 </li>
             </ul>
-            <small>{{ $t("panel.menu-style.try out the animation by clicking on the phone screen") }}</small>
         </div>
-
         <div class="flex flex-wrap items-center gap-2">
-            <h5>{{ $t("panel.menu-style.Logo Radius") }}</h5>
-            <input class="input-range light w-40" type="range" max="80" step="5" v-model="splashScreenOptions.cornerRadius" />
+            <h5 class="text-sm">{{ $t("panel.menu-style.Logo Radius") }}</h5>
+            <input class="input-range w-40" type="range" max="80" step="5" v-model="splashScreenOptions.cornerRadius" />
         </div>
+        <hr class="w-full border-bgSecondary">
         <div class="flex flex-wrap lg:flex-nowrap gap-4 w-full">
             <div class="flex flex-col gap-2 p-2 w-full rounded-lg border borde-neutral-500 border-opacity-50">
                 <div class="flex flex-wrap items-center gap-2">
                     <div class="flex items-center gap-2">
-                        <h5>{{ $t("panel.menu-style.Line Text") }}</h5>
-                        <Switch_Light v-model:value="splashScreenOptions.withLine" />
+                        <h5 class="text-sm">{{ $t("panel.menu-style.Line Text") }}</h5>
+                        <Switch v-model:value="splashScreenOptions.withLine" />
                     </div>
                     <span class="w-1 border border-neutral-500 opacity-25 grow"></span>
                 </div>
@@ -40,18 +40,19 @@
                     <hr class="w-full border-neutral-500 opacity-25" />
                     <div class="flex flex-wrap items-start gap-2">
                         <label class="text-sm">{{ $t("panel.menu-style.Line Rotation") }}</label>
-                        <input class="input-range light w-44" type="range" min="0" max="180" step="10" v-model="splashScreenOptions.lineRotation" />
+                        <input class="input-range w-44" type="range" min="0" max="180" step="10" v-model="splashScreenOptions.lineRotation" />
                     </div>
                     <Input :label="$t('panel.menu-style.Text')" v-model="splashScreenOptions.lineText" />
                 </div>
             </div>
         </div>
+        <hr class="w-full border-bgSecondary">
         <div class="flex flex-wrap lg:flex-nowrap gap-4 w-full">
             <div class="flex flex-col gap-2 p-2 w-full rounded-lg border borde-neutral-500 border-opacity-50">
                 <div class="flex flex-wrap items-center gap-2">
                     <div class="flex items-center gap-2">
-                        <h5>{{ $t("panel.menu-style.Background Pattern") }}</h5>
-                        <Switch_Light v-model:value="splashScreenOptions.withPattern" />
+                        <h5 class="text-sm">{{ $t("panel.menu-style.Background Pattern") }}</h5>
+                        <Switch v-model:value="splashScreenOptions.withPattern" />
                     </div>
                     <span class="w-1 border border-neutral-500 opacity-25 grow"></span>
                     <ul class="flex items-center gap-2">
@@ -119,18 +120,19 @@
             <div class="flex flex-col gap-2" v-if="splashScreenOptions.withPattern">
                 <div class="flex flex-col items-start gap-1">
                     <label class="text-sm">{{ $t("panel.menu-style.Pattern Opacity") }}</label>
-                    <input class="input-range light w-44" type="range" min="10" max="100" step="10" v-model="splashScreenOptions.bgImageOpacity" />
+                    <input class="input-range w-44" type="range" min="10" max="100" step="10" v-model="splashScreenOptions.bgImageOpacity" />
                 </div>
                 <div class="flex flex-col items-start gap-1">
                     <label class="text-sm">{{ $t("panel.menu-style.Pattern Rotations") }}</label>
-                    <input class="input-range light w-44" type="range" min="-180" max="180" step="5" v-model="splashScreenOptions.bgImageRotation" />
+                    <input class="input-range w-44" type="range" min="-180" max="180" step="5" v-model="splashScreenOptions.bgImageRotation" />
                 </div>
                 <div class="flex flex-col items-start gap-1">
                     <label class="text-sm">{{ $t("panel.menu-style.Pattern Size") }}</label>
-                    <input class="input-range light w-44" type="range" min="10" max="100" step="10" v-model="splashScreenOptions.bgImageSize" />
+                    <input class="input-range w-44" type="range" min="10" max="100" step="10" v-model="splashScreenOptions.bgImageSize" />
                 </div>
             </div>
         </div>
+        <hr class="w-full border-bgSecondary" />
         <div class="flex flex-col gap-2">
             <div class="flex flex-wrap gap-2">
                 <ColorPicker :label="$t('panel.menu-style.text color')" v-model:color="splashScreenOptions.textColor" :baseColor="baseColors.textColor" />
@@ -150,7 +152,7 @@
                     :baseColor="baseColors.primaryColor"
                 />
             </div>
-            <small class="text-xs">
+            <small class="text-xs text-secondary opacity-80">
                 {{ $t("panel.menu-style.you can change colors for each section (make sure to unlock the color sync first)") }}
             </small>
         </div>
@@ -160,7 +162,7 @@
 <script setup>
 import Input from "@/components/form/Input.vue";
 import ColorPicker from "@/components/form/ColorPicker.vue";
-import Switch_Light from "~/components/form/Switch_Light.vue";
+import Switch from "~/components/form/Switch.vue";
 
 const route = useRoute();
 

@@ -263,7 +263,6 @@
                             </Draggable>
                         </div>
                     </div>
-                    <span class="w-full h-0.5 bg-bgSecondary mt-3"></span>
                 </div>
             </template>
         </Draggable>

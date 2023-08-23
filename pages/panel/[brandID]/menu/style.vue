@@ -1,22 +1,22 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full">
+    <div class="flex flex-col gap-6 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
-                    <img class="w-9" src="~/assets/images/panel-icons/brush-dark.png" alt="" />
+                    <Icon class="w-9 h-9 gradient" name="brush.svg" folder="icons/duo" size="36px" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.menu-style.Menu Style Editor") }}</h1>
                 </div>
-                <small class="hidden sm:flex text-sm">
+                <small class="hidden sm:flex text-sm opacity-75">
                     {{ $t("panel.menu-style.Style your menu that suit your restaurant scheme") }}
                 </small>
             </div>
         </header>
-        <hr class="w-full border-gray-300 opacity-50" />
-        <div class="flex flex-wrap @[1280px]:flex-nowrap items-start gap-4 w-full">
-            <section class="flex flex-col items-start gap-4 w-full grow">
-                <div class="flex flex-wrap gap-3">
+        <hr class="w-full border-bgSecondary" />
+        <div class="flex flex-wrap @[1280px]:flex-nowrap items-start gap-6 w-full">
+            <section class="flex flex-col items-start gap-6 w-full grow">
+                <div class="flex flex-wrap justify-between gap-3 w-full">
                     <ColorPicker :label="$t('panel.menu-style.text color')" v-model:color="baseColors.textColor" />
                     <ColorPicker :label="$t('panel.menu-style.background main')" v-model:color="baseColors.bgMainColor" />
                     <ColorPicker :label="$t('panel.menu-style.background accent')" v-model:color="baseColors.bgSecondaryColor" />
@@ -24,17 +24,17 @@
                     <ColorPicker :label="$t('panel.menu-style.accent color')" v-model:color="baseColors.accentColor" />
                 </div>
 
-                <ul class="scroll-thin flex items-center gap-2 w-full pb-2 -my-1 -mb-3 overflow-auto shrink-0">
+                <ul class="scroll-thin flex items-center gap-2 w-full -my-3 overflow-auto bg-bgSecondary bg-opacity-75 p-2 rounded-2xl shrink-0">
                     <li
-                        class="flex items-center gap-2 text-sm p-1 px-2 border-2 rounded-md shrink-0 cursor-pointer"
-                        :class="{ 'border-dolphin bg-pencil-tip text-white': selectedTab === item.name.replaceAll(' ', '') }"
+                        class="btn flex items-center gap-2 text-sm p-2 px-3 hover:px-5 border-2 rounded-xl shrink-0 bg-bgAccent cursor-pointer"
+                        :class="[selectedTab === item.name.replaceAll(' ', '') ? 'bg-bgSecondary border-primary border-opacity-75' : 'border-bgSecondary opacity-80']"
                         @click="selectedTab = item.name.replaceAll(' ', '')"
                         v-for="(item, i) in tabsList"
                         :key="i"
                     >
                         <Icon
                             class="w-4 h-4 shrink-0"
-                            :class="[selectedTab === item.name.replaceAll(' ', '') ? 'bg-white' : 'bg-black']"
+                            :class="[selectedTab === item.name.replaceAll(' ', '') ? 'bg-primary  shadow-md shadow-primary' : 'bg-fgPrimary']"
                             :name="item.icon"
                             folder="icons/light"
                             size="16px"
@@ -43,20 +43,20 @@
                     </li>
                 </ul>
 
-                <hr class="w-full border-gray-300 opacity-50" />
+                <!-- <hr class="w-full border-bgSecondary" /> -->
 
                 <div class="flex flex-col gap-4 w-full" v-show="selectedTab === 'MainMenuStyle'">
                     <HeaderSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :headerOptions="mainMenuStyleOptions.headerOptions" />
-                    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5">
+                    <Wrapper class="flex flex-col gap-4 w-full p-4 bg-bgAccent rounded-2xl shadow-mr15">
                         <template #title>
                             <div class="flex items-center justify-between gap-2 w-full">
-                                <h3 class="font-bold">{{ $t("panel.menu-style.Offers Section") }}</h3>
-                                <span class="h-0.5 bg-neutral-200 grow"></span>
-                                <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                                <h3 class="font-bold text-primary">{{ $t("panel.menu-style.Offers Section") }}</h3>
+                                <span class="h-0.5 bg-bgSecondary grow"></span>
+                                <Icon class="w-5 h-5 bg-primary -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
                             </div>
                         </template>
-                        <div class="flex flex-col gap-2 overflow-hidden">
-                            <small class="w-full text-primary border border-neutral-500 border-opacity-25 rounded-md p-2">{{ $t("Coming soon") }}...</small>
+                        <div class="flex flex-col gap-6 overflow-hidden">
+                            <small class="w-full border border-bgSecondary rounded-xl p-4">{{ $t("Coming soon") }}...</small>
                         </div>
                     </Wrapper>
                     <SearchSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :searchOptions="mainMenuStyleOptions.searchOptions" />

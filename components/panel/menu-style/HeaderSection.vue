@@ -1,17 +1,17 @@
 <style scoped></style>
 
 <template>
-    <Wrapper class="flex flex-col gap-2 w-full p-4 bg-white rounded-lg shadow-nr5" :defaultState="1">
+    <Wrapper class="flex flex-col gap-4 w-full p-4 bg-bgAccent rounded-2xl shadow-mr15" :defaultState="1">
         <template #title>
             <div class="flex items-center justify-between gap-2 w-full">
-                <h3 class="font-bold">{{ $t("panel.menu-style.Header Section") }}</h3>
-                <span class="h-0.5 bg-neutral-200 grow"></span>
-                <Icon class="w-5 h-5 bg-pencil-tip -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
+                <h3 class="font-bold text-primary">{{ $t("panel.menu-style.Header Section") }}</h3>
+                <span class="h-0.5 bg-bgSecondary grow"></span>
+                <Icon class="w-5 h-5 bg-primary -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
             </div>
         </template>
-        <div class="flex flex-col gap-4 overflow-hidden">
+        <div class="flex flex-col gap-6 overflow-hidden">
             <div class="flex flex-wrap items-center gap-2">
-                <h5>{{ $t("panel.menu-style.Header Type") }}</h5>
+                <h5 class="text-sm">{{ $t("panel.menu-style.Header Type") }}</h5>
                 <ul class="flex flex-wrap items-center gap-2">
                     <li
                         class="flex items-center gap-2 p-1.5 rounded-full border-2 border-neutral-500 border-opacity-25 shadow-nr5 cursor-pointer"
@@ -30,36 +30,36 @@
                 </ul>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-                <h5>{{ $t("panel.menu-style.Logo Radius") }}</h5>
-                <input class="input-range light w-40" type="range" max="50" step="5" v-model="headerOptions.logoRadius" />
+                <h5 class="text-sm">{{ $t("panel.menu-style.Logo Radius") }}</h5>
+                <input class="input-range w-40" type="range" max="50" step="5" v-model="headerOptions.logoRadius" />
             </div>
+            <hr class="w-full border-bgSecondary" />
             <div class="flex flex-wrap lg:flex-nowrap gap-4 w-full">
-                <div class="flex flex-col gap-2 p-2 w-full rounded-lg border borde-neutral-500 border-opacity-50">
+                <div class="flex flex-col gap-4 p-4 w-full rounded-2xl bg-bgSecondary bg-opacity-60">
                     <div class="flex flex-wrap items-center gap-2">
                         <div class="flex items-center gap-2">
-                            <h5>{{ $t("panel.menu-style.Background Pattern") }}</h5>
-                            <Switch_Light v-model:value="headerOptions.withPattern" />
+                            <h5 class="text-sm">{{ $t("panel.menu-style.Background Pattern") }}</h5>
+                            <Switch v-model:value="headerOptions.withPattern" />
                         </div>
                         <span class="w-1 border border-neutral-500 opacity-25 grow"></span>
                         <ul class="flex items-center gap-2">
                             <li
-                                class="p-1 px-2 text-xs rounded-md border border-primary cursor-pointer"
-                                :class="[patternMode == 'upload' ? 'bg-pencil-tip text-white ' : 'text-pencil-tip']"
+                                class="p-1.5 px-2 text-xs rounded-lg border-2 cursor-pointer"
+                                :class="[patternMode == 'upload' ? 'bg-bgSecondary  border-primary ' : 'border-bgSecondary']"
                                 @click="patternMode = 'upload'"
                             >
                                 {{ $t("panel.menu.File Upload") }}
                             </li>
                             <li
-                                class="p-1 px-2 text-xs rounded-md border border-primary cursor-pointer"
-                                :class="[patternMode == 'list' ? 'bg-pencil-tip text-white' : 'text-pencil-tip']"
+                                class="p-1.5 px-2 text-xs rounded-lg border-2 cursor-pointer"
+                                :class="[patternMode == 'list' ? 'bg-bgSecondary  border-primary' : 'border-bgSecondary']"
                                 @click="patternMode = 'list'"
                             >
                                 {{ $t("panel.menu.Select From List") }}
                             </li>
                         </ul>
                     </div>
-                    <div class="flex flex-col gap-2" v-if="headerOptions.withPattern">
-                        <hr class="w-full border-neutral-500 opacity-25" />
+                    <div class="flex flex-col gap-4" v-if="headerOptions.withPattern">
                         <div
                             class="flex flex-col justify-center gap-2 w-full h-28"
                             v-show="patternMode === 'upload'"
@@ -89,35 +89,36 @@
                             </nuxt-link>
                         </div>
                         <div class="flex flex-col justify-center gap-4 w-full h-28" v-show="patternMode === 'list'">
-                            <ul class="flex flex-wrap items-start gap-2 w-full h-full overflow-auto">
+                            <ul class="flex flex-wrap items-start gap-2.5 w-full h-full overflow-auto">
                                 <li
-                                    class="bg-pencil-tip p-2 rounded-md border-4 cursor-pointer"
+                                    class="bg-pencil-tip p-2 rounded-xl border-4 cursor-pointer"
                                     :class="[headerOptions.bgImage === pattern ? 'border-primary' : 'border-transparent']"
                                     v-for="(pattern, i) in patterns"
                                     :key="i"
                                     @click="selectPatternFromList(pattern)"
                                 >
-                                    <img class="w-12 h-12 object-contain" :src="pattern" alt="" />
+                                    <img class="w-11 h-11 object-contain" :src="pattern" alt="" />
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-col gap-2" v-if="headerOptions.withPattern">
-                    <div class=" flex flex-col items-start gap-1">
-                        <label class="text-sm">{{$t("panel.menu-style.Pattern Opacity")}}</label>
-                        <input class="input-range light w-44" type="range" min="10" max="100" step="10" v-model="headerOptions.bgImageOpacity" />
+                    <div class="flex flex-col items-start gap-1">
+                        <label class="text-sm">{{ $t("panel.menu-style.Pattern Opacity") }}</label>
+                        <input class="input-range w-44" type="range" min="10" max="100" step="10" v-model="headerOptions.bgImageOpacity" />
                     </div>
-                    <div class=" flex flex-col items-start gap-1">
-                        <label class="text-sm">{{$t("panel.menu-style.Pattern Rotations")}}</label>
-                        <input class="input-range light w-44" type="range" min="-180" max="180" step="5" v-model="headerOptions.bgImageRotation" />
+                    <div class="flex flex-col items-start gap-1">
+                        <label class="text-sm">{{ $t("panel.menu-style.Pattern Rotations") }}</label>
+                        <input class="input-range w-44" type="range" min="-180" max="180" step="5" v-model="headerOptions.bgImageRotation" />
                     </div>
-                    <div class=" flex flex-col items-start gap-1">
-                        <label class="text-sm">{{$t("panel.menu-style.Pattern Size")}}</label>
-                        <input class="input-range light w-44" type="range" min="10" max="100" step="10" v-model="headerOptions.bgImageSize" />
+                    <div class="flex flex-col items-start gap-1">
+                        <label class="text-sm">{{ $t("panel.menu-style.Pattern Size") }}</label>
+                        <input class="input-range w-44" type="range" min="10" max="100" step="10" v-model="headerOptions.bgImageSize" />
                     </div>
                 </div>
             </div>
+            <hr class="w-full border-bgSecondary" />
             <div class="flex flex-col gap-2">
                 <div class="flex flex-wrap gap-2">
                     <ColorPicker :label="$t('panel.menu-style.text color')" v-model:color="headerOptions.textColor" :baseColor="baseColors.textColor" />
@@ -132,7 +133,7 @@
                         :baseColor="baseColors.bgSecondaryColor"
                     />
                 </div>
-                <small class="text-xs">
+                <small class="text-xs text-secondary opacity-80">
                     {{ $t("panel.menu-style.you can change colors for each section (make sure to unlock the color sync first)") }}
                 </small>
             </div>
@@ -142,7 +143,7 @@
 
 <script setup>
 import ColorPicker from "@/components/form/ColorPicker.vue";
-import Switch_Light from "~/components/form/Switch_Light.vue";
+import Switch from "~/components/form/Switch.vue";
 import Wrapper from "~/components/form/Wrapper.vue";
 
 const route = useRoute();

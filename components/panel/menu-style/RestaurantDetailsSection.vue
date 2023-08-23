@@ -1,9 +1,9 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full p-4 rounded-lg bg-white shadow-nr5">
+    <div class="flex flex-col gap-6 w-full p-4 bg-bgAccent rounded-2xl shadow-mr15">
         <div class="flex flex-wrap items-center gap-2">
-            <h5>{{ $t("panel.menu-style.Frame Style") }}</h5>
+            <h5 class="text-sm">{{ $t("panel.menu-style.Frame Style") }}</h5>
             <ul class="flex flex-wrap items-center gap-2">
                 <li
                     class="flex items-center gap-2 p-1.5 rounded-full border-2 border-neutral-500 border-opacity-25 shadow-nr5 cursor-pointer"
@@ -22,7 +22,7 @@
             </ul>
         </div>
         <div class="flex flex-wrap items-center gap-2">
-            <h5>{{ $t("panel.menu-style.Content Style") }}</h5>
+            <h5 class="text-sm">{{ $t("panel.menu-style.Content Style") }}</h5>
             <ul class="flex flex-wrap items-center gap-2">
                 <li
                     class="flex items-center gap-2 p-1.5 rounded-full border-2 border-neutral-500 border-opacity-25 shadow-nr5 cursor-pointer"
@@ -41,19 +41,20 @@
             </ul>
         </div>
         <div class="flex flex-wrap items-center gap-2">
-            <h5>{{ $t("panel.menu-style.Corner Radius") }}</h5>
-            <input class="input-range light w-40" type="range" max="60" step="5" v-model="restaurantDetailsPageOptions.cornerRadius" />
+            <h5 class="text-sm">{{ $t("panel.menu-style.Corner Radius") }}</h5>
+            <input class="input-range w-40" type="range" max="60" step="5" v-model="restaurantDetailsPageOptions.cornerRadius" />
         </div>
         <div class="flex flex-wrap items-center gap-2" v-if="0">
-            <h5>{{ $t("panel.menu-style.Thumbnail Overflow") }}</h5>
-            <input class="input-range light w-40" type="range" max="20" step="5" v-model="restaurantDetailsPageOptions.marginTop" />
+            <h5 class="text-sm">{{ $t("panel.menu-style.Thumbnail Overflow") }}</h5>
+            <input class="input-range w-40" type="range" max="20" step="5" v-model="restaurantDetailsPageOptions.marginTop" />
         </div>
+        <hr class="w-full border-bgSecondary">
         <div class="flex flex-wrap lg:flex-nowrap gap-4 w-full">
             <div class="flex flex-col gap-2 p-2 w-full rounded-lg border borde-neutral-500 border-opacity-50">
                 <div class="flex flex-wrap items-center gap-2">
                     <div class="flex items-center gap-2">
-                        <h5>{{ $t("panel.menu-style.Background Pattern") }}</h5>
-                        <Switch_Light v-model:value="restaurantDetailsPageOptions.withPattern" />
+                        <h5 class="text-sm">{{ $t("panel.menu-style.Background Pattern") }}</h5>
+                        <Switch v-model:value="restaurantDetailsPageOptions.withPattern" />
                     </div>
                     <span class="w-1 border border-neutral-500 opacity-25 grow"></span>
                     <ul class="flex items-center gap-2">
@@ -121,18 +122,19 @@
             <div class="flex flex-col gap-2" v-if="restaurantDetailsPageOptions.withPattern">
                 <div class="flex flex-col items-start gap-1">
                     <label class="text-sm">{{ $t("panel.menu-style.Pattern Opacity") }}</label>
-                    <input class="input-range light w-44" type="range" min="10" max="100" step="10" v-model="restaurantDetailsPageOptions.bgImageOpacity" />
+                    <input class="input-range w-44" type="range" min="10" max="100" step="10" v-model="restaurantDetailsPageOptions.bgImageOpacity" />
                 </div>
                 <div class="flex flex-col items-start gap-1">
                     <label class="text-sm">{{ $t("panel.menu-style.Pattern Rotations") }}</label>
-                    <input class="input-range light w-44" type="range" min="-180" max="180" step="5" v-model="restaurantDetailsPageOptions.bgImageRotation" />
+                    <input class="input-range w-44" type="range" min="-180" max="180" step="5" v-model="restaurantDetailsPageOptions.bgImageRotation" />
                 </div>
                 <div class="flex flex-col items-start gap-1">
                     <label class="text-sm">{{ $t("panel.menu-style.Pattern Size") }}</label>
-                    <input class="input-range light w-44" type="range" min="10" max="100" step="10" v-model="restaurantDetailsPageOptions.bgImageSize" />
+                    <input class="input-range w-44" type="range" min="10" max="100" step="10" v-model="restaurantDetailsPageOptions.bgImageSize" />
                 </div>
             </div>
         </div>
+        <hr class="w-full border-bgSecondary">
         <div class="flex flex-col gap-2">
             <div class="flex flex-wrap gap-2">
                 <ColorPicker
@@ -161,7 +163,7 @@
                     :baseColor="baseColors.accentColor"
                 />
             </div>
-            <small class="text-xs">
+            <small class="text-xs text-secondary opacity-80">
                 {{ $t("panel.menu-style.you can change colors for each section (make sure to unlock the color sync first)") }}
             </small>
         </div>
@@ -170,7 +172,7 @@
 
 <script setup>
 import ColorPicker from "@/components/form/ColorPicker.vue";
-import Switch_Light from "~/components/form/Switch_Light.vue";
+import Switch from "~/components/form/Switch.vue";
 
 const route = useRoute();
 

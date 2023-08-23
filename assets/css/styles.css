@@ -118,7 +118,7 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
 .input-range::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     width: 100%; height: .5rem; border-radius: 1rem;
-    cursor: pointer; background-color: theme("colors.neutral.500");
+    cursor: pointer; background-color: theme("colors.neutral.600");
 }
 .input-range::-moz-range-track {
     width: 100%; height: .5rem; border-radius: 1rem;

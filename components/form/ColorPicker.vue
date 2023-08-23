@@ -45,7 +45,7 @@ input[type="range"]::-moz-range-thumb {
 </style>
 
 <template>
-    <div class="relative flex flex-col items-start gap-2 w-[166px] border p-2 rounded-md isolate">
+    <div class="relative flex flex-col items-start gap-2 w-[166px] bg-bgSecondary bg-opacity-75 p-3 rounded-xl shadow-mr15 isolate">
         <div class="flex items-center justify-between gap-0 w-full">
             <label class="flex items-center gap-2 text-xs grow" v-if="label">{{ label }} </label>
             <button
