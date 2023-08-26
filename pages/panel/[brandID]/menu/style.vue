@@ -12,10 +12,26 @@
                     {{ $t("panel.menu-style.Style your menu that suit your restaurant scheme") }}
                 </small>
             </div>
+            <div class="flex flex-wrap items-center gap-4">
+                <nuxt-link
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-fgPrimary text-bgPrimary shrink-0"
+                    :to="`${runtimeConfig.public.BASE_URL}/r/${route.params.brandID}`"
+                >
+                    <Icon class="w-5 h-5 gradient" name="book-open.svg" folder="icons/light" size="20px" />
+                    {{ $t("panel.menu.View Live Menu") }}
+                </nuxt-link>
+                <button class="btn flex items-center justify-center gap-2 p-3 hover:px-6 bg-primary rounded-xl text-sm" @click="saveSettings()">
+                    <span class="flex items-center gap-2" v-if="!saving">
+                        <Icon class="w-5 h-5 bg-fgPrimary" name="floppy-disk.svg" folder="icons/light" size="20px" />
+                        {{ $t("panel.qrcode.Save Settings") }}
+                    </span>
+                    <Loading v-else />
+                </button>
+            </div>
         </header>
         <hr class="w-full border-bgSecondary" />
-        <div class="flex flex-wrap @[1280px]:flex-nowrap items-start gap-6 w-full">
-            <section class="flex flex-col items-start gap-6 w-full grow">
+        <div class="flex flex-wrap @[1280px]:flex-nowrap items-start gap-4 w-full">
+            <section class="flex flex-col items-start gap-4 w-full grow">
                 <div class="flex flex-wrap justify-between gap-3 w-full">
                     <ColorPicker :label="$t('panel.menu-style.text color')" v-model:color="baseColors.textColor" />
                     <ColorPicker :label="$t('panel.menu-style.background main')" v-model:color="baseColors.bgMainColor" />
@@ -23,11 +39,13 @@
                     <ColorPicker :label="$t('panel.menu-style.primary color')" v-model:color="baseColors.primaryColor" />
                     <ColorPicker :label="$t('panel.menu-style.accent color')" v-model:color="baseColors.accentColor" />
                 </div>
-
-                <ul class="scroll-thin flex items-center gap-2 w-full -my-3 overflow-auto bg-bgSecondary bg-opacity-75 p-2 rounded-2xl shrink-0">
+                <hr class="w-full border-bgSecondary" />
+                <ul class="scroll-thin flex items-center gap-2 w-full overflow-auto shrink-0">
                     <li
                         class="btn flex items-center gap-2 text-sm p-2 px-3 hover:px-5 border-2 rounded-xl shrink-0 bg-bgAccent cursor-pointer"
-                        :class="[selectedTab === item.name.replaceAll(' ', '') ? 'bg-bgSecondary border-primary border-opacity-75' : 'border-bgSecondary opacity-80']"
+                        :class="[
+                            selectedTab === item.name.replaceAll(' ', '') ? 'bg-bgSecondary border-primary border-opacity-75' : 'border-bgSecondary opacity-80',
+                        ]"
                         @click="selectedTab = item.name.replaceAll(' ', '')"
                         v-for="(item, i) in tabsList"
                         :key="i"
@@ -42,16 +60,13 @@
                         {{ $t(`panel.menu-style.${item.name}`) }}
                     </li>
                 </ul>
-
-                <!-- <hr class="w-full border-bgSecondary" /> -->
-
                 <div class="flex flex-col gap-4 w-full" v-show="selectedTab === 'MainMenuStyle'">
                     <HeaderSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :headerOptions="mainMenuStyleOptions.headerOptions" />
                     <Wrapper class="flex flex-col gap-4 w-full p-4 bg-bgAccent rounded-2xl shadow-mr15">
                         <template #title>
-                            <div class="flex items-center justify-between gap-2 w-full">
+                            <div class="flex items-center justify-between gap-2 w-full group">
                                 <h3 class="font-bold text-primary">{{ $t("panel.menu-style.Offers Section") }}</h3>
-                                <span class="h-0.5 bg-bgSecondary grow"></span>
+                                <span class="h-0.5 bg-primary bg-opacity-40 group-hover:bg-opacity-100 transition-all grow"></span>
                                 <Icon class="w-5 h-5 bg-primary -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
                             </div>
                         </template>
@@ -120,17 +135,25 @@ import NavbarSection from "~/components/panel/menu-style/NavbarSection.vue";
 import ItemDetailsSection from "~/components/panel/menu-style/ItemDetailsSection.vue";
 import RestaurantDetailsSection from "~/components/panel/menu-style/RestaurantDetailsSection.vue";
 import SplashScreenSection from "~/components/panel/menu-style/SplashScreenSection.vue";
+import axios from "axios";
+import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-const { t } = useI18n();
+const { localeProperties, t } = useI18n();
 
+const route = useRoute();
+const runtimeConfig = useRuntimeConfig();
+const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
 useHead({ title: `${t("panel.menu-style.Menu Style Editor")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
+
+const responseMessage = ref("");
+const errorField = ref("");
 
 const selectedTab = ref("MainMenuStyle");
 const tabsList = ref([
@@ -157,8 +180,8 @@ const patterns = ref([
 
 const baseColors = reactive({
     textColor: "#FCFCFDFF",
-    bgMainColor: "#323232FF",
-    bgSecondaryColor: "#545454FF",
+    bgMainColor: "#303030FF",
+    bgSecondaryColor: "#404040FF",
     primaryColor: "#C1AACEFF",
     accentColor: "#649EAFFF",
 });
@@ -174,6 +197,8 @@ const mainMenuStyleOptions = reactive({
         primaryColor: baseColors.primaryColor || "#000000ff",
         accentColor: baseColors.accentColor || "#000000ff",
         withPattern: false,
+        bgImageFile: null,
+        bgImageMode: "list",
         bgImage: "",
         bgImageSize: "30",
         bgImageOpacity: "20",
@@ -222,6 +247,8 @@ const mainMenuStyleOptions = reactive({
         primaryColor: baseColors.primaryColor || "#000000ff",
         accentColor: baseColors.accentColor || "#000000ff",
         withPattern: false,
+        bgImageFile: null,
+        bgImageMode: "list",
         bgImage: "",
         bgImageSize: "30",
         bgImageOpacity: "20",
@@ -272,6 +299,8 @@ const restaurantDetailsPageOptions = reactive({
     bodyComponent: "Body1",
     bodyComponentList: ["Body1"],
     withPattern: false,
+    bgImageFile: null,
+    bgImageMode: "list",
     bgImage: "",
     bgImageSize: "30",
     bgImageOpacity: "20",
@@ -293,6 +322,8 @@ const splashScreenOptions = reactive({
     bodyComponent: "Body1",
     bodyComponentList: ["Body1"],
     withPattern: false,
+    bgImageFile: null,
+    bgImageMode: "list",
     bgImage: "",
     bgImageSize: "30",
     bgImageOpacity: "10",
@@ -305,4 +336,43 @@ const splashScreenOptions = reactive({
     transitionList: ["opacity-swing", "slide-up", "slide-left", "fall", "zoom-fade"],
 });
 // -------------------------------------------
+
+// save qr code settings -------------------------------------------------
+const saving = ref(false);
+const saveSettings = async () => {
+    if (saving.value) return;
+    saving.value = true;
+
+    responseMessage.value = "";
+    errorField.value = "";
+
+    const data = new FormData();
+    if (mainMenuStyleOptions.headerOptions.bgImageFile) data.append("headerBgImageFile", mainMenuStyleOptions.headerOptions.bgImageFile);
+    if (mainMenuStyleOptions.itemListOptions.bgImageFile) data.append("itemListBgImageFile", mainMenuStyleOptions.itemListOptions.bgImageFile);
+    if (restaurantDetailsPageOptions.bgImageFile) data.append("restaurantDetailsBgImageFile", restaurantDetailsPageOptions.bgImageFile);
+    if (splashScreenOptions.bgImageFile) data.append("splashScreenBgImageFile", splashScreenOptions.bgImageFile);
+    data.append("mainMenuStyleOptions", JSON.stringify(mainMenuStyleOptions));
+    data.append("itemsDialogStyleOptions", JSON.stringify(itemsDialogStyleOptions));
+    data.append("restaurantDetailsPageOptions", JSON.stringify(restaurantDetailsPageOptions));
+    data.append("splashScreenOptions", JSON.stringify(splashScreenOptions));
+
+    await axios
+        .post(`/api/v1/panel/menu-styles`, data, { headers: { brand: route.params.brandID } })
+        .then((response) => {
+            toast.success(t(`panel.menu-style.style settings has been saved`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+        })
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            if (process.server) console.log({ err });
+            toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+        })
+        .finally(() => (saving.value = false));
+};
+// -------------------------------------------------
 </script>

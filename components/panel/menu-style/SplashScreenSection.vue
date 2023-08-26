@@ -4,11 +4,11 @@
     <div class="flex flex-col gap-6 w-full p-4 bg-bgAccent rounded-2xl shadow-mr15">
         <small class="text-secondary opacity-80 -mb-4">{{ $t("panel.menu-style.try out the animation by clicking on the phone screen") }}</small>
         <div class="flex flex-wrap items-center gap-2">
-            <h5 class="text-sm">{{ $t("panel.menu-style.Animation") }}</h5>
+            <h5 class="text-sm opacity-80">{{ $t("panel.menu-style.Animation") }}</h5>
             <ul class="flex flex-wrap items-center gap-2">
                 <li
-                    class="flex items-center gap-2 p-1.5 rounded-full border-2 border-neutral-500 border-opacity-25 shadow-nr5 cursor-pointer"
-                    :class="{ 'bg-pencil-tip text-white': splashScreenOptions.transition == item }"
+                    class="flex items-center gap-2 p-1.5 rounded-full border border-bgSecondary shadow-nr15 cursor-pointer"
+                    :class="{ 'bg-bgSecondary': splashScreenOptions.transition == item }"
                     @click="splashScreenOptions.transition = item"
                     v-for="item in splashScreenOptions.transitionList"
                 >
@@ -23,15 +23,15 @@
             </ul>
         </div>
         <div class="flex flex-wrap items-center gap-2">
-            <h5 class="text-sm">{{ $t("panel.menu-style.Logo Radius") }}</h5>
+            <h5 class="text-sm opacity-80">{{ $t("panel.menu-style.Logo Radius") }}</h5>
             <input class="input-range w-40" type="range" max="80" step="5" v-model="splashScreenOptions.cornerRadius" />
         </div>
-        <hr class="w-full border-bgSecondary">
+        <hr class="w-full border-bgSecondary" />
         <div class="flex flex-wrap lg:flex-nowrap gap-4 w-full">
-            <div class="flex flex-col gap-2 p-2 w-full rounded-lg border borde-neutral-500 border-opacity-50">
+            <div class="flex flex-col gap-4 p-4 w-full rounded-2xl bg-bgSecondary bg-opacity-30">
                 <div class="flex flex-wrap items-center gap-2">
                     <div class="flex items-center gap-2">
-                        <h5 class="text-sm">{{ $t("panel.menu-style.Line Text") }}</h5>
+                        <h5 class="text-sm opacity-80">{{ $t("panel.menu-style.Line Text") }}</h5>
                         <Switch v-model:value="splashScreenOptions.withLine" />
                     </div>
                     <span class="w-1 border border-neutral-500 opacity-25 grow"></span>
@@ -46,34 +46,33 @@
                 </div>
             </div>
         </div>
-        <hr class="w-full border-bgSecondary">
+        <hr class="w-full border-bgSecondary" />
         <div class="flex flex-wrap lg:flex-nowrap gap-4 w-full">
-            <div class="flex flex-col gap-2 p-2 w-full rounded-lg border borde-neutral-500 border-opacity-50">
+            <div class="flex flex-col gap-4 p-4 w-full rounded-2xl bg-bgSecondary bg-opacity-30">
                 <div class="flex flex-wrap items-center gap-2">
                     <div class="flex items-center gap-2">
-                        <h5 class="text-sm">{{ $t("panel.menu-style.Background Pattern") }}</h5>
+                        <h5 class="text-sm opacity-80">{{ $t("panel.menu-style.Background Pattern") }}</h5>
                         <Switch v-model:value="splashScreenOptions.withPattern" />
                     </div>
                     <span class="w-1 border border-neutral-500 opacity-25 grow"></span>
                     <ul class="flex items-center gap-2">
                         <li
-                            class="p-1 px-2 text-xs rounded-md border border-primary cursor-pointer"
-                            :class="[patternMode == 'upload' ? 'bg-pencil-tip text-white ' : 'text-pencil-tip']"
+                            class="p-1.5 px-2 text-xs rounded-lg border-2 cursor-pointer"
+                            :class="[patternMode == 'upload' ? 'bg-bgSecondary  border-primary ' : 'border-bgSecondary']"
                             @click="patternMode = 'upload'"
                         >
                             {{ $t("panel.menu.File Upload") }}
                         </li>
                         <li
-                            class="p-1 px-2 text-xs rounded-md border border-primary cursor-pointer"
-                            :class="[patternMode == 'list' ? 'bg-pencil-tip text-white' : 'text-pencil-tip']"
+                            class="p-1.5 px-2 text-xs rounded-lg border-2 cursor-pointer"
+                            :class="[patternMode == 'list' ? 'bg-bgSecondary  border-primary' : 'border-bgSecondary']"
                             @click="patternMode = 'list'"
                         >
                             {{ $t("panel.menu.Select From List") }}
                         </li>
                     </ul>
                 </div>
-                <div class="flex flex-col gap-2" v-if="splashScreenOptions.withPattern">
-                    <hr class="w-full border-neutral-500 opacity-25" />
+                <div class="flex flex-col gap-4" v-if="splashScreenOptions.withPattern">
                     <div
                         class="flex flex-col justify-center gap-2 w-full h-28"
                         v-show="patternMode === 'upload'"
@@ -103,15 +102,15 @@
                         </nuxt-link>
                     </div>
                     <div class="flex flex-col justify-center gap-4 w-full h-28" v-show="patternMode === 'list'">
-                        <ul class="flex flex-wrap items-start gap-2 w-full h-full overflow-auto">
+                        <ul class="flex flex-wrap items-start gap-2.5 w-full h-full overflow-auto">
                             <li
-                                class="bg-pencil-tip p-2 rounded-md border-4 cursor-pointer"
+                                class="bg-pencil-tip p-2 rounded-xl border-4 cursor-pointer"
                                 :class="[splashScreenOptions.bgImage === pattern ? 'border-primary' : 'border-transparent']"
                                 v-for="(pattern, i) in patterns"
                                 :key="i"
                                 @click="selectPatternFromList(pattern)"
                             >
-                                <img class="w-12 h-12 object-contain" :src="pattern" alt="" />
+                                <img class="w-11 h-11 object-contain" :src="pattern" alt="" />
                             </li>
                         </ul>
                     </div>
@@ -180,11 +179,12 @@ const image = ref(""); // Dom Ref
 const selectPatternImage = () => {
     props.splashScreenOptions.bgImage;
     if (!image.value.files[0]) return;
+    props.splashScreenOptions.bgImageFile = image.value.files[0];
     props.splashScreenOptions.bgImage = URL.createObjectURL(image.value.files[0]);
-    selectedPatternMode.value = "upload";
+    props.splashScreenOptions.bgImageMode = selectedPatternMode.value = "upload";
 };
 const selectPatternFromList = (pattern) => {
     props.splashScreenOptions.bgImage = pattern;
-    selectedPatternMode.value = "list";
+    props.splashScreenOptions.bgImageMode = selectedPatternMode.value = "list";
 };
 </script>

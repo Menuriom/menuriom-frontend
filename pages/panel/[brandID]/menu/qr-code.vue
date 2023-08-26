@@ -59,7 +59,7 @@
                             {{ link }}
                         </a>
                     </div>
-                    <button class="btn flex items-center justify-center gap-2 p-3 hover:px-6 bg-bgSecondary rounded-xl text-sm" @click="saveSettings()">
+                    <button class="btn flex items-center justify-center gap-2 p-3 hover:px-6 bg-fgPrimary text-bgPrimary rounded-xl text-sm" @click="saveSettings()">
                         <span class="flex items-center gap-2" v-if="!saving">
                             <Icon class="w-5 h-5 gradient" name="floppy-disk.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.qrcode.Save Settings") }}
@@ -756,6 +756,13 @@ onMounted(() => {
 // download qr code as png -------------------------------------------------
 const saveCanvas = () => {
     const dataURL = canvasEl.value.toDataURL("image/png");
+
+    // scaling down the image
+    // const resizeCanvas = document.createElement("canvas");
+    // resizeCanvas.width = resizeCanvas.height = 256;
+    // resizeCanvas.getContext("2d").drawImage(canvasEl.value, 0, 0, 1024, 1024, 0, 0, 256, 256);
+    // const dataURL = resizeCanvas.toDataURL("image/png");
+
     const a = document.createElement("a");
     a.download = "QR-Code.png";
     a.href = dataURL;
@@ -801,7 +808,7 @@ const saveSettings = async () => {
     await axios
         .post(`/api/v1/panel/menu-qrcode`, data, { headers: { brand: route.params.brandID } })
         .then((response) => {
-            toast.success(t(`panel.qrcode.QR code settings are saved`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            toast.success(t(`panel.qrcode.QR code settings has been saved`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {

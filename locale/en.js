@@ -495,6 +495,8 @@ export default {
             "Line Rotation": "Line Rotation",
             Text: "Text",
             "try out the animation by clicking on the phone screen": "try out the animation by clicking on the phone's screen",
+
+            "style settings has been saved": "style settings has been saved",
         },
 
         qrcode: {
@@ -525,7 +527,7 @@ export default {
             "Gradient Angle": "Gradient Angle",
             "Download QR Code": "Download QR Code",
             "Save Settings": "Save Settings",
-            "QR code settings are saved": "QR code settings are saved",
+            "QR code settings has been saved": "QR code settings has been saved",
             "Make sure the colors have good contrast so that the code is easily scannable":
                 "Make sure the colors have good contrast so that the code is easily scannable",
         },

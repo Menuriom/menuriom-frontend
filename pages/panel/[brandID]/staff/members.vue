@@ -19,7 +19,7 @@
                     @click="panelStore.openPopUp('sent-invites')"
                     v-if="canInviteNewMembers && checkPermissions(['main-panel.staff.invite'], brand)"
                 >
-                    <Icon class="w-4 h-4 bg-black" name="envelope-open-text.svg" folder="icons/light" size="16px" />
+                    <Icon class="w-4 h-4 gradient" name="envelope-open-text.svg" folder="icons/light" size="16px" />
                     {{ $t("panel.side-menu.Sent Invites") }}
                 </button>
                 <button

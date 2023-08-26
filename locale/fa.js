@@ -496,6 +496,8 @@ export default {
             "Line Rotation": "زاویه متن",
             Text: "متن",
             "try out the animation by clicking on the phone screen": "برای مشاهده انیمیشن روی صفحه موبایل کلیک کنید",
+
+            "style settings has been saved": "تنظیمات ظاهر منو ذخیره شد",
         },
 
         qrcode: {
@@ -526,7 +528,7 @@ export default {
             "Gradient Angle": "زاویه گرادیان",
             "Download QR Code": "دانلود کد QR",
             "Save Settings": "ذخیره تنظیمات",
-            "QR code settings are saved": "تنظیمات ذخیره شد",
+            "QR code settings has been saved": "تنظیمات ذخیره شد",
             "Make sure the colors have good contrast so that the code is easily scannable":
                 "برای راحت تر اسکن شدن کد، مطمئن شوید که رنگ پیش زمینه نسبت به رنگ بارکد از کنتراست بالایی برخوردار باشد",
         },

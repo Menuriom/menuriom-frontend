@@ -18,14 +18,14 @@
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <nuxt-link
-                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-bgSecondary shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-fgPrimary text-bgPrimary shrink-0"
                     :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/style`)"
                 >
                     <Icon class="w-5 h-5 gradient" name="brush.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.menu.Edit Menu Style") }}
                 </nuxt-link>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-bgSecondary shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-fgPrimary text-bgPrimary shrink-0"
                     @click="panelStore.openPopUp('invite-new-member')"
                 >
                     <Icon class="w-5 h-5 gradient" name="book-open.svg" folder="icons/light" size="20px" />

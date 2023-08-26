@@ -3,15 +3,15 @@
 <template>
     <Wrapper class="flex flex-col gap-4 w-full p-4 bg-bgAccent rounded-2xl shadow-mr15" :defaultState="0">
         <template #title>
-            <div class="flex items-center justify-between gap-2 w-full">
+            <div class="flex items-center justify-between gap-2 w-full group">
                 <h3 class="font-bold text-primary">{{ $t("panel.menu-style.Search Section") }}</h3>
-                <span class="h-0.5 bg-bgSecondary grow"></span>
+                <span class="h-0.5 bg-primary bg-opacity-40 group-hover:bg-opacity-100 transition-all grow"></span>
                 <Icon class="w-5 h-5 bg-primary -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
             </div>
         </template>
         <div class="flex flex-col gap-6 overflow-hidden">
             <div class="flex flex-wrap items-center gap-2">
-                <h5 class="text-sm">{{ $t("panel.menu-style.Show search section") }}</h5>
+                <h5 class="text-sm opacity-80">{{ $t("panel.menu-style.Show search section") }}</h5>
                 <Switch v-model:value="searchOptions.active" />
             </div>
             <div class="flex flex-col gap-2">

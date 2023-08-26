@@ -36,7 +36,7 @@
             <div class="absolute inset-0 -z-10 opacity-50 rounded-2xl overflow-hidden"><div class="absolute mask inset-0"></div></div>
             <ul class="grid gap-6 w-full" style="grid-template-columns: repeat(auto-fill, minmax(275px, 1fr))" v-show="!loading">
                 <li
-                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-2xl bg-bgPrimary border border-bgSecondary hover:shadow-mr15 transition-all overflow-hidden group"
+                    class="relative flex flex-col items-center gap-4 p-4 w-full rounded-3xl bg-bgPrimary border border-bgSecondary hover:shadow-mr15 transition-all overflow-hidden group"
                     v-for="(brand, i) in records.list"
                     :key="i"
                 >
@@ -75,7 +75,7 @@
                             <small>{{ $t("panel.brands.Leave This Brand") }}</small>
                         </button>
                     </SlideMenu>
-                    <div class="flex flex-wrap gap-4 w-full bg-bgSecondary bg-opacity-70 p-4 -mt-4 rounded-xl">
+                    <div class="flex flex-wrap gap-4 w-full bg-bgSecondary bg-opacity-70 p-4 -mt-4 rounded-2xl">
                         <div class="flex items-start gap-4">
                             <div class="flex flex-col items-start gap-2 shrink-0">
                                 <nuxt-link
@@ -137,7 +137,7 @@
                     </div>
                 </li>
                 <li
-                    class="relative w-full rounded-2xl bg-fgPrimary border-0 hover:border-8 border-primary shadow-nr5 hover:shadow-nr10 overflow-hidden transition-all group"
+                    class="relative w-full rounded-3xl bg-fgPrimary border-0 hover:border-8 border-primary shadow-nr5 hover:shadow-nr10 overflow-hidden transition-all group"
                     v-if="canCreateNewBrand && records.list.length > 0"
                 >
                     <nuxt-link class="flex flex-col items-center justify-center gap-4 w-full h-full p-3" :to="localePath(`/panel/brand/creation`)">

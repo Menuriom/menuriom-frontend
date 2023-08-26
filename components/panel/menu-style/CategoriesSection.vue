@@ -3,19 +3,19 @@
 <template>
     <Wrapper class="flex flex-col gap-4 w-full p-4 bg-bgAccent rounded-2xl shadow-mr15" :defaultState="0">
         <template #title>
-            <div class="flex items-center justify-between gap-2 w-full">
+            <div class="flex items-center justify-between gap-2 w-full group">
                 <h3 class="font-bold text-primary">{{ $t("panel.menu-style.Categories Section") }}</h3>
-                <span class="h-0.5 bg-bgSecondary grow"></span>
+                <span class="h-0.5 bg-primary bg-opacity-40 group-hover:bg-opacity-100 transition-all grow"></span>
                 <Icon class="w-5 h-5 bg-primary -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
             </div>
         </template>
         <div class="flex flex-col gap-6 overflow-hidden">
             <div class="flex flex-wrap items-center gap-2">
-                <h5 class="text-sm">{{ $t("panel.menu-style.Orientation") }}</h5>
+                <h5 class="text-sm opacity-80">{{ $t("panel.menu-style.Orientation") }}</h5>
                 <ul class="flex flex-wrap items-center gap-2">
                     <li
-                        class="flex items-center gap-2 p-1.5 rounded-full border-2 border-neutral-500 border-opacity-25 shadow-nr5 cursor-pointer"
-                        :class="{ 'bg-pencil-tip text-white': categoriesOptions.orientation == orient }"
+                        class="flex items-center gap-2 p-1.5 rounded-full border border-bgSecondary shadow-nr15 cursor-pointer"
+                        :class="{ 'bg-bgSecondary': categoriesOptions.orientation == orient }"
                         @click="categoriesOptions.orientation = orient"
                         v-for="orient in categoriesOptions.orientations"
                     >
@@ -29,16 +29,16 @@
                     </li>
                 </ul>
             </div>
-            <hr class="w-full border-bgSecondary">
+            <hr class="w-full border-bgSecondary" />
             <div class="flex flex-wrap items-center gap-2">
-                <h5 class="text-sm">{{ $t("panel.menu-style.Corner Radius") }}</h5>
+                <h5 class="text-sm opacity-80">{{ $t("panel.menu-style.Corner Radius") }}</h5>
                 <input class="input-range w-40" type="range" max="50" step="5" v-model="categoriesOptions.cornerRadius" />
             </div>
-             <div class="flex flex-wrap items-center gap-2">
-                <h5 class="text-sm">{{ $t("panel.menu-style.Show categories icons") }}</h5>
+            <div class="flex flex-wrap items-center gap-2">
+                <h5 class="text-sm opacity-80">{{ $t("panel.menu-style.Show categories icons") }}</h5>
                 <Switch v-model:value="categoriesOptions.withIcon" />
             </div>
-            <hr class="w-full border-bgSecondary">
+            <hr class="w-full border-bgSecondary" />
             <div class="flex flex-col gap-2">
                 <div class="flex flex-wrap gap-2">
                     <ColorPicker :label="$t('panel.menu-style.text color')" v-model:color="categoriesOptions.textColor" :baseColor="baseColors.textColor" />
