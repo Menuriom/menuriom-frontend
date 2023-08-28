@@ -78,7 +78,7 @@
                     <div
                         class="flex flex-col justify-center gap-2 w-full h-28"
                         v-show="patternMode === 'upload'"
-                        v-if="checkLimitations([['customizable-category-logo', false]], brand)"
+                        v-if="checkLimitations([['customizable-category-logo', true]], brand)"
                     >
                         <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 1 }) }}</small>
                         <div

@@ -19,7 +19,7 @@ main {
 </style>
 
 <template>
-    <div class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-bgPrimary text-fgPrimary overflow-clip" id="app">
+    <div class="wrapper flex flex-col items-center w-screen max-w-screen-4xl mx-auto bg-neutral-900 text-fgPrimary overflow-clip" id="app">
         <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
             <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
             <Header_Dark />

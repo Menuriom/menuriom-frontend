@@ -13,7 +13,7 @@
                 <small class="f-inter p-0.5 px-2 rounded-full text-xs bg-black text-secondary"> {{ annualOffPercent }}% Off </small>
             </div>
         </div>
-        <ul class="flex flex-wrap items-center justify-center gap-12 w-full max-w-screen-xl">
+        <ul class="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl">
             <li
                 class="flex flex-col gap-2 rounded-4xl shadow-mr35"
                 :class="[item.highlight ? 'gradient-re p-3' : 'bg-fgPrimary']"
@@ -48,7 +48,7 @@
                         </li>
                     </ul>
                     <a
-                        class="flex items-center justify-center w-full p-4 mt-4 bg-bgAccent text-fgPrimary rounded-xl hover:translate-y-1 transition-transform"
+                        class="btn flex items-center justify-center mx-auto p-4 px-8 hover:px-12 mt-4 bg-bgAccent text-fgPrimary rounded-xl hover:translate-y-1"
                         href="#"
                     >
                         {{ $t("pricing.Get Started") }}

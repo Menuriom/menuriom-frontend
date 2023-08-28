@@ -144,6 +144,7 @@ const { localeProperties, t } = useI18n();
 
 const route = useRoute();
 const runtimeConfig = useRuntimeConfig();
+const nuxtApp = useNuxtApp();
 const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
@@ -272,7 +273,7 @@ const mainMenuStyleOptions = reactive({
 // -------------------------------------------
 
 // ItemsDialogStyle options --------------------------------
-const itemsDialogStyleOptions = reactive({
+const itemsDialogStyleOptions = ref({
     textColor: baseColors.textColor || "#000000ff",
     bgMainColor: baseColors.bgMainColor || "#000000ff",
     bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
@@ -288,7 +289,7 @@ const itemsDialogStyleOptions = reactive({
 // -------------------------------------------
 
 // RestaurantDetailsPage --------------------------------
-const restaurantDetailsPageOptions = reactive({
+const restaurantDetailsPageOptions = ref({
     textColor: baseColors.textColor || "#000000ff",
     bgMainColor: baseColors.bgMainColor || "#000000ff",
     bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
@@ -311,7 +312,7 @@ const restaurantDetailsPageOptions = reactive({
 // -------------------------------------------
 
 // SplashScreen --------------------------------
-const splashScreenOptions = reactive({
+const splashScreenOptions = ref({
     textColor: baseColors.textColor || "#000000ff",
     bgMainColor: baseColors.bgMainColor || "#000000ff",
     bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
@@ -349,12 +350,13 @@ const saveSettings = async () => {
     const data = new FormData();
     if (mainMenuStyleOptions.headerOptions.bgImageFile) data.append("headerBgImageFile", mainMenuStyleOptions.headerOptions.bgImageFile);
     if (mainMenuStyleOptions.itemListOptions.bgImageFile) data.append("itemListBgImageFile", mainMenuStyleOptions.itemListOptions.bgImageFile);
-    if (restaurantDetailsPageOptions.bgImageFile) data.append("restaurantDetailsBgImageFile", restaurantDetailsPageOptions.bgImageFile);
-    if (splashScreenOptions.bgImageFile) data.append("splashScreenBgImageFile", splashScreenOptions.bgImageFile);
+    if (restaurantDetailsPageOptions.value.bgImageFile) data.append("restaurantDetailsBgImageFile", restaurantDetailsPageOptions.value.bgImageFile);
+    if (splashScreenOptions.value.bgImageFile) data.append("splashScreenBgImageFile", splashScreenOptions.value.bgImageFile);
     data.append("mainMenuStyleOptions", JSON.stringify(mainMenuStyleOptions));
-    data.append("itemsDialogStyleOptions", JSON.stringify(itemsDialogStyleOptions));
-    data.append("restaurantDetailsPageOptions", JSON.stringify(restaurantDetailsPageOptions));
-    data.append("splashScreenOptions", JSON.stringify(splashScreenOptions));
+    data.append("itemsDialogStyleOptions", JSON.stringify(itemsDialogStyleOptions.value));
+    data.append("restaurantDetailsPageOptions", JSON.stringify(restaurantDetailsPageOptions.value));
+    data.append("splashScreenOptions", JSON.stringify(splashScreenOptions.value));
+    data.append("baseColors", JSON.stringify(baseColors));
 
     await axios
         .post(`/api/v1/panel/menu-styles`, data, { headers: { brand: route.params.brandID } })
@@ -374,5 +376,31 @@ const saveSettings = async () => {
         })
         .finally(() => (saving.value = false));
 };
+// -------------------------------------------------
+
+// loadMenuStyleSettings -------------------------------------------------
+const loadMenuStyleSettings_results = await useLazyAsyncData(() => loadMenuStyleSettings(route.params.brandID));
+const loadingMenuStyleSettings = computed(() => loadMenuStyleSettings_results.pending.value);
+
+const handleLoadingMenuStyleSettings_results = (data) => {
+    if (!data?._menuStyles) return;
+    if (data._menuStyles?.baseColors?.textColor) baseColors.textColor = data._menuStyles.baseColors.textColor;
+    if (data._menuStyles?.baseColors?.bgMainColor) baseColors.bgMainColor = data._menuStyles.baseColors.bgMainColor;
+    if (data._menuStyles?.baseColors?.bgSecondaryColor) baseColors.bgSecondaryColor = data._menuStyles.baseColors.bgSecondaryColor;
+    if (data._menuStyles?.baseColors?.primaryColor) baseColors.primaryColor = data._menuStyles.baseColors.primaryColor;
+    if (data._menuStyles?.baseColors?.accentColor) baseColors.accentColor = data._menuStyles.baseColors.accentColor;
+    if (data._menuStyles?.mainMenuStyleOptions?.headerOptions) mainMenuStyleOptions.headerOptions = data._menuStyles.mainMenuStyleOptions.headerOptions;
+    if (data._menuStyles?.mainMenuStyleOptions?.searchOptions) mainMenuStyleOptions.searchOptions = data._menuStyles.mainMenuStyleOptions.searchOptions;
+    if (data._menuStyles?.mainMenuStyleOptions?.categoriesOptions)
+        mainMenuStyleOptions.categoriesOptions = data._menuStyles.mainMenuStyleOptions.categoriesOptions;
+    if (data._menuStyles?.mainMenuStyleOptions?.itemHeaderOptions)
+        mainMenuStyleOptions.itemHeaderOptions = data._menuStyles.mainMenuStyleOptions.itemHeaderOptions;
+    if (data._menuStyles?.mainMenuStyleOptions?.itemListOptions) mainMenuStyleOptions.itemListOptions = data._menuStyles.mainMenuStyleOptions.itemListOptions;
+    if (data._menuStyles?.mainMenuStyleOptions?.navbarOptions) mainMenuStyleOptions.navbarOptions = data._menuStyles.mainMenuStyleOptions.navbarOptions;
+    if (data._menuStyles?.itemsDialogStyleOptions) itemsDialogStyleOptions.value = data._menuStyles.itemsDialogStyleOptions;
+    if (data._menuStyles?.restaurantDetailsPageOptions) restaurantDetailsPageOptions.value = data._menuStyles.restaurantDetailsPageOptions;
+    if (data._menuStyles?.splashScreenOptions) splashScreenOptions.value = data._menuStyles.splashScreenOptions;
+};
+watch(loadMenuStyleSettings_results.data, (val) => handleLoadingMenuStyleSettings_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 </script>
