@@ -14,7 +14,7 @@
                 </h3>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4">
                     <div
-                        class="relative flex flex-col items-start justify-center gap-2 w-32 h-32 rounded-full hover:border-2 border-violet bg-white flex-shrink-0"
+                        class="relative flex flex-col items-start justify-center gap-2 w-32 h-32 rounded-full hover:border-2 border-primary bg-white shrink-0"
                     >
                         <img class="w-full h-full rounded-full object-contain" :src="logoBlob" v-if="logoBlob" />
                         <div class="flex flex-col items-center justify-center gap-2 w-full" v-else>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === 'logo' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <hr class="w-full opacity-25" />
                 <h3 class="flex items-center gap-2 text-lg font-bold">
@@ -97,9 +97,9 @@
                 </div>
                 <hr class="w-full opacity-25" />
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
-                <button class="btn w-max p-3 rounded-lg bg-violet" :class="{ 'opacity-75 cursor-not-allowed': saving }" :disabled="saving" @click="save()">
+                <button class="btn w-max p-3 rounded-lg bg-primary" :class="{ 'opacity-75 cursor-not-allowed': saving }" :disabled="saving" @click="save()">
                     <span v-if="!saving"> {{ $t("panel.brands.Update Brand Info") }} </span>
                     <Loading v-else />
                 </button>

@@ -1,7 +1,7 @@
 <style scoped>
 .tile {
-    background: url("/tiles.svg");
-    background-size: 10px;
+    background: url("/tiles-black.svg");
+    background-size: 7px;
     background-repeat: repeat;
 }
 
@@ -14,20 +14,20 @@ input[type="range"]::-webkit-slider-runnable-track {
     height: 1rem;
     border-radius: 2rem;
     cursor: pointer;
-    background: linear-gradient(270deg, v-bind("color.slice(0, 7)") 0%, transparent 100%);
+    background: linear-gradient(270deg, v-bind("color.slice(0, 7)") 15%, transparent 100%);
 }
 input[type="range"]::-moz-range-track {
     width: 100%;
     height: 1rem;
     border-radius: 2rem;
     cursor: pointer;
-    background: linear-gradient(270deg, v-bind("color.slice(0, 7)") 0%, transparent 100%);
+    background: linear-gradient(270deg, v-bind("color.slice(0, 7)") 15%, transparent 100%);
 }
 
 input[type="range"]::-webkit-slider-thumb {
     height: 1rem;
     width: 1rem;
-    border: 1px solid theme("colors.neutral.400");
+    border: 1px solid theme("colors.neutral.300");
     background: theme("colors.neutral.50");
     border-radius: 999rem;
     box-shadow: 0px 5px 15px -2px rgba(0, 0, 0, 0.25);
@@ -36,7 +36,7 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-moz-range-thumb {
     height: 1rem;
     width: 1rem;
-    border: 1px solid theme("colors.neutral.400");
+    border: 1px solid theme("colors.neutral.300");
     background: theme("colors.neutral.50");
     border-radius: 999rem;
     box-shadow: 0px 5px 15px -2px rgba(0, 0, 0, 0.25);
@@ -45,21 +45,21 @@ input[type="range"]::-moz-range-thumb {
 </style>
 
 <template>
-    <div class="relative flex flex-col items-start gap-2 w-[166px] border p-2 rounded-md isolate">
+    <div class="relative flex flex-col items-start gap-2 w-[166px] bg-bgSecondary bg-opacity-75 p-3 rounded-xl shadow-mr15 isolate">
         <div class="flex items-center justify-between gap-0 w-full">
             <label class="flex items-center gap-2 text-xs grow" v-if="label">{{ label }} </label>
             <button
-                class="flex items-center justify-center p-1 rounded border border-neutral-500 border-opacity-50 shadow-nr15 shrink-0"
-                :class="[!isColorLocked ? 'bg-white' : 'bg-violet']"
+                class="absolute end-0 top-0 flex items-center justify-center p-1.5 rounded-lg shadow-nr15 shrink-0"
+                :class="[!isColorLocked ? 'bg-fgPrimary bg-opacity-25' : 'bg-primary bg-opacity-80']"
                 @click="lockColor()"
                 v-if="baseColor"
             >
                 <Icon
-                    class="w-2.5 h-2.5"
-                    :class="[!isColorLocked ? 'bg-pencil-tip bg-opacity-30' : 'bg-white ']"
+                    class="w-3 h-3"
+                    :class="[!isColorLocked ? 'bg-fgPrimary' : 'bg-white ']"
                     :name="isColorLocked ? 'lock-keyhole.svg' : 'lock-keyhole-open.svg'"
                     folder="icons"
-                    size="11px"
+                    size="12px"
                 />
             </button>
         </div>

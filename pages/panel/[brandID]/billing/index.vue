@@ -5,14 +5,15 @@
 
 .plan-card-list {
     margin-top: -1rem;
-    padding: 0 1rem;
+    padding: 0.25rem;
     grid-template-rows: 0fr;
     transition: all 0.2s ease-out;
+    opacity: 0;
 }
 .plan-card:hover .plan-card-list {
-    margin-top: -0.5rem;
-    padding: 1rem;
+    padding: 1.25rem;
     grid-template-rows: 1fr;
+    opacity: 1;
 }
 .plan-card:hover {
     z-index: 2;
@@ -20,8 +21,8 @@
 </style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full">
-        <nuxt-link to="#" class="relative flex flex-col w-full p-2 bg-black rounded-lg shadow-nr25 overflow-hidden" name="Banner">
+    <div class="flex flex-col gap-6 w-full">
+        <nuxt-link to="#" class="relative flex flex-col w-full p-2 bg-black bg-opacity-60 rounded-2xl shadow-nr25 overflow-hidden" name="Banner">
             <span class="absolute end-1/2 -top-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute end-18 -bottom-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute start-1/4 -bottom-14 -rotate-45 -ms-10 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
@@ -34,58 +35,60 @@
 
         <section class="flex flex-col gap-4 w-full" name="Billing Info">
             <header class="flex items-center gap-2">
-                <img class="w-9" src="~/assets/images/panel-icons/money-bills-dark.png" alt="" />
+                <Icon class="w-9 h-9 gradient" name="money-bills.svg" folder="icons/duo" size="36px" />
                 <h1 class="text-2xl/tight md:text-3xl/tight font-bold">{{ $t("panel.billing.Billing Info") }}</h1>
             </header>
-            <div class="flex flex-wrap xl:flex-nowrap gap-4 w-full 2sm:p-4 2sm:bg-white rounded-lg 2sm:shadow-nr10">
+            <div class="flex flex-wrap xl:flex-nowrap gap-4 w-full rounded-2xl">
                 <div class="flex flex-col gap-4 w-full xl:max-w-xl shrink-0">
-                    <div class="flex flex-col gap-4 p-4 w-full rounded-lg bg-pencil-tip text-white shadow-nr15" v-if="!loadingCurrentPlan">
-                        <h3 class="flex items-center gap-4">
-                            <b class="text-sm shrink-0">{{ $t("panel.billing.Current Plan Details") }}</b>
-                            <span class="w-full h-0.5 bg-neutral-400 opacity-50"></span>
-                        </h3>
-                        <div class="flex flex-wrap items-center justify-between gap-4">
-                            <div class="flex items-center gap-2">
-                                <img class="bg-dolphin p-2 rounded-md w-16" :src="currentPlan.plan.icon" />
-                                <h2 class="gradient-text text-3xl sm:text-4xl/relaxed font-extrabold">
-                                    {{ currentPlan.plan.translation?.[locale]?.name || currentPlan.plan.name }}
-                                </h2>
+                    <div class="flex items-center justify-center p-2 w-full rounded-3xl gradient shadow-nr15" v-if="!loadingCurrentPlan">
+                        <div class="flex flex-col gap-4 p-5 w-full rounded-2xl bg-bgSecondary bg-opacity-80 shadow-nr10">
+                            <h3 class="flex items-center gap-4">
+                                <b class="text-sm shrink-0">{{ $t("panel.billing.Current Plan Details") }}</b>
+                                <span class="w-full h-0.5 bg-fgPrimary opacity-30"></span>
+                            </h3>
+                            <div class="flex flex-wrap items-center justify-between gap-4">
+                                <div class="flex items-center gap-2">
+                                    <img class="bg-fgPrimary bg-opacity-10 p-2 rounded-xl w-16" :src="currentPlan.plan.icon" />
+                                    <h2 class="gradient-text text-3xl sm:text-4xl/relaxed font-extrabold">
+                                        {{ currentPlan.plan.translation?.[locale]?.name || currentPlan.plan.name }}
+                                    </h2>
+                                </div>
+                                <div class="flex items-center gap-1 bg-bgAccent p-2 rounded-xl shadow-mr15" v-if="currentPlan.daysRemaining">
+                                    <b class="text-primary">{{ currentPlan.daysRemaining }}</b>
+                                    <small>{{ $t("panel.billing.remaining") }}</small>
+                                </div>
                             </div>
-                            <div class="flex items-center gap-1" v-if="currentPlan.daysRemaining">
-                                <b class="text-purple-400">{{ currentPlan.daysRemaining }}</b>
-                                <small>{{ $t("panel.billing.remaining") }}</small>
+                            <p
+                                class="w-max max-w-full text-xs border border-fgPrimary border-opacity-10 p-1 px-3 rounded-lg shadow-mr35"
+                                v-html="
+                                    $t('panel.billing.planLimitDesc', {
+                                        branchLimit: `<b class='text-secondary'>${currentPlan.branchLimit}</b>`,
+                                        staffLimit: `<b class='text-secondary'>${currentPlan.staffLimit}</b>`,
+                                    })
+                                "
+                            />
+                            <div class="flex items-baseline gap-2" v-if="currentPlan.price > 0">
+                                <div class="flex flex-wrap items-end gap-1">
+                                    <b class="text-2xl/none text-secondary">
+                                        {{ Intl.NumberFormat(locale).format(currentPlan.price) }}
+                                        <!-- <span class="text-sm font-normal">,000</span> -->
+                                    </b>
+                                    <b class="f-inter text-sm font-extralight">{{ $t("pricing.Toman") }}</b>
+                                </div>
+                                <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
+                                <b>{{ currentPlan.period == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</b>
                             </div>
-                        </div>
-                        <p
-                            class="text-xs text-neutral-200"
-                            v-html="
-                                $t('panel.billing.planLimitDesc', {
-                                    branchLimit: `<b class='text-white'>${currentPlan.branchLimit}</b>`,
-                                    staffLimit: `<b class='text-white'>${currentPlan.staffLimit}</b>`,
-                                })
-                            "
-                        />
-                        <div class="flex items-baseline gap-2" v-if="currentPlan.price > 0">
-                            <div class="flex flex-wrap items-end gap-1">
-                                <b class="text-2xl/none text-emerald-200">
-                                    {{ Intl.NumberFormat(locale).format(currentPlan.price) }}
-                                    <!-- <span class="text-sm font-normal">,000</span> -->
-                                </b>
-                                <b class="f-inter text-sm font-extralight">{{ $t("pricing.Toman") }}</b>
+                            <div class="flex items-baseline gap-2" v-else>
+                                <b class="text-2xl/none text-secondary font-black"> {{ $t("pricing.Free") }} </b>
+                                <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
+                                <b>{{ $t("pricing.Always") }}</b>
                             </div>
-                            <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
-                            <b>{{ currentPlan.period == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</b>
-                        </div>
-                        <div class="flex items-baseline gap-2" v-else>
-                            <b class="text-2xl/none text-emerald-200"> {{ $t("pricing.Free") }} </b>
-                            <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
-                            <b>{{ $t("pricing.Always") }}</b>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-4 p-4 w-full rounded-lg bg-pencil-tip text-white shadow-nr15" v-else>
+                    <div class="flex flex-col gap-4 p-4 w-full rounded-2xl bg-bgSecondary bg-opacity-50 shadow-nr15" v-else>
                         <h3 class="flex items-center gap-4">
                             <b class="text-sm shrink-0">{{ $t("panel.billing.Current Plan Details") }}</b>
-                            <span class="w-full h-0.5 bg-neutral-400 opacity-50"></span>
+                            <span class="w-full h-0.5 bg-fgPrimary opacity-50"></span>
                         </h3>
                         <div class="flex flex-wrap items-center justify-between gap-4">
                             <div class="flex items-center gap-2">
@@ -96,134 +99,138 @@
                         </div>
                         <p class="skeleton rounded-md w-96 h-4" />
                         <div class="flex items-baseline gap-2">
-                            <b class="skeleton w-20 h-6 rounded text-2xl/none text-emerald-200"></b>
+                            <b class="skeleton w-20 h-6 rounded text-2xl/none text-secondary"></b>
                             <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
                             <b class="skeleton w-20 h-6 rounded"></b>
                         </div>
                     </div>
                     <div class="flex flex-wrap items-center gap-4 w-full">
                         <button
-                            class="btn flex items-center justify-center gap-3 p-3 border text-sm rounded-md grow"
+                            class="btn flex items-center justify-center gap-3 p-3 hover:px-6 bg-fgPrimary text-bgPrimary rounded-xl grow"
                             @click="panelStore.openPopUp('change-plan-dialog')"
                             v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
                         >
-                            <Icon class="w-5 h-5 bg-pencil-tip shrink-0" name="arrow-up-big-small.svg" folder="icons/light" size="20px" />
+                            <Icon class="w-5 h-5 gradient shrink-0" name="arrow-up-big-small.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.billing.Upgrade-Downgrade Plan") }}
                         </button>
                         <button
-                            class="btn flex items-center justify-center gap-3 p-3 border text-sm rounded-md grow"
+                            class="btn flex items-center justify-center gap-3 p-3 hover:px-6 bg-fgPrimary text-bgPrimary rounded-xl grow"
                             @click="panelStore.openPopUp('change-plan-dialog')"
                             v-if="checkPermissions(['main-panel.billing.change-plan'], brand)"
                         >
-                            <Icon class="w-5 h-5 bg-pencil-tip shrink-0" name="calendar-clock.svg" folder="icons/light" size="20px" />
+                            <Icon class="w-5 h-5 gradient shrink-0" name="calendar-clock.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.billing.Change Payment Period") }}
                         </button>
                     </div>
                 </div>
                 <div
-                    class="flex flex-col gap-2 p-4 w-full border-2 border-neutral-300 border-dashed bg-white rounded-lg shadow-nr5 grow"
+                    class="flex flex-col gap-3 p-4 w-full bg-bgSecondary bg-opacity-50 rounded-2xl shadow-mr15 grow"
                     v-if="bills.list.length > 0 && lastBill.billNumber"
                 >
                     <div class="flex flex-wrap items-center gap-4 w-full">
                         <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Your Last Bill") }}</h3>
-                        <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
+                        <span class="h-0.5 bg-fgPrimary opacity-30 grow"></span>
                         <div class="flex items-center gap-1 text-sm" v-if="lastBill.dueDate">
                             <span>{{ $t("panel.billing.Due Date") }}:</span>
                             <b>{{ new Date(lastBill.dueDate).toLocaleString(locale) }}</b>
                         </div>
                     </div>
-                    <small>
-                        {{ $t("panel.billing.Bill Number") }} <b class="text-sm" dir="ltr">#{{ lastBill.billNumber }}</b>
+                    <small class="text-secondary">
+                        {{ $t("panel.billing.Bill Number") }} <b class="text-sm text-fgPrimary" dir="ltr">#{{ lastBill.billNumber }}</b>
                     </small>
-                    <p class="text-sm w-full max-w-sm">{{ lastBill.translation?.[locale]?.description || lastBill.description }}</p>
-                    <p class="text-sm w-full max-w-sm -mt-2" v-if="lastBill.forHowLong">{{ $t("panel.billing.For") }} {{ lastBill.forHowLong }}</p>
-                    <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-md bg-neutral-100 grow">
-                        <div class="flex flex-col items-start">
-                            <h4 class="text-sm">{{ $t("panel.billing.Plan") }}</h4>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <p class="text-sm opacity-75">{{ lastBill.translation?.[locale]?.description || lastBill.description }}</p>
+                        <p class="text-sm p-1 px-2 rounded-lg bg-bgSecondary shadow-inner opacity-75" v-if="lastBill.forHowLong">
+                            {{ $t("panel.billing.For") }} {{ lastBill.forHowLong }}
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-xl bg-bgAccent shadow-inner grow">
+                        <div class="flex items-center gap-2">
+                            <h4 class="text-sm text-secondary">{{ $t("panel.billing.Plan") }}</h4>
                             <b>{{ lastBill.plan.translation?.[locale]?.name || lastBill.plan.name }}</b>
                         </div>
-                        <div class="flex items-baseline gap-1">
-                            <span class="text-3xl/none text-lime-700"> {{ Intl.NumberFormat(locale).format(lastBill.payablePrice) }}</span>
+                        <div class="flex items-baseline gap-1 font-bold">
+                            <span class="text-3xl/none text-emerald-400"> {{ Intl.NumberFormat(locale).format(lastBill.payablePrice) }}</span>
                             <small class="text-sm">{{ $t("pricing.Toman") }}</small>
                         </div>
                     </div>
                     <h3 class="flex items-center gap-4">
                         <b class="text-sm shrink-0">{{ $t("panel.billing.Payment Details") }}</b>
-                        <span class="w-full h-0.5 bg-zinc-400 opacity-30"></span>
+                        <span class="w-full h-0.5 bg-fgPrimary opacity-30"></span>
                     </h3>
                     <div class="flex flex-wrap items-center justify-between gap-4 w-full">
                         <span
-                            class="p-2 text-sm rounded-md bg-opacity-25"
+                            class="p-3 py-2 text-sm rounded-xl bg-opacity-10"
                             :class="{
-                                'bg-red-800 text-rose-800': lastBill.status == 'notPaid',
-                                'bg-blue-800 text-blue-800': lastBill.status == 'pendingPayment',
-                                'bg-emerald-800 text-emerald-800': lastBill.status == 'paid',
-                                'bg-red-800 text-red-800': lastBill.status == 'canceled',
+                                'bg-red-200 text-rose-300': lastBill.status == 'notPaid',
+                                'bg-blue-200 text-blue-300': lastBill.status == 'pendingPayment',
+                                'bg-emerald-200 text-emerald-300': lastBill.status == 'paid',
+                                'bg-red-200 text-red-300': lastBill.status == 'canceled',
                             }"
                         >
                             {{ $t(`panel.payment.${lastBill.status}`) }}
                         </span>
                         <div v-if="lastBill.status == 'notPaid' && checkPermissions(['main-panel.billing.pay'], brand)">
-                            <button class="btn w-max p-3 px-6 text-sm bg-violet text-white rounded-lg">{{ $t("panel.billing.Pay This Bill") }}</button>
+                            <button class="btn w-max p-3 px-5 hover:px-8 text-sm bg-primary rounded-xl">
+                                {{ $t("panel.billing.Pay This Bill") }}
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 p-0 sm:p-4 w-full sm:border-2 bg-white rounded-lg shadow-nr5 grow" v-else>
+                <div class="flex flex-col gap-4 p-2 2sm:p-4 w-full bg-bgSecondary bg-opacity-50 rounded-2xl shadow-mr15 grow" v-else>
                     <div class="flex flex-wrap items-start justify-center gap-4 w-full">
                         <div class="flex flex-wrap items-center gap-4 p-2 md:p-0 grow">
                             <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Upgrade Your Plan Now") }}</h3>
-                            <span class="h-0.5 bg-zinc-400 opacity-30 grow"></span>
+                            <span class="h-0.5 bg-fgPrimary opacity-30 grow"></span>
                         </div>
-                        <div class="relative flex items-center gap-2 p-1 py-2 rounded-md bg-neutral-100 shadow-inner">
+                        <div class="relative flex items-center gap-2 p-1.5 py-3 rounded-xl bg-bgAccent shadow-nr15">
                             <span
-                                class="absolute w-32 h-7 shadow-md bg-white rounded-md transition-all"
-                                :class="[priceType == 'monthly' ? 'start-1' : 'start-32 ms-3']"
+                                class="absolute w-32 h-7 shadow-mr5 shadow-neutral-500 bg-fgPrimary bg-opacity-90 rounded-lg transition-all"
+                                :class="[priceType == 'monthly' ? 'start-1.5' : 'start-32 ms-3']"
                             ></span>
-                            <span class="relative flex items-center justify-center w-32 text-sm cursor-pointer" @click="priceType = 'monthly'">
-                                {{ $t("pricing.Monthly") }}
-                            </span>
+                            <div class="relative flex items-center justify-center w-32 text-sm cursor-pointer" @click="priceType = 'monthly'">
+                                <span :class="[priceType == 'monthly' ? 'text-bgPrimary' : 'text-fgPrimary']">{{ $t("pricing.Monthly") }}</span>
+                            </div>
                             <div class="relative flex items-center justify-center gap-1 w-32 text-sm cursor-pointer" @click="priceType = 'annual'">
-                                <span>{{ $t("pricing.Annual") }}</span>
-                                <small class="f-inter px-2 rounded-full whitespace-nowrap text-[11px] bg-pencil-tip text-purple-200"> 10% Off </small>
+                                <span :class="[priceType == 'annual' ? 'text-bgPrimary' : 'text-fgPrimary']">{{ $t("pricing.Annual") }}</span>
+                                <small class="f-inter px-2 rounded-full whitespace-nowrap text-[10px] bg-black text-purple-200"> 10% Off </small>
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-wrap xl:flex-nowrap items-start gap-4 grow">
+                    <div class="flex flex-wrap @6xl:flex-nowrap items-start gap-4 grow">
                         <div
-                            class="plan-card relative flex flex-col gap-4 w-full p-4 rounded-xl bg-pencil-tip shadow-nr15 cursor-pointer grow"
+                            class="plan-card relative flex flex-col gap-6 w-full p-4 md:p-5 rounded-2xl bg-bgPrimary cursor-pointer grow"
                             v-for="(plan, i) in purchasablePlans.plans.filter((plan) => plan.monthlyPrice != 0 && plan.yearlyPrice != 0)"
                             :key="i"
                             @click="checkPermissions(['main-panel.billing.change-plan'], brand) ? panelStore.openPopUp('change-plan-dialog') : ''"
                         >
                             <div class="flex items-center gap-2">
-                                <img class="w-10" :src="plan.icon" :alt="plan.name" />
-                                <h3 class="text-2xl text-white font-bold">{{ plan.translation?.[locale]?.name || plan.name }}</h3>
+                                <img class="w-12 bg-bgSecondary bg-opacity-50 p-2 rounded-xl" :src="plan.icon" :alt="plan.name" />
+                                <h3 class="text-2xl font-bold">{{ plan.translation?.[locale]?.name || plan.name }}</h3>
                             </div>
-                            <p class="text-sm text-white opacity-90 h-10">{{ plan.translation?.[locale]?.desc || plan.desc }}</p>
-                            <div
-                                class="flex flex-wrap items-center justify-between gap-4 p-3 bg-neutral-800 text-white rounded-lg"
-                                v-if="plan.monthlyPrice > 0"
-                            >
+                            <p class="text-sm opacity-75">{{ plan.translation?.[locale]?.desc || plan.desc }}</p>
+                            <div class="flex flex-wrap items-center justify-between gap-4 rounded-lg" v-if="plan.monthlyPrice > 0">
                                 <div class="flex flex-wrap items-baseline gap-1">
-                                    <b class="f-inter text-emerald-100 text-3xl">
+                                    <b class="f-inter gradient-text text-3xl font-extrabold">
                                         {{ Intl.NumberFormat(locale).format((priceType === "monthly" ? plan.monthlyPrice : plan.yearlyPrice) / 1000)
-                                        }}<span class="text-xs">,000</span>
+                                        }}<small class="text-base">,{{ Intl.NumberFormat(locale).format(1000).substring(2) }}</small>
                                     </b>
-                                    <b class="f-inter text-baby-blue">{{ $t("pricing.Toman") }}</b>
+                                    <b class="f-inter">{{ $t("pricing.Toman") }}</b>
                                     <small class="">/ {{ priceType == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</small>
                                 </div>
                             </div>
-                            <div class="plan-card-list grid md:absolute start-0 top-full w-full bg-pencil-tip rounded-b-xl shadow-nr35">
-                                <ul class="flex flex-col gap-4 w-full overflow-hidden">
+                            <div class="plan-card-list grid md:absolute start-0 top-full w-full bg-bgPrimary rounded-b-2xl shadow-mr35">
+                                <ul class="flex flex-col gap-5 w-full overflow-hidden">
+                                    <span class="w-11/12 h-0.5 mx-auto bg-fgPrimary opacity-5"></span>
                                     <li class="flex items-center gap-2">
-                                        <Icon class="relative w-4 h-4 bg-baby-blue" name="plus.svg" folder="icons" size="16px" />
-                                        <small class="opacity-90 text-sky-200 text-sm">{{ $t("pricing.Everything on previous plan") }}</small>
+                                        <Icon class="relative w-4 h-4 bg-secondary" name="plus.svg" folder="icons" size="16px" />
+                                        <small class="opacity-90 text-sky-200 text-xs">{{ $t("pricing.Everything on previous plan") }}</small>
                                     </li>
                                     <li class="flex items-center gap-2" v-for="(feature, j) in plan.listings" :key="j">
-                                        <Icon class="relative w-4 h-4 bg-baby-blue" name="check.svg" folder="icons" size="16px" />
-                                        <small class="opacity-90 text-white text-sm">{{ plan.translation?.[locale]?.listings[j] || feature }}</small>
+                                        <Icon class="relative w-4 h-4 bg-secondary" name="check.svg" folder="icons" size="16px" />
+                                        <small class="opacity-80 text-fgPrimary text-xs">{{ plan.translation?.[locale]?.listings[j] || feature }}</small>
                                     </li>
-                                    <button class="gradient w-full p-4 py-2 text-white rounded-md shrink-0">
+                                    <button class="gradient w-full p-3 hover:px-6 text-bgPrimary rounded-xl font-extrabold shrink-0">
                                         {{ $t("panel.billing.Purchase") }}
                                     </button>
                                 </ul>
@@ -234,78 +241,85 @@
             </div>
         </section>
 
-        <hr class="w-full border-gray-300 opacity-50" />
+        <hr class="w-full border-bgSecondary" />
 
-        <section class="flex flex-col gap-4 w-full pb-2" name="Billing History">
+        <section class="flex flex-col gap-6 w-full pb-2" name="Billing History">
             <header class="flex items-center gap-2">
-                <img class="w-9" src="~/assets/images/panel-icons/money-bill-transfer-dark.png" alt="" />
+                <Icon class="w-9 h-9 gradient" name="money-bill-transfer.svg" folder="icons/duo" size="36px" />
                 <h1 class="text-2xl/tight md:text-3xl/tight font-bold">{{ $t("panel.billing.Billing History") }}</h1>
             </header>
             <!-- TODO : add date range for billing history -->
             <ul class="flex flex-col gap-4" v-if="bills.list.length">
                 <li
-                    class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 p-4 bg-white rounded-lg shadow-nr10"
+                    class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 p-4 bg-bgAccent rounded-2xl shadow-nr10"
                     v-for="(bill, i) in bills.list"
                     :key="i"
                 >
                     <div class="flex flex-col gap-2 w-72">
-                        <small>
-                            {{ $t("panel.billing.Bill Number") }} <b class="text-sm" dir="ltr">#{{ bill.billNumber }}</b>
+                        <small class="text-secondary">
+                            {{ $t("panel.billing.Bill Number") }} <b class="text-sm text-fgPrimary" dir="ltr">#{{ bill.billNumber }}</b>
                         </small>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-1 opacity-75">
                             <p class="text-sm w-full max-w-sm">{{ bill.translation?.[locale]?.description || bill.description }}</p>
                             <p class="text-sm w-full max-w-sm" v-if="bill.forHowLong">
-                                {{ $t("panel.billing.For") }} <span class="p-1.5 py-0.5 bg-neutral-100 rounded-md shadow-inner">{{ bill.forHowLong }}</span>
+                                {{ $t("panel.billing.For") }} <span class="p-1.5 py-0 bg-bgSecondary rounded-md shadow-inner">{{ bill.forHowLong }}</span>
                             </p>
                         </div>
                     </div>
                     <div class="flex flex-col gap-1">
                         <div class="flex items-center gap-1 text-sm">
-                            <span class="w-20">{{ $t("panel.billing.Issue Date") }}:</span>
-                            <b class="w-44">{{ new Date(bill.createdAt).toLocaleString(locale) }}</b>
+                            <span class="w-20 text-secondary">{{ $t("panel.billing.Issue Date") }}:</span>
+                            <b class="w-44 opacity-80">{{ new Date(bill.createdAt).toLocaleString(locale) }}</b>
                         </div>
                         <div class="flex items-center gap-1 text-sm" v-if="bill.dueDate">
-                            <span class="w-20">{{ $t("panel.billing.Due Date") }}:</span>
-                            <b class="w-44">{{ new Date(bill.dueDate).toLocaleString(locale) }}</b>
+                            <span class="w-20 text-secondary">{{ $t("panel.billing.Due Date") }}:</span>
+                            <b class="w-44 opacity-80">{{ new Date(bill.dueDate).toLocaleString(locale) }}</b>
                         </div>
                     </div>
                     <div class="flex items-center justify-center w-44 shrink-0">
-                        <div class="flex items-center gap-2 p-2 rounded-lg border bg-neutral-800">
+                        <div class="flex items-center gap-2 p-3 rounded-xl border-2 border-bgSecondary shadow-mr15">
                             <img class="w-6" :src="bill.plan.icon" :alt="bill.plan.name" />
-                            <span class="gradient-text font-bold">
+                            <span class="gradient-text font-black">
                                 {{ bill.plan.translation?.[locale]?.name || bill.plan.name }}
                             </span>
                         </div>
                     </div>
-                    <div class="money-box flex items-baseline gap-1 w-full">
-                        <span class="text-xl text-lime-700"> {{ Intl.NumberFormat(locale).format(bill.payablePrice) }}</span>
+                    <div class="money-box flex items-baseline gap-1 w-full font-bold">
+                        <span class="text-xl text-emerald-400"> {{ Intl.NumberFormat(locale).format(bill.payablePrice) }}</span>
                         <small class="text-sm">{{ $t("pricing.Toman") }}</small>
                     </div>
                     <div class="flex items-center md:justify-center w-40 shrink-0">
                         <span
-                            class="text-center p-2 py-1 text-sm rounded-md bg-opacity-25"
+                            class="text-center p-3 py-2 text-sm rounded-xl bg-opacity-10"
                             :class="{
-                                'bg-red-800 text-rose-800': bill.status == 'notPaid',
-                                'bg-blue-800 text-blue-800': bill.status == 'pendingPayment',
-                                'bg-emerald-800 text-emerald-800': bill.status == 'paid',
-                                'bg-red-800 text-red-800': bill.status == 'canceled',
+                                'bg-red-200 text-rose-200': bill.status == 'notPaid',
+                                'bg-blue-200 text-blue-200': bill.status == 'pendingPayment',
+                                'bg-emerald-200 text-emerald-200': bill.status == 'paid',
+                                'bg-red-200 text-red-200': bill.status == 'canceled',
                             }"
                         >
                             {{ $t(`panel.payment.${bill.status}`) }}
                         </span>
                     </div>
-                    <button class="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-50 border shrink-0" @click="openBillDetail(bill)">
+                    <button
+                        class="btn flex items-center justify-center w-8 hover:w-10 aspect-square rounded-full bg-neutral-50 shrink-0"
+                        @click="openBillDetail(bill)"
+                    >
                         <Icon class="w-5 h-5 bg-black rotate-90" name="dots.svg" folder="icons" size="4px" />
                     </button>
                 </li>
             </ul>
             <Loading v-if="loadingBills" />
-            <button class="btn w-max p-2.5 border bg-white rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreBills">
+            <button
+                class="btn w-max p-3 hover:px-6 border border-bgSecondary hover:bg-fgPrimary hover:text-bgPrimary rounded-xl text-xs"
+                @click="loadMore()"
+                v-if="!noMoreBills"
+            >
                 {{ $t("panel.Load More") }}
             </button>
             <small class="text-xs opacity-75" v-if="noMoreBills && bills.list.length > 0">{{ $t("panel.End of the list") }}</small>
             <small class="flex items-start gap-0.5 text-xs text-rose-500" v-if="!loadingBills && errorField === 'data' && responseMessage !== ''">
-                <Icon class="icon w-4 h-4 bg-rose-500 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                <Icon class="icon w-4 h-4 bg-rose-500 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
             </small>
             <div class="flex flex-col items-center gap-4 w-full my-10" v-if="!bills.list.length">
                 <img class="w-40" src="~/assets/images/invoice.webp" alt="invoice" />

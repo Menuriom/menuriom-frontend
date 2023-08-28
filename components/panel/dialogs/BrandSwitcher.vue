@@ -16,14 +16,14 @@
                         :class="[i == panelStore.selectedBrandId ? 'p-2' : 'p-3']"
                         @click="selectBrand(i)"
                     >
-                        <img class="w-12 h-12 rounded-full object-cover shadow-nr15 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
-                        <img class="w-12 h-12 rounded-full object-cover shadow-nr15 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                        <img class="w-12 h-12 rounded-full object-cover shadow-nr15 shrink-0" :src="brand.logo" v-if="brand.logo" />
+                        <img class="w-12 h-12 rounded-full object-cover shadow-nr15 shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                         <div class="flex flex-col flex-grow">
                             <h4 class="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-44">{{ brand.name }}</h4>
                             <small class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-44 text-purple-300"> {{ brand.role }} </small>
                         </div>
                         <span
-                            class="flex items-center justify-center w-4 h-4 border-2 border-baby-blue rounded-full flex-shrink-0"
+                            class="flex items-center justify-center w-4 h-4 border-2 border-baby-blue rounded-full shrink-0"
                             :class="{ 'bg-baby-blue': i == panelStore.selectedBrandId }"
                         >
                             <Icon class="w-4 h-4 bg-dolphin" name="Check.svg" folder="icons/basil" size="16px" v-if="i == panelStore.selectedBrandId" />
@@ -31,7 +31,7 @@
                     </li>
                 </div>
             </ul>
-            <hr class="w-full opacity-40" />
+            <hr class="w-full opacity-20" />
             <nuxt-link
                 class="btn flex items-center justify-center gap-2 p-2.5 rounded-lg text-sm border-2 border-white"
                 :to="localePath('/panel/brands')"

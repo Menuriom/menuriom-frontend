@@ -7,13 +7,13 @@
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: theme("colors.neutral.400");
+    background: theme("colors.neutral.600");
 }
 .rs-range::-moz-range-track {
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: theme("colors.neutral.400");
+    background: theme("colors.neutral.600");
 }
 
 .rs-range::-webkit-slider-thumb {
@@ -41,7 +41,7 @@
     transition-property: background-color, width, height;
     pointer-events: none;
     border-radius: 999px;
-    color: theme("colors.baby-blue");
+    color: theme("colors.primary");
 }
 </style>
 
@@ -49,7 +49,7 @@
     <div class="flex flex-col items-center justify-center w-full mt-4 mb-8">
         <div class="relative flex items-center w-full group">
             <div class="bubble absolute flex flex-col items-center gap-1 pointer-events-none" ref="bubble">
-                <span class="flex items-center justify-center border-2 border-dolphin group-hover:border-violet h-10 group-hover:h-12">
+                <span class="flex items-center justify-center border-2 border-bgSecondary group-hover:border-primary h-10 group-hover:h-12">
                     {{ modelValue >= max ? `${max}+` : modelValue }}
                 </span>
                 <small class="text-xs opacity-75 -mb-4" v-if="label">{{ label }}</small>

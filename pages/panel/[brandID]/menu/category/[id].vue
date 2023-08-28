@@ -1,69 +1,70 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full">
+    <div class="flex flex-col gap-6 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-1">
+            <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
-                    <img class="w-9" src="~/assets/images/panel-icons/layer-group-dark.png" alt="" />
+                    <Icon class="w-9 h-9 gradient" name="layer-group.svg" folder="icons/duo" size="36px" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.menu.Edit Category") }}</h1>
                 </div>
                 <div class="flex items-center gap-1 text-sm ms-2">
                     <nuxt-link :to="localePath(`/panel/${route.params.brandID}`)">
-                        <Icon class="w-4 h-4 bg-pencil-tip hover:bg-violet" name="house.svg" folder="icons/light" size="16px" />
+                        <Icon class="w-4 h-4 bg-fgPrimary hover:bg-primary" name="house.svg" folder="icons/light" size="16px" />
                     </nuxt-link>
-                    <span>&gt;</span>
-                    <nuxt-link class="hover:text-violet" :to="localePath(`/panel/${route.params.brandID}/menu/editor`)">
+                    <span class="opacity-60">&gt;</span>
+                    <nuxt-link class="hover:text-primary" :to="localePath(`/panel/${route.params.brandID}/menu/editor`)">
                         {{ $t("panel.menu.Menu Editor") }}
                     </nuxt-link>
-                    <span>&gt;</span>
-                    <span>{{ $t("panel.menu.Edit Category") }}</span>
+                    <span class="opacity-60">&gt;</span>
+                    <span class="text-secondary">{{ $t("panel.menu.Edit Category") }}</span>
                 </div>
             </div>
         </header>
-        <hr class="w-full border-gray-300 opacity-50" />
+        <hr class="w-full border-bgSecondary" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full" ref="form">
-            <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-                <h3 class="flex items-center gap-2 text-lg font-bold">
-                    <Icon class="w-5 h-5 gradient-re" name="images.svg" folder="icons/light" size="20px" />
-                    {{ $t("panel.menu.Category Icon") }}
-                </h3>
-
+            <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-2xl bg-bgAccent text-fgPrimary shadow-nr10">
                 <div class="flex flex-wrap md:flex-nowrap items-start gap-4">
-                    <div class="relative flex flex-col items-center justify-center gap-2 w-32 h-32 rounded-full bg-white shrink-0">
-                        <img class="w-20 max-h-20 object-cover" :src="logoBlob" v-if="logoBlob" />
-                        <img class="w-20 max-h-20 object-cover" src="~/assets/images/panel-icons/knife-fork.svg" v-else />
+                    <div class="flex flex-col items-center gap-4 shrink-0">
+                        <h3 class="flex items-center gap-2 text-lg font-bold">
+                            <Icon class="w-5 h-5 gradient-re" name="images.svg" folder="icons/light" size="20px" />
+                            {{ $t("panel.menu.Category Icon") }}
+                        </h3>
+                        <div class="relative flex flex-col items-center justify-center gap-2 w-32 h-32 rounded-2xl bg-fgPrimary shadow-mr35 shrink-0">
+                            <img class="w-20 max-h-20 object-cover" :src="logoBlob" v-if="logoBlob" />
+                            <img class="w-20 max-h-20 object-cover" src="~/assets/images/panel-icons/knife-fork.svg" v-else />
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-2 p-2 w-full bg-dolphin rounded-lg shadow-nr25">
+                    <div class="flex flex-col gap-4 p-2 md:p-4 w-full bg-bgSecondary bg-opacity-50 rounded-2xl shadow-mr15">
                         <ul class="flex items-center gap-2">
                             <li
-                                class="p-1 px-2 text-xs rounded-md border border-violet cursor-pointer"
-                                :class="[iconMode == 'upload' ? 'bg-white text-black' : 'text-white']"
+                                class="p-1 px-2 text-xs rounded-lg border-2 cursor-pointer"
+                                :class="[iconMode == 'upload' ? 'bg-fgPrimary text-bgPrimary' : 'text-fgPrimary border-fgPrimary border-opacity-20']"
                                 @click="iconMode = 'upload'"
                             >
                                 {{ $t("panel.menu.File Upload") }}
                             </li>
                             <li
-                                class="p-1 px-2 text-xs rounded-md border border-violet cursor-pointer"
-                                :class="[iconMode == 'list' ? 'bg-white text-black' : 'text-white']"
+                                class="p-1 px-2 text-xs rounded-lg border-2 cursor-pointer"
+                                :class="[iconMode == 'list' ? 'bg-fgPrimary text-bgPrimary' : 'text-fgPrimary border-fgPrimary border-opacity-20']"
                                 @click="iconMode = 'list'"
                             >
                                 {{ $t("panel.menu.Select From List") }}
                             </li>
                         </ul>
-                        <hr class="w-full opacity-20" />
+                        <hr class="w-full border-fgPrimary border-opacity-10" />
                         <div
-                            class="flex flex-col justify-center gap-2 w-full h-44"
+                            class="flex flex-col justify-center gap-2 w-full h-32"
                             v-show="iconMode === 'upload'"
                             v-if="checkLimitations([['customizable-category-logo', true]], brand)"
                         >
-                            <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 1 }) }}</small>
+                            <small class="text-xs text-secondary opacity-80">{{ $t("panel.Images must be less than nMB", { size: 1 }) }}</small>
                             <div
-                                class="relative flex items-center justify-center w-full rounded-lg border-2 border-dashed border-neutral-400 hover:border-violet grow"
+                                class="relative flex items-center justify-center w-full rounded-lg border-2 border-dashed border-fgPrimary border-opacity-20 hover:border-primary grow"
                             >
                                 <div class="flex flex-col items-center justify-center gap-2 w-full">
-                                    <Icon class="w-5 h-5 bg-purple-300" name="images.svg" folder="icons/light" size="20px" />
-                                    <span class="text-sm text-purple-300">{{ $t("panel.Drag & drop your logo or click to select") }}</span>
+                                    <Icon class="w-5 h-5 bg-fgPrimary" name="images.svg" folder="icons/light" size="20px" />
+                                    <span class="text-sm text-primary">{{ $t("panel.Drag & drop your logo or click to select") }}</span>
                                 </div>
                                 <input
                                     class="absolute inset-0 opacity-0 cursor-pointer"
@@ -75,17 +76,17 @@
                                 />
                             </div>
                         </div>
-                        <div class="flex flex-col items-center justify-center gap-1 h-44" v-show="iconMode === 'upload'" v-else>
+                        <div class="flex flex-col items-center justify-center gap-1 h-32" v-show="iconMode === 'upload'" v-else>
                             <span class="opacity-75 text-sm">{{ $t("panel.This feature is for the pro plan only") }}.</span>
                             <nuxt-link class="text-purple-300 text-sm underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
                                 {{ $t("panel.Upgrade your plan to get this feature") }}.
                             </nuxt-link>
                         </div>
-                        <div class="flex flex-col justify-center gap-4 w-full h-44" v-show="iconMode === 'list'">
+                        <div class="flex flex-col justify-center gap-4 w-full h-32" v-show="iconMode === 'list'">
                             <ul class="flex flex-wrap items-start gap-2 w-full h-full overflow-auto">
                                 <li
-                                    class="bg-pencil-tip p-3 rounded-md border-4 cursor-pointer"
-                                    :class="[logoBlob === icon ? 'border-violet' : 'border-transparent']"
+                                    class="p-3 rounded-xl border-4 cursor-pointer"
+                                    :class="[logoBlob === icon ? 'border-primary' : 'border-bgSecondary']"
                                     v-for="(icon, i) in icons.list"
                                     :key="i"
                                     @click="selectIconFromList(icon)"
@@ -97,17 +98,24 @@
                     </div>
                 </div>
 
-                <hr class="w-full opacity-20" />
+                <hr class="w-full border-bgSecondary" />
                 <Input
                     :label="$t('panel.menu.Category Name')"
                     :required="formLang == 'default'"
                     v-model="name.values[formLang]"
                     :error="errorField == `name.${formLang}` ? responseMessage : ''"
                 />
-                <Switch :label="$t('panel.menu.Show as new category')" v-model:value="showAsNew" />
-                <Switch :label="$t('panel.menu.Hide This Category')" v-model:value="hide" />
-                <hr class="w-full opacity-20" />
-                <small> {{ $t("panel.menu.You can select specific branches for this category") }} </small>
+                <div class="flex flex-wrap items-center gap-4">
+                    <Switch :label="$t('panel.menu.Show as new category')" v-model:value="showAsNew" />
+                    <Switch :label="$t('panel.menu.Hide This Category')" v-model:value="hide" />
+                </div>
+                <hr class="w-full border-bgSecondary" />
+                <div class="flex flex-col gap-1">
+                    <small> {{ $t("panel.menu.You can select specific branches for this category") }} </small>
+                    <small class="text-xs opacity-75 text-secondary">
+                        {{ $t("panel.menu.If you dont select any branches this category will be available for all of your branches") }}
+                    </small>
+                </div>
                 <MultiSelectDropDown
                     class="w-full flex-grow"
                     :formHtmlObject="form"
@@ -119,12 +127,9 @@
                 >
                     <span :value="option.value">{{ option.name }}</span>
                 </MultiSelectDropDown>
-                <small class="text-xs opacity-75">
-                    {{ $t("panel.menu.If you dont select any branches this category will be available for all of your branches") }}
-                </small>
-                <hr class="w-full opacity-20" />
+                <hr class="w-full border-bgSecondary" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <div class="flex flex-wrap items-center gap-2" v-if="saving && percentage > 0">
                     <small>{{ $t("panel.Uploading") }}</small>
@@ -134,7 +139,7 @@
                 </div>
                 <div class="flex flex-wrap items-center gap-4">
                     <nuxt-link
-                        class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-lg border-2 border-neutral-300 flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-bgSecondary"
                         :to="localePath(`/panel/${route.params.brandID}/menu/editor`)"
                     >
                         <Icon
@@ -147,7 +152,7 @@
                         {{ $t("panel.Go Back") }}
                     </nuxt-link>
                     <button
-                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-lg bg-violet text-white flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary"
                         :class="{ 'opacity-50': saving }"
                         :disabled="saving"
                         @click="save()"

@@ -6,32 +6,24 @@ header {
 
 nav {
     position: absolute;
-    top: 4rem;
-    inset-inline: 0rem;
-    background-color: white;
+    top: 4.25rem;
+    inset-inline-end: 0rem;
+    background-color: theme("colors.bgAccent");
     box-shadow: theme("boxShadow.nr35");
-    border-radius: 0.5rem;
-}
-
-.drop_down_list {
-    inset-inline-start: -2.25rem;
-}
-
-.link {
-    transition: all 0.2s ease-in;
+    border-radius: 1rem;
 }
 
 .toggle {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    gap: 5px;
+    width: 2.65rem;
+    height: 2.65rem;
+    gap: 6px;
 }
 .line {
     width: 1.5rem;
-    height: 3px;
+    height: 2px;
 }
 
 @media (min-width: 768px) {
@@ -50,107 +42,74 @@ nav {
 </style>
 
 <template>
-    <header
-        ref="header"
-        class="fixed flex items-center justify-between gap-4 border-2 border-gray-100 rounded-lg mt-2 md:mt-4 p-2 sm:p-3 max-w-screen-2xl h-14 lg:h-16 bg-white bg-opacity-90 shadow-nr5 z-20"
-    >
-        <nuxt-link class="flex items-center gap-1 sm:gap-3 h-7 md:h-9 overflow-hidden flex-shrink-0" :to="localePath('/')">
-            <img class="relative h-7 md:h-9" src="/logo.svg" title="Menuriom" alt="Menuriom" />
-            <img class="h-6 md:h-8" src="/logo-text.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
-            <img class="h-7 md:h-9" src="/logo-text-fa.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
+    <header ref="header" class="fixed flex items-center justify-between gap-4 rounded-2xl mt-2 md:mt-4 p-2 max-w-screen-2xl bg-bgAccent shadow-mr25 z-20">
+        <nuxt-link class="flex items-center gap-2 overflow-hidden shrink-0" :to="localePath('/')">
+            <div class="rounded-lg p-0.5 md:p-1 bg-gradient-to-t from-primary to-secondary">
+                <img class="relative h-8 rounded-md" src="/logos/logo9-dark.webp" title="Menuriom" alt="Menuriom" />
+            </div>
+            <img class="h-5 xl:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
+            <img class="h-5 xl:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
         </nuxt-link>
 
         <transition name="slide-up" appear>
-            <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full p-4 lg:p-0" v-show="menuOpen">
-                <ul
-                    class="relative flex flex-col lg:flex-row lg:items-center gap-6 xl:gap-8 w-full lg:w-auto mx-auto max-h-96 overflow-auto lg:overflow-visible"
-                >
-                    <li
-                        class="flex flex-col gap-1 rounded-t-lg transition-all"
-                        :class="{ 'lg:bg-white lg:p-2 lg:px-3 lg:shadow-nr25': featureListOpen }"
-                        ref="featureDropdown"
-                        @mouseover="toggleFeatures('hover', true)"
-                        @mouseleave="toggleFeatures('hover', false)"
-                    >
-                        <div class="flex items-center gap-1 cursor-pointer select-none" @click="toggleFeatures('click')">
+            <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-screen-2xs lg:max-w-none p-6 lg:p-0" v-show="menuOpen">
+                <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')">
                             <span>{{ $t("header.Features") }}</span>
-                            <img src="/icons/arrow.svg" alt=">" />
-                        </div>
-                        <transition name="slidedown" mode="out-in" appear>
-                            <ul
-                                class="drop_down_list lg:absolute top-9 grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-3 w-full lg:w-screen lg:max-w-2xl p-0 lg:p-4 xl:p-6 bg-white rounded-xl lg:shadow-nr15"
-                                v-if="featureListOpen"
-                            >
-                                <li class="w-full p-3 hover:bg-neutral-100 rounded-lg" v-for="(item, i) in features.list" :key="i">
-                                    <nuxt-link class="flex items-center gap-2" :to="localePath(`/features#${item.title.toLowerCase().replaceAll(' ', '-')}`)">
-                                        <img class="w-8" :src="item.icon" :alt="$t(`header.${item.title}`)" />
-                                        <div class="flex flex-col">
-                                            <h4 class="f-inter font-semibold opacity-70">{{ $t(`header.${item.title}`) }}</h4>
-                                            <small class="text-xs opacity-75">{{ $t(`header.${item.desc}`) }}</small>
-                                        </div>
-                                    </nuxt-link>
-                                </li>
-                                <li class="w-full p-3">
-                                    <nuxt-link class="flex items-center w-max" :to="localePath('/features')">
-                                        <span class="border-b-2 border-violet hover:border-b-4 pb-1">{{ $t("header.See all the features") }} &gt;</span>
-                                    </nuxt-link>
-                                </li>
-                            </ul>
-                        </transition>
+                        </nuxt-link>
                     </li>
-                    <li class="flex items-center gap-1 hover:underline">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/demo')">
                             <span>{{ $t("header.Demo") }}</span>
-                            <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
-                    <li class="flex items-center gap-1 hover:underline">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')">
                             <span>{{ $t("header.Pricing") }} </span>
-                            <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
-                    <li class="flex items-center gap-1 hover:underline">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/how-it-works')">
                             <span>{{ $t("header.How It Works") }} </span>
-                            <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
-                    <li class="flex items-center gap-1 hover:underline">
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')">
                             <span>{{ $t("header.Contact Us") }}</span>
-                            <span class="lg:hidden flex-grow h-0.5 bg-neutral-100"></span>
                         </nuxt-link>
                     </li>
                 </ul>
-                <hr class="gradient-re w-full h-0.5 lg:hidden" />
-                <div class="flex items-center gap-4">
-                    <LangSwitch class="" textColor="black" />
-                    <span class="lg:hidden text-gray-400">|</span>
-                    <nuxt-link
-                        class="link md:hidden p-2 hover:px-3 rounded-md"
-                        :to="localePath('/authenticate')"
-                        title="Login into user panel"
-                        v-if="!user.email.value"
-                    >
-                        {{ $t("header.Login") }}
-                    </nuxt-link>
-                    <nuxt-link
-                        class="link 2sm:hidden p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
-                        :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
-                        :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
-                    >
-                        <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
-                        <span v-else>{{ $t("header.Your Dashboard") }}</span>
-                    </nuxt-link>
+                <hr class="w-full h-0.5 bg-fgPrimary opacity-10 lg:hidden" />
+                <div class="flex flex-wrap items-center gap-4">
+                    <LangSwitch class="" textColor="white" :showText="true" />
+                    <!-- <span class="w-0.5 h-full lg:hidden text-gray-400"></span> -->
+                    <div class="flex items-center gap-2">
+                        <nuxt-link
+                            class="link md:hidden p-2 px-3 hover:px-5 rounded-lg bg-fgPrimary text-bgPrimary transition-all"
+                            :to="localePath('/authenticate')"
+                            title="Login into user panel"
+                            v-if="!user.email.value"
+                        >
+                            {{ $t("header.Login") }}
+                        </nuxt-link>
+                        <nuxt-link
+                            class="link 2sm:hidden p-2 px-3 hover:px-5 rounded-lg bg-primary text-fgPrimary transition-all"
+                            :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
+                            :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
+                        >
+                            <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
+                            <span v-else>{{ $t("header.Your Dashboard") }}</span>
+                        </nuxt-link>
+                    </div>
                 </div>
             </nav>
         </transition>
 
-        <div class="flex items-center gap-2 xl:gap-4 flex-shrink-0">
-            <span class="hidden md:flex text-gray-400">|</span>
+        <div class="flex items-center gap-2 xl:gap-4 shrink-0">
+            <span class="w-0.5 h-7 -ms-4 hidden lg:flex bg-fgPrimary opacity-30"></span>
             <nuxt-link
-                class="link hidden md:flex p-2 hover:px-3 rounded-md"
+                class="link hidden md:flex p-2 hover:px-4 rounded-lg hover:bg-bgSecondary hover:text-secondary transition-all"
                 :to="localePath(`/authenticate`)"
                 title="Login into user panel"
                 v-if="!user.email.value"
@@ -158,17 +117,17 @@ nav {
                 {{ $t("header.Login") }}
             </nuxt-link>
             <nuxt-link
-                class="link hidden 2sm:flex text-sm p-1.5 md:p-2 hover:px-3 rounded-md bg-violet border-2 border-black text-white shadow-md"
+                class="hidden 2sm:flex text-sm p-2.5 hover:px-4 rounded-lg bg-primary text-fgPrimary shadow-md transition-all"
                 :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
                 :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
             >
                 <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
                 <span v-else>{{ $t("header.Your Dashboard") }}</span>
             </nuxt-link>
-            <button class="toggle flex lg:hidden w-10 h-10 hover:bg-zinc-100 rounded-full transition-colors" @click="headerToggle()">
-                <span class="line bg-black transition-all" :class="{ 'rotate-45 -mb-1': menuOpen }"></span>
-                <span class="line bg-black transition-all" v-show="!menuOpen"></span>
-                <span class="line bg-black transition-all" :class="{ '-rotate-45 -mt-1': menuOpen }"></span>
+            <button class="toggle flex lg:hidden w-8 h-8 hover:bg-bgPrimary rounded-xl transition-colors" @click="headerToggle()">
+                <span class="line bg-fgPrimary transition-all" :class="{ 'rotate-45 -mb-1': menuOpen }"></span>
+                <span class="line bg-fgPrimary transition-all" v-show="!menuOpen"></span>
+                <span class="line bg-fgPrimary transition-all" :class="{ '-rotate-45 -mt-1': menuOpen }"></span>
             </button>
         </div>
     </header>
@@ -187,19 +146,6 @@ const user = storeToRefs(userStore);
 
 const featureDropdown = ref(null); //Ref to DOM
 const featureListOpen = ref(false);
-const features = reactive({
-    list: [
-        { icon: "/gradient-icons/dark/palette.png", title: "Templates&Customization", desc: "Templates&CustomizationDesc" },
-        { icon: "/gradient-icons/dark/store.png", title: "MultipleBranches", desc: "MultipleBranchesDesc" },
-        { icon: "/gradient-icons/dark/fire.png", title: "ItemSpecialazation", desc: "ItemSpecialazationDesc" },
-        { icon: "/gradient-icons/dark/clipboard-list-check.png", title: "OrderingSystem", desc: "OrderingSystemDesc" },
-        { icon: "/gradient-icons/dark/earth-america.png", title: "MenuTranslation", desc: "MenuTranslationDesc" },
-        { icon: "/gradient-icons/dark/bell-on.png", title: "ServerCall", desc: "ServerCallDesc" },
-        { icon: "/gradient-icons/dark/comments-question-check.png", title: "FeedbackSystem", desc: "FeedbackSystemDesc" },
-        { icon: "/gradient-icons/dark/object-intersect.png", title: "ComboLists", desc: "ComboListsDesc" },
-        { icon: "/gradient-icons/dark/qrcode.png", title: "CustomQRCode", desc: "CustomQRCodeDesc" },
-    ],
-});
 
 const menuOpen = ref(false);
 

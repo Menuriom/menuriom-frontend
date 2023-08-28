@@ -2,12 +2,13 @@
 .pattern-bg {
     background-repeat: repeat;
     background-size: 80px;
+    mix-blend-mode: darken;
 }
 </style>
 
 <template>
     <div class="relative flex items-start justify-between gap-4 w-full px-2 pt-4 mb-2 isolate shrink-0">
-        <div class="absolute start-0 top-0 w-full h-20 -z-10 overflow-hidden" :style="`background-color: ${options.bgSecondaryColor};`">
+        <div class="absolute start-0 top-0 w-full h-20 -z-10 overflow-hidden" :style="`background-color: ${options.primaryColor};`">
             <div
                 class="pattern-bg absolute -top-1/2 w-96 aspect-square"
                 :style="`background-image: url('${options.bgImage}'); background-size: ${options.bgImageSize}%; background-color: ${options.bgSecondaryColor}; opacity: ${options.bgImageOpacity}%; rotate: ${options.bgImageRotation}deg;`"

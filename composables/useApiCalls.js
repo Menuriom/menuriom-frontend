@@ -227,6 +227,27 @@ export const getSideItemGroupList = async (brandID) => {
 };
 // ---------------------------------------------------------
 
+// menu styles ---------------------------------------------------------
+export const loadMenuStyleSettings = async (brandID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/panel/menu-styles`, { brand: brandID });
+    const params = [];
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _menuStyles = {};
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            _menuStyles = response.data.menuStyles;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _menuStyles };
+};
+// ---------------------------------------------------------
+
 // qr codes ---------------------------------------------------------
 export const loadQRCodeSettings = async (brandID) => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/menu-qrcode`, { brand: brandID });

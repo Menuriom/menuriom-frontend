@@ -4,11 +4,11 @@
     <Dialog name="side-item-creator" boxClass="max-w-xl">
         <template #title>
             <div class="flex items-center gap-2 w-full">
-                <img class="w-8" src="~/assets/images/panel-icons/list-tree-light.png" alt="" />
+                <Icon class="w-8 h-8 gradient" name="list-tree.svg" folder="icons/duo" size="32px" />
                 <h3 class="text-xl md:text-2xl font-bold text-center">{{ $t("panel.menu.New Side Item Group") }}</h3>
             </div>
         </template>
-        <hr class="opacity-25" />
+        <hr class="border-bgSecondary" />
         <div class="flex flex-col gap-4 md:w-screen max-w-lg">
             <FormLangListForDialog
                 :brandID="route.params.brandID"
@@ -30,7 +30,7 @@
                 v-model="description.values[formLang]"
                 :error="errorField == `name.${formLang}` ? responseMessage : ''"
             />
-            <hr class="opacity-25" />
+            <hr class="border-bgSecondary" />
             <small class="flex flex-col gap-1"> {{ $t("panel.menu.You can add up to 20 items") }} </small>
             <ul class="flex flex-col gap-4 p-1 max-h-96 overflow-auto">
                 <li class="flex flex-wrap md:flex-nowrap items-center gap-2" v-for="(item, i) in items" :key="i">
@@ -43,29 +43,34 @@
                         v-model="items[i].price"
                     />
                     <button
-                        class="flex items-center gap-2 p-4 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer flex-shrink-0"
+                        class="flex items-center gap-2 p-3.5 border border-bgSecondary rounded-xl hover:bg-rose-400 cursor-pointer group shrink-0"
                         @click="items.splice(i, 1)"
                     >
-                        <Icon class="w-5 h-5 bg-red-300" name="trash-can.svg" folder="icons/light" size="20px" />
+                        <Icon class="w-5 h-5 bg-red-300 group-hover:bg-fgPrimary" name="trash-can.svg" folder="icons/light" size="20px" />
                     </button>
                 </li>
             </ul>
-            <button class="flex items-center gap-2 w-max text-xs text-purple-300" @click="addNewItem()" type="button" v-if="items.length < 20">
+            <button
+                class="btn flex items-center gap-2 w-max text-xs text-purple-300 border border-bgSecondary p-2 hover:px-5 rounded-xl"
+                @click="addNewItem()"
+                type="button"
+                v-if="items.length < 20"
+            >
                 <Icon class="w-3 h-3 bg-purple-300" name="plus.svg" folder="icons" size="12px" />
                 {{ $t("panel.menu.Add New Item") }}
             </button>
-            <hr class="opacity-25" />
+            <hr class="border-bgSecondary" />
             <div class="flex flex-col md:flex-row items-center gap-4">
                 <div class="flex flex-col gap-1 shrink-0">
                     <h3 class="font-bold">{{ $t("panel.menu.Maximum That User Can Select") }}</h3>
-                    <small class="text-xs opacity-75">{{ $t("panel.menu.Leave it empty to specify no limit for the user") }}</small>
+                    <small class="text-xs opacity-80 text-secondary">{{ $t("panel.menu.Leave it empty to specify no limit for the user") }}</small>
                 </div>
                 <Input class="w-full" :label="$t('panel.menu.Maximum Limit')" mask="##" v-model="maximum" />
             </div>
-            <hr class="opacity-25" />
-            <div class="flex flex-wrap items-center gap-4">
+            <hr class="border-bgSecondary" />
+            <div class="flex flex-wrap items-center gap-2">
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 py-2.5 text-sm rounded-md border-2 border-neutral-300 flex-shrink-0"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-bgSecondary shrink-0"
                     @click="panelStore.openPopUp('side-item-picker')"
                 >
                     <Icon
@@ -78,7 +83,7 @@
                     {{ $t("panel.Go Back") }}
                 </button>
                 <button
-                    class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md bg-violet text-white grow"
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary grow"
                     :class="{ 'opacity-50': saving }"
                     @click="save()"
                 >

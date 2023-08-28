@@ -26,11 +26,7 @@ span {
 
 <template>
     <div class="flex flex-col gap-1">
-        <div
-            class="wrapper relative flex bg-neutral-700 dark:bg-black2 text-white rounded-md"
-            :class="{ error: !!error, 'input-box-shadow': !!shadow }"
-            ref="dropdown"
-        >
+        <div class="wrapper relative flex bg-bgSecondary bg-opacity-50 rounded-xl" :class="{ error: !!error, 'input-box-shadow': !!shadow }" ref="dropdown">
             <div class="relative flex items-center w-full" tabindex="0" @click="toggleDropdown()">
                 <img
                     class="ms-3 object-contain"
@@ -39,7 +35,7 @@ span {
                     v-if="selectedOption.icon"
                 />
                 <input
-                    class="w-full bg-transparent rounded-b-md outline-none text-sm select-none"
+                    class="w-full bg-transparent rounded-b-md outline-none text-sm select-none pointer-events-none"
                     :class="[label ? 'p-1 px-3 pb-1.5 mt-6' : customPadding]"
                     :required="required"
                     :name="name"
@@ -64,18 +60,18 @@ span {
                 </span>
             </div>
             <span class="flex items-center my-2 mx-1 border-s-2 border-neutral-600" tabindex="0" @click="toggleDropdown()">
-                <Icon class="w-4 h-4 bg-violet mx-2" name="arrow.svg" folder="icons" size="14px" />
+                <Icon class="w-4 h-4 bg-primary mx-1.5 -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
             </span>
             <transition :name="openDirection === 'top' ? 'slide-down' : 'slide-up'" appear>
                 <ul
-                    class="list scroll-thin absolute w-full bg-dolphin border-2 border-violet rounded-md shadow-lg z-10"
+                    class="list scroll-thin absolute w-full bg-bgSecondary rounded-xl shadow-nr25 z-10"
                     :class="[openDirection === 'top' ? 'bottom-full mb-2' : 'top-full mt-2']"
                     tabindex="0"
                     v-show="open"
                 >
                     <li
-                        class="p-2 text-sm opacity-90 hover:bg-neutral-600 cursor-pointer"
-                        :class="{ 'bg-neutral-500': option.value == selectedOption.value }"
+                        class="p-2 text-sm hover:bg-secondary hover:bg-opacity-50 cursor-pointer"
+                        :class="{ 'bg-fgPrimary bg-opacity-10': option.value == selectedOption.value }"
                         v-for="(option, i) in options"
                         :key="i"
                         @click="selectOption(option)"
@@ -86,7 +82,7 @@ span {
             </transition>
         </div>
         <small class="flex items-start gap-0.5 text-xs text-rose-300" v-if="!!error">
-            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ error }}
+            <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ error }}
         </small>
     </div>
 </template>

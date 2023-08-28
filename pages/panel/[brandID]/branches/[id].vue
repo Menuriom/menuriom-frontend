@@ -1,55 +1,59 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full">
+    <div class="flex flex-col gap-6 w-full">
         <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-1">
+            <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-2">
-                    <img class="w-9" src="~/assets/images/panel-icons/store-dark.png" alt="" />
+                    <Icon class="w-9 h-9 gradient" name="store.svg" folder="icons/duo" size="36px" />
                     <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.branches.Edit Branch Details") }}</h1>
                 </div>
                 <div class="flex items-center gap-1 text-sm ms-2">
-                    <nuxt-link :to="localePath(`/panel/${route.params.brandID}`)">
-                        <Icon class="w-4 h-4 bg-pencil-tip hover:bg-violet" name="house.svg" folder="icons/light" size="16px" />
+                    <nuxt-link class="underline" :to="localePath(`/panel/${route.params.brandID}`)">
+                        <Icon class="w-4 h-4 bg-fgPrimary hover:bg-primary" name="house.svg" folder="icons/light" size="16px" />
                     </nuxt-link>
-                    <span>&gt;</span>
-                    <nuxt-link class="hover:text-violet" :to="localePath(`/panel/${route.params.brandID}/branches`)">
+                    <span class="opacity-60">&gt;</span>
+                    <nuxt-link class="hover:text-primary" :to="localePath(`/panel/${route.params.brandID}/branches`)">
                         {{ $t("panel.branches.Branches") }}
                     </nuxt-link>
-                    <span>&gt;</span>
-                    <span>{{ $t("panel.branches.Edit Branch Details") }}</span>
+                    <span class="opacity-60">&gt;</span>
+                    <span class="text-secondary">{{ $t("panel.branches.Edit Branch Details") }}</span>
                 </div>
             </div>
         </header>
-        <hr class="w-full border-gray-300 opacity-50" />
+        <hr class="w-full border-bgSecondary" />
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full">
-            <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white shadow-nr35">
-                <div class="flex flex-col gap-1">
+            <div class="flex flex-col gap-4 w-full max-w-screen-md p-4 rounded-2xl bg-bgAccent text-fgPrimary shadow-nr10">
+                <div class="flex flex-col gap-2">
                     <h3 class="flex items-center gap-2 text-lg font-bold">
                         <Icon class="w-5 h-5 gradient-re" name="images.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.branches.Branch Images") }}
-                        <small class="px-2 p-1 text-xs rounded-md bg-zinc-800 opacity-75">{{ $t("panel.up to n", { number: 5 }) }}</small>
+                        <small class="p-1 px-2 rounded-xl border border-bgSecondary bg-bgPrimary opacity-80">
+                            {{ $t("panel.up to n", { number: 5 }) }}
+                        </small>
                     </h3>
                     <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 2 }) }}</small>
                 </div>
                 <ul class="flex flex-wrap items-center gap-4">
-                    <li class="relative w-40 h-28 border-2 border-zinc-400 bg-neutral-100 rounded-md" v-for="(image, i) in gallery" :key="i">
+                    <li class="relative w-40 h-28 shadow-mr15 bg-bgSecondary rounded-xl" v-for="(image, i) in gallery" :key="i">
                         <img class="w-full h-full object-contain" :src="image.blob" alt="" />
-                        <button class="absolute top-1 start-1 p-1.5 hover:border border-red-500 rounded-md bg-dolphin cursor-pointer" @click="removeImage(i)">
-                            <Icon class="w-5 h-5 bg-rose-300" name="trash-can.svg" folder="icons/light" size="20px" />
+                        <button class="btn absolute top-1 start-1 p-2 rounded-lg bg-bgAccent hover:bg-rose-400 group cursor-pointer" @click="removeImage(i)">
+                            <Icon class="w-4.5 h-4.5 bg-rose-400 group-hover:bg-fgPrimary" name="trash-can.svg" folder="icons/light" size="18px" />
                         </button>
                     </li>
-                    <li class="relative flex items-center justify-center w-40 h-28 rounded-lg border-2 border-dashed border-neutral-400 hover:border-violet">
+                    <li
+                        class="relative flex items-center justify-center w-40 h-28 rounded-xl border-2 border-dashed border-fgPrimary border-opacity-50 hover:border-primary group"
+                    >
                         <div class="flex flex-col items-center gap-2">
-                            <Icon class="w-4 h-4 bg-purple-300" name="plus.svg" folder="icons" size="16px" />
+                            <Icon class="w-4 group-hover:w-8 aspect-square bg-purple-300 transition-all" name="plus.svg" folder="icons" size="24px" />
                             <small class="text-purple-300">{{ $t("panel.branches.Add Image") }}</small>
                         </div>
-                        <form class="absolute inset-0 opacity-0 cursor-pointer" @submit.prevent="" ref="fileInputForm">
+                        <form class="absolute inset-0 opacity-0" @submit.prevent="" ref="fileInputForm">
                             <input class="absolute inset-0" ref="fileInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple @input="addImages()" />
                         </form>
                     </li>
                 </ul>
-                <hr class="w-full opacity-20" />
+                <hr class="w-full border-bgSecondary" />
                 <h3 class="flex items-center gap-2 text-lg font-bold">
                     <Icon class="w-5 h-5 gradient-re" name="newspaper.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.branches.General Info") }}
@@ -61,6 +65,7 @@
                     :error="errorField == `name.${formLang}` ? responseMessage : ''"
                 />
                 <div class="flex flex-wrap md:flex-nowrap items-start gap-4 w-full">
+                    <!-- TODO : add little flag icon on the corner of any dual language field showing the current lang -->
                     <Input
                         name="address"
                         class="w-full flex-grow"
@@ -72,46 +77,46 @@
                     <Input
                         name="postalCode"
                         :placeholder="$t('panel.branches.10 digit number')"
-                        class="w-full md:w-52 flex-shrink-0"
+                        class="w-full md:w-52 shrink-0"
                         :label="$t('panel.branches.Branch Postal Code')"
                         mask="##########"
                         v-model="postalCode"
                         :error="errorField == 'postalCode' ? responseMessage : ''"
                     />
                 </div>
-                <hr class="w-full opacity-20" />
+                <hr class="w-full border-bgSecondary" />
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <h3 class="flex items-center gap-2 text-lg font-bold">
                         <Icon class="w-5 h-5 gradient-re" name="phone-rotary.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.branches.Phone Numbers") }}
                     </h3>
                     <button
-                        class="btn flex items-center justify-center gap-2 p-2.5 text-xs rounded-md border-2 text-purple-300 border-neutral-300"
+                        class="btn flex items-center justify-center gap-2 p-3 hover:px-5 text-xs rounded-xl text-primary bg-fgPrimary"
                         @click="telephoneNumbers.push('')"
                         type="button"
                     >
-                        <Icon class="w-3 h-3 bg-purple-300" name="plus.svg" folder="icons" size="12px" />
+                        <Icon class="w-3 h-3 bg-primary" name="plus.svg" folder="icons" size="12px" />
                         <!-- {{ $t("panel.branches.Add Phone Number") }} -->
                     </button>
                 </div>
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === 'telephoneNumbers' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <ul class="flex flex-col gap-4">
                     <li class="flex items-center gap-2" v-for="(number, i) in telephoneNumbers" :key="number">
                         <Input placeholder="021 22334455" name="tel" mask="###########" class="w-full md:w-52 flex-grow" v-model="telephoneNumbers[i]" />
                         <button
-                            class="flex items-center gap-2 p-2 rounded-md hover:bg-rose-500 hover:bg-opacity-10 text-red-300 cursor-pointer flex-shrink-0"
+                            class="flex items-center gap-2 p-3.5 border border-bgSecondary rounded-xl hover:bg-rose-400 cursor-pointer group shrink-0"
                             @click="telephoneNumbers.splice(i, 1)"
                         >
-                            <Icon class="w-4 h-4 bg-red-300" name="trash-can.svg" folder="icons/light" size="16px" />
-                            <small>{{ $t("panel.Delete") }}</small>
+                            <Icon class="w-5 h-5 bg-red-300 group-hover:bg-fgPrimary" name="trash-can.svg" folder="icons/light" size="18px" />
+                            <small class="text-rose-300 group-hover:text-fgPrimary">{{ $t("panel.Delete") }}</small>
                         </button>
                     </li>
                 </ul>
-                <hr class="w-full opacity-20" />
+                <hr class="w-full border-bgSecondary" />
                 <small class="flex items-start gap-0.5 text-xs text-rose-400" v-if="!saving && errorField === '' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-400 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-400 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
                 <div class="flex flex-wrap items-center gap-2" v-if="saving && percentage > 0">
                     <small>{{ $t("panel.Uploading") }}</small>
@@ -119,13 +124,13 @@
                         <span class="flex h-2 rounded-lg gradient" :style="`width:${percentage}%`"></span>
                     </div>
                 </div>
-                <div class="flex flex-wrap items-center gap-4">
+                <div class="flex flex-wrap items-center gap-2">
                     <nuxt-link
-                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md border flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-bgSecondary"
                         :to="localePath(`/panel/${route.params.brandID}/branches`)"
                     >
                         <Icon
-                            class="w-3 h-3 py-2 bg-white"
+                            class="w-3 h-3 py-2 bg-fgPrimary"
                             :class="[localeProperties.dir == 'rtl' ? 'rotate-45' : '-rotate-[135deg]']"
                             name="arrow-angle.svg"
                             folder="icons"
@@ -134,14 +139,14 @@
                         {{ $t("panel.Go Back") }}
                     </nuxt-link>
                     <button
-                        class="btn flex items-center justify-center gap-2 p-3 text-sm rounded-md border border-violet bg-violet text-white flex-shrink-0"
+                        class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary"
                         :class="{ 'opacity-50': saving }"
                         :disabled="saving"
                         @click="save()"
                         v-if="checkPermissions(['main-panel.branches.add'], brand)"
                     >
                         <span class="flex items-center gap-2" v-if="!saving">
-                            <Icon class="w-4 h-4 bg-white" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                            <Icon class="w-4 h-4 bg-fgPrimary" name="pen-to-square.svg" folder="icons/light" size="16px" />
                             {{ $t("panel.branches.Edit Details") }}
                         </span>
                         <Loading v-else />

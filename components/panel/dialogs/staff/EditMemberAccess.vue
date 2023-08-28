@@ -4,17 +4,15 @@
     <Dialog name="edit-member-access">
         <template #title>
             <div class="flex items-center gap-2 w-full">
-                <img class="w-8" src="~/assets/images/panel-icons/shield.png" alt="" />
+                <Icon class="w-9 h-9 gradient" name="shield.svg" folder="icons/duo" size="36px" />
                 <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.staff.Change Access Of Staff") }}</h3>
             </div>
         </template>
         <transition name="slide-up" mode="out-in">
             <div class="flex flex-col items-center gap-4 md:w-screen max-w-md mt-4" ref="form">
                 <div class="flex flex-col gap-4 w-full">
-                    <div class="flex items-center gap-2 bg-white text-pencil-tip p-4 rounded-md">
-                        <div class="relative w-14 h-14 rounded-full overflow-hidden bg-pencil-tip shadow-nr25">
-                            <img class="w-full h-full object-cover" :src="user.avatar ?? '/avatar.webp'" />
-                        </div>
+                    <div class="flex items-center gap-2 bg-fgPrimary text-bgPrimary p-4 rounded-2xl shadow-mr25">
+                        <img class="w-14 aspect-square object-cover rounded-full shadow-nr35" :src="user.avatar ?? '/avatar.webp'" />
                         <div class="flex flex-col">
                             <h4 class="font-bold text-xl">{{ `${user.name} ${user.family}` }}</h4>
                             <p class="text-xs opacity-75">{{ user.email ? user.email : user.mobile }}</p>
@@ -32,15 +30,15 @@
                         <span :value="option.value">{{ option.name }}</span>
                     </SelectDropDown>
                     <nuxt-link
-                        class="flex items-center gap-1 w-max text-xs text-purple-300 hover:underline underline-offset-2"
+                        class="flex items-center gap-1 w-max text-xs text-secondary border border-bgSecondary p-1 px-2 rounded-lg hover:underline underline-offset-2"
                         :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/roles`)"
                         @click="panelStore.closePopUp()"
                         v-if="checkPermissions(['main-panel.staff.roles'], brand)"
                     >
-                        <Icon class="w-3 h-3 bg-purple-300" name="arrow-angle.svg" folder="icons" size="10px" />
+                        <Icon class="w-3 h-3 bg-secondary" name="arrow-angle.svg" folder="icons" size="10px" />
                         {{ $t("panel.staff.Go to staff roles") }}
                     </nuxt-link>
-                    <hr class="w-full opacity-25" />
+                    <hr class="w-full border-bgSecondary" />
                     <small> {{ $t("panel.staff.You can select specific branches for this member") }} </small>
                     <MultiSelectDropDown
                         class="w-full flex-grow"
@@ -56,11 +54,16 @@
                     <small class="text-xs opacity-75">
                         {{ $t("panel.staff.If you dont select any branches this user will have access to all branches") }}
                     </small>
-                    <hr class="w-full opacity-25" />
+                    <hr class="w-full border-bgSecondary" />
                     <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                         <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
-                    <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75': loading }" :disabled="loading" @click="editingAccess()">
+                    <button
+                        class="btn w-full p-3 hover:px-6 rounded-xl bg-primary"
+                        :class="{ 'opacity-75': loading }"
+                        :disabled="loading"
+                        @click="editingAccess()"
+                    >
                         <span v-if="!loading"> {{ $t("panel.Save") }} </span>
                         <Loading v-else />
                     </button>

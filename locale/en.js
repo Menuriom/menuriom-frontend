@@ -85,10 +85,13 @@ export default {
         "Sign Up Now For Free": "Sign Up Now For Free",
 
         "The Best Way To Create Online Menus": "The Best Way To Create Online Menus",
+        "The Best Way To Manage Orders": "The Best Way To Manage Orders",
         "Follow Us On Instagram": "Follow Us On Instagram",
+        "Message Us On Telegram": "Message Us On Telegram",
         Pricing: "Pricing",
         Faqs: "Faqs",
         About: "About",
+        Demo: "Demo",
         "Request Feature": "Request Feature",
         "Contact Us": "Contact Us",
         "Help Center": "Help Center",
@@ -100,6 +103,7 @@ export default {
 
     pricing: {
         Pricing: "Pricing",
+        PRICING: "PRICING",
         PricingSlogan: "No matter the size of your business, we got you covered!",
         PricingSubText: "Start creating instantly. Start free.",
 
@@ -117,6 +121,28 @@ export default {
         "Compare Plans": "Compare Plans",
         "Overview of what is included in our different plans": "Overview of what is included in our different plans",
         OFF: "OFF",
+    },
+
+    "contact-us": {
+        "Contact Us": "Contact Us",
+        contactDescription:
+            "Looking for more information or want to try one of our paid plans? Submit your information and we will follow up with you as soon as possible.",
+        "Have a simple question?": "Have a simple question?",
+        "Name & Family": "Name & Family",
+        "Email Address": "Email Address",
+        "Your Message": "Your Message",
+        Send: "Send",
+        "Check out our FAQ": "Check out our FAQ",
+        "Send Us An Email": "Send Us An Email",
+        "Follow Us": "Follow Us",
+    },
+
+    faqs: {
+        "Frequently Asked Questions": "Frequently Asked Questions",
+        "Ask what you dont know": "Ask what you dont know",
+        sells: "Sells",
+        accounts: "Accounts",
+        support: "Support",
     },
 
     panel: {
@@ -262,7 +288,7 @@ export default {
 
         branches: {
             Branches: "Branches",
-            "Here you can manage your branches and customize their menu": "Here you can manage your branches and customize their menu",
+            "Here you can manage your business branches and their info": "Here you can manage your business branches and their info",
             "New Branch": "New Branch",
             "Create New Branch": "Create New Branch",
             "Customize This Branch Menu": "Customize This Branch Menu",
@@ -469,6 +495,8 @@ export default {
             "Line Rotation": "Line Rotation",
             Text: "Text",
             "try out the animation by clicking on the phone screen": "try out the animation by clicking on the phone's screen",
+
+            "style settings has been saved": "style settings has been saved",
         },
 
         qrcode: {
@@ -499,7 +527,7 @@ export default {
             "Gradient Angle": "Gradient Angle",
             "Download QR Code": "Download QR Code",
             "Save Settings": "Save Settings",
-            "QR code settings are saved": "QR code settings are saved",
+            "QR code settings has been saved": "QR code settings has been saved",
             "Make sure the colors have good contrast so that the code is easily scannable":
                 "Make sure the colors have good contrast so that the code is easily scannable",
         },

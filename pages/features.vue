@@ -20,7 +20,7 @@
                     <div class="flex items-center justify-center odd:-mb-10 1.5xl:odd:-my-10 w-full max-w-xl select-none" draggable="false">
                         <img class="w-10/12 h-10/12 object-scale-down" :src="item.image" :alt="item.title" />
                     </div>
-                    <div class="gradient hidden 1.5xl:flex items-center justify-center group-hover:p-1.5 rounded-lg transition-all flex-shrink-0">
+                    <div class="gradient hidden 1.5xl:flex items-center justify-center group-hover:p-1.5 rounded-lg transition-all shrink-0">
                         <div class="relative flex items-center justify-center p-6 md:p-8 rounded-lg bg-white group-odd:bg-pencil-tip">
                             <img class="absolute w-16 h-16 md:w-24 md:h-24 object-contain blur-md opacity-30" :src="item.icon" :alt="item.title" />
                             <img class="relative w-12 h-12 md:w-20 md:h-20 object-contain" :src="item.icon" :alt="item.title" />
@@ -28,14 +28,14 @@
                     </div>
                     <div class="flex flex-col items-center gap-8 w-full max-w-xl">
                         <div
-                            class="relative flex 1.5xl:hidden items-center justify-center p-6 md:p-8 rounded-lg bg-white group-odd:bg-pencil-tip flex-shrink-0"
+                            class="relative flex 1.5xl:hidden items-center justify-center p-6 md:p-8 rounded-lg bg-white group-odd:bg-pencil-tip shrink-0"
                         >
                             <img class="absolute w-16 h-16 md:w-24 md:h-24 object-contain blur-md opacity-30" :src="item.icon" :alt="item.title" />
                             <img class="relative w-12 h-12 md:w-20 md:h-20 object-contain" :src="item.icon" :alt="item.title" />
                         </div>
                         <div class="flex flex-col items-center 1.5xl:items-start gap-2 w-full">
                             <h4 class="f-inter text-center 1.5xl:text-start text-3xl lg:text-5xl font-bold">{{ item.title }}</h4>
-                            <span class="flex w-full h-4 bg-violet rounded-sm"></span>
+                            <span class="flex w-full h-4 bg-primary rounded-sm"></span>
                             <p class="text-center 1.5xl:text-start lg:text-xl opacity-75">{{ item.desc }}</p>
                         </div>
                     </div>

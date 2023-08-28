@@ -11,29 +11,32 @@
 </style>
 
 <template>
-    <div class="flex flex-col items-center justify-center gap-4">
+    <div class="relative flex flex-col items-center justify-center gap-4 md:gap-6 isolate">
         <!-- TODO : refactor the stage 3 business size to be a check box rather than a simple user input -->
-        <div class="flex flex-col items-center gap-6 w-full md:w-max max-w-md p-6 md:p-8 bg-pencil-tip rounded-lg shadow-2xl overflow-hidden">
-            <div class="gradient-re flex items-center justify-center w-max p-1 rounded-md">
-                <img class="w-16 h-16 -ml-0.5" src="/logo.svg" alt="Menuriom" />
+        <img class="absolute -top-4 rotate-[30deg] -z-10" src="~/assets/images/key.webp" alt="">
+        <div class="flex flex-col items-center gap-6 w-full md:w-max max-w-md p-6 md:p-8 bg-bgAccent rounded-2xl shadow-mr25 overflow-hidden">
+            <div class="gradient-re flex items-center justify-center w-max p-2 rounded-xl">
+                <img class="w-16 h-16" src="/logos/logo9-dark.webp" alt="Menuriom" />
             </div>
             <transition name="slide-left" mode="out-in">
-                <section class="flex flex-col items-center justify-center gap-6 w-full text-white" page="1" v-if="page == 1">
+                <section class="flex flex-col items-center justify-center gap-6 w-full" page="1" v-if="page == 1">
                     <div class="flex flex-col items-center gap-2 w-full">
                         <h1 class="f-inter text-3xl font-semibold">{{ $t("auth.welcome") }}</h1>
-                        <h2 class="text-sm font-thin opacity-60">{{ $t("auth.Login or signup with your email") }}</h2>
+                        <span class="text-sm opacity-60">{{ $t("auth.Login or signup with your email") }}</span>
                     </div>
                     <button
-                        class="flex items-center justify-center gap-2 p-3 w-full border-2 border-white hover:bg-white hover:text-pencil-tip rounded transition-colors"
+                        class="flex items-center justify-center gap-2 p-3 w-full border-4 border-white hover:bg-white hover:text-pencil-tip rounded-xl transition-colors"
                         @click="continueWithGoogle()"
                     >
                         <img src="~/assets/images/G.png" alt="G" />
-                        <span>{{ $t("auth.Continue with Google") }}</span>
+                        <span class="opacity-90">{{ $t("auth.Continue with Google") }}</span>
                     </button>
                     <div class="flex items-center gap-2 w-full">
-                        <hr class="gradient w-1 h-1 border-0 flex-grow" />
-                        {{ $t("auth.OR") }}
-                        <hr class="gradient-re w-1 h-1 border-0 flex-grow" />
+                        <hr class="gradient w-1 h-1 rounded-full border-0 grow" />
+                        <span class="flex items-center justify-center w-10 h-10 border border-neutral-500 border-opacity-25 rounded-full">
+                            {{ $t("auth.OR") }}
+                        </span>
+                        <hr class="gradient-re w-1 h-1 rounded-full border-0 grow" />
                     </div>
                     <form class="flex flex-col gap-4 w-full" @submit.prevent="sendVerificationCode()">
                         <Input
@@ -46,10 +49,10 @@
                             :error="errorField == 'email' ? responseMessage : ''"
                         />
                         <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                            <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
                         <button
-                            class="btn flex items-center justify-center w-full p-3 rounded bg-violet"
+                            class="flex items-center justify-center w-full p-4 rounded-xl bg-primary hover:scale-x-105 hover:shadow-mr35 transition-all"
                             :class="{ 'opacity-75 cursor-not-allowed': loading }"
                             :disabled="loading"
                         >
@@ -58,7 +61,7 @@
                         </button>
                     </form>
                     <small
-                        class="text-xs font-thin opacity-50"
+                        class="text-xs font-extralight opacity-50"
                         v-html="
                             $t('auth.sign up term agreement message', {
                                 PrivacyPolicy: `<a class='underline' href='/privacy-policy'>${$t('auth.Privacy Policy')}</a>`,
@@ -67,10 +70,10 @@
                         "
                     />
                 </section>
-                <section class="flex flex-col items-center justify-center gap-6 w-full text-white" page="2" v-else-if="page == 2">
+                <section class="flex flex-col items-center justify-center gap-6 w-full" page="2" v-else-if="page == 2">
                     <div class="flex flex-col items-center gap-2 w-full">
                         <h1 class="f-inter text-3xl font-semibold">{{ $t("auth.Check Your Email") }}</h1>
-                        <h2 class="text-sm font-thin text-center" v-html="$t('auth.sent code message', { email: email })" />
+                        <h2 class="text-sm text-center" v-html="$t('auth.sent code message', { email: email })" />
                     </div>
                     <form class="flex flex-col gap-4 w-full" @submit.prevent="checkVerificationCode()">
                         <Input
@@ -83,9 +86,13 @@
                             :error="errorField == 'code' ? responseMessage : ''"
                         />
                         <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                            <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
-                        <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
+                        <button
+                            class="flex items-center justify-center w-full p-4 rounded-xl bg-primary hover:scale-x-105 hover:shadow-mr35 transition-all"
+                            :class="{ 'opacity-75 cursor-not-allowed': loading }"
+                            :disabled="loading"
+                        >
                             <span v-if="!loading"> {{ $t("auth.Continue") }} </span>
                             <Loading class="" v-else />
                         </button>
@@ -101,10 +108,10 @@
                         <span v-if="timeLeft">{{ new Date(timeLeft * 1000).toISOString().substring(14, 19) }}</span>
                     </button>
                 </section>
-                <section class="flex flex-col items-center justify-center gap-6 w-full text-white" page="3" v-else-if="page == 3">
+                <section class="flex flex-col items-center justify-center gap-6 w-full" page="3" v-else-if="page == 3">
                     <div class="flex flex-col items-center gap-2 w-full">
                         <h1 class="f-inter text-3xl font-semibold">{{ $t("auth.Almost Done") }}</h1>
-                        <h2 class="text-sm font-thin text-center">
+                        <h2 class="text-sm text-center">
                             <span class="opacity-60"> {{ $t("auth.complete signup message") }} </span>
                         </h2>
                     </div>
@@ -134,9 +141,13 @@
                             :error="errorField == 'mobile' ? responseMessage : ''"
                         />
                         <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                            <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                            <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                         </small>
-                        <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
+                        <button
+                            class="flex items-center justify-center w-full p-4 rounded-xl bg-primary hover:scale-x-105 hover:shadow-mr35 transition-all"
+                            :class="{ 'opacity-75 cursor-not-allowed': loading }"
+                            :disabled="loading"
+                        >
                             <span v-if="!loading"> {{ $t("auth.Signup") }} </span>
                             <Loading class="" v-else />
                         </button>
@@ -145,28 +156,26 @@
             </transition>
         </div>
         <nav>
-            <ul class="flex flex-wrap items-center justify-center gap-2 p-2 text-white">
+            <ul class="flex flex-wrap items-center justify-center gap-2 p-4 rounded-2xl bg-bgAccent shadow-mr15">
                 <li>
-                    <nuxt-link class="hover:underline text-xs" :to="localePath('/')">{{ $t("auth.MenuriomDotCom") }}</nuxt-link>
+                    <nuxt-link class="hover:underline underline-offset-2 text-xs" :to="localePath('/')">{{ $t("auth.MenuriomDotCom") }}</nuxt-link>
                 </li>
-                <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
                 <li>
-                    <nuxt-link class="hover:underline text-xs" :to="localePath('/pricing')">{{ $t("auth.Pricing") }}</nuxt-link>
+                    <nuxt-link class="hover:underline underline-offset-2 text-xs" :to="localePath('/help-center')">{{ $t("auth.Help Center") }}</nuxt-link>
                 </li>
-                <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
                 <li>
-                    <nuxt-link class="hover:underline text-xs" :to="localePath('/help-center')">{{ $t("auth.Help Center") }}</nuxt-link>
+                    <nuxt-link class="hover:underline underline-offset-2 text-xs" :to="localePath('/faqs')">{{ $t("auth.Faqs") }}</nuxt-link>
                 </li>
-                <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
                 <li>
-                    <nuxt-link class="hover:underline text-xs" :to="localePath('/faqs')">{{ $t("auth.Faqs") }}</nuxt-link>
+                    <nuxt-link class="hover:underline underline-offset-2 text-xs" :to="localePath('/privacy-policy')">
+                        {{ $t("auth.Privacy Policy") }}
+                    </nuxt-link>
                 </li>
-                <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li>
-                    <nuxt-link class="hover:underline text-xs" :to="localePath('/privacy-policy')">{{ $t("auth.Privacy Policy") }}</nuxt-link>
-                </li>
-                <span class="w-1 h-1 bg-baby-blue rounded-full"></span>
-                <li><LangSwitch textColor="white" /></li>
+                <span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
+                <li><LangSwitch textColor="white" :show-text="true" /></li>
             </ul>
         </nav>
     </div>

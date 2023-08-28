@@ -7,47 +7,41 @@
             <p class="text-xs opacity-75 text-center max-w-sm">
                 {{ $t("panel.account-setup.please answer a few questions so that we can set up your account to fit you best") }}
             </p>
-            <ul class="flex items-center gap-2">
-                <li class="w-2.5 h-2.5 rounded-full bg-violet"></li>
-                <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>
-                <li class="w-2.5 h-2.5 rounded-full bg-neutral-500"></li>
-                <li class="w-5 h-0.5 bg-zinc-500 opacity-50"></li>
-                <li class="w-2.5 h-2.5 rounded-full bg-neutral-500"></li>
-            </ul>
-            <hr class="w-full border-0 h-0.5 gradient" />
-            <h4 class="text-lg">{{ $t("panel.account-setup.What is your full name and phone number?") }}</h4>
+            <hr class="w-3/4 border-neutral-500 border-opacity-40" />
             <form class="flex flex-col gap-4 w-full" @submit.prevent="completeSignup()">
-                <div class="flex items-center gap-4">
+                <div class="flex flex-col gap-4 p-4 w-full rounded-2xl bg-bgPrimary bg-opacity-90 shadow-inner">
+                    <h4 class="text-lg">{{ $t("panel.account-setup.What is your full name and phone number?") }}</h4>
+                    <div class="flex items-center gap-4">
+                        <Input
+                            class="w-full flex-grow"
+                            name="name"
+                            :required="true"
+                            :label="$t('auth.First Name')"
+                            v-model="name"
+                            :error="errorField == 'name' ? responseMessage : ''"
+                        />
+                        <Input
+                            class="w-full flex-grow"
+                            name="family"
+                            :required="true"
+                            :label="$t('auth.Last Name')"
+                            v-model="family"
+                            :error="errorField == 'family' ? responseMessage : ''"
+                        />
+                    </div>
                     <Input
-                        class="w-full flex-grow"
-                        name="name"
+                        name="mobile"
                         :required="true"
-                        :label="$t('auth.First Name')"
-                        v-model="name"
-                        :error="errorField == 'name' ? responseMessage : ''"
-                    />
-                    <Input
-                        class="w-full flex-grow"
-                        name="family"
-                        :required="true"
-                        :label="$t('auth.Last Name')"
-                        v-model="family"
-                        :error="errorField == 'family' ? responseMessage : ''"
+                        mask="+98 ### ### ####"
+                        :label="$t('auth.Phone Number')"
+                        v-model="mobile"
+                        :error="errorField == 'mobile' ? responseMessage : ''"
                     />
                 </div>
-                <Input
-                    name="mobile"
-                    :required="true"
-                    mask="+98 ### ### ####"
-                    :label="$t('auth.Phone Number')"
-                    v-model="mobile"
-                    :error="errorField == 'mobile' ? responseMessage : ''"
-                />
-                <hr class="w-full opacity-25" />
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                    <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                    <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
-                <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
+                <button class="btn w-full p-3 hover:px-6 rounded-xl bg-primary" :class="{ 'opacity-75 cursor-not-allowed': loading }" :disabled="loading">
                     <span v-if="!loading"> {{ $t("auth.Continue") }} </span>
                     <Loading class="" v-else />
                 </button>

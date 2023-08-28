@@ -2,13 +2,14 @@
 .pattern-bg {
     background-repeat: repeat;
     background-size: 80px;
+    mix-blend-mode: darken;
 }
 </style>
 
 <template>
     <div
-        class="sticky top-7 flex items-center justify-between gap-2 w-full mb-2 p-2 shadow-nr15 isolate overflow-hidden shrink-0"
-        :style="`background-color: ${options.bgSecondaryColor};`"
+        class="relative flex items-center justify-between gap-2 w-full mb-2 p-2 shadow-nr15 isolate overflow-hidden shrink-0"
+        :style="`background-color: ${options.primaryColor};`"
     >
         <div
             class="pattern-bg absolute -top-1/2 w-96 aspect-square -z-10"

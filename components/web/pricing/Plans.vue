@@ -2,61 +2,53 @@
 
 <template>
     <div class="flex flex-col items-center gap-10 w-full p-2 sm:p-4 md:p-8">
-        <div class="relative flex items-center gap-10 p-4 px-5 rounded-md bg-neutral-100">
+        <div class="relative flex items-center gap-6 p-4 rounded-2xl bg-bgAccent isolate">
             <span
-                class="absolute h-10 shadow-md bg-white border-2 border-violet rounded-md transition-all"
-                :class="[priceType == 'monthly' ? 'start-2 w-22' : 'start-28 w-36']"
-                v-if="locale == 'en'"
+                class="absolute w-36 h-10 shadow-md bg-bgSecondary rounded-xl transition-all -z-10"
+                :class="[priceType == 'monthly' ? 'start-2' : 'start-40']"
             ></span>
-            <span
-                class="absolute h-10 shadow-md bg-white border-2 border-violet rounded-md transition-all"
-                :class="[priceType == 'monthly' ? 'start-2 w-18' : 'start-22 w-[8.25rem]']"
-                v-else
-            ></span>
-            <span class="relative cursor-pointer" @click="togglePriceType('monthly')">{{ $t("pricing.Monthly") }}</span>
-            <div class="relative flex items-center gap-1 cursor-pointer" @click="togglePriceType('annual')">
+            <span class="flex items-center justify-center gap-1 w-32 cursor-pointer" @click="togglePriceType('monthly')">{{ $t("pricing.Monthly") }}</span>
+            <div class="flex items-center justify-center gap-1 w-32 cursor-pointer" @click="togglePriceType('annual')">
                 <span>{{ $t("pricing.Annual") }}</span>
-                <small class="f-inter p-0.5 px-2 rounded-full whitespace-nowrap text-xs bg-pencil-tip text-purple-200"> {{ annualOffPercent }}% Off </small>
+                <small class="f-inter p-0.5 px-2 rounded-full text-xs bg-black text-secondary"> {{ annualOffPercent }}% Off </small>
             </div>
         </div>
-        <ul class="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl md:mt-12">
+        <ul class="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl">
             <li
-                class="flex flex-col gap-2 rounded-2xl shadow-xl"
-                :class="[item.highlight ? 'gradient-re p-2 md:-mt-12' : 'bg-pencil-tip']"
+                class="flex flex-col gap-2 rounded-4xl shadow-mr35"
+                :class="[item.highlight ? 'gradient-re p-3' : 'bg-fgPrimary']"
                 v-for="(item, i) in pricing.list"
                 :key="i"
             >
-                <span class="f-inter text-lg mx-auto text-white drop-shadow-md" v-if="item.highlight">{{ $t("pricing.Most Popular") }}</span>
-                <div class="flex flex-col gap-4 w-full max-w-xs h-full p-6 rounded-xl bg-pencil-tip text-white">
+                <div class="flex flex-col gap-6 w-full max-w-sm h-full p-6 md:p-8 rounded-3xl bg-fgPrimary text-bgPrimary">
                     <!-- TODO: calculate prices base on priceType -->
                     <div class="flex items-center gap-2">
-                        <img class="w-10" :src="item.icon" :alt="item.title" />
-                        <h3 class="f-inter text-lg font-bold">{{ item.title }}</h3>
+                        <img class="w-12 p-2 rounded-xl bg-bgSecondary bg-opacity-10" :src="item.icon" :alt="item.title" />
+                        <h3 class="f-inter text-2xl font-bold">{{ item.title }}</h3>
                     </div>
-                    <p class="text-xs text-white opacity-90">{{ item.desc }}</p>
-                    <div class="flex items-baseline gap-1 bg-zinc-100 text-pencil-tip rounded-lg p-2" v-if="item.monthlyPrice > 0">
-                        <b class="f-inter text-4xl">{{ item.monthlyPrice / 1000 }}<span class="text-xs">,000</span></b>
-                        <b class="f-inter text-violet">{{ $t("pricing.Toman") }}</b>
+                    <p class="text-sm">{{ item.desc }}</p>
+                    <div class="flex items-baseline gap-1 text-pencil-tip rounded-lg" v-if="item.monthlyPrice > 0">
+                        <b class="f-inter text-4xl font-extrabold gradient-text">{{ item.monthlyPrice / 1000 }}<span class="text-lg">,000</span></b>
+                        <b class="f-inter">{{ $t("pricing.Toman") }}</b>
                         <small class="">/ {{ priceType == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</small>
                     </div>
-                    <div class="flex items-baseline gap-1 bg-zinc-100 text-pencil-tip rounded-lg p-2" v-else>
-                        <b class="f-inter text-3xl text-violet bg-zinc-100 rounded-lg"> {{ $t("pricing.Free") }} </b>
+                    <div class="flex items-baseline gap-1 text-pencil-tip rounded-lg" v-else>
+                        <b class="f-inter text-3xl font-extrabold gradient-text rounded-lg"> {{ $t("pricing.Free") }} </b>
                         <small class="">/ {{ $t("pricing.Always") }}</small>
                     </div>
-                    <hr class="border-2 border-gray-400 opacity-25" />
+                    <hr class="border-spacing-0.5 border-bgPrimary opacity-10" />
                     <ul class="flex flex-col gap-4 flex-grow">
                         <li class="flex items-center gap-2" v-if="i > 0">
-                            <Icon class="relative w-4 h-4 bg-baby-blue" name="plus.svg" folder="icons" size="16px" />
-                            <small class="opacity-90 text-sky-200">{{ $t("pricing.Everything on previous plan") }}</small>
+                            <Icon class="relative w-4 h-4 bg-primary" name="plus.svg" folder="icons" size="14px" />
+                            <small class="opacity-90 text-primary">{{ $t("pricing.Everything on previous plan") }}</small>
                         </li>
                         <li class="flex items-center gap-2" v-for="(feature, j) in item.features" :key="j">
-                            <Icon class="relative w-4 h-4 bg-baby-blue" name="check.svg" folder="icons" size="16px" />
+                            <Icon class="relative w-4 h-4 bg-secondary" name="check.svg" folder="icons" size="16px" />
                             <small class="opacity-90">{{ feature }}</small>
                         </li>
                     </ul>
                     <a
-                        class="flex items-center justify-center w-full p-3 mt-4 text-white rounded hover:translate-y-1 transition-transform"
-                        :class="[item.highlight ? 'gradient-re' : 'bg-violet']"
+                        class="btn flex items-center justify-center mx-auto p-4 px-8 hover:px-12 mt-4 bg-bgAccent text-fgPrimary rounded-xl hover:translate-y-1"
                         href="#"
                     >
                         {{ $t("pricing.Get Started") }}

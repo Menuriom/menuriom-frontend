@@ -30,7 +30,7 @@
         >
             <!-- <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="/patterns/pattern7.webp" alt="" /> -->
 
-            <div class="pattern-bg-wrapper absolute bottom-0 w-full h-96 -z-10 overflow-hidden" :style="`background-color: ${baseColors.bgMainColor};`">
+            <div class="pattern-bg-wrapper absolute bottom-0 h-96 -z-10 overflow-hidden" :style="`width: 99%; background-color: ${baseColors.bgMainColor};`">
                 <div
                     class="pattern-bg absolute w-96 aspect-square"
                     :style="`background-image: url('${mainMenuStyleOptions.itemListOptions.bgImage}'); background-size: ${mainMenuStyleOptions.itemListOptions.bgImageSize}%; background-color: ${baseColors.bgMainColor}; opacity: ${mainMenuStyleOptions.itemListOptions.bgImageOpacity}%; rotate: ${mainMenuStyleOptions.itemListOptions.bgImageRotation}deg;`"
@@ -40,8 +40,8 @@
 
             <div
                 id="status-bar"
-                class="sticky top-0 flex items-center justify-between w-full h-7 px-6 pt-1 grayscale z-6 shrink-0"
-                :style="`background-color: ${baseColors.bgSecondaryColor};`"
+                class="sticky top-0 flex items-center justify-between w-full h-7 px-6 pt-1 grayscale-[0.5] z-6 shrink-0"
+                :style="`background-color: ${baseColors.primaryColor};`"
             >
                 <div class="text-xs text-white mix-blend-difference">12:59</div>
                 <div class="flex items-center">

@@ -81,14 +81,17 @@ export default {
         "Tell us what you want, we will get to work on implementing it": "به ما بگو چی میخوای، ما میذاریم تو برنامه که اضافه کنیمش",
         "Submit A Feature Request": "ثبت درخواست قابلیت جدید",
 
-        "Start Building Your First Menu For Free": "اولین منوتو رو همین الان رایگان بساز",
+        "Start Building Your First Menu For Free": "منو رستوران خودتون رو رایگان بسازید",
         "Sign Up Now For Free": "رایگان ثبت نام کنید",
 
         "The Best Way To Create Online Menus": "بهترین راه برای ساخت منوی آنلاین",
+        "The Best Way To Manage Orders": "بهترین راه برای مدیریت سفارشات",
         "Follow Us On Instagram": "اینستاگرام ما رو دنبال کن",
+        "Message Us On Telegram": "تو تلگرام به ما پیام بده",
         Pricing: "تعرفه ها",
         Faqs: "سوالات متداول",
         About: "درباره ما",
+        Demo: "نمونه منو",
         "Request Feature": "درخواست قابلیت جدید",
         "Contact Us": "تماس با ما",
         "Help Center": "مرکز دانش",
@@ -100,6 +103,7 @@ export default {
 
     pricing: {
         Pricing: "تعرفه ها",
+        PRICING: "تعرفه ها",
         PricingSlogan: "هر رستوران با هر اندازه ای که دارید، میتونید رو ما حساب کنید!",
         PricingSubText: "رایگان شروع کنید. رایگان بسازید.",
 
@@ -117,6 +121,28 @@ export default {
         "Compare Plans": "مقایسه پلن ها",
         "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
         OFF: "تخفیف",
+    },
+
+    "contact-us": {
+        "Contact Us": "تماس با ما",
+        contactDescription:
+            "به دنبال اطلاعات تکمیلی هستید یا قصد خرید یکی از پلن های پولی رو دارید؟ اطلاعات خود را ارسال کنید و ما در اسرع وقت با شما تماس خواهیم گرفت.",
+        "Have a simple question?": "فقط یه سوال ساده دارید؟",
+        "Name & Family": "نام کامل شما",
+        "Email Address": "آدرس ایمیل",
+        "Your Message": "متن پیام شما",
+        Send: "ارسال",
+        "Check out our FAQ": "به سوالات متداول سری بزنید",
+        "Send Us An Email": "پست الکترونیک ما",
+        "Follow Us": "شبکه های اجتماعی ما",
+    },
+
+    faqs: {
+        "Frequently Asked Questions": "سوالات متداول",
+        "Ask what you dont know": "چطور میتونیم کمکتون کنیم",
+        sells: "فروش",
+        accounts: "حساب ها",
+        support: "پشتیبانی",
     },
 
     panel: {
@@ -262,7 +288,7 @@ export default {
 
         branches: {
             Branches: "شعبه ها",
-            "Here you can manage your branches and customize their menu": "اینجا میتونی شعبه های رستورانتو مدیریت کنی و منوهاشون رو سفارشی کنی",
+            "Here you can manage your business branches and their info": "اینجا شما میتونید شعبه ها و اطلاعات شعبه های خودتون رو مدیریت کنید",
             "New Branch": "شعبه جدید",
             "Create New Branch": "ساخت شعبه جدید",
             "Customize This Branch Menu": "سفارشی سازی منوی این شعبه",
@@ -470,6 +496,8 @@ export default {
             "Line Rotation": "زاویه متن",
             Text: "متن",
             "try out the animation by clicking on the phone screen": "برای مشاهده انیمیشن روی صفحه موبایل کلیک کنید",
+
+            "style settings has been saved": "تنظیمات ظاهر منو ذخیره شد",
         },
 
         qrcode: {
@@ -500,7 +528,7 @@ export default {
             "Gradient Angle": "زاویه گرادیان",
             "Download QR Code": "دانلود کد QR",
             "Save Settings": "ذخیره تنظیمات",
-            "QR code settings are saved": "تنظیمات ذخیره شد",
+            "QR code settings has been saved": "تنظیمات ذخیره شد",
             "Make sure the colors have good contrast so that the code is easily scannable":
                 "برای راحت تر اسکن شدن کد، مطمئن شوید که رنگ پیش زمینه نسبت به رنگ بارکد از کنتراست بالایی برخوردار باشد",
         },
@@ -561,10 +589,10 @@ export default {
 
         languages: {
             "By selecting different language, you can translate text fields": "با انتخاب زبان های متفاوت، میتوانید فیلد های متنی را ترجمه کنید",
-            "Select your menu languages and setup your currency unit": "زبان های منو و واحد پولی که تو منو نمایش داده میشه انتخاب کن",
+            "Select your menu languages and setup your currency unit": "زبان های منو و واحد پولی که داخل منو نمایش داده میشود رو انتخاب کنید",
             "Menu Languages": "زبان های منو",
             Currency: "واحد پولی",
-            "Choose which languages you want your menu to have": "زبان هایی که میخواهید داخل منو نمایش داده بشه رو انتخاب کنید",
+            "Choose which languages you want your menu to have": "زبان هایی که میخواهید داخل منو نمایش داده بشوند رو انتخاب کنید",
             "You can translate your menu items and your restaurant info base on languages you choose":
                 "بسته به زبان هایی که انتخاب میکنید، میتونید منو رو ترجمه کنید",
             "Upgrade your plan to support more languages": "برای انتخاب زبان های بیشتر پلن خود را ارتقا بدید",

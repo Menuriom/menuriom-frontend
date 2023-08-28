@@ -30,16 +30,16 @@ aside li a.router-link-exact-active {
         <section class="flex flex-wrap lg:flex-nowrap items-start gap-4 w-full h-full">
             <aside class="flex flex-col gap-4 w-full lg:max-w-xs">
                 <div class="flex items-center gap-2 p-2 rounded-lg border bg-white shadow-nr10">
-                    <img class="w-14 h-14 object-cover rounded-full border shadow-nr5 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
-                    <img class="w-14 h-14 object-cover rounded-full border shadow-nr5 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                    <img class="w-14 h-14 object-cover rounded-full border shadow-nr5 shrink-0" :src="brand.logo" v-if="brand.logo" />
+                    <img class="w-14 h-14 object-cover rounded-full border shadow-nr5 shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                     <div class="flex flex-col gap-1 w-full">
                         <h4 class="font-semibold whitespace-nowrap text-ellipsis overflow-hidden w-36">{{ brand.name }}</h4>
-                        <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-28 text-violet">{{ brand.role }}</span>
+                        <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-28 text-primary">{{ brand.role }}</span>
                     </div>
                 </div>
                 <nav class="flex flex-col w-full p-2 lg:max-w-xs rounded-lg bg-pencil-tip text-white shadow-nr10">
                     <ul class="flex lg:flex-col gap-2 p-2 w-full overflow-auto">
-                        <li class="flex items-center text-sm flex-shrink-0">
+                        <li class="flex items-center text-sm shrink-0">
                             <nuxt-link
                                 class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800"
                                 :to="localePath(`/panel/brand/${route.params.id}/general-info`)"
@@ -49,19 +49,19 @@ aside li a.router-link-exact-active {
                                 <div class="gradient w-3 h-3 rounded-lg ms-auto"></div>
                             </nuxt-link>
                         </li>
-                        <li class="flex items-center text-sm flex-shrink-0">
+                        <li class="flex items-center text-sm shrink-0">
                             <nuxt-link class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800" to="">
                                 <img class="w-5" src="~/assets/images/panel-icons/money-bills.png" alt="" />
                                 Billing & Plan Upgrades
                             </nuxt-link>
                         </li>
-                        <li class="flex items-center text-sm flex-shrink-0">
+                        <li class="flex items-center text-sm shrink-0">
                             <nuxt-link class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800" to="">
                                 <img class="w-5" src="~/assets/images/panel-icons/language.png" alt="" />
                                 Language Settings
                             </nuxt-link>
                         </li>
-                        <li class="hidden lg:flex items-center text-sm flex-shrink-0">
+                        <li class="hidden lg:flex items-center text-sm shrink-0">
                             <nuxt-link class="flex items-center gap-2 p-2.5 rounded-md w-full hover:bg-neutral-800" :to="localePath(`/panel`)">
                                 <Icon
                                     class="w-4 h-4 py-2 bg-white"

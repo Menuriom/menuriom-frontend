@@ -1,22 +1,18 @@
 <style scoped></style>
 
 <template>
-    <section class="flex flex-col items-center w-full p-2 sm:p-4 md:p-8">
+    <section class="flex flex-col items-center gap-4 w-full p-4">
         <div class="flex flex-col items-center gap-2 w-full">
-            <img class="w-16 mb-4" src="~/assets/images/icons/pricing.png" alt="pricing" />
-            <h2 class="f-inter text-2xl font-bold">PRICING.</h2>
-            <h4 class="flex items-center justify-center gap-2 w-full text-2xl opacity-60 font-extralight text-center">
-                <span class="w-full max-w-lg h-0.5 bg-violet"></span>
-                <span class="flex-shrink-0">Start creating instantly. Start free.</span>
-                <span class="w-full max-w-lg h-0.5 bg-violet"></span>
-            </h4>
+            <h2 class="f-inter text-2xl lg:text-5xl font-bold text-fgPrimary">PRICING.</h2>
+            <h4 class="f-poppins lg:text-2xl opacity-50 text-fgPrimary text-center">Start creating instantly. Start free.</h4>
         </div>
         <Plans />
-        <Button class="text-sm border-4 py-2.5 px-4 border-black" type="secondary" linkTo="/pricing">Compare the plans</Button>
+        <nuxt-link class="hover:bg-fgPrimary hover:text-bgSecondary transition-all text-sm p-4 border-2 border-bgSecondary rounded-2xl" to="/pricing">
+            Compare the plans
+        </nuxt-link>
     </section>
 </template>
 
 <script setup>
-import Button from "~/components/web/Button.vue";
 import Plans from "~/components/web/pricing/Plans.vue";
 </script>

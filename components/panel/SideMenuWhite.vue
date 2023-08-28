@@ -63,19 +63,19 @@ aside > div {
 </style>
 
 <template>
-    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 flex-shrink-0 shadow-nr10" :class="{ close: !panelStore.sideMenuOpen }">
+    <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 shrink-0 shadow-nr10" :class="{ close: !panelStore.sideMenuOpen }">
         <div class="flex flex-col gap-4 h-full p-4 bg-white text-pencil-tip rounded-lg">
             <nuxt-link
                 class="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-600 bg-dolphin text-white cursor-pointer transition-all group"
                 :to="localePath(`/panel/`)"
             >
-                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 flex-shrink-0" :src="brand.logo" v-if="brand.logo" />
-                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 flex-shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 shrink-0" :src="brand.logo" v-if="brand.logo" />
+                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                 <div class="flex flex-col gap-1 w-full">
                     <h4 class="font-semibold whitespace-nowrap text-ellipsis overflow-hidden w-36">{{ brand.name }}</h4>
                     <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-28 text-purple-300">{{ brand.role }}</span>
                 </div>
-                <Icon class="w-3 h-3 bg-white group-hover:-rotate-90 transition-all flex-shrink-0" name="arrow.svg" folder="icons" size="12px" />
+                <Icon class="w-3 h-3 bg-white group-hover:-rotate-90 transition-all shrink-0" name="arrow.svg" folder="icons" size="12px" />
             </nuxt-link>
 
             <div class="flex items-center gap-2 w-full" v-if="panelStore.selectedBrandId !== ''">

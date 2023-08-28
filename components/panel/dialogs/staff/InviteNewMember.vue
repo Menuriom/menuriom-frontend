@@ -4,7 +4,7 @@
     <Dialog name="invite-new-member">
         <template #title>
             <div class="flex items-center gap-2 w-full">
-                <img class="w-8" src="~/assets/images/panel-icons/envelope-open-text-light.png" alt="" />
+                <Icon class="w-9 h-9 gradient" name="envelope-open-text.svg" folder="icons/duo" size="36px" />
                 <h3 class="text-2xl md:text-3xl font-bold text-center">{{ $t("panel.staff.Invite New Member") }}</h3>
             </div>
         </template>
@@ -31,15 +31,15 @@
                         <span :value="option.value">{{ option.name }}</span>
                     </SelectDropDown>
                     <nuxt-link
-                        class="flex items-center gap-1 w-max text-xs text-purple-300 hover:underline underline-offset-2"
+                        class="flex items-center gap-1 w-max text-xs text-secondary border border-bgSecondary p-1 px-2 rounded-lg hover:underline underline-offset-2"
                         :to="localePath(`/panel/${panelStore.selectedBrandId}/staff/roles`)"
                         @click="panelStore.closePopUp()"
                         v-if="checkPermissions(['main-panel.staff.roles'], brand)"
                     >
-                        <Icon class="w-3 h-3 bg-purple-300" name="arrow-angle.svg" folder="icons" size="10px" />
+                        <Icon class="w-3 h-3 bg-secondary" name="arrow-angle.svg" folder="icons" size="10px" />
                         {{ $t("panel.staff.Go to staff roles") }}
                     </nuxt-link>
-                    <hr class="w-full opacity-25" />
+                    <hr class="w-full border-bgSecondary" />
                     <small> {{ $t("panel.staff.You can select specific branches for this member") }} </small>
                     <MultiSelectDropDown
                         class="w-full flex-grow"
@@ -55,26 +55,32 @@
                     <small class="text-xs opacity-75">
                         {{ $t("panel.staff.If you dont select any branches this user will have access to all branches") }}
                     </small>
-                    <hr class="w-full opacity-25" />
+                    <hr class="w-full border-bgSecondary" />
                     <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
-                        <Icon class="icon w-4 h-4 bg-rose-300 flex-shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
+                        <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                     </small>
-                    <button class="btn w-full p-3 rounded bg-violet" :class="{ 'opacity-75': loading }" :disabled="loading" @click="sendInvite()">
+                    <button
+                        class="btn w-full p-3 hover:px-6 rounded-xl bg-primary"
+                        :class="{ 'opacity-75': loading }"
+                        :disabled="loading"
+                        @click="sendInvite()"
+                    >
                         <span v-if="!loading"> {{ $t("panel.staff.Send Invite") }} </span>
                         <Loading v-else />
                     </button>
                 </div>
             </div>
             <div class="relative flex flex-col items-center gap-4 md:w-screen max-w-md text-center" v-else-if="stage === 2">
-                <div class="flex flex-col items-center gap-4 my-8">
+                <div class="flex flex-col items-center gap-4 mt-8">
                     <img class="rotate-pop object-contain" src="~/assets/images/check.png" v-if="stage === 2" />
-                    <p class="text-xl gradient-text font-extrabold">{{ $t("panel.staff.Invite has been sent") }}</p>
-                    <small class="text-blue-200 bg-blue-900 bg-opacity-20 p-2 border border-blue-900 rounded-md" v-if="noUser">
+                    <p class="text-2xl gradient-text font-extrabold">{{ $t("panel.staff.Invite has been sent") }}</p>
+                    <small class="text-blue-200 bg-blue-400 bg-opacity-20 p-2 rounded-2xl" v-if="!noUser">
                         {{ $t("panel.staff.noUserNotice") }}
                     </small>
                     <small class="opacity-75"> {{ $t("panel.staff.You can always revoke your sent invitations from sent invite list") }} </small>
                 </div>
-                <button class="text-sm text-violet underline underline-offset-2" @click="stage = 1">{{ $t("panel.staff.Send Another Invite") }}</button>
+                  <hr class="w-full border-bgSecondary" />
+                <button class="text-sm text-secondary underline underline-offset-4" @click="stage = 1">{{ $t("panel.staff.Send Another Invite") }}</button>
             </div>
         </transition>
     </Dialog>
