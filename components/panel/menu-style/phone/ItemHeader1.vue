@@ -1,5 +1,7 @@
+<style scoped></style>
+
 <template>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 w-full px-2">
         <header class="flex items-center gap-2 w-full">
             <span
                 class="flex items-center justify-center w-8 h-8 p-1 rounded-full shadow-nr35 shrink-0"
@@ -24,6 +26,5 @@
 <script setup>
 const props = defineProps({
     options: { type: Object },
-    // baseColors: { type: Object },
 });
 </script>

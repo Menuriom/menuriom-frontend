@@ -379,7 +379,7 @@ const saveSettings = async () => {
 // -------------------------------------------------
 
 // loadMenuStyleSettings -------------------------------------------------
-const loadMenuStyleSettings_results = await useLazyAsyncData(() => loadMenuStyleSettings(route.params.brandID));
+const loadMenuStyleSettings_results = await useAsyncData(() => loadMenuStyleSettings(route.params.brandID), { lazy: process.client && nuxtApp.isHydrating });
 const loadingMenuStyleSettings = computed(() => loadMenuStyleSettings_results.pending.value);
 
 const handleLoadingMenuStyleSettings_results = (data) => {
@@ -401,6 +401,8 @@ const handleLoadingMenuStyleSettings_results = (data) => {
     if (data._menuStyles?.restaurantDetailsPageOptions) restaurantDetailsPageOptions.value = data._menuStyles.restaurantDetailsPageOptions;
     if (data._menuStyles?.splashScreenOptions) splashScreenOptions.value = data._menuStyles.splashScreenOptions;
 };
-watch(loadMenuStyleSettings_results.data, (val) => handleLoadingMenuStyleSettings_results(val), { immediate: process.server || nuxtApp.isHydrating });
+
+handleLoadingMenuStyleSettings_results(loadMenuStyleSettings_results.data.value);
+watch(loadMenuStyleSettings_results.data, (val) => handleLoadingMenuStyleSettings_results(val));
 // -------------------------------------------------
 </script>
