@@ -2,10 +2,10 @@
 
 <template>
     <div class="flex flex-col gap-4 w-full">
-        <h2 class="flex items-center gap-2 text-2xl font-bold">
+        <!-- <h2 class="flex items-center gap-2 text-2xl font-bold">
             <img class="w-6" src="~/assets/images/panel-icons/pen-dark.png" alt="" />
             {{ $t("panel.brands.General Info") }}
-        </h2>
+        </h2> -->
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full">
             <div class="flex flex-col gap-4 w-full lg:max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white">
                 <h3 class="flex items-center gap-2 text-lg font-bold">
@@ -13,9 +13,7 @@
                     {{ $t("panel.brands.Brand Details") }}
                 </h3>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4">
-                    <div
-                        class="relative flex flex-col items-start justify-center gap-2 w-32 h-32 rounded-full hover:border-2 border-primary bg-white shrink-0"
-                    >
+                    <div class="relative flex flex-col items-start justify-center gap-2 w-32 h-32 rounded-full hover:border-2 border-primary bg-white shrink-0">
                         <img class="w-full h-full rounded-full object-contain" :src="logoBlob" v-if="logoBlob" />
                         <div class="flex flex-col items-center justify-center gap-2 w-full" v-else>
                             <img class="w-10" src="~/assets/images/panel-icons/knife-fork.svg" alt="" />
@@ -33,13 +31,25 @@
                         </button>
                     </div>
                     <div class="flex flex-col gap-4 w-full">
-                        <Input
-                            class="w-full flex-grow"
-                            :label="$t('panel.brands.Brand Name')"
-                            :required="formLang == 'default'"
-                            v-model="name.values[formLang]"
-                            :error="errorField == `name.${formLang}` ? responseMessage : ''"
-                        />
+                        <div class="flex flex-wrap @3xl:flex-nowrap items-start gap-4 w-full">
+                            <Input
+                                class="w-full flex-grow"
+                                :label="$t('panel.brands.Brand Name')"
+                                :required="formLang == 'default'"
+                                v-model="name.values[formLang]"
+                                :error="errorField == `name.${formLang}` ? responseMessage : ''"
+                            />
+                            <Input
+                                class="w-full flex-grow"
+                                :label="$t('panel.brands.Brand Username')"
+                                :placeholder="$t('panel.brands.Only english numbers and letters')"
+                                icon-name="at.svg"
+                                icon-folder="icons"
+                                :required="true"
+                                v-model="username"
+                                :error="errorField == `username` ? responseMessage : ''"
+                            />
+                        </div>
                         <Input
                             class="w-full flex-grow"
                             :label="$t('panel.brands.Brand Slogan')"
@@ -104,7 +114,12 @@
                     <Loading v-else />
                 </button>
             </div>
-            <FormLangList :brandID="route.params.id" :formLang="formLang" @update:formLang="formLang = $event" @updateLanguages="setLangVariables($event)" />
+            <FormLangList
+                :brandID="route.params.brandID"
+                :formLang="formLang"
+                @update:formLang="formLang = $event"
+                @updateLanguages="setLangVariables($event)"
+            />
         </section>
     </div>
 </template>
@@ -137,6 +152,7 @@ const logoFile = ref(null);
 const logoBlob = ref(null);
 const ogLogo = ref(null);
 
+const username = ref("");
 const name = reactive({ values: { default: "" } });
 const slogan = reactive({ values: { default: "" } });
 const socials = reactive({ instagram: "", twitter: "", telegram: "", whatsapp: "" });
@@ -148,6 +164,8 @@ const selectLogoImage = () => {
     fileInputForm.value.reset();
 };
 
+// TODO : if username is changing then make a confirmation that by changing username qr codes should be updated
+
 // saving ----------------------------------------
 const saving = ref(false);
 const save = async () => {
@@ -158,6 +176,8 @@ const save = async () => {
     responseMessage.value = "";
     errorField.value = "";
 
+    username.value = username.value.replaceAll(" ", "");
+
     const data = new FormData();
     if (logoFile.value) {
         if (logoFile.value.size > 1_048_576) {
@@ -167,6 +187,7 @@ const save = async () => {
         }
         data.append("logo", logoFile.value);
     }
+    data.append("username", username.value);
     for (const val in name.values) data.append(`name.${val}`, name.values[val]);
     for (const val in slogan.values) data.append(`slogan.${val}`, slogan.values[val]);
     if (socials.instagram) data.append("socials_instagram", socials.instagram);
@@ -175,12 +196,13 @@ const save = async () => {
     if (socials.whatsapp) data.append("socials_whatsapp", socials.whatsapp);
 
     await axios
-        .put(`/api/v1/panel/brands/${route.params.id}`, data, { headers: { brand: route.params.id } })
+        .put(`/api/v1/panel/brands/${route.params.brandID}`, data, { headers: { brand: route.params.brandID } })
         .then((response) => {
             // update brand details in store
-            brands.value.list[route.params.id].logo = response.data.logo;
-            brands.value.list[route.params.id].name = response.data.name;
-            brands.value.list[route.params.id].slogan = response.data.slogan;
+            brands.value.list[route.params.brandID].logo = response.data.logo;
+            brands.value.list[route.params.brandID].username = response.data.username;
+            brands.value.list[route.params.brandID].name = response.data.name;
+            brands.value.list[route.params.brandID].slogan = response.data.slogan;
             logoBlob.value = ogLogo.value = response.data.logo;
 
             // make toast to inform user that brand details is updated
@@ -213,13 +235,14 @@ const handleErrors = (err) => {
 
 // getBrandInfo -------------------------------------------------
 const loadingInfo = ref(true);
-const getBrandInfo_results = await useLazyAsyncData(() => getBrandInfo(route.params.id));
+const getBrandInfo_results = await useLazyAsyncData(() => getBrandInfo(route.params.brandID));
 
 if (getBrandInfo_results.error.value) handleErrors(getBrandInfo_results.error.value);
 watch(getBrandInfo_results.error, (err) => handleErrors(err));
 
 const handleBrandInfo_results = (data) => {
     logoBlob.value = ogLogo.value = data._info.logo;
+    username.value = data._info.username;
     name.values = data._info.name;
     slogan.values = data._info.slogan;
     socials.instagram = data._info.socials.instagram || "";

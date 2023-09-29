@@ -283,9 +283,13 @@ aside > div {
                         :style="`grid-template-rows: ${openSubMenus2.has('settings') ? 1 : 0}fr;`"
                     >
                         <ul class="sub_menu flex flex-col gap-1 overflow-hidden">
-                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/languages`)">
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/settings`)">
                                 <li class="flex items-center gap-3">
-                                    <!-- <Icon class="w-5 h-5 bg-fgPrimary" name="language.svg" folder="icons/light" size="20px" /> -->
+                                    <span>{{ $t("panel.side-menu.Brand Settings") }}</span>
+                                </li>
+                            </nuxt-link>
+                            <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/settings/languages`)">
+                                <li class="flex items-center gap-3">
                                     <span>{{ $t("panel.side-menu.Language Settings") }}</span>
                                 </li>
                             </nuxt-link>

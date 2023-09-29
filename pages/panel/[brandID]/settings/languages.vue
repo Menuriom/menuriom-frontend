@@ -2,28 +2,16 @@
 
 <template>
     <div class="flex flex-col gap-6 w-full">
-        <header class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-col gap-2">
-                <div class="flex items-center gap-2">
-                    <Icon class="w-9 h-9 gradient" name="language.svg" folder="icons/duo" size="36px" />
-                    <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.side-menu.Language Settings") }}</h1>
-                </div>
-                <!-- <small class="hidden sm:flex text-sm">
-                    {{ $t("panel.languages.Select your menu languages and setup your currency unit") }}
-                </small> -->
-            </div>
-            <button
-                class="btn flex items-center justify-center gap-2 text-sm p-3 hover:px-6 rounded-xl bg-primary"
-                :class="{ 'opacity-50 cursor-not-allowed': saving }"
-                :disabled="saving"
-                @click="saveSetting()"
-                v-if="checkPermissions(['main-panel.settings'], brand)"
-            >
-                <Icon class="w-4 h-4 bg-fgPrimary" name="floppy-disk.svg" folder="icons" size="16px" />
-                {{ $t("panel.Save") }}
-            </button>
-        </header>
-        <hr class="w-full border-bgSecondary" />
+        <!-- <button
+            class="btn flex items-center justify-center gap-2 w-max text-sm p-3 hover:px-6 rounded-xl bg-primary"
+            :class="{ 'opacity-50 cursor-not-allowed': saving }"
+            :disabled="saving"
+            @click="saveSetting()"
+            v-if="checkPermissions(['main-panel.settings'], brand)"
+        >
+            <Icon class="w-4 h-4 bg-fgPrimary" name="floppy-disk.svg" folder="icons" size="16px" />
+            {{ $t("panel.Save") }}
+        </button> -->
         <section class="flex flex-wrap items-start gap-4 w-full" ref="sec">
             <div class="flex flex-col gap-4 p-4 bg-bgAccent rounded-2xl w-full max-w-3xl shadow-nr15 flex-grow">
                 <h2 class="text-2xl/none font-bold">{{ $t("panel.languages.Menu Languages") }}</h2>
@@ -81,7 +69,7 @@
                         :class="[i == settings.currency ? 'bg-fgPrimary text-bgPrimary' : 'bg-bgSecondary bg-opacity-50']"
                         v-for="(currency, i) in currencies.list"
                         :key="i"
-                        @click="settings.currency = i"
+                        @click="changeCurrency(i)"
                     >
                         <span>{{ currency }}</span>
                         <span class="flex items-center justify-center w-6 h-6 bg-primary rounded-full" v-if="i == settings.currency">
@@ -123,16 +111,22 @@ const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] |
 const errorField = ref("");
 const responseMessage = ref("");
 
-const toggleLang = (langCode) => {
+const toggleLang = async (langCode) => {
     if (settings.languages.includes(langCode)) {
         settings.languages.splice(settings.languages.indexOf(langCode), 1);
+        await saveSetting();
     } else {
         if (settings.languages.length >= settings.languageLimit) {
             // TODO : make toast and inform user that they cant pick more than the limit and they must unselect a selected lang first
             return;
         }
         settings.languages.push(langCode);
+        await saveSetting();
     }
+};
+const changeCurrency = async (index) => {
+    settings.currency = index;
+    await saveSetting();
 };
 
 // saving data -------------------------------------------------

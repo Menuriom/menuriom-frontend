@@ -189,6 +189,7 @@ export default {
 
             Dashboard: "داشبورد",
             "Language Settings": "تنظیمات زبان",
+            "Brand Settings": "تنظیمات برند",
             Branches: "شعبه ها",
             Menu: "مدیریت منو",
             "Menu Editor": "ویرایش منو",
@@ -249,6 +250,8 @@ export default {
 
         brands: {
             "Brand Details": "مشخصات برند",
+            "Brand Username": "یوزنیم برند",
+            "Only english numbers and letters": "فقط حروف و اعداد انگلیسی",
             "Brand Name": "اسم برند",
             "Brand Slogan": "شعار برند",
             "How many branches does your business have?": "کسب و کار شما چند شعبه دارد؟",

@@ -26,7 +26,6 @@ main {
             <!-- <Header /> -->
             <div class="relative flex w-full h-0 flex-grow">
                 <SideMenu v-if="!dontShowMenu" />
-                <!-- <SideMenuWhite v-if="!dontShowMenu" /> -->
                 <main class="relative p-3 pt-5 me-2 flex-grow max-h-full overflow-y-scroll" :class="{ wide: !panelStore.sideMenuOpen }">
                     <slot />
                 </main>
@@ -49,7 +48,6 @@ import Header from "~/components/panel/Header.vue";
 import Header_Dark from "~/components/panel/Header_Dark.vue";
 import Blob from "~/components/web/Blob.vue";
 const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
-const SideMenuWhite = defineAsyncComponent(() => import("~/components/panel/SideMenuWhite.vue"));
 const SentInvites = defineAsyncComponent(() => import("~/components/panel/dialogs/staff/SentInvites.vue"));
 const PersonalInfo = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/PersonalInfo.vue"));
 const CreateNewBrand = defineAsyncComponent(() => import("~/components/panel/dialogs/account-setup/CreateNewBrand.vue"));

@@ -51,7 +51,7 @@
                         </nuxt-link>
                         <nuxt-link
                             class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30"
-                            :to="localePath(`/panel/brand/${brand._id}/general-info`)"
+                            :to="localePath(`/panel/${brand._id}/settings`)"
                             v-if="brand.role == 'owner'"
                         >
                             <Icon class="w-4 h-4 bg-fgPrimary shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />

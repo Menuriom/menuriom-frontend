@@ -189,6 +189,7 @@ export default {
 
             Dashboard: "Dashboard",
             "Language Settings": "Language Settings",
+            "Brand Settings": "Brand Settings",
             Branches: "Branches",
             Menu: "Menu",
             "Menu Editor": "Menu Editor",
@@ -249,6 +250,8 @@ export default {
 
         brands: {
             "Brand Details": "Brand Details",
+            "Brand Username": "Brand Username",
+            "Only english numbers and letters": "Only english numbers and letters",
             "Brand Name": "Brand Name",
             "Brand Slogan": "Brand Slogan",
             "How many branches does your business have?": "How many branches does your business have?",
