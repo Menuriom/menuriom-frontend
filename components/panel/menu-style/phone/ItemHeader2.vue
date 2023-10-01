@@ -1,5 +1,7 @@
+<style scoped></style>
+
 <template>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 w-full px-2">
         <header class="flex items-center gap-2 w-full">
             <hr class="opacity-20 w-1 grow" :style="`border-color: ${options.textColor};`" />
             <div class="flex flex-col items-center gap-2">
@@ -27,6 +29,5 @@
 <script setup>
 const props = defineProps({
     options: { type: Object },
-    // baseColors: { type: Object },
 });
 </script>

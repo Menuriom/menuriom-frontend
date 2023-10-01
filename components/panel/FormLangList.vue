@@ -9,7 +9,7 @@
             </div>
             <nuxt-link
                 class="btn flex items-center justify-center gap-2 text-xs border border-bgSecondary p-2 hover:px-4 rounded-xl"
-                :to="localePath(`/panel/${brandID}/languages`)"
+                :to="localePath(`/panel/${brandID}/settings/languages`)"
                 :title="$t('panel.side-menu.Language Settings')"
             >
                 <Icon class="w-4 h-4 gradient" name="gear.svg" folder="icons/duo" size="16px" />

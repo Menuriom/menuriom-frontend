@@ -28,8 +28,6 @@
             class="screen flex flex-col items-center w-full p-4 overflow-auto isolate"
             :style="`background-color: ${baseColors.bgMainColor}; color: ${baseColors.textColor};`"
         >
-            <!-- <img class="bg-image absolute bottom-0 start-0 -z-10 w-full h-96 object-contain opacity-10" src="/patterns/pattern7.webp" alt="" /> -->
-
             <div class="pattern-bg-wrapper absolute bottom-0 h-96 -z-10 overflow-hidden" :style="`width: 99%; background-color: ${baseColors.bgMainColor};`">
                 <div
                     class="pattern-bg absolute w-96 aspect-square"
@@ -84,13 +82,13 @@
                 :options="mainMenuStyleOptions.categoriesOptions"
             />
 
-            <div id="item-groups" class="flex flex-col gap-4 w-full p-2">
-                <component
-                    name="itemHeaders"
-                    :is="itemHeaders[mainMenuStyleOptions.itemHeaderOptions.component]"
-                    :baseColors="baseColors"
-                    :options="mainMenuStyleOptions.itemHeaderOptions"
-                />
+            <component
+                name="itemHeader"
+                :is="itemHeaders[mainMenuStyleOptions.itemHeaderOptions.component]"
+                :options="mainMenuStyleOptions.itemHeaderOptions"
+            />
+
+            <div class="flex flex-col gap-4 w-full p-2">
                 <component
                     name="itemList"
                     :is="itemLists[mainMenuStyleOptions.itemListOptions.component]"
@@ -109,6 +107,7 @@
                 :restaurantDetailsPageOptions="restaurantDetailsPageOptions"
                 v-if="selectedTab === 'RestaurantDetailsPage'"
             />
+
             <SplashScreen :brand="brand" :baseColors="baseColors" :splashScreenOptions="splashScreenOptions" v-if="selectedTab === 'SplashScreen'" />
         </div>
     </div>

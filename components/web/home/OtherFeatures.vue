@@ -16,7 +16,7 @@
                     <div class="relative flex items-center justify-center -mt-16">
                         <div class="gradient-re absolute w-28 h-28 rounded-2xl scale-0 group-hover:scale-100 transition-transform"></div>
                         <div class="relative flex items-center justify-center w-24 h-24 rounded-xl bg-bgSecondary bg-opacity-60 backdrop-blur-sm">
-                            <Icon class="relative w-16 h-16 bg-fgtext-fgPrimary" :name="item.icon" folder="icons/basil" size="64px" />
+                            <Icon class="relative w-16 h-16 bg-fgPrimary" :name="item.icon" folder="icons/basil" size="64px" />
                         </div>
                     </div>
                     <h3 class="gradient-text f-inter text-3xl font-extrabold text-center">{{ item.title }}</h3>

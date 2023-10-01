@@ -44,14 +44,14 @@
                 <hr class="w-full opacity-20 mt-auto" :style="`border-color: ${options.textColor};`" />
                 <div class="flex flex-wrap items-center justify-between gap-2">
                     <div class="flex items-center gap-1 text-base/none">
-                        <b class="w-12 h-4 opacity-75 rounded" :style="`background-color: ${options.textColor};`"></b>
-                        <span class="w-2 h-4 rounded-sm" :style="`background-color: ${options.primaryColor};`"></span>
+                        <b class="w-12 h-4 opacity-75 rounded" :style="`background-color: ${options.accentColor};`"></b>
+                        <span class="w-2 h-4 rounded-sm" :style="`background-color: ${options.textColor};`"></span>
                     </div>
                     <button
                         class="flex items-center justify-center w-7 h-7 p-1 rounded-full shadow-nr15 transition-all hover:scale-125 shrink-0"
                         :style="`background-color: ${options.primaryColor};`"
                     >
-                        <Icon class="w-5 h-5 shrink-0" :style="`background-color: ${options.bgMainColor};`" name="plus.svg" folder="icons/tabler" size="18px" />
+                        <Icon class="w-5 h-5 shrink-0" :style="`background-color: ${options.textColor};`" name="plus.svg" folder="icons/tabler" size="18px" />
                     </button>
                 </div>
             </div>

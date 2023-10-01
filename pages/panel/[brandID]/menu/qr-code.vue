@@ -459,7 +459,7 @@ const errorField = ref("");
 
 const selectedTab = ref("qrcode");
 
-const link = `${runtimeConfig.public.BASE_URL}/r/${route.params.brandID}`;
+const link = `${runtimeConfig.public.BASE_URL}/r/${brand.value.username}`;
 const borderMargin = ref(4);
 const rotateTheCode = ref(false);
 const size = 1024;
@@ -563,7 +563,7 @@ const cellNumbers = ref(0);
 const cellLength = ref(0);
 
 let IMCctx;
-const cells = QR.QrCode.encodeText(link, QR.QrCode.Ecc.HIGH).getModules();
+const cells = QR.QrCode.encodeText(link, QR.QrCode.Ecc.QUARTILE).getModules();
 const canvasEl = ref(); // Dom Ref
 
 const drawQR = () => {
@@ -652,7 +652,7 @@ const renderOverlays = () => {
 const drawLogo = (backgroundFillStyle) => {
     const ctx = canvasEl.value.getContext("2d");
 
-    const imageSize = Math.min(link.length / 2.5, 11);
+    const imageSize = Math.min(link.length / 3.5, 11);
     const pos = cellNumbers.value / 2 - imageSize / 2;
 
     ctx.fillStyle = backgroundFillStyle;

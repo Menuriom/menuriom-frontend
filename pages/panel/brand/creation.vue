@@ -39,13 +39,25 @@
                         />
                     </div>
                     <div class="flex flex-col gap-4 w-full">
-                        <Input
-                            class="w-full flex-grow"
-                            :required="true"
-                            :label="$t('panel.brands.Brand Name')"
-                            v-model="name"
-                            :error="errorField == 'name' ? responseMessage : ''"
-                        />
+                        <div class="flex flex-wrap @3xl:flex-nowrap items-start gap-4 w-full">
+                            <Input
+                                class="w-full flex-grow"
+                                :required="true"
+                                :label="$t('panel.brands.Brand Name')"
+                                v-model="name"
+                                :error="errorField == 'name' ? responseMessage : ''"
+                            />
+                            <Input
+                                class="w-full flex-grow"
+                                :label="$t('panel.brands.Brand Username')"
+                                :placeholder="$t('panel.brands.Only english numbers and letters')"
+                                icon-name="at.svg"
+                                icon-folder="icons"
+                                :required="true"
+                                v-model="username"
+                                :error="errorField == `username` ? responseMessage : ''"
+                            />
+                        </div>
                         <Input
                             class="w-full flex-grow"
                             :label="$t('panel.brands.Brand Slogan')"
@@ -136,6 +148,7 @@ const responseMessage = ref("");
 const logo = ref(""); // Dom Ref
 const logoBlob = ref(null);
 
+const username = ref("");
 const name = ref("");
 const slogan = ref("");
 const branchSize = ref(1);
@@ -156,6 +169,8 @@ const save = async () => {
     responseMessage.value = "";
     errorField.value = "";
 
+    username.value = username.value.replaceAll(" ", "");
+
     const data = new FormData();
     if (logo.value.files[0]) {
         if (logo.value.files[0].size > 1_048_576) {
@@ -165,7 +180,7 @@ const save = async () => {
         }
         data.append("logo", logo.value.files[0]);
     }
-
+    data.append("username", username.value);
     data.append("name", name.value);
     if (slogan.value) data.append("slogan", slogan.value);
     data.append("branchSize", branchSize.value);
