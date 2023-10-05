@@ -656,6 +656,7 @@ export default {
             "Transaction Time": "تاریخ تراکنش",
             "Paid Amount": "مبلغ پرداختی",
 
+            Brand: "برند",
             "Bill Info": "مشخصات فاکتور",
             "Bill Number": "شماره فاکتور",
             "Payable Price": "مبلغ قابل پرداخت",

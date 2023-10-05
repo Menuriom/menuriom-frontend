@@ -657,6 +657,7 @@ export default {
             "Transaction Time": "Transaction Time",
             "Paid Amount": "Paid Amount",
 
+            "Brand": "Brand",
             "Bill Info": "Bill Info",
             "Bill Number": "Bill Number",
             "Payable Price": "Payable Price",
