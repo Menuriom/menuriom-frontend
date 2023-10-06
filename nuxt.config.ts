@@ -67,9 +67,14 @@ export default defineNuxtConfig({
             { code: "fa", name: "فارسی", iso: "fa-IR", files: ["fa.js", "fa.json"], dir: "rtl", domain: process.env.BASE_FA_URL },
             { code: "en", name: "English", iso: "en-US", files: ["en.js", "en.json"], dir: "ltr", domain: process.env.BASE_EN_URL },
         ],
-        vueI18n: {
-            legacy: false,
+        compilation: {
+            strictMessage: false,
+            escapeHtml: false,
         },
+        vueI18n: "./i18n.config.ts",
+        // vueI18n: {
+        //     legacy: false,
+        // },
     },
 
     modules: [
