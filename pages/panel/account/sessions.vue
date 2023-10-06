@@ -68,7 +68,8 @@
                         class="btn border-2 border-rose-500 border-opacity-50 hover:bg-rose-500 bg-opacity-60 hover:bg-opacity-80 text-white p-2 px-3 hover:px-6 text-sm rounded-xl"
                         @click="terminate(session)"
                     >
-                        {{ $t("panel.account.Terminate") }}
+                        <span v-if="!session.terminating"> {{ $t("panel.account.Terminate") }} </span>
+                        <Loading class="" v-else />
                     </button>
                 </li>
             </ul>
