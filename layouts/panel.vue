@@ -72,7 +72,9 @@ const userStore = useUserStore();
 const user = storeToRefs(userStore);
 
 const dontShowMenu = computed(() => {
-    for (let i = 0; i < route.matched.length; i++) if (route.matched[i].path == localePath("/panel/:brandID")) return false;
+    for (let i = 0; i < route.matched.length; i++) {
+        if (route.matched[i].path == localePath("/panel/:brandID()")) return false;
+    }
     return true;
 });
 const showPopUp = computed(() => {

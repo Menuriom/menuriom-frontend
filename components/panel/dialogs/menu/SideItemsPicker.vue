@@ -106,6 +106,7 @@ const toggleItemGroupSelection = (item, id) => {
 // };
 
 const handleErrors = (err) => {
+    if (!err) return;
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;

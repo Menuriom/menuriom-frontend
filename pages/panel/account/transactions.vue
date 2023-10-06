@@ -13,7 +13,7 @@ table td:last-child {
             <Icon class="w-6 h-6 gradient" name="money-bill-transfer.svg" folder="icons/duo" size="24px" />
             {{ $t("panel.account.Transactions") }}
         </h2>
-        <table class="w-full text-fgPrimary border-separate border-spacing-y-4">
+        <table class="w-full text-fgPrimary border-separate border-spacing-y-4 -my-4" v-if="records.list.length !== 0">
             <thead class="">
                 <th class="text-start px-4">
                     <span class="text-sm opacity-75">{{ $t("panel.payment.Brand") }}</span>
@@ -40,7 +40,7 @@ table td:last-child {
             <tr class="rounded-2xl" v-for="(transaction, i) in records.list" :key="i">
                 <td class="bg-bgAccent p-4">
                     <div class="flex items-center gap-2">
-                        <img class="w-8 aspect-square object-cover rounded-full" :src="transaction.brand.logo" alt="">
+                        <img class="w-8 aspect-square object-cover rounded-full" :src="transaction.brand.logo" alt="" />
                         <span>{{ transaction.brand.translation[locale]?.name || transaction.brand.name }}</span>
                     </div>
                 </td>
@@ -94,7 +94,7 @@ table td:last-child {
         <button
             class="btn w-max p-3 hover:px-6 border border-bgSecondary hover:bg-fgPrimary hover:text-bgPrimary rounded-xl text-xs"
             @click="loadMore()"
-            v-if="!noMoreRecords"
+            v-if="!noMoreRecords && records.list.length > 0"
         >
             {{ $t("panel.Load More") }}
         </button>
@@ -103,8 +103,8 @@ table td:last-child {
             class="flex flex-col items-center gap-2 w-full max-w-screen-xs p-6 mx-auto my-4 rounded-2xl bg-bgAccent shadow-mr25"
             v-if="records.list.length === 0"
         >
-            <img class="h-20" src="~/assets/images/envelop.png" alt="" />
-            <p class="opacity-75">{{ $t("panel.account-setup.You Have No Invitations Yet") }}</p>
+            <!-- <img class="h-20" src="~/assets/images/envelop.png" alt="" /> -->
+            <p class="opacity-75">{{ $t("panel.payment.You have not done any transactions yet") }}</p>
         </div>
     </section>
 </template>
@@ -121,6 +121,7 @@ const errorField = ref("");
 const responseMessage = ref("");
 
 const handleErrors = (err) => {
+    if (!err) return;
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;
@@ -128,7 +129,7 @@ const handleErrors = (err) => {
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
     // TODO : log errors in sentry type thing
-    if (responseMessage.value) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+    if (responseMessage.value && process.client) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
 };
 
 // getTransactionList -------------------------------------------------

@@ -106,7 +106,7 @@ const acceptInvite = async (invite, index) => {
             if (process.server) console.log({ err });
             // TODO : log errors in sentry type thing
 
-            if (responseMessage.value) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            if (responseMessage.value && process.client) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
         })
         .finally(() => (records.list[index].loading = false));
 };
@@ -138,13 +138,14 @@ const rejectInvite = async (invite, index) => {
             if (process.server) console.log({ err });
             // TODO : log errors in sentry type thing
 
-            if (responseMessage.value) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            if (responseMessage.value && process.client) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
             records.list[index].loading = false;
         });
 };
 // ----------------------------------------
 
 const handleErrors = (err) => {
+    if (!err) return;
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;
@@ -153,7 +154,7 @@ const handleErrors = (err) => {
     if (process.server) console.log({ err });
     // TODO : log errors in sentry type thing
 
-    if (responseMessage.value) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+    if (responseMessage.value && process.client) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
 };
 
 // getInviteList -------------------------------------------------

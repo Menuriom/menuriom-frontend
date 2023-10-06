@@ -246,6 +246,15 @@ export default {
             Sessions: "دستگاه های متصل",
 
             "You can join three brands at a max": "حداکثر می توانید به سه برند بپیوندید",
+
+            "This Device": "این دستگاه",
+            "Other Devices": "دستگاه های دیگر",
+            Device: "دستگاه",
+            "IP Address": "آدرس ای پی",
+            "Online Status": "وضعیت آنلاین",
+            "Last active": "آخرین فعالیت",
+            ago: "پیش",
+            Terminate: "Terminate",
         },
 
         brands: {
@@ -656,6 +665,7 @@ export default {
             "Transaction Time": "تاریخ تراکنش",
             "Paid Amount": "مبلغ پرداختی",
 
+            "You have not done any transactions yet": "شما هنوز تراکنشی انجام نداده اید",
             Brand: "برند",
             "Bill Info": "مشخصات فاکتور",
             "Bill Number": "شماره فاکتور",

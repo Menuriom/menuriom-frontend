@@ -246,6 +246,15 @@ export default {
             Sessions: "Sessions",
 
             "You can join three brands at a max": "You can join three brands at a max",
+
+            "This Device": "This Device",
+            "Other Devices": "Other Devices",
+            Device: "Device",
+            "IP Address": "IP Address",
+            "Online Status": "Online Status",
+            "Last active": "Last active",
+            ago: "ago",
+            Terminate: "Terminate",
         },
 
         brands: {
@@ -657,7 +666,8 @@ export default {
             "Transaction Time": "Transaction Time",
             "Paid Amount": "Paid Amount",
 
-            "Brand": "Brand",
+            "You have not done any transactions yet": "You have not done any transactions yet",
+            Brand: "Brand",
             "Bill Info": "Bill Info",
             "Bill Number": "Bill Number",
             "Payable Price": "Payable Price",
