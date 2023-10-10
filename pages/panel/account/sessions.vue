@@ -79,7 +79,6 @@
 
 <script setup>
 import axios from "axios";
-import { useFetch } from "nuxt/app";
 import { useToast } from "vue-toastification";
 
 const { t, localeProperties } = useI18n();

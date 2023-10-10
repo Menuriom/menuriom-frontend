@@ -7,7 +7,7 @@
             {{ $t("panel.brands.General Info") }}
         </h2> -->
         <section class="flex flex-wrap-reverse lg:flex-nowrap items-start gap-4 w-full">
-            <div class="flex flex-col gap-4 w-full lg:max-w-screen-md p-4 rounded-lg bg-pencil-tip text-white">
+            <div class="flex flex-col gap-4 w-full lg:max-w-screen-md p-4 rounded-2xl bg-bgAccent text-fgPrimary">
                 <h3 class="flex items-center gap-2 text-lg font-bold">
                     <Icon class="w-5 h-5 gradient-re" name="fork-knife.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.brands.Brand Details") }}
@@ -109,7 +109,7 @@
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
-                <button class="btn w-max p-3 rounded-lg bg-primary" :class="{ 'opacity-75 cursor-not-allowed': saving }" :disabled="saving" @click="save()">
+                <button class="btn w-max p-3 hover:px-6 rounded-lg bg-primary" :class="{ 'opacity-75 cursor-not-allowed': saving }" :disabled="saving" @click="save()">
                     <span v-if="!saving"> {{ $t("panel.brands.Update Brand Info") }} </span>
                     <Loading v-else />
                 </button>

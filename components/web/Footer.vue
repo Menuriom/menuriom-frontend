@@ -107,12 +107,12 @@
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/faqs')">{{ $t("footer.Faqs") }}</nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
-                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/demo')">{{ $t("footer.Demo") }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" to="http://localhost:3002">{{ $t("footer.Demo") }}</nuxt-link>
                     </li>
                 </ul>
                 <ul class="flex flex-col items-start gap-3 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
-                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/request-feature')">
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/contact-us')">
                             {{ $t("footer.Request Feature") }}
                         </nuxt-link>
                     </li>
@@ -122,7 +122,7 @@
                         </nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
-                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/help-center')">
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" to="http://localhost:3003/welcome-to-help-center">
                             {{ $t("footer.Help Center") }}
                         </nuxt-link>
                     </li>

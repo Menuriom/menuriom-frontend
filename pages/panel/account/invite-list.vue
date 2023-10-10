@@ -50,13 +50,10 @@
 <script setup>
 import axios from "axios";
 import { useToast } from "vue-toastification";
-import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
 const { localeProperties, t } = useI18n();
-const route = useRoute();
 const toast = useToast();
-const panelStore = usePanelStore();
 const userStore = useUserStore();
 
 // useHead({ title: computed(() => t("panel.account.Invitations List")) });

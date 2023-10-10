@@ -148,6 +148,7 @@ export default {
     panel: {
         "Your Menuriom Panel": "Your Menuriom Panel",
         Congratulations: "Congratulations",
+        Confirm: "Confirm",
         Ok: "Ok",
         Save: "Save",
         "Save Changes": "Save Changes",
@@ -181,6 +182,25 @@ export default {
             "Upgrade Plan": "Upgrade Plan",
             "Help Center": "Help Center",
             Logout: "Logout",
+
+            Name: "Name",
+            Family: "Family",
+            "Email Address": "Email Address",
+            "Phone Number": "Phone Number",
+            "Update Info": "Update Info",
+            "Change and verify": "Change and verify",
+            "Delete Avatar Image": "Delete Avatar Image",
+            "Your info has been updated": "Your info has been updated",
+
+            "Change And Verify Email": "Change And Verify Email",
+            "Change And Verify Mobile": "Change And Verify Mobile",
+
+            emailVerifyMessage: "We will send a verification code to your email. after verification, your email will be changed",
+            mobileVerifyMessage: "We will send a verification code to your phone. after verification, your phone number will be changed",
+            "Verfication Code": "Verfication Code",
+            "send code": "send code",
+            "Your email address has been updated": "Your email address has been updated",
+            "Your phone number has been updated": "Your phone number has been updated",
         },
 
         "side-menu": {

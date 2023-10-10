@@ -14,8 +14,8 @@ export default defineEventHandler(async (event) => {
         return res.end("Expired");
     }
 
-    // const data = req.readable ? await read(req) : null;
-    const data = isMethod(event, ["PATCH", "POST", "PUT"]) ? await readRawBody(event) : null;
+    const data = req.readable ? await read(req) : null;
+    // const data = isMethod(event, ["PATCH", "POST", "PUT"]) ? await readRawBody(event) : null;
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
 
     delete req.headers["content-length"];
