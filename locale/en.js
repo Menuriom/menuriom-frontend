@@ -638,6 +638,7 @@ export default {
             "Billing History": "Billing History",
             "Current Plan Details": "Current Plan Details",
             remaining: "remaining",
+            passed: "passed",
             "Upgrade-Downgrade Plan": "Upgrade/Downgrade Plan",
             "Change Payment Period": "Change Payment Period",
             "You have no bills yet": "You have no bills yet",

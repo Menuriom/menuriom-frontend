@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="flex items-center gap-1 bg-bgAccent p-2 rounded-xl shadow-mr15" v-if="currentPlan.daysRemaining">
                                     <b class="text-primary">{{ currentPlan.daysRemaining }}</b>
-                                    <small>{{ $t("panel.billing.remaining") }}</small>
+                                    <small>{{ currentPlan.secondsPassed > 0 ? $t("panel.billing.remaining") : $t("panel.billing.passed") }}</small>
                                 </div>
                             </div>
                             <p

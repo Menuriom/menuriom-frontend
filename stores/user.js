@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-const refreshInterval = 60 * 15; // 15 minutes
+const refreshInterval = 60 * 10; // 10 minutes
 
 export const useUserStore = defineStore("user", () => {
     const avatar = ref("");

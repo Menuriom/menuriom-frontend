@@ -637,6 +637,7 @@ export default {
             "Billing History": "تاریخچه پرداختی ها",
             "Current Plan Details": "مشخصات اشتراک کنونی",
             remaining: "باقی مانده",
+            passed: "گذشته",
             "Upgrade-Downgrade Plan": "ارتقا / تنزل اشتراک",
             "Change Payment Period": "تغییر بازه پرداخت",
             "You have no bills yet": "شما فعلا هیچ صورت حسابی ندارید",
