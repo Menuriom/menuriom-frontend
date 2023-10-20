@@ -459,7 +459,7 @@ const errorField = ref("");
 
 const selectedTab = ref("qrcode");
 
-const link = `${runtimeConfig.public.BASE_URL}/r/${brand.value.username}`;
+const link = `${runtimeConfig.public.MENU_BASE_URL}/${brand.value.username}`;
 const borderMargin = ref(4);
 const rotateTheCode = ref(false);
 const size = 1024;
