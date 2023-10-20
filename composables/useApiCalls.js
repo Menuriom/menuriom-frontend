@@ -524,6 +524,32 @@ export const getBillTransactionsList = async (brandID, billID, records = [], pp 
 
     return { _records, _noMoreRecords };
 };
+export const getUserTransactionList = async (records = [], pp = 25, lastRecordID) => {
+    let { url, headers } = getRequestConfig(`/api/v1/account/user-transactions`, {});
+    const params = [];
+    params.push(`pp=${pp}`);
+    if (lastRecordID) params.push(`lastRecordID=${lastRecordID}`);
+    url = encodeURI(`${url}?${params.join("&")}`);
+
+    let _transactions = records;
+    let _noMoreRecords = false;
+
+    await axios
+        .get(url, { headers: headers })
+        .then((response) => {
+            const newTransactions = response.data.transactions.map((record) => {
+                return { ...record, loading: false };
+            });
+            _transactions = [..._transactions, ...newTransactions];
+
+            if (newTransactions.length === 0) _noMoreRecords = true;
+        })
+        .catch((e) => {
+            throw e;
+        });
+
+    return { _transactions, _noMoreRecords };
+};
 // ---------------------------------------------------------
 
 // general APIs ---------------------------------------------------------

@@ -60,7 +60,7 @@ nav {
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/demo')">
+                        <nuxt-link class="flex items-center gap-4 w-full" to="http://localhost:3002">
                             <span>{{ $t("header.Demo") }}</span>
                         </nuxt-link>
                     </li>

@@ -148,6 +148,7 @@ export default {
     panel: {
         "Your Menuriom Panel": "Your Menuriom Panel",
         Congratulations: "Congratulations",
+        Confirm: "Confirm",
         Ok: "Ok",
         Save: "Save",
         "Save Changes": "Save Changes",
@@ -181,6 +182,25 @@ export default {
             "Upgrade Plan": "Upgrade Plan",
             "Help Center": "Help Center",
             Logout: "Logout",
+
+            Name: "Name",
+            Family: "Family",
+            "Email Address": "Email Address",
+            "Phone Number": "Phone Number",
+            "Update Info": "Update Info",
+            "Change and verify": "Change and verify",
+            "Delete Avatar Image": "Delete Avatar Image",
+            "Your info has been updated": "Your info has been updated",
+
+            "Change And Verify Email": "Change And Verify Email",
+            "Change And Verify Mobile": "Change And Verify Mobile",
+
+            emailVerifyMessage: "We will send a verification code to your email. after verification, your email will be changed",
+            mobileVerifyMessage: "We will send a verification code to your phone. after verification, your phone number will be changed",
+            "Verfication Code": "Verfication Code",
+            "send code": "send code",
+            "Your email address has been updated": "Your email address has been updated",
+            "Your phone number has been updated": "Your phone number has been updated",
         },
 
         "side-menu": {
@@ -246,6 +266,15 @@ export default {
             Sessions: "Sessions",
 
             "You can join three brands at a max": "You can join three brands at a max",
+
+            "This Device": "This Device",
+            "Other Devices": "Other Devices",
+            Device: "Device",
+            "IP Address": "IP Address",
+            "Online Status": "Online Status",
+            "Last active": "Last active",
+            ago: "ago",
+            Terminate: "Terminate",
         },
 
         brands: {
@@ -609,6 +638,7 @@ export default {
             "Billing History": "Billing History",
             "Current Plan Details": "Current Plan Details",
             remaining: "remaining",
+            passed: "passed",
             "Upgrade-Downgrade Plan": "Upgrade/Downgrade Plan",
             "Change Payment Period": "Change Payment Period",
             "You have no bills yet": "You have no bills yet",
@@ -657,6 +687,8 @@ export default {
             "Transaction Time": "Transaction Time",
             "Paid Amount": "Paid Amount",
 
+            "You have not done any transactions yet": "You have not done any transactions yet",
+            Brand: "Brand",
             "Bill Info": "Bill Info",
             "Bill Number": "Bill Number",
             "Payable Price": "Payable Price",

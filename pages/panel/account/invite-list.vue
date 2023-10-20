@@ -3,22 +3,22 @@
 <template>
     <section class="flex flex-col items-start gap-4 w-full h-full rounded-lg">
         <h2 class="flex items-center gap-2 text-2xl font-bold">
-            <img class="w-6" src="~/assets/images/panel-icons/envelope-open-text-dark.png" alt="" />
+            <Icon class="w-6 h-6 gradient" name="envelope-open-text.svg" folder="icons/duo" size="24px" />
             {{ $t("panel.account.Invitations List") }}
         </h2>
         <ul class="flex flex-col gap-4 w-full text-white" v-if="records.list.length > 0">
-            <li class="flex items-center gap-4 p-4 rounded-md bg-dolphin hover:bg-neutral-700" v-for="(invite, i) in records.list" :key="i">
-                <img class="w-12 h-12 rounded-full object-cover bg-pencil-tip shadow-xl shrink-0" :src="invite.brand.logo" v-if="invite.brand.logo" />
-                <img class="w-12 h-12 rounded-full object-cover bg-pencil-tip shadow-xl shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
-                <div class="flex flex-col gap-2 grow">
+            <li class="flex items-center gap-4 p-4 rounded-2xl bg-bgAccent" v-for="(invite, i) in records.list" :key="i">
+                <img class="w-12 h-12 rounded-full object-cover shadow-xl shrink-0" :src="invite.brand.logo" v-if="invite.brand.logo" />
+                <img class="w-12 h-12 rounded-full object-cover shadow-xl shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                <div class="flex flex-col gap-1 grow">
                     <h5 class="font-bold">{{ invite.brand.name }}</h5>
                     <p class="text-xs opacity-90" v-html="$t('panel.account-setup.roleInviteDesc', { role: invite.role.name })" />
                 </div>
                 <div class="flex items-center gap-2 shrink-0" v-if="!invite.loading">
-                    <button class="btn text-sm w-max p-3 rounded bg-primary shrink-0" @click="acceptInvite(invite, i)">
+                    <button class="btn text-sm w-max py-2.5 px-3 hover:px-6 rounded-xl bg-primary shrink-0" @click="acceptInvite(invite, i)">
                         {{ $t("panel.Accept") }}
                     </button>
-                    <button class="btn text-sm w-max p-2.5 rounded border-2 shrink-0" @click="rejectInvite(invite, i)">
+                    <button class="btn text-sm w-max py-2.5 px-3 hover:px-6 rounded-xl bg-bgSecondary shrink-0" @click="rejectInvite(invite, i)">
                         {{ $t("panel.Reject") }}
                     </button>
                 </div>
@@ -26,14 +26,21 @@
             </li>
         </ul>
         <Loading class="w-full my-4" v-if="loading" />
-        <button class="btn w-max p-2.5 border bg-white rounded-md text-black text-xs" @click="loadMore()" v-if="!noMoreRecords">
+        <button
+            class="btn w-max p-3 hover:px-6 border border-bgSecondary hover:bg-fgPrimary hover:text-bgPrimary rounded-xl text-xs"
+            @click="loadMore()"
+            v-if="!noMoreRecords"
+        >
             {{ $t("panel.Load More") }}
         </button>
         <small class="text-xs opacity-75" v-if="noMoreRecords && records.list.length > 0">{{ $t("panel.End of the list") }}</small>
-        <div class="flex flex-col items-center gap-2 w-full my-4" v-if="records.list.length === 0">
-            <img class="" src="~/assets/images/envelop.png" alt="" />
+        <div
+            class="flex flex-col items-center gap-2 w-full max-w-screen-xs p-6 mx-auto my-4 rounded-2xl bg-bgAccent shadow-mr25"
+            v-if="records.list.length === 0"
+        >
+            <img class="h-20" src="~/assets/images/envelop.png" alt="" />
             <p class="opacity-75">{{ $t("panel.account-setup.You Have No Invitations Yet") }}</p>
-            <button :class="{ 'animate-spin': !canRefresh }" @click="refreshInviteList()">
+            <button class="mt-4" :class="{ 'animate-spin': !canRefresh }" @click="refreshInviteList()">
                 <Icon class="icon w-6 h-6 gradient" name="arrows-rotate.svg" folder="icons" size="22px" />
             </button>
         </div>
@@ -43,13 +50,10 @@
 <script setup>
 import axios from "axios";
 import { useToast } from "vue-toastification";
-import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
 const { localeProperties, t } = useI18n();
-const route = useRoute();
 const toast = useToast();
-const panelStore = usePanelStore();
 const userStore = useUserStore();
 
 // useHead({ title: computed(() => t("panel.account.Invitations List")) });
@@ -99,7 +103,7 @@ const acceptInvite = async (invite, index) => {
             if (process.server) console.log({ err });
             // TODO : log errors in sentry type thing
 
-            if (responseMessage.value) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            if (responseMessage.value && process.client) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
         })
         .finally(() => (records.list[index].loading = false));
 };
@@ -131,13 +135,14 @@ const rejectInvite = async (invite, index) => {
             if (process.server) console.log({ err });
             // TODO : log errors in sentry type thing
 
-            if (responseMessage.value) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            if (responseMessage.value && process.client) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
             records.list[index].loading = false;
         });
 };
 // ----------------------------------------
 
 const handleErrors = (err) => {
+    if (!err) return;
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;
@@ -146,7 +151,7 @@ const handleErrors = (err) => {
     if (process.server) console.log({ err });
     // TODO : log errors in sentry type thing
 
-    if (responseMessage.value) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+    if (responseMessage.value && process.client) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
 };
 
 // getInviteList -------------------------------------------------

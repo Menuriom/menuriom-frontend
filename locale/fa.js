@@ -148,6 +148,7 @@ export default {
     panel: {
         "Your Menuriom Panel": "پنل منوریوم شما",
         Congratulations: "تبریک",
+        Confirm: "تایید",
         Ok: "خُب",
         Save: "ذخیره",
         "Save Changes": "ثبت تغییرات",
@@ -181,6 +182,25 @@ export default {
             "Upgrade Plan": "ارتقا پلن",
             "Help Center": "مرکز آموزش",
             Logout: "خروج از حساب",
+
+            Name: "نام",
+            Family: "نام خانوادگی",
+            "Email Address": "آدرس ایمیل",
+            "Phone Number": "شماره موبایل",
+            "Update Info": "ثبت اطلاعات",
+            "Change and verify": "تغییر و تایید",
+            "Delete Avatar Image": "حذف عکس پروفایل",
+            "Your info has been updated": "اطلاعات شما به روز شد",
+
+            "Change And Verify Email": "تغییر و تایید آدرس ایمیل",
+            "Change And Verify Mobile": "تغییر و تایید شماره موبایل",
+
+            emailVerifyMessage: "یک کد تایید به ایمیل شما ارسال خواهد شد. پس از تایید کد، ایمیل شما تغییر خواهد کرد",
+            mobileVerifyMessage: "یک کد تایید به تلفن همراه شما ارسال خواهد شد. پس از تایید کد، شماره تلفن شما تغییر خواهد کرد",
+            "Verfication Code": "کد تایید",
+            "send code": "ارسال کد",
+            "Your email address has been updated": "آدرس ایمیل شما به روز شد",
+            "Your phone number has been updated": "شماره موبایل شما به روز شد",
         },
 
         "side-menu": {
@@ -246,6 +266,15 @@ export default {
             Sessions: "دستگاه های متصل",
 
             "You can join three brands at a max": "حداکثر می توانید به سه برند بپیوندید",
+
+            "This Device": "این دستگاه",
+            "Other Devices": "دستگاه های دیگر",
+            Device: "دستگاه",
+            "IP Address": "آدرس ای پی",
+            "Online Status": "وضعیت آنلاین",
+            "Last active": "آخرین فعالیت",
+            ago: "پیش",
+            Terminate: "Terminate",
         },
 
         brands: {
@@ -608,6 +637,7 @@ export default {
             "Billing History": "تاریخچه پرداختی ها",
             "Current Plan Details": "مشخصات اشتراک کنونی",
             remaining: "باقی مانده",
+            passed: "گذشته",
             "Upgrade-Downgrade Plan": "ارتقا / تنزل اشتراک",
             "Change Payment Period": "تغییر بازه پرداخت",
             "You have no bills yet": "شما فعلا هیچ صورت حسابی ندارید",
@@ -656,6 +686,8 @@ export default {
             "Transaction Time": "تاریخ تراکنش",
             "Paid Amount": "مبلغ پرداختی",
 
+            "You have not done any transactions yet": "شما هنوز تراکنشی انجام نداده اید",
+            Brand: "برند",
             "Bill Info": "مشخصات فاکتور",
             "Bill Number": "شماره فاکتور",
             "Payable Price": "مبلغ قابل پرداخت",

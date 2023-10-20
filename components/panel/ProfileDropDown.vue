@@ -31,7 +31,7 @@ li:hover .icon {
                     <h3 class="text-sm font-bold capitalize">{{ `${userStore.name} ${userStore.family}` }}</h3>
                     <small class="text-xs opacity-75">{{ userStore.email || userStore.mobile }}</small>
                 </li>
-                <nuxt-link :to="localePath('/panel/profile')">
+                <nuxt-link :to="localePath('/panel/account/profile')">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-bgSecondary rounded-xl cursor-pointer group">
                         <Icon class="icon w-5 h-5 bg-fgPrimary group-hover:bg-secondary" name="user-pen.svg" folder="icons/light" size="20px" />
                         <small class="group-hover:text-secondary">{{ $t("panel.profile.Your Profile") }}</small>
@@ -55,7 +55,7 @@ li:hover .icon {
                         <small class="group-hover:text-secondary">{{ $t("panel.brands.Your Brands") }}</small>
                     </li>
                 </nuxt-link>
-                <nuxt-link :to="localePath(`/panel/${panelStore.selectedBrandId}/billing/change-plan`)" v-if="panelStore.selectedBrandId != ''">
+                <nuxt-link :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)" v-if="panelStore.selectedBrandId != ''">
                     <li class="flex items-center gap-2 w-full p-2.5 hover:bg-bgSecondary rounded-xl cursor-pointer group">
                         <Icon class="icon w-5 h-5 bg-fgPrimary group-hover:bg-secondary" name="arrow-up-big-small.svg" folder="icons/light" size="20px" />
                         <small class="group-hover:text-secondary">{{ $t("panel.profile.Upgrade Plan") }}</small>

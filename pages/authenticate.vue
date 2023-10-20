@@ -135,7 +135,7 @@
                         <Input
                             name="mobile"
                             :required="true"
-                            mask="+98 ### ### ####"
+                            mask="+98 9## ### ####"
                             :label="$t('auth.Phone Number')"
                             v-model="mobile"
                             :error="errorField == 'mobile' ? responseMessage : ''"
@@ -331,7 +331,7 @@ const completeSignup = async () => {
             code: useNumbersToEnglish(code.value),
             name: name.value,
             family: family.value,
-            mobile: mobile.value.replaceAll(" ", ""),
+            mobile: useNumbersToEnglish(mobile.value.replaceAll(" ", "")),
         })
         .then((response) => {
             userStore.setRefreshInterval();
