@@ -59,7 +59,10 @@
                             {{ link }}
                         </a>
                     </div>
-                    <button class="btn flex items-center justify-center gap-2 p-3 hover:px-6 bg-fgPrimary text-bgPrimary rounded-xl text-sm" @click="saveSettings()">
+                    <button
+                        class="btn flex items-center justify-center gap-2 p-3 hover:px-6 bg-fgPrimary text-bgPrimary rounded-xl text-sm"
+                        @click="saveSettings()"
+                    >
                         <span class="flex items-center gap-2" v-if="!saving">
                             <Icon class="w-5 h-5 gradient" name="floppy-disk.svg" folder="icons/light" size="20px" />
                             {{ $t("panel.qrcode.Save Settings") }}
@@ -826,38 +829,41 @@ const saveSettings = async () => {
 // -------------------------------------------------
 
 // loadQRCodeSettings -------------------------------------------------
-const loadQRCodeSettings_results = await useLazyAsyncData(() => loadQRCodeSettings(route.params.brandID));
+// const loadQRCodeSettings_results = await useLazyAsyncData(() => loadQRCodeSettings(route.params.brandID));
+const loadQRCodeSettings_results = await useFetch("/api/v1/panel/menu-qrcode", { lazy: process.client, headers: { brand: route.params.brandID } });
 const loadingQRCodeSettings = computed(() => loadQRCodeSettings_results.pending.value);
 
 const handleLoadingQRCodeSettings_results = (data) => {
     if (!data) return;
-    backgroundGradient.value = data._QRSettings.backgroundGradient || backgroundGradient.value;
-    backgroundGradientType.value = data._QRSettings.backgroundGradientType || backgroundGradientType.value;
-    backgroundGradientAngle.value = data._QRSettings.backgroundGradientAngle || backgroundGradientAngle.value;
-    backgroundColor1.value = data._QRSettings.backgroundColor1 || backgroundColor1.value;
-    backgroundColor2.value = data._QRSettings.backgroundColor2 || backgroundColor2.value;
-    foregroundGradient.value = data._QRSettings.foregroundGradient || foregroundGradient.value;
-    foregroundGradientType.value = data._QRSettings.foregroundGradientType || foregroundGradientType.value;
-    foregroundGradientAngle.value = data._QRSettings.foregroundGradientAngle || foregroundGradientAngle.value;
-    foregroundColor1.value = data._QRSettings.foregroundColor1 || foregroundColor1.value;
-    foregroundColor2.value = data._QRSettings.foregroundColor2 || foregroundColor2.value;
-    dotImage.value = data._QRSettings.dotImage || dotImage.value;
-    randomSize.value = data._QRSettings.randomSize || randomSize.value;
-    customCorner.value = data._QRSettings.customCorner || customCorner.value;
-    cornerRingColor.value = data._QRSettings.cornerRingColor || cornerRingColor.value;
-    cornerCenterColor.value = data._QRSettings.cornerCenterColor || cornerCenterColor.value;
-    cornerRingRadius.value = data._QRSettings.cornerRingRadius || cornerRingRadius.value;
-    cornerCenterRadius.value = data._QRSettings.cornerCenterRadius || cornerCenterRadius.value;
-    withLogo.value = data._QRSettings.withLogo || withLogo.value;
-    logoPadding.value = data._QRSettings.logoPadding || logoPadding.value;
-    logoBorderRadius.value = data._QRSettings.logoBorderRadius || logoBorderRadius.value;
-    logoShadow.value = data._QRSettings.logoShadow || logoShadow.value;
-    logoShadowIntensity.value = data._QRSettings.logoShadowIntensity || logoShadowIntensity.value;
+    backgroundGradient.value = data.qrSettings?.backgroundGradient || backgroundGradient.value;
+    backgroundGradientType.value = data.qrSettings?.backgroundGradientType || backgroundGradientType.value;
+    backgroundGradientAngle.value = data.qrSettings?.backgroundGradientAngle || backgroundGradientAngle.value;
+    backgroundColor1.value = data.qrSettings?.backgroundColor1 || backgroundColor1.value;
+    backgroundColor2.value = data.qrSettings?.backgroundColor2 || backgroundColor2.value;
+    foregroundGradient.value = data.qrSettings?.foregroundGradient || foregroundGradient.value;
+    foregroundGradientType.value = data.qrSettings?.foregroundGradientType || foregroundGradientType.value;
+    foregroundGradientAngle.value = data.qrSettings?.foregroundGradientAngle || foregroundGradientAngle.value;
+    foregroundColor1.value = data.qrSettings?.foregroundColor1 || foregroundColor1.value;
+    foregroundColor2.value = data.qrSettings?.foregroundColor2 || foregroundColor2.value;
+    dotImage.value = data.qrSettings?.dotImage || dotImage.value;
+    randomSize.value = data.qrSettings?.randomSize || randomSize.value;
+    customCorner.value = data.qrSettings?.customCorner || customCorner.value;
+    cornerRingColor.value = data.qrSettings?.cornerRingColor || cornerRingColor.value;
+    cornerCenterColor.value = data.qrSettings?.cornerCenterColor || cornerCenterColor.value;
+    cornerRingRadius.value = data.qrSettings?.cornerRingRadius || cornerRingRadius.value;
+    cornerCenterRadius.value = data.qrSettings?.cornerCenterRadius || cornerCenterRadius.value;
+    withLogo.value = data.qrSettings?.withLogo || withLogo.value;
+    logoPadding.value = data.qrSettings?.logoPadding || logoPadding.value;
+    logoBorderRadius.value = data.qrSettings?.logoBorderRadius || logoBorderRadius.value;
+    logoShadow.value = data.qrSettings?.logoShadow || logoShadow.value;
+    logoShadowIntensity.value = data.qrSettings?.logoShadowIntensity || logoShadowIntensity.value;
     try {
         renderAll();
     } catch (e) {}
 };
-watch(loadQRCodeSettings_results.data, (val) => handleLoadingQRCodeSettings_results(val), { immediate: process.server || nuxtApp.isHydrating });
+handleLoadingQRCodeSettings_results(loadQRCodeSettings_results.data.value);
+watch(loadQRCodeSettings_results.data, (val) => handleLoadingQRCodeSettings_results(val));
+// watch(loadQRCodeSettings_results.data, (val) => handleLoadingQRCodeSettings_results(val), { immediate: process.server || nuxtApp.isHydrating });
 // -------------------------------------------------
 
 // getCurrentPlan -------------------------------------------------

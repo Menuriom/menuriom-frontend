@@ -36,7 +36,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
                 return true;
             })
             .catch((e) => {
-                console.log({ e });
                 return false;
             });
         if (isTokenValid) return navigateTo(localePath("/"));
