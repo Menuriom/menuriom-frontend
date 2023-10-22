@@ -14,21 +14,24 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         if (!token) return abortNavigation();
 
         const req = nuxtApp.ssrContext.event.node.req;
-        const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
 
+        delete req.headers["content-length"];
+        delete req.headers["host"];
+
+        const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
         const url = `${process.env.API_BASE_URL}/user/info`;
         const headers = { ...req.headers, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() };
 
         const user = await axios
             .get(url, { headers: headers })
             .then((response) => {
-                   user.avatar.value = response.data.avatar || "/avatar.webp";
-                   user.name.value = response.data.name;
-                   user.family.value = response.data.family;
-                   user.email.value = response.data.email;
-                   user.mobile.value = response.data.mobile;
-                   user.brands.value.list = response.data.brands;
-                   return response.data;
+                user.avatar.value = response.data.avatar || "/avatar.webp";
+                user.name.value = response.data.name;
+                user.family.value = response.data.family;
+                user.email.value = response.data.email;
+                user.mobile.value = response.data.mobile;
+                user.brands.value.list = response.data.brands;
+                return response.data;
             })
             .catch((e) => {});
 

@@ -15,8 +15,11 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         if (!token) return;
 
         const req = nuxtApp.ssrContext.event.node.req;
-        const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
+        
+        delete req.headers["content-length"];
+        delete req.headers["host"];
 
+        const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
         const url = `${process.env.API_BASE_URL}/user/info`;
         const headers = { ...req.headers, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() };
 
