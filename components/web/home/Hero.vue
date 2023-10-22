@@ -22,9 +22,9 @@
 </style>
 
 <template>
-    <div class="relative flex justify-center items-end w-full max-w-screen-4xl px-6">
+    <div class="relative flex justify-center items-end w-full max-w-screen-4xl px-2 md:px-6">
         <section
-            class="flex flex-wrap xl:flex-nowrap items-center xl:items-start justify-center xl:justify-between gap-10 w-full p-6 pt-24 lg:p-10 lg:pt-24 -mt-14 bg-neutral-50 text-bgPrimary rounded-3xl"
+            class="flex flex-wrap xl:flex-nowrap items-center xl:items-start justify-center xl:justify-between gap-10 w-full p-3 pt-20 lg:p-10 lg:pt-24 -mt-14 bg-neutral-50 text-bgPrimary rounded-3xl"
             title="The Best Way To Manage Your Restaurant Menu And Orders"
         >
             <div class="relative flex flex-col items-center xl:items-start gap-6 md:gap-10 w-full max-w-6xl bg-neutral-50 overflow-hidden">
