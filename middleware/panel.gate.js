@@ -32,7 +32,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
                 user.brands.value.list = response.data.brands;
                 return true;
             })
-            .catch((e) => false);
+            .catch((e) => {
+                console.log({ e });
+                return false;
+            });
         if (!isTokenValid) return navigateTo(localePath("/authenticate"));
     }
 
