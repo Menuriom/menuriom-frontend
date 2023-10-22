@@ -121,8 +121,8 @@ const responseMessage = ref("");
 const name = reactive({ values: { default: "" } });
 const description = reactive({ values: { default: "" } });
 const items = ref([
-    { name: { values: { default: "" } }, price: "" },
-    { name: { values: { default: "" } }, price: "" },
+    { name: { values: { default: "" } }, price: "0" },
+    { name: { values: { default: "" } }, price: "0" },
 ]);
 const maximum = ref("");
 
@@ -159,6 +159,7 @@ const save = async () => {
     for (const val in description.values) data.append(`description.${val}`, description.values[val]);
     if (maximum.value) data.append("maximum", maximum.value);
     items.value.forEach((item) => {
+        item.price = item.price || 0;
         if (item.name) data.append("items[]", JSON.stringify(item));
     });
 
@@ -174,6 +175,7 @@ const save = async () => {
                 if (typeof errors === "object") {
                     responseMessage.value = errors[0].errors[0];
                     errorField.value = errors[0].property;
+                    toast.success(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
