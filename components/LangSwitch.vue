@@ -49,6 +49,7 @@ defineProps({
 
 const { locale, locales, setLocale } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
+const i18n_redirected = useCookie("i18n_redirected");
 
 const availableLocales = computed(() => locales.value.filter((i) => i.code !== locale.value));
 
@@ -68,6 +69,7 @@ const closeDropdown = (event) => {
 
 const selectOption = (code) => {
     if (locale === code) return;
+    i18n_redirected.value = code;
     setLocale(code);
     toggleDropdown();
 };

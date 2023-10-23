@@ -382,4 +382,14 @@ const toggleSubMenu2 = (subMenuName) => {
     openSubMenus2.value.has(subMenuName) ? openSubMenus2.value.delete(subMenuName) : openSubMenus2.value.add(subMenuName);
 };
 // --------------------------
+
+onMounted(() => {
+    const links = nav.value.querySelectorAll("a");
+    links.forEach((link) => {
+        link.addEventListener("click", () => {
+            if (window.innerWidth > 768) return;
+            panelStore.sideMenuOpen = false;
+        });
+    });
+});
 </script>

@@ -805,7 +805,7 @@ const saveSettings = async () => {
         logoPadding: Number(logoPadding.value),
         logoBorderRadius: Number(logoBorderRadius.value),
         logoShadow: logoShadow.value,
-        logoShadowIntensity: logoShadowIntensity.value,
+        logoShadowIntensity: Number(logoShadowIntensity.value),
     };
 
     await axios
