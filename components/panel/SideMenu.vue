@@ -334,13 +334,13 @@ aside > div {
                     <div class="flex items-start gap-2">
                         <img class="w-11 mix-blend-exclusion" src="/pricing/pro-g.png" alt="pro" />
                         <div class="flex flex-col">
-                            <h5 class="hidden 2sm:flex text-white text-xl font-black whitespace-nowrap">{{ $t("panel.billing.Upgrade To Pro") }}</h5>
-                            <small class="hidden 2sm:flex text-xs opacity-60">{{ $t("panel.billing.Remove The Limitations") }}</small>
+                            <h5 class="flex text-white md:text-xl font-black whitespace-nowrap">{{ $t("panel.billing.Upgrade To Pro") }}</h5>
+                            <small class="flex text-xs opacity-60">{{ $t("panel.billing.Remove The Limitations") }}</small>
                         </div>
                     </div>
                     <button class="btn hidden md:flex items-center gap-2 p-2 px-4 hover:px-8 bg-fgPrimary text-bgAccent rounded-xl shadow-xl">
                         <img class="w-6 md:w-8 animate-pulse" src="~/assets/images/icons/sparkles.png" alt="" />
-                        <b class="text-base md:text-xl/none">{{ $t("panel.billing.Go Pro") }}</b>
+                        <b class="md:text-xl/none">{{ $t("panel.billing.Go Pro") }}</b>
                     </button>
                 </div>
             </nuxt-link>
