@@ -53,13 +53,14 @@ export default defineNuxtConfig({
         strategy: "prefix_except_default",
         baseUrl: process.env.BASE_URL,
         // differentDomains: true,
-        // detectBrowserLanguage: false,
-        detectBrowserLanguage: {
-            useCookie: true,
-            cookieKey: "i18n_redirected",
-            redirectOn: "root",
-            fallbackLocale: "fa",
-        },
+        detectBrowserLanguage: false,
+        // detectBrowserLanguage: {
+        //     alwaysRedirect: false,
+        //     useCookie: true,
+        //     cookieKey: "i18n_redirected",
+        //     redirectOn: "root",
+        //     fallbackLocale: "fa",
+        // },
         defaultLocale: "fa",
         defaultDirection: "rtl",
         lazy: true,
@@ -73,9 +74,6 @@ export default defineNuxtConfig({
             escapeHtml: false,
         },
         vueI18n: "./i18n.config.ts",
-        // vueI18n: {
-        //     legacy: false,
-        // },
     },
 
     modules: [

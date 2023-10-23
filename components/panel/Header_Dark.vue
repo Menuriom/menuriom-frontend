@@ -20,7 +20,7 @@ header {
     <header class="flex items-center justify-between gap-3 rounded-2xl mt-2 p-2 max-w-screen-4xl bg-bgAccent shadow-mr25 z-20">
         <div class="flex items-center gap-3 flex-grow">
             <button
-                class="toggle flex items-center justify-center w-10 h-10 hover:bg-neutral-600 rounded-lg transition-colors"
+                class="toggle flex items-center justify-center w-10 h-10 hover:bg-neutral-600 rounded-lg transition-colors shrink-0"
                 @click="panelStore.toggleSideMenu()"
                 v-if="!dontShowToggle"
             >
@@ -30,13 +30,13 @@ header {
                     <span class="h-0.5 bg-white transition-all" :class="[panelStore.sideMenuOpen ? 'w-4' : 'w-6']"></span>
                 </div>
             </button>
-            <nuxt-link class="flex items-center justify-center p-1 rounded-lg gradient" :to="localePath('/')" v-else>
+            <nuxt-link class="flex items-center justify-center p-1 rounded-lg gradient shrink-0" :to="localePath('/')" v-else>
                 <img class="relative h-7 rounded-md" src="/logos/logo9-dark.svg" title="Menuriom" alt="Menuriom" />
             </nuxt-link>
 
             <nuxt-link class="flex items-center justify-center h-7 md:h-9 overflow-hidden group" :to="localePath('/')">
-                <img class="h-5 md:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
-                <img class="h-5 md:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
+                <img class="h-4 md:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
+                <img class="h-4 md:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
             </nuxt-link>
         </div>
         <div class="flex items-center gap-3 shrink-0">

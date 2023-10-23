@@ -44,7 +44,6 @@ main {
 </template>
 
 <script setup>
-import Header from "~/components/panel/Header.vue";
 import Header_Dark from "~/components/panel/Header_Dark.vue";
 import Blob from "~/components/web/Blob.vue";
 const SideMenu = defineAsyncComponent(() => import("~/components/panel/SideMenu.vue"));
