@@ -673,6 +673,10 @@ export default {
                 "Any unpaid renewal bill for your current plan will be canceled upon successful plan change",
             "because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade":
                 "because less than 5 days of your current plan remaining, you need to pay the whole price of the plan to upgrade",
+
+            "Upgrade To Pro": "Upgrade To Pro",
+            "Remove The Limitations": "Remove The Limitations",
+            "Go Pro": "Go Pro",
         },
 
         payment: {

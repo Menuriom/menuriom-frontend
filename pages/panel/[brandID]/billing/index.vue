@@ -22,16 +22,19 @@
 
 <template>
     <div class="flex flex-col gap-6 w-full">
-        <nuxt-link to="#" class="relative flex flex-col w-full p-2 bg-black bg-opacity-60 rounded-2xl shadow-nr25 overflow-hidden" name="Banner">
+        <button
+            class="btn relative flex flex-col items-center w-full p-3 bg-black bg-opacity-60 border-2 border-bgSecondary rounded-2xl shadow-nr25 overflow-hidden"
+            name="Banner"
+            @click="panelStore.openPopUp('change-plan-dialog')"
+        >
             <span class="absolute end-1/2 -top-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute end-18 -bottom-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute start-1/4 -bottom-14 -rotate-45 -ms-10 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute start-1/4 -bottom-20 -rotate-12 gradient-re w-24 h-24 rounded-2xl"></span>
             <div class="relative flex flex-col items-center justify-between gap-2">
-                <!-- TODO -->
-                <h5 class="hidden 2sm:flex gradient-text text-3xl font-black">Upgrade To Pro</h5>
+                <h5 class="hidden 2sm:flex gradient-text text-3xl font-black">{{ $t("panel.billing.Upgrade To Pro") }}</h5>
             </div>
-        </nuxt-link>
+        </button>
 
         <section class="flex flex-col gap-4 w-full" name="Billing Info">
             <header class="flex items-center gap-2">

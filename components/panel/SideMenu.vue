@@ -1,7 +1,7 @@
 <style scoped>
 aside {
     width: calc(275px + 0.5rem);
-    height: calc(100% - 1rem);
+    height: calc(100% - 0.25rem);
     padding-block: 0.5rem;
     padding-inline-start: 0.5rem;
     transition: all 0.2s ease-in-out;
@@ -101,8 +101,6 @@ aside > div {
                 </nuxt-link>
             </div>
 
-            <hr class="w-full opacity-20" />
-
             <nav
                 class="flex flex-col items-center gap-2 pe-1 w-full max-h-full overflow-y-auto overflow-x-hidden grow text-sm"
                 ref="nav"
@@ -191,17 +189,18 @@ aside > div {
                                     <span>{{ $t("panel.side-menu.Style Editor") }}</span>
                                 </li>
                             </nuxt-link>
-                            <nuxt-link
-                                class="link"
-                                :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/qr-code`)"
-                                v-if="checkPermissions(['main-panel.menu.qr-code'], brand)"
-                            >
-                                <li class="flex items-center gap-3">
-                                    <span>{{ $t("panel.side-menu.QR Code") }}</span>
-                                </li>
-                            </nuxt-link>
                         </ul>
                     </div>
+                    <nuxt-link
+                        class="link"
+                        :to="localePath(`/panel/${panelStore.selectedBrandId}/menu/qr-code`)"
+                        v-if="checkPermissions(['main-panel.menu.qr-code'], brand)"
+                    >
+                        <li class="flex items-center gap-3">
+                            <Icon class="w-5 h-5 gradient" name="qrcode.svg" folder="icons/duo" size="20px" />
+                            <span>{{ $t("panel.side-menu.QR Code") }}</span>
+                        </li>
+                    </nuxt-link>
                     <button
                         class="link"
                         :class="{ toggler_active: openSubMenus2.has('staff') }"
@@ -257,6 +256,32 @@ aside > div {
                             </nuxt-link>
                         </ul>
                     </div>
+                </ul>
+                <hr class="w-full opacity-20 mx-4" />
+                <ul class="flex flex-col gap-2 w-full">
+                    <nuxt-link
+                        class="link"
+                        :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)"
+                        v-if="checkPermissions(['main-panel.billing'], brand)"
+                    >
+                        <li class="flex items-center gap-3">
+                            <Icon class="w-5 h-5 gradient" name="money-bills.svg" folder="icons/duo" size="20px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="money-bills.svg" folder="icons/light" size="22px" /> -->
+                            <!-- <img class="w-5" src="~/assets/images/panel-icons/money-bills-light.png" alt="" /> -->
+                            <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
+                        </li>
+                    </nuxt-link>
+                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
+                        <li class="flex items-center gap-3">
+                            <Icon class="w-5 h-5 gradient" name="message-question.svg" folder="icons/duo" size="20px" />
+                            <!-- <Icon class="w-6 h-6 gradient" name="message-question-light.svg" folder="icons/light" size="22px" /> -->
+                            <!-- <img class="w-5" src="~/assets/images/panel-icons/message-question-light.png" alt="" /> -->
+                            <span>{{ $t("panel.side-menu.Support") }}</span>
+                        </li>
+                    </nuxt-link>
+                </ul>
+                <hr class="w-full opacity-20 mx-4" />
+                <ul class="flex flex-col gap-2 w-full">
                     <button
                         class="link"
                         :class="{ toggler_active: openSubMenus2.has('settings') }"
@@ -296,52 +321,29 @@ aside > div {
                         </ul>
                     </div>
                 </ul>
-                <hr class="w-full opacity-20 mx-4" />
-                <ul class="flex flex-col gap-2 w-full">
-                    <nuxt-link
-                        class="link"
-                        :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)"
-                        v-if="checkPermissions(['main-panel.billing'], brand)"
-                    >
-                        <li class="flex items-center gap-3">
-                            <Icon class="w-5 h-5 gradient" name="money-bills.svg" folder="icons/duo" size="20px" />
-                            <!-- <Icon class="w-6 h-6 gradient" name="money-bills.svg" folder="icons/light" size="22px" /> -->
-                            <!-- <img class="w-5" src="~/assets/images/panel-icons/money-bills-light.png" alt="" /> -->
-                            <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
-                        </li>
-                    </nuxt-link>
-                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
-                        <li class="flex items-center gap-3">
-                            <Icon class="w-5 h-5 gradient" name="message-question.svg" folder="icons/duo" size="20px" />
-                            <!-- <Icon class="w-6 h-6 gradient" name="message-question-light.svg" folder="icons/light" size="22px" /> -->
-                            <!-- <img class="w-5" src="~/assets/images/panel-icons/message-question-light.png" alt="" /> -->
-                            <span>{{ $t("panel.side-menu.Support") }}</span>
-                        </li>
-                    </nuxt-link>
-                </ul>
             </nav>
 
-            <div class="relative flex flex-col items-center p-2 md:p-4 bg-bgPrimary rounded-xl shadow-inner overflow-hidden shrink-0">
+            <nuxt-link
+                class="relative flex flex-col items-center p-2 md:p-4 bg-bgPrimary rounded-xl shadow-inner overflow-hidden shrink-0"
+                :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)"
+            >
                 <span class="absolute end-1/2 -top-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
                 <span class="absolute end-10 -bottom-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
                 <span class="absolute -end-4 -bottom-14 -rotate-45 gradient-re w-24 h-24 rounded-2xl"></span>
-                <div class="relative flex flex-col items-center justify-between gap-4">
+                <div class="relative flex flex-col items-center justify-between gap-2 md:gap-4">
                     <div class="flex items-start gap-2">
                         <img class="w-11 mix-blend-exclusion" src="/pricing/pro-g.png" alt="pro" />
                         <div class="flex flex-col">
-                            <h5 class="hidden 2sm:flex gradient-text text-xl font-black whitespace-nowrap">Upgrade To Pro</h5>
-                            <small class="hidden 2sm:flex text-xs opacity-60">Remove The Limitations</small>
+                            <h5 class="hidden 2sm:flex text-white text-xl font-black whitespace-nowrap">{{ $t("panel.billing.Upgrade To Pro") }}</h5>
+                            <small class="hidden 2sm:flex text-xs opacity-60">{{ $t("panel.billing.Remove The Limitations") }}</small>
                         </div>
                     </div>
-                    <nuxt-link
-                        class="btn flex items-center gap-2 p-1 px-4 hover:px-8 bg-fgPrimary text-bgAccent rounded-xl shadow-xl"
-                        :to="localePath('/panel/billing/upgrade')"
-                    >
-                        <img class="w-8 md:w-10 animate-pulse" src="~/assets/images/icons/sparkles.png" alt="" />
-                        <b class="text-xl/none">Go Pro</b>
-                    </nuxt-link>
+                    <button class="btn hidden md:flex items-center gap-2 p-2 px-4 hover:px-8 bg-fgPrimary text-bgAccent rounded-xl shadow-xl">
+                        <img class="w-6 md:w-8 animate-pulse" src="~/assets/images/icons/sparkles.png" alt="" />
+                        <b class="text-base md:text-xl/none">{{ $t("panel.billing.Go Pro") }}</b>
+                    </button>
                 </div>
-            </div>
+            </nuxt-link>
         </div>
     </aside>
 </template>

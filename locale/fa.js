@@ -672,6 +672,10 @@ export default {
                 "درصورت تفییر موفق اشتراک، هرگونه صورتحساب تمدید پلن کنونی شما لغو خواهد شد",
             "because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade":
                 "به این علت که کمتر از 5 روز از اشتراک کنونی شما مانده، برای ارتقا باید کل قیمت اشتراک جدید را پرداخت کنید",
+
+            "Upgrade To Pro": "اشتراک حرفه ای",
+            "Remove The Limitations": "بدون محدودیت",
+            "Go Pro": "ارتقا پلن",
         },
 
         payment: {
