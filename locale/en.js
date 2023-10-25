@@ -101,6 +101,11 @@ export default {
         copyright: "All rights reserved.",
     },
 
+    home: {
+        "Managing a restaurant hasnt been easier": "Managing a restaurant hasn't been easier",
+        "The Best Way To Manage Your Restaurant Menu And Orders": "The Best Way To Manage Your Restaurant Menu And Orders",
+    },
+
     pricing: {
         Pricing: "Pricing",
         PRICING: "PRICING",

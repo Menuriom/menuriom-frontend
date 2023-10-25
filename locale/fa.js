@@ -101,6 +101,11 @@ export default {
         copyright: "کلیه حقوق مادی و معنوی این وبسایت متعلق به گروه منوریوم است.",
     },
 
+    home: {
+        "Managing a restaurant hasnt been easier": "مدیریت یک رستوران ساده تر از این نمیشه",
+        "The Best Way To Manage Your Restaurant Menu And Orders": "بهترین انتخاب برای مدیریت منو و سفارشات رستوران شما",
+    },
+
     pricing: {
         Pricing: "تعرفه ها",
         PRICING: "تعرفه ها",

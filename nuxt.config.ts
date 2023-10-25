@@ -1,3 +1,5 @@
+const cacheAge = 60 * 60 * 24 * 365; // 1 year
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     app: {
@@ -47,6 +49,12 @@ export default defineNuxtConfig({
 
     nitro: {
         compressPublicAssets: true,
+        routeRules: {
+            "/**": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/icons/**": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/patterns/**": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/_nuxt/**": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+        },
     },
 
     i18n: {
@@ -76,10 +84,15 @@ export default defineNuxtConfig({
         vueI18n: "./i18n.config.ts",
     },
 
+    image: {
+        format: ["webp"],
+    },
+
     modules: [
         // ...
         "@nuxtjs/tailwindcss",
-        "@pinia/nuxt",
         "@nuxtjs/i18n",
+        "@nuxt/image",
+        "@pinia/nuxt",
     ],
 });

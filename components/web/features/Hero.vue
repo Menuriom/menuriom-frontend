@@ -7,11 +7,9 @@
 
 <template>
     <section
-        class="wrapper relative flex items-center justify-evenly gap-4 w-screen max-w-screen-2xl rounded-xl bg-pencil-tip text-white p-4 md:p-8 lg:p-16 shadow-nr25"
+        class="wrapper relative flex items-center justify-evenly gap-4 w-screen max-w-screen-2xl rounded-3xl bg-pencil-tip text-white p-4 md:p-8 lg:p-16 shadow-nr25"
     >
-        <Blob class="absolute start-0 -top-16" width="350px" height="350px" />
-        <Blob class="absolute end-20 -bottom-44 opacity-40 md:opacity-100" />
-        <div class="absolute top-36 lg:top-auto -start-20 md:start-10 hidden md:grid grid-cols-2 gap-10 w-96">
+        <div class="absolute top-36 lg:top-auto scale-75 md:scale-100 -start-20 md:start-10 grid grid-cols-2 gap-10 w-96">
             <span class="absolute -top-16 rotate-12 gradient-re flex items-center justify-center p-1 rounded-xl">
                 <div class="flex items-center justify-center p-4 bg-pencil-tip rounded-lg">
                     <img class="w-10 h-10 object-contain" src="/gradient-icons/light/object-intersect.png" alt="combo" />
@@ -33,14 +31,11 @@
                 </div>
             </span>
         </div>
-        <div
-            class="relative flex flex-col items-center gap-4 w-full max-w-xl rounded-lg py-6 my-8 bg-pencil-tip bg-opacity-30 backdrop-blur-sm z-2 shrink-0"
-        >
-            <img class="w-20 mb-4" src="~/assets/images/icons/gold-card.png" alt="features" />
+        <div class="relative flex flex-col items-center gap-4 w-full max-w-xl rounded-lg py-6 my-8 bg-pencil-tip bg-opacity-30 backdrop-blur-sm z-2 shrink-0">
             <h1 class="f-inter text-6xl font-extrabold text-center">Core Features</h1>
             <h2 class="text-3xl text-center opacity-60">Get familiar with Menutiom features</h2>
         </div>
-        <div class="absolute top-36 lg:top-auto -end-20 md:end-10 hidden md:grid grid-cols-2 gap-10 w-96">
+        <div class="absolute top-36 lg:top-auto scale-75 md:scale-100 -end-20 md:end-10 grid grid-cols-2 gap-10 w-96">
             <span class="absolute -top-32 end-64 rotate-12 gradient-re flex items-center justify-center p-1 rounded-xl">
                 <div class="flex items-center justify-center p-4 bg-pencil-tip rounded-lg">
                     <img class="w-10 h-10 object-contain" src="/gradient-icons/light/earth-america.png" alt="Translation" />

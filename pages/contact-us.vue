@@ -18,7 +18,7 @@
 </style>
 
 <template>
-    <div class="relative flex flex-wrap items-start justify-center gap-10 w-full my-12">
+    <div class="relative flex flex-wrap items-start justify-center gap-10 w-full mt-8 md:my-12">
         <section class="relative flex flex-col gap-6 w-full max-w-4xl p-6 md:p-10 bg-bgAccent rounded-3xl shadow-mr5 grow isolate">
             <div class="bar absolute h-24 rounded-2xl bg-gradient-to-r from-primary to-secondary shadow-mr25"></div>
             <header class="flex flex-col gap-2 w-full p-4 md:p-6 rounded-2xl bg-bgSecondary bg-opacity-75 backdrop-blur-lg isolate">

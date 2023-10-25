@@ -22,7 +22,7 @@
 </style>
 
 <template>
-    <div class="relative flex justify-center items-end w-full max-w-screen-4xl px-2 md:px-6">
+    <div class="relative flex justify-center items-end w-full max-w-screen-4xl px-2 md:px-6 mt-16 md:mt-0">
         <section
             class="flex flex-wrap xl:flex-nowrap items-center xl:items-start justify-center xl:justify-between gap-10 w-full p-3 pt-20 lg:p-10 lg:pt-24 -mt-14 bg-neutral-50 text-bgPrimary rounded-3xl"
             title="The Best Way To Manage Your Restaurant Menu And Orders"
@@ -30,11 +30,11 @@
             <div class="relative flex flex-col items-center xl:items-start gap-6 md:gap-10 w-full max-w-6xl bg-neutral-50 overflow-hidden">
                 <div class="bar absolute w-full h-16 md:h-24 rounded-xl bg-gradient-to-r from-secondary to-primary opacity-90 shadow-mr25"></div>
                 <div class="flex items-baseline gap-4 w-full lg:-mb-4">
-                    <span class="text-xs xl:text-sm text-center">Managing a restaurant hasn't been easier.</span>
+                    <span class="text-xs xl:text-sm text-center">{{ $t("home.Managing a restaurant hasnt been easier") }}.</span>
                     <span class="flex bg-bgSecondary bg-opacity-50 h-0.5 grow"></span>
                 </div>
                 <h1 class="big-text flex flex-col items-center xl:items-start text-4xl/tight sm:text-5xl/tight md:text-7xl/tight font-extrabold">
-                    The Best Way To Manage Your Restaurant Menu And Orders
+                    {{ $t("home.The Best Way To Manage Your Restaurant Menu And Orders") }}
                 </h1>
                 <div class="relative flex flex-col gap-6 bg-bgPrimary text-fgPrimary rounded-2xl p-8 shadow-mr15 isolate">
                     <div class="absolute inset-0 -z-10 pattern opacity-20"></div>
