@@ -163,6 +163,10 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
 .fade-leave-active { transition: all 0.2s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
+.fade-slow-enter-active { transition: all 1s ease; }
+.fade-slow-leave-active { transition: all 1s ease; }
+.fade-slow-enter-from, .fade-slow-leave-to { opacity: 0; }
+
 /* ===================================================================== */
 .dropdown-box {
     display: grid;

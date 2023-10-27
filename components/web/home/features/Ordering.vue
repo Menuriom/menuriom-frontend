@@ -1,8 +1,8 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col items-start gap-4 p-4 sm:p-8 w-full sm:w-96 rounded-xl border-2 border-zinc-100 bg-white shadow-nr10">
-        <div class="flex flex-col items-start">
+    <div class="flex flex-col items-start gap-4 p-4 sm:p-8 w-80 sm:w-96 rounded-3xl border-2 border-zinc-100 bg-white shadow-nr10" dir="ltr">
+        <div class="flex flex-col items-start text-black">
             <b class="f-inter text-xl font-bold">Your Order</b>
             <span class="text-sm opacity-70">3 Items</span>
         </div>

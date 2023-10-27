@@ -104,6 +104,34 @@ export default {
     home: {
         "Managing a restaurant hasnt been easier": "Managing a restaurant hasn't been easier",
         "The Best Way To Manage Your Restaurant Menu And Orders": "The Best Way To Manage Your Restaurant Menu And Orders",
+        "Check The Demo": "Check The Demo",
+        "Any good restaurant needs a good menu": "Any good restaurant needs a good menu",
+        "With Menuriom build and manage your restaurant menu with ease": "With Menuriom build and manage your restaurant menu with ease",
+        "Try It For Free": "Try It For Free",
+        "Head To Dashboard": "Head To Dashboard",
+        "Check The Demo": "Check The Demo",
+        "Learn How It Works": "Learn How It Works",
+        Multilingual: "Multilingual",
+        "Ordering System": "Ordering System",
+        Customizable: "Customizable",
+        "User Friendly Interface": "User Friendly Interface",
+
+        "Create a highly versatile online menu and lower your restaurant costs": "Create a highly versatile online menu and lower your restaurant costs",
+        FeatureDescription:
+            "By using an online menu system you can organize your products better and change any item details quickly and easily, have a different menu for different languages, and tailor your menu however you see fit",
+
+        "Highlight Specific Items In Your Menu": "Highlight Specific Items In Your Menu",
+        "maybe you have a new item on your menu": "maybe you have a new item on your menu",
+        "maybe an item is sold out for the day, or you just want to add an item as a special one":
+            "maybe an item is sold out for the day, or you just want to add an item as a special one",
+        "you can highlight items with special tags and even put discounts on some of your products":
+            "you can highlight items with special tags and even put discounts on some of your products",
+        "Build Different Menu For Your Branches": "Build Different Menu For Your Branches",
+        branchFeatureDesc:
+            "create your menu specific to your branch, whether it's smaller or larger or you don't serve specific items in some of your branches, you can easily tailor your menus based on your specific needs",
+        "Get Orders From Your Customers With Your Menu": "Get Orders From Your Customers With Your Menu",
+        orderFeatureDesc:
+            "still using pen and paper to take orders? your customers can easily pick their orders from the menu and you get notified what table ordered what",
     },
 
     pricing: {

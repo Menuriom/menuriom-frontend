@@ -104,6 +104,33 @@ export default {
     home: {
         "Managing a restaurant hasnt been easier": "مدیریت یک رستوران ساده تر از این نمیشه",
         "The Best Way To Manage Your Restaurant Menu And Orders": "بهترین انتخاب برای مدیریت منو و سفارشات رستوران شما",
+        "Check The Demo": "مشاهده منوی دمو",
+        "Any good restaurant needs a good menu": "هر رستوران خوب به یه منوی خوب نیاز داره",
+        "With Menuriom build and manage your restaurant menu with ease": "با منوریوم منوی رستوران خودتون رو به راحتی بسازید و مدیریت کنید",
+        "Try It For Free": "رایگان امتحان کن",
+        "Head To Dashboard": "ورود به داشبورد",
+        "Learn How It Works": "آموزش نحوه کارکرد",
+        Multilingual: "چندزبانه",
+        "Ordering System": "سیستم سفارشات",
+        Customizable: "قابل شخصی سازی",
+        "User Friendly Interface": "ظاهر ساده و کاربرپسند",
+
+        "Create a highly versatile online menu and lower your restaurant costs": "با ساخت یک منوی همه کاره، هزینه های رستوران خود را کاهش دهید",
+        FeatureDescription:
+            "با استفاده از یک منوی انلاین شما میتوانید محصولات خودتون رو بهتر مدیریت کنید و تغییرات منو رو به سادگی و سرعت اعمال کنید، میتوانید منوی های مختلف برای زبان های مختلف داشته باشید و منوی رستوران خود را به هر شکلی که دوست دارید بسازید",
+
+        "Highlight Specific Items In Your Menu": "هایلایت کردن بعضی از ایتم ها در منو",
+        "maybe you have a new item on your menu": "شاید یه ایتم جدید به منوی خود اضافه کردید",
+        "maybe an item is sold out for the day, or you just want to add an item as a special one":
+            "یا شاید یکی از ایتم ها تموم شده، یا شاید بعضی از ایتم ها در روز های خاصی از هفته موجود هستند",
+        "you can highlight items with special tags and even put discounts on some of your products":
+            "با اضافه کردن تگ های خاص، ایتم های منوی خودتون رو هایلایت کنید تا بهتر دیده بشوند",
+        "Build Different Menu For Your Branches": "برای هر شعبه منوی متفاوت بسازید",
+        branchFeatureDesc:
+            "منوی خودتون رو بسته به نیاز هر شعبه بسازید، اگر ایتم های خاصی برای شعبه های مختلف دارید یا بعضی شعبه هاتون کوچکتر یا بزرگتر هستند. میتوانید منوی خودتون رو بسته به نیاز تغییر دهید",
+        "Get Orders From Your Customers With Your Menu": "سفارشات مشتری را از طریق منو دریافت کنید",
+        orderFeatureDesc:
+            "هنوز با کاغذ مداد سفارش میگیرید؟ مشتریان شما به راحتی میتونند از طریق منو سفارش خودشون رو ثبت کنند و شما به راحتی متوجه میشید چه میزی چه چیزی سفارش داده",
     },
 
     pricing: {

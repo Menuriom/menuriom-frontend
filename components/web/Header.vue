@@ -1,6 +1,6 @@
 <style scoped>
 header {
-    width: calc(100vw - 1rem);
+    width: calc(100vw - 1.75rem);
     backdrop-filter: blur(8px);
 }
 
