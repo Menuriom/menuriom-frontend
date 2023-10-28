@@ -40,7 +40,7 @@
             <div class="relative flex flex-col items-center 1.5xl:items-start gap-6 md:gap-10 w-full max-w-6xl bg-neutral-5000 isolate">
                 <div
                     class="bar absolute w-full h-16 md:h-24 rounded-xl bg-gradient-to-r from-secondary to-primary opacity-50"
-                    :class="[localeProperties.dir == 'rtl' ? 'rotate-[10deg] top-[4%]' : 'rotate-[-10deg] top-[34%]']"
+                    :class="[localeProperties.dir == 'rtl' ? 'rotate-[8deg] top-[8%]' : 'rotate-[-8deg] top-[29%]']"
                 ></div>
                 <div class="flex items-baseline gap-4 w-full lg:-mb-4">
                     <span class="text-xs xl:text-sm text-center">{{ $t("home.Managing a restaurant hasnt been easier") }}.</span>
@@ -50,7 +50,7 @@
                     {{ $t("home.The Best Way To Manage Your Restaurant Menu And Orders") }}
                 </h1>
                 <div class="relative flex flex-col gap-6 w-full max-w-5xl bg-bgPrimary bg-opacity-70 text-fgPrimary rounded-2xl p-6 sm:p-8 shadow-mr15 isolate">
-                    <!-- <div class="absolute inset-0 -z-10 pattern opacity-10"></div> -->
+                    <div class="absolute inset-0 -z-10 pattern opacity-5"></div>
                     <p class="text-center sm:text-start text-2xl md:text-3xl/relaxed opacity-90">
                         {{ $t("home.Any good restaurant needs a good menu") }}
                         <br />

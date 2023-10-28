@@ -132,11 +132,41 @@ export default {
         "Get Orders From Your Customers With Your Menu": "Get Orders From Your Customers With Your Menu",
         orderFeatureDesc:
             "still using pen and paper to take orders? your customers can easily pick their orders from the menu and you get notified what table ordered what",
+        "Get Feedback On Your Services And Products": "Get Feedback On Your Services And Products",
+        "find out what your customers think about your products and put aside the guessing work":
+            "find out what your customers think about your products and put aside the guessing work",
+
+        FEATURES: "FEATURES",
+        "We are constantly growing and adding new features": "We are constantly growing and adding new features",
+        "Easy To Use": "Easy To Use",
+        Uptime: "Uptime",
+        "User Friendly": "User Friendly",
+        Multilingual: "Multilingual",
+        "Fully Customizable": "Fully Customizable",
+        "Works On Any Device": "Works On Any Device",
+        "Multiple Branches": "Multiple Branches",
+        "Customer Feedback": "Customer Feedback",
+        "with couple of clicks you can build and manage your menus, branches and orders with ease":
+            "with couple of clicks you can build and manage your menus, branches and orders with ease",
+        "we can guarantee your menus are available at anytime": "we can guarantee your menus are available at anytime",
+        "our templates are as easy to use as possible so your customers find what they want easily":
+            "our templates are as easy to use as possible so your customers find what they want easily",
+        "your servers doesn't need to explain the menu to a foreign guest anymore": "your servers doesn't need to explain the menu to a foreign guest anymore",
+        "You can customize your menu based on your restaurant theme, and with your brand logo":
+            "You can customize your menu based on your restaurant theme, and with your brand logo",
+        "our system is web-based so you can manage your menu and get orders on any device":
+            "our system is web-based so you can manage your menu and get orders on any device",
+        "you can have different menus for every branch and tailor your menus for a specific branch":
+            "you can have different menus for every branch and tailor your menus for a specific branch",
+        "your customers can like any food on your menu and leave a feedback to you to see":
+            "your customers can like any food on your menu and leave a feedback to you to see",
     },
 
     pricing: {
         Pricing: "Pricing",
         PRICING: "PRICING",
+        "Start creating instantly": "Start creating instantly",
+        "Start free": "Start free",
         PricingSlogan: "No matter the size of your business, we got you covered!",
         PricingSubText: "Start creating instantly. Start free.",
 
@@ -152,8 +182,10 @@ export default {
         "Get Started": "Get Started",
 
         "Compare Plans": "Compare Plans",
+        "Compare the plans": "Compare the plans",
         "Overview of what is included in our different plans": "Overview of what is included in our different plans",
         OFF: "OFF",
+        Off: "Off",
     },
 
     "contact-us": {

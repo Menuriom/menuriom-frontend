@@ -131,11 +131,41 @@ export default {
         "Get Orders From Your Customers With Your Menu": "سفارشات مشتری را از طریق منو دریافت کنید",
         orderFeatureDesc:
             "هنوز با کاغذ مداد سفارش میگیرید؟ مشتریان شما به راحتی میتونند از طریق منو سفارش خودشون رو ثبت کنند و شما به راحتی متوجه میشید چه میزی چه چیزی سفارش داده",
+        "Get Feedback On Your Services And Products": "در خصوص محصولات و سرویس هاتون بازخورد بگیرید",
+        "find out what your customers think about your products and put aside the guessing work":
+            "نظر مشتریان خودتون رو نسبت به محصولاتتون بدونید و آمار کامل و دقیقی برای محبوبیت و فروش محصولاتتون داشته باشید",
+
+        FEATURES: "قابلیت ها",
+        "We are constantly growing and adding new features": "ما به طور مداول در حال بهبود و افزودن ویژگی های جدید هستیم",
+        "Easy To Use": "راحتی در استفاده",
+        Uptime: "در دسترس",
+        "User Friendly": "کاربر پسند",
+        Multilingual: "چند زبانه",
+        "Fully Customizable": "کاملا قابل شخصی سازی",
+        "Works On Any Device": "قابل اجرا بر روی همه دستگاه ها",
+        "Multiple Branches": "امکان ایجاد چند شعبه",
+        "Customer Feedback": "بازخورد مشتری",
+        "with couple of clicks you can build and manage your menus, branches and orders with ease":
+            "با چند کلیک ساده به راحتی میتونید منو، شعبه ها و سفارشات خودتون رو مدیریت کنید",
+        "we can guarantee your menus are available at anytime": "ما به شما تضمین میکنیم که در هر لحظه از شبانه روز، منوی شما در دسترس باشه",
+        "our templates are as easy to use as possible so your customers find what they want easily":
+            "قالب و ساختار منو های ما ساده و اصولیست به طوری که مشتریان شما به راحتی بتونند از سرویس های شما استفاده کنند",
+        "your servers doesn't need to explain the menu to a foreign guest anymore": "دیگه نیازی نیست که ایتم های منوتون رو به مشتریان خارجی خود شرح دهید",
+        "You can customize your menu based on your restaurant theme, and with your brand logo":
+            "شما میتونید منوتون رو بسته به قالب ظاهری رستوران و لوگوی برندتون شخصی سازی کنید",
+        "our system is web-based so you can manage your menu and get orders on any device":
+            "سیستم ما کامل تحت وب و قابل دسترس از طریق هر دستگاه متصل به اینترنت است",
+        "you can have different menus for every branch and tailor your menus for a specific branch":
+            "شما میتونید منوی متفاوت برای هز شعبه از رستوران خود داشته باشید و بسته به هر شعبه منوتون رو تغییر بدید",
+        "your customers can like any food on your menu and leave a feedback to you to see":
+            "مشتریان شما میتونند برای ایتم های منو نظر ثبت کنن و یا ایتم ها رو به لیست علاقه مندی اضافه کنند",
     },
 
     pricing: {
         Pricing: "تعرفه ها",
         PRICING: "تعرفه ها",
+        "Start creating instantly": "الان شروع کنید",
+        "Start free": "رایگان شروع کنید",
         PricingSlogan: "هر رستوران با هر اندازه ای که دارید، میتونید رو ما حساب کنید!",
         PricingSubText: "رایگان شروع کنید. رایگان بسازید.",
 
@@ -151,8 +181,10 @@ export default {
         "Get Started": "شروع کنید",
 
         "Compare Plans": "مقایسه پلن ها",
+        "Compare the plans": "مقایسه تعرفه ها",
         "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
         OFF: "تخفیف",
+        Off: "تخفیف",
     },
 
     "contact-us": {

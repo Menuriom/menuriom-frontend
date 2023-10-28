@@ -3,6 +3,7 @@
 <template>
     <section class="relative flex flex-col gap-24 lg:gap-16 items-center w-screen max-w-screen-2xl rounded-lg p-6" title="Features">
         <div class="relative flex flex-col gap-6 max-w-4xl z-2">
+            <img class="absolute -top-14 md:-top-20 opacity-40 mix-blend-multiply" src="~/assets/images/line-wave.svg" alt="" />
             <h2 class="f-inter text-4xl/tight sm:text-5xl/tight font-bold text-center">
                 {{ $t("home.Create a highly versatile online menu and lower your restaurant costs") }}
             </h2>
@@ -62,8 +63,8 @@
                 <div class="flex flex-col items-start gap-6 max-w-xl rounded-3xl">
                     <hr class="hidden lg:flex w-full h-1 mb-2 bg-primary border-none" />
                     <img class="h-10" src="~/assets/images/custom-icons/light/comments-question-check.png" alt="comments-question-check" />
-                    <h3 class="f-inter text-4xl/snug font-bold">Get Feedback On Your Services And Products</h3>
-                    <p class="text-lg opacity-75">find out what your customers think about your products and put aside the guessing work</p>
+                    <h3 class="f-inter text-4xl/snug font-bold">{{ $t("home.Get Feedback On Your Services And Products") }}</h3>
+                    <p class="text-lg opacity-75">{{ $t("home.find out what your customers think about your products and put aside the guessing work") }}</p>
                 </div>
                 <span class="hidden lg:inline-block lg:w-24"></span>
             </div>

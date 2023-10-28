@@ -23,8 +23,8 @@
     "googleapis": "^114.0.0",
     "h3": "^1.8.2",
     "maska": "^2.1.8",
+    "nuxt-swiper": "^1.2.2",
     "pinia": "^2.1.6",
-    "swiper": "^9.1.1",
     "vue-toastification": "^2.0.0-rc.5",
     "vuedraggable": "^4.1.0"
   }
