@@ -94,7 +94,7 @@
                     >
                         <span class="absolute inset-0 bg-secondary scale-0 group-hover:scale-100 rounded-xl transition-all -z-10"></span>
                         <Icon class="w-5 h-5 bg-fgPrimary group-hover:bg-bgSecondary" name="envelop.svg" folder="icons" size="20px" />
-                        <span class="text-fgPrimary group-hover:text-bgSecondary">Menuriom@gmail.com</span>
+                        <span class="text-fgPrimary group-hover:text-bgSecondary">Info@Menuriom.com</span>
                     </a>
                 </div>
             </div>
@@ -107,7 +107,9 @@
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/faqs')">{{ $t("footer.Faqs") }}</nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
-                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" to="http://localhost:3002">{{ $t("footer.Demo") }}</nuxt-link>
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="`${runtimeConfig.public.MENU_BASE_URL}/Menuriom`">
+                            {{ $t("footer.Demo") }}
+                        </nuxt-link>
                     </li>
                 </ul>
                 <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
@@ -122,7 +124,7 @@
                         </nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
-                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" to="http://localhost:3003/welcome-to-help-center">
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" to="#">
                             {{ $t("footer.Help Center") }}
                         </nuxt-link>
                     </li>
@@ -153,6 +155,7 @@
 <script setup>
 import LangSwitch from "~/components/LangSwitch.vue";
 
+const runtimeConfig = useRuntimeConfig();
 const localePath = useLocalePath();
 const { locale } = useI18n();
 

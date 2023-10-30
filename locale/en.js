@@ -12,6 +12,7 @@ export default {
     "SOLD OUT": "SOLD OUT",
     New: "New",
     "Coming soon": "Coming soon",
+    Unlimited: "Unlimited",
 
     auth: {
         welcome: "Welcome to Menuriom",
@@ -151,7 +152,7 @@ export default {
         "we can guarantee your menus are available at anytime": "we can guarantee your menus are available at anytime",
         "our templates are as easy to use as possible so your customers find what they want easily":
             "our templates are as easy to use as possible so your customers find what they want easily",
-        "your servers doesn't need to explain the menu to a foreign guest anymore": "your servers doesn't need to explain the menu to a foreign guest anymore",
+        "your servers doesnt need to explain the menu to a foreign guest anymore": "your servers doesn't need to explain the menu to a foreign guest anymore",
         "You can customize your menu based on your restaurant theme, and with your brand logo":
             "You can customize your menu based on your restaurant theme, and with your brand logo",
         "our system is web-based so you can manage your menu and get orders on any device":
@@ -200,6 +201,15 @@ export default {
         "Check out our FAQ": "Check out our FAQ",
         "Send Us An Email": "Send Us An Email",
         "Follow Us": "Follow Us",
+
+        "Im contacting for": "I'm contacting for",
+        "Choose your subject to contact": "Choose your subject to contact",
+        "Request New Feature": "Request New Feature",
+        "Reporting An Issue": "Reporting An Issue",
+        Sales: "Sales",
+
+        successSendMessage: "Thank you for contacting us. we will get back to you as soon as possible.",
+        retryLaterMessage: "We got your message, if you want to send a new message please wait a bit and retry again.",
     },
 
     faqs: {

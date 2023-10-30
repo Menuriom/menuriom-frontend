@@ -19,7 +19,7 @@
                             <Icon class="relative w-16 h-16 bg-fgPrimary" :name="item.icon" folder="icons/basil" size="64px" />
                         </div>
                     </div>
-                    <h3 class="gradient-text f-inter text-3xl/normal font-extrabold text-center">{{ item.title }}</h3>
+                    <h3 class="gradient-text f-inter text-2xl/normal font-extrabold text-center">{{ item.title }}</h3>
                     <p class="text-sm/relaxed text-fgPrimary text-center opacity-90">{{ item.desc }}</p>
                 </li>
             </ul>
@@ -53,7 +53,7 @@ const features = reactive({
         {
             icon: "Globe.svg",
             title: t("home.Multilingual"),
-            desc: t("home.your servers doesn't need to explain the menu to a foreign guest anymore"),
+            desc: t("home.your servers doesnt need to explain the menu to a foreign guest anymore"),
         },
         {
             icon: "Palette.svg",

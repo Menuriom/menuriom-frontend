@@ -8,7 +8,7 @@
                 {{ $t("pricing.Start creating instantly") }}. {{ $t("pricing.Start free") }}.
             </h4>
         </div>
-        <Plans />
+        <Plans :plans="plans" />
         <nuxt-link class="hover:bg-fgPrimary hover:text-bgSecondary transition-all text-sm p-4 border-2 border-bgSecondary rounded-2xl" to="/pricing">
             {{ $t("pricing.Compare the plans") }}
         </nuxt-link>
@@ -17,4 +17,24 @@
 
 <script setup>
 import Plans from "~/components/web/pricing/Plans.vue";
+
+const handleError = (err) => {
+    if (!err) return;
+};
+const handleData = (data) => {
+    if (!data) return;
+    plans.value = data.plans;
+};
+
+// getPlans =====================================
+const plans = ref([]);
+const plansResults = await useFetch("/api/v1/pricing/purchasable-plans", { lazy: process.client, key: "get-purchasable-plans" });
+const plansLoading = computed(() => plansResults.pending.value);
+
+handleError(plansResults.error.value);
+watch(plansResults.error, (err) => handleError(err));
+
+handleData(plansResults.data.value);
+watch(plansResults.data, (data) => handleData(data));
+//  =====================================
 </script>

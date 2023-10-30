@@ -12,6 +12,7 @@ export default {
     "SOLD OUT": "تمام شده",
     New: "جدید",
     "Coming soon": "بزودی",
+    Unlimited: "نا محدود",
 
     auth: {
         welcome: "به منوریوم خوش اومدی",
@@ -150,7 +151,7 @@ export default {
         "we can guarantee your menus are available at anytime": "ما به شما تضمین میکنیم که در هر لحظه از شبانه روز، منوی شما در دسترس باشه",
         "our templates are as easy to use as possible so your customers find what they want easily":
             "قالب و ساختار منو های ما ساده و اصولیست به طوری که مشتریان شما به راحتی بتونند از سرویس های شما استفاده کنند",
-        "your servers doesn't need to explain the menu to a foreign guest anymore": "دیگه نیازی نیست که ایتم های منوتون رو به مشتریان خارجی خود شرح دهید",
+        "your servers doesnt need to explain the menu to a foreign guest anymore": "دیگه نیازی نیست که ایتم های منوتون رو به مشتریان خارجی خود شرح دهید",
         "You can customize your menu based on your restaurant theme, and with your brand logo":
             "شما میتونید منوتون رو بسته به قالب ظاهری رستوران و لوگوی برندتون شخصی سازی کنید",
         "our system is web-based so you can manage your menu and get orders on any device":
@@ -199,6 +200,15 @@ export default {
         "Check out our FAQ": "به سوالات متداول سری بزنید",
         "Send Us An Email": "پست الکترونیک ما",
         "Follow Us": "شبکه های اجتماعی ما",
+
+        "Im contacting for": "تماس میگیرم برای",
+        "Choose your subject to contact": "موضوع مورد نظر را انتخاب کنید",
+        "Request New Feature": "درخواست قابلیت جدید",
+        "Reporting An Issue": "گزارش مشکل",
+        Sales: "فروش",
+
+        successSendMessage: "از اینکه با ما تماس گرفتید متشکریم. ما در اسرع وقت با شما تماس میگیریم.",
+        retryLaterMessage: "ما پیام شما را دریافت کردیم، اگر می خواهید پیام جدیدی ارسال کنید، لطفاً کمی صبر کنید و دوباره امتحان کنید.",
     },
 
     faqs: {

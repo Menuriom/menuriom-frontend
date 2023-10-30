@@ -221,22 +221,23 @@ nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollb
 
 /* .Vue-Toastification =================================== */
 .Vue-Toastification__toast--default { background-color: theme("colors.dolphin") !important; }
-.Vue-Toastification__toast--info { background-color: theme("colors.cyan.900") !important; }
-.Vue-Toastification__toast--success { background-color: theme("colors.emerald.900") !important; }
-.Vue-Toastification__toast--error { background-color: theme("colors.red.900") !important; }
-.Vue-Toastification__toast--warning { background-color: theme("colors.yellow.900") !important; }
+.Vue-Toastification__toast--info { background-color: theme("colors.sky.600") !important; }
+.Vue-Toastification__toast--success { background-color: theme("colors.emerald.600") !important; }
+.Vue-Toastification__toast--error { background-color: theme("colors.rose.600") !important; }
+.Vue-Toastification__toast--warning { background-color: theme("colors.amber.600") !important; }
 .Vue-Toastification__icon {
     margin: 0 !important;
     padding: 1rem !important;
     width: 3rem !important; height: 3rem !important;
     background-color: rgba(45, 45, 45, .4) !important;
-    border-radius: .5rem;
+    border-radius: 1rem;
 }
 .Vue-Toastification__toast {
     align-items: center; padding: .5rem !important;
+    border-radius: 1rem !important;
     padding-bottom: 1rem !important;
     gap: 1rem; font-size: .75rem !important;
-    box-shadow: 0px 5px 15px -5px rgba(0,0,0,.4) !important;
+    box-shadow: 0px 5px 35px -5px rgba(0,0,0,.4) !important;
     font-family: "Poppins", "Shabnam" !important;
 }
 /* .Vue-Toastification =================================== */

@@ -60,7 +60,7 @@ nav {
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" to="http://localhost:3002">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="`${runtimeConfig.public.MENU_BASE_URL}/Menuriom`">
                             <span>{{ $t("header.Demo") }}</span>
                         </nuxt-link>
                     </li>
@@ -70,7 +70,7 @@ nav {
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/how-it-works')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('#')">
                             <span>{{ $t("header.How It Works") }} </span>
                         </nuxt-link>
                     </li>
@@ -141,6 +141,7 @@ import { storeToRefs } from "pinia";
 const localePath = useLocalePath();
 const { locale } = useI18n();
 
+const runtimeConfig = useRuntimeConfig();
 const userStore = useUserStore();
 const user = storeToRefs(userStore);
 

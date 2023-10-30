@@ -28,8 +28,8 @@
                 </span>
             </h3>
         </div>
-        <Plans class="relative" />
-        <PlanCompare />
+        <Plans class="relative" :plans="plans" />
+        <PlanCompare :plans="plans" />
         <hr class="gradient-re opacity-50 border-0 my-6 h-0.5 w-11/12 lg:w-full max-w-screen-lg" />
         <Faqs blobPosition="left" />
     </div>
@@ -42,4 +42,24 @@ import Faqs from "~/components/web/home/Faqs.vue";
 
 useHead({ title: `Pricing and plan compression - Menuriom` });
 definePageMeta({ layout: "default" });
+
+const handleError = (err) => {
+    if (!err) return;
+};
+const handleData = (data) => {
+    if (!data) return;
+    plans.value = data.plans;
+};
+
+// getPlans =====================================
+const plans = ref([]);
+const plansResults = await useFetch("/api/v1/pricing/purchasable-plans", { lazy: process.client, key: "get-purchasable-plans" });
+const plansLoading = computed(() => plansResults.pending.value);
+
+handleError(plansResults.error.value);
+watch(plansResults.error, (err) => handleError(err));
+
+handleData(plansResults.data.value);
+watch(plansResults.data, (data) => handleData(data));
+//  =====================================
 </script>
