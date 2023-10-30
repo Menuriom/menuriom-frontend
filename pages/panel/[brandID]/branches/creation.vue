@@ -213,7 +213,7 @@ const addImages = () => {
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         if (file.size > 2 * 1_048_576) {
-            toast.success(t(`panel.Some of files that you select was over the nMB size limit`, { size: 2 }), {
+            toast.success(t(`panel.Some of the files that you selected, were over the nMB size limit`, { size: 2 }), {
                 timeout: 3000,
                 rtl: localeProperties.value.dir == "rtl",
             });

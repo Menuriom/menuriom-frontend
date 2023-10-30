@@ -12,6 +12,7 @@ export default {
     "SOLD OUT": "SOLD OUT",
     New: "New",
     "Coming soon": "Coming soon",
+    Unlimited: "Unlimited",
 
     auth: {
         welcome: "Welcome to Menuriom",
@@ -101,9 +102,72 @@ export default {
         copyright: "All rights reserved.",
     },
 
+    home: {
+        "Managing a restaurant hasnt been easier": "Managing a restaurant hasn't been easier",
+        "The Best Way To Manage Your Restaurant Menu And Orders": "The Best Way To Manage Your Restaurant Menu And Orders",
+        "Check The Demo": "Check The Demo",
+        "Any good restaurant needs a good menu": "Any good restaurant needs a good menu",
+        "With Menuriom build and manage your restaurant menu with ease": "With Menuriom build and manage your restaurant menu with ease",
+        "Try It For Free": "Try It For Free",
+        "Head To Dashboard": "Head To Dashboard",
+        "Check The Demo": "Check The Demo",
+        "Learn How It Works": "Learn How It Works",
+        Multilingual: "Multilingual",
+        "Ordering System": "Ordering System",
+        Customizable: "Customizable",
+        "User Friendly Interface": "User Friendly Interface",
+
+        "Create a highly versatile online menu and lower your restaurant costs": "Create a highly versatile online menu and lower your restaurant costs",
+        FeatureDescription:
+            "By using an online menu system you can organize your products better and change any item details quickly and easily, have a different menu for different languages, and tailor your menu however you see fit",
+
+        "Highlight Specific Items In Your Menu": "Highlight Specific Items In Your Menu",
+        "maybe you have a new item on your menu": "maybe you have a new item on your menu",
+        "maybe an item is sold out for the day, or you just want to add an item as a special one":
+            "maybe an item is sold out for the day, or you just want to add an item as a special one",
+        "you can highlight items with special tags and even put discounts on some of your products":
+            "you can highlight items with special tags and even put discounts on some of your products",
+        "Build Different Menu For Your Branches": "Build Different Menu For Your Branches",
+        branchFeatureDesc:
+            "create your menu specific to your branch, whether it's smaller or larger or you don't serve specific items in some of your branches, you can easily tailor your menus based on your specific needs",
+        "Get Orders From Your Customers With Your Menu": "Get Orders From Your Customers With Your Menu",
+        orderFeatureDesc:
+            "still using pen and paper to take orders? your customers can easily pick their orders from the menu and you get notified what table ordered what",
+        "Get Feedback On Your Services And Products": "Get Feedback On Your Services And Products",
+        "find out what your customers think about your products and put aside the guessing work":
+            "find out what your customers think about your products and put aside the guessing work",
+
+        FEATURES: "FEATURES",
+        "We are constantly growing and adding new features": "We are constantly growing and adding new features",
+        "Easy To Use": "Easy To Use",
+        Uptime: "Uptime",
+        "User Friendly": "User Friendly",
+        Multilingual: "Multilingual",
+        "Fully Customizable": "Fully Customizable",
+        "Works On Any Device": "Works On Any Device",
+        "Multiple Branches": "Multiple Branches",
+        "Customer Feedback": "Customer Feedback",
+        "with couple of clicks you can build and manage your menus, branches and orders with ease":
+            "with couple of clicks you can build and manage your menus, branches and orders with ease",
+        "we can guarantee your menus are available at anytime": "we can guarantee your menus are available at anytime",
+        "our templates are as easy to use as possible so your customers find what they want easily":
+            "our templates are as easy to use as possible so your customers find what they want easily",
+        "your servers doesnt need to explain the menu to a foreign guest anymore": "your servers doesn't need to explain the menu to a foreign guest anymore",
+        "You can customize your menu based on your restaurant theme, and with your brand logo":
+            "You can customize your menu based on your restaurant theme, and with your brand logo",
+        "our system is web-based so you can manage your menu and get orders on any device":
+            "our system is web-based so you can manage your menu and get orders on any device",
+        "you can have different menus for every branch and tailor your menus for a specific branch":
+            "you can have different menus for every branch and tailor your menus for a specific branch",
+        "your customers can like any food on your menu and leave a feedback to you to see":
+            "your customers can like any food on your menu and leave a feedback to you to see",
+    },
+
     pricing: {
         Pricing: "Pricing",
         PRICING: "PRICING",
+        "Start creating instantly": "Start creating instantly",
+        "Start free": "Start free",
         PricingSlogan: "No matter the size of your business, we got you covered!",
         PricingSubText: "Start creating instantly. Start free.",
 
@@ -119,8 +183,10 @@ export default {
         "Get Started": "Get Started",
 
         "Compare Plans": "Compare Plans",
+        "Compare the plans": "Compare the plans",
         "Overview of what is included in our different plans": "Overview of what is included in our different plans",
         OFF: "OFF",
+        Off: "Off",
     },
 
     "contact-us": {
@@ -135,6 +201,15 @@ export default {
         "Check out our FAQ": "Check out our FAQ",
         "Send Us An Email": "Send Us An Email",
         "Follow Us": "Follow Us",
+
+        "Im contacting for": "I'm contacting for",
+        "Choose your subject to contact": "Choose your subject to contact",
+        "Request New Feature": "Request New Feature",
+        "Reporting An Issue": "Reporting An Issue",
+        Sales: "Sales",
+
+        successSendMessage: "Thank you for contacting us. we will get back to you as soon as possible.",
+        retryLaterMessage: "We got your message, if you want to send a new message please wait a bit and retry again.",
     },
 
     faqs: {

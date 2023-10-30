@@ -22,8 +22,8 @@
             <header class="lg:sticky top-24 flex justify-center lg:items-end gap-1 2sm:gap-4 w-full z-2">
                 <div class="hidden lg:flex flex-grow-0 lg:grow"></div>
                 <div
-                    class="list_heads flex justify-center rounded-[20px] shadow-nr25"
-                    :class="[item.highlight ? 'gradient p-1' : 'bg-pencil-tip']"
+                    class="list_heads flex justify-center p-1 rounded-[20px] shadow-nr25"
+                    :class="[item.highlight ? 'gradient' : 'bg-neutral-300']"
                     v-for="(item, i) in pricing.list"
                     :key="i"
                 >
@@ -47,7 +47,7 @@
                         </div>
 
                         <a
-                            class="flex items-center justify-center w-full p-2 mt-auto lg:mt-0 bg-fgPrimary text-bgPrimary font-bold rounded-lg hover:translate-y-0.5 transition-transform"
+                            class="flex items-center justify-center w-full p-2 mt-auto lg:mt-0 bg-primary text-fgPrimary rounded-lg hover:translate-y-0.5 transition-transform"
                             href="#"
                         >
                             <small class="text-center">{{ $t("pricing.Get Started") }}</small>
@@ -58,13 +58,13 @@
             <ul class="flex flex-col gap-6 lg:gap-0 w-full">
                 <li
                     class="flex flex-col lg:flex-row items-center lg:items-stretch gap-1 w-full py-2 lg:py-0 rounded-2xl lg:odd:bg-bgAccent group"
-                    v-for="(item, i) in features.list"
+                    v-for="(item, i) in features"
                     :key="i"
                 >
                     <div class="flex flex-col items-center lg:items-start gap-1.5 grow p-1 lg:p-3 w-full">
                         <h4 class="flex items-center gap-2 text-center w-full">
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-500 bg-opacity-20"></span>
-                            <span class="px-2 lg:px-0"> {{ item.title }} </span>
+                            <span class="px-2 lg:px-0 group-even:opacity-70"> {{ item.title[locale] }} </span>
                             <span class="lg:hidden flex-grow h-0.5 bg-neutral-500 bg-opacity-20"></span>
                         </h4>
                         <div class="flex items-start gap-1.5 text-xs opacity-60" v-if="item.desc && item.desc !== ''">
@@ -79,10 +79,10 @@
                             :key="j"
                         >
                             <span class="lg:hidden text-fgPrimary text-xs">{{ pricing.list[j].title }}</span>
-                            <Icon class="relative w-6 h-6 bg-secondary" name="Check.svg" folder="icons/basil" size="24px" v-if="mark == true" />
-                            <Icon class="relative w-6 h-6 bg-neutral-500" name="Cross.svg" folder="icons/basil" size="24px" v-else-if="mark == false" />
-                            <span class="text-secondary text-xs py-1" v-else>{{ mark }}</span>
-                            <span class="absolute bottom-0 w-3/4 h-0.5 bg-neutral-600 hidden lg:flex group-last:hidden"></span>
+                            <Icon class="relative w-6 h-6 bg-secondary" name="Check.svg" folder="icons/basil" size="24px" v-if="mark === true" />
+                            <Icon class="relative w-6 h-6 bg-neutral-500" name="Cross.svg" folder="icons/basil" size="24px" v-else-if="mark === false" />
+                            <span class="text-fgPrimary text-sm py-1" v-else>{{ mark }}</span>
+                            <span class="absolute bottom-0 w-3/4 h-0.5 bg-bgSecondary hidden lg:flex group-last:hidden"></span>
                         </div>
                     </div>
                 </li>
@@ -92,7 +92,11 @@
 </template>
 
 <script setup>
-import Icon from "~/components/Icon.vue";
+const props = defineProps({
+    plans: { type: Object },
+});
+
+const { locale, t } = useI18n();
 
 const pricing = reactive({
     list: [
@@ -102,12 +106,122 @@ const pricing = reactive({
     ],
 });
 
-const features = reactive({
-    list: [
-        { title: "File Limit", desc: "For individuals or small restaurants and small coffee shops", marks: [true, false, "Unlimited"] },
-        { title: "QR View Limit", desc: "", marks: [true, false, "Unlimited"] },
-        { title: "File Limit", desc: "", marks: [true, false, "Unlimited"] },
-        { title: "File Limit", desc: "", marks: [true, false, "Unlimited"] },
-    ],
+const features = ref({
+    "qr-scan-limit": {
+        title: { en: "QR code scan limit", fa: "میزان اسکن کد QR" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "category-limit": {
+        title: { en: "Menu category limit", fa: "محدودیت ساخت دسته بندی منو" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "menu-item-limit": {
+        title: { en: "Menu item creation limit", fa: "محدودیت ساخت ایتم منو" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "brand-details-in-menu": {
+        title: { en: "Brand details page in menu", fa: "صفحه جزئیات داخل منو" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "multiple-language-limit": {
+        title: { en: "Multiple languages", fa: "تعداد زبان های انتخابی" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "ticket-and-support": {
+        title: { en: "Ticket & support", fa: "تیکت و پشتیبانی" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "menu-templates": {
+        title: { en: "Menutemplates", fa: "قالب های منو" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "branch-limit-count": {
+        title: { en: "Branch creation limit", fa: "محدودیت ساخت شعبه" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "staff-limit-count": {
+        title: { en: "Staff limit", fa: "دعوت اعضای خدمه" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "customize-qr": {
+        title: { en: "Customizable QR codes", fa: "قابلیت شخصی سازی کد های QR" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    // "restaurant-detailed-info": {
+    //     title: { en: "", fa: "" },
+    //     desc: "",
+    //     marks: [true, false, "Unlimited"],
+    // },
+    "menu-item-like": {
+        title: { en: "Menu item like option", fa: "گزینه علاقه مندی ایتم ها" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    analytics: {
+        title: { en: "Menu views and purchases analytics", fa: "آمار بازدید و فروش" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "item-highlighting": {
+        title: { en: "Item highlighting", fa: "هایلایت کردن ایتم ها" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "ordering-system": {
+        title: { en: "Ordering & order managment system", fa: "سیستم سفارش گیری و مدیریت سفارشات" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "server-call-button": {
+        title: { en: "Server call option", fa: "گزینه درخواست گارسون" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "logo-in-qr": {
+        title: { en: "Brand logo option in QR code", fa: "افزودن لوگوی برند به کد QR" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "menu-item-coupling": {
+        title: { en: "Menu items coupling", fa: "قابلیت جفت کردن ایتم های منو" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "menu-tag-option": {
+        title: { en: "Menu custom tags option", fa: "تگ های خاص برای ایتم ها" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "customizable-category-logo": {
+        title: { en: "Customizable menu category logos", fa: "شخصی سازی عکس دسته بندی ها" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
+    "customer-review": {
+        title: { en: "Customer review option", fa: "امکان دریافت بازخورد مشتریان" },
+        desc: "",
+        marks: [true, false, "Unlimited"],
+    },
 });
+
+for (let i = 0; i < props.plans.length; i++) {
+    const plan = props.plans[i];
+    pricing.list[i].title = plan.translation?.[locale.value]?.name || plan.name;
+    pricing.list[i].monthlyPrice = plan.monthlyPrice;
+
+    for (const limitation of plan.limitations) {
+        if (!features.value[limitation.limit]) continue;
+        features.value[limitation.limit].marks[i] = limitation.value === null ? t("Unlimited") : limitation.value;
+    }
+}
 </script>

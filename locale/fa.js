@@ -12,6 +12,7 @@ export default {
     "SOLD OUT": "تمام شده",
     New: "جدید",
     "Coming soon": "بزودی",
+    Unlimited: "نا محدود",
 
     auth: {
         welcome: "به منوریوم خوش اومدی",
@@ -101,9 +102,71 @@ export default {
         copyright: "کلیه حقوق مادی و معنوی این وبسایت متعلق به گروه منوریوم است.",
     },
 
+    home: {
+        "Managing a restaurant hasnt been easier": "مدیریت یک رستوران ساده تر از این نمیشه",
+        "The Best Way To Manage Your Restaurant Menu And Orders": "بهترین انتخاب برای مدیریت منو و سفارشات رستوران شما",
+        "Check The Demo": "مشاهده منوی دمو",
+        "Any good restaurant needs a good menu": "هر رستوران خوب به یه منوی خوب نیاز داره",
+        "With Menuriom build and manage your restaurant menu with ease": "با منوریوم منوی رستوران خودتون رو به راحتی بسازید و مدیریت کنید",
+        "Try It For Free": "رایگان امتحان کن",
+        "Head To Dashboard": "ورود به داشبورد",
+        "Learn How It Works": "آموزش نحوه کارکرد",
+        Multilingual: "چندزبانه",
+        "Ordering System": "سیستم سفارشات",
+        Customizable: "قابل شخصی سازی",
+        "User Friendly Interface": "ظاهر ساده و کاربرپسند",
+
+        "Create a highly versatile online menu and lower your restaurant costs": "با ساخت یک منوی همه کاره، هزینه های رستوران خود را کاهش دهید",
+        FeatureDescription:
+            "با استفاده از یک منوی انلاین شما میتوانید محصولات خودتون رو بهتر مدیریت کنید و تغییرات منو رو به سادگی و سرعت اعمال کنید، میتوانید منوی های مختلف برای زبان های مختلف داشته باشید و منوی رستوران خود را به هر شکلی که دوست دارید بسازید",
+
+        "Highlight Specific Items In Your Menu": "هایلایت کردن بعضی از ایتم ها در منو",
+        "maybe you have a new item on your menu": "شاید یه ایتم جدید به منوی خود اضافه کردید",
+        "maybe an item is sold out for the day, or you just want to add an item as a special one":
+            "یا شاید یکی از ایتم ها تموم شده، یا شاید بعضی از ایتم ها در روز های خاصی از هفته موجود هستند",
+        "you can highlight items with special tags and even put discounts on some of your products":
+            "با اضافه کردن تگ های خاص، ایتم های منوی خودتون رو هایلایت کنید تا بهتر دیده بشوند",
+        "Build Different Menu For Your Branches": "برای هر شعبه منوی متفاوت بسازید",
+        branchFeatureDesc:
+            "منوی خودتون رو بسته به نیاز هر شعبه بسازید، اگر ایتم های خاصی برای شعبه های مختلف دارید یا بعضی شعبه هاتون کوچکتر یا بزرگتر هستند. میتوانید منوی خودتون رو بسته به نیاز تغییر دهید",
+        "Get Orders From Your Customers With Your Menu": "سفارشات مشتری را از طریق منو دریافت کنید",
+        orderFeatureDesc:
+            "هنوز با کاغذ مداد سفارش میگیرید؟ مشتریان شما به راحتی میتونند از طریق منو سفارش خودشون رو ثبت کنند و شما به راحتی متوجه میشید چه میزی چه چیزی سفارش داده",
+        "Get Feedback On Your Services And Products": "در خصوص محصولات و سرویس هاتون بازخورد بگیرید",
+        "find out what your customers think about your products and put aside the guessing work":
+            "نظر مشتریان خودتون رو نسبت به محصولاتتون بدونید و آمار کامل و دقیقی برای محبوبیت و فروش محصولاتتون داشته باشید",
+
+        FEATURES: "قابلیت ها",
+        "We are constantly growing and adding new features": "ما به طور مداول در حال بهبود و افزودن ویژگی های جدید هستیم",
+        "Easy To Use": "راحتی در استفاده",
+        Uptime: "در دسترس",
+        "User Friendly": "کاربر پسند",
+        Multilingual: "چند زبانه",
+        "Fully Customizable": "کاملا قابل شخصی سازی",
+        "Works On Any Device": "قابل اجرا بر روی همه دستگاه ها",
+        "Multiple Branches": "امکان ایجاد چند شعبه",
+        "Customer Feedback": "بازخورد مشتری",
+        "with couple of clicks you can build and manage your menus, branches and orders with ease":
+            "با چند کلیک ساده به راحتی میتونید منو، شعبه ها و سفارشات خودتون رو مدیریت کنید",
+        "we can guarantee your menus are available at anytime": "ما به شما تضمین میکنیم که در هر لحظه از شبانه روز، منوی شما در دسترس باشه",
+        "our templates are as easy to use as possible so your customers find what they want easily":
+            "قالب و ساختار منو های ما ساده و اصولیست به طوری که مشتریان شما به راحتی بتونند از سرویس های شما استفاده کنند",
+        "your servers doesnt need to explain the menu to a foreign guest anymore": "دیگه نیازی نیست که ایتم های منوتون رو به مشتریان خارجی خود شرح دهید",
+        "You can customize your menu based on your restaurant theme, and with your brand logo":
+            "شما میتونید منوتون رو بسته به قالب ظاهری رستوران و لوگوی برندتون شخصی سازی کنید",
+        "our system is web-based so you can manage your menu and get orders on any device":
+            "سیستم ما کامل تحت وب و قابل دسترس از طریق هر دستگاه متصل به اینترنت است",
+        "you can have different menus for every branch and tailor your menus for a specific branch":
+            "شما میتونید منوی متفاوت برای هز شعبه از رستوران خود داشته باشید و بسته به هر شعبه منوتون رو تغییر بدید",
+        "your customers can like any food on your menu and leave a feedback to you to see":
+            "مشتریان شما میتونند برای ایتم های منو نظر ثبت کنن و یا ایتم ها رو به لیست علاقه مندی اضافه کنند",
+    },
+
     pricing: {
         Pricing: "تعرفه ها",
         PRICING: "تعرفه ها",
+        "Start creating instantly": "الان شروع کنید",
+        "Start free": "رایگان شروع کنید",
         PricingSlogan: "هر رستوران با هر اندازه ای که دارید، میتونید رو ما حساب کنید!",
         PricingSubText: "رایگان شروع کنید. رایگان بسازید.",
 
@@ -119,8 +182,10 @@ export default {
         "Get Started": "شروع کنید",
 
         "Compare Plans": "مقایسه پلن ها",
+        "Compare the plans": "مقایسه تعرفه ها",
         "Overview of what is included in our different plans": "نمای کلی از امکانات و محدودیت های هر پلن",
         OFF: "تخفیف",
+        Off: "تخفیف",
     },
 
     "contact-us": {
@@ -135,6 +200,15 @@ export default {
         "Check out our FAQ": "به سوالات متداول سری بزنید",
         "Send Us An Email": "پست الکترونیک ما",
         "Follow Us": "شبکه های اجتماعی ما",
+
+        "Im contacting for": "تماس میگیرم برای",
+        "Choose your subject to contact": "موضوع مورد نظر را انتخاب کنید",
+        "Request New Feature": "درخواست قابلیت جدید",
+        "Reporting An Issue": "گزارش مشکل",
+        Sales: "فروش",
+
+        successSendMessage: "از اینکه با ما تماس گرفتید متشکریم. ما در اسرع وقت با شما تماس میگیریم.",
+        retryLaterMessage: "ما پیام شما را دریافت کردیم، اگر می خواهید پیام جدیدی ارسال کنید، لطفاً کمی صبر کنید و دوباره امتحان کنید.",
     },
 
     faqs: {
