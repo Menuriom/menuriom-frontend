@@ -14,6 +14,7 @@ RUN npm ci --verbose
 # Copy the rest of the application code to the working directory
 COPY . .
 ENV GENERATE_SOURCEMAP=false
+ENV NODE_OPTIONS=--max-old-space-size=2048
 
 # Build the Nuxt application
 RUN npm run build

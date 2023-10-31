@@ -107,7 +107,6 @@
                     </div>
                     <Input
                         :label="$t('panel.menu.Description')"
-                        :required="formLang == 'default'"
                         v-model="description.values[formLang]"
                         :error="errorField == `description.${formLang}` ? responseMessage : ''"
                     />
