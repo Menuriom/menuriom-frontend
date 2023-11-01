@@ -57,12 +57,20 @@
                 :options="mainMenuStyleOptions.headerOptions"
             />
 
-            <component
+            <!-- <component
                 name="offers"
                 class="z-4"
                 :is="offers[mainMenuStyleOptions.offerOptions.component]"
                 :baseColors="baseColors"
                 :options="mainMenuStyleOptions.offerOptions"
+            /> -->
+
+            <component
+                name="suggestions"
+                class="z-4"
+                :is="suggestions[mainMenuStyleOptions.suggestionsOptions.component]"
+                :baseColors="baseColors"
+                :options="mainMenuStyleOptions.suggestionsOptions"
             />
 
             <component
@@ -141,6 +149,9 @@ const searchs = {
 };
 const offers = {
     Offers1: defineAsyncComponent(() => import("./Offers1.vue")),
+};
+const suggestions = {
+    Suggestions1: defineAsyncComponent(() => import("./Sugesstions1.vue")),
 };
 const categories = {
     Categories1: defineAsyncComponent(() => import("./Categories1.vue")),

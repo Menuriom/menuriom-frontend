@@ -50,9 +50,12 @@ export default defineNuxtConfig({
     nitro: {
         compressPublicAssets: true,
         routeRules: {
-            "/**": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
-            "/icons/**": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
-            "/patterns/**": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.js": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.css": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.png": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.svg": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.jpg": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.webp": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
             "/_nuxt/**": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
         },
     },

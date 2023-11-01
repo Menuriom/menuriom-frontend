@@ -470,6 +470,10 @@ export default {
             "Create New Item": "Create New Item",
             "Edit Item": "Edit Item",
             "Hide this item": "Hide this item",
+            "Show as our suggestion": "Show as our suggestion",
+            "Showed as our suggestion": "Showed as our suggestion",
+            "Mark as suggested": "Mark as suggested",
+            "Marked as suggested": "Marked as suggested",
             "Pin to the top of category": "Pin to the top of category",
             "Mark as sold out": "Mark as sold out",
             "Item is pinned": "Item is pinned",
@@ -552,6 +556,7 @@ export default {
             Header2: "Fat",
 
             "Offers Section": "Offers Section",
+            "Suggestions Section": "Suggestions Section",
 
             "Search Section": "Search Section",
             "Show search section": "Show search section",

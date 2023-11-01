@@ -470,6 +470,10 @@ export default {
             "Create New Item": "ساخت ایتم جدید",
             "Edit Item": "ویرایش ایتم",
             "Hide this item": "مخفی کردن ایتم",
+            "Show as our suggestion": "نمایش به عنوان پیشنهاد ما",
+            "Showed as our suggestion": "نمایش داده شده در پیشنهادات ما",
+            "Mark as suggested": "پیشنهاد ما",
+            "Marked as suggested": "پیشنهاد ما",
             "Pin to the top of category": "پین کردن ایتم",
             "Mark as sold out": "نمایش به عنوان تمام شده",
             "Item is pinned": "پین شده",
@@ -553,6 +557,7 @@ export default {
             Header2: "بزرگ",
 
             "Offers Section": "قسمت بنر تخفیفات",
+            "Suggestions Section": "قسمت پیشنهادات",
 
             "Search Section": "قسمت جستجو",
             "Show search section": "نمایش قسمت جستجو",

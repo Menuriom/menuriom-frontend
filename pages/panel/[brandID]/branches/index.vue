@@ -210,7 +210,7 @@ const deleteRecord = async () => {
 // -------------------------------------------------
 
 const handleErrors = (err) => {
-    console.log({ err });
+    if(!err) return
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;
@@ -226,7 +226,7 @@ const noMoreRecords = ref(false);
 const records = reactive({ list: [] });
 const getBranchList_results = await useLazyAsyncData(() => getBranchList(route.params.brandID));
 
-if (getBranchList_results.error.value) handleErrors(getBranchList_results.error.value);
+handleErrors(getBranchList_results.error.value);
 watch(getBranchList_results.error, (err) => handleErrors(err));
 
 const handleBranchList_results = (data) => {

@@ -36,8 +36,7 @@
                         v-if="checkLimitations([['item-highlighting', true]], brand)"
                     >
                         <Icon class="w-4 h-4 gradient-re -rotate-45" name="thumbtack.svg" folder="icons/light" size="16px" />
-                        <span class="text-sm">{{ $t("panel.menu.Pin to the top of category") }}</span>
-                        <small class="flex items-center gap-1 text-primary text-xs" v-if="pinned"> {{ $t(`panel.menu.Item is pinned`) }} </small>
+                        <span class="text-sm">{{ $t("panel.menu.Show as our suggestion") }}</span>
                         <Switch class="ms-2" v-model:value="pinned" />
                     </div>
                     <div class="flex flex-wrap items-center gap-2 w-full max-w-max p-2 rounded-xl border border-bgSecondary">
