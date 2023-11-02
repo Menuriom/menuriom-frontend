@@ -417,6 +417,28 @@ export default {
             "Phone Number": "تلفن تماس",
             "Add Phone Number": "افزودن شماره تماس",
             "10 digit number": "کد 10 رقمی",
+
+            "Working Hours": "ساعات کاری",
+        },
+
+        "working-hours": {
+            "Working Hours": "ساعات کاری",
+            Saturdays: "شنبه ها",
+            Sundays: "یک شنبه ها",
+            Mondays: "دو شنبه ها",
+            Tuesdays: "سه شنبه ها",
+            Wednesdays: "چهار شنبه ها",
+            Thursdays: "پنج شنبه ها",
+            Fridays: "جمعه ها",
+
+            Open: "باز",
+            Closed: "بسته",
+            From: "از",
+            Till: "تا",
+
+            "All-branches working-hours setting will only apply to branches that have no hours set":
+                "تنظیمات 'همه ی شعبه ها' فقط برای شعبه های که ساعات کاری ندارند اعمال میشود",
+            "You can specify a custom hour for any branch": "شما میتوانید برای هر شعبه ساعات کاری مخصوص تعریف کنید",
         },
 
         menu: {

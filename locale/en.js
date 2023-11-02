@@ -417,6 +417,28 @@ export default {
             "Phone Number": "Phone Number",
             "Add Phone Number": "Add Phone Number",
             "10 digit number": "10 digit number",
+
+            "Working Hours": "Working Hours",
+        },
+
+        "working-hours": {
+            "Working Hours": "Working Hours",
+            Saturdays: "Saturdays",
+            Sundays: "Sundays",
+            Mondays: "Mondays",
+            Tuesdays: "Tuesdays",
+            Wednesdays: "Wednesdays",
+            Thursdays: "Thursdays",
+            Fridays: "Fridays",
+
+            Open: "Open",
+            Closed: "Closed",
+            From: "From",
+            Till: "Till",
+
+            "All-branches working-hours setting will only apply to branches that have no hours set":
+                "All-branches working-hours setting will only apply to branches that have no hours set",
+            "You can specify a custom hour for any branch": "You can specify a custom hour for any branch",
         },
 
         menu: {
