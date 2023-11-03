@@ -439,6 +439,8 @@ export default {
             "All-branches working-hours setting will only apply to branches that have no hours set":
                 "تنظیمات 'همه ی شعبه ها' فقط برای شعبه های که ساعات کاری ندارند اعمال میشود",
             "You can specify a custom hour for any branch": "شما میتوانید برای هر شعبه ساعات کاری مخصوص تعریف کنید",
+
+            "Work hours updated": "ساعات کاری بروز شد",
         },
 
         menu: {

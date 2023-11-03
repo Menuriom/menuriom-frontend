@@ -59,14 +59,12 @@
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.From`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.From Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].saturday.from"
                     />
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.Till`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.To Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].saturday.to"
                     />
@@ -83,14 +81,12 @@
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.From`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.From Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].sunday.from"
                     />
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.Till`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.To Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].sunday.to"
                     />
@@ -107,14 +103,12 @@
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.From`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.From Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].monday.from"
                     />
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.Till`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.To Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].monday.to"
                     />
@@ -131,14 +125,12 @@
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.From`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.From Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].tuesday.from"
                     />
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.Till`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.To Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].tuesday.to"
                     />
@@ -155,14 +147,12 @@
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.From`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.From Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].wednesday.from"
                     />
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.Till`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.To Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].wednesday.to"
                     />
@@ -179,14 +169,12 @@
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.From`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.From Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].thursday.from"
                     />
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.Till`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.To Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].thursday.to"
                     />
@@ -203,14 +191,12 @@
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.From`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.From Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].friday.from"
                     />
                     <small class="flex items-center gap-1 text-primary"> {{ $t(`panel.working-hours.Till`) }} </small>
                     <input
                         class="w-40 bg-bgSecondary bg-opacity-75 p-1 px-3 rounded-xl shrink-0"
-                        :placeholder="$t('panel.working-hours.To Hour')"
                         type="time"
                         v-model="workingHours[selectedBranch].friday.to"
                     />
@@ -259,7 +245,7 @@ const save = async () => {
     await axios
         .post(`/api/v1/panel/working-hours`, { workingHours: workingHours.value }, { headers: { brand: route.params.brandID } })
         .then((response) => {
-            toast.success(t(`panel.menu.New menu item has been created`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+            toast.success(t(`panel.working-hours.Work hours updated`), { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -287,6 +273,21 @@ const handleErrors = (err) => {
     if (process.server) console.log({ err });
     // TODO : log errors in sentry type thing
 };
+
+// getWorkingHours -------------------------------------------------
+const getWorkingHours_results = await useFetch(`/api/v1/panel/working-hours/`, { lazy: process.client, headers: { brand: route.params.brandID } });
+const loadingWorkingHours = computed(() => getWorkingHours_results.pending.value);
+
+handleErrors(getWorkingHours_results.error.value);
+watch(getWorkingHours_results.error, (err) => handleErrors(err));
+
+const handleWorkingHours_results = (data) => {
+    if (!data) return;
+    workingHours.value = data.workingHours;
+};
+handleWorkingHours_results(getWorkingHours_results.data.value);
+watch(getWorkingHours_results.data, (val) => handleWorkingHours_results(val));
+// -------------------------------------------------
 
 // getBranchList -------------------------------------------------
 const branches = reactive({ list: [] });

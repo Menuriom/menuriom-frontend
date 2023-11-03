@@ -439,6 +439,8 @@ export default {
             "All-branches working-hours setting will only apply to branches that have no hours set":
                 "All-branches working-hours setting will only apply to branches that have no hours set",
             "You can specify a custom hour for any branch": "You can specify a custom hour for any branch",
+            
+            "Work hours updated": "Work hours updated",
         },
 
         menu: {
