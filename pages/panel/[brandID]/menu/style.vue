@@ -62,18 +62,12 @@
                 </ul>
                 <div class="flex flex-col gap-4 w-full" v-show="selectedTab === 'MainMenuStyle'">
                     <HeaderSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :headerOptions="mainMenuStyleOptions.headerOptions" />
-                    <Wrapper class="flex flex-col gap-4 w-full p-4 bg-bgAccent rounded-2xl shadow-mr15">
-                        <template #title>
-                            <div class="flex items-center justify-between gap-2 w-full group">
-                                <h3 class="font-bold text-primary">{{ $t("panel.menu-style.Offers Section") }}</h3>
-                                <span class="h-0.5 bg-primary bg-opacity-40 group-hover:bg-opacity-100 transition-all grow"></span>
-                                <Icon class="w-5 h-5 bg-primary -rotate-90" name="caret-left.svg" folder="icons/tabler" size="20px" />
-                            </div>
-                        </template>
-                        <div class="flex flex-col gap-6 overflow-hidden">
-                            <small class="w-full border border-bgSecondary rounded-xl p-4">{{ $t("Coming soon") }}...</small>
-                        </div>
-                    </Wrapper>
+                    <SuggestionSection
+                        :brand="brand"
+                        :base-colors="baseColors"
+                        :patterns="patterns"
+                        :suggestionsOptions="mainMenuStyleOptions.suggestionsOptions"
+                    />
                     <SearchSection :brand="brand" :base-colors="baseColors" :patterns="patterns" :searchOptions="mainMenuStyleOptions.searchOptions" />
                     <CategoriesSection
                         :brand="brand"
@@ -127,6 +121,7 @@ import ColorPicker from "@/components/form/ColorPicker.vue";
 import Wrapper from "~/components/form/Wrapper.vue";
 import Phone from "@/components/panel/menu-style/phone/Phone.vue";
 import HeaderSection from "@/components/panel/menu-style/HeaderSection.vue";
+import SuggestionSection from "@/components/panel/menu-style/SuggestionSection.vue";
 import SearchSection from "@/components/panel/menu-style/SearchSection.vue";
 import CategoriesSection from "@/components/panel/menu-style/CategoriesSection.vue";
 import ItemHeaderSection from "~/components/panel/menu-style/ItemHeaderSection.vue";
@@ -206,7 +201,21 @@ const mainMenuStyleOptions = reactive({
         bgImageRotation: "0",
         logoRadius: "50",
     },
-    offerOptions: { component: "Offers1" },
+    suggestionsOptions: {
+        component: "Suggestions1",
+        textColor: baseColors.textColor || "#000000ff",
+        bgMainColor: baseColors.bgMainColor || "#000000ff",
+        bgSecondaryColor: baseColors.bgSecondaryColor || "#000000ff",
+        accentColor: baseColors.accentColor || "#000000ff",
+        withPattern: false,
+        bgImageFile: null,
+        bgImageMode: "list",
+        bgImage: "",
+        bgImageSize: "30",
+        bgImageOpacity: "20",
+        bgImageRotation: "0",
+        cornerRadius: "10",
+    },
     searchOptions: {
         component: "Search1",
         textColor: baseColors.textColor || "#000000ff",
@@ -349,6 +358,7 @@ const saveSettings = async () => {
 
     const data = new FormData();
     if (mainMenuStyleOptions.headerOptions.bgImageFile) data.append("headerBgImageFile", mainMenuStyleOptions.headerOptions.bgImageFile);
+    if (mainMenuStyleOptions.suggestionsOptions.bgImageFile) data.append("suggestionsBgImageFile", mainMenuStyleOptions.suggestionsOptions.bgImageFile);
     if (mainMenuStyleOptions.itemListOptions.bgImageFile) data.append("itemListBgImageFile", mainMenuStyleOptions.itemListOptions.bgImageFile);
     if (restaurantDetailsPageOptions.value.bgImageFile) data.append("restaurantDetailsBgImageFile", restaurantDetailsPageOptions.value.bgImageFile);
     if (splashScreenOptions.value.bgImageFile) data.append("splashScreenBgImageFile", splashScreenOptions.value.bgImageFile);
@@ -378,30 +388,46 @@ const saveSettings = async () => {
 };
 // -------------------------------------------------
 
-// loadMenuStyleSettings -------------------------------------------------
-const loadMenuStyleSettings_results = await useAsyncData(() => loadMenuStyleSettings(route.params.brandID), { lazy: process.client && nuxtApp.isHydrating });
-const loadingMenuStyleSettings = computed(() => loadMenuStyleSettings_results.pending.value);
-
-const handleLoadingMenuStyleSettings_results = (data) => {
-    if (!data?._menuStyles) return;
-    if (data._menuStyles?.baseColors?.textColor) baseColors.textColor = data._menuStyles.baseColors.textColor;
-    if (data._menuStyles?.baseColors?.bgMainColor) baseColors.bgMainColor = data._menuStyles.baseColors.bgMainColor;
-    if (data._menuStyles?.baseColors?.bgSecondaryColor) baseColors.bgSecondaryColor = data._menuStyles.baseColors.bgSecondaryColor;
-    if (data._menuStyles?.baseColors?.primaryColor) baseColors.primaryColor = data._menuStyles.baseColors.primaryColor;
-    if (data._menuStyles?.baseColors?.accentColor) baseColors.accentColor = data._menuStyles.baseColors.accentColor;
-    if (data._menuStyles?.mainMenuStyleOptions?.headerOptions) mainMenuStyleOptions.headerOptions = data._menuStyles.mainMenuStyleOptions.headerOptions;
-    if (data._menuStyles?.mainMenuStyleOptions?.searchOptions) mainMenuStyleOptions.searchOptions = data._menuStyles.mainMenuStyleOptions.searchOptions;
-    if (data._menuStyles?.mainMenuStyleOptions?.categoriesOptions)
-        mainMenuStyleOptions.categoriesOptions = data._menuStyles.mainMenuStyleOptions.categoriesOptions;
-    if (data._menuStyles?.mainMenuStyleOptions?.itemHeaderOptions)
-        mainMenuStyleOptions.itemHeaderOptions = data._menuStyles.mainMenuStyleOptions.itemHeaderOptions;
-    if (data._menuStyles?.mainMenuStyleOptions?.itemListOptions) mainMenuStyleOptions.itemListOptions = data._menuStyles.mainMenuStyleOptions.itemListOptions;
-    if (data._menuStyles?.mainMenuStyleOptions?.navbarOptions) mainMenuStyleOptions.navbarOptions = data._menuStyles.mainMenuStyleOptions.navbarOptions;
-    if (data._menuStyles?.itemsDialogStyleOptions) itemsDialogStyleOptions.value = data._menuStyles.itemsDialogStyleOptions;
-    if (data._menuStyles?.restaurantDetailsPageOptions) restaurantDetailsPageOptions.value = data._menuStyles.restaurantDetailsPageOptions;
-    if (data._menuStyles?.splashScreenOptions) splashScreenOptions.value = data._menuStyles.splashScreenOptions;
+const handleErrors = (err) => {
+    if (!err) return;
+    errorField.value = "data";
+    if (typeof err.response !== "undefined" && err.response.data) {
+        const errors = err.response.data.errors || err.response.data.message;
+        if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
+    } else responseMessage.value = t("Something went wrong!");
+    if (process.server) console.log({ err });
+    if (responseMessage.value && process.client) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+    // TODO : log errors in sentry type thing
 };
 
+// loadMenuStyleSettings -------------------------------------------------
+const loadMenuStyleSettings_results = await useFetch(`/api/v1/panel/menu-styles`, { lazy: process.client, headers: { brand: route.params.brandID } });
+const loadingMenuStyleSettings = computed(() => loadMenuStyleSettings_results.pending.value);
+
+handleErrors(loadMenuStyleSettings_results.error.value);
+watch(loadMenuStyleSettings_results.error, (err) => handleErrors(err));
+
+const handleLoadingMenuStyleSettings_results = (data) => {
+    if (!data) return;
+    if (data.menuStyles?.baseColors?.textColor) baseColors.textColor = data.menuStyles.baseColors.textColor;
+    if (data.menuStyles?.baseColors?.bgMainColor) baseColors.bgMainColor = data.menuStyles.baseColors.bgMainColor;
+    if (data.menuStyles?.baseColors?.bgSecondaryColor) baseColors.bgSecondaryColor = data.menuStyles.baseColors.bgSecondaryColor;
+    if (data.menuStyles?.baseColors?.primaryColor) baseColors.primaryColor = data.menuStyles.baseColors.primaryColor;
+    if (data.menuStyles?.baseColors?.accentColor) baseColors.accentColor = data.menuStyles.baseColors.accentColor;
+    if (data.menuStyles?.mainMenuStyleOptions?.headerOptions) mainMenuStyleOptions.headerOptions = data.menuStyles.mainMenuStyleOptions.headerOptions;
+    if (data.menuStyles?.mainMenuStyleOptions?.suggestionsOptions)
+        mainMenuStyleOptions.suggestionsOptions = data.menuStyles.mainMenuStyleOptions.suggestionsOptions;
+    if (data.menuStyles?.mainMenuStyleOptions?.searchOptions) mainMenuStyleOptions.searchOptions = data.menuStyles.mainMenuStyleOptions.searchOptions;
+    if (data.menuStyles?.mainMenuStyleOptions?.categoriesOptions)
+        mainMenuStyleOptions.categoriesOptions = data.menuStyles.mainMenuStyleOptions.categoriesOptions;
+    if (data.menuStyles?.mainMenuStyleOptions?.itemHeaderOptions)
+        mainMenuStyleOptions.itemHeaderOptions = data.menuStyles.mainMenuStyleOptions.itemHeaderOptions;
+    if (data.menuStyles?.mainMenuStyleOptions?.itemListOptions) mainMenuStyleOptions.itemListOptions = data.menuStyles.mainMenuStyleOptions.itemListOptions;
+    if (data.menuStyles?.mainMenuStyleOptions?.navbarOptions) mainMenuStyleOptions.navbarOptions = data.menuStyles.mainMenuStyleOptions.navbarOptions;
+    if (data.menuStyles?.itemsDialogStyleOptions) itemsDialogStyleOptions.value = data.menuStyles.itemsDialogStyleOptions;
+    if (data.menuStyles?.restaurantDetailsPageOptions) restaurantDetailsPageOptions.value = data.menuStyles.restaurantDetailsPageOptions;
+    if (data.menuStyles?.splashScreenOptions) splashScreenOptions.value = data.menuStyles.splashScreenOptions;
+};
 handleLoadingMenuStyleSettings_results(loadMenuStyleSettings_results.data.value);
 watch(loadMenuStyleSettings_results.data, (val) => handleLoadingMenuStyleSettings_results(val));
 // -------------------------------------------------

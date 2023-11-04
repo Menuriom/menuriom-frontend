@@ -51,7 +51,7 @@
                 </h1>
                 <div class="relative flex flex-col gap-6 w-full max-w-5xl bg-bgPrimary bg-opacity-70 text-fgPrimary rounded-2xl p-6 sm:p-8 shadow-mr15 isolate">
                     <div class="absolute inset-0 -z-10 pattern opacity-10"></div>
-                    <p class="text-center sm:text-start text-2xl md:text-3xl/relaxed opacity-90">
+                    <p class="text-center sm:text-start text-lg sm:text-2xl md:text-3xl/relaxed opacity-90">
                         {{ $t("home.Any good restaurant needs a good menu") }}
                         <br />
                         {{ $t("home.With Menuriom build and manage your restaurant menu with ease") }}

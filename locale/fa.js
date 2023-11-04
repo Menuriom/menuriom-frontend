@@ -111,7 +111,7 @@ export default {
         "Try It For Free": "رایگان امتحان کن",
         "Head To Dashboard": "ورود به داشبورد",
         "Learn How It Works": "آموزش نحوه کارکرد",
-        Multilingual: "چندزبانه",
+        Multilingual: "چند زبانه",
         "Ordering System": "سیستم سفارشات",
         Customizable: "قابل شخصی سازی",
         "User Friendly Interface": "ظاهر ساده و کاربرپسند",
@@ -141,7 +141,6 @@ export default {
         "Easy To Use": "راحتی در استفاده",
         Uptime: "در دسترس",
         "User Friendly": "کاربر پسند",
-        Multilingual: "چند زبانه",
         "Fully Customizable": "کاملا قابل شخصی سازی",
         "Works On Any Device": "قابل اجرا بر روی همه دستگاه ها",
         "Multiple Branches": "امکان ایجاد چند شعبه",
@@ -418,6 +417,30 @@ export default {
             "Phone Number": "تلفن تماس",
             "Add Phone Number": "افزودن شماره تماس",
             "10 digit number": "کد 10 رقمی",
+
+            "Working Hours": "ساعات کاری",
+        },
+
+        "working-hours": {
+            "Working Hours": "ساعات کاری",
+            Saturdays: "شنبه ها",
+            Sundays: "یک شنبه ها",
+            Mondays: "دو شنبه ها",
+            Tuesdays: "سه شنبه ها",
+            Wednesdays: "چهار شنبه ها",
+            Thursdays: "پنج شنبه ها",
+            Fridays: "جمعه ها",
+
+            Open: "باز",
+            Closed: "بسته",
+            From: "از",
+            Till: "تا",
+
+            "All-branches working-hours setting will only apply to branches that have no hours set":
+                "تنظیمات 'همه ی شعبه ها' فقط برای شعبه های که ساعات کاری ندارند اعمال میشود",
+            "You can specify a custom hour for any branch": "شما میتوانید برای هر شعبه ساعات کاری مخصوص تعریف کنید",
+
+            "Work hours updated": "ساعات کاری بروز شد",
         },
 
         menu: {
@@ -471,6 +494,10 @@ export default {
             "Create New Item": "ساخت ایتم جدید",
             "Edit Item": "ویرایش ایتم",
             "Hide this item": "مخفی کردن ایتم",
+            "Show as our suggestion": "نمایش به عنوان پیشنهاد ما",
+            "Showed as our suggestion": "نمایش داده شده در پیشنهادات ما",
+            "Mark as suggested": "پیشنهاد ما",
+            "Marked as suggested": "پیشنهاد ما",
             "Pin to the top of category": "پین کردن ایتم",
             "Mark as sold out": "نمایش به عنوان تمام شده",
             "Item is pinned": "پین شده",
@@ -554,6 +581,7 @@ export default {
             Header2: "بزرگ",
 
             "Offers Section": "قسمت بنر تخفیفات",
+            "Suggestions Section": "قسمت پیشنهادات",
 
             "Search Section": "قسمت جستجو",
             "Show search section": "نمایش قسمت جستجو",

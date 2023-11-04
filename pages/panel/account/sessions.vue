@@ -14,7 +14,7 @@
                     -
                     <span> {{ currentSession.userAgent?.os?.name }} {{ currentSession.userAgent?.os?.version }} </span>
                 </h4>
-                <div class="flex items-center justify-between gap-2 w-full max-w-md">
+                <div class="flex items-center justify-between gap-2 w-full">
                     <div class="flex items-center gap-1">
                         <span class="opacity-75"> {{ $t("panel.account.Device") }} </span>: {{ currentSession.userAgent?.device?.model }}
                         {{ currentSession.userAgent?.device?.type || "?" }}

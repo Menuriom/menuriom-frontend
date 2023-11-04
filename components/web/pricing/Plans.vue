@@ -31,7 +31,7 @@
         >
             <SwiperSlide
                 tag="li"
-                class="flex flex-col gap-2 w-full md:w-screen max-w-[355px] md:max-w-[400px] rounded-4xl shadow-mr35 me-6 sm:me-12"
+                class="flex flex-col gap-2 w-full md:w-screen max-w-xs 2sm:max-w-[355px] md:max-w-[400px] rounded-4xl shadow-mr35 me-6 sm:me-12"
                 v-for="(item, i) in plans"
                 :key="i"
             >
@@ -62,11 +62,11 @@
                         <ul class="flex flex-col gap-4 flex-grow">
                             <li class="flex items-center gap-2" v-if="i > 0">
                                 <Icon class="relative w-5 h-5 bg-primary" name="plus.svg" folder="icons" size="16px" />
-                                <p class="opacity-90 text-primary">{{ $t("pricing.Everything on previous plan") }}</p>
+                                <p class="text-sm sm:text-base opacity-90 text-primary">{{ $t("pricing.Everything on previous plan") }}</p>
                             </li>
                             <li class="flex items-center gap-2" v-for="(feature, j) in item.listings" :key="j">
                                 <Icon class="relative w-5 h-5 bg-secondary" name="check.svg" folder="icons" size="18px" />
-                                <p class="opacity-90">{{ item.translation?.[locale]?.listings[j] || feature }}</p>
+                                <p class="text-sm sm:text-base opacity-90">{{ item.translation?.[locale]?.listings[j] || feature }}</p>
                             </li>
                         </ul>
                         <a

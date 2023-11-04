@@ -4,8 +4,8 @@
     <div class="relative flex flex-col items-center gap-10 w-full">
         <Hero2 class="z-2" />
         <Features class="mt-0 2sm:mt-[30%] sm:mt-64 2xl:mt-40" />
-        <OtherFeatures class="mt-24" />
-        <Pricing class="mt-24" />
+        <OtherFeatures class="mt-10 md:mt-24" />
+        <Pricing class="mt-10 md:mt-24" />
         <hr class="gradient-re opacity-50 border-0 my-6 h-0.5 w-11/12 lg:w-full max-w-screen-lg" />
         <Faqs />
     </div>

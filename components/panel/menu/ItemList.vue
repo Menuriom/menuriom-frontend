@@ -143,8 +143,8 @@
                                                         folder="icons/light"
                                                         size="16px"
                                                     />
-                                                    <small class="" v-if="dish.pinned"> {{ $t(`panel.menu.Item is pinned`) }} </small>
-                                                    <small class="" v-else> {{ $t("panel.menu.Pin to the top of category") }} </small>
+                                                    <small class="" v-if="dish.pinned"> {{ $t(`panel.menu.Mark as suggested`) }} </small>
+                                                    <small class="" v-else> {{ $t("panel.menu.Marked as suggested") }} </small>
                                                 </button>
                                                 <Loading v-if="dish[`toggling_pinned`]" />
                                             </div>

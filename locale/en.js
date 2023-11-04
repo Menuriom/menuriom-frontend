@@ -110,7 +110,6 @@ export default {
         "With Menuriom build and manage your restaurant menu with ease": "With Menuriom build and manage your restaurant menu with ease",
         "Try It For Free": "Try It For Free",
         "Head To Dashboard": "Head To Dashboard",
-        "Check The Demo": "Check The Demo",
         "Learn How It Works": "Learn How It Works",
         Multilingual: "Multilingual",
         "Ordering System": "Ordering System",
@@ -142,7 +141,6 @@ export default {
         "Easy To Use": "Easy To Use",
         Uptime: "Uptime",
         "User Friendly": "User Friendly",
-        Multilingual: "Multilingual",
         "Fully Customizable": "Fully Customizable",
         "Works On Any Device": "Works On Any Device",
         "Multiple Branches": "Multiple Branches",
@@ -419,6 +417,30 @@ export default {
             "Phone Number": "Phone Number",
             "Add Phone Number": "Add Phone Number",
             "10 digit number": "10 digit number",
+
+            "Working Hours": "Working Hours",
+        },
+
+        "working-hours": {
+            "Working Hours": "Working Hours",
+            Saturdays: "Saturdays",
+            Sundays: "Sundays",
+            Mondays: "Mondays",
+            Tuesdays: "Tuesdays",
+            Wednesdays: "Wednesdays",
+            Thursdays: "Thursdays",
+            Fridays: "Fridays",
+
+            Open: "Open",
+            Closed: "Closed",
+            From: "From",
+            Till: "Till",
+
+            "All-branches working-hours setting will only apply to branches that have no hours set":
+                "All-branches working-hours setting will only apply to branches that have no hours set",
+            "You can specify a custom hour for any branch": "You can specify a custom hour for any branch",
+            
+            "Work hours updated": "Work hours updated",
         },
 
         menu: {
@@ -472,6 +494,10 @@ export default {
             "Create New Item": "Create New Item",
             "Edit Item": "Edit Item",
             "Hide this item": "Hide this item",
+            "Show as our suggestion": "Show as our suggestion",
+            "Showed as our suggestion": "Showed as our suggestion",
+            "Mark as suggested": "Mark as suggested",
+            "Marked as suggested": "Marked as suggested",
             "Pin to the top of category": "Pin to the top of category",
             "Mark as sold out": "Mark as sold out",
             "Item is pinned": "Item is pinned",
@@ -554,6 +580,7 @@ export default {
             Header2: "Fat",
 
             "Offers Section": "Offers Section",
+            "Suggestions Section": "Suggestions Section",
 
             "Search Section": "Search Section",
             "Show search section": "Show search section",

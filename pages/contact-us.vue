@@ -160,6 +160,7 @@ const responseMessage = ref("");
 const sending = ref(false);
 const send = async () => {
     if (sending.value) return;
+    sending.value = true;
 
     responseMessage.value = "";
     errorField.value = "";

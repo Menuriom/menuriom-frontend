@@ -12,14 +12,23 @@
                     {{ $t("panel.branches.Here you can manage your business branches and their info") }}
                 </small>
             </div>
-            <nuxt-link
-                class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary shrink-0"
-                :to="localePath(`/panel/${route.params.brandID}/branches/creation`)"
-                v-if="checkPermissions(['main-panel.branches.add'], brand)"
-            >
-                <Icon class="w-3 h-3 bg-fgPrimary" name="plus.svg" folder="icons" size="12px" />
-                {{ $t("panel.branches.New Branch") }}
-            </nuxt-link>
+            <div class="flex flex-wrap items-center gap-2">
+                <nuxt-link
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-fgPrimary text-bgPrimary shrink-0"
+                    :to="localePath(`/panel/${route.params.brandID}/working-hours`)"
+                >
+                    <Icon class="w-4 h-4 gradient" name="calendar-clock.svg" folder="icons/light" size="16px" />
+                    {{ $t("panel.branches.Working Hours") }}
+                </nuxt-link>
+                <nuxt-link
+                    class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-primary shrink-0"
+                    :to="localePath(`/panel/${route.params.brandID}/branches/creation`)"
+                    v-if="checkPermissions(['main-panel.branches.add'], brand)"
+                >
+                    <Icon class="w-3 h-3 bg-fgPrimary" name="plus.svg" folder="icons" size="12px" />
+                    {{ $t("panel.branches.New Branch") }}
+                </nuxt-link>
+            </div>
         </header>
         <hr class="w-full border-bgSecondary" />
         <section class="flex flex-col w-full">
@@ -210,7 +219,7 @@ const deleteRecord = async () => {
 // -------------------------------------------------
 
 const handleErrors = (err) => {
-    console.log({ err });
+    if(!err) return
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;
@@ -226,7 +235,7 @@ const noMoreRecords = ref(false);
 const records = reactive({ list: [] });
 const getBranchList_results = await useLazyAsyncData(() => getBranchList(route.params.brandID));
 
-if (getBranchList_results.error.value) handleErrors(getBranchList_results.error.value);
+handleErrors(getBranchList_results.error.value);
 watch(getBranchList_results.error, (err) => handleErrors(err));
 
 const handleBranchList_results = (data) => {
