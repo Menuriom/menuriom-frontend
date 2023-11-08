@@ -1,4 +1,3 @@
-// import { sendStream } from "h3";
 import http from "http";
 import https from "https";
 
@@ -20,6 +19,9 @@ export default defineEventHandler(async (event) => {
     const baseUrl = process.env.API_BASE_URL;
     const protocol = baseUrl.includes("https://") ? https : http;
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
+
+    const cacheAge = 60 * 60 * 24 * 15; // 15 days
+    setHeader(event, "cache-control", `public, max-age=${cacheAge}, s-maxage=${cacheAge}`);
 
     const data = await getFile(req, protocol, baseUrl, ip).catch((e) => {});
     return await sendStream(event, data);
