@@ -8,7 +8,7 @@
                 {{ $t("pricing.Start creating instantly") }}. {{ $t("pricing.Start free") }}.
             </h4>
         </div>
-        <Plans :plans="plans" />
+        <Plans2 :plans="plans" />
         <nuxt-link class="hover:bg-fgPrimary hover:text-bgSecondary transition-all text-sm p-4 border-2 border-bgSecondary rounded-2xl" to="/pricing">
             {{ $t("pricing.Compare the plans") }}
         </nuxt-link>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import Plans from "~/components/web/pricing/Plans.vue";
+import Plans2 from "~/components/web/pricing/Plans2.vue";
 
 const handleError = (err) => {
     if (!err) return;

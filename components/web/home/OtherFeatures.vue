@@ -2,7 +2,7 @@
 
 <template>
     <div class="flex items-center justify-center w-full max-w-screen-3xl px-6">
-        <section class="flex flex-col items-center gap-8 md:gap-14 w-full px-4 md:px-8 py-20 bg-bgAccent rounded-4xl">
+        <section class="flex flex-col items-center gap-8 md:gap-14 w-full px-4 md:px-8 py-10 md:py-20 bg-bgAccent rounded-4xl">
             <div class="flex flex-col items-center gap-2">
                 <h2 class="f-inter text-2xl lg:text-5xl font-bold text-fgPrimary">{{ $t("home.FEATURES") }}.</h2>
                 <h4 class="f-poppins lg:text-2xl opacity-50 text-fgPrimary text-center">{{ $t("home.We are constantly growing and adding new features") }}.</h4>

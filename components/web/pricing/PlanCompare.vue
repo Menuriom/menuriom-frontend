@@ -22,13 +22,13 @@
             <header class="lg:sticky top-24 flex justify-center lg:items-end gap-1 2sm:gap-4 w-full z-2">
                 <div class="hidden lg:flex flex-grow-0 lg:grow"></div>
                 <div
-                    class="list_heads flex justify-center p-1 rounded-[20px] shadow-nr25"
-                    :class="[item.highlight ? 'gradient' : 'bg-neutral-300']"
+                    class="list_heads flex justify-center rounded-[20px] shadow-nr25"
+                    :class="[item.highlight ? 'gradient p-1' : 'bg-neutral-300 sm:p-1']"
                     v-for="(item, i) in pricing.list"
                     :key="i"
                 >
-                    <div class="flex flex-col gap-3 p-3 md:p-4 w-full rounded-2xl bg-pencil-tip text-fgPrimary">
-                        <div class="flex flex-col sm:flex-row items-center gap-2">
+                    <div class="flex flex-col gap-3 p-2 sm:p-3 md:p-4 w-full rounded-2xl bg-pencil-tip text-fgPrimary">
+                        <div class="hidden lg:flex flex-col sm:flex-row items-center gap-2">
                             <img class="w-5" :src="item.icon" :alt="item.title" />
                             <h3 class="f-inter text-sm lg:text-lg font-bold">{{ item.title }}</h3>
                         </div>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="flex flex-col lg:flex-row justify-start items-center sm:items-baseline md:gap-1" v-else>
                             <b class="f-inter text-center sm:text-start text-lg text-secondary">{{ $t("pricing.Free") }}</b>
-                            <small class="text-[10px]">/{{ $t("pricing.Always") }}</small>
+                            <small class="text-[10px]">{{ $t("pricing.Always") }}</small>
                         </div>
 
                         <a
@@ -55,7 +55,16 @@
                     </div>
                 </div>
             </header>
-            <ul class="flex flex-col gap-6 lg:gap-0 w-full">
+            <ul class="flex flex-col gap-1 lg:gap-0 w-full">
+                <ul class="sticky top-18 lg:hidden flex items-center justify-center gap-4 2sm:gap-8 px-2 mx-auto w-full z-10">
+                    <li
+                        class="lg:hidden flex flex-col items-center gap-2 w-28 text-center text-fgPrimary text-xs p-2 py-6 rounded-lg bg-bgAccent"
+                        v-for="item in pricing.list"
+                    >
+                        <img class="w-5" :src="item.icon" :alt="item.title" />
+                        <b>{{ item.title }}</b>
+                    </li>
+                </ul>
                 <li
                     class="flex flex-col lg:flex-row items-center lg:items-stretch gap-1 w-full py-2 lg:py-0 rounded-2xl lg:odd:bg-bgAccent group"
                     v-for="(item, i) in features"
@@ -72,13 +81,13 @@
                             <span class="-mt-0.5">{{ item.desc }}</span>
                         </div>
                     </div>
-                    <div class="flex justify-center gap-1 2sm:gap-4 w-full">
+                    <div class="flex justify-center gap-2 2sm:gap-4 w-full">
                         <div
-                            class="relative list_checks flex flex-col items-center justify-center p-2 lg:p-3 bg-bgAccent rounded-md lg:rounded-none group-first:rounded-t-lg group-last:rounded-b-lg shadow-mr25"
+                            class="relative list_checks flex flex-col items-center justify-center p-2 lg:p-3 sm:bg-bgAccent rounded-md lg:rounded-none group-first:rounded-t-lg group-last:rounded-b-lg shadow-mr25"
                             v-for="(mark, j) in item.marks"
                             :key="j"
                         >
-                            <span class="lg:hidden text-fgPrimary text-xs">{{ pricing.list[j].title }}</span>
+                            <!-- <span class="lg:hidden text-fgPrimary text-xs p-2 rounded-lg bg-bgAccent">{{ pricing.list[j].title }}</span> -->
                             <Icon class="relative w-6 h-6 bg-secondary" name="Check.svg" folder="icons/basil" size="24px" v-if="mark === true" />
                             <Icon class="relative w-6 h-6 bg-neutral-500" name="Cross.svg" folder="icons/basil" size="24px" v-else-if="mark === false" />
                             <span class="text-fgPrimary text-sm py-1" v-else>{{ mark }}</span>

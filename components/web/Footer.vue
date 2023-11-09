@@ -44,7 +44,7 @@
     <footer class="relative flex flex-col items-center gap-12 p-2 px-6 md:px-8 w-full bg-bgAccent">
         <div class="box flex flex-wrap lg:flex-nowrap items-end justify-center gap-4 w-full max-w-4xl p-10 sm:px-16 -mt-40 lg:-mt-56">
             <div class="flex flex-col gap-6 items-center lg:items-start w-full max-w-md self-center">
-                <h4 class="f-inter font-extrabold text-2xl sm:text-3xl lg:text-4xl/[3rem] text-center lg:text-start">
+                <h4 class="f-inter font-extrabold text-xl sm:text-3xl lg:text-4xl/[3rem] text-center lg:text-start">
                     {{ $t("footer.Start Building Your First Menu For Free") }}
                 </h4>
                 <button
@@ -54,7 +54,7 @@
                     {{ $t("footer.Sign Up Now For Free") }}
                 </button>
             </div>
-            <img class="w-64 lg:w-auto lg:-mt-28 -mb-10" src="~/assets/images/iPhone.webp" alt="iPhone" />
+            <img class="w-44 sm:w-64 lg:w-auto lg:-mt-28 -mb-10" src="~/assets/images/iPhone.webp" alt="iPhone" />
         </div>
         <div class="flex flex-wrap items-center justify-center lg:justify-between gap-10 md:gap-16 w-full max-w-screen-xl">
             <div class="flex flex-col items-start gap-10">
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <nav class="flex flex-col sm:flex-row flex-wrap items-center md:items-start gap-8 md:gap-16">
-                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
+                <ul class="flex flex-col items-center md:items-start gap-2 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/pricing')">{{ $t("footer.Pricing") }}</nuxt-link>
                     </li>
@@ -112,7 +112,7 @@
                         </nuxt-link>
                     </li>
                 </ul>
-                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
+                <ul class="flex flex-col items-center md:items-start gap-2 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/contact-us')">
                             {{ $t("footer.Request Feature") }}
@@ -129,7 +129,7 @@
                         </nuxt-link>
                     </li>
                 </ul>
-                <ul class="flex flex-col items-center md:items-start gap-3 sm:gap-5">
+                <ul class="flex flex-col items-center md:items-start gap-2 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/privacy-policy')">
                             {{ $t("footer.Privacy Policy") }}

@@ -21,10 +21,12 @@
 ::selection { color: theme("colors.bgPrimary"); background: theme("colors.secondary"); }
 ::-moz-selection { color: theme("colors.bgPrimary"); background: theme("colors.secondary"); }
 
-*::-webkit-scrollbar { margin-inline-start: 0.25em; width: 10px; height: 10px; margin: auto 2px; border-radius: 5px; box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.01); }
-*::-webkit-scrollbar-track { background-color: theme("colors.zinc.900"); border-radius: 5px; box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.01); }
-/* *::-webkit-scrollbar-track-piece { background-color: theme("colors.zinc.800"); border-radius: 5px; } */
-*::-webkit-scrollbar-thumb { background: theme("colors.bgSecondary"); border-radius: 5px; box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1); }
+@media (min-width: 768px) {
+    *::-webkit-scrollbar { margin-inline-start: 0.25em; width: 10px; height: 10px; margin: auto 2px; border-radius: 5px; box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.01); }
+    *::-webkit-scrollbar-track { background-color: theme("colors.zinc.900"); border-radius: 5px; box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.01); }
+    /* *::-webkit-scrollbar-track-piece { background-color: theme("colors.zinc.800"); border-radius: 5px; } */
+    *::-webkit-scrollbar-thumb { background: theme("colors.bgSecondary"); border-radius: 5px; box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1); }
+}
 
 /* @font-face { font-family: "IranyekanRegular"; src: local('Roboto'), url("../fonts/iranyekanwebregular.woff2"); font-display: swap; }
 @font-face { font-family: "IranyekanBold"; src: local('Roboto'), url("../fonts/iranyekanwebbold.woff2"); font-display: swap; } */

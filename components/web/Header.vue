@@ -52,7 +52,7 @@ nav {
         </nuxt-link>
 
         <transition name="slide-up" appear>
-            <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-screen-2xs lg:max-w-none p-6 lg:p-0" v-show="menuOpen">
+            <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-[250px] lg:max-w-none p-6 lg:p-0" v-show="menuOpen">
                 <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')">
@@ -84,9 +84,9 @@ nav {
                 <div class="flex flex-wrap items-center gap-4">
                     <LangSwitch class="" textColor="white" :showText="true" />
                     <!-- <span class="w-0.5 h-full lg:hidden text-gray-400"></span> -->
-                    <div class="flex items-center gap-2">
+                    <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
                         <nuxt-link
-                            class="link md:hidden p-2 px-3 hover:px-5 rounded-lg bg-fgPrimary text-bgPrimary transition-all"
+                            class="link md:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-fgPrimary text-bgPrimary transition-all"
                             :to="localePath('/authenticate')"
                             title="Login into user panel"
                             v-if="!user.email.value"
@@ -94,7 +94,7 @@ nav {
                             {{ $t("header.Login") }}
                         </nuxt-link>
                         <nuxt-link
-                            class="link 2sm:hidden p-2 px-3 hover:px-5 rounded-lg bg-primary text-fgPrimary transition-all"
+                            class="link 2sm:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-primary text-fgPrimary transition-all"
                             :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
                             :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
                         >
