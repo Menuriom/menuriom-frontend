@@ -52,13 +52,20 @@ jobs:
               run: echo "DOCKER_REPOSITORY=${DOCKER_REPOSITORY,,}" >> ${GITHUB_ENV}
 
             - name: Test to see nuxt variables are set
-              run: echo "BASE_URL=$BASE_URL MENU_BASE_URL=$MENU_BASE_URL GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID"
+              run: |
+                  echo "BASE_URL=$BASE_URL MENU_BASE_URL=$MENU_BASE_URL GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID"
 
-            # - name: Create .env file
+            - name: Create .env file for nuxt
+              run: |
+                  echo "BASE_URL=$BASE_URL" > .env
+                  echo "MENU_BASE_URL=$MENU_BASE_URL" >> .env
+                  echo "GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID" >> .env
+
+            # - name: Export env variables for nuxt
             #   run: |
-            #       echo "BASE_URL=$BASE_URL" > .env
-            #       echo "MENU_BASE_URL=$MENU_BASE_URL" >> .env
-            #       echo "GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID" >> .env
+            #       export BASE_URL=$BASE_URL
+            #       export MENU_BASE_URL=$MENU_BASE_URL
+            #       export GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID
 
             - name: Build and push docker image
               uses: docker/build-push-action@v5

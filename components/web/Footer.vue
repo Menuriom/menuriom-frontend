@@ -107,7 +107,7 @@
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/faqs')">{{ $t("footer.Faqs") }}</nuxt-link>
                     </li>
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
-                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="`${runtimeConfig.public.MENU_BASE_URL}/Menuriom`">
+                        <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="`${$config.public.MENU_BASE_URL}/Menuriom`">
                             {{ $t("footer.Demo") }}
                         </nuxt-link>
                     </li>
@@ -155,7 +155,6 @@
 <script setup>
 import LangSwitch from "~/components/LangSwitch.vue";
 
-const runtimeConfig = useRuntimeConfig();
 const localePath = useLocalePath();
 const { locale } = useI18n();
 
