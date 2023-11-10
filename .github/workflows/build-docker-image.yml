@@ -16,6 +16,12 @@ jobs:
     build-and-push-docker:
         runs-on: ubuntu-latest
 
+        # adding env variables that nuxt config needs
+        env:
+            BASE_URL: ${{ vars.BASE_URL }}
+            MENU_BASE_URL: ${{ vars.MENU_BASE_URL }}
+            GOOGLE_LOGIN_CLIENT_ID: ${{ vars.GOOGLE_LOGIN_CLIENT_ID }}
+
         permissions:
             contents: read
             packages: write
