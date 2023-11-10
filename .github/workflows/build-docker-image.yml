@@ -12,15 +12,14 @@ env:
     # github.repository as <account>/<repo>
     DOCKER_REPOSITORY: ${{ github.repository }}
 
+    # variables that nuxt config needs
+    BASE_URL: ${{ vars.BASE_URL }}
+    MENU_BASE_URL: ${{ vars.MENU_BASE_URL }}
+    GOOGLE_LOGIN_CLIENT_ID: ${{ vars.GOOGLE_LOGIN_CLIENT_ID }}
+
 jobs:
     build-and-push-docker:
         runs-on: ubuntu-latest
-
-        # adding env variables that nuxt config needs
-        env:
-            BASE_URL: ${{ vars.BASE_URL }}
-            MENU_BASE_URL: ${{ vars.MENU_BASE_URL }}
-            GOOGLE_LOGIN_CLIENT_ID: ${{ vars.GOOGLE_LOGIN_CLIENT_ID }}
 
         permissions:
             contents: read
@@ -51,6 +50,15 @@ jobs:
 
             - name: Set docker repository to lowercase
               run: echo "DOCKER_REPOSITORY=${DOCKER_REPOSITORY,,}" >> ${GITHUB_ENV}
+
+            - name: Test to see nuxt variables are set
+              run: echo "BASE_URL=$BASE_URL MENU_BASE_URL=$MENU_BASE_URL GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID"
+
+            # - name: Create .env file
+            #   run: |
+            #       echo "BASE_URL=$BASE_URL" > .env
+            #       echo "MENU_BASE_URL=$MENU_BASE_URL" >> .env
+            #       echo "GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID" >> .env
 
             - name: Build and push docker image
               uses: docker/build-push-action@v5
