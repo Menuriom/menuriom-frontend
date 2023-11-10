@@ -28,7 +28,7 @@
                 </span>
             </h3>
         </div>
-        <Plans class="relative" :plans="plans" />
+        <Plans2 class="relative" :plans="plans" />
         <PlanCompare :plans="plans" />
         <hr class="gradient-re opacity-50 border-0 my-6 h-0.5 w-11/12 lg:w-full max-w-screen-lg" />
         <Faqs blobPosition="left" />
@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import Plans from "~/components/web/pricing/Plans.vue";
+import Plans2 from "~/components/web/pricing/Plans2.vue";
 import PlanCompare from "~/components/web/pricing/PlanCompare.vue";
 import Faqs from "~/components/web/home/Faqs.vue";
 

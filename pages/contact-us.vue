@@ -38,23 +38,23 @@
                     <span class="text-2xl">{{ $t("contact-us.Im contacting for") }}...</span>
                     <h3 class="opacity-60">{{ $t("contact-us.Choose your subject to contact") }}</h3>
                 </div>
-                <ul class="flex flex-wrap gap-4">
+                <ul class="flex  gap-4 w-full overflow-auto">
                     <li
-                        class="flex items-center justify-center rounded-xl transition-all cursor-pointer"
+                        class="flex items-center justify-center rounded-xl transition-all cursor-pointer shrink-0"
                         :class="[subject == 'request-feature' ? 'gradient p-1' : 'p-0 bg-transparent']"
                         @click="subject = 'request-feature'"
                     >
                         <span class="p-3 px-4 rounded-lg bg-bgSecondary bg-opacity-90">{{ $t("contact-us.Request New Feature") }}</span>
                     </li>
                     <li
-                        class="flex items-center justify-center rounded-xl transition-all cursor-pointer"
+                        class="flex items-center justify-center rounded-xl transition-all cursor-pointer shrink-0"
                         :class="[subject == 'report-issue' ? 'gradient p-1' : 'p-0 bg-transparent']"
                         @click="subject = 'report-issue'"
                     >
                         <span class="p-3 px-4 rounded-lg bg-bgSecondary bg-opacity-90">{{ $t("contact-us.Reporting An Issue") }}</span>
                     </li>
                     <li
-                        class="flex items-center justify-center rounded-xl transition-all cursor-pointer"
+                        class="flex items-center justify-center rounded-xl transition-all cursor-pointer shrink-0"
                         :class="[subject == 'sales' ? 'gradient p-1' : 'p-0 bg-transparent']"
                         @click="subject = 'sales'"
                     >
