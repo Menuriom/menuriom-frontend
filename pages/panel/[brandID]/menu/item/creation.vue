@@ -36,7 +36,7 @@
                         v-if="checkLimitations([['item-highlighting', true]], brand)"
                     >
                         <Icon class="w-4 h-4 gradient-re -rotate-45" name="thumbtack.svg" folder="icons/light" size="16px" />
-                        <span class="text-sm">{{ $t("panel.menu.Show as our suggestion") }}</span>  
+                        <span class="text-sm">{{ $t("panel.menu.Show as our suggestion") }}</span>
                         <Switch class="ms-2" v-model:value="pinned" />
                     </div>
                     <div class="flex flex-wrap items-center gap-2 w-full max-w-max p-2 rounded-xl border border-bgSecondary">
@@ -424,7 +424,7 @@ const save = async () => {
     gallery.value.forEach((image) => data.append("gallery", image.file));
 
     for (const val in name.values) data.append(`name.${val}`, name.values[val]);
-    for (const val in description.values) data.append(`description.${val}`, description.values[val]);
+    for (const val in description.values) if (description.values[val]) data.append(`description.${val}`, description.values[val]);
     if (selectedCategory.option.value) data.append("selectedCategory", selectedCategory.option.value);
     data.append("price", price.value);
 
