@@ -47,6 +47,10 @@ export default defineNuxtConfig({
     // vite options
     vite: {},
 
+    devServer: {
+        host: "",
+    },
+
     nitro: {
         compressPublicAssets: true,
         routeRules: {

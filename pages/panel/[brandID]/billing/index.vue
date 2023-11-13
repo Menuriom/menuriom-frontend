@@ -43,70 +43,7 @@
             </header>
             <div class="flex flex-wrap xl:flex-nowrap gap-4 w-full rounded-2xl">
                 <div class="flex flex-col gap-4 w-full xl:max-w-xl shrink-0">
-                    <div class="flex items-center justify-center p-2 w-full rounded-3xl gradient shadow-nr15" v-if="!loadingCurrentPlan">
-                        <div class="flex flex-col gap-4 p-5 w-full rounded-2xl bg-bgSecondary bg-opacity-80 shadow-nr10">
-                            <h3 class="flex items-center gap-4">
-                                <b class="text-sm shrink-0">{{ $t("panel.billing.Current Plan Details") }}</b>
-                                <span class="w-full h-0.5 bg-fgPrimary opacity-30"></span>
-                            </h3>
-                            <div class="flex flex-wrap items-center justify-between gap-4">
-                                <div class="flex items-center gap-2">
-                                    <img class="bg-fgPrimary bg-opacity-10 p-2 rounded-xl w-16" :src="currentPlan.plan.icon" />
-                                    <h2 class="gradient-text text-3xl sm:text-4xl/relaxed font-extrabold">
-                                        {{ currentPlan.plan.translation?.[locale]?.name || currentPlan.plan.name }}
-                                    </h2>
-                                </div>
-                                <div class="flex items-center gap-1 bg-bgAccent p-2 rounded-xl shadow-mr15" v-if="currentPlan.daysRemaining">
-                                    <b class="text-primary">{{ currentPlan.daysRemaining }}</b>
-                                    <small>{{ currentPlan.secondsPassed > 0 ? $t("panel.billing.remaining") : $t("panel.billing.passed") }}</small>
-                                </div>
-                            </div>
-                            <p
-                                class="w-max max-w-full text-xs border border-fgPrimary border-opacity-10 p-1 px-3 rounded-lg shadow-mr35"
-                                v-html="
-                                    $t('panel.billing.planLimitDesc', {
-                                        branchLimit: `<b class='text-secondary'>${currentPlan.branchLimit}</b>`,
-                                        staffLimit: `<b class='text-secondary'>${currentPlan.staffLimit}</b>`,
-                                    })
-                                "
-                            />
-                            <div class="flex items-baseline gap-2" v-if="currentPlan.price > 0">
-                                <div class="flex flex-wrap items-end gap-1">
-                                    <b class="text-2xl/none text-secondary">
-                                        {{ Intl.NumberFormat(locale).format(currentPlan.price) }}
-                                        <!-- <span class="text-sm font-normal">,000</span> -->
-                                    </b>
-                                    <b class="f-inter text-sm font-extralight">{{ $t("pricing.Toman") }}</b>
-                                </div>
-                                <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
-                                <b>{{ currentPlan.period == "monthly" ? $t("pricing.Monthly") : $t("pricing.Annual") }}</b>
-                            </div>
-                            <div class="flex items-baseline gap-2" v-else>
-                                <b class="text-2xl/none text-secondary font-black"> {{ $t("pricing.Free") }} </b>
-                                <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
-                                <b>{{ $t("pricing.Always") }}</b>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4 p-4 w-full rounded-2xl bg-bgSecondary bg-opacity-50 shadow-nr15" v-else>
-                        <h3 class="flex items-center gap-4">
-                            <b class="text-sm shrink-0">{{ $t("panel.billing.Current Plan Details") }}</b>
-                            <span class="w-full h-0.5 bg-fgPrimary opacity-50"></span>
-                        </h3>
-                        <div class="flex flex-wrap items-center justify-between gap-4">
-                            <div class="flex items-center gap-2">
-                                <span class="skeleton rounded-md w-16 h-16"></span>
-                                <h2 class="skeleton rounded-md w-40 h-8"></h2>
-                            </div>
-                            <span class="skeleton rounded-md w-24 h-4"></span>
-                        </div>
-                        <p class="skeleton rounded-md w-96 h-4" />
-                        <div class="flex items-baseline gap-2">
-                            <b class="skeleton w-20 h-6 rounded text-2xl/none text-secondary"></b>
-                            <span class="w-6 h-0.5 rounded-full bg-neutral-50"></span>
-                            <b class="skeleton w-20 h-6 rounded"></b>
-                        </div>
-                    </div>
+                    <CurrentPlan :loadingCurrentPlan="loadingCurrentPlan" :currentPlan="currentPlan" />
                     <div class="flex flex-wrap items-center gap-4 w-full">
                         <button
                             class="btn flex items-center justify-center gap-3 p-3 hover:px-6 bg-fgPrimary text-bgPrimary rounded-xl grow"
@@ -126,60 +63,7 @@
                         </button>
                     </div>
                 </div>
-                <div
-                    class="flex flex-col gap-3 p-4 w-full bg-bgSecondary bg-opacity-50 rounded-2xl shadow-mr15 grow"
-                    v-if="bills.list.length > 0 && lastBill.billNumber"
-                >
-                    <div class="flex flex-wrap items-center gap-4 w-full">
-                        <h3 class="flex items-center gap-4 text-sm font-bold shrink-0">{{ $t("panel.billing.Your Last Bill") }}</h3>
-                        <span class="h-0.5 bg-fgPrimary opacity-30 grow"></span>
-                        <div class="flex items-center gap-1 text-sm" v-if="lastBill.dueDate">
-                            <span>{{ $t("panel.billing.Due Date") }}:</span>
-                            <b>{{ new Date(lastBill.dueDate).toLocaleString(locale) }}</b>
-                        </div>
-                    </div>
-                    <small class="text-secondary">
-                        {{ $t("panel.billing.Bill Number") }} <b class="text-sm text-fgPrimary" dir="ltr">#{{ lastBill.billNumber }}</b>
-                    </small>
-                    <div class="flex flex-wrap items-center gap-4">
-                        <p class="text-sm opacity-75">{{ lastBill.translation?.[locale]?.description || lastBill.description }}</p>
-                        <p class="text-sm p-1 px-2 rounded-lg bg-bgSecondary shadow-inner opacity-75" v-if="lastBill.forHowLong">
-                            {{ $t("panel.billing.For") }} {{ lastBill.forHowLong }}
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-xl bg-bgAccent shadow-inner grow">
-                        <div class="flex items-center gap-2">
-                            <h4 class="text-sm text-secondary">{{ $t("panel.billing.Plan") }}</h4>
-                            <b>{{ lastBill.plan.translation?.[locale]?.name || lastBill.plan.name }}</b>
-                        </div>
-                        <div class="flex items-baseline gap-1 font-bold">
-                            <span class="text-3xl/none text-emerald-400"> {{ Intl.NumberFormat(locale).format(lastBill.payablePrice) }}</span>
-                            <small class="text-sm">{{ $t("pricing.Toman") }}</small>
-                        </div>
-                    </div>
-                    <h3 class="flex items-center gap-4">
-                        <b class="text-sm shrink-0">{{ $t("panel.billing.Payment Details") }}</b>
-                        <span class="w-full h-0.5 bg-fgPrimary opacity-30"></span>
-                    </h3>
-                    <div class="flex flex-wrap items-center justify-between gap-4 w-full">
-                        <span
-                            class="p-3 py-2 text-sm rounded-xl bg-opacity-10"
-                            :class="{
-                                'bg-red-200 text-rose-300': lastBill.status == 'notPaid',
-                                'bg-blue-200 text-blue-300': lastBill.status == 'pendingPayment',
-                                'bg-emerald-200 text-emerald-300': lastBill.status == 'paid',
-                                'bg-red-200 text-red-300': lastBill.status == 'canceled',
-                            }"
-                        >
-                            {{ $t(`panel.payment.${lastBill.status}`) }}
-                        </span>
-                        <div v-if="lastBill.status == 'notPaid' && checkPermissions(['main-panel.billing.pay'], brand)">
-                            <button class="btn w-max p-3 px-5 hover:px-8 text-sm bg-primary rounded-xl">
-                                {{ $t("panel.billing.Pay This Bill") }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <LastBill :lastBill="lastBill" :brand="brand" v-if="bills.list.length > 0 && lastBill.billNumber" />
                 <div class="flex flex-col gap-4 p-2 2sm:p-4 w-full bg-bgSecondary bg-opacity-50 rounded-2xl shadow-mr15 grow" v-else>
                     <div class="flex flex-wrap items-start justify-center gap-4 w-full">
                         <div class="flex flex-wrap items-center gap-4 p-2 md:p-0 grow">
@@ -345,6 +229,8 @@
 <script setup>
 const ChangePlanDialog = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/ChangePlanDialog.vue"));
 const BillDetails = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/BillDetails.vue"));
+const CurrentPlan = defineAsyncComponent(() => import("~/components/panel/billing/CurrentPlan.vue"));
+const LastBill = defineAsyncComponent(() => import("~/components/panel/billing/LastBill.vue"));
 import Loading from "~/components/Loading.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
@@ -355,7 +241,6 @@ const nuxtApp = useNuxtApp();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-// const title = computed(() => `${t("panel.billing.Billing")} - ${t("panel.Your Menuriom Panel")}`);
 useHead({ title: `${t("panel.billing.Billing")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});

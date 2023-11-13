@@ -47,8 +47,10 @@ nav {
             <div class="rounded-lg p-0.5 md:p-1 bg-gradient-to-t from-primary to-secondary">
                 <img class="relative h-8 rounded-md" src="/logos/logo9-dark.webp" title="Menuriom" alt="Menuriom" />
             </div>
-            <img class="h-5 xl:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
-            <img class="h-5 xl:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
+            <img class="h-7 xl:h-8" src="/logos/logo-text-en-light2.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
+            <img class="h-7 xl:h-8" src="/logos/logo-text-en-light2.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
+            <!-- <img class="h-5 xl:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
+            <img class="h-5 xl:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" /> -->
         </nuxt-link>
 
         <transition name="slide-up" appear>

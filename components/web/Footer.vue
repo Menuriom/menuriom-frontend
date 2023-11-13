@@ -59,12 +59,12 @@
         <div class="flex flex-wrap items-center justify-center lg:justify-between gap-10 md:gap-16 w-full max-w-screen-xl">
             <div class="flex flex-col items-start gap-10">
                 <div class="flex flex-wrap justify-center items-center gap-4">
-                    <div class="rounded-xl p-2 bg-gradient-to-t from-primary to-secondary">
-                        <img class="w-16 md:w-20 aspect-square" src="/logos/logo9-dark.webp" alt="Menuriom" />
+                    <div class="rounded-2xl p-2 bg-gradient-to-t from-primary to-secondary">
+                        <img class="w-16 md:w-20 aspect-square rounded-xl" src="/logos/logo9-dark.webp" alt="Menuriom" />
                     </div>
                     <div class="flex flex-col items-start gap-2">
-                        <img class="h-12" src="/logos/logo-text-en-light.svg" alt="Menuriom" v-if="locale == 'en'" />
-                        <img class="h-12" src="/logos/logo-text-fa-light.svg" alt="منوریوم" v-if="locale == 'fa'" />
+                        <img class="h-16" src="/logos/logo-text-en-light2.svg" alt="Menuriom" v-if="locale == 'en'" />
+                        <img class="h-16" src="/logos/logo-text-en-light2.svg" alt="منوریوم" v-if="locale == 'fa'" />
                         <small class="text-fgPrimary text-xs opacity-75">
                             {{ $t("footer.The Best Way To Manage Orders") }}
                         </small>

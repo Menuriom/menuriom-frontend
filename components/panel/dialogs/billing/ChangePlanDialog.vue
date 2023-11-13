@@ -296,7 +296,7 @@ const calculatePrice = () => {
         }
     }
 
-    if (remainingDays.value <= 5) {
+    if (remainingDays.value <= 5 && calculatedPrice.value > 0) {
         alerts.list.push({
             type: "info",
             text: t("panel.billing.because less than 5 days of your current plan remaining you need to pay the whole price of the plan to upgrade"),

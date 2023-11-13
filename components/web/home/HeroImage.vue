@@ -5,9 +5,9 @@
 </style>
 
 <template>
-    <div class="relative self-end w-full sm:w-auto 1.5xl:-mt-14">
-        <div class="relative flex flex-col items-center w-full sm:w-screen max-w-[480px] h-[690px] isolate">
-            <span class="absolute rounded-[4rem] mt-4 bg-neutral-50" style="width: calc(100% - 1rem); height: calc(100vh - 2rem);"></span>
+    <div class="relative self-end w-full sm:w-auto 1.5xl:-mt-5">
+        <div class="relative flex flex-col items-center lg:-mb-64 w-full sm:w-screen max-w-[468px] aspect-[1/2] overflow-hidden isolate">
+            <span class="absolute top-2 rounded-[3rem] mx-auto bg-neutral-50" style="width: calc(100% - 1rem); height: calc(100% - 1.25rem)"></span>
             <!-- <NuxtImg class="relative w-full px-6 mt-12 grayscale" src="/img/menu.png" sizes="100% 620px" alt="" /> -->
             <img class="absolute w-full" src="~/assets/images/Xmockup2.svg" alt="" />
         </div>
