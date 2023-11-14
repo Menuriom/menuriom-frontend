@@ -87,10 +87,10 @@ else if (Object.keys(user.brands.value.list).length == 0) {
     if (showPopUp.value) panelStore.openPopUp("select-account-type");
 }
 
-if (process.client) await userStore.refreshToken().catch((e) => {});
+// if (process.client) await userStore.refreshToken().catch((e) => {});
 
 onMounted(() => {
     panelStore.loadSelectedBrand();
-    userStore.setRefreshInterval();
+    if (!userStore.isIntervalSet) userStore.setRefreshInterval();
 });
 </script>

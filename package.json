@@ -12,6 +12,7 @@
     "@nuxtjs/tailwindcss": "^6.8.0",
     "autoprefixer": "^10.4.13",
     "nuxt": "^3.7.0",
+    "nuxt-delay-hydration": "^1.2.3",
     "postcss": "^8.4.21"
   },
   "dependencies": {
