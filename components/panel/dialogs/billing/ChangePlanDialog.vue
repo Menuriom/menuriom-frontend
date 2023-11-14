@@ -354,7 +354,6 @@ const changePlan = async () => {
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
             // TODO : log errors in sentry type thing
-
             loading.value = false;
         });
 };

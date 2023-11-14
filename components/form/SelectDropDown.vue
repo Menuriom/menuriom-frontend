@@ -26,7 +26,11 @@ span {
 
 <template>
     <div class="flex flex-col gap-1">
-        <div class="wrapper relative flex bg-bgSecondary bg-opacity-50 rounded-xl" :class="{ error: !!error, 'input-box-shadow': !!shadow }" ref="dropdown">
+        <div
+            class="wrapper relative flex bg-bgSecondary bg-opacity-50 rounded-xl"
+            :class="{ error: !!error, 'input-box-shadow': !!shadow, 'opacity-50': !!disabled }"
+            ref="dropdown"
+        >
             <div class="relative flex items-center w-full" tabindex="0" @click="toggleDropdown()">
                 <img
                     class="ms-3 object-contain"
@@ -103,6 +107,7 @@ const props = defineProps({
     iconFolder: { type: String, default: "icons" },
     customPadding: { type: String, default: "p-4" },
     formHtmlObject: Object,
+    disabled: { type: Boolean, default: false },
 });
 const emit = defineEmits(["update:selectedOption"]);
 
@@ -117,6 +122,7 @@ const open = ref(false);
 const openDirection = ref("bottom");
 const dropdown = ref(null); //Ref to DOM
 const toggleDropdown = (value) => {
+    if (props.disabled) return;
     openDirection.value = props.formHtmlObject.clientHeight - dropdown.value.offsetTop < 200 ? "top" : "bottom";
     open.value = value !== undefined ? value : !open.value;
 };

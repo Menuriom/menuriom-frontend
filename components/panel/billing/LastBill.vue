@@ -62,8 +62,9 @@
                         <span :value="option.value">{{ option.name }}</span>
                     </div>
                 </SelectDropDown>
-                <button class="btn w-max p-3 px-5 hover:px-8 text-sm bg-primary rounded-xl" @click="payLastBill()">
-                    {{ $t("panel.billing.Pay This Bill") }}
+                <button class="btn w-max p-3 px-5 hover:px-8 text-sm bg-primary rounded-xl" :class="{ 'opacity-70': loading }" @click="payLastBill()">
+                    <span v-if="!loading"> {{ $t("panel.billing.Pay This Bill") }} </span>
+                    <Loading v-else />
                 </button>
             </div>
         </div>
@@ -72,18 +73,62 @@
 
 <script setup>
 const SelectDropDown = defineAsyncComponent(() => import("~/components/form/SelectDropDown.vue"));
+import axios from "axios";
+import { useToast } from "vue-toastification";
 
 const props = defineProps({
     lastBill: { type: Object },
     brand: { type: Object },
 });
 
-const { locale, t } = useI18n();
+const { locale, localeProperties, t } = useI18n();
+const toast = useToast();
 
 const form = ref(); // Dom Ref
 const gateway = reactive({ list: [{ icon: "/icons/zarinpal.svg", name: "Zarinpal", value: "zarinpal" }] });
 const selectedGateway = reactive({ option: { icon: "/icons/zarinpal.svg", name: "Zarinpal", value: "zarinpal" } });
-const payLastBill = () => {
+
+const errorField = ref("");
+const responseMessage = ref("");
+
+const loading = ref(false);
+const payLastBill = async () => {
+    if (loading.value) return;
+    loading.value = true;
+
+    responseMessage.value = "";
+    errorField.value = "";
+
+    await axios
+        .post(
+            `/api/v1/panel/billing/plan-renewal`,
+            { selectedGateway: selectedGateway.option.value, lastBill: props.lastBill._id },
+            { headers: { brand: route.params.brandID } }
+        )
+        .then((response) => {
+            window.location.href = response.data.url;
+        })
+        .catch((err) => {
+            if (typeof err.response !== "undefined" && err.response.data) {
+                const errors = err.response.data.errors || err.response.data.message;
+                if (typeof errors === "object") {
+                    responseMessage.value = errors[0].errors[0];
+                    errorField.value = errors[0].property;
+                }
+            } else responseMessage.value = t("Something went wrong!");
+            toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
+
+            if (process.server) console.log({ err });
+            // TODO : log errors in sentry type thing
+
+            loading.value = false;
+        });
+
     // TODO
+    // request back to generate a transaction for this bill
+    // get the url from back
+    // redirect user to gateway base on url
+
+    // window.location.href = response.data.url;
 };
 </script>

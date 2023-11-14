@@ -2,11 +2,26 @@
 .flip {
     transform: rotateY(180deg);
 }
+
+.scene {
+    perspective: 1200px;
+    perspective-origin: center;
+}
+
+.phone {
+    animation: rotate-swing 5s ease infinite alternate;
+    transition: all 0.2s;
+}
+@keyframes rotate-swing {
+    100% {
+        transform: rotateY(20deg) rotateX(3deg);
+    }
+}
 </style>
 
 <template>
-    <div class="relative self-end w-full sm:w-auto 1.5xl:-mt-5">
-        <div class="relative flex flex-col items-center lg:-mb-64 w-full sm:w-screen max-w-[468px] aspect-[1/2] overflow-hidden isolate">
+    <div class="scene relative self-end w-full sm:w-auto 1.5xl:-mt-5">
+        <div class="phone relative flex flex-col items-center lg:-mb-64 w-full sm:w-screen max-w-[468px] aspect-[1/2] overflow-hidden isolate">
             <span class="absolute top-2 rounded-[3rem] mx-auto bg-neutral-50" style="width: calc(100% - 1rem); height: calc(100% - 1.25rem)"></span>
             <!-- <NuxtImg class="relative w-full px-6 mt-12 grayscale" src="/img/menu.png" sizes="100% 620px" alt="" /> -->
             <img class="absolute w-full" src="~/assets/images/Xmockup2.svg" alt="" />
