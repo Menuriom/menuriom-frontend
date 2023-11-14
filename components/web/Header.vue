@@ -47,35 +47,37 @@ nav {
             <div class="rounded-lg p-0.5 md:p-1 bg-gradient-to-t from-primary to-secondary">
                 <img class="relative h-8 rounded-md" src="/logos/logo9-dark.webp" title="Menuriom" alt="Menuriom" />
             </div>
-            <img class="h-5 xl:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
-            <img class="h-5 xl:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
+            <img class="h-7 xl:h-8" src="/logos/logo-text-en-light2.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
+            <img class="h-7 xl:h-8" src="/logos/logo-text-en-light2.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
+            <!-- <img class="h-5 xl:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
+            <img class="h-5 xl:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" /> -->
         </nuxt-link>
 
         <transition name="slide-up" appear>
-            <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-[250px] lg:max-w-none p-6 lg:p-0" v-show="menuOpen">
+            <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-[250px] lg:max-w-none p-6 lg:p-0" v-show="menuOpen" ref="nav">
                 <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')" @click="menuOpen = false">
                             <span>{{ $t("header.Features") }}</span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="`${$config.public.MENU_BASE_URL}/Menuriom`">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="`${$config.public.MENU_BASE_URL}/Menuriom`" @click="menuOpen = false">
                             <span>{{ $t("header.Demo") }}</span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')" @click="menuOpen = false">
                             <span>{{ $t("header.Pricing") }} </span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('#')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('#')" @click="menuOpen = false">
                             <span>{{ $t("header.How It Works") }} </span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')" @click="menuOpen = false">
                             <span>{{ $t("header.Contact Us") }}</span>
                         </nuxt-link>
                     </li>
@@ -89,18 +91,20 @@ nav {
                             class="link md:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-fgPrimary text-bgPrimary transition-all"
                             :to="localePath('/authenticate')"
                             title="Login into user panel"
-                            v-if="!user.email.value"
+                            v-if="!userStore.loading && !userStore.email"
                         >
                             {{ $t("header.Login") }}
                         </nuxt-link>
                         <nuxt-link
                             class="link 2sm:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-primary text-fgPrimary transition-all"
-                            :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
-                            :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
+                            :to="!userStore.email ? localePath(`/authenticate`) : localePath(`/panel`)"
+                            :title="!userStore.email ? `Try it for free` : `Your Menuriom Dashboard`"
+                            v-if="!userStore.loading"
                         >
-                            <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
+                            <span v-if="!userStore.email">{{ $t("header.Try It For Free") }}</span>
                             <span v-else>{{ $t("header.Your Dashboard") }}</span>
                         </nuxt-link>
+                        <Loading class="2sm:hidden" v-if="userStore.loading" />
                     </div>
                 </div>
             </nav>
@@ -112,19 +116,21 @@ nav {
                 class="link hidden md:flex p-2 hover:px-4 rounded-lg hover:bg-bgSecondary hover:text-secondary transition-all"
                 :to="localePath(`/authenticate`)"
                 title="Login into user panel"
-                v-if="!user.email.value"
+                v-if="!userStore.loading && !userStore.email"
             >
                 {{ $t("header.Login") }}
             </nuxt-link>
             <nuxt-link
                 class="hidden 2sm:flex text-sm p-2.5 hover:px-4 rounded-lg bg-primary text-fgPrimary shadow-md transition-all"
-                :to="!user.email.value ? localePath(`/authenticate`) : localePath(`/panel`)"
-                :title="!user.email.value ? `Try it for free` : `Your Menuriom Dashboard`"
+                :to="!userStore.email ? localePath(`/authenticate`) : localePath(`/panel`)"
+                :title="!userStore.email ? `Try it for free` : `Your Menuriom Dashboard`"
+                v-if="!userStore.loading"
             >
-                <span v-if="!user.email.value">{{ $t("header.Try It For Free") }}</span>
+                <span v-if="!userStore.email">{{ $t("header.Try It For Free") }}</span>
                 <span v-else>{{ $t("header.Your Dashboard") }}</span>
             </nuxt-link>
-            <button class="toggle flex lg:hidden w-8 h-8 hover:bg-bgPrimary rounded-xl transition-colors" @click="headerToggle()">
+            <Loading class="hidden 2sm:flex me-2" v-if="userStore.loading" />
+            <button class="toggle flex lg:hidden w-8 h-8 hover:bg-bgPrimary rounded-xl transition-colors" @click="headerToggle()" ref="headerToggler">
                 <span class="line bg-fgPrimary transition-all" :class="{ 'rotate-45 -mb-1': menuOpen }"></span>
                 <span class="line bg-fgPrimary transition-all" v-show="!menuOpen"></span>
                 <span class="line bg-fgPrimary transition-all" :class="{ '-rotate-45 -mt-1': menuOpen }"></span>
@@ -136,34 +142,27 @@ nav {
 <script setup>
 import LangSwitch from "~/components/LangSwitch.vue";
 import { useUserStore } from "@/stores/user";
-import { storeToRefs } from "pinia";
 
 const localePath = useLocalePath();
 const { locale } = useI18n();
 
 const userStore = useUserStore();
-const user = storeToRefs(userStore);
 
-const featureDropdown = ref(null); //Ref to DOM
-const featureListOpen = ref(false);
-
+const headerToggler = ref(); // DOM REF
+const nav = ref(); // DOM REF
 const menuOpen = ref(false);
 
+const headerToggle = () => (menuOpen.value = !menuOpen.value);
+const headerClose = (event) => {
+    const notClickedOnToggler = headerToggler.value && !headerToggler.value.contains(event.target);
+    const notClickedOnNav = nav.value && !nav.value.contains(event.target);
+    if (notClickedOnToggler && notClickedOnNav) menuOpen.value = false;
+};
+
 onMounted(() => {
-    document.addEventListener("click", closeFeatures);
+    document.addEventListener("click", headerClose);
 });
 onBeforeUnmount(() => {
-    document.removeEventListener("click", closeFeatures);
+    document.removeEventListener("click", headerClose);
 });
-
-const toggleFeatures = (event = "click", state = null) => {
-    if (window.innerWidth > 1024 && event == "click") return;
-    if (window.innerWidth < 1024 && event == "hover") return;
-    featureListOpen.value = state != null ? state : !featureListOpen.value;
-};
-const closeFeatures = (event) => {
-    if (featureDropdown.value && !featureDropdown.value.contains(event.target)) featureListOpen.value = false;
-};
-
-const headerToggle = () => (menuOpen.value = !menuOpen.value);
 </script>

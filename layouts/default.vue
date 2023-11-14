@@ -17,6 +17,7 @@
 import Header from "~/components/web/Header.vue";
 import Footer from "~/components/web/Footer.vue";
 import { useUserStore } from "@/stores/user";
+import { storeToRefs } from "pinia";
 
 const localHead = useLocaleHead({ addDirAttribute: true, identifierAttribute: "id", addSeoAttributes: true });
 const userStore = useUserStore();
@@ -29,9 +30,8 @@ useHead({
     meta: [...localHead.value.meta],
 });
 
-onMounted(async () => {
-    await userStore.getUserInfo().then(() => {
-        userStore.setRefreshInterval();
-    });
+await userStore.getUserInfo().catch((e) => {});
+onMounted(() => {
+    if (!userStore.isIntervalSet) userStore.setRefreshInterval();
 });
 </script>

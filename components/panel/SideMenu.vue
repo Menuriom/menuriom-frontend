@@ -334,7 +334,7 @@ aside > div {
                     <div class="flex items-start gap-2">
                         <img class="w-11 mix-blend-exclusion" src="/pricing/pro-g.png" alt="pro" />
                         <div class="flex flex-col">
-                            <h5 class="flex text-white md:text-xl font-black whitespace-nowrap">{{ $t("panel.billing.Upgrade To Pro") }}</h5>
+                            <h5 class="flex text-white font-black">{{ $t("panel.billing.Upgrade To Pro") }}</h5>
                             <small class="flex text-xs opacity-60">{{ $t("panel.billing.Remove The Limitations") }}</small>
                         </div>
                     </div>

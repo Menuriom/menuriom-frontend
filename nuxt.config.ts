@@ -47,16 +47,27 @@ export default defineNuxtConfig({
     // vite options
     vite: {},
 
+    devServer: {
+        host: "",
+    },
+
     nitro: {
         compressPublicAssets: true,
         routeRules: {
-            "/**/*.js": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
-            "/**/*.css": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
-            "/**/*.png": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
-            "/**/*.svg": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
-            "/**/*.jpg": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
-            "/**/*.webp": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
-            "/_nuxt/**": { headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.js": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.css": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.png": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.svg": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.jpg": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.webp": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/_nuxt/**": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+
+            "/": { swr: 60 * 60 * 12, isr: true },
+            "/privacy-policy": { prerender: true },
+            "/terms-of-service": { prerender: true },
+            "/pricing": { swr: 60 * 60 * 12, isr: true },
+            "/faqs": { prerender: true },
+            "/contact-us": { prerender: true },
         },
     },
 
@@ -91,6 +102,12 @@ export default defineNuxtConfig({
         format: ["webp"],
     },
 
+    delayHydration: {
+        // enables nuxt-delay-hydration in dev mode for testing
+        debug: process.env.NODE_ENV === "development",
+        mode: "mount",
+    },
+
     modules: [
         // ...
         "@pinia/nuxt",
@@ -98,5 +115,6 @@ export default defineNuxtConfig({
         "@nuxtjs/i18n",
         "@nuxt/image",
         "nuxt-swiper",
+        "nuxt-delay-hydration",
     ],
 });

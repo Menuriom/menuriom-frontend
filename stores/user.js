@@ -35,20 +35,27 @@ export const useUserStore = defineStore("user", () => {
         if (loading.value) return;
         loading.value = true;
 
-        await axios
-            .get(`/api/v1/user/info`, { timeout: 30 * 1000 })
-            .then((response) => {
-                avatar.value = response.data.avatar || "/avatar.webp";
-                name.value = response.data.name;
-                family.value = response.data.family;
-                email.value = response.data.email;
-                mobile.value = response.data.mobile;
-                brands.list = response.data.brands;
-            })
-            .catch((e) => {
-                throw e;
-            })
-            .finally(() => (loading.value = false));
+        const { data, error, pending } = await useFetch("/api/v1/user/info", { lazy: process.client });
+        if (pending.value !== null && pending.value !== undefined) loading.value = pending.value;
+        watch(pending, (pend) => (loading.value = pend));
+
+        if (error.value) {
+            if (error.value.statusCode >= 500 && process.server) console.log({ error: error.value });
+            throw error.value;
+        }
+
+        fillUserData(data.value);
+        watch(data, (data) => fillUserData(data));
+    };
+
+    const fillUserData = (data) => {
+        if (!data) return;
+        avatar.value = data.avatar || "/avatar.webp";
+        name.value = data.name;
+        family.value = data.family;
+        email.value = data.email;
+        mobile.value = data.mobile;
+        brands.list = data.brands;
     };
 
     const refreshToken = async () => {
@@ -65,12 +72,15 @@ export const useUserStore = defineStore("user", () => {
 
     const setRefreshInterval = () => {
         const interval = setInterval(async () => {
-            await axios.post(`/auth/refresh`, null, { timeout: 30 * 1000 }).catch((error) => {
-                if (error.response && error.response.status == 401) {
-                    clearInterval(interval);
-                    isIntervalSet.value = false;
-                }
-            });
+            await axios
+                .post(`/auth/refresh`, null, { timeout: 30 * 1000 })
+                .then(() => (isIntervalSet.value = true))
+                .catch((error) => {
+                    if (error.response && error.response.status == 401) {
+                        clearInterval(interval);
+                        isIntervalSet.value = false;
+                    }
+                });
         }, refreshInterval * 1000);
     };
 

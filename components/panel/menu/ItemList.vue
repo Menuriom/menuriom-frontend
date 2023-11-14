@@ -81,8 +81,7 @@
                                                     </div>
                                                     <div class="flex flex-wrap gap-3">
                                                         <span class="flex items-baseline font-bold text-emerald-300 text-2xl" dir="auto">
-                                                            {{ Intl.NumberFormat(locale).format(dish.price >= 1000 ? dish.price / 1000 : dish.price) }}
-                                                            <small v-if="dish.price >= 1000">,{{ Intl.NumberFormat(locale).format(1000).substring(2) }}</small>
+                                                            {{ Intl.NumberFormat(locale).format(dish.price) }}
                                                         </span>
                                                         <span class="f-inter text-sm font-extralight -ms-2"> {{ $t("pricing.Toman") }} </span>
                                                         <div

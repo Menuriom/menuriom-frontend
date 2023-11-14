@@ -88,9 +88,9 @@
                             :key="j"
                         >
                             <!-- <span class="lg:hidden text-fgPrimary text-xs p-2 rounded-lg bg-bgAccent">{{ pricing.list[j].title }}</span> -->
-                            <Icon class="relative w-6 h-6 bg-secondary" name="Check.svg" folder="icons/basil" size="24px" v-if="mark === true" />
-                            <Icon class="relative w-6 h-6 bg-neutral-500" name="Cross.svg" folder="icons/basil" size="24px" v-else-if="mark === false" />
-                            <span class="text-fgPrimary text-sm py-1" v-else>{{ mark }}</span>
+                            <Icon class="relative w-6 h-6 bg-emerald-400" name="Check.svg" folder="icons/basil" size="28px" v-if="mark === true" />
+                            <Icon class="relative w-6 h-6 bg-neutral-500 opacity-90" name="Cross.svg" folder="icons/basil" size="28px" v-else-if="mark === false" />
+                            <span class="text-primary sm:text-fgPrimary text-sm py-1" v-else>{{ mark }}</span>
                             <span class="absolute bottom-0 w-3/4 h-0.5 bg-bgSecondary hidden lg:flex group-last:hidden"></span>
                         </div>
                     </div>

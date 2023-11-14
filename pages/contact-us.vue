@@ -36,9 +36,9 @@
             <div class="flex flex-wrap items-center justify-between gap-4 w-full">
                 <div class="flex flex-col ms-4">
                     <span class="text-2xl">{{ $t("contact-us.Im contacting for") }}...</span>
-                    <h3 class="opacity-60">{{ $t("contact-us.Choose your subject to contact") }}</h3>
+                    <h3 class="text-sm opacity-60">{{ $t("contact-us.Choose your subject to contact") }}</h3>
                 </div>
-                <ul class="flex  gap-4 w-full overflow-auto">
+                <ul class="flex gap-4 max-w-full overflow-auto grow">
                     <li
                         class="flex items-center justify-center rounded-xl transition-all cursor-pointer shrink-0"
                         :class="[subject == 'request-feature' ? 'gradient p-1' : 'p-0 bg-transparent']"

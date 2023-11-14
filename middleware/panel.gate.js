@@ -44,7 +44,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (process.client && nuxtApp.isHydrating && nuxtApp.payload.serverRendered) return;
 
     if (process.client) {
-        if (userStore.name === "" || userStore.family === "" || userStore.mobile === "") {
+        if (userStore.name === "" || userStore.family === "") {
             const isTokenValid = await userStore
                 .getUserInfo()
                 .then(() => true)

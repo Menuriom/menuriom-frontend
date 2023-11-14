@@ -428,7 +428,7 @@ const save = async () => {
     });
 
     for (const val in name.values) data.append(`name.${val}`, name.values[val]);
-    for (const val in description.values) data.append(`description.${val}`, description.values[val]);
+    for (const val in description.values) if (description.values[val]) data.append(`description.${val}`, description.values[val]);
     if (selectedCategory.option.value) data.append("selectedCategory", selectedCategory.option.value);
     data.append("price", price.value);
 

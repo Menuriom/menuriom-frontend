@@ -12,11 +12,6 @@ env:
     # github.repository as <account>/<repo>
     DOCKER_REPOSITORY: ${{ github.repository }}
 
-    # variables that nuxt config needs
-    BASE_URL: ${{ vars.BASE_URL }}
-    MENU_BASE_URL: ${{ vars.MENU_BASE_URL }}
-    GOOGLE_LOGIN_CLIENT_ID: ${{ vars.GOOGLE_LOGIN_CLIENT_ID }}
-
 jobs:
     build-and-push-docker:
         runs-on: ubuntu-latest
@@ -24,8 +19,6 @@ jobs:
         permissions:
             contents: read
             packages: write
-            # This is used to complete the identity challenge
-            # with sigstore/fulcio when running outside of PRs.
             id-token: write
 
         steps:
@@ -51,21 +44,11 @@ jobs:
             - name: Set docker repository to lowercase
               run: echo "DOCKER_REPOSITORY=${DOCKER_REPOSITORY,,}" >> ${GITHUB_ENV}
 
-            - name: Test to see nuxt variables are set
+            - name: Create .env file for nuxt runtimeConfig
               run: |
-                  echo "BASE_URL=$BASE_URL MENU_BASE_URL=$MENU_BASE_URL GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID"
-
-            - name: Create .env file for nuxt
-              run: |
-                  echo "BASE_URL=$BASE_URL" > .env
-                  echo "MENU_BASE_URL=$MENU_BASE_URL" >> .env
-                  echo "GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID" >> .env
-
-            # - name: Export env variables for nuxt
-            #   run: |
-            #       export BASE_URL=$BASE_URL
-            #       export MENU_BASE_URL=$MENU_BASE_URL
-            #       export GOOGLE_LOGIN_CLIENT_ID=$GOOGLE_LOGIN_CLIENT_ID
+                  echo "BASE_URL=${{ vars.BASE_URL }}" > .env
+                  echo "MENU_BASE_URL=${{ vars.MENU_BASE_URL }}" >> .env
+                  echo "GOOGLE_LOGIN_CLIENT_ID=${{ vars.GOOGLE_LOGIN_CLIENT_ID }}" >> .env
 
             - name: Build and push docker image
               uses: docker/build-push-action@v5

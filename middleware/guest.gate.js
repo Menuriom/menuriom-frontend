@@ -15,7 +15,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         if (!token) return;
 
         const req = nuxtApp.ssrContext.event.node.req;
-        
+
         delete req.headers["content-length"];
         delete req.headers["host"];
 

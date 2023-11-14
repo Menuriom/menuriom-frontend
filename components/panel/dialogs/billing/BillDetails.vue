@@ -139,6 +139,17 @@ const loading = ref(false);
 const errorField = ref("");
 const responseMessage = ref("");
 
+const handleErrors = (err) => {
+    if (!err) return;
+    errorField.value = "data";
+    if (typeof err.response !== "undefined" && err.response.data) {
+        const errors = err.response.data.errors || err.response.data.message;
+        if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
+    } else responseMessage.value = t("Something went wrong!");
+    if (process.server) console.log({ err });
+    // TODO : log errors in sentry type thing
+};
+
 // getTransactions -------------------------------------------------
 const noMoreTransactions = ref(false);
 const lastTransactionID = ref("");

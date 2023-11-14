@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
     await axios
         .request({
             method: req.method,
-            url: `${process.env.API_BASE_URL}/panel/billing/plan-change-payment-callback/${params.method}?${getQueryString(event)}`,
+            url: `${process.env.API_BASE_URL}/panel/billing/bill-payment-callback/${params.method}?${getQueryString(event)}`,
             timeout: 15 * 1000,
             headers: { ...req.headers, "accept-language": lang, "x-forwarded-for": ip, serversecret: process.env.SERVER_SECRET, tt: Date.now() },
         })
