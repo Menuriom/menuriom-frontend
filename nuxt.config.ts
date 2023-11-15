@@ -61,14 +61,16 @@ export default defineNuxtConfig({
             "/**/*.jpg": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
             "/**/*.webp": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
             "/_nuxt/**": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
-
-            "/": { swr: 60 * 60 * 12, isr: true },
-            "/privacy-policy": { prerender: true },
-            "/terms-of-service": { prerender: true },
-            "/pricing": { swr: 60 * 60 * 12, isr: true },
-            "/faqs": { prerender: true },
-            "/contact-us": { prerender: true },
         },
+    },
+
+    routeRules: {
+        "/": { swr: 60 * 60 * 12, isr: true },
+        "/privacy-policy": { prerender: true },
+        "/terms-of-service": { prerender: true },
+        "/pricing": { swr: 60 * 60 * 12, isr: true },
+        "/faqs": { prerender: true },
+        "/contact-us": { prerender: true },
     },
 
     i18n: {
