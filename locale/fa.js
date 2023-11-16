@@ -778,6 +778,12 @@ export default {
             "Upgrade To Pro": "ارتقا به اشتراک حرفه ای",
             "Remove The Limitations": "بدون محدودیت",
             "Go Pro": "ارتقا پلن",
+
+            "Transferring to gateway": "درحال انتقال به درگاه",
+            "We are redirecting you to the payment gateway": "ما درحال انتقال شما به درگاه پرداخت هستیم",
+            "Please make sure that your VPN is off": "لطفا از خاموشی VPN خود مطمئن شوید",
+            "After the payment is done, wait until the gateway redirects you back to us":
+                "بعد از پرداخت، لطفا منتظر بمانید تا درگاه به وبسایت بازگردد",
         },
 
         payment: {

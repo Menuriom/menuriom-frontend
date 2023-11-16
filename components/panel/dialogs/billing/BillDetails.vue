@@ -120,7 +120,6 @@
 <script setup>
 import Dialog from "~/components/panel/Dialog.vue";
 import Loading from "~/components/Loading.vue";
-import axios from "axios";
 import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 

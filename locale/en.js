@@ -439,7 +439,7 @@ export default {
             "All-branches working-hours setting will only apply to branches that have no hours set":
                 "All-branches working-hours setting will only apply to branches that have no hours set",
             "You can specify a custom hour for any branch": "You can specify a custom hour for any branch",
-            
+
             "Work hours updated": "Work hours updated",
         },
 
@@ -779,6 +779,12 @@ export default {
             "Upgrade To Pro": "Upgrade To Pro",
             "Remove The Limitations": "Remove The Limitations",
             "Go Pro": "Go Pro",
+
+            "Transferring to gateway": "Transfering to gateway",
+            "We are redirecting you to the payment gateway": "We are redirecting you to the payment gateway",
+            "Please make sure that your VPN is off": "Please make sure that your VPN is off",
+            "After the payment is done, wait until the gateway redirects you back to us":
+                "After the payment is done, wait until the gateway redirects you back to us",
         },
 
         payment: {
