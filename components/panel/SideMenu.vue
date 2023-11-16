@@ -72,8 +72,8 @@ aside > div {
                 class="flex items-center gap-2 p-2 rounded-xl hover:bg-neutral-600 bg-bgSecondary cursor-pointer transition-all group"
                 :to="localePath(`/panel/`)"
             >
-                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 shrink-0" :src="brand.logo" v-if="brand.logo" />
-                <img class="w-14 h-14 object-cover rounded-full shadow-nr35 shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
+                <img class="w-9 md:w-14 aspect-square object-cover rounded-full shadow-nr35 shrink-0" :src="brand.logo" v-if="brand.logo" />
+                <img class="w-9 md:w-14 aspect-square object-cover rounded-full shadow-nr35 shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
                 <div class="flex flex-col gap-1 w-full grow">
                     <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">{{ brand.name }}</h4>
                     <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-full text-purple-300">{{ brand.role }}</span>

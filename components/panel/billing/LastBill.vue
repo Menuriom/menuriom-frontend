@@ -82,6 +82,7 @@ const props = defineProps({
 });
 
 const { locale, localeProperties, t } = useI18n();
+const route = useRoute();
 const toast = useToast();
 
 const form = ref(); // Dom Ref
@@ -123,12 +124,5 @@ const payLastBill = async () => {
 
             loading.value = false;
         });
-
-    // TODO
-    // request back to generate a transaction for this bill
-    // get the url from back
-    // redirect user to gateway base on url
-
-    // window.location.href = response.data.url;
 };
 </script>
