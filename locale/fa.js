@@ -782,8 +782,16 @@ export default {
             "Transferring to gateway": "درحال انتقال به درگاه",
             "We are redirecting you to the payment gateway": "ما درحال انتقال شما به درگاه پرداخت هستیم",
             "Please make sure that your VPN is off": "لطفا از خاموشی VPN خود مطمئن شوید",
-            "After the payment is done, wait until the gateway redirects you back to us":
-                "بعد از پرداخت، لطفا منتظر بمانید تا درگاه به وبسایت بازگردد",
+            "After the payment is done, wait until the gateway redirects you back to us": "بعد از پرداخت، لطفا منتظر بمانید تا درگاه به وبسایت بازگردد",
+
+            "Head to billing page": "تمدید اشتراک",
+            "Your subscription plan is about to end": "اشتراک کنونی شما رو به اتمام است",
+            "Please renew your subscription by paying the renewal bill": "لطفا اشتراک خود را با پرداخت صورتحساب تمدید کنید",
+            "If you dont renew your subscription, your account will be freeze": "بعد از اتمام زمان اشتراک در صورت عدم پرداخت سررسید، اکانت شما محدود خواهد شد",
+            "Your subscription renewal bill is due": "اعتبار اشتراک شما به پایان رسیده",
+            "You cant create or edit your branch and menu items": "شما امکان ساخت یا ویرایش هیچ ایتمی در این برند را ندارید",
+            "Please pay the renewal bill or downgrade your plan to a free tier to be able to manage your data again":
+                "لطفا قبض تمدید اشتراک خود را پرداخت کنید و یا اشتراک خود را به پلن رایگان تبدیل کنید تا امکان مدیریت ایتم ها را داشته باشید",
         },
 
         payment: {

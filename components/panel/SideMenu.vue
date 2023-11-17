@@ -69,12 +69,12 @@ aside > div {
     <aside class="absolute md:relative flex rounded-lg overflow-hidden z-20 shrink-0" :class="{ close: !panelStore.sideMenuOpen }">
         <div class="flex flex-col gap-4 h-full p-4 bg-bgAccent rounded-2xl shadow-mr35">
             <nuxt-link
-                class="flex items-center gap-2 p-2 rounded-xl hover:bg-neutral-600 bg-bgSecondary cursor-pointer transition-all group"
+                class="flex items-center gap-2 p-1.5 md:p-2 rounded-xl hover:bg-neutral-600 bg-bgSecondary cursor-pointer transition-all group"
                 :to="localePath(`/panel/`)"
             >
                 <img class="w-9 md:w-14 aspect-square object-cover rounded-full shadow-nr35 shrink-0" :src="brand.logo" v-if="brand.logo" />
                 <img class="w-9 md:w-14 aspect-square object-cover rounded-full shadow-nr35 shrink-0" src="~/assets/images/fake-logo2.svg" v-else />
-                <div class="flex flex-col gap-1 w-full grow">
+                <div class="flex flex-col md:gap-0.5 w-full grow">
                     <h4 class="w-full font-semibold whitespace-nowrap text-ellipsis overflow-hidden">{{ brand.name }}</h4>
                     <span class="text-xs whitespace-nowrap text-ellipsis overflow-hidden w-full text-purple-300">{{ brand.role }}</span>
                 </div>
@@ -269,6 +269,7 @@ aside > div {
                             <!-- <Icon class="w-6 h-6 gradient" name="money-bills.svg" folder="icons/light" size="22px" /> -->
                             <!-- <img class="w-5" src="~/assets/images/panel-icons/money-bills-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
+                            <!-- TODO : add a blob to show there is a new renewal bill -->
                         </li>
                     </nuxt-link>
                     <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">

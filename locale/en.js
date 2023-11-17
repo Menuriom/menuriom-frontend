@@ -785,6 +785,15 @@ export default {
             "Please make sure that your VPN is off": "Please make sure that your VPN is off",
             "After the payment is done, wait until the gateway redirects you back to us":
                 "After the payment is done, wait until the gateway redirects you back to us",
+
+            "Head to billing page": "Head to billing page",
+            "Your subscription plan is about to end": "Your subscription plan is about to end",
+            "Please renew your subscription by paying the renewal bill": "Please renew your subscription by paying the renewal bill",
+            "If you dont renew your subscription, your account will be freeze": "If you don't renew your subscription, your account will be freeze",
+            "Your subscription renewal bill is due": "Your subscription renewal bill is due",
+            "You cant create or edit your branch and menu items": "You can't create or edit your branch and menu items",
+            "Please pay the renewal bill or downgrade your plan to a free tier to be able to manage your data again":
+                "Please pay the renewal bill or downgrade your plan to a free tier to be able to manage your data again",
         },
 
         payment: {
