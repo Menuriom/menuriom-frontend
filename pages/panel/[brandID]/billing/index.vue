@@ -222,11 +222,13 @@
                 v-if="panelStore.popUpOpened === 'change-plan-dialog'"
             />
             <BillDetails :bill="selectedBill" v-if="panelStore.popUpOpened === 'bill-details'" />
+            <RedirectToGatewayDialog v-if="panelStore.popUpOpened === 'payment-redircet'" />
         </Teleport>
     </div>
 </template>
 
 <script setup>
+const RedirectToGatewayDialog = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/RedirectToGatewayDialog.vue"));
 const ChangePlanDialog = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/ChangePlanDialog.vue"));
 const BillDetails = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/BillDetails.vue"));
 const CurrentPlan = defineAsyncComponent(() => import("~/components/panel/billing/CurrentPlan.vue"));

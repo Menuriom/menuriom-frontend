@@ -75,6 +75,7 @@
 const SelectDropDown = defineAsyncComponent(() => import("~/components/form/SelectDropDown.vue"));
 import axios from "axios";
 import { useToast } from "vue-toastification";
+import { usePanelStore } from "@/stores/panel";
 
 const props = defineProps({
     lastBill: { type: Object },
@@ -82,7 +83,9 @@ const props = defineProps({
 });
 
 const { locale, localeProperties, t } = useI18n();
+const route = useRoute();
 const toast = useToast();
+const panelStore = usePanelStore();
 
 const form = ref(); // Dom Ref
 const gateway = reactive({ list: [{ icon: "/icons/zarinpal.svg", name: "Zarinpal", value: "zarinpal" }] });
@@ -106,7 +109,10 @@ const payLastBill = async () => {
             { headers: { brand: route.params.brandID } }
         )
         .then((response) => {
-            window.location.href = response.data.url;
+            setTimeout(() => {
+                window.location.href = response.data.url;
+            }, 5 * 1000);
+            panelStore.openPopUp("payment-redircet");
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -123,12 +129,5 @@ const payLastBill = async () => {
 
             loading.value = false;
         });
-
-    // TODO
-    // request back to generate a transaction for this bill
-    // get the url from back
-    // redirect user to gateway base on url
-
-    // window.location.href = response.data.url;
 };
 </script>

@@ -333,7 +333,10 @@ const changePlan = async () => {
         )
         .then((response) => {
             if (response.data.type === "withPayment") {
-                window.location.href = response.data.url;
+                setTimeout(() => {
+                    window.location.href = response.data.url;
+                }, 5 * 1000);
+                panelStore.openPopUp("payment-redircet");
             } else {
                 loading.value = false;
                 emit("update:currentPlan");

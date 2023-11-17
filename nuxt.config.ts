@@ -104,11 +104,11 @@ export default defineNuxtConfig({
         format: ["webp"],
     },
 
-    delayHydration: {
-        // enables nuxt-delay-hydration in dev mode for testing
-        debug: process.env.NODE_ENV === "development",
-        mode: "mount",
-    },
+    // delayHydration: {
+    //     // enables nuxt-delay-hydration in dev mode for testing
+    //     debug: process.env.NODE_ENV === "development",
+    //     mode: "mount",
+    // },
 
     modules: [
         // ...
@@ -117,6 +117,6 @@ export default defineNuxtConfig({
         "@nuxtjs/i18n",
         "@nuxt/image",
         "nuxt-swiper",
-        "nuxt-delay-hydration",
+        // "nuxt-delay-hydration",
     ],
 });
