@@ -109,10 +109,11 @@ const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
+const emit = defineEmits(["category:length"]);
+
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
 const searchQuery = ref("");
-
 const errorField = ref("");
 const responseMessage = ref("");
 
@@ -247,10 +248,10 @@ const handleCategoryList_results = (data) => {
     if (!data) return;
     categories.list = filteredCategories.list = data._categories;
     canCreateNewCategory.value = data._canCreateNewCategory;
+    emit("category:length", categories.list.length);
 };
 handleCategoryList_results(getCategoryList_results.data.value);
 watch(getCategoryList_results.data, (val) => handleCategoryList_results(val));
-
 // -------------------------------------------------
 
 const search = (query) => {

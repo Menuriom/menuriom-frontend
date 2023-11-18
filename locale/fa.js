@@ -552,6 +552,9 @@ export default {
             "Delete Menu Item": "حذف ایتم منو",
             "This Category Has No Items": "این دسته‌بندی ایتم ندارد",
             "Menu items order updated": "ترتیب ایتم ها بروز شد",
+
+            "You Have No Items Yet": "شما هیچ ایتمی نساخته اید",
+            "For creating a menu, first start by creating a category": "برای ساخت منو، ابتدا یک دسته بندی ایجاد کنید",
         },
 
         "menu-style": {

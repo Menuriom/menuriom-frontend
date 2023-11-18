@@ -551,6 +551,9 @@ export default {
             "Delete Menu Item": "Delete Menu Item",
             "This Category Has No Items": "This Category Has No Items",
             "Menu items order updated": "Menu items order updated",
+
+            "You Have No Items Yet": "You Have No Items Yet",
+            "For creating a menu, first start by creating a category": "For creating a menu, first start by creating a category",
         },
 
         "menu-style": {

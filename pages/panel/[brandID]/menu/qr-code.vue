@@ -445,6 +445,7 @@ import { useUserStore } from "@/stores/user";
 
 const { localeProperties, t } = useI18n();
 const nuxtApp = useNuxtApp();
+const localePath = useLocalePath();
 const route = useRoute();
 const runtimeConfig = useRuntimeConfig();
 const toast = useToast();

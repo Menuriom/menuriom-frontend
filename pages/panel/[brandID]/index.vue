@@ -20,7 +20,9 @@ const panelStore = usePanelStore();
 // getBills -------------------------------------------------
 const alertLevel = ref("");
 const checkBrandSubscription = await useFetch(`/api/v1/panel/billing/subscription-check`, { lazy: process.client, headers: { brand: route.params.brandID } });
-if (checkBrandSubscription.error.value && process.server) console.error({ err: checkBrandSubscription.error.value });
+if (checkBrandSubscription.error.value && checkBrandSubscription.error.value.statusCode >= 500 && process.server) {
+    console.error({ err: checkBrandSubscription.error.value });
+}
 
 if (checkBrandSubscription.data.value) alertLevel.value = checkBrandSubscription.data.value?.alert || "";
 watch(checkBrandSubscription.data, (val) => (alertLevel.value = val.alert || ""));
