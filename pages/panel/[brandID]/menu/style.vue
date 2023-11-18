@@ -401,7 +401,7 @@ const handleErrors = (err) => {
 };
 
 // loadMenuStyleSettings -------------------------------------------------
-const loadMenuStyleSettings_results = await useFetch(`/api/v1/panel/menu-styles`, { lazy: process.client, headers: { brand: route.params.brandID } });
+const loadMenuStyleSettings_results = await useFetch(`/api/v1/panel/menu-styles`, { lazy: false, headers: { brand: route.params.brandID } });
 const loadingMenuStyleSettings = computed(() => loadMenuStyleSettings_results.pending.value);
 
 handleErrors(loadMenuStyleSettings_results.error.value);
