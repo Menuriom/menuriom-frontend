@@ -1,57 +1,66 @@
 <style scoped>
-.bg-card:nth-child(2n) {
-    background-color: theme("colors.pencil-tip");
-    border-radius: 2rem;
-    color: white;
+.wrapper {
+    background-image: url("~/assets/images/pattern-black.webp");
+    background-repeat: repeat;
 }
 </style>
 
 <template>
-    <div class="relative flex flex-col items-center gap-10 w-full px-2 md:mb-16">
-        <Hero class="1.5xl:mb-32" />
-        <div class="relative flex flex-col items-center w-full max-w-screen-2xl p-2">
-            <span class="absolute hidden 1.5xl:flex w-1 h-full border-r-8 border-dotted border-zinc-400"></span>
+    <section class="relative flex flex-col items-center gap-10 w-full px-2 md:mb-16">
+        <header
+            class="wrapper relative flex items-center justify-evenly gap-4 w-screen max-w-screen-lg rounded-3xl bg-bgAccent text-white p-4 md:p-8 lg:p-16 shadow-nr25"
+        >
+            <div
+                class="relative flex flex-col items-center gap-5 w-full max-w-xl rounded-2xl py-6 my-6 bg-bgSecondary bg-opacity-30 backdrop-blur-sm z-2 shrink-0"
+            >
+                <h1 class="f-inter text-3xl md:text-5xl font-extrabold text-center">{{ $t("features.Core Features") }}.</h1>
+                <h2 class="md:text-xl text-center opacity-60">{{ $t("features.Get familiar with Menutiom features") }}</h2>
+            </div>
+        </header>
+        <div class="relative flex flex-col items-center w-full max-w-screen-2xl p-2 mt-20">
             <ul class="relative flex flex-col items-center gap-20 w-full">
                 <li
-                    class="bg-card flex flex-col-reverse 1.5xl:flex-row 1.5xl:even:flex-row-reverse items-center justify-center p-32 px-10 md:px-16 gap-8 lg:gap-16 w-full group"
+                    class="flex flex-col-reverse 1.5xl:flex-row 1.5xl:even:flex-row-reverse items-center justify-center gap-16 lg:gap-32 w-full group"
                     v-for="(item, i) in features.list"
                     :key="i"
                 >
-                    <div class="flex items-center justify-center odd:-mb-10 1.5xl:odd:-my-10 w-full max-w-xl select-none" draggable="false">
-                        <img class="w-10/12 h-10/12 object-scale-down" :src="item.image" :alt="item.title" />
+                    <div class="flex items-center justify-center w-full max-w-xl select-none" draggable="false">
+                        <NuxtImg class="w-full object-scale-down" width="576px" :src="item.image" :alt="item.title" loading="lazy" />
                     </div>
-                    <div class="gradient hidden 1.5xl:flex items-center justify-center group-hover:p-2 rounded-3xl transition-all shrink-0">
-                        <div class="relative flex items-center justify-center p-6 md:p-8 rounded-2xl bg-white group-odd:bg-pencil-tip">
-                            <img class="relative w-12 h-12 md:w-20 md:h-20 object-contain" :src="item.icon" :alt="item.title" />
-                        </div>
-                    </div>
-                    <div class="flex flex-col items-center gap-8 w-full max-w-xl">
-                        <div class="relative flex 1.5xl:hidden items-center justify-center p-6 md:p-8 rounded-lg bg-white group-odd:bg-pencil-tip shrink-0">
-                            <img class="absolute w-16 h-16 md:w-24 md:h-24 object-contain blur-md opacity-30" :src="item.icon" :alt="item.title" />
-                            <img class="relative w-12 h-12 md:w-20 md:h-20 object-contain" :src="item.icon" :alt="item.title" />
-                        </div>
+                    <div class="flex flex-col items-center gap-8 w-full max-w-2xl">
                         <div class="flex flex-col items-center 1.5xl:items-start gap-4 w-full">
                             <h4 class="f-inter text-center 1.5xl:text-start text-3xl lg:text-5xl font-bold">{{ item.title }}</h4>
-                            <span class="flex w-full h-4 bg-primary rounded-sm"></span>
-                            <p class="text-center 1.5xl:text-start lg:text-xl opacity-75">{{ item.desc }}</p>
+                            <span class="flex w-full h-3 gradient mb-4 md:mb-6"></span>
+                            <div class="flex flex-col gap-2 border-s-8 ps-3">
+                                <p class="text-center 1.5xl:text-start lg:text-xl opacity-75" v-for="desc in item.desc">{{ desc }}</p>
+                            </div>
+                            <ul class="flex flex-col items-start gap-2">
+                                <li class="flex items-center gap-4 bg-bgSecondary p-2 px-4 rounded-lg" v-for="tap in item.list">
+                                    <div class="relative flex items-center justify-center w-3 h-3 bg-primary rounded-full">
+                                        <span class="absolute w-4 h-4 gradient rounded-full animate-ping"></span>
+                                    </div>
+                                    {{ tap }}
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- <hr class="flex 1.5xl:hidden gradient w-10/12 h-0.5 border-0 opacity-50" /> -->
                 </li>
             </ul>
         </div>
-        <div class="flex flex-col items-center justify-center gap-4">
-            <p class="text-2xl font-bold">And Many More</p>
-            <span class="flex w-1 h-10 border-r-8 border-dotted border-zinc-400"></span>
-            <nuxt-link class="btn bg-primary p-4 px-6 hover:px-10 rounded-xl shadow-mr15" :to="localePath('/authenticate')">
-                <span class="text-lg font-bold text-white">Create Your First Menu For Free</span>
-            </nuxt-link>
-        </div>
-    </div>
+        <nuxt-link class="relative flex items-center justify-center p-8 aspect-square bg-bgAccent rounded-full isolate group mt-16" :to="localePath('/authenticate')">
+            <div class="absolute inset-0 group-hover:scale-100 scale-0 bg-primary rounded-full transition-all">
+                <div class="absolute inset-0 group-hover:scale-125 scale-0 bg-primary bg-opacity-25 animate-ping rounded-full transition-all"></div>
+            </div>
+            <div class="relative flex flex-col items-center justify-center gap-2">
+                <p class="text-2xl font-bold">And Many More...</p>
+                <span class="text-lg text-white opacity-75">Create Your First Menu For Free</span>
+            </div>
+        </nuxt-link>
+    </section>
 </template>
 
 <script setup>
-import Hero from "~/components/web/features/Hero.vue";
+// import Hero from "~/components/web/features/Hero.vue";
 
 useHead({ title: `Features - Menuriom` });
 definePageMeta({ layout: "default" });
@@ -63,56 +72,86 @@ const features = reactive({
         {
             icon: "/gradient-icons/light/palette.png",
             title: "Templates & Customization",
-            desc: "Select from your favorite style of menu and customize it how ever you see fit",
-            image: "/feature-images/customization2.webp",
+            desc: [
+                "Customize your menu base on your restaurant color scheme and design it the way it fits you the best",
+                "With easy to use and simple setting for every part of your menu",
+                "Easily enable and disable the parts of menu that you want and tailor it to you spesific needs",
+            ],
+            list: ["Multiple Patterns", "Custom Icons", "Style For Every Page"],
+            image: "/feature-images/customization.png",
         },
         {
             icon: "/gradient-icons/dark/qrcode.png",
             title: "Custom QR Code",
-            desc: "You can add your brand logo right on the QR code for more customization",
-            image: "/feature-images/custom-qr2.webp",
+            desc: ["Build and design your own custom QR code.", "Customize its colors and shape with your custom logo in the middle"],
+            list: ["With Your Brand Icon", "Fully Customizable", "Ready To Print"],
+            image: "/feature-images/custom-qr.png",
         },
         {
             icon: "/gradient-icons/light/fire.png",
             title: "Item Specialazation",
-            desc: "Highlight items in your menu and add custom tags to attract more attention from your customers",
-            image: "/feature-images/special-item2.webp",
+            desc: [
+                "Highlight items in your menu and add custom tags to attract more attention from your customers",
+                "Dont let your customers miss any items by adding the NEW badge",
+                "Suggest your best sellers on top of your menu for your customers",
+                "Add discount to your items with the DISCOUNT tag",
+            ],
+            image: "/feature-images/special-item.png",
         },
         {
             icon: "/gradient-icons/dark/earth-america.png",
             title: "Menu Translation",
-            desc: "You can add translation for menu item with same QR code",
-            image: "/feature-images/multi-lang2.webp",
+            desc: ["Go internatnal by translate your menu once and for all", "Add more languages as you feel the need for it"],
+            image: "/feature-images/multi-lang.png",
         },
         {
             icon: "/gradient-icons/light/object-intersect.png",
-            title: "Best Item Combos",
-            desc: "You can group items in the menu for recommendation or a discount",
-            image: "/feature-images/combos2.webp",
+            title: "Advanced Analytics",
+            desc: [
+                "Get the most detailed analytic dashboard about your menu, and make desitions base on real numbers",
+                "see what items you sell more, or people like more from your menu",
+            ],
+            list: ["Sells and orders charts", "view your customers feedback", "menu scan analytics"],
+            image: "/feature-images/analytics.png",
         },
         {
             icon: "/gradient-icons/dark/comments-question-check.png",
             title: "Customer Feedback System",
-            desc: "Your customers can leave reviews and like on menu items",
-            image: "/feature-images/feedback2.webp",
+            desc: [
+                "Your customers can leave reviews and like the menu items",
+                "See what your customers think about each item in your menu and reply to their comments",
+            ],
+            list: ["get feeback from real customers", "get in touch with your customers", "improve base on your feebacks"],
+            image: "/feature-images/feedback.png",
         },
         {
             icon: "/gradient-icons/light/clipboard-list-check.png",
             title: "Ordering System",
-            desc: "Your customers can place orders without the need of a waiter",
-            image: "/feature-images/ordering2.webp",
+            desc: [
+                "All in one ordering app and order managment system",
+                "short on staff? your customers can order write from the menu",
+                "get order tickets printed out right in your kichen",
+            ],
+            list: ["your customers wait less", "helps you better manage you restaurant", "lowers down your costs"],
+            image: "/feature-images/ordering.png",
         },
         {
             icon: "/gradient-icons/dark/bell-on.png",
             title: "Waiter Call",
-            desc: "Your customers can call waiter to their table right from the menu app",
-            image: "/feature-images/server-call2.webp",
+            desc: ["Get notified imidatly when a table needs an asistance", "Your customers can call waiter to their table right from the menu app"],
+            list: ["improves your customer service"],
+            image: "/feature-images/server-call.png",
         },
         {
             icon: "/gradient-icons/light/store.png",
             title: "Multiple Branch System",
-            desc: "You can have different menus base on a specific branch",
-            image: "/feature-images/multi-branch2.webp",
+            desc: [
+                "You can have different menu base on a specific branch",
+                "add all your branches addresses in your menu for your customers to choose from",
+                "helps your customers find the closest branch for them",
+            ],
+            list: ["modify your menu base on branch", "custom page for your branch details"],
+            image: "/feature-images/multi-branch.png",
         },
     ],
 });

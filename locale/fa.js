@@ -46,6 +46,7 @@ export default {
     },
 
     header: {
+        Home: "صفحه اصلی",
         Features: "قابلیت ها",
         Demo: "نمونه منو",
         Pricing: "تعرفه ها",
@@ -159,6 +160,11 @@ export default {
             "شما میتونید منوی متفاوت برای هز شعبه از رستوران خود داشته باشید و بسته به هر شعبه منوتون رو تغییر بدید",
         "your customers can like any food on your menu and leave a feedback to you to see":
             "مشتریان شما میتونند برای ایتم های منو نظر ثبت کنن و یا ایتم ها رو به لیست علاقه مندی اضافه کنند",
+    },
+
+    features: {
+        "Core Features": "قابلیت های اصلی",
+        "Get familiar with Menutiom features": "با قابلیت های منوریوم بیشتر آشنا شوید",
     },
 
     pricing: {

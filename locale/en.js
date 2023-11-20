@@ -46,6 +46,7 @@ export default {
     },
 
     header: {
+        Home: "Home",
         Features: "Features",
         Demo: "Demo",
         Pricing: "Pricing",
@@ -159,6 +160,11 @@ export default {
             "you can have different menus for every branch and tailor your menus for a specific branch",
         "your customers can like any food on your menu and leave a feedback to you to see":
             "your customers can like any food on your menu and leave a feedback to you to see",
+    },
+
+    features: {
+        "Core Features": "Core Features",
+        "Get familiar with Menutiom features": "Get familiar with Menutiom features",
     },
 
     pricing: {
