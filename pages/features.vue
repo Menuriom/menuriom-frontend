@@ -3,6 +3,19 @@
     background-image: url("~/assets/images/pattern-black.webp");
     background-repeat: repeat;
 }
+
+div:has(> .rocket) {
+    perspective: 1200px;
+    perspective-origin: center;
+}
+.rocket {
+    animation: rotate-swing 5s ease infinite alternate;
+}
+@keyframes rotate-swing {
+    100% {
+        transform: rotateZ(10deg) rotateX(10deg);
+    }
+}
 </style>
 
 <template>
@@ -18,28 +31,34 @@
             </div>
         </header>
         <div class="relative flex flex-col items-center w-full max-w-screen-2xl p-2 mt-20">
-            <ul class="relative flex flex-col items-center gap-20 w-full">
+            <ul class="relative flex flex-col items-center gap-16 md:gap-24 w-full">
                 <li
                     class="flex flex-col-reverse 1.5xl:flex-row 1.5xl:even:flex-row-reverse items-center justify-center gap-16 lg:gap-32 w-full group"
                     v-for="(item, i) in features.list"
                     :key="i"
                 >
-                    <div class="flex items-center justify-center w-full max-w-xl select-none" draggable="false">
-                        <NuxtImg class="w-full object-scale-down" width="576px" :src="item.image" :alt="item.title" loading="lazy" />
+                    <div
+                        class="flex items-center justify-center w-full max-w-xl select-none"
+                        style="perspective: 1200px; perspective-origin: center"
+                        draggable="false"
+                    >
+                        <NuxtImg class="w-full object-scale-down" ref="img" width="576px" :src="item.image" :alt="item.title" loading="lazy" />
                     </div>
                     <div class="flex flex-col items-center gap-8 w-full max-w-2xl">
                         <div class="flex flex-col items-center 1.5xl:items-start gap-4 w-full">
-                            <h4 class="f-inter text-center 1.5xl:text-start text-3xl lg:text-5xl font-bold">{{ item.title }}</h4>
-                            <span class="flex w-full h-3 gradient mb-4 md:mb-6"></span>
-                            <div class="flex flex-col gap-2 border-s-8 ps-3">
-                                <p class="text-center 1.5xl:text-start lg:text-xl opacity-75" v-for="desc in item.desc">{{ desc }}</p>
+                            <h4 class="f-inter text-center 1.5xl:text-start text-3xl/tight lg:text-5xl/normal font-extrabold">
+                                {{ $t(`features.${item.title}`) }}
+                            </h4>
+                            <span class="flex w-full h-5 gradient rounded-sm mb-4 md:mb-6"></span>
+                            <div class="flex flex-col gap-2 border-s-8 ps-3 mb-2">
+                                <p class="text-center 1.5xl:text-start lg:text-xl opacity-75" v-for="desc in item.desc">{{ $t(`features.${desc}`) }}</p>
                             </div>
-                            <ul class="flex flex-col items-start gap-2">
+                            <ul class="flex flex-col items-start gap-3">
                                 <li class="flex items-center gap-4 bg-bgSecondary p-2 px-4 rounded-lg" v-for="tap in item.list">
                                     <div class="relative flex items-center justify-center w-3 h-3 bg-primary rounded-full">
                                         <span class="absolute w-4 h-4 gradient rounded-full animate-ping"></span>
                                     </div>
-                                    {{ tap }}
+                                    {{ $t(`features.${tap}`) }}
                                 </li>
                             </ul>
                         </div>
@@ -47,13 +66,18 @@
                 </li>
             </ul>
         </div>
-        <nuxt-link class="relative flex items-center justify-center p-8 aspect-square bg-bgAccent rounded-full isolate group mt-16" :to="localePath('/authenticate')">
+        <!-- TODO : list more features in grid form with just icon and details -->
+        <nuxt-link
+            class="relative flex items-center justify-center p-8 aspect-square bg-bgAccent rounded-full isolate group mt-16"
+            :to="localePath('/authenticate')"
+        >
             <div class="absolute inset-0 group-hover:scale-100 scale-0 bg-primary rounded-full transition-all">
                 <div class="absolute inset-0 group-hover:scale-125 scale-0 bg-primary bg-opacity-25 animate-ping rounded-full transition-all"></div>
             </div>
-            <div class="relative flex flex-col items-center justify-center gap-2">
-                <p class="text-2xl font-bold">And Many More...</p>
-                <span class="text-lg text-white opacity-75">Create Your First Menu For Free</span>
+            <div class="relative flex flex-col items-center justify-center gap-2 group">
+                <NuxtImg class="rocket w-20 aspect-square mb-4 group-hover:grayscale" src="/img/rocket.png" sizes="128px 128px" />
+                <p class="text-2xl font-bold">{{ $t("features.And Many More") }}...</p>
+                <span class="text-lg text-white opacity-75">{{ $t("features.Create Your Menu For Free") }}</span>
             </div>
         </nuxt-link>
     </section>
@@ -73,18 +97,21 @@ const features = reactive({
             icon: "/gradient-icons/light/palette.png",
             title: "Templates & Customization",
             desc: [
-                "Customize your menu base on your restaurant color scheme and design it the way it fits you the best",
-                "With easy to use and simple setting for every part of your menu",
-                "Easily enable and disable the parts of menu that you want and tailor it to you spesific needs",
+                "Customize your menu based on your restaurant color scheme and design it the way it fits you the best",
+                "With easy-to-use and simple settings for every part of your menu, easily enable and disable the parts of the menu that you want and tailor it to your specific needs",
             ],
-            list: ["Multiple Patterns", "Custom Icons", "Style For Every Page"],
+            list: ["Custom icons", "Style for every page", "Multiple patterns"],
             image: "/feature-images/customization.png",
         },
         {
             icon: "/gradient-icons/dark/qrcode.png",
             title: "Custom QR Code",
-            desc: ["Build and design your own custom QR code.", "Customize its colors and shape with your custom logo in the middle"],
-            list: ["With Your Brand Icon", "Fully Customizable", "Ready To Print"],
+            desc: [
+                // ...
+                "Build and design your own custom QR code",
+                "Customize its colors and shape with your custom logo in the middle",
+            ],
+            list: ["With your brand icon", "Ready to print", "Fully customizable"],
             image: "/feature-images/custom-qr.png",
         },
         {
@@ -94,24 +121,28 @@ const features = reactive({
                 "Highlight items in your menu and add custom tags to attract more attention from your customers",
                 "Dont let your customers miss any items by adding the NEW badge",
                 "Suggest your best sellers on top of your menu for your customers",
-                "Add discount to your items with the DISCOUNT tag",
+                "Add a discount to your items with the DISCOUNT tag",
             ],
             image: "/feature-images/special-item.png",
         },
         {
             icon: "/gradient-icons/dark/earth-america.png",
             title: "Menu Translation",
-            desc: ["Go internatnal by translate your menu once and for all", "Add more languages as you feel the need for it"],
+            desc: [
+                // ...
+                "Go international by translating your menu once and for all",
+                "Add more languages as you feel the need for it",
+            ],
             image: "/feature-images/multi-lang.png",
         },
         {
             icon: "/gradient-icons/light/object-intersect.png",
             title: "Advanced Analytics",
             desc: [
-                "Get the most detailed analytic dashboard about your menu, and make desitions base on real numbers",
-                "see what items you sell more, or people like more from your menu",
+                "Get the most detailed analytic dashboard about your menu, and make decisions based on real numbers",
+                "See what items you sell more, or what people like more from your menu",
             ],
-            list: ["Sells and orders charts", "view your customers feedback", "menu scan analytics"],
+            list: ["Sells and orders charts", "View your customers feedback", "Menu scan analytics"],
             image: "/feature-images/analytics.png",
         },
         {
@@ -121,38 +152,54 @@ const features = reactive({
                 "Your customers can leave reviews and like the menu items",
                 "See what your customers think about each item in your menu and reply to their comments",
             ],
-            list: ["get feeback from real customers", "get in touch with your customers", "improve base on your feebacks"],
+            list: ["Get feedback from real customers", "Get in touch with your customers", "Improve based on the feedback"],
             image: "/feature-images/feedback.png",
         },
         {
             icon: "/gradient-icons/light/clipboard-list-check.png",
             title: "Ordering System",
             desc: [
-                "All in one ordering app and order managment system",
-                "short on staff? your customers can order write from the menu",
-                "get order tickets printed out right in your kichen",
+                "Short on staff? your customers can order right from the menu, and you get order tickets printed out right in your kitchen",
+                "All-in-one ordering app and order management system",
             ],
-            list: ["your customers wait less", "helps you better manage you restaurant", "lowers down your costs"],
+            list: ["Your customers wait less", "Helps you better manage your restaurant", "Lowers down your costs"],
             image: "/feature-images/ordering.png",
         },
         {
             icon: "/gradient-icons/dark/bell-on.png",
             title: "Waiter Call",
-            desc: ["Get notified imidatly when a table needs an asistance", "Your customers can call waiter to their table right from the menu app"],
-            list: ["improves your customer service"],
+            desc: [
+                // ...
+                "Your customers can call a waiter to their table right from the menu app",
+                "Get notified immediately when a table needs assistance",
+            ],
+            list: ["Improves your customer service"],
             image: "/feature-images/server-call.png",
         },
         {
             icon: "/gradient-icons/light/store.png",
             title: "Multiple Branch System",
             desc: [
-                "You can have different menu base on a specific branch",
-                "add all your branches addresses in your menu for your customers to choose from",
-                "helps your customers find the closest branch for them",
+                "You can have different menus based on a specific branch and add all your branch addresses to your menu for your customers to choose from",
+                "Helps your customers find the closest branch for them",
             ],
-            list: ["modify your menu base on branch", "custom page for your branch details"],
+            list: ["Modify your menu based on the branch", "Custom page for your branch details"],
             image: "/feature-images/multi-branch.png",
         },
     ],
+});
+
+const img = ref(); // Dom Ref
+onMounted(() => {
+    const images = img.value;
+    document.addEventListener("mousemove", (e) => {
+        console.log({ x: e.clientX, y: e.clientY });
+        // for(const img of images){
+        for (let i = 0; i < images.length; i++) {
+            const img = images[i];
+            img.$el.style.transform = `rotateY(${e.clientX * (i % 2 == 0 ? -1 : 1) * 0.009}deg) rotateX(${e.clientY * 0.006}deg)`;
+        }
+        // console.log({ dd: img.value.includes(e.target) });
+    });
 });
 </script>

@@ -165,6 +165,65 @@ export default {
     features: {
         "Core Features": "Core Features",
         "Get familiar with Menutiom features": "Get familiar with Menutiom features",
+        "And Many More": "And Many More",
+        "Create Your Menu For Free": "Create Your Menu For Free",
+
+        "Templates & Customization": "Templates & Customization",
+        "Custom QR Code": "Custom QR Code",
+        "Item Specialazation": "Item Specialazation",
+        "Menu Translation": "Menu Translation",
+        "Advanced Analytics": "Advanced Analytics",
+        "Customer Feedback System": "Customer Feedback System",
+        "Ordering System": "Ordering System",
+        "Waiter Call": "Waiter Call",
+        "Multiple Branch System": "Multiple Branch System",
+
+        "Multiple patterns": "Multiple patterns",
+        "Custom icons": "Custom icons",
+        "Style for every page": "Style for every page",
+        "With your brand icon": "With your brand icon",
+        "Ready to print": "Ready to print",
+        "Fully customizable": "Fully customizable",
+        "Sells and orders charts": "Sells and orders charts",
+        "View your customers feedback": "View your customer's feedback",
+        "Menu scan analytics": "Menu scan analytics",
+        "Get feedback from real customers": "Get feedback from real customers",
+        "Get in touch with your customers": "Get in touch with your customers",
+        "Improve based on the feedback": "Improve based on the feedback",
+        "Your customers wait less": "Your customers wait less",
+        "Helps you better manage your restaurant": "Helps you better manage your restaurant",
+        "Lowers down your costs": "Lowers down your costs",
+        "Improves your customer service": "Improves your customer service",
+        "Modify your menu based on the branch": "Modify your menu based on the branch",
+        "Custom page for your branch details": "Custom page for your branch details",
+
+        "Customize your menu based on your restaurant color scheme and design it the way it fits you the best":
+            "Customize your menu based on your restaurant color scheme and design it the way it fits you the best",
+        "With easy-to-use and simple settings for every part of your menu, easily enable and disable the parts of the menu that you want and tailor it to your specific needs":
+            "With easy-to-use and simple settings for every part of your menu, easily enable and disable the parts of the menu that you want and tailor it to your specific needs",
+        "Build and design your own custom QR code": "Build and design your own custom QR code",
+        "Customize its colors and shape with your custom logo in the middle": "Customize its colors and shape with your custom logo in the middle",
+        "Highlight items in your menu and add custom tags to attract more attention from your customers":
+            "Highlight items in your menu and add custom tags to attract more attention from your customers",
+        "Dont let your customers miss any items by adding the NEW badge": "Don't let your customers miss any items by adding the NEW badge",
+        "Suggest your best sellers on top of your menu for your customers": "Suggest your best sellers on top of your menu for your customers",
+        "Add a discount to your items with the DISCOUNT tag": "Add a discount to your items with the DISCOUNT tag",
+        "Go international by translating your menu once and for all": "Go international by translating your menu once and for all",
+        "Add more languages as you feel the need for it": "Add more languages as you feel the need for it",
+        "Get the most detailed analytic dashboard about your menu, and make decisions based on real numbers":
+            "Get the most detailed analytic dashboard about your menu, and make decisions based on real numbers",
+        "See what items you sell more, or what people like more from your menu": "See what items you sell more, or what people like more from your menu",
+        "Your customers can leave reviews and like the menu items": "Your customers can leave reviews and like the menu items",
+        "See what your customers think about each item in your menu and reply to their comments":
+            "See what your customers think about each item in your menu and reply to their comments",
+        "Short on staff? your customers can order right from the menu, and you get order tickets printed out right in your kitchen":
+            "Short on staff? your customers can order right from the menu, and you get order tickets printed out right in your kitchen",
+        "All-in-one ordering app and order management system": "All-in-one ordering app and order management system",
+        "Your customers can call a waiter to their table right from the menu app": "Your customers can call a waiter to their table right from the menu app",
+        "Get notified immediately when a table needs assistance": "Get notified immediately when a table needs assistance",
+        "You can have different menus based on a specific branch and add all your branch addresses to your menu for your customers to choose from":
+            "You can have different menus based on a specific branch and add all your branch addresses to your menu for your customers to choose from",
+        "Helps your customers find the closest branch for them": "Helps your customers find the closest branch for them",
     },
 
     pricing: {
