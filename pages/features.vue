@@ -190,16 +190,17 @@ const features = reactive({
 });
 
 const img = ref(); // Dom Ref
-onMounted(() => {
+const motion = (e) => {
     const images = img.value;
-    document.addEventListener("mousemove", (e) => {
-        console.log({ x: e.clientX, y: e.clientY });
-        // for(const img of images){
-        for (let i = 0; i < images.length; i++) {
-            const img = images[i];
-            img.$el.style.transform = `rotateY(${e.clientX * (i % 2 == 0 ? -1 : 1) * 0.009}deg) rotateX(${e.clientY * 0.006}deg)`;
-        }
-        // console.log({ dd: img.value.includes(e.target) });
-    });
+    for (let i = 0; i < images.length; i++) {
+        const img = images[i];
+        img.$el.style.transform = `rotateY(${e.clientX * (i % 2 == 0 ? -1 : 1) * 0.009}deg) rotateX(${e.clientY * 0.006}deg)`;
+    }
+};
+onMounted(() => {
+    document.addEventListener("mousemove", motion);
+});
+onUnmounted(() => {
+    document.removeEventListener("mousemove", motion);
 });
 </script>

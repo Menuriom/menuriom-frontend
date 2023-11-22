@@ -415,6 +415,25 @@ export default {
             Terminate: "Terminate",
         },
 
+        dashboard: {
+            "Billing & Plans": "Billing & Plans",
+            "View Last Bill": "View Last Bill",
+            "View Your Billing History": "View Your Billing History",
+            "Renew Your Plan": "Renew Your Plan",
+            "Your Current Plan": "Your Current Plan",
+
+            "Signed up users": "Signed up users",
+            "This Month": "This Month",
+            "Last Month": "Last Month",
+            Branches: "Branches",
+            "Menu Items": "Menu Items",
+            "Staff Members": "Staff Members",
+
+            "QR Code Scans": "QR Code Scans",
+            "Edit QR Code": "Edit QR Code",
+            "Upgrade your plan to standard to view this chart": "Upgrade your plan to standard to view this chart",
+        },
+
         brands: {
             "Brand Details": "Brand Details",
             "Brand Username": "Brand Username",

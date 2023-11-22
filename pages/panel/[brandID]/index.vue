@@ -1,8 +1,17 @@
 <style scoped></style>
 
 <template>
-    <div>
-        dashboard - {{ route.params.brandID }}
+    <div class="flex flex-col gap-4 w-full">
+        <div class="flex flex-wrap items-center gap-4 w-full">
+            <div class="w-96 h-96 grow"></div>
+            <QrScansModule />
+        </div>
+        <div class="flex flex-wrap items-center gap-4 w-full">
+            <CounterModule />
+            <BillingModule />
+            <div class="flex flex-col gap-4 w-full">
+            </div>
+        </div>
 
         <Teleport to="body">
             <BillAlertDialog :alertLevel="alertLevel" v-if="panelStore.popUpOpened === 'billing-alert-dialog'" />
@@ -12,6 +21,9 @@
 
 <script setup>
 const BillAlertDialog = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/BillAlertDialog.vue"));
+import BillingModule from "~/components/panel/dashboard/BillingModule.vue";
+import CounterModule from "~/components/panel/dashboard/CounterModule.vue";
+import QrScansModule from "~/components/panel/dashboard/QrScansModule.vue";
 import { usePanelStore } from "@/stores/panel";
 
 const route = useRoute();

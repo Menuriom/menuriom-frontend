@@ -416,6 +416,25 @@ export default {
             Terminate: "Terminate",
         },
 
+        dashboard: {
+            "Billing & Plans": "صورت حساب و اشتراک",
+            "View Last Bill": "مشاهده قبض آخر",
+            "View Your Billing History": "مشاهده تاریخچه پرداختی ها",
+            "Renew Your Plan": "تمدید اشتراک",
+            "Your Current Plan": "اشتراک کنونی",
+
+            "Signed up users": "ثبت نام کاربران",
+            "This Month": "این ماه",
+            "Last Month": "ماه پیش",
+            Branches: "شعبه ها",
+            "Menu Items": "ایتم های منو",
+            "Staff Members": "خدمه",
+
+            "QR Code Scans": "اسکن های کد QR",
+            "Edit QR Code": "ویرایش کد QR",
+            "Upgrade your plan to standard to view this chart": "برای مشاهده این نمودار، اشتراک خود را به استاندارد ارتقا دهید",
+        },
+
         brands: {
             "Brand Details": "مشخصات برند",
             "Brand Username": "یوزنیم برند",
@@ -845,7 +864,7 @@ export default {
                 "به این علت که کمتر از 5 روز از اشتراک کنونی شما مانده، برای ارتقا باید کل قیمت اشتراک جدید را پرداخت کنید",
 
             "Upgrade To Pro": "ارتقا به اشتراک حرفه ای",
-            "Remove The Limitations": "بدون محدودیت",
+            "Remove The Limitations": "حذف محدودیت ها",
             "Go Pro": "ارتقا پلن",
 
             "Transferring to gateway": "درحال انتقال به درگاه",
