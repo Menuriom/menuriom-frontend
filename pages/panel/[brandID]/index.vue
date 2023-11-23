@@ -1,14 +1,15 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full -my-1">
-        <div class="flex flex-wrap lg:flex-nowrap gap-4 w-full">
+    <div class="flex flex-col gap-4 w-full -my-2">
+        <div class="flex flex-wrap @5xl:flex-nowrap justify-center gap-4 w-full">
             <OrdersModule class="grow" />
             <QrScansModule />
         </div>
-        <div class="flex flex-wrap md:flex-nowrap gap-4 w-full">
-            <div class="flex flex-col gap-4 w-full">
-                <CounterModule class="shrink-0" />
+        <div class="flex flex-wrap @6xl:flex-nowrap justify-center gap-4 w-full">
+            <div class="flex flex-col items-center justify-center gap-4 w-full">
+                <CounterModule class="" />
+                <BestItemsModule class="" />
             </div>
             <FeedbacksModule class="grow" />
             <BillingModule />
@@ -26,6 +27,7 @@ import OrdersModule from "~/components/panel/dashboard/OrdersModule.vue";
 import FeedbacksModule from "~/components/panel/dashboard/FeedbacksModule.vue";
 import BillingModule from "~/components/panel/dashboard/BillingModule.vue";
 import CounterModule from "~/components/panel/dashboard/CounterModule.vue";
+import BestItemsModule from "~/components/panel/dashboard/BestItemsModule.vue";
 import QrScansModule from "~/components/panel/dashboard/QrScansModule.vue";
 import { usePanelStore } from "@/stores/panel";
 

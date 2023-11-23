@@ -24,7 +24,7 @@
                 <b class="text-lg/none text-primary">345</b>
             </div>
         </div>
-        <div class="relative w-full flex items-center justify-center p-1 rounded-2xl shadow-mr25 group grow">
+        <div class="relative w-full flex items-center justify-center p-1 rounded-2xl border border-bgSecondary shadow-mr25 group grow">
             <NuxtImg class="w-full object-contain blur-sm group-hover:blur transition-all" src="/img/chart-long.png" />
             <span class="absolute w-full max-w-xs p-3 px-4 rounded-xl bg-bgPrimary bg-opacity-60 text-sm text-center shadow-mr25">
                 {{ $t("panel.dashboard.Upgrade your plan to standard to view this chart") }}

@@ -425,6 +425,7 @@ export default {
             "Signed up users": "Signed up users",
             "This Month": "This Month",
             "Last Month": "Last Month",
+            "This Year": "This Year",
             Branches: "Branches",
             "Menu Items": "Menu Items",
             "Staff Members": "Staff Members",
@@ -442,7 +443,11 @@ export default {
             "Customers Feedback": "Customers Feedback",
             "New feedback in this month": "New feedback in this month",
             "View All": "View All",
-            "Reply": "Reply",
+            Reply: "Reply",
+
+            "Most Viewed": "Most Viewed",
+            "Most Liked": "Most Liked",
+            "Most Ordered": "Most Ordered",
         },
 
         brands: {

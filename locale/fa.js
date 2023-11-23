@@ -426,6 +426,7 @@ export default {
             "Signed up users": "ثبت نام کاربران",
             "This Month": "این ماه",
             "Last Month": "ماه پیش",
+            "This Year": "امسال",
             Branches: "شعبه ها",
             "Menu Items": "ایتم های منو",
             "Staff Members": "خدمه",
@@ -444,6 +445,10 @@ export default {
             "New feedback in this month": "نظر جدید در این ماه",
             "View All": "مشاهده همه",
             Reply: "پاسخ",
+
+            "Most Viewed": "پر بازدیدها",
+            "Most Ordered": "پر سفارش ها",
+            "Most Liked": "بیشترین لایک",
         },
 
         brands: {
