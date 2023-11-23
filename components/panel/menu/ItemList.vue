@@ -46,7 +46,6 @@
 
                     <div class="dropdown-box" :class="{ open: !filteredDishes.list[k][0].category.close }">
                         <div class="w-full rounded-2xl overflow-hidden">
-                            <!-- :class="{ 'pb-2': !filteredDishes.list[k][0].category.close }" -->
                             <Draggable
                                 tag="ul"
                                 class="flex flex-col gap-3 w-full"
@@ -79,17 +78,28 @@
                                                             {{ dish.translation?.[locale]?.description || dish.description }}
                                                         </p>
                                                     </div>
-                                                    <div class="flex flex-wrap gap-3">
-                                                        <span class="flex items-baseline font-bold text-emerald-300 text-2xl" dir="auto">
-                                                            {{ Intl.NumberFormat(locale).format(dish.price) }}
-                                                        </span>
-                                                        <span class="f-inter text-sm font-extralight -ms-2"> {{ $t("pricing.Toman") }} </span>
-                                                        <div
-                                                            class="flex items-center gap-1 px-2 py-0.5 rounded-xl bg-rose-400 bg-opacity-75 text-white shadow-nr10 shadow-rose-900"
-                                                            v-if="dish.discountActive"
-                                                        >
-                                                            <h5 class="text-xs font-bold">{{ dish.discountPercentage }}%</h5>
-                                                            <small class="font-extralight opacity-75">{{ $t("pricing.OFF") }}</small>
+                                                    <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+                                                        <div class="flex flex-wrap gap-3">
+                                                            <span class="flex items-baseline font-bold text-emerald-300 text-2xl" dir="auto">
+                                                                {{ Intl.NumberFormat(locale).format(dish.price) }}
+                                                            </span>
+                                                            <span class="f-inter text-sm font-extralight -ms-2"> {{ $t("pricing.Toman") }} </span>
+                                                            <div
+                                                                class="flex items-center gap-1 px-2 py-0.5 rounded-xl bg-rose-400 bg-opacity-75 text-white shadow-nr10 shadow-rose-900"
+                                                                v-if="dish.discountActive"
+                                                            >
+                                                                <h5 class="text-xs font-bold">{{ dish.discountPercentage }}%</h5>
+                                                                <small class="font-extralight opacity-75">{{ $t("pricing.OFF") }}</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex items-center gap-1 p-1 px-2 bg-bgPrimary rounded-full">
+                                                            <b class="text-sm md:text-base">{{ Intl.NumberFormat(locale).format(dish.likes) }}</b>
+                                                            <Icon
+                                                                class="w-4 h-4 bg-rose-400 shrink-0"
+                                                                name="heart-filled.svg"
+                                                                folder="icons/tabler"
+                                                                size="16px"
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -206,14 +216,6 @@
                                                 </nuxt-link>
                                             </div>
                                         </div>
-                                        <!-- <div class="flex flex-col gap-2 w-full max-w-screen-2xs">
-                                    <h4 class="flex items-center gap-1 text-sm font-semibold">
-                                        <Icon class="w-5 h-5 bg-black" name="list-tree2.svg" folder="icons/light" size="20px" />
-                                        {{ $t("panel.menu.Side Items") }}
-                                        <span class="bg-fgPrimary bg-opacity-10 h-0.5 grow"></span>
-                                    </h4>
-                                </div> -->
-                                        <!-- TODO : show menu item like count if limitations allows it "menu-item-like" -->
                                         <div class="flex flex-wrap md:flex-col items-center gap-4 md:ms-auto shrink-0">
                                             <nuxt-link
                                                 class="btn flex items-center gap-2 p-3 rounded-xl border border-bgSecondary hover:bg-sky-300 group/btn"
@@ -325,17 +327,6 @@ const localePath = useLocalePath();
 const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
-
-// TODO
-// add scleton loading for menu item loading
-
-// ordering with different branches and different categories selected may cuase problem with current numbering system
-
-// TODO : show all items with heading of their category (one ul for every category - show all)
-// and when user clicket at a category scroll to specific category heading
-// user can change order of items in a category or change category by moving onto a category
-// make headings sticky
-// there is no need to an all category this way
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
@@ -463,10 +454,10 @@ const handleErrors = (err) => {
 const dishes = reactive({ list: [] });
 const filteredDishes = reactive({ list: [] });
 const canCreateNewDish = ref(true);
-const getDishList_results = await useLazyAsyncData(() => getDishesList(route.params.brandID));
+const getDishList_results = await useAsyncData(() => getDishesList(route.params.brandID), { lazy: false });
 const loadingDishes = computed(() => getDishList_results.pending.value);
 
-if (getDishList_results.error.value) handleErrors(getDishList_results.error.value);
+handleErrors(getDishList_results.error.value);
 watch(getDishList_results.error, (err) => handleErrors(err));
 
 const handleDishList_results = (data) => {
@@ -474,15 +465,13 @@ const handleDishList_results = (data) => {
     dishes.list = filteredDishes.list = data._items;
     canCreateNewDish.value = data._canCreateNewDish;
 };
-watch(getDishList_results.data, (val) => handleDishList_results(val), { immediate: process.server || nuxtApp.isHydrating });
+handleDishList_results(getDishList_results.data.value);
+watch(getDishList_results.data, (val) => handleDishList_results(val));
 
 // -------------------------------------------------
 
 const inSearchMode = ref(false);
 const search = (query) => {
-    // if (query) inSearchMode.value = true;
-    // else inSearchMode.value = false;
-
     inSearchMode.value = !!query;
 
     filteredDishes.list = dishes.list.map((categories) => {

@@ -57,6 +57,11 @@ nav {
             <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-[250px] lg:max-w-none p-6 lg:p-0" v-show="menuOpen" ref="nav">
                 <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/')" @click="menuOpen = false">
+                            <span>{{ $t("header.Home") }}</span>
+                        </nuxt-link>
+                    </li>
+                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')" @click="menuOpen = false">
                             <span>{{ $t("header.Features") }}</span>
                         </nuxt-link>

@@ -110,7 +110,7 @@ const updateTransparency = (transparency) => {
     if (!isColorLocked.value) emit("update:color", `${hue}${b10_to_b16(transparency)}`);
 };
 
-const isColorLocked = ref(baseColor.value ? true : false);
+const isColorLocked = ref(baseColor.value && baseColor.value === props.color ? true : false);
 const lockColor = () => {
     isColorLocked.value = !isColorLocked.value;
     if (isColorLocked.value) emit("update:color", baseColor.value);

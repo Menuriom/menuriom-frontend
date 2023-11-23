@@ -2,83 +2,59 @@
 
 <template>
     <div class="flex gap-4 w-full pb-2 overflow-auto">
-        <!-- <ul class="flex gap-4 w-full pb-2 overflow-auto">
-            <li class="relative flex flex-col items-center gap-4 w-48 h-44 p-4 pb-6 rounded-lg bg-white shadow-nr10 hover:shadow-nr15 transition-all">
-                <div class="flex flex-col items-center justify-center gap-2 w-32 h-32 bg-pencil-tip shadow-nr15 rounded-xl">
-                    <img class="w-16 h-16 mt-2" src="~/assets/images/panel-icons/grid-2-light.png" alt="" />
-                    <h4 class="w-full text-sm text-white whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">All</h4>
+        <ul class="flex gap-6 w-full pb-2 overflow-auto">
+            <li
+                class="relative flex flex-col items-center justify-center w-48 h-48 p-4 rounded-2xl group bg-bgSecondary bg-opacity-50 shadow-nr15 hover:shadow-mr25 transition-all overflow-hidden shrink-0"
+                v-for="(category, i) in filteredCategories.list"
+                :key="i"
+            >
+                <SlideMenu class="z-10">
+                    <button
+                        class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30"
+                        @click="toggleCategoryVisibility(i)"
+                        v-if="checkPermissions(['main-panel.menu.items'], brand)"
+                    >
+                        <div class="flex items-center gap-2" v-if="!hiding">
+                            <Icon class="w-4 h-4 bg-white shrink-0" name="eye-slash.svg" folder="icons/light" size="16px" />
+                            <small v-if="!category.hidden">{{ $t("panel.menu.Hide This Category") }}</small>
+                            <small v-else>{{ $t("panel.menu.Make Category Visible") }}</small>
+                        </div>
+                        <Loading size="h-4" v-else />
+                    </button>
+                    <nuxt-link
+                        class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30"
+                        :to="localePath(`/panel/${route.params.brandID}/menu/category/${category._id}`)"
+                        v-if="checkPermissions(['main-panel.menu.items'], brand)"
+                    >
+                        <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
+                        <small>{{ $t("panel.menu.Edit This Category") }}</small>
+                    </nuxt-link>
+                    <hr class="w-11/12 mx-auto opacity-10" />
+                    <button
+                        class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30 text-red-300"
+                        @click="openDeleteDialog(i)"
+                        v-if="checkPermissions(['main-panel.menu.items'], brand)"
+                    >
+                        <Icon class="w-4 h-4 bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="16px" />
+                        <small>{{ $t("panel.menu.Delete Category") }}</small>
+                    </button>
+                </SlideMenu>
+                <div class="flex flex-col items-center justify-center gap-2 w-36 h-36 bg-bgSecondary shadow-mr25 rounded-xl">
+                    <img class="w-16 h-16 mt-2" :src="category.icon" alt="" loading="lazy" />
+                    <h4 class="w-full whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
+                        {{ category.translation?.[locale]?.name || category.name }}
+                    </h4>
+                </div>
+                <div class="absolute top-8 start-2 flex flex-col items-start gap-2">
+                    <span class="p-1 rounded-md text-xs text-white bg-primary bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.hidden">
+                        {{ $t("panel.menu.Hidden") }}
+                    </span>
+                    <span class="p-1 rounded-md text-xs text-white bg-secondary bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.showAsNew">
+                        {{ $t("New") }}
+                    </span>
                 </div>
             </li>
-        </ul> -->
-        <!-- :class="{ 'flex-row-reverse': localeProperties.dir === 'rtl' }" -->
-        <div class="flex max-w-max">
-            <Draggable
-                tag="ul"
-                class="flex gap-6"
-                v-model="filteredCategories.list"
-                @start="resetSavingOrder()"
-                @end="saveOrder()"
-                handle=".grab_area"
-                item-key="order"
-            >
-                <template #item="{ element: category, index: i }">
-                    <li
-                        class="relative flex flex-col items-center justify-center w-48 h-48 p-4 rounded-2xl group bg-bgSecondary bg-opacity-50 shadow-nr15 hover:shadow-mr25 transition-all overflow-hidden"
-                    >
-                        <SlideMenu class="z-10">
-                            <button
-                                class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30"
-                                @click="toggleCategoryVisibility(i)"
-                                v-if="checkPermissions(['main-panel.menu.items'], brand)"
-                            >
-                                <div class="flex items-center gap-2" v-if="!hiding">
-                                    <Icon class="w-4 h-4 bg-white shrink-0" name="eye-slash.svg" folder="icons/light" size="16px" />
-                                    <small v-if="!category.hidden">{{ $t("panel.menu.Hide This Category") }}</small>
-                                    <small v-else>{{ $t("panel.menu.Make Category Visible") }}</small>
-                                </div>
-                                <Loading size="h-4" v-else />
-                            </button>
-                            <nuxt-link
-                                class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30"
-                                :to="localePath(`/panel/${route.params.brandID}/menu/category/${category._id}`)"
-                                v-if="checkPermissions(['main-panel.menu.items'], brand)"
-                            >
-                                <Icon class="w-4 h-4 bg-white shrink-0" name="pen-to-square.svg" folder="icons/light" size="16px" />
-                                <small>{{ $t("panel.menu.Edit This Category") }}</small>
-                            </nuxt-link>
-                            <hr class="w-11/12 mx-auto opacity-10" />
-                            <button
-                                class="flex items-center gap-2 p-2 rounded-xl hover:bg-bgAccent hover:bg-opacity-30 text-red-300"
-                                @click="openDeleteDialog(i)"
-                                v-if="checkPermissions(['main-panel.menu.items'], brand)"
-                            >
-                                <Icon class="w-4 h-4 bg-red-300 shrink-0" name="trash-can.svg" folder="icons/light" size="16px" />
-                                <small>{{ $t("panel.menu.Delete Category") }}</small>
-                            </button>
-                        </SlideMenu>
-                        <div class="flex flex-col items-center justify-center gap-2 w-36 h-36 bg-bgSecondary shadow-mr25 rounded-xl">
-                            <img class="w-16 h-16 mt-2" :src="category.icon" alt="" loading="lazy" />
-                            <h4 class="w-full whitespace-nowrap text-ellipsis overflow-hidden text-center px-2">
-                                {{ category.translation?.[locale]?.name || category.name }}
-                            </h4>
-                        </div>
-                        <div class="absolute top-8 start-2 flex flex-col items-start gap-2">
-                            <span class="p-1 rounded-md text-xs text-white bg-primary bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.hidden">
-                                {{ $t("panel.menu.Hidden") }}
-                            </span>
-                            <span class="p-1 rounded-md text-xs text-white bg-secondary bg-opacity-60 shadow-md backdrop-blur-sm" v-if="category.showAsNew">
-                                {{ $t("New") }}
-                            </span>
-                        </div>
-                        <!-- <span class="grab_area absolute bottom-1.5 flex items-center justify-center gap-1.5 w-full h-5 hover:cursor-grab active:cursor-grabbing">
-                            <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                            <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                            <Icon class="w-5 h-5 bg-black" name="grip-dots.svg" folder="icons/light" size="20px" />
-                        </span> -->
-                    </li>
-                </template>
-            </Draggable>
-        </div>
+        </ul>
 
         <Teleport to="body">
             <Dialog name="delete-confirmation" :title="$t('panel.menu.Delete Category')">
@@ -133,13 +109,11 @@ const toast = useToast();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
+const emit = defineEmits(["category:length"]);
+
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
-// TODO
-// add scleton loading for category loading
-
 const searchQuery = ref("");
-
 const errorField = ref("");
 const responseMessage = ref("");
 
@@ -263,19 +237,21 @@ const handleErrors = (err) => {
 const categories = reactive({ list: [] });
 const filteredCategories = reactive({ list: [] });
 const canCreateNewCategory = ref(true);
-const getCategoryList_results = await useLazyAsyncData(() => getCategoryList(route.params.brandID));
+// const getCategoryList_results = await useLazyAsyncData(() => getCategoryList(route.params.brandID));
+const getCategoryList_results = await useAsyncData(() => getCategoryList(route.params.brandID), { lazy: false });
 const loadingCategories = computed(() => getCategoryList_results.pending.value);
 
-if (getCategoryList_results.error.value) handleErrors(getCategoryList_results.error.value);
+handleErrors(getCategoryList_results.error.value);
 watch(getCategoryList_results.error, (err) => handleErrors(err));
 
 const handleCategoryList_results = (data) => {
     if (!data) return;
     categories.list = filteredCategories.list = data._categories;
     canCreateNewCategory.value = data._canCreateNewCategory;
+    emit("category:length", categories.list.length);
 };
-watch(getCategoryList_results.data, (val) => handleCategoryList_results(val), { immediate: process.server || nuxtApp.isHydrating });
-
+handleCategoryList_results(getCategoryList_results.data.value);
+watch(getCategoryList_results.data, (val) => handleCategoryList_results(val));
 // -------------------------------------------------
 
 const search = (query) => {

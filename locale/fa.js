@@ -46,6 +46,7 @@ export default {
     },
 
     header: {
+        Home: "صفحه اصلی",
         Features: "قابلیت ها",
         Demo: "نمونه منو",
         Pricing: "تعرفه ها",
@@ -120,7 +121,7 @@ export default {
         FeatureDescription:
             "با استفاده از یک منوی انلاین شما میتوانید محصولات خودتون رو بهتر مدیریت کنید و تغییرات منو رو به سادگی و سرعت اعمال کنید، میتوانید منوی های مختلف برای زبان های مختلف داشته باشید و منوی رستوران خود را به هر شکلی که دوست دارید بسازید",
 
-        "Highlight Specific Items In Your Menu": "هایلایت کردن بعضی از ایتم ها در منو",
+        "Highlight Specific Items In Your Menu": "هایلایت کردن برخی ایتم ها در منو",
         "maybe you have a new item on your menu": "شاید یه ایتم جدید به منوی خود اضافه کردید",
         "maybe an item is sold out for the day, or you just want to add an item as a special one":
             "یا شاید یکی از ایتم ها تموم شده، یا شاید بعضی از ایتم ها در روز های خاصی از هفته موجود هستند",
@@ -159,6 +160,71 @@ export default {
             "شما میتونید منوی متفاوت برای هز شعبه از رستوران خود داشته باشید و بسته به هر شعبه منوتون رو تغییر بدید",
         "your customers can like any food on your menu and leave a feedback to you to see":
             "مشتریان شما میتونند برای ایتم های منو نظر ثبت کنن و یا ایتم ها رو به لیست علاقه مندی اضافه کنند",
+    },
+
+    features: {
+        "Core Features": "قابلیت های اصلی",
+        "Get familiar with Menutiom features": "با قابلیت های منوریوم بیشتر آشنا شوید",
+        "And Many More": "و خیلی قابلیت های بیشتر",
+        "Create Your Menu For Free": "منوی خودتون رو رایگان بسازید",
+
+        "Templates & Customization": "قالب ها و شخصی سازی",
+        "Custom QR Code": "کد های QR متنوع",
+        "Item Specialazation": "متنوع کردن ایتم های منو",
+        "Menu Translation": "زبان های مختلف",
+        "Advanced Analytics": "سیستم آمار حرفه ای",
+        "Customer Feedback System": "نظرات و بازخورد مشتریان",
+        "Ordering System": "سیستم سفارش و مدیرت سفارشات",
+        "Waiter Call": "درخواست گارسون",
+        "Multiple Branch System": "ایجاد چندین شعبه",
+
+        "Multiple patterns": "طرح های متنوع",
+        "Custom icons": "ایکون های اختصاصی",
+        "Style for every page": "طرح برای هر صفحهی منو",
+        "With your brand icon": "با لوگوی برند شما",
+        "Ready to print": "آماده چاپ",
+        "Fully customizable": "کاملا قابل شخصی سازی",
+        "Sells and orders charts": "آمار فروش و سفارشات",
+        "View your customers feedback": "مشاهده بازخورد مشتریان",
+        "Menu scan analytics": "آمار اسکن منو",
+        "Get feedback from real customers": "دریافت بازخورد واقعی از مشتریان",
+        "Get in touch with your customers": "در تماس بودن با مشتریان",
+        "Improve based on the feedback": "بهبود با توجه به بازخوردها",
+        "Your customers wait less": "انتظار کمتر مشتریان شما",
+        "Helps you better manage your restaurant": "کمک برای بهتر مدیریت کردن رستوران",
+        "Lowers down your costs": "کاهش هزینه های جانبی",
+        "Improves your customer service": "بهبود خدمات مشتریان",
+        "Modify your menu based on the branch": "اصلاح منو بسته به نیاز هر شعبه",
+        "Custom page for your branch details": "صفحه اختصاصی برای مشخصات شعبه ها",
+
+        "Customize your menu based on your restaurant color scheme and design it the way it fits you the best":
+            "منوی خودتو رو بسته به ظاهر رستوران خودتون بسازید و هرجور که مناسب شماست طراحیش کنید",
+        "With easy-to-use and simple settings for every part of your menu, easily enable and disable the parts of the menu that you want and tailor it to your specific needs":
+            "با تنظیمات ساده و کاربردی برای هر قسمت از منو، به راحتی بخش هایی از منو رو که می خواهید فعال و غیرفعال کنید و منوی خودتون رو با نیازهای خاص خود تنظیم کنید",
+        "Build and design your own custom QR code": "کدهای QR خاص و مخصوص به خودتون بسازید",
+        "Customize its colors and shape with your custom logo in the middle": "رنگ و ظاهرش رو شخصی سازی کنید و لوگوی برند خودتون رو روش بزنید",
+        "Highlight items in your menu and add custom tags to attract more attention from your customers":
+            "ایتم های منو رو برجسته کنید و با برچسب های مختلف توجه مشتریانتون رو جلب کنید",
+        "Dont let your customers miss any items by adding the NEW badge": "با برچسب جدید، نذارید مشتریانتون چیزی رو جا بندازن",
+        "Suggest your best sellers on top of your menu for your customers": "محصولات خودتون رو به حالت خاص به مشتریانتون پیشنهاد بدید",
+        "Add a discount to your items with the DISCOUNT tag": "با تگ تخفیف رو ایتم هاتون تخفیف بذارید",
+        "Go international by translating your menu once and for all": "با ترجمه منوتون به زبان های مختلف بین المللی بشید",
+        "Add more languages as you feel the need for it": "در هر زمان زبان های بیشتری اضافه کنید",
+        "Get the most detailed analytic dashboard about your menu, and make decisions based on real numbers":
+            "صاحب دقیق ترین پنل آماردهی برای منوی خودتون بشید، و بر اساس اعداد واقعی تصمیم بگیرید",
+        "See what items you sell more, or what people like more from your menu":
+            "از ایتم های پرفروش خود با خبر بشید و ببینید کدام ایتم ها رو مشتریانتون بیشتر می‌پسندند",
+        "Your customers can leave reviews and like the menu items": "مشتریان شما میتونند روی ایتم های نظر ثبت کنن و ایتم ها رو لایک کنن",
+        "See what your customers think about each item in your menu and reply to their comments":
+            "ببینید مشتریان شما چه دیدگاهی نسبت به منوی شما دارند و به نظراتشون پاسخ بدید",
+        "Short on staff? your customers can order right from the menu, and you get order tickets printed out right in your kitchen":
+            "کارکنان کمی دارید؟ مشتریان شما میتونن سفارش خودشون رو مستقیم از داخل منو ثبت کنند، و شما تیکت سفارش رو داخل آشپزخونه تحویل بگیرید",
+        "All-in-one ordering app and order management system": "سیستم سفارگیری و مدیرت سفارشات همه کاره",
+        "Your customers can call a waiter to their table right from the menu app": "مشتریان شما به راحتی میتوانند گارسون را از داخل منو به میز خود صدا بزنند",
+        "Get notified immediately when a table needs assistance": "به سرعت مطلع شوید که کدام میز به کمک نیاز دارد",
+        "You can have different menus based on a specific branch and add all your branch addresses to your menu for your customers to choose from":
+            "شما میتوانید بسته به هر شعبه منوی متفاوتی داشته باشید، و مشخصات تمام شعبه های خودتون رو داخل منو به مشتریانتون نشان بدید",
+        "Helps your customers find the closest branch for them": "به راحتی به مشریان خود این امکان رو بدید که نزدیک ترین شعبه شما رو پیدا بکنند",
     },
 
     pricing: {
@@ -348,6 +414,42 @@ export default {
             "Last active": "آخرین فعالیت",
             ago: "پیش",
             Terminate: "Terminate",
+        },
+
+        dashboard: {
+            "Billing & Plans": "صورت حساب و اشتراک",
+            "View Last Bill": "مشاهده قبض آخر",
+            "View Your Billing History": "مشاهده تاریخچه پرداختی ها",
+            "Renew Your Plan": "تمدید اشتراک",
+            "Your Current Plan": "اشتراک کنونی",
+
+            "Signed up users": "ثبت نام کاربران",
+            "This Month": "این ماه",
+            "Last Month": "ماه پیش",
+            "This Year": "امسال",
+            Branches: "شعبه ها",
+            "Menu Items": "ایتم های منو",
+            "Staff Members": "خدمه",
+
+            "QR Code Scans": "اسکن های کد QR",
+            "Edit QR Code": "ویرایش کد QR",
+            "Upgrade your plan to standard to view this chart": "برای مشاهده این نمودار، اشتراک خود را به استاندارد ارتقا دهید",
+            "Unique Scans": "اسکن های یکتا",
+            "Total Scans": "کل اسکن ها",
+            "Menu Link": "لینک منو",
+
+            "Orders Statistics": "آمار سفارشات",
+            "Orders Panel": "پنل سفارشات",
+            "Total Orders": "کل سفارشات",
+
+            "Customers Feedback": "دیدگاه مشتریان",
+            "New feedback in this month": "نظر جدید در این ماه",
+            "View All": "مشاهده همه",
+            Reply: "پاسخ",
+
+            "Most Viewed": "پر بازدیدها",
+            "Most Liked": "بیشترین لایک",
+            "Most Ordered": "پر سفارش ها",
         },
 
         brands: {
@@ -552,6 +654,9 @@ export default {
             "Delete Menu Item": "حذف ایتم منو",
             "This Category Has No Items": "این دسته‌بندی ایتم ندارد",
             "Menu items order updated": "ترتیب ایتم ها بروز شد",
+
+            "You Have No Items Yet": "شما هیچ ایتمی نساخته اید",
+            "For creating a menu, first start by creating a category": "برای ساخت منو، ابتدا یک دسته بندی ایجاد کنید",
         },
 
         "menu-style": {
@@ -776,7 +881,7 @@ export default {
                 "به این علت که کمتر از 5 روز از اشتراک کنونی شما مانده، برای ارتقا باید کل قیمت اشتراک جدید را پرداخت کنید",
 
             "Upgrade To Pro": "ارتقا به اشتراک حرفه ای",
-            "Remove The Limitations": "بدون محدودیت",
+            "Remove The Limitations": "حذف محدودیت ها",
             "Go Pro": "ارتقا پلن",
 
             "Transferring to gateway": "درحال انتقال به درگاه",

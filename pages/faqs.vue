@@ -2,8 +2,9 @@
 
 <template>
     <section class="flex flex-col items-center gap-14 w-full max-w-screen-xl mx-auto p-4">
-        <header class="relative flex flex-col items-center w-full p-3 md:p-10 bg-bgAccent rounded-3xl isolate">
-            <img class="absolute -z-10 opacity-75" src="~/assets/images/tiles.webp" alt="tiles" />
+        <header class="relative flex flex-col items-center w-full p-3 md:p-10 bg-bgAccent rounded-3xl overflow-hidden isolate">
+            <!-- <img class="absolute -z-10 opacity-75" src="~/assets/images/tiles.webp" alt="tiles" /> -->
+            <NuxtImg class="absolute inset-0 w-full h-full opacity-50 rounded-3xl object-cover" src="/img/restaurant3.jpg" sizes="100% 1280px" loading="lazy" />
             <div
                 class="flex flex-col items-center gap-2 w-full max-w-3xl mt-12 p-10 pb-16 bg-fgPrimary bg-opacity-60 text-bgPrimary backdrop-blur-sm rounded-2xl"
             >
@@ -17,7 +18,7 @@
                 </button>
             </div>
         </header>
-        <ul class="flex items-center gap-2 sm:gap-6 md:gap-10">
+        <ul class="relative flex items-center gap-2 sm:gap-6 md:gap-10  md:-mt-28">
             <li
                 class="flex items-center justify-center w-28 sm:w-44 lg:w-64 aspect-square rounded-3xl sm:rounded-4xl overflow-hidden transition-all cursor-pointer"
                 :class="[topic == item ? 'gradient p-1.5 sm:p-3' : 'p-0']"

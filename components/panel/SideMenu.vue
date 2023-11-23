@@ -120,7 +120,7 @@ aside > div {
                     </nuxt-link>
                     <nuxt-link
                         class="link"
-                        :to="localePath(`/panel/${panelStore.selectedBrandId}/feedback`)"
+                        :to="localePath(`/panel/${panelStore.selectedBrandId}/feedbacks`)"
                         v-if="checkPermissions(['main-panel.customer-feedback.view'], brand)"
                     >
                         <li class="flex items-center gap-3">

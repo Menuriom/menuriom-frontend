@@ -71,6 +71,7 @@ export const useUserStore = defineStore("user", () => {
     };
 
     const setRefreshInterval = () => {
+        isIntervalSet.value = true;
         const interval = setInterval(async () => {
             await axios
                 .post(`/auth/refresh`, null, { timeout: 30 * 1000 })
