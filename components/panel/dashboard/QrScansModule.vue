@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="flex flex-wrap items-center gap-2 p-2 rounded-xl bg-fgPrimary text-bgPrimary">
-            <span class="text-sm text-primary font-bold">{{ $t("panel.qrcode.Link to your menu") }}:</span>
+            <span class="text-sm text-primary font-bold">{{ $t("panel.dashboard.Menu Link") }}:</span>
             <a
                 class="btn rounded-lg text-sm p-1 hover:px-4 hover:bg-secondary hover:bg-opacity-60 hover:shadow-nr15 hover:underline underline-offset-2"
                 :href="link"

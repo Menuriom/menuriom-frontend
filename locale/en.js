@@ -435,6 +435,7 @@ export default {
             "Upgrade your plan to standard to view this chart": "Upgrade your plan to standard to view this chart",
             "Unique Scans": "Unique Scans",
             "Total Scans": "Total Scans",
+            "Menu Link": "Menu Link",
 
             "Orders Statistics": "Orders Statistics",
             "Orders Panel": "Orders Panel",

@@ -436,6 +436,7 @@ export default {
             "Upgrade your plan to standard to view this chart": "برای مشاهده این نمودار، اشتراک خود را به استاندارد ارتقا دهید",
             "Unique Scans": "اسکن های یکتا",
             "Total Scans": "کل اسکن ها",
+            "Menu Link": "لینک منو",
 
             "Orders Statistics": "آمار سفارشات",
             "Orders Panel": "پنل سفارشات",
@@ -447,8 +448,8 @@ export default {
             Reply: "پاسخ",
 
             "Most Viewed": "پر بازدیدها",
-            "Most Ordered": "پر سفارش ها",
             "Most Liked": "بیشترین لایک",
+            "Most Ordered": "پر سفارش ها",
         },
 
         brands: {
