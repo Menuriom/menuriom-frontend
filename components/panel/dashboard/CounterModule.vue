@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <section class="flex gap-4 w-full max-w-[420px]">
+    <section class="flex gap-4 w-full max-w-md">
         <ul class="flex flex-col items-center justify-center gap-2 w-full p-4 rounded-3xl bg-bgSecondary bg-opacity-75 shadow-mr35">
             <li class="flex items-center gap-2 w-full">
                 <h3 class="text-sm">{{ $t("panel.dashboard.Branches") }}</h3>

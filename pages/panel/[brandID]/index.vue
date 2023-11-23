@@ -1,16 +1,17 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full">
-        <div class="flex flex-wrap items-center gap-4 w-full">
-            <div class="w-96 h-96 grow"></div>
+    <div class="flex flex-col gap-4 w-full -my-1">
+        <div class="flex flex-wrap lg:flex-nowrap gap-4 w-full">
+            <OrdersModule class="grow" />
             <QrScansModule />
         </div>
-        <div class="flex flex-wrap items-center gap-4 w-full">
-            <CounterModule />
-            <BillingModule />
+        <div class="flex flex-wrap md:flex-nowrap gap-4 w-full">
             <div class="flex flex-col gap-4 w-full">
+                <CounterModule class="shrink-0" />
             </div>
+            <FeedbacksModule class="grow" />
+            <BillingModule />
         </div>
 
         <Teleport to="body">
@@ -21,6 +22,8 @@
 
 <script setup>
 const BillAlertDialog = defineAsyncComponent(() => import("~/components/panel/dialogs/billing/BillAlertDialog.vue"));
+import OrdersModule from "~/components/panel/dashboard/OrdersModule.vue";
+import FeedbacksModule from "~/components/panel/dashboard/FeedbacksModule.vue";
 import BillingModule from "~/components/panel/dashboard/BillingModule.vue";
 import CounterModule from "~/components/panel/dashboard/CounterModule.vue";
 import QrScansModule from "~/components/panel/dashboard/QrScansModule.vue";

@@ -433,6 +433,17 @@ export default {
             "QR Code Scans": "اسکن های کد QR",
             "Edit QR Code": "ویرایش کد QR",
             "Upgrade your plan to standard to view this chart": "برای مشاهده این نمودار، اشتراک خود را به استاندارد ارتقا دهید",
+            "Unique Scans": "اسکن های یکتا",
+            "Total Scans": "کل اسکن ها",
+
+            "Orders Statistics": "آمار سفارشات",
+            "Orders Panel": "پنل سفارشات",
+            "Total Orders": "کل سفارشات",
+
+            "Customers Feedback": "دیدگاه مشتریان",
+            "New feedback in this month": "نظر جدید در این ماه",
+            "View All": "مشاهده همه",
+            Reply: "پاسخ",
         },
 
         brands: {

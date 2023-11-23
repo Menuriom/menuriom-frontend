@@ -15,7 +15,7 @@
             <div class="flex flex-wrap items-center gap-4">
                 <nuxt-link
                     class="btn flex items-center justify-center gap-2 p-3 hover:px-6 text-sm rounded-xl bg-fgPrimary text-bgPrimary shrink-0"
-                    :to="`${runtimeConfig.public.BASE_URL}/r/${route.params.brandID}`"
+                    :to="`${runtimeConfig.public.MENU_BASE_URL}/${brand.username}`"
                 >
                     <Icon class="w-5 h-5 gradient" name="book-open.svg" folder="icons/light" size="20px" />
                     {{ $t("panel.menu.View Live Menu") }}

@@ -432,6 +432,17 @@ export default {
             "QR Code Scans": "QR Code Scans",
             "Edit QR Code": "Edit QR Code",
             "Upgrade your plan to standard to view this chart": "Upgrade your plan to standard to view this chart",
+            "Unique Scans": "Unique Scans",
+            "Total Scans": "Total Scans",
+
+            "Orders Statistics": "Orders Statistics",
+            "Orders Panel": "Orders Panel",
+            "Total Orders": "Total Orders",
+
+            "Customers Feedback": "Customers Feedback",
+            "New feedback in this month": "New feedback in this month",
+            "View All": "View All",
+            "Reply": "Reply",
         },
 
         brands: {

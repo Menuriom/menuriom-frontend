@@ -1,8 +1,7 @@
-import { NuxtImg } from '#build/components';
 <style scoped></style>
 
 <template>
-    <section class="relative flex flex-col gap-4 w-full max-w-[400px] p-6 rounded-3xl overflow-hidden isolate">
+    <section class="relative flex flex-col gap-4 w-full max-w-sm p-6 rounded-3xl overflow-hidden isolate">
         <div class="absolute inset-0 -z-2 gradient opacity-75"></div>
 
         <header class="relative flex items-center gap-2 w-full">
@@ -17,17 +16,19 @@ import { NuxtImg } from '#build/components';
             <span class="absolute start-3/4 -bottom-20 -rotate-45 -ms-10 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute -end-4 -bottom-20 -rotate-12 gradient-re w-28 h-28 rounded-2xl"></span>
 
-            <div class="relative flex items-center gap-2 w-full" v-if="userIsPro">
+            <div class="relative flex items-center gap-2 w-full" v-if="!userIsPro">
                 <NuxtImg class="w-16 -rotate-6 -ms-6" src="/img/cafe.png" width="64px" />
-                <div class="relative flex flex-col items-start">
+                <div class="relative flex flex-col items-start bg-bgSecondary bg-opacity-40 p-2 rounded-lg">
                     <small class="flex text-sm opacity-75">{{ $t("panel.billing.Remove The Limitations") }}</small>
-                    <h5 class="hidden 2sm:flex gradient-text text-3xl/normal font-black -mt-1">{{ $t("panel.billing.Upgrade To Pro") }}</h5>
+                    <h5 class="hidden 2sm:flex text-fgPrimary text-2xl/normal font-black -mt-1">{{ $t("panel.billing.Upgrade To Pro") }}</h5>
                 </div>
             </div>
 
-            <div class="relative flex items-center gap-1" v-else>
+            <div class="relative flex items-center" v-else>
                 <NuxtImg class="w-16 -rotate-6 -ms-10" src="/img/bill.png" width="64px" />
-                <h5 class="hidden 2sm:flex gradient-text text-2xl/normal font-extrabold">{{ $t("panel.dashboard.View Your Billing History") }}</h5>
+                <h5 class="hidden 2sm:flex text-fgPrimary bg-bgSecondary bg-opacity-40 p-2 rounded-lg text-xl/normal font-extrabold">
+                    {{ $t("panel.dashboard.View Your Billing History") }}
+                </h5>
             </div>
         </nuxt-link>
 
