@@ -142,6 +142,23 @@
                     </li>
                     <LangSwitch :showText="true" textColor="white" />
                 </ul>
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-center aspect-square p-2 border border-bgSecondary rounded-2xl">
+                        <a
+                            class="inline-block bg-fgPrimary rounded-xl"
+                            referrerpolicy="origin"
+                            target="_blank"
+                            href="https://trustseal.enamad.ir/?id=426668&Code=Ams6Rt4exUDJi19VQBBnqCriW8foVxCj"
+                        >
+                            <img
+                                class="max-w-[96px] aspect-square cursor-pointer rounded-xl"
+                                referrerpolicy="origin"
+                                src="https://trustseal.enamad.ir/logo.aspx?id=426668&Code=Ams6Rt4exUDJi19VQBBnqCriW8foVxCj"
+                                Code="Ams6Rt4exUDJi19VQBBnqCriW8foVxCj"
+                            />
+                        </a>
+                    </div>
+                </div>
             </nav>
         </div>
         <hr class="gradient-re w-full max-w-screen-xl h-0.5 border-0 opacity-50 -my-4 -mb-8" />
