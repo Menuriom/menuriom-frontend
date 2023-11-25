@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <section class="flex flex-col gap-4 w-full md:max-w-lg p-6 bg-bgAccent rounded-3xl">
+    <section class="flex flex-col gap-4 w-full md:max-w-lg p-4 md:p-6 bg-bgAccent rounded-3xl">
         <header class="flex items-center gap-2 w-full">
             <h3 class="font-extrabold text-fgPrimary">{{ $t("panel.dashboard.Customers Feedback") }}</h3>
             <span class="w-0.5 h-0.5 bg-bgSecondary opacity-50 grow"></span>

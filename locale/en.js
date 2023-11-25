@@ -433,6 +433,7 @@ export default {
             "QR Code Scans": "QR Code Scans",
             "Edit QR Code": "Edit QR Code",
             "Upgrade your plan to standard to view this chart": "Upgrade your plan to standard to view this chart",
+            "Upgrade your plan to pro to view this chart": "Upgrade your plan to pro to view this chart",
             "Unique Scans": "Unique Scans",
             "Total Scans": "Total Scans",
             "Menu Link": "Menu Link",

@@ -434,7 +434,8 @@ export default {
             "QR Code Scans": "اسکن های کد QR",
             "Edit QR Code": "ویرایش کد QR",
             "Upgrade your plan to standard to view this chart": "برای مشاهده این نمودار، اشتراک خود را به استاندارد ارتقا دهید",
-            "Unique Scans": "اسکن های یکتا",
+            "Upgrade your plan to pro to view this chart": "برای مشاهده این نمودار، اشتراک خود را به حرفه ای ارتقا دهید",
+            "Unique Scans": "اسکن های جدید",
             "Total Scans": "کل اسکن ها",
             "Menu Link": "لینک منو",
 

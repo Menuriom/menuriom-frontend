@@ -8,7 +8,7 @@
 
 <template>
     <section class="flex flex-col gap-4 w-full max-w-xl lg:max-w-[420px] p-4 bg-bgAccent rounded-3xl" ref="section">
-        <header class="flex items-center justify-between gap-4 w-full">
+        <header class="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 w-full">
             <ul class="flex items-center gap-1 shrink-0">
                 <li
                     class="text-[11px] py-1.5 px-2 rounded-lg bg-opacity-20 border border-bgSecondary cursor-pointer"

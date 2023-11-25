@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <section class="flex flex-col gap-4 w-full max-w-xl lg:max-w-[420px] p-6 bg-bgAccent rounded-3xl">
+    <section class="flex flex-col gap-4 w-full max-w-xl lg:max-w-[420px] p-4 md:p-6 bg-bgAccent rounded-3xl">
         <header class="flex items-center gap-2 w-full">
             <h3 class="font-extrabold text-fgPrimary">{{ $t("panel.dashboard.QR Code Scans") }}</h3>
             <span class="w-0.5 h-0.5 bg-bgSecondary opacity-50 grow"></span>
@@ -17,42 +17,43 @@
             <div class="flex flex-col gap-4 grow p-3 rounded-2xl bg-bgSecondary bg-opacity-75 shadow-mr35">
                 <div class="flex items-center justify-between gap-2 w-full">
                     <h3 class="text-sm">{{ $t("panel.dashboard.Unique Scans") }}</h3>
-                    <small class="text-emerald-300">+23%</small>
+                    <small class="text-emerald-300">+0%</small>
                 </div>
                 <ul class="flex items-center gap-2 w-full">
                     <li class="flex flex-col items-center w-full p-2.5 rounded-2xl bg-bgPrimary shadow-mr25">
-                        <b class="text-lg/none text-primary">345</b>
-                        <span class="text-xs">{{ $t("panel.dashboard.This Month") }}</span>
+                        <b class="text-lg/none text-primary">0</b>
+                        <span class="text-xxs">{{ $t("panel.dashboard.This Month") }}</span>
                     </li>
                     <li class="flex flex-col items-center w-full p-2.5 rounded-2xl bg-bgPrimary shadow-mr25">
-                        <b class="text-lg/none text-primary">345</b>
-                        <span class="text-xs">{{ $t("panel.dashboard.Last Month") }}</span>
+                        <b class="text-lg/none text-primary">0</b>
+                        <span class="text-xxs">{{ $t("panel.dashboard.Last Month") }}</span>
                     </li>
                 </ul>
             </div>
             <div class="flex flex-col gap-4 grow p-3 rounded-2xl bg-bgSecondary bg-opacity-75 shadow-mr35">
                 <div class="flex items-center justify-between gap-2 w-full">
                     <h3 class="text-sm">{{ $t("panel.dashboard.Total Scans") }}</h3>
-                    <small class="text-rose-300">-23%</small>
+                    <small class="text-rose-300">-0%</small>
                 </div>
                 <ul class="flex items-center gap-2">
                     <li class="flex flex-col items-center w-full p-2.5 rounded-2xl bg-bgPrimary shadow-mr25">
-                        <b class="text-lg/none text-primary">3452</b>
-                        <span class="text-xs">{{ $t("panel.dashboard.This Month") }}</span>
+                        <b class="text-lg/none text-primary">0</b>
+                        <span class="text-xxs">{{ $t("panel.dashboard.This Month") }}</span>
                     </li>
                     <li class="flex flex-col items-center w-full p-2.5 rounded-2xl bg-bgPrimary shadow-mr25">
-                        <b class="text-lg/none text-primary">3452</b>
-                        <span class="text-xs">{{ $t("panel.dashboard.Last Month") }}</span>
+                        <b class="text-lg/none text-primary">0</b>
+                        <span class="text-xxs">{{ $t("panel.dashboard.Last Month") }}</span>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="flex flex-wrap items-center gap-2 p-2 rounded-xl bg-fgPrimary text-bgPrimary">
-            <span class="text-sm text-primary font-bold">{{ $t("panel.dashboard.Menu Link") }}:</span>
+        <div class="flex items-center justify-between gap-2 p-2 rounded-xl bg-fgPrimary text-bgPrimary overflow-hidden">
+            <span class="text-sm text-primary font-bold shrink-0">{{ $t("panel.dashboard.Menu Link") }}:</span>
             <a
-                class="btn rounded-lg text-sm p-1 hover:px-4 hover:bg-secondary hover:bg-opacity-60 hover:shadow-nr15 hover:underline underline-offset-2"
+                class="btn rounded-lg text-sm overflow-ellipsis overflow-hidden p-1 hover:px-4 hover:bg-secondary hover:bg-opacity-60 hover:shadow-nr15 hover:underline underline-offset-2"
                 :href="link"
                 target="_blank"
+                dir="ltr"
             >
                 {{ link }}
             </a>
