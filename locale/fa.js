@@ -440,8 +440,10 @@ export default {
             "Menu Link": "لینک منو",
 
             "Orders Statistics": "آمار سفارشات",
+            "Income Statistics": "آمار درآمد و فروش",
             "Orders Panel": "پنل سفارشات",
             "Total Orders": "کل سفارشات",
+            "We are working on this feature stay tuned": "ما در حال کار روی این قابلیت هستیم!",
 
             "Customers Feedback": "دیدگاه مشتریان",
             "New feedback in this month": "نظر جدید در این ماه",

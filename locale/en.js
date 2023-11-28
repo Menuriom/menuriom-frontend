@@ -439,8 +439,10 @@ export default {
             "Menu Link": "Menu Link",
 
             "Orders Statistics": "Orders Statistics",
+            "Income Statistics": "Income Statistics",
             "Orders Panel": "Orders Panel",
             "Total Orders": "Total Orders",
+            "We are working on this feature stay tuned": "We are working on this feature. Stay tuned!",
 
             "Customers Feedback": "Customers Feedback",
             "New feedback in this month": "New feedback in this month",

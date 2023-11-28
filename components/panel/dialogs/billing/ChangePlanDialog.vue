@@ -345,6 +345,8 @@ const changePlan = async () => {
                     rtl: localeProperties.value.dir == "rtl",
                 });
                 panelStore.closePopUp();
+                // update the page for changes to take effect
+                setTimeout(() => window.location.reload(), 500);
             }
         })
         .catch((err) => {
