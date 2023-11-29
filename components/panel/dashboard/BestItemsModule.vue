@@ -43,23 +43,34 @@
                 <span class="text-xs" :value="option.value">{{ option.name }}</span>
             </SelectDropDown>
         </header>
-        <div>
-            <Swiper class="w-full h-auto" wrapper-tag="ul" slides-per-view="auto" :dir="localeProperties.dir" @swiper="getSwiper">
-                <SwiperSlide tag="li" class="relative shadow-mr25 me-3 group" v-for="item in itemsList">
-                    <div class="relative w-44 h-44 rounded-2xl overflow-hidden border-2 border-bgSecondary select-none isolate">
-                        <img class="absolute w-full aspect-square object-cover rounded-xl" :src="item.menuItem.images[0]" />
-                        <div
-                            class="absolute -bottom-6 group-hover:bottom-0 flex flex-col gap-1 w-full p-2 bg-bgAccent bg-opacity-80 rounded-lg shadow-mr15 backdrop-blur-sm transition-all"
-                        >
-                            <span class="flex items-center justify-center gap-2 w-full overflow-hidden overflow-ellipsis font-bold">
-                                <Icon class="w-5 h-5 gradient" name="heart.svg" folder="icons/tabler" size="22px" />
-                                {{ Intl.NumberFormat(locale).format(item.totalCount) }}
-                            </span>
-                            <span class="w-full overflow-hidden overflow-ellipsis text-center text-sm"> {{ item.menuItem.name }} </span>
-                        </div>
+        <Swiper
+            class="w-full h-auto"
+            wrapper-tag="ul"
+            slides-per-view="auto"
+            :dir="localeProperties.dir"
+            @swiper="getSwiper"
+            v-if="itemsList.length && !getTheBestOf.pending.value"
+        >
+            <SwiperSlide tag="li" class="relative shadow-mr25 me-3 group" v-for="item in itemsList">
+                <div class="relative w-44 h-44 rounded-2xl overflow-hidden border-2 border-bgSecondary select-none isolate">
+                    <img class="absolute w-full aspect-square object-cover rounded-xl" :src="item.menuItem.images[0]" />
+                    <div
+                        class="absolute -bottom-6 group-hover:bottom-0 flex flex-col gap-1 w-full p-2 bg-bgAccent bg-opacity-80 rounded-lg shadow-mr15 backdrop-blur-sm transition-all"
+                    >
+                        <span class="flex items-center justify-center gap-2 w-full overflow-hidden overflow-ellipsis font-bold">
+                            <Icon class="w-5 h-5 gradient" name="heart.svg" folder="icons/tabler" size="22px" />
+                            {{ Intl.NumberFormat(locale).format(item.totalCount) }}
+                        </span>
+                        <span class="w-full overflow-hidden overflow-ellipsis text-center text-sm"> {{ item.menuItem.name }} </span>
                     </div>
-                </SwiperSlide>
-            </Swiper>
+                </div>
+            </SwiperSlide>
+        </Swiper>
+        <div class="flex items-center justify-center w-full h-44 border-2 border-bgSecondary bg-bgSecondary rounded-2xl" v-if="!itemsList.length && !getTheBestOf.pending.value">
+            <span>{{ $t("panel.dashboard.Not enough data") }}</span>
+        </div>
+        <div class="flex items-center justify-center w-full h-44 border-2 border-bgSecondary bg-bgSecondary rounded-2xl" v-if="getTheBestOf.pending.value">
+            <Loading />
         </div>
     </section>
 </template>
