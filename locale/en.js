@@ -50,6 +50,7 @@ export default {
         Features: "Features",
         Demo: "Demo",
         Pricing: "Pricing",
+        "About Us": "About Us",
         "How It Works": "How It Works",
         "Contact Us": "Contact Us",
         Login: "Login",
@@ -273,6 +274,42 @@ export default {
 
         successSendMessage: "Thank you for contacting us. we will get back to you as soon as possible.",
         retryLaterMessage: "We got your message, if you want to send a new message please wait a bit and retry again.",
+
+        addressText: "#1, East Shahid Abbas-Asadi St, Shahid Mohammad-Bagher Kamasaee St, Daros, Tehran, Iran",
+    },
+
+    "about-us": {
+        "About Us": "About Us",
+        desc1: "Menuriom is a web base restaurant order and menu management system.",
+        desc2: "We started working in 1401 and after many of ups and downs we finally released our product in 1402.",
+        desc3: "We hope to bring uniformity and consistency to restaurant management systems and help restaurants and shops manage their business with one ecosystem to simplify their jobs.",
+
+        "Our Humble Team": "Our Humble Team",
+        "Amin Khalili": "Amin Khalili",
+        "Owner & Co Founder": "Owner & Co-Founder",
+        "Kasra Keshvardoost": "Kasra Keshvardoost",
+        "Tech Lead & Co Founder": "Tech Lead & Co-Founder",
+
+        "Our Goals": "Our Goals",
+        "We want to build everything you need to manage your restaurant": "We want to build everything you need to manage your restaurant",
+        "We added these features so far": "We added these features so far",
+        "What we plan to add next": "What we plan to add next",
+        "Menu management service": "Menu management service",
+        "Branch management": "Branch management",
+        "Customizations and templates for menu and QR codes": "Customizations and templates for menu and QR codes",
+        "Analytics and reports": "Analytics and reports",
+        "Staff management": "Staff management",
+        "QR code for menus": "QR code for menus",
+        "Orders management": "Orders management",
+        "Ordering app for waiters": "Ordering app for waiters",
+        "in menu ordering for your customers": "in menu ordering for your customers",
+        "reservation system": "reservation system",
+        "customer feedback system": "customer feedback system",
+        "bills and factor management system": "bills and factor management system",
+        "CRM system & customers club": "CRM system & customers club",
+
+        "We are open to your suggestions": "We are open to your suggestions",
+        openToSuggestion: "if you feel a need for a system that we didn't plan to integrate, please feel free to tell us about it.",
     },
 
     faqs: {
@@ -433,13 +470,16 @@ export default {
             "QR Code Scans": "QR Code Scans",
             "Edit QR Code": "Edit QR Code",
             "Upgrade your plan to standard to view this chart": "Upgrade your plan to standard to view this chart",
+            "Upgrade your plan to pro to view this chart": "Upgrade your plan to pro to view this chart",
             "Unique Scans": "Unique Scans",
             "Total Scans": "Total Scans",
             "Menu Link": "Menu Link",
 
             "Orders Statistics": "Orders Statistics",
+            "Income Statistics": "Income Statistics",
             "Orders Panel": "Orders Panel",
             "Total Orders": "Total Orders",
+            "We are working on this feature stay tuned": "We are working on this feature. Stay tuned!",
 
             "Customers Feedback": "Customers Feedback",
             "New feedback in this month": "New feedback in this month",
@@ -449,6 +489,7 @@ export default {
             "Most Viewed": "Most Viewed",
             "Most Liked": "Most Liked",
             "Most Ordered": "Most Ordered",
+            "Not enough data": "Not enough data",
         },
 
         brands: {

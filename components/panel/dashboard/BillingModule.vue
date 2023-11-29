@@ -1,7 +1,7 @@
 <style scoped></style>
 
 <template>
-    <section class="relative flex flex-col gap-4 w-full max-w-sm p-6 rounded-3xl overflow-hidden isolate">
+    <section class="relative flex flex-col gap-4 w-full max-w-sm p-4 md:p-6 rounded-3xl overflow-hidden isolate">
         <div class="absolute inset-0 -z-2 gradient opacity-75"></div>
 
         <header class="relative flex items-center gap-2 w-full">

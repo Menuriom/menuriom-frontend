@@ -104,7 +104,7 @@
                         <span class="hidden sm:inline-block">{{ $t("auth.OR") }}</span>
                         <nuxt-link
                             class="w-full 2sm:w-auto text-center p-4 px-8 hover:px-12 rounded-xl bg-fgPrimary text-bgPrimary transition-all shadow-mr25"
-                            to="/demo"
+                            :to="`${$config.public.MENU_BASE_URL}/Menuriom`"
                             v-if="!user.email.value"
                         >
                             <span class="f-inter md:text-xl">{{ $t("home.Check The Demo") }}</span>

@@ -1,7 +1,16 @@
-<style scoped></style>
+<style scoped>
+#app {
+    width: 100vw;
+}
+@media (min-width: 768px) {
+    #app {
+        width: calc(100vw - 10px);
+    }
+}
+</style>
 
 <template>
-    <div class="flex flex-col items-center w-screen bg-neutral-900 text-fgPrimary overflow-clip" id="app">
+    <div class="flex flex-col items-center bg-neutral-900 text-fgPrimary overflow-clip" id="app">
         <Html :lang="localHead.htmlAttrs.lang" :dir="localHead.htmlAttrs.dir">
             <NuxtLoadingIndicator color="repeating-linear-gradient(to right, #9f74cd 0%, #7ecfe1 100%)" />
             <Header />

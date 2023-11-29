@@ -73,12 +73,12 @@ nav {
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                         <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')" @click="menuOpen = false">
-                            <span>{{ $t("header.Pricing") }} </span>
+                            <span>{{ $t("header.Pricing") }}</span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('#')" @click="menuOpen = false">
-                            <span>{{ $t("header.How It Works") }} </span>
+                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/about-us')" @click="menuOpen = false">
+                            <span>{{ $t("header.About Us") }}</span>
                         </nuxt-link>
                     </li>
                     <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">

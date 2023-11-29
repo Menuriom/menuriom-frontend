@@ -50,6 +50,7 @@ export default {
         Features: "قابلیت ها",
         Demo: "نمونه منو",
         Pricing: "تعرفه ها",
+        "About Us": "درباره ما",
         "How It Works": "نحوه کار",
         "Contact Us": "تماس با ما",
         Login: "ورود",
@@ -274,6 +275,42 @@ export default {
 
         successSendMessage: "از اینکه با ما تماس گرفتید متشکریم. ما در اسرع وقت با شما تماس میگیریم.",
         retryLaterMessage: "ما پیام شما را دریافت کردیم، اگر می خواهید پیام جدیدی ارسال کنید، لطفاً کمی صبر کنید و دوباره امتحان کنید.",
+
+        addressText: "تهران، دروس، خیابان شهیدمحمدباقری کماسائی، خیابان شهید عباس اسدی شرقی، پلاک 1",
+    },
+
+    "about-us": {
+        "About Us": "درباره ما",
+        desc1: "منوریوم یک سیستم مدیرت منو و سفارشات تحت وب است.",
+        desc2: "شروع کار ما از سال 1401 بود که بعد از فراز و نشیب های متعدد، بالاخره محصول نهایی سال 1402 عرضه شد.",
+        desc3: "هدف ما ایجاد یک سیستم واحد و مستقل برای مدیریت رستوران برای کمک به رستوران ها و صاحبان کسب کار ها بوده تا با یک اکوسیستم یکپارچه انجام امور مدیریتی را ساده تر کنیم.",
+
+        "Our Humble Team": "تیم کوچیک ما",
+        "Amin Khalili": "امین خلیلی",
+        "Owner & Co Founder": "مدیریت و هم بنیانگذار",
+        "Kasra Keshvardoost": "کسری کشوردوست",
+        "Tech Lead & Co Founder": "راهبر فنی و هم بنیانگذار",
+
+        "Our Goals": "اهداف ما",
+        "We want to build everything you need to manage your restaurant": "ما به دنبال ساخت هرچیز لازم برای مدیریت رستوران شما هستیم",
+        "We added these features so far": "تا الان اینا رو اضافه کردیم",
+        "What we plan to add next": "قراره اینا هم اضافه کنیم",
+        "Menu management service": "سرویس مدیریت منو",
+        "Branch management": "مدیریت شعب",
+        "Customizations and templates for menu and QR codes": "شخصی سازی و قالب برای منو و کد QR",
+        "Analytics and reports": "آمار و گزارش ها",
+        "Staff management": "مدیریت خدمه",
+        "QR code for menus": "کد QR برای منو",
+        "Orders management": "مدیریت سفارشات",
+        "Ordering app for waiters": "نرم افزار سفارش گیری برای خدمه",
+        "in menu ordering for your customers": "سفارش گیری از داخل منو",
+        "reservation system": "سیستم رزرواسیون",
+        "customer feedback system": "سیستم بازخورد مشتری",
+        "bills and factor management system": "سیستم مدیریت فاکتور و حسابداری",
+        "CRM system & customers club": "سیستم مدیریت مشتری و باشگاه مشتریان",
+
+        "We are open to your suggestions": "از پیشنهادات شما استقبال میکنیم",
+        openToSuggestion: "اگر نیاز به سیستمی دارید که ما در نظر نگرفتیم، لطفا از طریق فرم درخواست قابلیت به ما اطلاع دهید.",
     },
 
     faqs: {
@@ -434,13 +471,16 @@ export default {
             "QR Code Scans": "اسکن های کد QR",
             "Edit QR Code": "ویرایش کد QR",
             "Upgrade your plan to standard to view this chart": "برای مشاهده این نمودار، اشتراک خود را به استاندارد ارتقا دهید",
-            "Unique Scans": "اسکن های یکتا",
+            "Upgrade your plan to pro to view this chart": "برای مشاهده این نمودار، اشتراک خود را به حرفه ای ارتقا دهید",
+            "Unique Scans": "اسکن های جدید",
             "Total Scans": "کل اسکن ها",
             "Menu Link": "لینک منو",
 
             "Orders Statistics": "آمار سفارشات",
+            "Income Statistics": "آمار درآمد و فروش",
             "Orders Panel": "پنل سفارشات",
             "Total Orders": "کل سفارشات",
+            "We are working on this feature stay tuned": "ما در حال کار روی این قابلیت هستیم!",
 
             "Customers Feedback": "دیدگاه مشتریان",
             "New feedback in this month": "نظر جدید در این ماه",
@@ -450,6 +490,7 @@ export default {
             "Most Viewed": "پر بازدیدها",
             "Most Liked": "بیشترین لایک",
             "Most Ordered": "پر سفارش ها",
+            "Not enough data": "اطلاعاتی وجود ندارد",
         },
 
         brands: {

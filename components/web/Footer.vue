@@ -98,7 +98,7 @@
                     </a>
                 </div>
             </div>
-            <nav class="flex flex-col sm:flex-row flex-wrap items-center md:items-start gap-8 md:gap-16">
+            <nav class="flex flex-col sm:flex-row flex-wrap items-center md:items-start gap-8 md:gap-14">
                 <ul class="flex flex-col items-center md:items-start gap-2 sm:gap-5">
                     <li class="pb-1 w-max border-b-2 border-transparent hover:border-primary group">
                         <nuxt-link class="text-fgPrimary group-hover:text-purple-300" :to="localePath('/pricing')">{{ $t("footer.Pricing") }}</nuxt-link>
@@ -142,19 +142,21 @@
                     </li>
                     <LangSwitch :showText="true" textColor="white" />
                 </ul>
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col items-end gap-2">
                     <div class="flex items-center justify-center aspect-square p-2 border border-bgSecondary rounded-2xl">
                         <a
                             class="inline-block bg-fgPrimary rounded-xl"
                             referrerpolicy="origin"
                             target="_blank"
                             href="https://trustseal.enamad.ir/?id=426668&Code=Ams6Rt4exUDJi19VQBBnqCriW8foVxCj"
+                            rel="nofollow"
                         >
                             <img
-                                class="max-w-[96px] aspect-square cursor-pointer rounded-xl"
+                                class="max-w-[64px] aspect-square cursor-pointer rounded-xl"
                                 referrerpolicy="origin"
                                 src="https://trustseal.enamad.ir/logo.aspx?id=426668&Code=Ams6Rt4exUDJi19VQBBnqCriW8foVxCj"
                                 Code="Ams6Rt4exUDJi19VQBBnqCriW8foVxCj"
+                                loading="lazy"
                             />
                         </a>
                     </div>

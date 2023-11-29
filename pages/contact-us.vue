@@ -110,28 +110,34 @@
                 </small>
             </form>
         </section>
-        <section class="relative flex flex-col justify-end gap-6 p-6 pt-40 w-full max-w-md rounded-3xl shadow-mr25 overflow-hidden isolate">
-            <img class="absolute inset-0 -z-10" src="~/assets/images/phone.webp" alt="phone" />
-            <div class="flex flex-col items-start gap-2 w-full p-6 text-bgPrimary bg-fgPrimary bg-opacity-80 backdrop-blur-sm rounded-2xl">
-                <h3 class="text-lg/none font-bold opacity-50">{{ $t("contact-us.Send Us An Email") }}</h3>
-                <a class="text-xl/none font-bold hover:text-primary transition-all" href="">Info@Menuriom.com</a>
-            </div>
-            <div class="flex flex-col items-start gap-2 w-full p-6 text-bgPrimary bg-fgPrimary bg-opacity-80 backdrop-blur-sm rounded-2xl">
-                <h3 class="text-lg/none font-bold opacity-50">{{ $t("contact-us.Follow Us") }}</h3>
-                <ul class="flex items-center gap-2">
-                    <li>
-                        <a class="" href="#" target="_blank">
-                            <Icon class="w-8 h-8 bg-bgSecondary hover:bg-primary transition-all" name="instagram.svg" folder="icons" size="32px" />
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="#" target="_blank">
-                            <Icon class="w-8 h-8 bg-bgSecondary hover:bg-primary transition-all" name="telegram.svg" folder="icons" size="32px" />
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </section>
+        <div class="flex flex-col gap-4">
+            <section class="relative flex flex-col justify-end gap-6 p-6 pt-40 w-full max-w-md rounded-3xl shadow-mr25 overflow-hidden isolate">
+                <img class="absolute inset-0 -z-10" src="~/assets/images/phone.webp" alt="phone" />
+                <div class="flex flex-col items-start gap-2 w-full p-6 text-bgPrimary bg-fgPrimary bg-opacity-80 backdrop-blur-sm rounded-2xl">
+                    <h3 class="text-lg/none font-bold opacity-50">{{ $t("contact-us.Send Us An Email") }}</h3>
+                    <a class="text-xl/none font-bold hover:text-primary transition-all" href="">Info@Menuriom.com</a>
+                </div>
+                <div class="flex flex-col items-start gap-2 w-full p-6 text-bgPrimary bg-fgPrimary bg-opacity-80 backdrop-blur-sm rounded-2xl">
+                    <h3 class="text-lg/none font-bold opacity-50">{{ $t("contact-us.Follow Us") }}</h3>
+                    <ul class="flex items-center gap-2">
+                        <li>
+                            <a class="" href="#" target="_blank">
+                                <Icon class="w-8 h-8 bg-bgSecondary hover:bg-primary transition-all" name="instagram.svg" folder="icons" size="32px" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="#" target="_blank">
+                                <Icon class="w-8 h-8 bg-bgSecondary hover:bg-primary transition-all" name="telegram.svg" folder="icons" size="32px" />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="flex flex-col items-start gap-2 w-full max-w-md p-4 rounded-2xl bg-bgAccent shadow-mr35">
+                <span class="select-none" dir="ltr">021-22588725</span>
+                <address class="text-sm opacity-75 not-italic">{{ $t('contact-us.addressText') }}</address>
+            </section>
+        </div>
     </div>
 </template>
 
