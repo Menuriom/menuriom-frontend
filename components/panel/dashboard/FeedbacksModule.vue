@@ -8,14 +8,14 @@
         </header>
         <div class="flex flex-wrap items-center justify-between gap-2 py-2 p-3 rounded-xl bg-bgSecondary bg-opacity-75 shadow-mr35">
             <div class="flex items-center gap-1">
-                <b class="text-primary">345</b>
+                <b class="text-primary">0</b>
                 <span class="text-sm">{{ $t("panel.dashboard.New feedback in this month") }}</span>
-                <small class="text-emerald-300 ms-2">+23%</small>
+                <small class="text-emerald-300 ms-2">+0%</small>
             </div>
             <nuxt-link class="btn text-secondary text-sm underline underline-offset-2" to="">{{ $t("panel.dashboard.View All") }}</nuxt-link>
         </div>
-        <ul class="flex flex-col gap-4 w-full max-h-64 overflow-auto pe-2">
-            <li class="flex items-start gap-2 group" v-for="i in 5">
+        <ul class="flex flex-col gap-4 w-full max-h-64 overflow-auto pe-2" v-if="0">
+            <li class="flex items-start gap-2 group" v-for="i in 0">
                 <div class="flex flex-col gap-2 shrink-0">
                     <img class="w-16 aspect-square object-cover rounded-xl shadow-mr25" :src="`/sample-foods/sample-food${i}.webp`" />
                     <nuxt-link
@@ -37,6 +37,11 @@
                 </div>
             </li>
         </ul>
+        <div class="flex items-center justify-center w-full h-full rounded-2xl bg-bgSecondary bg-opacity-50">
+            <span class="absolute w-full max-w-xs p-3 px-4 rounded-xl bg-bgPrimary bg-opacity-60 text-sm text-center shadow-mr25">
+                {{ $t("panel.dashboard.We are working on this feature stay tuned") }}
+            </span>
+        </div>
     </section>
 </template>
 

@@ -77,28 +77,28 @@
                 <span class="text-lg">{{ $t("about-us.Our Goals") }}</span>
                 <span class="w-0.5 h-0.5 bg-bgAccent grow"></span>
             </h3>
-            <h2 class="text-3xl/normal md:text-5xl/tight font-bold mb-6 gradient-text">
+            <h2 class="w-full max-w-5xl text-3xl/normal md:text-5xl/tight font-extrabold mb-6 gradient-text">
                 {{ $t("about-us.We want to build everything you need to manage your restaurant") }}!
             </h2>
             <div class="flex flex-col items-start gap-4 p-6 md:p-8 rounded-3xl bg-bgAccent shadow-mr15">
                 <div class="flex items-center gap-2">
-                    <span class="flex items-center justify-center h-8 w-8"> <img class="h-8 animate-pulse" src="/img/check.png" alt="check" /> </span>
+                    <span class="flex items-center justify-center h-8 w-8 shrink-0"> <img class="h-8 animate-pulse" src="/img/check.png" alt="check" /> </span>
                     <h4 class="text-xl font-bold">{{ $t("about-us.We added these features so far") }}...</h4>
                 </div>
                 <ul class="flex flex-wrap items-start gap-4 ps-4 md:p-6 border-s-4 ms-3">
                     <li class="flex items-center gap-2 bg-bgSecondary bg-opacity-50 rounded-xl p-2 px-4 text-sm md:text-base shadow-mr15" v-for="item in weBuilt">
-                        <span class="relative flex items-center justify-center w-3 h-3 rounded-full bg-secondary"></span> {{ $t(`about-us.${item}`) }}
+                        <span class="relative flex items-center justify-center w-3 h-3 rounded-full bg-secondary shrink-0"></span> {{ $t(`about-us.${item}`) }}
                     </li>
                 </ul>
             </div>
             <div class="flex flex-col items-start gap-4 p-6 md:p-8 rounded-3xl bg-bgAccent shadow-mr15">
                 <div class="flex items-center gap-2">
-                    <span class="flex items-center justify-center h-8 w-8"> <img class="h-8 animate-pulse" src="/img/hourglass.png" alt="hourglass" /> </span>
+                    <span class="flex items-center justify-center h-8 w-8 shrink-0"> <img class="h-8 animate-pulse" src="/img/hourglass.png" alt="hourglass" /> </span>
                     <h4 class="text-xl font-bold">{{ $t("about-us.What we plan to add next") }}...</h4>
                 </div>
                 <ul class="flex flex-wrap items-start gap-4 ps-4 md:p-6 border-s-4 ms-3">
                     <li class="flex items-center gap-2 bg-bgSecondary bg-opacity-50 rounded-xl p-2 px-4 text-sm md:text-base shadow-mr15" v-for="item in wePlan">
-                        <span class="relative flex items-center justify-center w-3 h-3 rounded-full bg-secondary grayscale"></span> {{ $t(`about-us.${item}`) }}
+                        <span class="relative flex items-center justify-center w-3 h-3 rounded-full bg-secondary grayscale shrink-0"></span> {{ $t(`about-us.${item}`) }}
                     </li>
                 </ul>
             </div>
@@ -110,7 +110,7 @@
             class="flex flex-wrap md:flex-nowrap items-center justify-center gap-6 w-full max-w-5xl p-6 md:p-8 rounded-3xl bg-fgPrimary text-bgPrimary shadow-mr25"
         >
             <img class="w-32" src="/img/mail.png" alt="contact-us" />
-            <span class="flex flex-col gap-1 w-full">
+            <span class="flex flex-col gap-2 w-full">
                 <p class="text-2xl font-bold">{{ $t("about-us.We are open to your suggestions") }}!</p>
                 <p class="text-xl">{{ $t("about-us.openToSuggestion") }}</p>
             </span>

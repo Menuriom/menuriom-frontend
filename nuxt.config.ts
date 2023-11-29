@@ -71,6 +71,7 @@ export default defineNuxtConfig({
         "/pricing": { swr: 60 * 60 * 12, isr: true },
         "/faqs": { prerender: true },
         "/contact-us": { prerender: true },
+        "/about-us": { prerender: true },
     },
 
     i18n: {
