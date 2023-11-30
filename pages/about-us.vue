@@ -1,21 +1,18 @@
 <style scoped>
 .flip {
-    transform: rotateY(180deg) rotateZ(-15deg);
+    transform: rotateY(180deg) rotateZ(90deg);
 }
 
 .bar {
     width: 90%;
-    /* top: -10%; */
     inset-inline-start: -2%;
     transform-origin: top left;
-    /* z-index: -1; */
     mix-blend-mode: screen;
 }
 
 @media (min-width: 768px) {
     .bar {
         width: 50%;
-        /* top: -12%; */
         inset-inline-start: -7%;
     }
 }
@@ -47,22 +44,27 @@
         <section
             class="relative flex flex-col items-center justify-center gap-6 md:gap-10 w-full max-w-4xl p-6 md:p-12 ms-auto rounded-3xl bg-bgAccent shadow-mr35"
         >
-            <img
+            <!-- <img
                 class="absolute -top-20 -start-52 hidden lg:flex w-36 mix-blend-difference"
                 :class="[localeProperties.dir == 'rtl' ? 'flip' : '-rotate-[15deg]']"
                 src="/img/arrow.svg"
+            /> -->
+            <NuxtImg
+                class="absolute -top-16 -start-96 -ms-4 hidden lg:flex w-96 mix-blend-difference invert"
+                :class="[localeProperties.dir == 'rtl' ? 'flip' : 'rotate-[90deg]']"
+                src="/img/arrow2.png"
             />
 
             <h2 class="text-4xl font-extrabold">{{ $t("about-us.Our Humble Team") }}.</h2>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center gap-4 w-full">
-                <div class="flex items-center gap-4 w-full max-w-screen-2sm p-4 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
+                <div class="btn flex items-center gap-4 w-full max-w-screen-2sm p-4 hover:scale-105 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
                     <img class="w-20 h-20 rounded-full shadow-mr15" width="100px" height="100px" src="/img/Amin.png" alt="Amin" />
                     <div class="flex flex-col gap-1">
                         <b class="text-lg">{{ $t("about-us.Amin Khalili") }}</b>
                         <span class="opacity-75">{{ $t("about-us.Owner & Co Founder") }}</span>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 w-full max-w-screen-2sm p-4 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
+                <div class="btn flex items-center gap-4 w-full max-w-screen-2sm p-4 hover:scale-105 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
                     <img class="w-20 h-20 rounded-full shadow-mr15" width="100px" height="100px" src="/img/Kasra.png" alt="Kasra" />
                     <div class="flex flex-col gap-1">
                         <b class="text-lg">{{ $t("about-us.Kasra Keshvardoost") }}</b>
@@ -86,25 +88,34 @@
                     <h4 class="text-xl font-bold">{{ $t("about-us.We added these features so far") }}...</h4>
                 </div>
                 <ul class="flex flex-wrap items-start gap-4 ps-4 md:p-6 border-s-4 ms-3">
-                    <li class="flex items-center gap-2 bg-bgSecondary bg-opacity-50 rounded-xl p-2 px-4 text-sm md:text-base shadow-mr15" v-for="item in weBuilt">
+                    <li
+                        class="flex items-center gap-2 bg-bgSecondary bg-opacity-50 rounded-xl p-2 px-4 text-sm md:text-base shadow-mr15"
+                        v-for="item in weBuilt"
+                    >
                         <span class="relative flex items-center justify-center w-3 h-3 rounded-full bg-secondary shrink-0"></span> {{ $t(`about-us.${item}`) }}
                     </li>
                 </ul>
             </div>
             <div class="flex flex-col items-start gap-4 p-6 md:p-8 rounded-3xl bg-bgAccent shadow-mr15">
                 <div class="flex items-center gap-2">
-                    <span class="flex items-center justify-center h-8 w-8 shrink-0"> <img class="h-8 animate-pulse" src="/img/hourglass.png" alt="hourglass" /> </span>
+                    <span class="flex items-center justify-center h-8 w-8 shrink-0">
+                        <img class="h-8 animate-pulse" src="/img/hourglass.png" alt="hourglass" />
+                    </span>
                     <h4 class="text-xl font-bold">{{ $t("about-us.What we plan to add next") }}...</h4>
                 </div>
                 <ul class="flex flex-wrap items-start gap-4 ps-4 md:p-6 border-s-4 ms-3">
-                    <li class="flex items-center gap-2 bg-bgSecondary bg-opacity-50 rounded-xl p-2 px-4 text-sm md:text-base shadow-mr15" v-for="item in wePlan">
-                        <span class="relative flex items-center justify-center w-3 h-3 rounded-full bg-secondary grayscale shrink-0"></span> {{ $t(`about-us.${item}`) }}
+                    <li
+                        class="flex items-center gap-2 bg-bgSecondary bg-opacity-50 rounded-xl p-2 px-4 text-sm md:text-base shadow-mr15"
+                        v-for="item in wePlan"
+                    >
+                        <span class="relative flex items-center justify-center w-3 h-3 rounded-full bg-secondary grayscale shrink-0"></span>
+                        {{ $t(`about-us.${item}`) }}
                     </li>
                 </ul>
             </div>
         </section>
 
-        <hr class="w-full max-w-screen-xl opacity-20" />
+        <hr class="w-full max-w-screen-lg opacity-10" />
 
         <section
             class="flex flex-wrap md:flex-nowrap items-center justify-center gap-6 w-full max-w-5xl p-6 md:p-8 rounded-3xl bg-fgPrimary text-bgPrimary shadow-mr25"

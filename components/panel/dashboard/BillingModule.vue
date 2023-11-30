@@ -85,8 +85,6 @@ const route = useRoute();
 const localePath = useLocalePath();
 const panelStore = usePanelStore();
 
-const userIsPro = ref(false);
-
 // getCounts -------------------------------------------------
 const currentPlan = ref({});
 const getCurrentPlan = await useFetch(`/api/v1/panel/analytics/current-plan`, { lazy: process.client, headers: { brand: route.params.brandID } });
@@ -95,6 +93,6 @@ if (getCurrentPlan.error.value && getCurrentPlan.error.value.statusCode >= 500 &
 }
 
 if (getCurrentPlan.data.value) currentPlan.value = getCurrentPlan.data.value || {};
-watch(getCurrentPlan.data, (val) => (currentPlan.value = val || []));
+watch(getCurrentPlan.data, (val) => (currentPlan.value = val || {}));
 // -------------------------------------------------
 </script>
