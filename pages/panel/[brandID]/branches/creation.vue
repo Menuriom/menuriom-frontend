@@ -262,7 +262,7 @@ const save = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (saving.value = false));
 };

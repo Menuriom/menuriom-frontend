@@ -199,7 +199,7 @@ const send = async () => {
                     errorField.value = errors[0].property;
                 }
             } else responseMessage.value = t("Something went wrong!");
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (sending.value = false));
 };

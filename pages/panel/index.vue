@@ -313,7 +313,7 @@ const deleteRecord = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (deleting.value = false));
 };
@@ -355,7 +355,7 @@ const leaveBrand = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (leaving.value = false));
 };
@@ -369,7 +369,7 @@ const handleErrors = (err) => {
         if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // getBrandList -------------------------------------------------

@@ -159,9 +159,6 @@
 </template>
 
 <script setup>
-// TODO :
-// if successful : request backend to get transaction and bill details with a link to head back to billing page
-// if error : show error and if a transactiod id available then request back to get transaction and bill info
 
 const { locale, t } = useI18n();
 const route = useRoute();
@@ -190,7 +187,7 @@ const handleErrors = (err) => {
         if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // getTransactionDetails -------------------------------------------------

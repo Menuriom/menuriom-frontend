@@ -264,7 +264,7 @@ const handleErrors = (err) => {
         if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // getCurrentPlan -------------------------------------------------

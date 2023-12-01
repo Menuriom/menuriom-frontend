@@ -125,7 +125,7 @@ const payLastBill = async () => {
             toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
 
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
 
             loading.value = false;
         });

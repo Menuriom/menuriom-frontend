@@ -60,10 +60,4 @@ const selectBrand = (index) => {
     panelStore.closePopUp();
     // brands.value.list[index]
 };
-
-// TODO : only staff members should be able to open the ordering app
-// and staff members are limited:
-// basic -> 1 branch -> 5 staff member per branch
-// standard -> 3 branch -> 10 staff member per branch
-// pro -> 10 branch -> 15 staff member per branch
 </script>

@@ -120,7 +120,6 @@
             </div>
             <hr class="w-full border-bgSecondary" />
             <div class="flex flex-col gap-2">
-                <!-- TODO : we need to save the color lock state so that changing base colors doesnt affect unlocked colores -->
                 <div class="flex flex-wrap gap-2">
                     <ColorPicker :label="$t('panel.menu-style.text color')" v-model:color="headerOptions.textColor" :baseColor="baseColors.textColor" />
                     <ColorPicker

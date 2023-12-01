@@ -113,7 +113,6 @@ aside > div {
                         v-if="checkPermissions(['main-panel.dashboard.view'], brand)"
                     >
                         <li class="flex items-center gap-3">
-                            <!-- <Icon class="w-6 h-6 gradient" name="column-light.svg" folder="icons/light" size="22px" /> -->
                             <Icon class="w-5 h-5 gradient" name="rectangles-mixed.svg" folder="icons/duo" size="20px" />
                             <span>{{ $t("panel.side-menu.Dashboard") }}</span>
                         </li>
@@ -125,8 +124,6 @@ aside > div {
                     >
                         <li class="flex items-center gap-3">
                             <Icon class="w-5 h-5 gradient" name="comments.svg" folder="icons/duo" size="20px" />
-                            <!-- <Icon class="w-6 h-6 gradient" name="comments-light.svg" folder="icons/light" size="22px" /> -->
-                            <!-- <img class="w-5" src="~/assets/images/panel-icons/comments-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
                         </li>
                     </nuxt-link>
@@ -140,8 +137,6 @@ aside > div {
                     >
                         <li class="flex items-center gap-3">
                             <Icon class="w-5 h-5 gradient" name="store.svg" folder="icons/duo" size="20px" />
-                            <!-- <Icon class="w-6 h-6 gradient" name="store.svg" folder="icons/light" size="22px" /> -->
-                            <!-- <img class="w-5" src="~/assets/images/panel-icons/store-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Branches") }}</span>
                         </li>
                     </nuxt-link>
@@ -153,8 +148,6 @@ aside > div {
                     >
                         <li class="flex items-center gap-3">
                             <Icon class="w-5 h-5 gradient" name="cards-blank.svg" folder="icons/duo" size="20px" />
-                            <!-- <Icon class="w-6 h-6 gradient" name="cards-blank.svg" folder="icons/light" size="22px" /> -->
-                            <!-- <img class="w-5" src="~/assets/images/panel-icons/cards-blank-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Menu") }}</span>
                             <Icon
                                 class="sub_menu_toggler bg-fgPrimary"
@@ -209,8 +202,6 @@ aside > div {
                     >
                         <li class="flex items-center gap-3">
                             <Icon class="w-5 h-5 gradient" name="user-group.svg" folder="icons/duo" size="20px" />
-                            <!-- <Icon class="w-6 h-6 gradient" name="user-group-light.svg" folder="icons/light" size="22px" /> -->
-                            <!-- <img class="w-5" src="~/assets/images/panel-icons/user-group-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Manage Staff") }}</span>
                             <Icon
                                 class="sub_menu_toggler bg-fgPrimary"
@@ -266,8 +257,6 @@ aside > div {
                     >
                         <li class="flex items-center gap-3">
                             <Icon class="w-5 h-5 gradient" name="money-bills.svg" folder="icons/duo" size="20px" />
-                            <!-- <Icon class="w-6 h-6 gradient" name="money-bills.svg" folder="icons/light" size="22px" /> -->
-                            <!-- <img class="w-5" src="~/assets/images/panel-icons/money-bills-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
                             <!-- TODO : add a blob to show there is a new renewal bill -->
                         </li>
@@ -275,8 +264,6 @@ aside > div {
                     <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
                         <li class="flex items-center gap-3">
                             <Icon class="w-5 h-5 gradient" name="message-question.svg" folder="icons/duo" size="20px" />
-                            <!-- <Icon class="w-6 h-6 gradient" name="message-question-light.svg" folder="icons/light" size="22px" /> -->
-                            <!-- <img class="w-5" src="~/assets/images/panel-icons/message-question-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Support") }}</span>
                         </li>
                     </nuxt-link>
@@ -291,8 +278,6 @@ aside > div {
                     >
                         <li class="flex items-center gap-3">
                             <Icon class="w-5 h-5 gradient" name="gear.svg" folder="icons/duo" size="20px" />
-                            <!-- <Icon class="w-6 h-6 gradient" name="gear-light.svg" folder="icons/light" size="22px" /> -->
-                            <!-- <img class="w-5" src="~/assets/images/panel-icons/gear-light.png" alt="" /> -->
                             <span>{{ $t("panel.side-menu.Settings") }}</span>
                             <Icon
                                 class="sub_menu_toggler bg-fgPrimary"

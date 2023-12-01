@@ -107,10 +107,7 @@ const closeDropdown = (event) => {
 const logout = async () => {
     await userStore
         .logout()
-        .then(() => {
-            router.push(localePath("/"));
-        })
+        .then(() => (window.location.href = localePath("/")))
         .catch((e) => {});
-    // TODO : ...
 };
 </script>

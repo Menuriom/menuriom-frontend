@@ -270,8 +270,6 @@
 
         <span class="my-2"></span>
 
-        <!-- TODO : add state for when there is not category or items available -->
-
         <Teleport to="body">
             <Dialog name="delete-item-confirmation" :title="$t('panel.menu.Delete Menu Item')">
                 <div class="flex flex-col gap-4">
@@ -447,7 +445,7 @@ const handleErrors = (err) => {
         if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // getDishesList -------------------------------------------------
