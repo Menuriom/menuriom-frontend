@@ -131,18 +131,8 @@ const datasetDefaults = {
 const chartData = ref({
     labels: [],
     datasets: [
-        {
-            label: t("panel.dashboard.Unique Scans"),
-            backgroundColor: "#9c85b2bb",
-            ...datasetDefaults,
-            data: [],
-        },
-        {
-            label: t("panel.dashboard.Total Scans"),
-            backgroundColor: "#98c7d0bb",
-            ...datasetDefaults,
-            data: [],
-        },
+        { label: t("panel.dashboard.Unique Scans"), backgroundColor: "#9c85b2bb", data: [], ...datasetDefaults },
+        { label: t("panel.dashboard.Total Scans"), backgroundColor: "#98c7d0bb", data: [], ...datasetDefaults },
     ],
 });
 const chartOptions = {
