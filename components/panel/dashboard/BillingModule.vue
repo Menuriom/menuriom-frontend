@@ -21,7 +21,7 @@
             <span class="absolute start-3/4 -bottom-20 -rotate-45 -ms-10 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute -end-4 -bottom-20 -rotate-12 gradient-re w-28 h-28 rounded-2xl"></span>
 
-            <div class="relative flex items-center gap-2 w-full" v-if="currentPlan.plan.code < 2">
+            <div class="relative flex items-center gap-2 w-full" v-if="currentPlan.plan?.code < 2">
                 <NuxtImg class="w-16 -rotate-6 -ms-6" src="/img/cafe.png" width="64px" />
                 <div class="relative flex flex-col items-start bg-bgSecondary bg-opacity-40 p-2 rounded-lg">
                     <small class="flex text-sm opacity-75">{{ $t("panel.billing.Remove The Limitations") }}</small>

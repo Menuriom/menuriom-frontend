@@ -491,6 +491,8 @@ export default {
             "Most Liked": "بیشترین لایک",
             "Most Ordered": "پر سفارش ها",
             "Not enough data": "اطلاعاتی وجود ندارد",
+            Monthly: "ماهانه",
+            Daily: "روزانه",
         },
 
         brands: {

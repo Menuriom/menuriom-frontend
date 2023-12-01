@@ -147,7 +147,7 @@ const features = ref({
         marks: [true, false, "Unlimited"],
     },
     "menu-templates": {
-        title: { en: "Menutemplates", fa: "قالب های منو" },
+        title: { en: "Menu templates", fa: "قالب های منو" },
         desc: "",
         marks: [true, false, "Unlimited"],
     },

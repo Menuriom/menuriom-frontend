@@ -490,6 +490,8 @@ export default {
             "Most Liked": "Most Liked",
             "Most Ordered": "Most Ordered",
             "Not enough data": "Not enough data",
+            Monthly: "Monthly",
+            Daily: "Daily",
         },
 
         brands: {
