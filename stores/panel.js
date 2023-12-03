@@ -4,6 +4,7 @@ export const usePanelStore = defineStore("panel", () => {
     const sideMenuOpen = ref(true);
     const popUpOpened = ref("");
     const selectedBrandId = ref("");
+    const newRenewalBill = ref(false);
 
     const resetPanel = () => {
         sideMenuOpen.value = true;
@@ -26,6 +27,7 @@ export const usePanelStore = defineStore("panel", () => {
         sideMenuOpen,
         popUpOpened,
         selectedBrandId,
+        newRenewalBill,
         resetPanel,
         toggleSideMenu,
         openPopUp,

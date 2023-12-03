@@ -138,7 +138,8 @@ const deleteRecord = async () => {
         .then((response) => {
             categories.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();
-            // TODO : allow user to create new category if the number became under 100
+
+            canCreateNewCategory.value = response.data.canCreateNewCategory;
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -237,7 +238,6 @@ const handleErrors = (err) => {
 const categories = reactive({ list: [] });
 const filteredCategories = reactive({ list: [] });
 const canCreateNewCategory = ref(true);
-// const getCategoryList_results = await useLazyAsyncData(() => getCategoryList(route.params.brandID));
 const getCategoryList_results = await useAsyncData(() => getCategoryList(route.params.brandID), { lazy: false });
 const loadingCategories = computed(() => getCategoryList_results.pending.value);
 

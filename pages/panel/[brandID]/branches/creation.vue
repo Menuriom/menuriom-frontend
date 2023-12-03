@@ -172,8 +172,6 @@ import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-// TODO : add map to record the location of branch to show in menu
-
 const { localeProperties, t } = useI18n();
 const route = useRoute();
 const router = useRouter();

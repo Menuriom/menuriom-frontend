@@ -45,15 +45,12 @@
                         >
                             {{ $t("panel.Select") }}
                         </small>
-                        <!-- <span class="flex items-center justify-center w-5 h-5 bg-primary rounded-full" v-if="settings.languages.includes(code)">
-                            <Icon class="w-5 h-5 bg-dolphin" name="check.svg" folder="icons" size="14px" />
-                        </span> -->
                     </li>
                 </ul>
                 <Loading v-else />
                 <hr class="w-full border-bgSecondary" />
                 <div class="flex flex-wrap items-center gap-1">
-                    <small class="text-sm">{{ $t("panel.languages.You can choose up to n languages", { n: 2 }) }} -</small>
+                    <small class="text-sm">{{ $t("panel.languages.You can choose up to n languages", { n: settings.languageLimit }) }} -</small>
                     <nuxt-link class="text-sm hover:underline text-primary" :to="localePath(`/panel/${route.params.brandID}/billing`)">
                         {{ $t("panel.languages.Upgrade your plan to support more languages") }}
                     </nuxt-link>
@@ -93,8 +90,7 @@ import axios from "axios";
 import { useUserStore } from "@/stores/user";
 import { usePanelStore } from "@/stores/panel";
 
-// TODO
-// add new setting for tax percent and other service percentages
+// TODO : add new setting for tax percent and other service percentages
 
 const { t } = useI18n();
 const route = useRoute();

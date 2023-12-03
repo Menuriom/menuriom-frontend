@@ -11,7 +11,7 @@
 .pattern {
     background-image: url("/patterns/pattern14.webp");
     background-repeat: repeat;
-    background-size: 25rem;
+    background-size: 256px;
     background-position: 6rem;
 }
 

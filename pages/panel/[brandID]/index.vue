@@ -55,6 +55,9 @@ watch(checkBrandSubscription.data, (val) => (alertLevel.value = val.alert || "")
 // -------------------------------------------------
 
 onMounted(() => {
-    if (alertLevel.value) panelStore.openPopUp("billing-alert-dialog");
+    if (alertLevel.value) {
+        panelStore.openPopUp("billing-alert-dialog");
+        panelStore.newRenewalBill = true;
+    }
 });
 </script>

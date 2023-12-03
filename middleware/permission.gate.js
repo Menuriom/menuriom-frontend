@@ -13,8 +13,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     // if user has access to the brand then set the brand
     panelStore.setSelectedBrand(to.params.brandID);
 
-    // TODO : check for brands plan limitations and allow routes base on them
-
     // owner has access to all routes
     if (userStore.brands.list[to.params.brandID].role == "owner") return;
 
@@ -48,7 +46,7 @@ const getRoutePermissionList = (routes, localePath) => {
         [localePath("/panel/:brandID/staff/roles/creation")]: ["main-panel.staff.roles"],
         [localePath("/panel/:brandID/staff/roles/:id")]: ["main-panel.staff.roles"],
         // settings
-        [localePath("/panel/:brandID/languages")]: ["main-panel.settings"],
+        [localePath("/panel/:brandID/settings/languages")]: ["main-panel.settings"],
         // billing
         [localePath("/panel/:brandID/billing")]: ["main-panel.billing.access"],
         // ...

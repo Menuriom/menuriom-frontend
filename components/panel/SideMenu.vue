@@ -84,7 +84,7 @@ aside > div {
             <div class="flex items-center gap-1.5 w-full" v-if="panelStore.selectedBrandId !== ''">
                 <nuxt-link
                     class="btn relative flex items-center justify-center gap-2 p-2 px-1 hover:px-4 rounded-lg bg-fgPrimary text-pencil-tip grow"
-                    :to="localePath(`/orders-panel/${panelStore.selectedBrandId}`)"
+                    to="#"
                     v-if="checkPermissions(['orders-panel'], brand)"
                 >
                     <img class="w-5" src="~/assets/images/panel-icons/cash-register.png" alt="" />
@@ -93,7 +93,7 @@ aside > div {
                 </nuxt-link>
                 <nuxt-link
                     class="btn flex items-center justify-center gap-2 p-2 px-1 hover:px-4 rounded-lg bg-fgPrimary text-pencil-tip grow"
-                    :to="localePath(`/ordering-app/${panelStore.selectedBrandId}`)"
+                    to="#"
                     v-if="checkPermissions(['ordering-app'], brand)"
                 >
                     <img class="w-5" src="~/assets/images/panel-icons/mobile-button.png" alt="" />
@@ -117,7 +117,7 @@ aside > div {
                             <span>{{ $t("panel.side-menu.Dashboard") }}</span>
                         </li>
                     </nuxt-link>
-                    <nuxt-link
+                    <!-- <nuxt-link
                         class="link"
                         :to="localePath(`/panel/${panelStore.selectedBrandId}/feedbacks`)"
                         v-if="checkPermissions(['main-panel.customer-feedback.view'], brand)"
@@ -126,7 +126,7 @@ aside > div {
                             <Icon class="w-5 h-5 gradient" name="comments.svg" folder="icons/duo" size="20px" />
                             <span>{{ $t("panel.side-menu.Customers Feedback") }}</span>
                         </li>
-                    </nuxt-link>
+                    </nuxt-link> -->
                 </ul>
                 <hr class="w-full opacity-20 mx-4" />
                 <ul class="flex flex-col gap-2 w-full">
@@ -258,15 +258,17 @@ aside > div {
                         <li class="flex items-center gap-3">
                             <Icon class="w-5 h-5 gradient" name="money-bills.svg" folder="icons/duo" size="20px" />
                             <span>{{ $t("panel.side-menu.Billing & Plan Upgrade") }}</span>
-                            <!-- TODO : add a blob to show there is a new renewal bill -->
+                            <span class="relative w-3 h-3 rounded-full bg-primary ms-auto isolate" v-if="panelStore.newRenewalBill">
+                                <span class="absolute inset-0 gradient rounded-full animate-ping"></span>
+                            </span>
                         </li>
                     </nuxt-link>
-                    <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
+                    <!-- <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/support`)">
                         <li class="flex items-center gap-3">
                             <Icon class="w-5 h-5 gradient" name="message-question.svg" folder="icons/duo" size="20px" />
                             <span>{{ $t("panel.side-menu.Support") }}</span>
                         </li>
-                    </nuxt-link>
+                    </nuxt-link> -->
                 </ul>
                 <hr class="w-full opacity-20 mx-4" />
                 <ul class="flex flex-col gap-2 w-full">

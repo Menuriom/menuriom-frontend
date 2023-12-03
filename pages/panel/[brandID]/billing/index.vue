@@ -135,7 +135,6 @@
                 <Icon class="w-9 h-9 gradient" name="money-bill-transfer.svg" folder="icons/duo" size="36px" />
                 <h1 class="text-2xl/tight md:text-3xl/tight font-bold">{{ $t("panel.billing.Billing History") }}</h1>
             </header>
-            <!-- TODO : add date range for billing history -->
             <ul class="flex flex-col gap-4" v-if="bills.list.length">
                 <li
                     class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 p-4 bg-bgAccent rounded-2xl shadow-nr10"

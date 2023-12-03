@@ -224,14 +224,9 @@ const localePath = useLocalePath();
 const panelStore = usePanelStore();
 const userStore = useUserStore();
 
-// const title = computed(() => `${t("panel.staff.Staff Members")} - ${t("panel.Your Menuriom Panel")}`);
 useHead({ title: `${t("panel.staff.Staff Members")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
-
-// TODO : limit staff invitation base on the user's plan on brand
-// for every branch a brand can add up to 15 staff memebers
-// so for example : if brand CAN create 5 branches then they can invite 5*15 (75) staff members
 
 const form = ref(); // Dom Ref
 const errorField = ref("");
@@ -260,7 +255,9 @@ const deleteRecord = async () => {
         .then((response) => {
             records.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();
-            // TODO : allow user to invite new staff if the limit is under the plan's limit
+
+            //  allow user to invite new staff if the limit is under the plan's limit
+            canInviteNewMembers.value = response.data.canInviteNewMembers;
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {

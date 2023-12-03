@@ -190,8 +190,6 @@ import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-// TODO : add ability to remove category icon in style section
-
 const { localeProperties, t } = useI18n();
 const route = useRoute();
 const router = useRouter();

@@ -15,7 +15,7 @@
 
         <div class="relative flex flex-col-reverse lg:flex-row items-center lg:items-start justify-center sm:gap-8 z-2">
             <!-- <SpecialItems class="-mt-10 sm:-mt-0 z-2 scale-75 sm:scale-100 shrink-0" /> -->
-            <NuxtImg class="-mt-2 sm:-mt-28 z-2 scale-90 sm:scale-100 shrink-0" sizes="100% 500px" src="/feature-images/special-item.png" loading="lazy" />
+            <img class="w-full max-w-lg -mt-2 sm:-mt-28 z-2 scale-90 sm:scale-100 shrink-0" sizes="100% 500px" src="/feature-images/special-item.png" loading="lazy" />
             <div class="flex items-center p-6 md:p-8 lg:-ms-44 bg-pencil-tip text-zinc-100 rounded-3xl -mt-10">
                 <span class="hidden lg:inline-block w-44"></span>
                 <div class="flex flex-col items-start gap-6 max-w-xl rounded-3xl">
@@ -48,12 +48,12 @@
                     </p>
                 </div>
                 <!-- <Branches class="-mt-10 sm:mt-10 lg:ms-10 scale-75 sm:scale-100" /> -->
-                <NuxtImg class="ms-4" src="/feature-images/multi-branch.png" sizes="100% 550px" loading="lazy" />
+                <img class="w-full max-w-lg ms-4" src="/feature-images/multi-branch.png" sizes="100% 550px" loading="lazy" />
             </div>
             <span class="hidden lg:flex w-1 h-96 my-auto border-none"></span>
             <div class="flex flex-col-reverse lg:flex-col items-center sm:gap-8 lg:gap-4 lg:-mt-44 w-full lg:w-auto">
                 <!-- <Ordering class="-mt-10 sm:-mt-0 sm:mb-4 z-2 scale-75 sm:scale-100" /> -->
-                <NuxtImg class="-mt-10 sm:-mt-0 ms-4 z-2 scale-90 sm:scale-100" sizes="100% 500px" src="/feature-images/ordering.png" loading="lazy" />
+                <img class="w-full max-w-lg -mt-10 sm:-mt-0 ms-4 z-2 scale-90 sm:scale-100" sizes="100% 500px" src="/feature-images/ordering.png" loading="lazy" />
                 <div class="flex flex-col items-start gap-6 max-w-xl p-6 md:p-8 lg:pt-40 lg:-mt-40 bg-pencil-tip text-zinc-100 rounded-3xl">
                     <h3 class="f-inter text-2xl/snug sm:text-4xl/snug font-bold">
                         <img class="inline-block h-10 me-2" src="~/assets/images/custom-icons/light/clipboard-list-check.png" alt="clipboard-list-check" />
@@ -84,14 +84,14 @@
                 <span class="hidden lg:inline-block lg:w-24"></span>
             </div>
             <!-- <Feedback class="lg:-mt-28 scale-75 sm:scale-100" /> -->
-            <NuxtImg class="lg:-mt-52" sizes="100% 630px" src="/feature-images/feedback.png" loading="lazy" />
+            <img class="w-full max-w-xl lg:-mt-52" sizes="100% 630px" src="/feature-images/feedback.png" loading="lazy" />
         </div>
     </section>
 </template>
 
 <script setup>
-import SpecialItems from "~/components/web/home/features/SpecialItems.vue";
-import Ordering from "~/components/web/home/features/Ordering.vue";
-import Feedback from "~/components/web/home/features/Feedback.vue";
-import Branches from "~/components/web/home/features/Branches.vue";
+// import SpecialItems from "~/components/web/home/features/SpecialItems.vue";
+// import Ordering from "~/components/web/home/features/Ordering.vue";
+// import Feedback from "~/components/web/home/features/Feedback.vue";
+// import Branches from "~/components/web/home/features/Branches.vue";
 </script>

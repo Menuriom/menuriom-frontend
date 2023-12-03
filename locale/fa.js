@@ -534,6 +534,9 @@ export default {
             "Check Invite List": "لیست دعوتنامه ها",
             "Start by creating a brand, or check your invation list to join a existing brand":
                 "برند جدیدی بساز، یا برای عضویت در برند خاص لیست دعوت های خودتو چک کن",
+
+            "By changing the brand username, menu link and QR code also will be changed!":
+                "با تغییر یوزرنیم برند، لینک منو و کد QR نیز عوض میشود!",
         },
 
         branches: {

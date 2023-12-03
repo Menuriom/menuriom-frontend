@@ -533,6 +533,9 @@ export default {
             "Check Invite List": "Check Invite List",
             "Start by creating a brand, or check your invation list to join a existing brand":
                 "Start by creating a brand, or check your invation list to join a existing brand",
+
+            "By changing the brand username, menu link and QR code also will be changed!":
+                "By changing the brand username, menu link and QR code also will be changed!",
         },
 
         branches: {

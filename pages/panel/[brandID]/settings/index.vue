@@ -31,6 +31,10 @@
                         </button>
                     </div>
                     <div class="flex flex-col gap-4 w-full">
+                        <small class="flex items-center gap-2 text-xs p-1.5 rounded-lg bg-secondary bg-opacity-10 text-fgPrimary text-opacity-75">
+                            <Icon class="icon w-4 h-4 bg-secondary shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />
+                            {{ $t("panel.brands.By changing the brand username, menu link and QR code also will be changed!") }}
+                        </small>
                         <div class="flex flex-wrap @3xl:flex-nowrap items-start gap-4 w-full">
                             <Input
                                 class="w-full flex-grow"
@@ -109,7 +113,12 @@
                 <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
                     <Icon class="icon w-4 h-4 bg-rose-300 shrink-0" name="Info-circle.svg" folder="icons/basil" size="16px" />{{ responseMessage }}
                 </small>
-                <button class="btn w-max p-3 hover:px-6 rounded-lg bg-primary" :class="{ 'opacity-75 cursor-not-allowed': saving }" :disabled="saving" @click="save()">
+                <button
+                    class="btn w-max p-3 hover:px-6 rounded-lg bg-primary"
+                    :class="{ 'opacity-75 cursor-not-allowed': saving }"
+                    :disabled="saving"
+                    @click="save()"
+                >
                     <span v-if="!saving"> {{ $t("panel.brands.Update Brand Info") }} </span>
                     <Loading v-else />
                 </button>
@@ -163,8 +172,6 @@ const selectLogoImage = () => {
     logoFile.value = logo.value.files[0];
     fileInputForm.value.reset();
 };
-
-// TODO : if username is changing then make a confirmation that by changing username qr codes should be updated
 
 // saving ----------------------------------------
 const saving = ref(false);

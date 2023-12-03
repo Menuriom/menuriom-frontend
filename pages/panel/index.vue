@@ -115,24 +115,31 @@
                         </div>
                     </div>
                     <!-- <hr class="w-full border-bgSecondary" /> -->
-                    <div class="flex items-center justify-between gap-4 w-full">
-                        <ul class="flex items-center">
-                            <li class="flex items-center justify-center w-8 h-8 rounded-full shadow-nr10">
-                                <img class="w-full h-full object-contain" src="/avatar.webp" alt="" />
+
+                    <div class="flex items-center justify-between gap-4 w-full" v-if="brand.branchCount">
+                        <ul class="flex items-center" v-if="brand.staffList.length > 0">
+                            <li
+                                class="flex items-center justify-center w-8 h-8 rounded-full shadow-nr10"
+                                :class="{ '-ms-3': i > 1 }"
+                                v-for="i in brand.staffList.length < 3 ? brand.staffList.length : 3"
+                                :title="brand.staffList[i]?.fullName"
+                            >
+                                <img
+                                    class="w-full h-full object-contain"
+                                    :src="brand.staffList[i]?.avatar || 'avatar.webp'"
+                                    :alt="brand.staffList[i]?.fullName"
+                                />
                             </li>
-                            <li class="flex items-center justify-center w-8 h-8 rounded-full shadow-nr10 -ms-3">
-                                <img class="w-full h-full object-contain" src="/avatar.webp" alt="" />
-                            </li>
-                            <li class="flex items-center justify-center w-8 h-8 rounded-full shadow-nr10 -ms-3">
-                                <img class="w-full h-full object-contain" src="/avatar.webp" alt="" />
-                            </li>
-                            <li class="flex items-center justify-center w-8 h-8 bg-bgSecondary rounded-full shadow-nr10 -ms-3 z-2">
-                                <small>3+</small>
+                            <li
+                                class="flex items-center justify-center w-8 h-8 bg-bgSecondary rounded-full shadow-nr10 -ms-3 z-2"
+                                v-if="brand.staffList.length - 3 > 1"
+                            >
+                                <small>{{ brand.staffList.length - 3 }}+</small>
                             </li>
                         </ul>
                         <div class="flex items-center gap-1" :title="$t('panel.brands.Branch')">
                             <Icon class="w-5 h-5 bg-fgPrimary" name="store.svg" folder="icons/light" size="20px" />
-                            <h5 class="">2</h5>
+                            <h5 class="">{{ brand.branchCount }}</h5>
                         </div>
                     </div>
                 </li>
@@ -267,9 +274,6 @@ const userStore = useUserStore();
 
 useHead({ title: `${t("panel.brands.Your Brands")} - ${t("panel.Your Menuriom Panel")}` });
 
-// TODO : if user has only one brand and he is the owner of that brand, redirect user to the brand-edit page
-// TODO : add branch count and staff list to brands
-
 const errorField = ref("");
 const responseMessage = ref("");
 
@@ -338,9 +342,7 @@ const leaveBrand = async () => {
     await axios
         .delete(`/api/v1/panel/brands/leave/${id}`, { headers: { brand: id } })
         .then((response) => {
-            // remove the brand from list of brands in the page
             records.list.splice(indexToLeave.value, 1);
-            // remove the brand from list of brands in store
             delete userStore.brands.list[id];
 
             panelStore.closePopUp();

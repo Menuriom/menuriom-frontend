@@ -30,8 +30,6 @@
                 </nuxt-link>
             </div>
         </header>
-        <!-- TODO : add a reset button for every branch menu that returns any branch menu to default state -->
-        <!-- TODO : when editing a menu item add button to save the item for general menu or one branch specific -->
         <div class="flex flex-wrap items-center justify-between gap-4">
             <Search class="w-full max-w-xs" v-model="searchQuery" @search="search()" @clear:search="clearSearch()" v-if="categoryLength" />
             <!-- <label class="flex flex-wrap items-center gap-2">

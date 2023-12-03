@@ -355,7 +355,8 @@ const deleteRecord = async () => {
         .then((response) => {
             dishes.list[indexToDelete.value.k].splice(indexToDelete.value.i, 1);
             panelStore.closePopUp();
-            // TODO : allow user to create new dishes if the number became under 500
+
+            canCreateNewDish.value = response.data.canCreateNewDish;
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
