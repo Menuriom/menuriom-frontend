@@ -59,9 +59,12 @@
                     {{ $t("panel.menu.New Category") }}
                 </nuxt-link>
             </header>
-            <Suspense>
-                <template #fallback v-if="categoryLength"><CategoryListSkeleton /></template>
-                <CategoryList ref="categoryListRef" @category:length="updateCategoryLenght($event)" />
+            <Suspense timeout="0">
+                <!-- <template #fallback v-if="categoryLength"><CategoryListSkeleton /></template> -->
+                <template #fallback><CategoryListSkeleton /></template>
+                <template #default>
+                    <CategoryList ref="categoryListRef" @category:length="updateCategoryLength($event)" />
+                </template>
             </Suspense>
         </section>
 
@@ -77,9 +80,12 @@
                     {{ $t("panel.menu.New Item") }}
                 </nuxt-link>
             </header>
-            <Suspense>
-                <template #fallback v-if="categoryLength"><ItemListSkeleton /></template>
-                <ItemList ref="itemListRef" />
+            <Suspense timeout="0">
+                <!-- <template #fallback v-if="categoryLength"><ItemListSkeleton /></template> -->
+                <template #fallback><ItemListSkeleton /></template>
+                <template #default>
+                    <ItemList ref="itemListRef" />
+                </template>
             </Suspense>
         </section>
 
@@ -106,11 +112,11 @@
 <script setup>
 import Search from "~/components/form/Search.vue";
 import SelectDropDown from "~/components/form/SelectDropDown.vue";
-// const CategoryList = defineAsyncComponent(() => import("~/components/panel/menu/CategoryList.vue"));
-import CategoryList from "~/components/panel/menu/CategoryList.vue";
+const CategoryList = defineAsyncComponent(() => import("~/components/panel/menu/CategoryList.vue"));
+// import CategoryList from "~/components/panel/menu/CategoryList.vue";
 import CategoryListSkeleton from "~/components/panel/menu/CategoryListSkeleton.vue";
-// const ItemList = defineAsyncComponent(() => import("~/components/panel/menu/ItemList.vue"));
-import ItemList from "~/components/panel/menu/ItemList.vue";
+const ItemList = defineAsyncComponent(() => import("~/components/panel/menu/ItemList.vue"));
+// import ItemList from "~/components/panel/menu/ItemList.vue";
 import ItemListSkeleton from "~/components/panel/menu/ItemListSkeleton.vue";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
@@ -133,7 +139,9 @@ const itemListRef = ref(); // Dom Ref
 const menuLink = `${runtimeConfig.public.MENU_BASE_URL}/${brand.value.username}`;
 
 const categoryLength = ref(1);
-const updateCategoryLenght = (e) => (categoryLength.value = e);
+const updateCategoryLength = (e) => {
+    categoryLength.value = e;
+};
 
 const forBranch = ref({ value: null, name: "General Menu (all branch)" });
 const searchQuery = ref("");

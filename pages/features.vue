@@ -42,7 +42,15 @@ div:has(> .rocket) {
                         style="perspective: 1200px; perspective-origin: center"
                         draggable="false"
                     >
-                        <NuxtImg class="w-full object-scale-down" ref="img" width="576px" format="webp" :src="item.image" :alt="item.title" loading="lazy" />
+                        <NuxtImg
+                            class="w-full object-scale-down"
+                            ref="img"
+                            sizes="100% md:556px"
+                            format="webp"
+                            :src="item.image"
+                            :alt="item.title"
+                            loading="lazy"
+                        />
                     </div>
                     <div class="flex flex-col items-center gap-8 w-full max-w-2xl">
                         <div class="flex flex-col items-center 1.5xl:items-start gap-4 w-full">

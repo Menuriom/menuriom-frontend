@@ -507,23 +507,23 @@ const foregroundColor2 = ref("#000000");
 
 const dotImageList = ref([
     { for: "Basic Plan", lvl: 0, image: "/icons/qr-dots/Square.svg" },
-    { for: "Basic Plan", lvl: 0, image: "/icons/qr-dots/Square-Dot.svg" },
-    { for: "Basic Plan", lvl: 0, image: "/icons/qr-dots/Dot.svg" },
-
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Windows.svg" },
+    
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Square-Dot.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Dot.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Windows2.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Bars.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Sparkle.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Star.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Tile.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Panel.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Panel.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Octagon.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares2.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Rectangle-Fade.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares2.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Rectangle-Fade.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Favorite.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Ring-Dot.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Arc.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Balls.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Balls.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Circle-Dot.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Pages.svg" },
 

@@ -28,13 +28,13 @@
                     <h3 class="flex items-center gap-2 text-lg font-bold">
                         <Icon class="w-5 h-5 gradient-re" name="images.svg" folder="icons/light" size="20px" />
                         {{ $t("panel.branches.Branch Images") }}
-                        <small class="p-1 px-2 rounded-xl border border-bgSecondary bg-bgPrimary opacity-80">
+                        <small class="p-1 px-2 rounded-xl border border-bgSecondary bg-bgPrimary opacity-80" v-if="hasRestaurantDetailedInfo">
                             {{ $t("panel.up to n", { number: 5 }) }}
                         </small>
                     </h3>
-                    <small class="text-xs opacity-75">{{ $t("panel.Images must be less than nMB", { size: 2 }) }}</small>
+                    <small class="text-xs opacity-75" v-if="hasRestaurantDetailedInfo">{{ $t("panel.Images must be less than nMB", { size: 2 }) }}</small>
                 </div>
-                <ul class="flex flex-wrap items-center gap-4">
+                <ul class="flex flex-wrap items-center gap-4" v-if="hasRestaurantDetailedInfo">
                     <li class="relative w-40 h-28 shadow-mr15 bg-bgSecondary rounded-xl" v-for="(image, i) in gallery" :key="i">
                         <img class="w-full h-full object-contain" :src="image.blob" alt="" />
                         <button class="btn absolute top-1 start-1 p-2 rounded-lg bg-bgAccent hover:bg-rose-400 group cursor-pointer" @click="removeImage(i)">
@@ -53,6 +53,12 @@
                         </form>
                     </li>
                 </ul>
+                <small class="flex flex-wrap gap-2 w-full max-w-max p-3 rounded-lg border border-neutral-600 bg-pencil-tip" v-else>
+                    <span class="opacity-75">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
+                    <nuxt-link class="text-purple-300 underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                        {{ $t("panel.Upgrade your plan to get this feature") }}.
+                    </nuxt-link>
+                </small>
                 <hr class="w-full border-bgSecondary" />
                 <h3 class="flex items-center gap-2 text-lg font-bold">
                     <Icon class="w-5 h-5 gradient-re" name="newspaper.svg" folder="icons/light" size="20px" />
@@ -183,6 +189,7 @@ const userStore = useUserStore();
 useHead({ title: `${t("panel.branches.Edit Branch Details")} - ${t("panel.Your Menuriom Panel")}` });
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
+const hasRestaurantDetailedInfo = computed(() => checkLimitations([["restaurant-detailed-info", true]], brand.value));
 
 const fileInput = ref(""); // DOM ref
 const fileInputForm = ref(""); // DOM ref

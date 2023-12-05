@@ -10,7 +10,7 @@
             </nuxt-link>
         </header>
 
-        <div class="flex flex-col items-start gap-2 w-full" v-if="checkLimitations([['analytics', true]], brand)">
+        <div class="flex flex-col items-start gap-2 w-full" v-if="hasAnalytics">
             <ul class="flex items-center gap-1 shrink-0">
                 <li
                     class="text-xxs py-1 px-2 rounded-lg bg-opacity-20 border border-bgSecondary cursor-pointer"
@@ -110,6 +110,7 @@ const userStore = useUserStore();
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 const link = `${runtimeConfig.public.MENU_BASE_URL}/${brand.value.username}`;
+const hasAnalytics = computed(() => checkLimitations([["analytics", true]], brand.value));
 
 let chart;
 const chartCanvas = ref(); // Dom Ref
@@ -169,7 +170,9 @@ watch(getScanData.data, (val) => handleScanData(val));
 // -------------------------------------------------
 
 onMounted(() => {
-    const ctx = chartCanvas.value.getContext("2d");
-    chart = new ChartJS(ctx, { type: "line", data: chartData.value, options: chartOptions });
+    if (hasAnalytics && chartCanvas.value) {
+        const ctx = chartCanvas.value.getContext("2d");
+        chart = new ChartJS(ctx, { type: "line", data: chartData.value, options: chartOptions });
+    }
 });
 </script>

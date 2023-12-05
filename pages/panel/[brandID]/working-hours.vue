@@ -42,12 +42,12 @@
         </ul>
         <hr class="w-full border-bgSecondary" />
         <div class="flex flex-col -my-2">
-            <small class="opacity-75">{{
-                $t("panel.working-hours.All-branches working-hours setting will only apply to branches that have no hours set")
-            }}</small>
+            <small class="opacity-75">
+                {{ $t("panel.working-hours.All-branches working-hours setting will only apply to branches that have no hours set") }}
+            </small>
             <small class="text-secondary">{{ $t("panel.working-hours.You can specify a custom hour for any branch") }}</small>
         </div>
-        <section class="flex flex-col gap-2 w-full p-4 md:p-6 bg-bgAccent rounded-2xl">
+        <section class="flex flex-col gap-2 w-full p-4 md:p-6 bg-bgAccent rounded-2xl" v-if="checkLimitations([['restaurant-detailed-info', true]], brand)">
             <div class="flex items-center gap-2 border-b-2 border-bgSecondary min-h-[3.5rem] pb-2">
                 <span class="w-24">{{ $t("panel.working-hours.Saturdays") }} :</span>
                 <Switch class="" v-model:value="workingHours[selectedBranch].saturday.open" />
@@ -203,6 +203,12 @@
                 </div>
             </div>
         </section>
+        <section class="flex flex-col gap-2 w-full p-4 md:p-6 bg-bgAccent rounded-2xl" v-else>
+            <span class="opacity-75">{{ $t("panel.This feature is for the standard plan and above only") }}.</span>
+            <nuxt-link class="text-purple-300 underline underline-offset-4" :to="localePath(`/panel/${route.params.brandID}/billing`)">
+                {{ $t("panel.Upgrade your plan to get this feature") }}.
+            </nuxt-link>
+        </section>
     </div>
 </template>
 
@@ -212,12 +218,16 @@ import Switch from "~/components/form/Switch.vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
+import { useUserStore } from "@/stores/user";
 
 const { localeProperties, t } = useI18n();
 const localePath = useLocalePath();
 const toast = useToast();
 const route = useRoute();
 const panelStore = usePanelStore();
+const userStore = useUserStore();
+
+const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
 const errorField = ref("");
 const responseMessage = ref("");
