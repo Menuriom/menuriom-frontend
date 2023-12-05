@@ -52,20 +52,21 @@
             <NuxtImg
                 class="absolute -top-16 -start-96 -ms-4 hidden lg:flex w-96 mix-blend-difference invert"
                 :class="[localeProperties.dir == 'rtl' ? 'flip' : 'rotate-[90deg]']"
+                format="webp"
                 src="/img/arrow2.png"
             />
 
             <h2 class="text-4xl font-extrabold">{{ $t("about-us.Our Humble Team") }}.</h2>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center gap-4 w-full">
                 <div class="btn flex items-center gap-4 w-full max-w-screen-2sm p-4 hover:scale-105 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
-                    <img class="w-20 h-20 rounded-full shadow-mr15" width="100px" height="100px" src="/img/Amin.png" alt="Amin" />
+                    <NuxtImg class="w-20 h-20 rounded-full shadow-mr15" width="100px" height="100px" src="/img/Amin.png" format="webp" alt="Amin" />
                     <div class="flex flex-col gap-1">
                         <b class="text-lg">{{ $t("about-us.Amin Khalili") }}</b>
                         <span class="opacity-75">{{ $t("about-us.Owner & Co Founder") }}</span>
                     </div>
                 </div>
                 <div class="btn flex items-center gap-4 w-full max-w-screen-2sm p-4 hover:scale-105 rounded-2xl bg-bgSecondary bg-opacity-40 shadow-mr15">
-                    <img class="w-20 h-20 rounded-full shadow-mr15" width="100px" height="100px" src="/img/Kasra.png" alt="Kasra" />
+                    <NuxtImg class="w-20 h-20 rounded-full shadow-mr15" width="100px" height="100px" src="/img/Kasra.png" format="webp" alt="Kasra" />
                     <div class="flex flex-col gap-1">
                         <b class="text-lg">{{ $t("about-us.Kasra Keshvardoost") }}</b>
                         <span class="opacity-75">{{ $t("about-us.Tech Lead & Co Founder") }}</span>
