@@ -20,6 +20,11 @@
 
 <template>
     <div class="flex flex-col items-center gap-10 w-full max-w-screen-2xl mx-auto p-4">
+        <Head>
+            <Title> {{ $t("meta.aboutTitle") }} </Title>
+            <Meta name="description" :content="$t('meta.aboutDesc')" />
+        </Head>
+        
         <section class="flex flex-col isolate me-auto">
             <header
                 class="relative flex flex-col gap-4 md:gap-6 w-full md:w-screen max-w-5xl xl:max-w-6xl p-6 md:p-10 rounded-2xl bg-fgPrimary text-bgAccent isolate"
@@ -134,7 +139,6 @@
 </template>
 
 <script setup>
-useHead({ title: `About Us - Menuriom` });
 definePageMeta({ layout: "default" });
 
 const { localeProperties } = useI18n();

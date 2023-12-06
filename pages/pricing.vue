@@ -16,6 +16,11 @@
 
 <template>
     <div class="relative flex flex-col items-center gap-10 w-full">
+        <Head>
+            <Title> {{ $t("meta.pricingTitle") }} </Title>
+            <Meta name="description" :content="$t('meta.pricingDesc')" />
+        </Head>
+
         <div class="relative flex flex-col items-center gap-4 p-4 mt-12 isolate">
             <div class="bar absolute h-20 rounded-2xl bg-gradient-to-r from-secondary to-primary opacity-75 shadow-mr25"></div>
             <h1 class="text-5xl lg:text-6xl font-extrabold">{{ $t("pricing.PRICING") }}.</h1>
@@ -40,7 +45,6 @@ import Plans2 from "~/components/web/pricing/Plans2.vue";
 import PlanCompare from "~/components/web/pricing/PlanCompare.vue";
 import Faqs from "~/components/web/home/Faqs.vue";
 
-useHead({ title: `Pricing and plan compression - Menuriom` });
 definePageMeta({ layout: "default" });
 
 const handleError = (err) => {

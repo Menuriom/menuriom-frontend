@@ -12,6 +12,11 @@
 
 <template>
     <div class="relative flex flex-col items-center justify-center gap-4 md:gap-6 isolate">
+        <Head>
+            <Title> {{ $t("meta.authTitle") }} </Title>
+            <Meta name="description" :content="$t('meta.authDesc')" />
+        </Head>
+
         <img class="absolute -top-4 rotate-[30deg] -z-10" src="~/assets/images/key.webp" alt="" />
         <div class="flex flex-col items-center gap-6 w-full md:w-max max-w-md p-6 md:p-8 bg-bgAccent rounded-2xl shadow-mr25 overflow-hidden">
             <div class="gradient-re flex items-center justify-center w-max p-2 rounded-xl">
@@ -189,7 +194,6 @@ import axios from "axios";
 import { useToast } from "vue-toastification";
 import { useUserStore } from "@/stores/user";
 
-useHead({ title: `Login | Signup - Menuriom` });
 definePageMeta({ layout: "auth", middleware: ["guest-gate"] });
 
 const { localeProperties, t } = useI18n();

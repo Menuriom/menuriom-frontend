@@ -1,18 +1,18 @@
 const cacheAge = 60 * 60 * 24 * 365; // 1 year
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     app: {
         head: {
-            title: "Menuriom",
+            title: "Menuriom | The best way to manage your restaurant",
             meta: [
                 { charset: "utf-8" },
                 { name: "viewport", content: "width=device-width, initial-scale=1" },
                 { name: "format-detection", content: "telephone=no" },
-                { name: "description", content: "Create highly versatile online digital menus" },
-                { name: "theme-color", content: "#9f74cd" },
+                { name: "description", content: "Create highly versatile online digital/QR menus" },
+                { name: "theme-color", content: "#9c85b2" },
             ],
             link: [
+                { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
                 // { rel: "manifest", href: "/pwa/site.webmanifest" },
                 // { rel: "icon", href: "/pwa/favicon.ico" },
                 // { rel: "apple-touch-icon", href: "/pwa/apple-touch-icon.png" },
@@ -80,7 +80,6 @@ export default defineNuxtConfig({
     i18n: {
         strategy: "prefix_except_default",
         baseUrl: process.env.BASE_URL,
-        // differentDomains: true,
         detectBrowserLanguage: false,
         // detectBrowserLanguage: {
         //     alwaysRedirect: false,
@@ -102,10 +101,6 @@ export default defineNuxtConfig({
             escapeHtml: false,
         },
         vueI18n: "./i18n.config.ts",
-    },
-
-    image: {
-        format: ["webp"],
     },
 
     delayHydration: {

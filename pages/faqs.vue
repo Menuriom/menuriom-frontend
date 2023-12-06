@@ -2,6 +2,11 @@
 
 <template>
     <section class="flex flex-col items-center gap-14 w-full max-w-screen-xl mx-auto p-4">
+        <Head>
+            <Title> {{ $t("meta.faqsTitle") }} </Title>
+            <Meta name="description" :content="$t('meta.faqsDesc')" />
+        </Head>
+
         <header class="relative flex flex-col items-center w-full p-3 md:p-10 bg-bgAccent rounded-3xl overflow-hidden isolate">
             <!-- <img class="absolute -z-10 opacity-75" src="~/assets/images/tiles.webp" alt="tiles" /> -->
             <NuxtImg class="absolute inset-0 w-full h-full opacity-50 rounded-3xl object-cover" src="/img/restaurant3.jpg" sizes="100% 1280px" loading="lazy" />

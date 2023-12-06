@@ -14,6 +14,29 @@ export default {
     "Coming soon": "Coming soon",
     Unlimited: "Unlimited",
 
+    meta: {
+        indexTitle: "Menuriom - Online QR Menu Builder & Ordering Manager",
+        indexDesc: "The best way to manage your restaurant. Build digital menus, manage your menu items, and get reports from user interactions.",
+
+        aboutTitle: "About Menuriom",
+        aboutDesc: "We want to build everything you need for your restaurant.",
+
+        faqsTitle: "Frequently Asked Questions - Menuriom",
+        faqsDesc: "have questions about how we operate?",
+
+        authTitle: "Login Or Signup - Menuriom",
+        authDesc: "Start building your menu, start managing your restaurant.",
+
+        contactUsTitle: "Contact Us For Sales Or Feature Request - Menuriom",
+        contactUsDesc: "Need help picking a plan, having a question about our features, or maybe needing something we don't have. get in touch with our team.",
+
+        featuresTitle: "Our Features - Menuriom",
+        featuresDesc: "See what we have to offer in our menu, analytics, and management tools",
+
+        pricingTitle: "Menuriom Pricing And Plan Compression",
+        pricingDesc: "See and compare plans and choose based on your needs and restaurant size. Start free, change at any time.",
+    },
+
     auth: {
         welcome: "Welcome to Menuriom",
         "Login or signup with your email": "Login or signup with your email",
