@@ -41,6 +41,8 @@ export default defineNuxtConfig({
             MENU_BASE_URL: process.env.MENU_BASE_URL,
             BASE_URL: process.env.BASE_URL,
             GOOGLE_LOGIN_CLIENT_ID: process.env.GOOGLE_LOGIN_CLIENT_ID,
+            posthogPublicKey: "phc_K6FWhOYUnRVRFmKRtkH23df1SV7uypD2UxRw37id4in",
+            posthogHost: "https://app.posthog.com",
         },
     },
 
@@ -75,6 +77,7 @@ export default defineNuxtConfig({
         "/faqs": { prerender: true },
         "/contact-us": { prerender: true },
         "/about-us": { prerender: true },
+        "/panel/**": { index: false },
     },
 
     i18n: {
@@ -103,10 +106,22 @@ export default defineNuxtConfig({
         vueI18n: "./i18n.config.ts",
     },
 
-    delayHydration: {
-        // enables nuxt-delay-hydration in dev mode for testing
-        debug: process.env.NODE_ENV === "development",
-        mode: "mount",
+    // delayHydration: {
+    //     // enables nuxt-delay-hydration in dev mode for testing
+    //     debug: process.env.NODE_ENV === "development",
+    //     mode: "mount",
+    // },
+
+    linkChecker: { enabled: false },
+    ogImage: { enabled: false },
+    seoUi: { enabled: false },
+    seo: { redirectToCanonicalSiteUrl: true },
+    schemaOrg:{},
+    sitemap: { exclude: ["/panel/**"] },
+    site: {
+        name: "Menuriom",
+        url: process.env.BASE_URL,
+        defaultLocale: "fa",
     },
 
     modules: [
@@ -116,6 +131,7 @@ export default defineNuxtConfig({
         "@nuxtjs/i18n",
         "@nuxt/image",
         "nuxt-swiper",
-        "nuxt-delay-hydration",
+        // "nuxt-delay-hydration",
+        "@nuxtseo/module",
     ],
 });
