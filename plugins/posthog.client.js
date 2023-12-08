@@ -4,9 +4,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     const runtimeConfig = useRuntimeConfig();
     const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
         api_host: runtimeConfig.public.posthogHost || "https://app.posthog.com",
-        // loaded: (posthog) => {
-        //     if (import.meta.env.MODE === "development") posthog.debug();
-        // },
+        loaded: (posthog) => {
+            // if (import.meta.env.MODE === "development") posthog.debug();
+            posthog.debug(false);
+        },
     });
 
     // Make sure that pageviews are captured with each route change
