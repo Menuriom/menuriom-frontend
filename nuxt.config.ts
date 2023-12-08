@@ -1,18 +1,18 @@
 const cacheAge = 60 * 60 * 24 * 365; // 1 year
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     app: {
         head: {
-            title: "Menuriom",
+            title: "Menuriom | The best way to manage your restaurant",
             meta: [
                 { charset: "utf-8" },
                 { name: "viewport", content: "width=device-width, initial-scale=1" },
                 { name: "format-detection", content: "telephone=no" },
-                { name: "description", content: "Create highly versatile online digital menus" },
-                { name: "theme-color", content: "#9f74cd" },
+                { name: "description", content: "Create highly versatile online digital/QR menus" },
+                { name: "theme-color", content: "#9c85b2" },
             ],
             link: [
+                { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
                 // { rel: "manifest", href: "/pwa/site.webmanifest" },
                 // { rel: "icon", href: "/pwa/favicon.ico" },
                 // { rel: "apple-touch-icon", href: "/pwa/apple-touch-icon.png" },
@@ -41,6 +41,8 @@ export default defineNuxtConfig({
             MENU_BASE_URL: process.env.MENU_BASE_URL,
             BASE_URL: process.env.BASE_URL,
             GOOGLE_LOGIN_CLIENT_ID: process.env.GOOGLE_LOGIN_CLIENT_ID,
+            posthogPublicKey: "phc_K6FWhOYUnRVRFmKRtkH23df1SV7uypD2UxRw37id4in",
+            posthogHost: "https://app.posthog.com",
         },
     },
 
@@ -60,6 +62,9 @@ export default defineNuxtConfig({
             "/**/*.svg": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
             "/**/*.jpg": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
             "/**/*.webp": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.woff": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.woff2": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
+            "/**/*.ttf": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
             "/_nuxt/**": { swr: 60 * 60 * 12, isr: true, headers: { "cache-control": `public, max-age=${cacheAge}, s-maxage=${cacheAge}` } },
         },
     },
@@ -71,12 +76,13 @@ export default defineNuxtConfig({
         "/pricing": { swr: 60 * 60 * 12, isr: true },
         "/faqs": { prerender: true },
         "/contact-us": { prerender: true },
+        "/about-us": { prerender: true },
+        "/panel/**": { index: false },
     },
 
     i18n: {
         strategy: "prefix_except_default",
         baseUrl: process.env.BASE_URL,
-        // differentDomains: true,
         detectBrowserLanguage: false,
         // detectBrowserLanguage: {
         //     alwaysRedirect: false,
@@ -100,14 +106,22 @@ export default defineNuxtConfig({
         vueI18n: "./i18n.config.ts",
     },
 
-    image: {
-        format: ["webp"],
-    },
+    // delayHydration: {
+    //     // enables nuxt-delay-hydration in dev mode for testing
+    //     debug: process.env.NODE_ENV === "development",
+    //     mode: "mount",
+    // },
 
-    delayHydration: {
-        // enables nuxt-delay-hydration in dev mode for testing
-        debug: process.env.NODE_ENV === "development",
-        mode: "mount",
+    linkChecker: { enabled: false },
+    ogImage: { enabled: false },
+    seoUi: { enabled: false },
+    seo: { redirectToCanonicalSiteUrl: true },
+    schemaOrg: {},
+    sitemap: { exclude: ["/panel/**"] },
+    site: {
+        name: "Menuriom",
+        url: process.env.BASE_URL,
+        defaultLocale: "fa",
     },
 
     modules: [
@@ -117,6 +131,7 @@ export default defineNuxtConfig({
         "@nuxtjs/i18n",
         "@nuxt/image",
         "nuxt-swiper",
-        "nuxt-delay-hydration",
+        // "nuxt-delay-hydration",
+        "@nuxtseo/module",
     ],
 });

@@ -173,8 +173,6 @@ useHead({ title: `${t("panel.branches.Branches")} - ${t("panel.Your Menuriom Pan
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
 
-// TODO : limit branch creation base on the user's plan on brand
-
 const errorField = ref("");
 const responseMessage = ref("");
 
@@ -201,7 +199,9 @@ const deleteRecord = async () => {
         .then((response) => {
             records.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();
-            // TODO : allow user to create new branch if the limit is under the plan's limit
+
+            // allow user to create new branch if the limit is under the plan's limit
+            canCreateNewBranch.value = response.data.canCreateNewBranch;
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -212,21 +212,21 @@ const deleteRecord = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (deleting.value = false));
 };
 // -------------------------------------------------
 
 const handleErrors = (err) => {
-    if(!err) return
+    if (!err) return;
     errorField.value = "data";
     if (typeof err.response !== "undefined" && err.response.data) {
         const errors = err.response.data.errors || err.response.data.message;
         if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // getBranchList -------------------------------------------------

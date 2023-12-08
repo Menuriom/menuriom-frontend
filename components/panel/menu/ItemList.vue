@@ -126,7 +126,7 @@
                                                     class="btn flex items-center gap-2 p-2 hover:px-4 border border-bgSecondary rounded-xl cursor-pointer"
                                                     :class="{ 'bg-fgPrimary text-bgPrimary': dish.soldOut }"
                                                     @click="toggleStates(k, i, 'soldOut')"
-                                                    v-if="!dish[`toggling_soldOut`]"
+                                                    v-if="hasItemHighlighting && !dish[`toggling_soldOut`]"
                                                 >
                                                     <Icon
                                                         class="w-4 h-4"
@@ -135,15 +135,15 @@
                                                         folder="icons/light"
                                                         size="16px"
                                                     />
-                                                    <small class="" v-if="dish.soldOut"> {{ $t("SOLD OUT") }} </small>
-                                                    <small class="" v-else> {{ $t("panel.menu.Mark as sold out") }} </small>
+                                                    <small class=""> {{ $t("SOLD OUT") }} </small>
+                                                    <!-- <small class="" v-else> {{ $t("panel.menu.Mark as sold out") }} </small> -->
                                                 </button>
                                                 <Loading v-if="dish[`toggling_soldOut`]" />
                                                 <button
                                                     class="btn flex items-center gap-2 p-2 hover:px-4 border border-bgSecondary rounded-xl cursor-pointer"
                                                     :class="{ 'bg-fgPrimary text-bgPrimary': dish.pinned }"
                                                     @click="toggleStates(k, i, 'pinned')"
-                                                    v-if="checkLimitations([['item-highlighting', true]], brand) && !dish[`toggling_pinned`]"
+                                                    v-if="hasItemHighlighting && !dish[`toggling_pinned`]"
                                                 >
                                                     <Icon
                                                         class="w-4 h-4 -rotate-45"
@@ -152,10 +152,25 @@
                                                         folder="icons/light"
                                                         size="16px"
                                                     />
-                                                    <small class="" v-if="dish.pinned"> {{ $t(`panel.menu.Mark as suggested`) }} </small>
-                                                    <small class="" v-else> {{ $t("panel.menu.Marked as suggested") }} </small>
+                                                    <small class=""> {{ $t(`panel.menu.Mark as suggested`) }} </small>
                                                 </button>
                                                 <Loading v-if="dish[`toggling_pinned`]" />
+                                                <button
+                                                    class="btn flex items-center gap-2 p-2 hover:px-4 border border-bgSecondary rounded-xl cursor-pointer"
+                                                    :class="{ 'bg-fgPrimary text-bgPrimary': dish.showAsNew }"
+                                                    @click="toggleStates(k, i, 'showAsNew')"
+                                                    v-if="hasItemHighlighting && !dish[`toggling_showAsNew`]"
+                                                >
+                                                    <Icon
+                                                        class="w-4 h-4"
+                                                        :class="[dish.showAsNew ? 'bg-primary' : 'bg-fgPrimary bg-opacity-30']"
+                                                        name="new.svg"
+                                                        folder="icons/light"
+                                                        size="16px"
+                                                    />
+                                                    <small class=""> {{ $t(`panel.menu.New Item`) }} </small>
+                                                </button>
+                                                <Loading v-if="dish[`toggling_showAsNew`]" />
                                             </div>
                                         </div>
 
@@ -270,8 +285,6 @@
 
         <span class="my-2"></span>
 
-        <!-- TODO : add state for when there is not category or items available -->
-
         <Teleport to="body">
             <Dialog name="delete-item-confirmation" :title="$t('panel.menu.Delete Menu Item')">
                 <div class="flex flex-col gap-4">
@@ -329,6 +342,7 @@ const panelStore = usePanelStore();
 const userStore = useUserStore();
 
 const brand = computed(() => userStore.brands.list[panelStore.selectedBrandId] || {});
+const hasItemHighlighting = computed(() => checkLimitations([["item-highlighting", true]], brand.value));
 
 const searchQuery = ref("");
 
@@ -357,7 +371,8 @@ const deleteRecord = async () => {
         .then((response) => {
             dishes.list[indexToDelete.value.k].splice(indexToDelete.value.i, 1);
             panelStore.closePopUp();
-            // TODO : allow user to create new dishes if the number became under 500
+
+            canCreateNewDish.value = response.data.canCreateNewDish;
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -447,7 +462,7 @@ const handleErrors = (err) => {
         if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // getDishesList -------------------------------------------------

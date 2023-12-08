@@ -20,6 +20,11 @@ div:has(> .rocket) {
 
 <template>
     <section class="relative flex flex-col items-center gap-10 w-full px-2 md:mb-16">
+        <Head>
+            <Title> {{ $t("meta.featuresTitle") }} </Title>
+            <Meta name="description" :content="$t('meta.featuresDesc')" />
+        </Head>
+
         <header
             class="wrapper relative flex items-center justify-evenly gap-4 w-screen max-w-screen-lg rounded-3xl bg-bgAccent text-white p-4 md:p-8 lg:p-16 shadow-nr25"
         >
@@ -42,7 +47,15 @@ div:has(> .rocket) {
                         style="perspective: 1200px; perspective-origin: center"
                         draggable="false"
                     >
-                        <NuxtImg class="w-full object-scale-down" ref="img" width="576px" format="webp" :src="item.image" :alt="item.title" loading="lazy" />
+                        <NuxtImg
+                            class="w-full object-scale-down"
+                            ref="img"
+                            sizes="100% md:556px"
+                            format="webp"
+                            :src="item.image"
+                            :alt="item.title"
+                            loading="lazy"
+                        />
                     </div>
                     <div class="flex flex-col items-center gap-8 w-full max-w-2xl">
                         <div class="flex flex-col items-center 1.5xl:items-start gap-4 w-full">
@@ -84,9 +97,6 @@ div:has(> .rocket) {
 </template>
 
 <script setup>
-// import Hero from "~/components/web/features/Hero.vue";
-
-useHead({ title: `Features - Menuriom` });
 definePageMeta({ layout: "default" });
 
 const localePath = useLocalePath();

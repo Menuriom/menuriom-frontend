@@ -58,7 +58,9 @@
                         class="absolute -bottom-6 group-hover:bottom-0 flex flex-col gap-1 w-full p-2 bg-bgAccent bg-opacity-80 rounded-lg shadow-mr15 backdrop-blur-sm transition-all"
                     >
                         <span class="flex items-center justify-center gap-2 w-full overflow-hidden overflow-ellipsis font-bold">
-                            <Icon class="w-5 h-5 gradient" name="heart.svg" folder="icons/tabler" size="22px" />
+                            <Icon class="w-5 h-5 gradient" name="eye.svg" folder="icons/tabler" size="22px" v-if="tab == 'MostViewed'" />
+                            <Icon class="w-5 h-5 gradient" name="brand-shopee.svg" folder="icons/tabler" size="22px" v-if="tab == 'MostOrdered'" />
+                            <Icon class="w-5 h-5 gradient" name="heart.svg" folder="icons/tabler" size="22px" v-if="tab == 'MostLiked'" />
                             {{ Intl.NumberFormat(locale).format(item.totalCount) }}
                         </span>
                         <span class="w-full overflow-hidden overflow-ellipsis text-center text-sm"> {{ item.menuItem.name }} </span>

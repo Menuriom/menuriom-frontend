@@ -138,7 +138,8 @@ const deleteRecord = async () => {
         .then((response) => {
             categories.list.splice(indexToDelete.value, 1);
             panelStore.closePopUp();
-            // TODO : allow user to create new category if the number became under 100
+
+            canCreateNewCategory.value = response.data.canCreateNewCategory;
         })
         .catch((err) => {
             if (typeof err.response !== "undefined" && err.response.data) {
@@ -149,7 +150,7 @@ const deleteRecord = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (deleting.value = false));
 };
@@ -184,7 +185,7 @@ const toggleCategoryVisibility = async (index) => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
             toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
         })
         .finally(() => (hiding.value = false));
@@ -230,14 +231,13 @@ const handleErrors = (err) => {
         if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // getCategoryList -------------------------------------------------
 const categories = reactive({ list: [] });
 const filteredCategories = reactive({ list: [] });
 const canCreateNewCategory = ref(true);
-// const getCategoryList_results = await useLazyAsyncData(() => getCategoryList(route.params.brandID));
 const getCategoryList_results = await useAsyncData(() => getCategoryList(route.params.brandID), { lazy: false });
 const loadingCategories = computed(() => getCategoryList_results.pending.value);
 

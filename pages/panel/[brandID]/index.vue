@@ -1,18 +1,27 @@
 <style scoped></style>
 
 <template>
-    <div class="flex flex-col gap-4 w-full -my-2">
-        <div class="flex flex-wrap @5xl:flex-nowrap justify-center gap-4 w-full">
-            <OrdersModule class="grow" />
-            <QrScansModule />
-        </div>
-        <div class="flex flex-wrap @6xl:flex-nowrap justify-center gap-4 w-full">
-            <div class="flex flex-col items-center justify-center gap-4 w-full">
-                <CounterModule class="" />
-                <BestItemsModule class="" />
+    <div class="flex flex-col gap-6 w-full">
+        <header class="flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <Icon class="w-9 h-9 gradient" name="rectangles-mixed.svg" folder="icons/duo" size="36px" />
+                <h1 class="text-2xl md:text-4xl/tight font-bold">{{ $t("panel.side-menu.Dashboard") }}</h1>
             </div>
-            <FeedbacksModule class="grow" />
-            <BillingModule />
+        </header>
+        <hr class="w-full border-bgSecondary" />
+        <div class="flex flex-col gap-4 w-full">
+            <div class="flex flex-wrap @5xl:flex-nowrap justify-center gap-4 w-full">
+                <OrdersModule class="grow" />
+                <QrScansModule />
+            </div>
+            <div class="flex flex-wrap @6xl:flex-nowrap justify-center gap-4 w-full">
+                <div class="flex flex-col items-center justify-center gap-4 w-full">
+                    <CounterModule class="" />
+                    <BestItemsModule class="" />
+                </div>
+                <FeedbacksModule class="grow" />
+                <BillingModule />
+            </div>
         </div>
 
         <Teleport to="body">
@@ -46,6 +55,9 @@ watch(checkBrandSubscription.data, (val) => (alertLevel.value = val.alert || "")
 // -------------------------------------------------
 
 onMounted(() => {
-    if (alertLevel.value) panelStore.openPopUp("billing-alert-dialog");
+    if (alertLevel.value) {
+        panelStore.openPopUp("billing-alert-dialog");
+        panelStore.newRenewalBill = true;
+    }
 });
 </script>

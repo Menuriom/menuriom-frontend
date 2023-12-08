@@ -187,8 +187,6 @@ import { useToast } from "vue-toastification";
 import { usePanelStore } from "@/stores/panel";
 import { useUserStore } from "@/stores/user";
 
-// TODO : add ability to remove category icon in style section
-
 const { localeProperties, t } = useI18n();
 const route = useRoute();
 const router = useRouter();
@@ -280,7 +278,7 @@ const save = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (saving.value = false));
 };
@@ -294,7 +292,7 @@ const handleErrors = (err) => {
         if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // getCategoryInfo -------------------------------------------------

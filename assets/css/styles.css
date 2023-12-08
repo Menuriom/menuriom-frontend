@@ -64,6 +64,21 @@ body {
 nav, nav ul, .scroll-thin { scrollbar-width: thin; }
 nav::-webkit-scrollbar, nav ul::-webkit-scrollbar, .scroll-thin::-webkit-scrollbar { width: 4px; height: 4px; }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 *:is(h1, h2, h3, h4, h5, h6) { font-family: "Inter", "Estedad"; }
 
 .f-inter { font-family: "Inter", "Estedad" !important; }

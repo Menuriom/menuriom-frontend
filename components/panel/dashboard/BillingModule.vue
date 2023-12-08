@@ -7,16 +7,21 @@
         <header class="relative flex items-center gap-2 w-full">
             <h3 class="font-extrabold text-bgPrimary">{{ $t("panel.dashboard.Billing & Plans") }}</h3>
             <span class="w-0.5 h-0.5 bg-bgAccent opacity-25 grow"></span>
-            <nuxt-link class="btn text-fgPrimary text-sm underline underline-offset-2" to="">{{ $t("panel.dashboard.View Last Bill") }}</nuxt-link>
+            <nuxt-link class="btn text-fgPrimary text-sm underline underline-offset-2" :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)">
+                {{ $t("panel.dashboard.View Last Bill") }}
+            </nuxt-link>
         </header>
 
-        <nuxt-link class="btn relative flex flex-col items-center w-full p-3 py-4 bg-black rounded-2xl shadow-mr25 overflow-hidden" to="#">
+        <nuxt-link
+            class="btn relative flex flex-col items-center w-full p-3 py-4 bg-black rounded-2xl shadow-mr25 overflow-hidden"
+            :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)"
+        >
             <span class="absolute end-1/2 -top-20 rotate-12 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute end-6 -top-24 -rotate-[20deg] gradient-re w-28 h-28 rounded-2xl opacity-75"></span>
             <span class="absolute start-3/4 -bottom-20 -rotate-45 -ms-10 gradient-re w-24 h-24 rounded-2xl blur-sm opacity-75"></span>
             <span class="absolute -end-4 -bottom-20 -rotate-12 gradient-re w-28 h-28 rounded-2xl"></span>
 
-            <div class="relative flex items-center gap-2 w-full" v-if="!userIsPro">
+            <div class="relative flex items-center gap-2 w-full" v-if="currentPlan.plan?.code < 2">
                 <NuxtImg class="w-16 -rotate-6 -ms-6" src="/img/cafe.png" width="64px" />
                 <div class="relative flex flex-col items-start bg-bgSecondary bg-opacity-40 p-2 rounded-lg">
                     <small class="flex text-sm opacity-75">{{ $t("panel.billing.Remove The Limitations") }}</small>
@@ -62,7 +67,10 @@
                 </div>
             </div>
         </div>
-        <nuxt-link class="relative flex items-center justify-center gap-2 w-full p-2.5 bg-fgPrimary text-bgPrimary rounded-xl shadow-mr35" to="">
+        <nuxt-link
+            class="relative flex items-center justify-center gap-2 w-full p-2.5 bg-fgPrimary text-bgPrimary rounded-xl shadow-mr35"
+            :to="localePath(`/panel/${panelStore.selectedBrandId}/billing`)"
+        >
             <Icon class="w-7 h-7 gradient" name="money-bills.svg" folder="icons/duo" size="28px" />
             <b> {{ $t("panel.dashboard.Renew Your Plan") }} </b>
         </nuxt-link>
@@ -70,8 +78,21 @@
 </template>
 
 <script setup>
-const { locale } = useI18n();
+import { usePanelStore } from "@/stores/panel";
 
-const userIsPro = ref(false);
+const { locale } = useI18n();
+const route = useRoute();
+const localePath = useLocalePath();
+const panelStore = usePanelStore();
+
+// getCounts -------------------------------------------------
 const currentPlan = ref({});
+const getCurrentPlan = await useFetch(`/api/v1/panel/analytics/current-plan`, { lazy: process.client, headers: { brand: route.params.brandID } });
+if (getCurrentPlan.error.value && getCurrentPlan.error.value.statusCode >= 500 && process.server) {
+    console.error({ err: getCurrentPlan.error.value });
+}
+
+if (getCurrentPlan.data.value) currentPlan.value = getCurrentPlan.data.value || {};
+watch(getCurrentPlan.data, (val) => (currentPlan.value = val || {}));
+// -------------------------------------------------
 </script>

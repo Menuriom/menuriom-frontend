@@ -50,8 +50,8 @@
             </small>
             <hr class="w-full opacity-10" />
             <div class="flex flex-wrap @3xl:flex-nowrap items-center gap-4 w-full">
-                <h5 class="w-20 text-sm text-secondary text-opacity-75">{{ $t("panel.profile.Email Address") }}</h5>
-                <div class="flex items-center justify-center shrink-0">
+                <div class="flex items-center justify-center gap-1 shrink-0">
+                    <h5 class="w-20 text-sm text-secondary text-opacity-75">{{ $t("panel.profile.Email Address") }}</h5>
                     <Icon
                         class="icon w-6 h-6 gradient"
                         :class="{ 'grayscale opacity-50': !emailVerified }"
@@ -62,19 +62,24 @@
                     />
                     <Loading v-else />
                 </div>
-                <span class="p-3.5 bg-bgSecondary bg-opacity-60 text-fgPrimary text-opacity-75 rounded-xl shadow-mr15 grow" dir="ltr">
-                    {{ userStore.email }}
-                </span>
-                <button
-                    class="btn border-2 border-secondary hover:bg-secondary hover:text-bgPrimary rounded-lg p-2 hover:px-6 text-sm shrink-0"
-                    @click="panelStore.openPopUp('change-email')"
-                >
-                    {{ $t("panel.profile.Change and verify") }}
-                </button>
+                <div class="flex items-center justify-center gap-2 w-full md:w-auto grow">
+                    <span
+                        class="min-h-[52px] p-3.5 bg-bgSecondary bg-opacity-60 text-fgPrimary text-opacity-75 overflow-hidden overflow-ellipsis rounded-xl shadow-mr15 grow"
+                        dir="ltr"
+                    >
+                        {{ userStore.email }}
+                    </span>
+                    <button
+                        class="btn border-2 border-secondary hover:bg-secondary hover:text-bgPrimary rounded-lg p-2 hover:px-6 text-xs sm:text-sm shrink-0"
+                        @click="panelStore.openPopUp('change-email')"
+                    >
+                        {{ $t("panel.profile.Change and verify") }}
+                    </button>
+                </div>
             </div>
             <div class="flex flex-wrap @3xl:flex-nowrap items-center gap-4 w-full">
-                <h5 class="w-20 text-sm text-secondary text-opacity-75">{{ $t("panel.profile.Phone Number") }}</h5>
-                <div class="flex items-center justify-center shrink-0">
+                <div class="flex items-center justify-center gap-1 shrink-0">
+                    <h5 class="w-20 text-sm text-secondary text-opacity-75">{{ $t("panel.profile.Phone Number") }}</h5>
                     <Icon
                         class="icon w-6 h-6 gradient"
                         :class="{ 'grayscale opacity-50': !mobileVerified }"
@@ -85,15 +90,20 @@
                     />
                     <Loading v-else />
                 </div>
-                <span class="p-3.5 bg-bgSecondary bg-opacity-60 text-fgPrimary text-opacity-75 rounded-xl shadow-mr15 grow" dir="ltr">
-                    {{ userStore.mobile }}
-                </span>
-                <button
-                    class="btn border-2 border-secondary hover:bg-secondary hover:text-bgPrimary rounded-lg p-2 hover:px-6 text-sm shrink-0"
-                    @click="panelStore.openPopUp('change-mobile')"
-                >
-                    {{ $t("panel.profile.Change and verify") }}
-                </button>
+                <div class="flex items-center justify-center gap-2 w-full md:w-auto grow">
+                    <span
+                        class="min-h-[52px] p-3.5 bg-bgSecondary bg-opacity-60 text-fgPrimary text-opacity-75 overflow-hidden overflow-ellipsis rounded-xl shadow-mr15 grow"
+                        dir="ltr"
+                    >
+                        {{ userStore.mobile }}
+                    </span>
+                    <button
+                        class="btn border-2 border-secondary hover:bg-secondary hover:text-bgPrimary rounded-lg p-2 hover:px-6 text-xs sm:text-sm shrink-0"
+                        @click="panelStore.openPopUp('change-mobile')"
+                    >
+                        {{ $t("panel.profile.Change and verify") }}
+                    </button>
+                </div>
             </div>
             <hr class="w-full opacity-10" />
             <small class="flex items-start text-xs text-rose-300" v-if="errorField === '' && responseMessage !== ''">
@@ -191,7 +201,7 @@ const save = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (saving.value = false));
 };
@@ -205,7 +215,7 @@ const handleErrors = (err) => {
         if (typeof errors === "object") responseMessage.value = errors[0].errors[0];
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // getVerficationInfo -------------------------------------------------

@@ -397,7 +397,7 @@ const handleErrors = (err) => {
     } else responseMessage.value = t("Something went wrong!");
     if (process.server) console.log({ err });
     if (responseMessage.value && process.client) toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
-    // TODO : log errors in sentry type thing
+    // LOGGER : log errors in sentry type thing
 };
 
 // loadMenuStyleSettings -------------------------------------------------

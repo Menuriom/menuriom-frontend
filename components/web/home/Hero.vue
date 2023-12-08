@@ -49,7 +49,6 @@
                         {{ $t("home.With Menuriom build and manage your restaurant menu with ease") }}
                     </p>
                     <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 sm:mt-4">
-                        <!-- TODO : chnage the button when user is logged in to "head to dashboard" and "help center or how to start your first menu" -->
                         <nuxt-link
                             class="p-4 px-6 hover:px-8 rounded-xl bg-primary text-fgPrimary transition-all shadow-mr25"
                             to="/authenticate"

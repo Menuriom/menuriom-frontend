@@ -11,7 +11,7 @@
 .pattern {
     background-image: url("/patterns/pattern14.webp");
     background-repeat: repeat;
-    background-size: 25rem;
+    background-size: 256px;
     background-position: 6rem;
 }
 
@@ -33,35 +33,44 @@
                     <NuxtImg
                         class="absolute inset-0 w-full h-full object-cover"
                         src="/img/restaurant0.jpg"
-                        sizes="100% 1920px"
+                        sizes="100% lg:1920px"
+                        format="webp"
                         loading="lazy"
                         v-if="imageNum === 0"
                     />
                     <NuxtImg
                         class="absolute inset-0 w-full h-full object-cover"
                         src="/img/restaurant1.jpg"
-                        sizes="100% 1920px"
+                        sizes="100% lg:1320px"
+                        :quality="80"
+                        format="webp"
                         loading="lazy"
                         v-else-if="imageNum === 1"
                     />
                     <NuxtImg
                         class="absolute inset-0 w-full h-full object-cover"
                         src="/img/restaurant2.jpg"
-                        sizes="100% 1920px"
+                        sizes="100% lg:1320px"
+                        :quality="80"
+                        format="webp"
                         loading="lazy"
                         v-else-if="imageNum === 2"
                     />
                     <NuxtImg
                         class="absolute inset-0 w-full h-full object-cover"
                         src="/img/restaurant3.jpg"
-                        sizes="100% 1920px"
+                        sizes="100% lg:1320px"
+                        :quality="80"
+                        format="webp"
                         loading="lazy"
                         v-else-if="imageNum === 3"
                     />
                     <NuxtImg
                         class="absolute inset-0 w-full h-full object-cover"
                         src="/img/restaurant4.jpg"
-                        sizes="100% 1920px"
+                        sizes="100% lg:1320px"
+                        :quality="80"
+                        format="webp"
                         loading="lazy"
                         v-else-if="imageNum === 4"
                     />

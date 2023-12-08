@@ -14,6 +14,29 @@ export default {
     "Coming soon": "Coming soon",
     Unlimited: "Unlimited",
 
+    meta: {
+        indexTitle: "Menuriom - Online QR Menu Builder & Ordering Manager",
+        indexDesc: "The best way to manage your restaurant. Build digital menus, manage your menu items, and get reports from user interactions.",
+
+        aboutTitle: "About Menuriom",
+        aboutDesc: "We want to build everything you need for your restaurant.",
+
+        faqsTitle: "Frequently Asked Questions - Menuriom",
+        faqsDesc: "have questions about how we operate?",
+
+        authTitle: "Login Or Signup - Menuriom",
+        authDesc: "Start building your menu, start managing your restaurant.",
+
+        contactUsTitle: "Contact Us For Sales Or Feature Request - Menuriom",
+        contactUsDesc: "Need help picking a plan, having a question about our features, or maybe needing something we don't have. get in touch with our team.",
+
+        featuresTitle: "Our Features - Menuriom",
+        featuresDesc: "See what we have to offer in our menu, analytics, and management tools",
+
+        pricingTitle: "Menuriom Pricing And Plan Compression",
+        pricingDesc: "See and compare plans and choose based on your needs and restaurant size. Start free, change at any time.",
+    },
+
     auth: {
         welcome: "Welcome to Menuriom",
         "Login or signup with your email": "Login or signup with your email",
@@ -318,6 +341,31 @@ export default {
         sells: "Sells",
         accounts: "Accounts",
         support: "Support",
+        "View More": "View More",
+
+        "Is there a free trail?": "Is there a free trail?",
+        "Is there any fee other than the subscription fee?": "Is there any fee other than the subscription fee?",
+        "Can I change my plan at anytime?": "Can I change my plan at anytime?",
+        "How can I build an account?": "How can I build an account?",
+        "After I signed up how can I build a menu?": "After I signed up how can I build a menu?",
+        "Can I build multiple brands with a single account?": "Can I build multiple brands with a single account?",
+        "How can I add another user to help me manage my restaurant?": "How can I add another user to help me manage my restaurant?",
+        "Can I change the restaurant username at any time?": "Can I change the restaurant username at any time?",
+        "How can I access the menu I created?": "How can I access the menu I created?",
+        "How can I change the looks of my restaurant menu?": "How can I change the looks of my restaurant menu?",
+        "How can I change the content of my restaurant menu?": "How can I change the content of my restaurant menu?",
+
+        a1: "Yes, the basic plan is completely free forever and you can test the product with this tier",
+        a2: "No, you only need to pay the subscription fee which is available monthly or yearly and that's it",
+        a3: "Yes, you can change the payment period and the subscription tier at any time, for this, you only need to pay the price difference for the remaining time so you don't pay extra",
+        a4: "From the header on the top of the website, you can navigate to the Login & Signup page and create an account using your email address",
+        a5: "After you create your account and your first brand, your menu will be created automatically and you only need to add your menu items from the Menu Editor",
+        a6: "For now, every account can only create one brand with multiple branches",
+        a7: "Every staff member you want to add needs to sign up with an email address. then you can send an invite to that email and request them to join your restaurant",
+        a8: "Yes, if the username is available then you can change it at any time you want, but remember after any username change the menu link and QR code will be updated",
+        a9: "You can access your menu from the generated link or from scanning the QR code",
+        a10: "From the restaurant panel and menu style editor section, you can change the color and looks of your menu",
+        a11: "Item and category details can be edited from the menu manager section in the panel, and you can also edit the info about the restaurant brand from brand settings and branch info and address from the branch manager page",
     },
 
     panel: {
@@ -490,6 +538,8 @@ export default {
             "Most Liked": "Most Liked",
             "Most Ordered": "Most Ordered",
             "Not enough data": "Not enough data",
+            Monthly: "Monthly",
+            Daily: "Daily",
         },
 
         brands: {
@@ -531,6 +581,9 @@ export default {
             "Check Invite List": "Check Invite List",
             "Start by creating a brand, or check your invation list to join a existing brand":
                 "Start by creating a brand, or check your invation list to join a existing brand",
+
+            "By changing the brand username, menu link and QR code also will be changed!":
+                "By changing the brand username, menu link and QR code also will be changed!",
         },
 
         branches: {

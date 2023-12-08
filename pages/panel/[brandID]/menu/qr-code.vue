@@ -463,7 +463,10 @@ const errorField = ref("");
 
 const selectedTab = ref("qrcode");
 
-const link = `${runtimeConfig.public.MENU_BASE_URL}/${brand.value.username}`;
+// const link = `${runtimeConfig.public.MENU_BASE_URL}/${brand.value.username}`;
+// const link = `https://menuriom.menuriom.com`;
+// const link = `https://pedar_pesar.menuriom.com`;
+const link = `https://m.menuriom.com/pedarPesar`;
 const borderMargin = ref(4);
 const rotateTheCode = ref(false);
 const size = 1024;
@@ -504,23 +507,23 @@ const foregroundColor2 = ref("#000000");
 
 const dotImageList = ref([
     { for: "Basic Plan", lvl: 0, image: "/icons/qr-dots/Square.svg" },
-    { for: "Basic Plan", lvl: 0, image: "/icons/qr-dots/Square-Dot.svg" },
-    { for: "Basic Plan", lvl: 0, image: "/icons/qr-dots/Dot.svg" },
-
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Windows.svg" },
+    
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Square-Dot.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Dot.svg" },
+    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Windows2.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Bars.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Sparkle.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Star.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Tile.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Panel.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Panel.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Octagon.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares2.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Rectangle-Fade.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Squares2.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Rectangle-Fade.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Favorite.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Ring-Dot.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Arc.svg" },
-    { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Balls.svg" },
+    // { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Balls.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Circle-Dot.svg" },
     { for: "Standard Plan", lvl: 1, image: "/icons/qr-dots/Pages.svg" },
 
@@ -561,6 +564,7 @@ const logoPadding = ref("2");
 const logoBorderRadius = ref("2"); // 0 - 7 : 1
 const logoShadow = ref(true);
 const logoShadowIntensity = ref("5"); // 2 - 9 : 1
+const allowLogoRedraw = ref(true);
 
 let img;
 const cellNumbers = ref(0);
@@ -656,7 +660,7 @@ const renderOverlays = () => {
 const drawLogo = (backgroundFillStyle) => {
     const ctx = canvasEl.value.getContext("2d");
 
-    const imageSize = Math.min(link.length / 3.5, 11);
+    const imageSize = Math.min(link.length / 3.5, 9);
     const pos = cellNumbers.value / 2 - imageSize / 2;
 
     ctx.fillStyle = backgroundFillStyle;
@@ -689,7 +693,6 @@ const drawLogo = (backgroundFillStyle) => {
     };
     if (allowLogoInQR) logoImg.src = brand.value.logo;
     else logoImg.src = "/logo.svg";
-    // TODO : we dont need to draw logo image over and over : make it so that it draw once
 };
 
 const drawCorners = (backgroundFillStyle) => {
@@ -747,7 +750,6 @@ const gradientGenerator = (options = { type: "Linear", color1: "", color2: "", a
 };
 
 onMounted(() => {
-    // TODO : add more svg for pro
     logoImg = new Image();
 
     img = new Image();

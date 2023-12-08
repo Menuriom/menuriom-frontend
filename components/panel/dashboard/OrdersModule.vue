@@ -38,7 +38,7 @@
             v-if="checkLimitations([['ordering-system', true]], brand)"
         >
             <NuxtImg class="w-full object-contain blur-sm group-hover:blur transition-all" src="/img/chart-long.png" />
-            <span class="absolute w-full max-w-xs p-3 px-4 font-bold rounded-xl bg-bgPrimary bg-opacity-60 text-sm text-center shadow-mr25">
+            <span class="absolute w-full max-w-xs p-3 px-4 rounded-xl bg-bgPrimary bg-opacity-70 text-sm text-center shadow-mr25">
                 {{ $t("panel.dashboard.We are working on this feature stay tuned") }}
             </span>
         </span>
@@ -48,7 +48,7 @@
             v-else
         >
             <NuxtImg class="w-full object-contain blur-sm group-hover:blur transition-all" src="/img/chart-long.png" />
-            <span class="absolute w-full max-w-xs p-3 px-4 font-bold rounded-xl bg-bgPrimary bg-opacity-60 text-sm text-center shadow-mr25">
+            <span class="absolute w-full max-w-xs p-3 px-4 rounded-xl bg-bgPrimary bg-opacity-70 text-sm text-center shadow-mr25">
                 {{ $t("panel.dashboard.Upgrade your plan to pro to view this chart") }}
             </span>
         </nuxt-link>

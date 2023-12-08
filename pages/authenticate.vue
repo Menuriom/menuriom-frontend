@@ -12,8 +12,12 @@
 
 <template>
     <div class="relative flex flex-col items-center justify-center gap-4 md:gap-6 isolate">
-        <!-- TODO : refactor the stage 3 business size to be a check box rather than a simple user input -->
-        <img class="absolute -top-4 rotate-[30deg] -z-10" src="~/assets/images/key.webp" alt="">
+        <Head>
+            <Title> {{ $t("meta.authTitle") }} </Title>
+            <Meta name="description" :content="$t('meta.authDesc')" />
+        </Head>
+
+        <img class="absolute -top-4 rotate-[30deg] -z-10" src="~/assets/images/key.webp" alt="" />
         <div class="flex flex-col items-center gap-6 w-full md:w-max max-w-md p-6 md:p-8 bg-bgAccent rounded-2xl shadow-mr25 overflow-hidden">
             <div class="gradient-re flex items-center justify-center w-max p-2 rounded-xl">
                 <img class="w-16 h-16" src="/logos/logo9-dark.webp" alt="Menuriom" />
@@ -183,22 +187,22 @@
 
 <script setup>
 import Input from "~/components/form/Input.vue";
-import MobileInput from "~/components/form/MobileInput.vue";
 import Button from "~/components/web/Button.vue";
 import LangSwitch from "~/components/LangSwitch.vue";
 import Loading from "~/components/Loading.vue";
 import axios from "axios";
+import { useToast } from "vue-toastification";
 import { useUserStore } from "@/stores/user";
 
-useHead({ title: `Login | Signup - Menuriom` });
 definePageMeta({ layout: "auth", middleware: ["guest-gate"] });
 
-const userStore = useUserStore();
+const { localeProperties, t } = useI18n();
 const router = useRouter();
 const route = useRoute();
 const config = useRuntimeConfig();
 const localePath = useLocalePath();
-const { locale, t } = useI18n();
+const toast = useToast();
+const userStore = useUserStore();
 
 const error = route.query.error;
 
@@ -271,7 +275,7 @@ const sendVerificationCode = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (loading.value = false));
 };
@@ -306,9 +310,9 @@ const checkVerificationCode = async () => {
                     errorField.value = errors[0].property;
                 }
             } else responseMessage.value = t("Something went wrong!");
+            if (errorField.value == "") toast.error(responseMessage.value, { timeout: 3000, rtl: localeProperties.value.dir == "rtl" });
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
-            // TODO : if the property is "" then make a global error either on top of the continue button or as a toast message
+            // LOGGER : log errors in sentry type thing
             loading.value = false;
         });
 };
@@ -346,7 +350,7 @@ const completeSignup = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
             loading.value = false;
         });
 };

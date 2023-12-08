@@ -309,11 +309,7 @@ watch([paymentPeriod, selectedPlan], ([newPaymentPeriod, newSelectedPlan]) => ca
 
 // changing the plan -------------------------------------------------
 const changePlan = async () => {
-    // TODO
-    // NOTIC 1 : plan/period change can only be done for any user every 3 days
-    // NOTIC 2 : any bill other than auto generated renewal bill will be deleted if they stay more than 20 minutes in pending stage
-    // NOTIC 3 : show user the remaining time left to pay a bill inother word show how long can factor stay in pending stage
-    // NOTIC 4 : on any successful plan upgrade/downgrade any renewal bill will be canceled due to plan change
+    // TODO : plan/period change can only be done for any user every 3 days
 
     if (loading.value) return;
     loading.value = true;
@@ -358,7 +354,7 @@ const changePlan = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
             loading.value = false;
         });
 };

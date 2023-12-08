@@ -202,11 +202,10 @@ const createBrand = async () => {
                 }
             } else responseMessage.value = t("Something went wrong!");
             if (process.server) console.log({ err });
-            // TODO : log errors in sentry type thing
+            // LOGGER : log errors in sentry type thing
         })
         .finally(() => (loading.value = false));
 };
 
-// TODO : max brand count that user can create/own is 1 (hard coded) and max that can be staff of is 3
 // TODO : every user should only be able to login with 2 sessions at max
 </script>
