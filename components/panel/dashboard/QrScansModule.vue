@@ -29,7 +29,7 @@
             </ul>
             <div class="w-full h-44 p-2 rounded-2xl border border-bgSecondary shadow-mr25 grow">
                 <!-- <Line :data="chartData" :options="chartOptions" /> -->
-                <canvas class="w-full h-full" ref="chartCanvas"></canvas>
+                <canvas class="w-full h-full" ref="chartCanvas" id="chartCanvas"></canvas>
             </div>
         </div>
         <nuxt-link
@@ -113,7 +113,7 @@ const link = `${runtimeConfig.public.MENU_BASE_URL}/${brand.value.username}`;
 const hasAnalytics = computed(() => checkLimitations([["analytics", true]], brand.value));
 
 let chart;
-const chartCanvas = ref(); // Dom Ref
+// const chartCanvas = ref(); // Dom Ref
 ChartJS.register(...registerables);
 ChartJS.defaults.color = "#fffc";
 ChartJS.defaults.font.family = "'Poppins', 'Shabnam', sans-serif";
@@ -169,10 +169,18 @@ handleScanData(getScanData.data.value);
 watch(getScanData.data, (val) => handleScanData(val));
 // -------------------------------------------------
 
+const initChart = () => {
+    if (!hasAnalytics.value) return;
+
+    const chartCanvas = document.querySelector("#chartCanvas");
+    if (!chartCanvas) return;
+    const ctx = chartCanvas.getContext("2d");
+    if (!ctx) return;
+    
+    chart = new ChartJS(ctx, { type: "line", data: chartData.value, options: chartOptions });
+};
+
 onMounted(() => {
-    if (hasAnalytics && chartCanvas.value) {
-        const ctx = chartCanvas.value.getContext("2d");
-        chart = new ChartJS(ctx, { type: "line", data: chartData.value, options: chartOptions });
-    }
+    initChart();
 });
 </script>

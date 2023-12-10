@@ -36,7 +36,7 @@
         <div
             class="absolute bottom-16 -start-4 lg:-start-28 flex flex-col items-center justify-center gap-2 w-52 p-4 md:p-6 rounded-3xl border border-bgSecondary border-opacity-5 bg-fgPrimary bg-opacity-80 backdrop-blur-md"
         >
-            <NuxtImg class="object-contain rounded-2xl shadow-mr25" src="/img/qr2.png" width="200px" height="200px" />
+            <NuxtImg class="object-contain rounded-2xl shadow-mr25" src="/img/qr2.png" format="webp" width="200px" height="200px" />
             <strong class="text-2xl text-bgPrimary text-center">{{ $t("home.Check The Demo") }}</strong>
         </div>
     </div>
