@@ -26,10 +26,11 @@
                     <li v-for="(notif, i) in notifications">
                         <nuxt-link class="flex flex-col gap-2 w-full p-2.5 hover:bg-dolphin rounded-xl cursor-pointer" to="#">
                             <div class="flex items-center gap-2">
-                                <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" />
-                                <span class="text-sm">{{ notif.transition?.[locale]?.title || notif.title }}</span>
+                                <!-- <Icon class="icon w-5 h-5 bg-zinc-100" name="user-pen.svg" folder="icons/light" size="20px" /> -->
+                                <span class="text-sm font-semibold grow">{{ notif.translation?.[locale]?.title || notif.title }}</span>
+                                <span class="w-2.5 h-2.5 gradient rounded-full" v-if="!notif.viewedInSysAt"></span>
                             </div>
-                            <p class="text-xs opacity-75">{{ notif.transition?.[locale]?.text || notif.text }}</p>
+                            <p class="text-xs opacity-75">{{ notif.translation?.[locale]?.text || notif.text }}</p>
                         </nuxt-link>
                     </li>
                     <li class="flex flex-col items-center justify-center" v-if="!notifications.length">
