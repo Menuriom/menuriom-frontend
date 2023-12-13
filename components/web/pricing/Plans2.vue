@@ -53,12 +53,12 @@
                                 <p class="text-sm sm:text-base opacity-90">{{ item.translation?.[locale]?.listings[j] || feature }}</p>
                             </li>
                         </ul>
-                        <a
+                        <nuxt-link
                             class="btn flex items-center justify-center w-full sm:w-auto mx-auto p-4 px-8 hover:px-12 mt-4 bg-bgAccent text-fgPrimary rounded-xl hover:translate-y-1"
-                            href="#"
+                            :to="localePath('panel')"
                         >
                             {{ $t("pricing.Get Started") }}
-                        </a>
+                        </nuxt-link>
                     </div>
                 </div>
             </li>
@@ -74,6 +74,7 @@ const props = defineProps({
 });
 
 const { locale, localeProperties } = useI18n();
+const localePath = useLocalePath();
 
 const swiperInstance = ref();
 const getSwiper = (swiper) => {

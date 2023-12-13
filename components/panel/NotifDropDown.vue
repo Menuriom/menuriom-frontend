@@ -37,6 +37,7 @@
                         <NuxtImg class="opacity-75" src="/img/empty-state2.png" sizes="200px" format="webp" />
                         <small class="opacity-75 mb-4">{{ $t("panel.No Notifications") }}</small>
                     </li>
+                    <!-- TODO : add date to each notif -->
                 </ul>
                 <ul class="flex flex-col gap-4 w-full" v-else>
                     <li class="flex flex-col gap-2 w-full p-2.5 bg-bgSecondary bg-opacity-75 rounded-xl" v-for="i in 4">
