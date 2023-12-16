@@ -27,11 +27,11 @@
                         </div>
                         <p class="text-sm sm:text-base sm:min-h-[3rem]">{{ item.translation?.[locale]?.desc || item.desc }}</p>
                         <div class="flex items-baseline gap-1 text-pencil-tip rounded-lg" v-if="item.monthlyPrice > 0">
-                            <span class="flex items-baseline f-inter text-3xl/normal font-extrabold gradient-text" dir="auto" v-if="priceType == 'monthly'">
+                            <span class="flex items-baseline f-inter text-3xl/normal font-extrabold gradient-text" dir="ltr" v-if="priceType == 'monthly'">
                                 {{ Intl.NumberFormat(locale).format(item.monthlyPrice >= 1000 ? item.monthlyPrice / 1000 : item.monthlyPrice) }}
                                 <small v-if="item.monthlyPrice >= 1000">,{{ Intl.NumberFormat(locale).format(1000).substring(2) }}</small>
                             </span>
-                            <span class="flex items-baseline f-inter text-3xl/normal font-extrabold gradient-text" dir="auto" v-else>
+                            <span class="flex items-baseline f-inter text-3xl/normal font-extrabold gradient-text" dir="ltr" v-else>
                                 {{ Intl.NumberFormat(locale).format(item.yearlyPrice >= 1000 ? item.yearlyPrice / 1000 : item.yearlyPrice) }}
                                 <small v-if="item.yearlyPrice >= 1000">,{{ Intl.NumberFormat(locale).format(1000).substring(2) }}</small>
                             </span>
