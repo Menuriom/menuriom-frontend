@@ -27,11 +27,11 @@
                         </div>
                         <p class="text-sm sm:text-base sm:min-h-[3rem]">{{ item.translation?.[locale]?.desc || item.desc }}</p>
                         <div class="flex items-baseline gap-1 text-pencil-tip rounded-lg" v-if="item.monthlyPrice > 0">
-                            <span class="flex items-baseline f-inter text-3xl/normal font-extrabold gradient-text" dir="auto" v-if="priceType == 'monthly'">
+                            <span class="flex items-baseline f-inter text-3xl/normal font-extrabold gradient-text" dir="ltr" v-if="priceType == 'monthly'">
                                 {{ Intl.NumberFormat(locale).format(item.monthlyPrice >= 1000 ? item.monthlyPrice / 1000 : item.monthlyPrice) }}
                                 <small v-if="item.monthlyPrice >= 1000">,{{ Intl.NumberFormat(locale).format(1000).substring(2) }}</small>
                             </span>
-                            <span class="flex items-baseline f-inter text-3xl/normal font-extrabold gradient-text" dir="auto" v-else>
+                            <span class="flex items-baseline f-inter text-3xl/normal font-extrabold gradient-text" dir="ltr" v-else>
                                 {{ Intl.NumberFormat(locale).format(item.yearlyPrice >= 1000 ? item.yearlyPrice / 1000 : item.yearlyPrice) }}
                                 <small v-if="item.yearlyPrice >= 1000">,{{ Intl.NumberFormat(locale).format(1000).substring(2) }}</small>
                             </span>
@@ -53,12 +53,12 @@
                                 <p class="text-sm sm:text-base opacity-90">{{ item.translation?.[locale]?.listings[j] || feature }}</p>
                             </li>
                         </ul>
-                        <a
+                        <nuxt-link
                             class="btn flex items-center justify-center w-full sm:w-auto mx-auto p-4 px-8 hover:px-12 mt-4 bg-bgAccent text-fgPrimary rounded-xl hover:translate-y-1"
-                            href="#"
+                            :to="localePath('panel')"
                         >
                             {{ $t("pricing.Get Started") }}
-                        </a>
+                        </nuxt-link>
                     </div>
                 </div>
             </li>
@@ -74,6 +74,7 @@ const props = defineProps({
 });
 
 const { locale, localeProperties } = useI18n();
+const localePath = useLocalePath();
 
 const swiperInstance = ref();
 const getSwiper = (swiper) => {

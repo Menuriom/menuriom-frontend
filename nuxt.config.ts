@@ -116,7 +116,6 @@ export default defineNuxtConfig({
     ogImage: { enabled: false },
     seoUi: { enabled: false },
     seo: { redirectToCanonicalSiteUrl: true },
-    schemaOrg: {},
     sitemap: { exclude: ["/panel/**"] },
     site: {
         name: "Menuriom",

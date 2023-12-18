@@ -397,6 +397,8 @@ export default {
         "This feature is for the standard plan and above only": "This feature is for the standard plan and above only",
         "Upgrade your plan to get this feature": "Upgrade your plan to get this feature",
         "The first image will be the main image": "The first image will be the main image",
+        Notifications: "Notifications",
+        "No Notifications": "No Notifications",
 
         profile: {
             "Your Profile": "Your Profile",

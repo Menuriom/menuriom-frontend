@@ -114,17 +114,16 @@
                         <nuxt-link
                             class="w-full 2sm:w-auto text-center p-4 px-8 hover:px-12 rounded-xl bg-fgPrimary text-bgPrimary transition-all shadow-mr25"
                             :to="`${$config.public.MENU_BASE_URL}/Menuriom`"
-                            v-if="!user.email.value"
                         >
                             <span class="f-inter md:text-xl">{{ $t("home.Check The Demo") }}</span>
                         </nuxt-link>
-                        <nuxt-link
+                        <!-- <nuxt-link
                             class="w-full 2sm:w-auto text-center p-4 px-8 hover:px-12 rounded-xl bg-fgPrimary text-bgPrimary transition-all shadow-mr25"
                             to="/help-center"
                             v-else
                         >
                             <span class="f-inter md:text-xl">{{ $t("home.Learn How It Works") }}</span>
-                        </nuxt-link>
+                        </nuxt-link> -->
                     </div>
                 </div>
                 <ul class="hidden md:flex flex-wrap items-center gap-4 p-4 bg-bgPrimary rounded-2xl text-sm md:text-base shadow-mr15">

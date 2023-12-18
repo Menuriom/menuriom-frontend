@@ -168,9 +168,9 @@ const faqs = ref([
         ],
     },
 ]);
-const toggleQuestion = (i, j) => (faqs.value[i].questions[j].opened = !faqs.value[i].questions[j].opened);
-
 const faqsFiltered = ref(faqs.value);
+const toggleQuestion = (i, j) => (faqsFiltered.value[i].questions[j].opened = !faqsFiltered.value[i].questions[j].opened);
+
 const searchQuery = ref("");
 const search = () => {
     const aCopy = structuredClone(toRaw(faqs.value));

@@ -5,6 +5,7 @@ header {
 }
 
 nav {
+    display: v-bind(menuDisplay);
     position: absolute;
     top: 4.25rem;
     inset-inline-end: 0rem;
@@ -53,67 +54,68 @@ nav {
             <img class="h-5 xl:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" /> -->
         </nuxt-link>
 
-        <transition name="slide-up" appear>
-            <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-[250px] lg:max-w-none p-6 lg:p-0" v-show="menuOpen" ref="nav">
-                <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/')" @click="menuOpen = false">
-                            <span>{{ $t("header.Home") }}</span>
-                        </nuxt-link>
-                    </li>
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')" @click="menuOpen = false">
-                            <span>{{ $t("header.Features") }}</span>
-                        </nuxt-link>
-                    </li>
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="`${$config.public.MENU_BASE_URL}/Menuriom`" @click="menuOpen = false">
-                            <span>{{ $t("header.Demo") }}</span>
-                        </nuxt-link>
-                    </li>
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')" @click="menuOpen = false">
-                            <span>{{ $t("header.Pricing") }}</span>
-                        </nuxt-link>
-                    </li>
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/about-us')" @click="menuOpen = false">
-                            <span>{{ $t("header.About Us") }}</span>
-                        </nuxt-link>
-                    </li>
-                    <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                        <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')" @click="menuOpen = false">
-                            <span>{{ $t("header.Contact Us") }}</span>
-                        </nuxt-link>
-                    </li>
-                </ul>
-                <hr class="w-full h-0.5 bg-fgPrimary opacity-10 lg:hidden" />
-                <div class="flex flex-wrap items-center gap-4">
-                    <LangSwitch class="" textColor="white" :showText="true" />
-                    <!-- <span class="w-0.5 h-full lg:hidden text-gray-400"></span> -->
-                    <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
-                        <nuxt-link
-                            class="link md:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-fgPrimary text-bgPrimary transition-all"
-                            :to="localePath('/authenticate')"
-                            title="Login into user panel"
-                            v-if="!userStore.loading && !userStore.email"
-                        >
-                            {{ $t("header.Login") }}
-                        </nuxt-link>
-                        <nuxt-link
-                            class="link 2sm:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-primary text-fgPrimary transition-all"
-                            :to="!userStore.email ? localePath(`/authenticate`) : localePath(`/panel`)"
-                            :title="!userStore.email ? `Try it for free` : `Your Menuriom Dashboard`"
-                            v-if="!userStore.loading"
-                        >
-                            <span v-if="!userStore.email">{{ $t("header.Try It For Free") }}</span>
-                            <span v-else>{{ $t("header.Your Dashboard") }}</span>
-                        </nuxt-link>
-                        <Loading class="2sm:hidden" v-if="userStore.loading" />
-                    </div>
+        <!-- v-show="menuOpen" -->
+        <!-- <transition name="slide-up" appear>
+        </transition> -->
+        <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-[250px] lg:max-w-none p-6 lg:p-0" ref="nav">
+            <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
+                <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/')" @click="menuOpen = false">
+                        <span>{{ $t("header.Home") }}</span>
+                    </nuxt-link>
+                </li>
+                <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')" @click="menuOpen = false">
+                        <span>{{ $t("header.Features") }}</span>
+                    </nuxt-link>
+                </li>
+                <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="`${$config.public.MENU_BASE_URL}/Menuriom`" @click="menuOpen = false">
+                        <span>{{ $t("header.Demo") }}</span>
+                    </nuxt-link>
+                </li>
+                <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')" @click="menuOpen = false">
+                        <span>{{ $t("header.Pricing") }}</span>
+                    </nuxt-link>
+                </li>
+                <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/about-us')" @click="menuOpen = false">
+                        <span>{{ $t("header.About Us") }}</span>
+                    </nuxt-link>
+                </li>
+                <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')" @click="menuOpen = false">
+                        <span>{{ $t("header.Contact Us") }}</span>
+                    </nuxt-link>
+                </li>
+            </ul>
+            <hr class="w-full h-0.5 bg-fgPrimary opacity-10 lg:hidden" />
+            <div class="flex flex-wrap items-center gap-4">
+                <LangSwitch class="" textColor="white" :showText="true" />
+                <!-- <span class="w-0.5 h-full lg:hidden text-gray-400"></span> -->
+                <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
+                    <nuxt-link
+                        class="link md:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-fgPrimary text-bgPrimary transition-all"
+                        :to="localePath('/authenticate')"
+                        title="Login into user panel"
+                        v-if="!userStore.loading && !userStore.email"
+                    >
+                        {{ $t("header.Login") }}
+                    </nuxt-link>
+                    <nuxt-link
+                        class="link 2sm:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-primary text-fgPrimary transition-all"
+                        :to="!userStore.email ? localePath(`/authenticate`) : localePath(`/panel`)"
+                        :title="!userStore.email ? `Try it for free` : `Your Menuriom Dashboard`"
+                        v-if="!userStore.loading"
+                    >
+                        <span v-if="!userStore.email">{{ $t("header.Try It For Free") }}</span>
+                        <span v-else>{{ $t("header.Your Dashboard") }}</span>
+                    </nuxt-link>
+                    <Loading class="2sm:hidden" v-if="userStore.loading" />
                 </div>
-            </nav>
-        </transition>
+            </div>
+        </nav>
 
         <div class="flex items-center gap-2 xl:gap-4 shrink-0">
             <span class="w-0.5 h-7 -ms-4 hidden lg:flex bg-fgPrimary opacity-30"></span>
@@ -156,6 +158,7 @@ const userStore = useUserStore();
 const headerToggler = ref(); // DOM REF
 const nav = ref(); // DOM REF
 const menuOpen = ref(false);
+const menuDisplay = computed(() => (menuOpen.value ? `flex` : `none`));
 
 const headerToggle = () => (menuOpen.value = !menuOpen.value);
 const headerClose = (event) => {
