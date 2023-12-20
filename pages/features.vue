@@ -29,7 +29,7 @@ div:has(> .rocket) {
             class="wrapper relative flex items-center justify-evenly gap-4 w-screen max-w-screen-lg rounded-3xl bg-bgAccent text-white p-4 md:p-8 lg:p-16 shadow-nr25"
         >
             <div
-                class="relative flex flex-col items-center gap-5 w-full max-w-xl rounded-2xl py-6 my-6 bg-bgSecondary bg-opacity-30 backdrop-blur-sm z-2 shrink-0"
+                class="relative flex flex-col items-center gap-5 w-full max-w-xl rounded-2xl py-12 my-6 bg-gradient-to-r from-secondary/75 to-primary/75 backdrop-blur-sm z-2 shrink-0"
             >
                 <h1 class="f-inter text-3xl md:text-5xl font-extrabold text-center">{{ $t("features.Core Features") }}.</h1>
                 <h2 class="md:text-xl text-center opacity-60">{{ $t("features.Get familiar with Menutiom features") }}</h2>

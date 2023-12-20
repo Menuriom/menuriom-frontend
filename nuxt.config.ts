@@ -70,7 +70,7 @@ export default defineNuxtConfig({
     },
 
     routeRules: {
-        "/": { swr: 60 * 60 * 12, isr: true },
+        // "/": { swr: 60 * 60 * 12, isr: true },
         "/privacy-policy": { prerender: true },
         "/terms-of-service": { prerender: true },
         "/pricing": { swr: 60 * 60 * 12, isr: true },
