@@ -13,7 +13,7 @@
         >
             <Icon class="w-6 h-6" :class="[textColor == 'black' ? 'bg-bgPrimary' : 'bg-fgPrimary']" name="language.svg" folder="icons/light" size="24px" />
             <!-- <img class="w-6" :src="`/flags/${locale}.png`" :alt="locale" /> -->
-            <small :class="[textColor == 'black' ? 'text-bgPrimary' : 'text-fgPrimary']" v-if="showText">{{ locale }}</small>
+            <small class="leading-none" :class="[textColor == 'black' ? 'text-bgPrimary' : 'text-fgPrimary']" v-if="showText">{{ locale }}</small>
             <!-- <Icon class="w-2.5 h-2.5" :class="[textColor == 'black' ? 'bg-bgPrimary' : 'bg-fgPrimary']" name="arrow.svg" folder="icons" size="10px" /> -->
         </div>
         <transition name="slide-up" mode="out-in" appear>
