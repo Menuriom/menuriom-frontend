@@ -59,7 +59,9 @@
                         <span class="text-xs xl:text-base text-center">{{ $t("home.Managing a restaurant hasnt been easier") }}.</span>
                         <span class="flex gradient bg-opacity-50 h-0.5 grow"></span>
                     </div>
-                    <h1 class="flex flex-col items-center 1.5xl:items-start text-3xl/snug sm:text-5xl/snug md:text-6xl/snug font-extrabold text-fgPrimary">
+                    <h1
+                        class="flex flex-col items-center 1.5xl:items-start text-center xl:text-start text-2xl/snug sm:text-5xl/snug md:text-6xl/snug font-extrabold text-fgPrimary"
+                    >
                         {{ $t("home.The Best Way To Manage Your Restaurant Menu And Orders") }}
                     </h1>
                 </div>
@@ -73,20 +75,20 @@
                         <small class="opacity-70">{{ $t("home.With Menuriom build and manage your restaurant menu with ease") }}</small>
                     </p>
                     <nuxt-link
-                        class="btn flex items-center gap-2 w-full 2sm:w-auto text-center p-5 px-8 hover:px-12 rounded-2xl text-fgPrimary transition-all shadow-mr25"
+                        class="btn flex items-center justify-center gap-2 w-full 2sm:w-auto text-center p-4 px-8 hover:px-12 rounded-2xl text-fgPrimary transition-all shadow-mr25"
                         to="/authenticate"
                         v-if="!user.email.value"
                     >
-                        <Icon class="w-7 h-7 bg-white animate-pulse shrink-0" name="pizza.svg" folder="icons/tabler" size="28px" />
-                        <span class="f-inter md:text-xl">{{ $t("home.Try It For Free") }}</span>
+                        <Icon class="w-6 h-6 bg-white animate-pulse shrink-0" name="pizza.svg" folder="icons/tabler" size="28px" />
+                        <span class="f-inter text-xl/normal">{{ $t("home.Try It For Free") }}</span>
                     </nuxt-link>
                     <nuxt-link
-                        class="btn flex items-center gap-2 w-full 2sm:w-auto text-center p-5 px-8 hover:px-12 rounded-2xl text-fgPrimary transition-all shadow-mr25"
+                        class="btn flex items-center justify-center gap-2 w-full 2sm:w-auto text-center p-4 px-8 hover:px-12 rounded-2xl text-fgPrimary transition-all shadow-mr25"
                         to="/panel"
                         v-else
                     >
-                        <Icon class="w-7 h-7 bg-white animate-pulse shrink-0" name="pizza.svg" folder="icons/tabler" size="28px" />
-                        <span class="f-inter md:text-xl">{{ $t("home.Head To Dashboard") }}</span>
+                        <Icon class="w-6 h-6 bg-white animate-pulse shrink-0" name="pizza.svg" folder="icons/tabler" size="28px" />
+                        <span class="f-inter text-xl/normal">{{ $t("home.Head To Dashboard") }}</span>
                     </nuxt-link>
                 </div>
                 <ul
@@ -100,14 +102,15 @@
             </div>
             <HeroImage />
         </section>
-        <div
+        <button
             class="absolute -bottom-28 lg:-bottom-24 hidden xl:flex items-center justify-center border-4 border-fgPrimary border-opacity-50 p-2 rounded-full shadow-mr10"
+            @click="scrollDown()"
         >
             <div class="relative flex items-center justify-center w-32 h-32 rounded-full bg-white">
                 <img class="absolute top-4.5 animate-pulse" src="~/assets/images/scroll-down.svg" alt="scroll-down" />
                 <img class="animate-bounce mt-4" src="~/assets/images/arrow-down.png" alt="arrow-down" />
             </div>
-        </div>
+        </button>
     </div>
 </template>
 
@@ -122,6 +125,10 @@ const user = storeToRefs(userStore);
 
 const imageNum = ref(2);
 const showBgImages = ref(false);
+
+const scrollDown = () => {
+    window.scrollTo({ top: window.innerHeight - 100, behavior: "smooth" });
+};
 
 onMounted(() => {
     // showBgImages.value = window.innerWidth > 768;
