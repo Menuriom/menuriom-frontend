@@ -61,7 +61,7 @@
 </style>
 
 <template>
-    <div class="scene relative self-end w-full sm:w-auto 1.5xl:-mt-10">
+    <div class="scene relative flex flex-col items-center gap-4 self-end w-full sm:w-auto 1.5xl:-mt-10">
         <div class="phone relative flex flex-col items-center lg:-mb-52 w-full sm:w-screen max-w-[420px] aspect-[1/2] overflow-hidden isolate">
             <div
                 class="relative top-2 flex flex-col items-center rounded-[3rem] mx-auto bg-neutral-50 overflow-hidden no-scrl isolate"
@@ -309,21 +309,31 @@
                 </div>
             </div>
 
-            <img class="absolute w-full z-10 pointer-events-none" src="~/assets/images/Xmockup2.svg" alt="frame" />
+            <img class="absolute w-full z-10 pointer-events-none" src="~/assets/images/Xmockup2.svg" alt="frame" width="420px" />
         </div>
         <NuxtImg
             class="absolute top-24 lg:top-28 start-10 lg:-start-32 hidden lg:flex"
             :class="{ flip: localeProperties.dir == 'rtl' }"
             src="/img/arrow.svg"
             width="100px"
-            alt=""
+            alt="arrow"
+            loading="lazy"
         />
-        <div
-            class="absolute bottom-6 -start-4 lg:-start-28 flex flex-col items-center justify-center gap-4 w-52 p-4 md:p-6 rounded-3xl border border-bgSecondary border-opacity-5 bg-fgPrimary bg-opacity-60 backdrop-blur-md"
+        <nuxt-link
+            class="md:absolute bottom-6 -start-4 md:-start-28 flex flex-col items-center justify-center gap-4 w-52 p-4 md:p-6 rounded-2xl md:rounded-3xl border border-bgSecondary border-opacity-5 bg-fgPrimary md:bg-opacity-60 backdrop-blur-md"
+            :to="`${$config.public.MENU_BASE_URL}/Menuriom`"
+            :alt="$t('home.Check The Demo')"
         >
-            <NuxtImg class="object-contain rounded-2xl shadow-mr25" src="/img/qr2.png" format="webp" width="200px" height="200px" />
-            <strong class="text-2xl text-bgPrimary text-center font-extrabold">{{ $t("home.Check The Demo") }}</strong>
-        </div>
+            <NuxtImg
+                class="hidden md:inline-block object-contain rounded-2xl shadow-mr25"
+                src="/img/qr2.png"
+                alt="sample menu demo"
+                format="webp"
+                width="200px"
+                height="200px"
+            />
+            <strong class="text-xl md:text-2xl text-bgPrimary text-center font-extrabold">{{ $t("home.Check The Demo") }}</strong>
+        </nuxt-link>
     </div>
 </template>
 
@@ -344,43 +354,48 @@ const itemDetails = ref(); // Dom Ref
 
 const animate = () => {
     setTimeout(() => {
-        toolbar.value.style.transform = `translateY(0px)`;
-        header.value.style.transform = `translateY(-100px)`;
-        search.value.style.transform = `translateY(-100px)`;
-        category.value.style.transform = `translateY(-100px)`;
-        list.value.style.transform = `translateY(-300px)`;
+        if (toolbar.value) toolbar.value.style.transform = `translateY(0px)`;
+        if (header.value) header.value.style.transform = `translateY(-100px)`;
+        if (search.value) search.value.style.transform = `translateY(-100px)`;
+        if (category.value) category.value.style.transform = `translateY(-100px)`;
+        if (list.value) list.value.style.transform = `translateY(-300px)`;
     }, 1000);
 
     setTimeout(() => {
-        list.value.style.transform = `translateY(-650px)`;
+        if (list.value) list.value.style.transform = `translateY(-650px)`;
     }, 4000);
 
     setTimeout(() => {
-        backdrop.value.style.zIndex = `10`;
-        backdrop.value.style.opacity = `0.3`;
-        itemDetails.value.style.transform = `translateY(0px)`;
+        if (backdrop.value) backdrop.value.style.zIndex = `10`;
+        if (backdrop.value) backdrop.value.style.opacity = `0.3`;
+        if (itemDetails.value) itemDetails.value.style.transform = `translateY(0px)`;
     }, 7000);
 
     setTimeout(() => {
-        backdrop.value.style.zIndex = `-1`;
-        backdrop.value.style.opacity = `0`;
-        itemDetails.value.style.transform = `translateY(700px)`;
+        if (backdrop.value) backdrop.value.style.zIndex = `-1`;
+        if (backdrop.value) backdrop.value.style.opacity = `0`;
+        if (itemDetails.value) itemDetails.value.style.transform = `translateY(700px)`;
     }, 13_000);
 
     setTimeout(() => {
-        list.value.style.transform = `translateY(0px)`;
+        if (list.value) list.value.style.transform = `translateY(0px)`;
     }, 15_000);
 
     setTimeout(() => {
-        toolbar.value.style.transform = `translateY(-3rem)`;
-        header.value.style.transform = `translateY(0px)`;
-        search.value.style.transform = `translateY(0px)`;
-        category.value.style.transform = `translateY(0px)`;
+        if (toolbar.value) toolbar.value.style.transform = `translateY(-3rem)`;
+        if (header.value) header.value.style.transform = `translateY(0px)`;
+        if (search.value) search.value.style.transform = `translateY(0px)`;
+        if (category.value) category.value.style.transform = `translateY(0px)`;
     }, 17_000);
 };
 
+let animationLoop;
 onMounted(() => {
     animate();
-    setInterval(() => animate(), 22_000);
+    animationLoop = setInterval(() => animate(), 22_000);
+});
+
+onBeforeUnmount(() => {
+    clearInterval(animationLoop);
 });
 </script>

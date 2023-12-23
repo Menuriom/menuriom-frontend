@@ -45,7 +45,7 @@
     <div class="relative flex justify-center items-end w-full max-w-screen-4xl px-2 md:px-6 md:mt-10">
         <!-- :class="[localeProperties.dir == 'rtl' ? 'from-secondary  to-bgPrimary' : 'from-bgPrimary to-secondary']" -->
         <section
-            class="relative flex flex-wrap 1.5xl:flex-nowrap items-center justify-center 1.5xl:justify-between gap-10 w-full p-4 py-10 sm:p-14 lg:py-0 border-2 border-bgSecondary border-opacity-50 bg-bgAccent bg-opacity-25 text-fgPrimary rounded-3xl isolate"
+            class="relative flex flex-wrap 1.5xl:flex-nowrap items-center justify-center 1.5xl:justify-between gap-10 w-full p-4 py-10 sm:p-14 1.5xl:py-0 border-2 border-bgSecondary border-opacity-50 bg-bgAccent bg-opacity-25 text-fgPrimary rounded-3xl isolate"
             title="The Best Way To Manage Your Restaurant Menu And Orders"
         >
             <div class="absolute inset-0 -z-10 pattern opacity-10"></div>

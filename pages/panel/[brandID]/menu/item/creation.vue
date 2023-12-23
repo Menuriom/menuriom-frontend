@@ -100,7 +100,7 @@
                             :required="true"
                             v-model="price"
                             mask="###########"
-                            :unit="$t('pricing.Toman')"
+                            :unit="currency"
                             :error="errorField == `price` ? responseMessage : ''"
                         />
                     </div>
@@ -357,6 +357,7 @@ const description = reactive({ values: { default: "" } });
 const selectedCategory = reactive({ option: { name: "", value: "" } });
 const selectedBranches = reactive({ list: [] });
 const price = ref("");
+const currency = ref("");
 const discountActive = ref(false);
 const discountPercentage = ref("");
 const specialDaysActive = ref(false);
@@ -494,6 +495,7 @@ const handleCategoryList_results = (data) => {
     categories.list = data._categories.map((record) => {
         return { icon: record.icon, name: record.name, value: record._id };
     });
+    currency.value = data._currency;
 };
 watch(getCategoryList_results.data, (val) => handleCategoryList_results(val), { immediate: process.server || nuxtApp.isHydrating });
 

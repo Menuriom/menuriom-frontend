@@ -433,7 +433,7 @@ export default {
             "Ordering App": "Ordering App",
 
             Dashboard: "Dashboard",
-            "Language Settings": "Language Settings",
+            "Language & Currency Settings": "Language & Currency Settings",
             "Brand Settings": "Brand Settings",
             Branches: "Branches",
             Menu: "Menu",

@@ -303,7 +303,7 @@ aside > div {
                             </nuxt-link>
                             <nuxt-link class="link" :to="localePath(`/panel/${panelStore.selectedBrandId}/settings/languages`)">
                                 <li class="flex items-center gap-3">
-                                    <span>{{ $t("panel.side-menu.Language Settings") }}</span>
+                                    <span>{{ $t("panel.side-menu.Language & Currency Settings") }}</span>
                                 </li>
                             </nuxt-link>
                         </ul>

@@ -83,7 +83,7 @@
                                                             <span class="flex items-baseline font-bold text-emerald-300 text-2xl" dir="auto">
                                                                 {{ Intl.NumberFormat(locale).format(dish.price) }}
                                                             </span>
-                                                            <span class="f-inter text-sm font-extralight -ms-2"> {{ $t("pricing.Toman") }} </span>
+                                                            <span class="f-inter text-sm font-extralight -ms-2"> {{ currency }} </span>
                                                             <div
                                                                 class="flex items-center gap-1 px-2 py-0.5 rounded-xl bg-rose-400 bg-opacity-75 text-white shadow-nr10 shadow-rose-900"
                                                                 v-if="dish.discountActive"
@@ -469,6 +469,7 @@ const handleErrors = (err) => {
 const dishes = reactive({ list: [] });
 const filteredDishes = reactive({ list: [] });
 const canCreateNewDish = ref(true);
+const currency = ref('');
 const getDishList_results = await useAsyncData(() => getDishesList(route.params.brandID), { lazy: false });
 const loadingDishes = computed(() => getDishList_results.pending.value);
 
@@ -479,6 +480,7 @@ const handleDishList_results = (data) => {
     if (!data) return;
     dishes.list = filteredDishes.list = data._items;
     canCreateNewDish.value = data._canCreateNewDish;
+    currency.value = data._currency;
 };
 handleDishList_results(getDishList_results.data.value);
 watch(getDishList_results.data, (val) => handleDishList_results(val));

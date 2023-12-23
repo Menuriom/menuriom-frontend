@@ -60,32 +60,37 @@ nav {
         <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-[250px] lg:max-w-none p-6 lg:p-0" ref="nav">
             <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
                 <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/')" @click="menuOpen = false">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/')" @click="menuOpen = false" :alt="$t('header.Home')">
                         <span>{{ $t("header.Home") }}</span>
                     </nuxt-link>
                 </li>
                 <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')" @click="menuOpen = false">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/features')" @click="menuOpen = false" :alt="$t('header.Features')">
                         <span>{{ $t("header.Features") }}</span>
                     </nuxt-link>
                 </li>
                 <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                    <nuxt-link class="flex items-center gap-4 w-full" :to="`${$config.public.MENU_BASE_URL}/Menuriom`" @click="menuOpen = false">
+                    <nuxt-link
+                        class="flex items-center gap-4 w-full"
+                        :to="`${$config.public.MENU_BASE_URL}/Menuriom`"
+                        @click="menuOpen = false"
+                        :alt="$t('header.Demo')"
+                    >
                         <span>{{ $t("header.Demo") }}</span>
                     </nuxt-link>
                 </li>
                 <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')" @click="menuOpen = false">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/pricing')" @click="menuOpen = false" :alt="$t('header.Pricing')">
                         <span>{{ $t("header.Pricing") }}</span>
                     </nuxt-link>
                 </li>
                 <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/about-us')" @click="menuOpen = false">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/about-us')" @click="menuOpen = false" :alt="$t('header.About Us')">
                         <span>{{ $t("header.About Us") }}</span>
                     </nuxt-link>
                 </li>
                 <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
-                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')" @click="menuOpen = false">
+                    <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/contact-us')" @click="menuOpen = false" :alt="$t('header.Contact Us')">
                         <span>{{ $t("header.Contact Us") }}</span>
                     </nuxt-link>
                 </li>

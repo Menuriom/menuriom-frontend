@@ -434,7 +434,7 @@ export default {
             "Ordering App": "اپ سفارش",
 
             Dashboard: "داشبورد",
-            "Language Settings": "تنظیمات زبان",
+            "Language & Currency Settings": "تنظیمات زبان و واحد پول",
             "Brand Settings": "تنظیمات برند",
             Branches: "شعبه ها",
             Menu: "مدیریت منو",

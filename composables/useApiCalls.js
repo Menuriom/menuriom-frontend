@@ -133,18 +133,20 @@ export const getCategoryList = async (brandID) => {
 
     let _categories = [];
     let _canCreateNewCategory = false;
+    let _currency = "";
 
     await axios
         .get(url, { headers: headers })
         .then((response) => {
             _categories = response.data.records;
             _canCreateNewCategory = response.data.canCreateNewCategory;
+            _currency = response.data.currency;
         })
         .catch((e) => {
             throw e;
         });
 
-    return { _categories, _canCreateNewCategory };
+    return { _categories, _canCreateNewCategory, _currency };
 };
 export const getCategoryInfo = async (categoryID, brandID) => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/menu-categories/${categoryID}`, { brand: brandID });
@@ -174,18 +176,20 @@ export const getDishesList = async (brandID) => {
 
     let _items = [];
     let _canCreateNewDish = false;
+    let _currency = "";
 
     await axios
         .get(url, { headers: headers })
         .then((response) => {
             _items = response.data.records;
             _canCreateNewDish = response.data.canCreateNewItem;
+            _currency = response.data.currency;
         })
         .catch((e) => {
             throw e;
         });
 
-    return { _items, _canCreateNewDish };
+    return { _items, _canCreateNewDish, _currency };
 };
 export const getMenuItem = async (ItemID, brandID) => {
     let { url, headers } = getRequestConfig(`/api/v1/panel/menu-items/${ItemID}`, { brand: brandID });
