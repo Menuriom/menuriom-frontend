@@ -35,6 +35,12 @@ export default {
 
         pricingTitle: "Menuriom Pricing And Plan Compression",
         pricingDesc: "See and compare plans and choose based on your needs and restaurant size. Start free, change at any time.",
+
+        privacyPolicyTitle: "Privacy Policy - Menuriom",
+        privacyPolicyDesc: "Privacy policy rules in menuriom",
+
+        termsTitle: "Terms Of Service - Menuriom",
+        termsDesc: "Terms of using the Menuriom services",
     },
 
     auth: {

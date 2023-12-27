@@ -53,7 +53,7 @@
         >
             <SwiperSlide tag="li" class="relative shadow-mr25 me-3 group" v-for="item in itemsList">
                 <div class="relative w-44 h-44 rounded-2xl overflow-hidden border-2 border-bgSecondary select-none isolate">
-                    <img class="absolute w-full aspect-square object-cover rounded-xl" :src="item.menuItem.images[0]" />
+                    <img class="absolute w-full aspect-square object-cover rounded-xl" :src="item.menuItem?.images?.[0]" />
                     <div
                         class="absolute -bottom-6 group-hover:bottom-0 flex flex-col gap-1 w-full p-2 bg-bgAccent bg-opacity-80 rounded-lg shadow-mr15 backdrop-blur-sm transition-all"
                     >

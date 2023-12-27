@@ -463,10 +463,7 @@ const errorField = ref("");
 
 const selectedTab = ref("qrcode");
 
-// const link = `${runtimeConfig.public.MENU_BASE_URL}/${brand.value.username}`;
-// const link = `https://menuriom.menuriom.com`;
-// const link = `https://pedar_pesar.menuriom.com`;
-const link = `https://m.menuriom.com/pedarPesar`;
+const link = `${runtimeConfig.public.MENU_BASE_URL}/${brand.value.username}`;
 const borderMargin = ref(4);
 const rotateTheCode = ref(false);
 const size = 1024;
