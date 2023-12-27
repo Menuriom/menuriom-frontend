@@ -36,7 +36,7 @@
                     ]"
                     :to="localePath(`/panel/${panelStore.selectedBrandId}/settings/languages`)"
                 >
-                    {{ $t("panel.side-menu.Language Settings") }}
+                    {{ $t("panel.side-menu.Language & Currency Settings") }}
                 </nuxt-link>
             </li>
         </ul>

@@ -100,7 +100,7 @@
                             :required="true"
                             v-model="price"
                             mask="###########"
-                            :unit="$t('pricing.Toman')"
+                            :unit="currency"
                             :error="errorField == `price` ? responseMessage : ''"
                         />
                     </div>
@@ -358,6 +358,7 @@ const description = reactive({ values: { default: "" } });
 const selectedCategory = reactive({ option: { name: "", value: "" } });
 const selectedBranches = reactive({ list: [] });
 const price = ref("");
+const currency = ref("");
 const discountActive = ref(false);
 const discountPercentage = ref("");
 const specialDaysActive = ref(false);
@@ -536,6 +537,7 @@ const handleMenuItem_results = (data) => {
     selectedCategory.option = { name: data._info.category.name, value: data._info.category._id, icon: data._info.category.icon };
     selectedBranches.list = [...data._info.branches.map((branch) => ({ name: branch.name, value: branch._id }))];
     price.value = String(data._info.price);
+    currency.value = data._info?.brand?.currency || "?";
     discountActive.value = data._info.discountActive || false;
     discountPercentage.value = data._info.discountPercentage || "";
     specialDaysActive.value = data._info.specialDaysActive || false;

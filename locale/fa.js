@@ -35,6 +35,12 @@ export default {
 
         pricingTitle: "تعرفه ها و مقایسه قیمت منوریوم",
         pricingDesc: "تعرفه های پلن های ما رو ببینید و مقایسه کنید و بسته به نیاز خودتون و سایز رستورانتون انتخاب کنید. رایگان شروع کنید، هر زمان تغییر دهید.",
+
+        privacyPolicyTitle: "حریم شخصی - منوریوم",
+        privacyPolicyDesc: "قوانین حریم شخصی در منوریوم",
+
+        termsTitle: "شرایط استفاده - منوریوم",
+        termsDesc: "شرایط و قوانین استفاده از سرویس های منوریوم",
     },
 
     auth: {
@@ -434,7 +440,7 @@ export default {
             "Ordering App": "اپ سفارش",
 
             Dashboard: "داشبورد",
-            "Language Settings": "تنظیمات زبان",
+            "Language & Currency Settings": "تنظیمات زبان و واحد پول",
             "Brand Settings": "تنظیمات برند",
             Branches: "شعبه ها",
             Menu: "مدیریت منو",

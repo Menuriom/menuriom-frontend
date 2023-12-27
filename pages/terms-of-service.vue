@@ -1,46 +1,67 @@
 <style scoped></style>
 
 <template>
-     <div class="p-4">
+    <div class="p-4">
+        <Head>
+            <Title> {{ $t("meta.termsTitle") }} </Title>
+            <Meta name="description" :content="$t('meta.termsDesc')" />
+        </Head>
         <section class="flex flex-col gap-6 w-full max-w-6xl mx-auto bg-bgAccent rounded-3xl p-6 md:p-14 mt-12">
             <header class="relative w-full mb-4">
-                <img class="absolute -top-14 md:-top-20 -start-10 opacity-50" src="~/assets/images/line-wave.svg" alt="" />
-                <h1 class="text-5xl font-bold">Terms Of Service.</h1>
+                <img class="absolute -top-14 md:-top-20 -start-10 opacity-50 mix-blend-screen" src="~/assets/images/line-wave.svg" alt="" />
+                <h1 class="text-5xl font-bold">{{ $t("auth.Terms of Service") }}.</h1>
             </header>
-            <div class="flex flex-col items-start gap-6">
-                <p class="text-base/loose opacity-60">
-                    You alone are solely responsible for any activity that takes place on the Site or through the Service under your name and password. If you
-                    become aware of any unauthorized use of your username and/or password it is your responsibility to notify the Company immediately. It is up
-                    to you to maintain the confidentiality of your password and username at all times. You understand that you may receive business-related
-                    communications from Company such as Service announcements and account administrative notices, and you agree that these communications are
-                    not
-                    <b>“unsolicited commercial email advertisements”</b> and thus, subject to all applicable laws, you agree to receive such communications. You
-                    may unsubscribe from the receipt of such email communications at any time by sending an email requesting such un-subscription and/or
-                    cancellation to an email address that shall be designated specifically for receipt of such requests, however, the fulfillment of this
-                    request may affect the functionality of the Service and its ability to perform as intended.
+            <div class="flex flex-col items-start gap-4">
+                <p class="text-lg/normal">
+                    در صورت استفاده از هر یک از سرویس‌های منوریوم شما موظف به رعایت شرایط و قوانین زیر هستید. بنابراین پیشنهاد میشود که موارد زیر را با دقت
+                    مطالعه کنید. همچنین توجه داشته باشید که صفحه قوانین به صورت دوره‌ای و بر اساس شرایط تغییر می‌کند، بنابراین پیشنهاد می‌کنیم که هر چند وقت یک
+                    بار این صفحه را مطالعه بفرمایید.
                 </p>
-                <p class="text-base/loose opacity-60">
-                    Additionally, even in the event that you unsubscribe from the marketing emails, if you are registered with an account or have requested that
-                    the Company contact you about certain services, you authorize the Company to send you important notices about such services and any pending
-                    transactions relating to these services, to any email address you have provided to Company throughout the registration process, or at any
-                    other time thereafter.
+                <p class="text-base/normal opacity-80">از درج هرگونه محتوا که بر اساس قوانين جاری جمهوری اسلامی ايران، مشمول عنوان جرم می‌شود پرهيز کنید.</p>
+                <p class="text-base/normal opacity-80">حداقل سن قانونی برای استفاده از سرویس‌های منوریوم ۱۸ سال است.</p>
+                <p class="text-base/normal opacity-80">
+                    از درج هرگونه محتوا که بر خلاف عفت عمومی و يا هنجارهای متعارف جامعه باشد، و يا به گونه‌ای اهانت به مقدسات دینی اديان قانونی ياد شده در قانون
+                    اساسی بشود، خودداری کنید.
                 </p>
-                <p class="text-base/loose opacity-60">
-                    It is your sole responsibility to ensure that the email address on file remains up to date to be sure that important emails sent to you are
-                    not blocked or re-routed to spam folders. As a user of the Service you also understand and agree that the Service may also include
-                    advertisements or links thereto. You agree that such advertisements are not <b>“unsolicited commercial email advertisements”</b> and,
-                    subject to all applicable laws, you agree to receive such communications. You understand and agree that your correspondence or business
-                    dealings with, or participations in promotions of, advertisers found on or through the Service, including payment and delivery of services,
-                    and any other terms, conditions, warranties or representations associated with such dealings, are solely between you and the advertiser, and
-                    therefore subject to the advertiser’s terms of service and privacy policy. You agree that the Company shall not be responsible nor liable
-                    for any loss or damages incurred or sustained as the result of such dealings or as the result of the presence of such advertisers on the
-                    Service.
+                <p class="text-base/normal opacity-80">
+                    از درج هر گونه محتوا که به واسطه آن به اشخاص حقيقی يا حقوقی تابع کشور جمهوری اسلامی ايران توهين شود ممانعت کنید.
                 </p>
-                <strong class="text-base/loose opacity-75">
-                    YOU MUST BE AT LEAST 18 YEARS OF AGE TO ACCESS AND USE ANY PORTIONS OF THE SERVICE. IF YOU ARE ABOVE THE AGE OF 13, BUT BELOW THE LEGAL AGE
-                    MAJORITY, THIS SERVICE MAY ONLY BE USED WITH THE CONSENT AND SUPERVISION OF A PARENT OR LEGAL GUARDIAN. IF YOU ARE 13 YEARS OR YOUNGER, DO
-                    NOT USE THIS SERVICE FOR ANY PURPOSE AS IT IS NOT INTENDED FOR USE BY CHILDREN.
-                </strong>
+                <p class="text-base/normal opacity-80">
+                    مسئولیت حساب کاربری و تمامی فایل‌ها و متونی که در منوی خود استفاده میکنید به عهده سازنده آن حساب کاربری می‌باشد. توجه کنید که رعایت نکردن
+                    قوانین موجب بسته شدن صفحه منو و حساب کاربری خواهد شد. درصورت نیاز به اطلاع‌رسانی و هشدار، تیم پشتیبانی منوریوم از طریق پست الکترونیک یا
+                    شماره تماس وارد شده با شما ارتباط برقرار خواهد کرد.
+                </p>
+                <p class="text-base/normal opacity-80">
+                    مسئولیت درست نبودن اطلاعات کاربری و اطلاعات پرداخت به عهده کاربر می‌باشد و منوریوم در قبال اتفاقات ناشی از آن مسئولیتی ندارد.
+                </p>
+                <p class="text-base/normal opacity-80">
+                    مسئولیت حقوقی هرگونه محتوایی که در سرویس‌های منوریوم استفاده کنید متوجه کاربر می‌شود و سایت منوریوم هیچگونه مسئولیتی در قبال محتوای منوها
+                    نمی‌پذیرد.
+                </p>
+                <p class="text-base/normal opacity-80">منوریوم حق دارد در صورت نیاز در هر زمان سرویس ارائه شده را تغییر دهد و یا لغو کند.</p>
+                <p class="text-base/normal opacity-80">
+                    در صورت مغایرت محتوای منوها با قوانین جمهوری اسلامی ایران، منوریوم میتواند محتوای مجرمانه و یا در صورت نیاز رستوران متخلف را حذف کند.
+                </p>
+                <p class="text-base/normal opacity-80">
+                    خرید و فروش منو و برند های ساخته شده در منوریوم بدون هماهنگی، غیرقانونی است و در صورت مشاهده علاوه بر غیرفعال کردن برند، این مورد به صورت
+                    قانونی پیگیری خواهد شد.
+                </p>
+                <p class="text-base/normal opacity-80">
+                    در صورت استفاده از نام‌های غیرمتعارف در نام برند یا رستوران، منوریوم بدون اطلاع قبلی و در سریع‌ترین زمان ممکن منو و برند مورد نظر را حذف
+                    خواهند نمود.
+                </p>
+                <p class="text-base/normal opacity-80">
+                    منوریوم می‌تواند به دلایل مختلف در هر زمانی اقدام به دریافت مدارک شناسایی صاحب برند و رستوران یا تعهدنامه کتبی نماید.
+                </p>
+                <p class="text-base/normal opacity-80">
+                    در صورت استفاده از محتوای تهدیدآمیز یا سوء استفاده شفاهی و کتبی نسبت به هر یک از منوهای اینترنتی ساخته شده در منوریوم، کارمندان منوریوم و یا
+                    خود شرکت، حساب کاربری و برند و منوی شما مسدود می‌شود.
+                </p>
+                <p class="text-base/normal opacity-80">منوریوم حق دارد در صورت نیاز، محتوا ارائه شده در هر منو را بر اساس تشخیص خود، حذف یا غیرفعال نماید.</p>
+                <p>
+                    منوریوم در زمان پیش‌آمدن موارد فورس ماژور مانند بلایای طبیعی، جنگ، شورش، اعتصاب، تحریم، قطعی اینترنت و ارتباطات داخلی و بین‌المللی، مسوولیتی
+                    در قبال انجام نشدن تعهدات خود ندارد.
+                </p>
                 <img class="w-auto h-16 mix-blend-difference mt-10" src="~/assets/images/signature.png" alt="" />
             </div>
         </section>
@@ -48,6 +69,5 @@
 </template>
 
 <script setup>
-useHead({ title: `Terms Of Service - Menuriom` });
 definePageMeta({ layout: "default" });
 </script>
