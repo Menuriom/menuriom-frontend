@@ -5,7 +5,8 @@ header {
 }
 
 nav {
-    display: v-bind(menuDisplay);
+    /* display: v-bind(menuDisplay); */
+    display: none;
     position: absolute;
     top: 4.25rem;
     inset-inline-end: 0rem;
@@ -13,8 +14,13 @@ nav {
     box-shadow: theme("boxShadow.nr35");
     border-radius: 1rem;
 }
+nav:hover {
+    display: flex;
+}
 
 .toggle {
+    position: absolute;
+    inset-inline-end: 0.5rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -22,6 +28,10 @@ nav {
     height: 2.65rem;
     gap: 6px;
 }
+.toggle:hover + nav {
+    display: flex;
+}
+
 .line {
     width: 1.5rem;
     height: 2px;
@@ -50,15 +60,15 @@ nav {
             </div>
             <img class="h-7 xl:h-8" src="/logos/logo-text-en-light2.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
             <img class="h-7 xl:h-8" src="/logos/logo-text-en-light2.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" />
-            <!-- <img class="h-5 xl:h-6" src="/logos/logo-text-en-light.svg" title="Menuriom" alt="Menuriom" v-if="locale == 'en'" />
-            <img class="h-5 xl:h-6" src="/logos/logo-text-fa-light.svg" title="منوریوم" alt="منوریوم" v-if="locale == 'fa'" /> -->
         </nuxt-link>
 
-        <!-- v-show="menuOpen" -->
-        <!-- <transition name="slide-up" appear>
-        </transition> -->
+        <button class="toggle flex lg:hidden w-8 h-8 hover:bg-bgPrimary rounded-xl transition-colors" ref="headerToggler">
+            <span class="line bg-fgPrimary transition-all" :class="{ 'rotate-45 -mb-1': menuOpen }"></span>
+            <span class="line bg-fgPrimary transition-all" v-show="!menuOpen"></span>
+            <span class="line bg-fgPrimary transition-all" :class="{ '-rotate-45 -mt-1': menuOpen }"></span>
+        </button>
         <nav class="flex flex-col lg:flex-row gap-4 lg:gap-0 lg:items-center w-full max-w-[250px] lg:max-w-none p-6 lg:p-0" ref="nav">
-            <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
+            <ul class="relative flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-6 xl:gap-8 lg:mx-auto overflow-auto lg:overflow-visible">
                 <li class="flex items-center gap-1 rounded-xl py-2 hover:px-4 hover:bg-bgSecondary hover:text-secondary transition-all">
                     <nuxt-link class="flex items-center gap-4 w-full" :to="localePath('/')" @click="menuOpen = false" :alt="$t('header.Home')">
                         <span>{{ $t("header.Home") }}</span>
@@ -109,7 +119,7 @@ nav {
                         {{ $t("header.Login") }}
                     </nuxt-link>
                     <nuxt-link
-                        class="link 2sm:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-primary text-fgPrimary transition-all"
+                        class="link 2.5sm:hidden w-full sm:w-auto text-center p-2 px-3 hover:px-5 rounded-lg bg-primary text-fgPrimary transition-all"
                         :to="!userStore.email ? localePath(`/authenticate`) : localePath(`/panel`)"
                         :title="!userStore.email ? `Try it for free` : `Your Menuriom Dashboard`"
                         v-if="!userStore.loading"
@@ -117,12 +127,12 @@ nav {
                         <span v-if="!userStore.email">{{ $t("header.Try It For Free") }}</span>
                         <span v-else>{{ $t("header.Your Dashboard") }}</span>
                     </nuxt-link>
-                    <Loading class="2sm:hidden" v-if="userStore.loading" />
+                    <Loading class="2.5sm:hidden" v-if="userStore.loading" />
                 </div>
             </div>
         </nav>
 
-        <div class="flex items-center gap-2 xl:gap-4 shrink-0">
+        <div class="flex items-center gap-2 xl:gap-4 shrink-0 me-12 lg:me-0">
             <span class="w-0.5 h-7 -ms-4 hidden lg:flex bg-fgPrimary opacity-30"></span>
             <nuxt-link
                 class="link hidden md:flex p-2 hover:px-4 rounded-lg hover:bg-bgSecondary hover:text-secondary transition-all"
@@ -133,7 +143,7 @@ nav {
                 {{ $t("header.Login") }}
             </nuxt-link>
             <nuxt-link
-                class="hidden 2sm:flex text-sm p-2.5 hover:px-4 rounded-lg bg-primary text-fgPrimary shadow-md transition-all"
+                class="hidden 2.5sm:flex text-sm p-2.5 hover:px-4 rounded-lg bg-primary text-fgPrimary shadow-md transition-all"
                 :to="!userStore.email ? localePath(`/authenticate`) : localePath(`/panel`)"
                 :title="!userStore.email ? `Try it for free` : `Your Menuriom Dashboard`"
                 v-if="!userStore.loading"
@@ -141,12 +151,12 @@ nav {
                 <span v-if="!userStore.email">{{ $t("header.Try It For Free") }}</span>
                 <span v-else>{{ $t("header.Your Dashboard") }}</span>
             </nuxt-link>
-            <Loading class="hidden 2sm:flex me-2" v-if="userStore.loading" />
-            <button class="toggle flex lg:hidden w-8 h-8 hover:bg-bgPrimary rounded-xl transition-colors" @click="headerToggle()" ref="headerToggler">
+            <Loading class="hidden 2.5sm:flex me-2" v-if="userStore.loading" />
+            <!-- <button class="toggle flex lg:hidden w-8 h-8 hover:bg-bgPrimary rounded-xl transition-colors" @click="headerToggle()" ref="headerToggler">
                 <span class="line bg-fgPrimary transition-all" :class="{ 'rotate-45 -mb-1': menuOpen }"></span>
                 <span class="line bg-fgPrimary transition-all" v-show="!menuOpen"></span>
                 <span class="line bg-fgPrimary transition-all" :class="{ '-rotate-45 -mt-1': menuOpen }"></span>
-            </button>
+            </button> -->
         </div>
     </header>
 </template>
