@@ -63,7 +63,7 @@
                             <Icon class="w-5 h-5 gradient" name="heart.svg" folder="icons/tabler" size="22px" v-if="tab == 'MostLiked'" />
                             {{ Intl.NumberFormat(locale).format(item.totalCount) }}
                         </span>
-                        <span class="w-full overflow-hidden overflow-ellipsis text-center text-sm"> {{ item.menuItem.name }} </span>
+                        <span class="w-full overflow-hidden overflow-ellipsis text-center text-sm"> {{ item.menuItem?.name }} </span>
                     </div>
                 </div>
             </SwiperSlide>
