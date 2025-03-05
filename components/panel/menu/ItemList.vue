@@ -216,7 +216,7 @@
                                                     </small>
                                                     <span class="w-1 h-0.5 rounded-full bg-bgPrimary grow"></span>
                                                     <div class="flex items-center gap-1">
-                                                        <small class="text-emerald-300">{{ Intl.NumberFormat(locale).format(dish.price) }}</small>
+                                                        <small class="text-emerald-300">{{ Intl.NumberFormat(locale).format(variant.price) }}</small>
                                                         <span class="f-inter text-xs font-extralight me-2"> {{ $t("pricing.Toman") }} </span>
                                                     </div>
                                                 </li>
